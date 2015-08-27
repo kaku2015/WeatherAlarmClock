@@ -36,61 +36,48 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.kaku.weac.activities.ThemeActivity" >
-        </activity>
+        <activity android:name="com.kaku.weac.activities.ThemeActivity" />
         <activity
             android:name="com.kaku.weac.activities.AlarmClockNewActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Transparent" >
-        </activity>
+            android:theme="@style/Transparent" />
         <activity
             android:name="com.kaku.weac.activities.AlarmClockEditActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Transparent" >
-        </activity>
+            android:theme="@style/Transparent" />
         <activity
             android:name="com.kaku.weac.activities.RingSelectActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Transparent" >
-        </activity>
+            android:theme="@style/Transparent" />
         <activity
             android:name="com.kaku.weac.activities.AlarmClockOntimeActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Wallpaper.NoTitleBar" >
-        </activity>
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar" />
         <activity
             android:name="com.kaku.weac.activities.AlarmClockNapNotificationActivity"
-            android:theme="@android:style/Theme.NoDisplay" >
-        </activity>
+            android:theme="@android:style/Theme.NoDisplay" />
         <activity
             android:name="com.kaku.weac.activities.NapEditActivity"
-            android:theme="@style/Theme.MyDialog" >
-        </activity>
+            android:theme="@style/Theme.MyDialog" />
         <activity
             android:name="com.kaku.weac.activities.RecordOperateActivity"
-            android:theme="@style/Theme.MyDialog" >
-        </activity>
+            android:theme="@style/Theme.MyDialog" />
         <activity
             android:name="com.kaku.weac.activities.RecordDetailActivity"
-            android:theme="@style/Theme.MyDialog" >
-        </activity>
+            android:theme="@style/Theme.MyDialog" />
         <activity
             android:name="com.kaku.weac.activities.RecordRenameActivity"
-            android:theme="@style/Theme.MyDialog" >
-        </activity>
+            android:theme="@style/Theme.MyDialog" />
         <activity
             android:name="com.kaku.weac.activities.RecordDeleteActivity"
-            android:theme="@style/Theme.MyDialog" >
-        </activity>
+            android:theme="@style/Theme.MyDialog" />
         <activity
             android:name="com.kaku.weac.activities.RecordDeleteBatchActivity"
-            android:theme="@style/Transparent" >
-        </activity>
+            android:theme="@style/Transparent" />
 
         <receiver
             android:name="com.kaku.weac.broadcast.AlarmClockBroadcast"
-            android:process=":remote" >
-        </receiver>
+            android:process=":remote" />
         <receiver android:name="com.kaku.weac.broadcast.BootBroadcastReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -100,8 +87,7 @@
         <provider
             android:name="com.kaku.weac.db.AlarmClockProvider"
             android:authorities="com.kaku.weac"
-            android:exported="false" >
-        </provider>
+            android:exported="false" />
 
         <service
             android:name="com.kaku.weac.service.GuardMasterService"
@@ -113,7 +99,7 @@
 
         <uses-sdk
             android:minSdkVersion="16"
-            android:targetSdkVersion="16" />
+            android:targetSdkVersion="21" />
     </application>
 
 </manifest>

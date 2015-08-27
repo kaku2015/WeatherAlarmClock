@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/com.kaku.weac"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ring_select_llyt"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
-    <RelativeLayout style="@style/action_llyt" >
+    <RelativeLayout style="@style/action_llyt">
 
         <ImageView
             android:id="@+id/ring_select_cancel"
@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray_background_color"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <com.astuetz.PagerSlidingTabStrip
             android:id="@+id/tabstrip"

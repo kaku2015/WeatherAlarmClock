@@ -6,15 +6,15 @@ import com.kaku.weac.fragment.RingSelectFragment;
 
 /**
  * 铃声选择activity
- * 
+ *
  * @author 咖枯
  * @version 1.0 2015
  */
 public class RingSelectActivity extends SingleFragmentActivity {
 
-	@Override
-	protected Fragment createFragment() {
-		return new RingSelectFragment();
-	}
+    @Override
+    protected Fragment createFragment() {
+        return new RingSelectFragment();
+    }
 
 }

@@ -3,7 +3,6 @@ package com.kaku.weac.activities;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Process;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -21,6 +20,7 @@ import com.kaku.weac.fragment.AlarmClockFragment;
 import com.kaku.weac.fragment.MoreFragment;
 import com.kaku.weac.fragment.TimeFragment;
 import com.kaku.weac.fragment.WeaFragment;
+import com.kaku.weac.service.GuardMasterService;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
 
@@ -232,7 +232,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = new Intent("com.kaku.GuardMasterService");
+        Intent intent = new Intent(this, GuardMasterService.class);
         startService(intent);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -293,7 +293,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         tab_more.setOnClickListener(this);
 
         // 设置Tab页面集合
-        mFragmentList = new ArrayList<Fragment>();
+        mFragmentList = new ArrayList<>();
         mAlarmClockFragment = new AlarmClockFragment();
         mTimeFragment = new TimeFragment();
         mWeaFragment = new WeaFragment();
@@ -307,7 +307,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         mViewPager = (ViewPager) findViewById(R.id.fragment_container);
         mViewPager.setAdapter(new MyFragmentPagerAdapter(mFm));
         // TODO：切换渐变
-        mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
+        mViewPager.addOnPageChangeListener(new OnPageChangeListener() {
 
             @Override
             public void onPageSelected(int index) {
@@ -445,10 +445,12 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
      */
     private void setTextView(int iconId, TextView textView, int color) {
         Drawable drawable = getResources().getDrawable(iconId);
-        drawable.setBounds(0, 0, drawable.getMinimumWidth(),
-                drawable.getMinimumHeight());
-        // 设置图标
-        textView.setCompoundDrawables(null, drawable, null, null);
+        if (drawable != null) {
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(),
+                    drawable.getMinimumHeight());
+            // 设置图标
+            textView.setCompoundDrawables(null, drawable, null, null);
+        }
         // 设置文字颜色
         textView.setTextColor(color);
     }
@@ -456,7 +458,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
     @Override
     protected void onDestroy() {
         LogUtil.d(LOG_TAG, "onDestroy()");
-        Process.killProcess(Process.myPid());
+//        Process.killProcess(Process.myPid());
         super.onDestroy();
     }
 

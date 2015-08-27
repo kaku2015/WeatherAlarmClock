@@ -1,10 +1,5 @@
 package com.kaku.weac.fragment;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -30,6 +25,11 @@ import com.kaku.weac.bean.RecordDeleteItem;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.RecordItemDeleteComparator;
 import com.kaku.weac.util.ToastUtil;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * 录音批量删除Fragment
@@ -104,18 +104,18 @@ public class RecordDeleteBatchFragment extends Fragment implements
 	/**
 	 * 删除按钮可用文字灰白色
 	 */
-	private static int sColorWhite = Color.parseColor("#F4F4F4");
+	private static final int sColorWhite = Color.parseColor("#F4F4F4");
 
 	/**
 	 * 删除按钮不可用文字0.6透明白色
 	 */
-	private static int sColorWhiteTrans = Color.parseColor("#9AFFFFFF");
+	private static final int sColorWhiteTrans = Color.parseColor("#9affffff");
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		sDeleteList = new ArrayList<String>();
-		sRecordList = new ArrayList<RecordDeleteItem>();
+		sDeleteList = new ArrayList<>();
+		sRecordList = new ArrayList<>();
 		// 设置录音List
 		setRingList();
 		mAdapter = new RecordDeleteAdapter(getActivity(), sRecordList);
@@ -296,13 +296,13 @@ public class RecordDeleteBatchFragment extends Fragment implements
 		}
 		// 列出录音文件夹所有文件
 		File[] files = file.listFiles();
-		for (int i = 0; i < files.length; i++) {
+		for (File file1 : files) {
 			// 音频文件名
-			String ringName = files[i].getName();
+			String ringName = file1.getName();
 			// 去掉音频文件的扩展名
 			ringName = MyUtil.removeEx(ringName);
 			// 取得音频文件的地址
-			String ringUrl = files[i].getAbsolutePath();
+			String ringUrl = file1.getAbsolutePath();
 			// 录音删除信息实例
 			RecordDeleteItem item = new RecordDeleteItem(ringUrl, ringName,
 					false);

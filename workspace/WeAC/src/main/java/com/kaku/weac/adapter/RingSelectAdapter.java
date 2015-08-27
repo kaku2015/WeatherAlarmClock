@@ -1,8 +1,5 @@
 package com.kaku.weac.adapter;
 
-import java.util.List;
-import java.util.Map;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +12,9 @@ import com.kaku.weac.R;
 import com.kaku.weac.bean.RingSelectItem;
 import com.kaku.weac.common.WeacConstants;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 铃声选择适配器类
  * 
@@ -25,7 +25,7 @@ public class RingSelectAdapter extends ArrayAdapter<Map<String, String>> {
 	/**
 	 * activity上下文
 	 */
-	private Context mContext;
+	private final Context mContext;
 
 	/**
 	 * 当前铃声名标记位置

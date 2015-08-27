@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--suppress AndroidDomInspection -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kaku.weac.test">
 
-    <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="21" />
+    <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="23" />
 
     <application>
         <uses-library android:name="android.test.runner" />

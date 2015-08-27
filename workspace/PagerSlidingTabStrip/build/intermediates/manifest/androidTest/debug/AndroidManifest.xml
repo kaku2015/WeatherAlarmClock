@@ -4,7 +4,7 @@
 
     <uses-sdk
         android:minSdkVersion="16"
-        android:targetSdkVersion="16" />
+        android:targetSdkVersion="23" />
 
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
@@ -13,16 +13,8 @@
         android:label="Tests for com.astuetz.pagerslidingtabstrip.test"
         android:targetPackage="com.astuetz.pagerslidingtabstrip.test" />
 
-    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <application>
         <uses-library android:name="android.test.runner" />
-
-        <uses-sdk
-            android:minSdkVersion="16"
-            android:targetSdkVersion="16" />
     </application>
 
 </manifest>

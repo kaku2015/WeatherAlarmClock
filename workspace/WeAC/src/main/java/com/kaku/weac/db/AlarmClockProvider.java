@@ -15,11 +15,11 @@ import android.net.Uri;
  */
 public class AlarmClockProvider extends ContentProvider {
 
-    private static final UriMatcher sUriMathcer;
+    private static final UriMatcher sUriMatcher;
 
     static {
-        sUriMathcer = new UriMatcher(UriMatcher.NO_MATCH);
-        sUriMathcer.addURI(WeacDBMetaData.AUTHORITY, WeacDBMetaData.TABLE_NAME,
+        sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+        sUriMatcher.addURI(WeacDBMetaData.AUTHORITY, WeacDBMetaData.TABLE_NAME,
                 WeacDBMetaData.ALARM_CLOCK_DIR);
     }
 
@@ -32,7 +32,7 @@ public class AlarmClockProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
         // 匹配查询表Uri
-        if (sUriMathcer.match(uri) == WeacDBMetaData.ALARM_CLOCK_DIR) {
+        if (sUriMatcher.match(uri) == WeacDBMetaData.ALARM_CLOCK_DIR) {
             AlarmClockOpenHelper helper = new AlarmClockOpenHelper(getContext());
             SQLiteDatabase db = helper.getReadableDatabase();
             Cursor cursor = db.query(WeacDBMetaData.TABLE_NAME, projection,

@@ -17,7 +17,7 @@ public class ActivityCollector {
     /**
      * 保存Activity实例的List
      */
-    public static final List<Activity> sActivities = new ArrayList<>();
+    private static final List<Activity> sActivities = new ArrayList<>();
 
     /**
      * 添加Activity

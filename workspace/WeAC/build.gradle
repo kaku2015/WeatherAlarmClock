@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
+    compileSdkVersion 23
     buildToolsVersion "23.0.0"
 
     defaultConfig {
         applicationId "com.kaku.weac"
         minSdkVersion 16
-        targetSdkVersion 21
+        targetSdkVersion 23
     }
 
     buildTypes {

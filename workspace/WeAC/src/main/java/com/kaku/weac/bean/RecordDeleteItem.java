@@ -16,7 +16,7 @@ public class RecordDeleteItem {
     /**
      * 录音名
      */
-    private String mRingName;
+    private final String mRingName;
 
     /**
      * 是否选中

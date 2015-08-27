@@ -255,7 +255,7 @@ public class AlarmClockEditFragment extends Fragment implements
         // 初始化音量
         initVolume(view);
         // 初始化振动、小睡、天气提示
-        initToggleBotton(view);
+        initToggleButton(view);
         return view;
     }
 
@@ -462,7 +462,7 @@ public class AlarmClockEditFragment extends Fragment implements
      *
      * @param view view
      */
-    private void initToggleBotton(View view) {
+    private void initToggleButton(View view) {
         // 振动
         mVibrateBtn = (ToggleButton) view.findViewById(R.id.vibrate_btn);
 

@@ -407,12 +407,14 @@ public class AlarmClockOntimeFragment extends Fragment implements
                 AlarmClockNapNotificationActivity.class);
         it.putExtra(WeacConstants.ALARM_CLOCK, mAlarmClock);
         // FLAG_UPDATE_CURRENT 点击通知有时不会跳转！！
+        // FLAG_ONE_SHOT 清除列表只响应一个
         PendingIntent napCancel = PendingIntent.getActivity(getActivity(),
                 mAlarmClock.getAlarmClockCode(), it,
-                PendingIntent.FLAG_ONE_SHOT);
+                PendingIntent.FLAG_CANCEL_CURRENT);
         // 下拉列表通知显示的时间
         CharSequence time = new SimpleDateFormat("HH:mm", Locale.getDefault())
                 .format(nextTime);
+
         // 通知
         Notification notification = new Notification.Builder(getActivity())
                 // 设置PendingIntent
@@ -499,7 +501,7 @@ public class AlarmClockOntimeFragment extends Fragment implements
         /**
          * 闹钟响铃时间
          */
-        private int startedtime = 0;
+        private int startedTime = 0;
 
         /**
          * 3分钟
@@ -510,11 +512,11 @@ public class AlarmClockOntimeFragment extends Fragment implements
         public void run() {
             // Activity没有结束
             while (mIsRun) {
-                LogUtil.d(LOG_TAG, "TimeUpdateThread(已启动时间): " + startedtime);
+                LogUtil.d(LOG_TAG, "TimeUpdateThread(已启动时间): " + startedTime);
 
                 try {
                     // 响铃XX分钟并且当前Activity没有被销毁进入小睡
-                    if (startedtime == TIME) {
+                    if (startedTime == TIME) {
                         // 小睡开启状态
                         if (mAlarmClock.isNap()) {
                             if (!getActivity().isFinishing()) {
@@ -530,7 +532,7 @@ public class AlarmClockOntimeFragment extends Fragment implements
                             finishActivity();
                         }
                     }
-                    startedtime++;
+                    startedTime++;
                     // 界面显示的时间
                     CharSequence currentTime = new SimpleDateFormat("HH:mm",
                             Locale.getDefault()).format(System

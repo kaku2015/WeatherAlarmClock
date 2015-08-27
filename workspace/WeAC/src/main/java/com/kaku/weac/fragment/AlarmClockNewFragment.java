@@ -250,7 +250,7 @@ public class AlarmClockNewFragment extends Fragment implements OnClickListener,
         // 初始化音量
         initVolume(view);
         // 初始化振动、小睡、天气提示
-        initToggleBotton(view);
+        initToggleButton(view);
         return view;
     }
 
@@ -445,7 +445,7 @@ public class AlarmClockNewFragment extends Fragment implements OnClickListener,
      *
      * @param view view
      */
-    private void initToggleBotton(View view) {
+    private void initToggleButton(View view) {
         // 初始化闹钟实例的振动，默认振动
         mAlarmClock.setVibrate(true);
 

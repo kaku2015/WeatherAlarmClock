@@ -39,7 +39,6 @@ ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:
 		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:13:22-81
 application
 ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:15:5-93:19
-MERGED from [workspace:PagerSlidingTabStrip:unspecified] D:\AndroidStudioProjects\workspace\WeAC\build\intermediates\exploded-aar\workspace\PagerSlidingTabStrip\unspecified\AndroidManifest.xml:5:5-9:19
 MERGED from [com.android.support:support-v4:23.0.0] D:\AndroidStudioProjects\workspace\WeAC\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.0\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.0.0] D:\AndroidStudioProjects\workspace\WeAC\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.0\AndroidManifest.xml:22:5-20
 	android:label
@@ -192,6 +191,7 @@ ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:
 		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:90:25-67
 uses-sdk
 INJECTED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [workspace:PagerSlidingTabStrip:unspecified] D:\AndroidStudioProjects\workspace\WeAC\build\intermediates\exploded-aar\workspace\PagerSlidingTabStrip\unspecified\AndroidManifest.xml:6:5-8:41
 MERGED from [com.android.support:support-v4:23.0.0] D:\AndroidStudioProjects\workspace\WeAC\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.0\AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:support-v4:23.0.0] D:\AndroidStudioProjects\workspace\WeAC\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.0\AndroidManifest.xml:20:5-43
 	android:targetSdkVersion
@@ -200,5 +200,3 @@ MERGED from [com.android.support:support-v4:23.0.0] D:\AndroidStudioProjects\wor
 	android:minSdkVersion
 		INJECTED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml
 		INJECTED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml
-android:uses-permission#android.permission.READ_PHONE_STATE
-IMPLIED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:2:1-95:12 reason: com.astuetz.pagerslidingtabstrip has a targetSdkVersion < 4

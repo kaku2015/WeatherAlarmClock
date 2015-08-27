@@ -278,7 +278,7 @@ public class RecorderFragment extends Fragment implements OnClickListener {
         mRecordListView.setSelection(mPosition);
         mRecordListView.setOnItemClickListener(new OnItemClickListenerImpl());
         mRecordListView
-                .setOnItemLongClickListener(new onItemLongclickListenerImpl());
+                .setOnItemLongClickListener(new onItemLongClickListenerImpl());
         // 录音按钮组件
         mRecordBtn = (ImageButton) view.findViewById(R.id.ring_record_record);
         mStopBtn = (ImageButton) view.findViewById(R.id.ring_record_stop);
@@ -327,7 +327,7 @@ public class RecorderFragment extends Fragment implements OnClickListener {
         }
     }
 
-    private class onItemLongclickListenerImpl implements
+    private class onItemLongClickListenerImpl implements
             OnItemLongClickListener {
 
         @Override

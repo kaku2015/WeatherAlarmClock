@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout style="@style/action_llyt" >
+
+        <TextView
+            android:id="@+id/action_title"
+            style="@style/action_title"
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="19dp"
+            android:text="@string/alarm_clock" />
+
+        <ImageView
+            android:id="@+id/action_new"
+            style="@style/action_icon"
+            android:layout_alignParentRight="true"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_action_new" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/action_new" >
+
+            <ImageView
+                android:id="@+id/action_edit"
+                style="@style/action_icon"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_action_edit" />
+
+            <ImageView
+                android:id="@+id/action_accept"
+                style="@style/action_icon"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_action_accept"
+                android:visibility="gone" />
+        </FrameLayout>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="0.1dp"
+        android:cacheColorHint="#00000000"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="5dp"
+        android:listSelector="@drawable/bg_alarm_list_item_touch" >
+    </ListView>
+
+    <LinearLayout
+        android:id="@+id/alarm_clock_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:alpha="0.8"
+            android:gravity="right|center"
+            android:text="@string/press_right_top"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_action_new" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:alpha="0.8"
+            android:gravity="left|center"
+            android:text="@string/add_alarm_clock"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</LinearLayout><!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/layout/fm_alarm_clock.xml -->

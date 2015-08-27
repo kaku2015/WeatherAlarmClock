@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/workspace/PagerSlidingTabStrip/unspecified/res/values/values.xml -->
+    <eat-comment/>
+    <color name="background_tab_pressed">#6633B5E5</color>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/color.xml -->
+    <eat-comment/>
+    <color name="black">#000000</color>
+    <color name="black_trans15">#26000000</color>
+    <color name="black_trans20">#33000000</color>
+    <color name="black_trans50">#80000000</color>
+    <color name="black_trans80">#CC000000</color>
+    <color name="black_trans90">#E6000000</color>
+    <color name="blue_green">#0CCDF6</color>
+    <color name="blue_green50">#800CCDF6</color>
+    <color name="blue_green60">#9A0CCDF6</color>
+    <color name="blue_tab">#00A0F3</color>
+    <color name="blue_tog_btn">#397cbf</color>
+    <color name="dark_blue">#0080ff</color>
+    <color name="dark_blue_button_pressed">#0066ff</color>
+    <color name="dark_blue_foucus">#400080ff</color>
+    <color name="dark_blue_invalidate">#990080ff</color>
+    <color name="dark_blue_line">#0090ff</color>
+    <color name="dark_blue_trans40">#660080ff</color>
+    <color name="dark_gray">#989898</color>
+    <color name="dark_gray_button_pressed">#808080</color>
+    <color name="darkgray">#A9A9A9</color>
+    <color name="gray_background_color">#F4F4F4</color>
+    <color name="gray_divider_line">#DDDDDD</color>
+    <color name="gray_nap_edit">#808080</color>
+    <color name="gray_record_operate_item">#D0D0D0</color>
+    <color name="gray_ring_select_title">#4B4B4B</color>
+    <color name="gray_seekbar">#C0C0C0</color>
+    <color name="gray_tab">#989898</color>
+    <color name="red">#FF0000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_trans60">#99FFFFFF</color>
+    <declare-styleable name="PagerSlidingTabStrip"><attr format="color" name="pstsIndicatorColor"/><attr format="color" name="pstsUnderlineColor"/><attr format="color" name="pstsDividerColor"/><attr format="dimension" name="pstsIndicatorHeight"/><attr format="dimension" name="pstsUnderlineHeight"/><attr format="dimension" name="pstsDividerPadding"/><attr format="dimension" name="pstsTabPaddingLeftRight"/><attr format="dimension" name="pstsScrollOffset"/><attr format="reference" name="pstsTabBackground"/><attr format="boolean" name="pstsShouldExpand"/><attr format="boolean" name="pstsTextAllCaps"/><attr format="color" name="mySelectedColor"/></declare-styleable>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="add_alarm_clock">  添加闹钟  </string>
+    <string name="alarm_clock">闹钟</string>
+    <string name="alter_time">修改时间：</string>
+    <string name="app_name">天气闹钟</string>
+    <string name="cancel">取消</string>
+    <string name="click_record">点击录音</string>
+    <string name="click_stop">点击结束</string>
+    <string name="close_alarm_clock">关闭闹钟</string>
+    <string name="countdown_day_hour_minute">距闹钟响起还有%1$d天%2$d小时%3$d分</string>
+    <string name="countdown_hour_minute">距闹钟响起还有%1$d小时%2$d分</string>
+    <string name="countdown_minute">距闹钟响起还有%1$d分钟</string>
+    <string name="day">日</string>
+    <string name="default_ring">默认铃声</string>
+    <string name="delete">删除</string>
+    <string name="delete_batch">批量删除</string>
+    <string name="delete_success">删除成功</string>
+    <string name="detail">详情</string>
+    <string name="edit_alarm_clock">编辑闹钟</string>
+    <string name="eight">8</string>
+    <string name="error_sd_card">错误，SD卡不存在</string>
+    <string name="every_day">每天</string>
+    <string name="file_format">文件格式：</string>
+    <string name="file_name">文件名称：</string>
+    <string name="file_name_exist">文件名已存在</string>
+    <string name="file_size">文件大小：</string>
+    <string name="five">5</string>
+    <string name="five_h">五</string>
+    <string name="four_h">四</string>
+    <string name="friday">周五</string>
+    <string name="input_empty">输入内容为空</string>
+    <string name="interval">间隔 (分钟)</string>
+    <string name="local_music">本地音乐</string>
+    <string name="monday">周一</string>
+    <string name="more">更多</string>
+    <string name="nap">小睡</string>
+    <string name="nap_set">小睡设置</string>
+    <string name="nap_time">小睡%1$d分钟</string>
+    <string name="nap_to">小睡至%1$s闹钟再次响起，轻触取消</string>
+    <string name="new_alarm_clock">新建闹钟</string>
+    <string name="no_local_music_file">没有本地音乐文件</string>
+    <string name="no_record_file">没有录音文件</string>
+    <string name="no_ring">无铃声</string>
+    <string name="no_system_ring_file">没有系统铃声文件</string>
+    <string name="num">60</string>
+    <string name="one">1</string>
+    <string name="one_h">一</string>
+    <string name="play_duration">播放时长：</string>
+    <string name="play_fail">播放失败</string>
+    <string name="press_right_top">按右上的  </string>
+    <string name="record">录音</string>
+    <string name="record_fail">录音失败</string>
+    <string name="record_fail_confirm">录音失败，请检查录音权限是否开启或录音已被其他应用占用。</string>
+    <string name="record_file_name">/录音%1$s.amr</string>
+    <string name="rename">重命名</string>
+    <string name="rename_success">重命名成功</string>
+    <string name="repeat">重复</string>
+    <string name="repeat_once">只响一次</string>
+    <string name="ring">铃声</string>
+    <string name="ring_select">铃声选择</string>
+    <string name="roger">知道了</string>
+    <string name="saturday">周六</string>
+    <string name="save">保存</string>
+    <string name="save_path">保存路径：</string>
+    <string name="select_all">全选</string>
+    <string name="select_all_cancel">取消全选</string>
+    <string name="selected_xx_item">已选择%1$d项</string>
+    <string name="six_h">六</string>
+    <string name="sunday">周日</string>
+    <string name="sure">确定</string>
+    <string name="sure_delete">确定要删除吗？</string>
+    <string name="system_ring">系统铃声</string>
+    <string name="tag">标签</string>
+    <string name="ten">10</string>
+    <string name="theme_wallpaper">主题壁纸</string>
+    <string name="thirty">30</string>
+    <string name="three">3</string>
+    <string name="three_h">三</string>
+    <string name="thursday">周四</string>
+    <string name="time">计时</string>
+    <string name="times">次数</string>
+    <string name="touch_here_nap">轻按此处小睡%1$d分钟</string>
+    <string name="tuesday">周二</string>
+    <string name="twenty">20</string>
+    <string name="two_h">二</string>
+    <string name="unknown">未知</string>
+    <string name="vibrate">振动</string>
+    <string name="volume">音量</string>
+    <string name="wea">天气</string>
+    <string name="wea_prompt">天气提示</string>
+    <string name="wednesday">周三</string>
+    <string name="week">周</string>
+    <string name="week_day">平日</string>
+    <string name="week_end">周末</string>
+    <string name="xx_naping">%1$s (小睡中……)</string>
+    <string name="zero_zero">00:00</string>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="Theme.MyDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 设置dialog的背景 -->
+        <!-- <item name="android:windowNoTitle">true</item> -->
+        <!-- 设置title -->
+        <!-- <item name="android:windowFrame">@null</item> -->
+        <!-- 设置边框 -->
+        <!-- <item name="android:windowIsTranslucent">true</item> -->
+        <!-- 设置半透明 -->
+        <!-- <item name="android:backgroundDimEnabled">true</item> -->
+        <!-- 背景是否模糊显示 -->
+        <!-- <item name="android:windowFullscreen">true</item> -->
+        <!-- 设置全屏 -->
+        <!-- <item name="android:windowIsFloating">true</item> -->
+        <!-- 是否浮现在activity之上 -->
+    </style>
+    <style name="Transparent" parent="@android:style/Theme.Holo.Light">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+    <style name="action_icon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/bg_action_bar_button</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+    </style>
+    <style name="action_llyt">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">54dp</item>
+    </style>
+    <style name="action_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:alpha">0.8</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="action_tv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:background">@drawable/bg_action_bar_button</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:alpha">0.8</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingLeft">19dp</item>
+        <item name="android:paddingRight">19dp</item>
+    </style>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles_new_alarm_clock.xml -->
+    <eat-comment/>
+    <style name="dialog_llyt">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">25dp</item>
+        <item name="android:layout_marginRight">25dp</item>
+        <item name="android:background">@drawable/shape_circle_dialog</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <style name="dialog_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="divider_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/gray_divider_line</item>
+        <item name="android:layout_marginLeft">13dp</item>
+        <item name="android:layout_marginRight">13dp</item>
+    </style>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles_new_alarm_clock.xml -->
+    <eat-comment/>
+    <style name="divider_line_blank">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">5dp</item>
+    </style>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="divider_line_full">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:background">@color/gray_divider_line</item>
+    </style>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles_new_alarm_clock.xml -->
+    <eat-comment/>
+    <style name="line_blue">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:background">@color/dark_blue_line</item>
+    </style>
+    <style name="new_alarm_clcok_item">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">54dp</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+    <style name="new_alarm_clcok_item_describe">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/darkgray</item>
+    </style>
+    <style name="new_alarm_clcok_item_llyt">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:background">@drawable/shape_circle_dialog</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <style name="new_alarm_clcok_item_toggle_btn">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginRight">18dp</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:button">@drawable/toggle_btn_alarm_on_off</item>
+        <item name="android:checked">true</item>
+        <item name="android:textOff">""</item>
+        <item name="android:textOn">""</item>
+    </style>
+    <style name="new_alarm_clcok_item_type">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginLeft">19dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/gray_ring_select_title</item>
+    </style>
+    <style name="new_alarm_clcok_nap_edit_options_llyt">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <style name="new_alarm_clcok_nap_edit_options_radio_group">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+    <style name="new_alarm_clcok_nap_edit_options_tv">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/gray_nap_edit</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="new_alarm_clcok_nap_edit_radio_btn">
+        <item name="android:layout_width">38dp</item>
+        <item name="android:layout_height">38dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/toggle_btn_repeat_week</item>
+        <item name="android:button">@null</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@drawable/text_color_toggle_btn_circle</item>
+    </style>
+    <style name="new_alarm_clcok_repeat_days_tog_btn">
+        <item name="android:layout_width">38dp</item>
+        <item name="android:layout_height">38dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@drawable/toggle_btn_repeat_week</item>
+        <item name="android:checked">false</item>
+        <item name="android:layout_marginLeft">9dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@drawable/text_color_toggle_btn_circle</item>
+    </style>
+    <style name="record_detail_content">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/gray_nap_edit</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="record_detail_item_llyt">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+    <style name="record_detail_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/gray_ring_select_title</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="record_operate_item">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:paddingLeft">25dp</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="ring_select_no_file_tv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/gray_ring_select_title</item>
+    </style>
+    <style name="single_btn">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_margin">20dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/gray_background_color</item>
+        <item name="android:background">@drawable/bg_btn_sure</item>
+    </style>
+    <style name="sure_cancel_btn">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/gray_background_color</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="tab_llyt">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/bg_tab_touch</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <style name="tab_tv">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawablePadding">2dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+</resources>

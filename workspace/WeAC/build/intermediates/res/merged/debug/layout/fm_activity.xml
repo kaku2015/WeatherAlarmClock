@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragment_containers"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+<merge>
 
-</FrameLayout><!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/layout/fm_activity.xml -->
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/fragment_containers"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+</merge><!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/layout/fm_activity.xml -->

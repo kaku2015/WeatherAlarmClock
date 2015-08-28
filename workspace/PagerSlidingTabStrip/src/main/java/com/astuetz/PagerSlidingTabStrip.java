@@ -98,10 +98,6 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
     private int currentIndex = 0;
 
-    public int getCurrentIndex() {
-        return currentIndex;
-    }
-
     public void setCurrentIndex(int currentIndex) {
         this.currentIndex = currentIndex;
     }

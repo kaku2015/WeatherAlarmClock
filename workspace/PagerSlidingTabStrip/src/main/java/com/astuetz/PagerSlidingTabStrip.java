@@ -189,7 +189,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
                         scrollOffset);
         textAllCaps = a.getBoolean(
                 R.styleable.PagerSlidingTabStrip_pstsTextAllCaps, textAllCaps);
-        // 取得自定义背景颜色
+        // background color
         selectedColor = a.getColor(R.styleable.PagerSlidingTabStrip_mySelectedColor,
                 selectedColor);
 
@@ -320,7 +320,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
                 TextView tab = (TextView) v;
                 tab.setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSize);
                 tab.setTypeface(tabTypeface, tabTypefaceStyle);
-                // 设置选择后文字颜色
+                // font color
                 if (i == currentIndex) {
                     tab.setTextColor(selectedColor);
                 } else {

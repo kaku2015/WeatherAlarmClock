@@ -254,9 +254,9 @@ containing a value of this type.
         public static final int action_new=0x7f09000e;
         public static final int action_title=0x7f09000d;
         public static final int alarm_clock_empty=0x7f090012;
-        public static final int alarm_list_delete_btn=0x7f09005d;
+        public static final int alarm_list_delete_btn=0x7f09005f;
         public static final int analogClock1=0x7f09005a;
-        public static final int bg=0x7f09005b;
+        public static final int bg=0x7f09005d;
         public static final int button=0x7f09002c;
         public static final int cancel_btn=0x7f09000a;
         public static final int delete_btn=0x7f09003e;
@@ -267,9 +267,9 @@ containing a value of this type.
         public static final int fragment_containers=0x7f09000c;
         public static final int fragment_ring_select_sort=0x7f090058;
         public static final int gv_change_theme=0x7f090059;
-        public static final int icon=0x7f09005c;
+        public static final int icon=0x7f09005e;
         public static final int list_view=0x7f090011;
-        public static final int llyt=0x7f09005e;
+        public static final int llyt=0x7f090060;
         public static final int llyt_activity_main=0x7f090000;
         public static final int modify_time=0x7f090042;
         public static final int nap_btn=0x7f090026;
@@ -292,6 +292,7 @@ containing a value of this type.
         public static final int ontime_tag=0x7f090029;
         public static final int ontime_time=0x7f090028;
         public static final int play_duration=0x7f090043;
+        public static final int read_wea=0x7f09005b;
         public static final int record_delete=0x7f090047;
         public static final int record_delete_batch=0x7f090048;
         public static final int record_delete_batch_llyt=0x7f090039;
@@ -302,9 +303,9 @@ containing a value of this type.
         public static final int record_rename_error=0x7f09004b;
         public static final int repeat_describe=0x7f090018;
         public static final int ring_describe=0x7f090022;
-        public static final int ring_list_display_name=0x7f090062;
-        public static final int ring_list_select_mark=0x7f090064;
-        public static final int ring_list_toogle_btn=0x7f090063;
+        public static final int ring_list_display_name=0x7f090064;
+        public static final int ring_list_select_mark=0x7f090066;
+        public static final int ring_list_toogle_btn=0x7f090065;
         public static final int ring_llyt=0x7f090021;
         public static final int ring_record_button_info=0x7f090053;
         public static final int ring_record_empty=0x7f09004d;
@@ -332,7 +333,7 @@ containing a value of this type.
         public static final int time_picker=0x7f090017;
         public static final int time_picker_tv=0x7f090016;
         public static final int title_tv=0x7f09003a;
-        public static final int toast_tv=0x7f090065;
+        public static final int toast_tv=0x7f090067;
         public static final int tog_btn_friday=0x7f09001d;
         public static final int tog_btn_monday=0x7f090019;
         public static final int tog_btn_saturday=0x7f09001e;
@@ -340,16 +341,17 @@ containing a value of this type.
         public static final int tog_btn_thursday=0x7f09001c;
         public static final int tog_btn_tuesday=0x7f09001a;
         public static final int tog_btn_wednesday=0x7f09001b;
-        public static final int toggle_btn=0x7f090061;
+        public static final int toggle_btn=0x7f090063;
         public static final int tv_alarm_clock=0x7f090003;
         public static final int tv_more=0x7f090009;
-        public static final int tv_repeat=0x7f09005f;
-        public static final int tv_tag=0x7f090060;
+        public static final int tv_repeat=0x7f090061;
+        public static final int tv_tag=0x7f090062;
         public static final int tv_time=0x7f090005;
         public static final int tv_wea=0x7f090007;
         public static final int vibrate_btn=0x7f090024;
         public static final int volumn_sk=0x7f090023;
         public static final int wea_prompt_btn=0x7f090027;
+        public static final int wea_prompt_tv=0x7f09005c;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

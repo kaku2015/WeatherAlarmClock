@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
-    <ImageView
+    <Button
+        android:id="@+id/read_wea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:contentDescription="@null"
-        android:src="@android:drawable/ic_menu_more" >
-    </ImageView>
+        android:text="读取天气信息" />
+
+    <ScrollView
+        android:background="@color/black_trans50"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/read_wea">
+
+        <TextView
+            android:id="@+id/wea_prompt_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="天气信息" />
+    </ScrollView>
 
 </RelativeLayout><!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/layout/fm_wea.xml -->

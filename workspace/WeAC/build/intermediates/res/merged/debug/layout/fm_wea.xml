@@ -1,25 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/read_wea"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="读取天气信息" />
 
-    <ScrollView
-        android:background="@color/black_trans50"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/read_wea">
+    <RelativeLayout style="@style/action_llyt">
+
+        <ImageView
+            android:id="@+id/action_home"
+            style="@style/action_icon"
+            android:layout_alignParentLeft="true"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_action_home" />
 
         <TextView
-            android:id="@+id/wea_prompt_tv"
+            android:id="@+id/action_title"
+            style="@style/action_title"
+            android:drawableLeft="@drawable/ic_gps"
+            android:drawablePadding="5dp"
+            android:text="天津" />
+
+        <ImageView
+            android:id="@+id/action_refresh"
+            style="@style/action_icon"
+            android:layout_alignParentRight="true"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_action_refresh" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="天气信息" />
-    </ScrollView>
+            android:orientation="vertical">
 
-</RelativeLayout><!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/layout/fm_wea.xml -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="19dp"
+                android:layout_marginRight="19dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    style="@style/wea_font"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/shape_circle_promt"
+                    android:drawableLeft="@drawable/ic_alarm"
+                    android:drawablePadding="5dp"
+                    android:gravity="center"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:text="雷电预警"
+                    android:textSize="16sp" />
+
+                <TextView
+                    style="@style/wea_font"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="19:03发布"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="19dp"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        style="@style/wea_degree"
+                        android:src="@drawable/number_2" />
+
+                    <ImageView
+                        style="@style/wea_degree"
+                        android:src="@drawable/number_8" />
+
+                    <ImageView
+                        style="@style/wea_degree"
+                        android:src="@drawable/centigrade" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/wea_prompt"
+                    android:layout_marginTop="20dp"
+                    android:drawableLeft="@drawable/ic_weather_air"
+                    android:drawablePadding="10dp"
+                    android:text="轻度污染 156" />
+
+                <TextView
+                    style="@style/wea_prompt"
+                    android:drawableLeft="@drawable/ic_weather_wet"
+                    android:text="湿度 65%" />
+
+                <TextView
+                    style="@style/wea_prompt"
+                    android:drawableLeft="@drawable/ic_weather_wind"
+                    android:text="西南风 3级" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout><!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/layout/fm_wea.xml -->

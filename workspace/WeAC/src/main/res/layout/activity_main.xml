@@ -3,7 +3,7 @@
     android:id="@+id/llyt_activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/fragment_container"
@@ -15,11 +15,11 @@
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:baselineAligned="false"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/tab_alarm_clock"
-            style="@style/tab_llyt" >
+            style="@style/tab_llyt">
 
             <TextView
                 android:id="@+id/tv_alarm_clock"
@@ -28,18 +28,8 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/tab_time"
-            style="@style/tab_llyt" >
-
-            <TextView
-                android:id="@+id/tv_time"
-                style="@style/tab_tv"
-                android:text="@string/time" />
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/tab_wea"
-            style="@style/tab_llyt" >
+            style="@style/tab_llyt">
 
             <TextView
                 android:id="@+id/tv_wea"
@@ -48,8 +38,19 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/tab_time"
+            style="@style/tab_llyt">
+
+            <TextView
+                android:id="@+id/tv_time"
+                style="@style/tab_tv"
+                android:text="@string/time" />
+        </LinearLayout>
+
+
+        <LinearLayout
             android:id="@+id/tab_more"
-            style="@style/tab_llyt" >
+            style="@style/tab_llyt">
 
             <TextView
                 android:id="@+id/tv_more"

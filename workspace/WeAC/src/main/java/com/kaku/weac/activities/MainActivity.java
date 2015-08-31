@@ -276,31 +276,31 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
     private void initViews() {
         // 取得Tab布局
         tab_alarm_clock = (ViewGroup) findViewById(R.id.tab_alarm_clock);
-        tab_time = (ViewGroup) findViewById(R.id.tab_time);
         tab_wea = (ViewGroup) findViewById(R.id.tab_wea);
+        tab_time = (ViewGroup) findViewById(R.id.tab_time);
         tab_more = (ViewGroup) findViewById(R.id.tab_more);
 
         // 取得Tab控件
         tv_alarm_clock = (TextView) findViewById(R.id.tv_alarm_clock);
-        tv_time = (TextView) findViewById(R.id.tv_time);
         tv_wea = (TextView) findViewById(R.id.tv_wea);
+        tv_time = (TextView) findViewById(R.id.tv_time);
         tv_more = (TextView) findViewById(R.id.tv_more);
 
         // 设置Tab点击事件
         tab_alarm_clock.setOnClickListener(this);
-        tab_time.setOnClickListener(this);
         tab_wea.setOnClickListener(this);
+        tab_time.setOnClickListener(this);
         tab_more.setOnClickListener(this);
 
         // 设置Tab页面集合
         mFragmentList = new ArrayList<>();
         mAlarmClockFragment = new AlarmClockFragment();
-        mTimeFragment = new TimeFragment();
         mWeaFragment = new WeaFragment();
+        mTimeFragment = new TimeFragment();
         mMoreFragment = new MoreFragment();
         mFragmentList.add(mAlarmClockFragment);
-        mFragmentList.add(mTimeFragment);
         mFragmentList.add(mWeaFragment);
+        mFragmentList.add(mTimeFragment);
         mFragmentList.add(mMoreFragment);
 
         // 设置ViewPager
@@ -361,12 +361,12 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
             // 当选中计时Tab时
             case R.id.tab_time:
                 // 切换计时视图
-                setTabSelection(1);
+                setTabSelection(2);
                 break;
             // 当选中天气Tab时
             case R.id.tab_wea:
                 // 切换天气视图
-                setTabSelection(2);
+                setTabSelection(1);
                 break;
             // 当选中更多Tab时
             case R.id.tab_more:
@@ -403,12 +403,12 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
                         mSelectColor);
                 break;
             // 计时
-            case 1:
+            case 2:
                 // 改变计时控件的图片和文字颜色
                 setTextView(R.drawable.ic_time_select, tv_time, mSelectColor);
                 break;
             // 天气
-            case 2:
+            case 1:
                 // 改变天气控件的图片和文字颜色
                 setTextView(R.drawable.ic_wea_select, tv_wea, mSelectColor);
                 break;

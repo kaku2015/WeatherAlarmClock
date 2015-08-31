@@ -5,13 +5,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.kaku.weac.R;
-import com.kaku.weac.util.HttpCallbackListener;
-import com.kaku.weac.util.LogUtil;
-import com.kaku.weac.util.WeatherUtil;
 
 /**
  * 天气fragment
@@ -29,6 +24,8 @@ public class WeaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fm_wea, container, false);
+        return view;
+        /*
         Button readButton = (Button) view.findViewById(R.id.read_wea);
         final TextView tv = (TextView) view.findViewById(R.id.wea_prompt_tv);
         readButton.setOnClickListener(new View.OnClickListener() {
@@ -43,7 +40,24 @@ public class WeaFragment extends Fragment {
                                     @Override
                                     public void run() {
                                         tv.setText(response);
+                                        /*
+                                        try {
+                                            // 外部存储根路径
+                                            String fileName = Environment.getExternalStorageDirectory()
+                                                    .getAbsolutePath();
+                                            // 录音文件路径
+                                            fileName += "/WeaAlarmClock/wea.txt";
+                                            File file = new File(fileName);
+                                            if (!file.exists()) {
+                                                file.createNewFile();
+                                            }
 
+                                            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+                                            BufferedWriter bw = new BufferedWriter(fw);
+                                            bw.write(response);
+                                            bw.close();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
                                     }
                                 });
                             }
@@ -62,7 +76,7 @@ public class WeaFragment extends Fragment {
                         });
             }
         });
-        return view;
+        */
     }
 
 }

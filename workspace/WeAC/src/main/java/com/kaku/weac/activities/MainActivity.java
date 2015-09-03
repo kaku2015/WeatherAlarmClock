@@ -41,59 +41,19 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
     private static final String LOG_TAG = "MainActivity";
 
     /**
-     * 展示闹钟的Fragment
-     */
-    private AlarmClockFragment mAlarmClockFragment;
-
-    /**
-     * 展示计时的Fragment
-     */
-    private TimeFragment mTimeFragment;
-
-    /**
-     * 展示天气的Fragment
-     */
-    private WeaFragment mWeaFragment;
-
-    /**
-     * 展示更多的Fragment
-     */
-    private MoreFragment mMoreFragment;
-
-    /**
-     * 闹钟Tab界面布局
-     */
-    private ViewGroup tab_alarm_clock;
-
-    /**
-     * 计时Tab界面布局
-     */
-    private ViewGroup tab_time;
-
-    /**
-     * 天气Tab界面布局
-     */
-    private ViewGroup tab_wea;
-
-    /**
-     * 更多Tab界面布局
-     */
-    private ViewGroup tab_more;
-
-    /**
      * 闹钟Tab控件
      */
     private TextView tv_alarm_clock;
 
     /**
-     * 计时Tab控件
-     */
-    private TextView tv_time;
-
-    /**
      * 天气Tab控件
      */
     private TextView tv_wea;
+
+    /**
+     * 计时Tab控件
+     */
+    private TextView tv_time;
 
     /**
      * 更多Tab控件
@@ -106,7 +66,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
     private FragmentManager mFm;
 
     /**
-     * Tab为选中文字颜色
+     * Tab未选中文字颜色
      */
     private int mUnSelectColor;
 
@@ -242,7 +202,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         mFm = getSupportFragmentManager();
         // Tab选中文字颜色
         mSelectColor = getResources().getColor(R.color.blue_tab);
-        // Tab为选中文字颜色
+        // Tab未选中文字颜色
         mUnSelectColor = getResources().getColor(R.color.gray_tab);
         // 初始化布局元素
         initViews();
@@ -275,10 +235,14 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
      */
     private void initViews() {
         // 取得Tab布局
-        tab_alarm_clock = (ViewGroup) findViewById(R.id.tab_alarm_clock);
-        tab_wea = (ViewGroup) findViewById(R.id.tab_wea);
-        tab_time = (ViewGroup) findViewById(R.id.tab_time);
-        tab_more = (ViewGroup) findViewById(R.id.tab_more);
+        // 闹钟Tab界面布局
+        ViewGroup tab_alarm_clock = (ViewGroup) findViewById(R.id.tab_alarm_clock);
+        // 天气Tab界面布局
+        ViewGroup tab_wea = (ViewGroup) findViewById(R.id.tab_wea);
+        // 计时Tab界面布局
+        ViewGroup tab_time = (ViewGroup) findViewById(R.id.tab_time);
+        // 更多Tab界面布局
+        ViewGroup tab_more = (ViewGroup) findViewById(R.id.tab_more);
 
         // 取得Tab控件
         tv_alarm_clock = (TextView) findViewById(R.id.tv_alarm_clock);
@@ -294,10 +258,14 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 
         // 设置Tab页面集合
         mFragmentList = new ArrayList<>();
-        mAlarmClockFragment = new AlarmClockFragment();
-        mWeaFragment = new WeaFragment();
-        mTimeFragment = new TimeFragment();
-        mMoreFragment = new MoreFragment();
+        // 展示闹钟的Fragment
+        AlarmClockFragment mAlarmClockFragment = new AlarmClockFragment();
+        // 展示天气的Fragment
+        WeaFragment mWeaFragment = new WeaFragment();
+        // 展示计时的Fragment
+        TimeFragment mTimeFragment = new TimeFragment();
+        // 展示更多的Fragment
+        MoreFragment mMoreFragment = new MoreFragment();
         mFragmentList.add(mAlarmClockFragment);
         mFragmentList.add(mWeaFragment);
         mFragmentList.add(mTimeFragment);
@@ -358,15 +326,15 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
                 // 切换闹钟视图
                 setTabSelection(0);
                 break;
-            // 当选中计时Tab时
-            case R.id.tab_time:
-                // 切换计时视图
-                setTabSelection(2);
-                break;
             // 当选中天气Tab时
             case R.id.tab_wea:
                 // 切换天气视图
                 setTabSelection(1);
+                break;
+            // 当选中计时Tab时
+            case R.id.tab_time:
+                // 切换计时视图
+                setTabSelection(2);
                 break;
             // 当选中更多Tab时
             case R.id.tab_more:
@@ -381,7 +349,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
     /**
      * 设置选中的Tab
      *
-     * @param index 每个tab对应的下标。0表示闹钟，1表示计时，2表示天气，3表示更多。
+     * @param index 每个tab对应的下标。0表示闹钟，1表示天气，2表示计时，3表示更多。
      */
     private void setTabSelection(int index) {
         // 当重复选中相同Tab时不进行任何处理
@@ -402,15 +370,15 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
                 setTextView(R.drawable.ic_alarm_clock_select, tv_alarm_clock,
                         mSelectColor);
                 break;
-            // 计时
-            case 2:
-                // 改变计时控件的图片和文字颜色
-                setTextView(R.drawable.ic_time_select, tv_time, mSelectColor);
-                break;
             // 天气
             case 1:
                 // 改变天气控件的图片和文字颜色
                 setTextView(R.drawable.ic_wea_select, tv_wea, mSelectColor);
+                break;
+            // 计时
+            case 2:
+                // 改变计时控件的图片和文字颜色
+                setTextView(R.drawable.ic_time_select, tv_time, mSelectColor);
                 break;
             // 更多
             case 3:
@@ -428,10 +396,10 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         // 设置闹钟Tab为未选中状态
         setTextView(R.drawable.ic_alarm_clock_unselect, tv_alarm_clock,
                 mUnSelectColor);
-        // 设置计时Tab为未选中状态
-        setTextView(R.drawable.ic_time_unselect, tv_time, mUnSelectColor);
         // 设置天气Tab为未选中状态
         setTextView(R.drawable.ic_wea_unselect, tv_wea, mUnSelectColor);
+        // 设置计时Tab为未选中状态
+        setTextView(R.drawable.ic_time_unselect, tv_time, mUnSelectColor);
         // 设置更多Tab为未选中状态
         setTextView(R.drawable.ic_more_unselect, tv_more, mUnSelectColor);
     }

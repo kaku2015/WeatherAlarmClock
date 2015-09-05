@@ -244,6 +244,7 @@
 
             </LinearLayout>
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -263,6 +264,34 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp" />
             </LinearLayout>
+
+            <lecho.lib.hellocharts.view.LineChartView
+                android:id="@+id/chart"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp" />
+
+            <lecho.lib.hellocharts.view.LineChartView
+                android:id="@+id/chart2"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp" />
+
+            <Button
+                android:id="@+id/read_wea"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="读取" />
+
+            <TextView
+                android:id="@+id/wea_prompt_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/black_trans50"
+                android:textColor="@color/white_trans90" />
         </LinearLayout>
     </ScrollView>
-</LinearLayout><!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/layout/fm_wea.xml -->
+</LinearLayout>
+<!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/layout/fm_wea.xml -->

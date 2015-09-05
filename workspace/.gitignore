@@ -8,6 +8,7 @@
 # Java class files
 *.class
 classes/
+build/
 
 # generated files
 bin/
@@ -44,7 +45,7 @@ target/
 
 # Gradle
 .gradle
-build
+#build
 
 # Custom
 lib

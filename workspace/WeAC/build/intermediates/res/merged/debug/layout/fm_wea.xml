@@ -265,19 +265,30 @@
                     android:layout_marginLeft="10dp" />
             </LinearLayout>
 
-            <lecho.lib.hellocharts.view.LineChartView
+            <!--<lecho.lib.hellocharts.view.LineChartView
                 android:id="@+id/chart"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="80dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp" />
 
             <lecho.lib.hellocharts.view.LineChartView
                 android:id="@+id/chart2"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="80dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp" />
+                android:layout_marginRight="30dp" />-->
+
+            <com.kaku.weac.view.LineChartView
+                android:id="@+id/line_chart"
+                android:layout_width="match_parent"
+                android:layout_height="70dp" />
+
+            <com.kaku.weac.view.LineChartView
+                android:id="@+id/line_chart2"
+                android:layout_width="match_parent"
+                android:layout_height="70dp" />
+
 
             <Button
                 android:id="@+id/read_wea"

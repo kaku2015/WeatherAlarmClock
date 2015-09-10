@@ -44,7 +44,7 @@ public class LineChartView extends View {
     private int mHeight;
 
     /**
-     * 温度字体大小
+     * 字体大小
      */
     private float mTextSize;
 
@@ -73,7 +73,7 @@ public class LineChartView extends View {
      */
     private int mPointColor;
     /**
-     * 文字颜色
+     * 字体颜色
      */
     private int mTextColor;
 
@@ -109,14 +109,14 @@ public class LineChartView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         setWidthHeight();
-        computeYValues();
+        computeYAxisValues();
         drawChart(canvas);
     }
 
     /**
      * 计算y轴集合数值
      */
-    private void computeYValues() {
+    private void computeYAxisValues() {
         // 存放最低温度
         int minTemp = 0;
         // 存放最高温度
@@ -137,6 +137,7 @@ public class LineChartView extends View {
         }
         // 份数
         float parts = maxTemp - minTemp;
+        // 白天气温
         if (mTextSpace >= 0) {
             // y轴高度
             float yAxisHeight = mHeight - mTextSize - mTextSpace - mRadius * 2 - mSpace * 2;
@@ -152,7 +153,7 @@ public class LineChartView extends View {
                     mYAxis[i] = mHeight - partValue * (mTemp[i] - minTemp) - mRadius - mSpace;
                 }
             }
-
+            // 夜间气温
         } else {
             // y轴高度
             float yAxisHeight = mHeight - mTextSize + mTextSpace - mRadius * 2 - mSpace * 2;
@@ -181,9 +182,12 @@ public class LineChartView extends View {
     private void drawChart(Canvas canvas) {
         // 线画笔
         Paint linePaint = new Paint();
+        // 抗锯齿
         linePaint.setAntiAlias(true);
+        // 线宽
         linePaint.setStrokeWidth(mStokeWidth);
         linePaint.setColor(mLineColor);
+        // 空心
         linePaint.setStyle(Paint.Style.STROKE);
 
         // 点画笔
@@ -196,21 +200,28 @@ public class LineChartView extends View {
         textPaint.setAntiAlias(true);
         textPaint.setColor(mTextColor);
         textPaint.setTextSize(mTextSize);
+        // 文字居中
         textPaint.setTextAlign(Paint.Align.CENTER);
 
+        int alpha1 = 102;
+        int alpha2 = 255;
         for (int i = 0; i < mLength; i++) {
             // 画线
             if (i < mLength - 1) {
+                // 昨天
                 if (i == 0) {
-                    linePaint.setAlpha(100);
-                    linePaint.setPathEffect(new DashPathEffect(new float[]{6, 6}, 0));
+                    linePaint.setAlpha(alpha1);
+                    // 设置虚线效果
+                    linePaint.setPathEffect(new DashPathEffect(new float[]{2 * mDensity, 2 * mDensity}, 0));
+                    // 路径
                     Path path = new Path();
+                    // 路径起点
                     path.moveTo(mXAxis[i], mYAxis[i]);
+                    // 路径连接到
                     path.lineTo(mXAxis[i + 1], mYAxis[i + 1]);
                     canvas.drawPath(path, linePaint);
-//                    canvas.drawLine(mXAxis[i], mYAxis[i], mXAxis[i + 1], mYAxis[i + 1], linePaint);
                 } else {
-                    linePaint.setAlpha(255);
+                    linePaint.setAlpha(alpha2);
                     linePaint.setPathEffect(null);
                     canvas.drawLine(mXAxis[i], mYAxis[i], mXAxis[i + 1], mYAxis[i + 1], linePaint);
                 }
@@ -218,25 +229,28 @@ public class LineChartView extends View {
 
             // 画点
             if (i != 1) {
+                // 昨天
                 if (i == 0) {
-                    pointPaint.setAlpha(100);
+                    pointPaint.setAlpha(alpha1);
                     canvas.drawCircle(mXAxis[i], mYAxis[i], mRadius, pointPaint);
                 } else {
-                    pointPaint.setAlpha(255);
+                    pointPaint.setAlpha(alpha2);
                     canvas.drawCircle(mXAxis[i], mYAxis[i], mRadius, pointPaint);
                 }
+                // 今天
             } else {
-                pointPaint.setAlpha(255);
+                pointPaint.setAlpha(alpha2);
                 float radius = 5 * mDensity;
                 canvas.drawCircle(mXAxis[i], mYAxis[i], radius, pointPaint);
             }
 
             // 画字
+            // 昨天
             if (i == 0) {
-                textPaint.setAlpha(100);
+                textPaint.setAlpha(alpha1);
                 drawText(canvas, textPaint, i);
             } else {
-                textPaint.setAlpha(255);
+                textPaint.setAlpha(alpha2);
                 drawText(canvas, textPaint, i);
             }
         }
@@ -272,7 +286,7 @@ public class LineChartView extends View {
     /**
      * 设置温度
      *
-     * @param temp 温度
+     * @param temp 温度数组集合
      */
     public void setTemp(int[] temp) {
         mTemp = temp;

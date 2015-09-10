@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
 
     <RelativeLayout style="@style/action_llyt">
@@ -12,21 +12,21 @@
             style="@style/action_icon"
             android:layout_alignParentLeft="true"
             android:contentDescription="@null"
-            android:src="@drawable/ic_action_home" />
+            android:src="@drawable/ic_action_home"/>
 
         <TextView
             android:id="@+id/action_title"
             style="@style/action_title"
             android:drawableLeft="@drawable/ic_gps"
             android:drawablePadding="5dp"
-            android:text="天津" />
+            android:text="天津"/>
 
         <ImageView
             android:id="@+id/action_refresh"
             style="@style/action_icon"
             android:layout_alignParentRight="true"
             android:contentDescription="@null"
-            android:src="@drawable/ic_action_refresh" />
+            android:src="@drawable/ic_action_refresh"/>
     </RelativeLayout>
 
     <ScrollView
@@ -60,7 +60,7 @@
                     android:paddingTop="5dp"
                     android:text="雷电预警"
                     android:textColor="@color/white_trans90"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
                     android:layout_alignParentRight="true"
                     android:text="19:03发布"
                     android:textColor="@color/white_trans60"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"/>
 
             </RelativeLayout>
 
@@ -88,12 +88,12 @@
                     <ImageView
                         style="@style/wea_degree"
                         android:contentDescription="@null"
-                        android:src="@drawable/number_2" />
+                        android:src="@drawable/number_2"/>
 
                     <ImageView
                         style="@style/wea_degree"
                         android:contentDescription="@null"
-                        android:src="@drawable/number_8" />
+                        android:src="@drawable/number_8"/>
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
@@ -104,7 +104,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:contentDescription="@null"
-                            android:src="@drawable/centigrade" />
+                            android:src="@drawable/centigrade"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -113,7 +113,7 @@
                             android:paddingLeft="5dp"
                             android:text="雷阵雨"
                             android:textColor="@color/white_trans90"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"/>
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -123,22 +123,22 @@
                     android:layout_marginTop="20dp"
                     android:drawableLeft="@drawable/ic_weather_air"
                     android:drawablePadding="10dp"
-                    android:text="轻度污染 156" />
+                    android:text="轻度污染 156"/>
 
                 <TextView
                     style="@style/wea_prompt"
                     android:drawableLeft="@drawable/ic_weather_wet"
-                    android:text="湿度 65%" />
+                    android:text="湿度 65%"/>
 
                 <TextView
                     style="@style/wea_prompt"
                     android:drawableLeft="@drawable/ic_weather_wind"
-                    android:text="西南风 3级" />
+                    android:text="西南风 3级"/>
             </LinearLayout>
 
             <View
                 style="@style/divider_line_wea"
-                android:layout_marginBottom="5dp" />
+                android:layout_marginBottom="5dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -149,97 +149,97 @@
 
                     <TextView
                         style="@style/wea_forecast_title"
-                        android:text="今天" />
+                        android:text="今天"/>
 
                     <LinearLayout style="@style/wea_forecast_content_llyt">
 
                         <ImageView
                             style="@style/wea_forecast_content_iv"
-                            android:src="@drawable/ic_wea_thunder_shower" />
+                            android:src="@drawable/ic_wea_thunder_shower"/>
 
                         <RelativeLayout style="@style/wea_forecast_content_degree_rlyt">
 
                             <TextView
                                 style="@style/wea_forecast_content_degree_rlyt_tv"
                                 android:layout_alignParentTop="true"
-                                android:text="28°" />
+                                android:text="28°"/>
 
                             <TextView
                                 style="@style/wea_forecast_content_degree_rlyt_tv"
                                 android:layout_alignParentBottom="true"
-                                android:text="20°" />
+                                android:text="20°"/>
                         </RelativeLayout>
                     </LinearLayout>
 
                     <TextView
                         style="@style/wea_forecast_content_detail"
-                        android:text="雷阵雨转中雨" />
+                        android:text="雷阵雨转中雨"/>
                 </LinearLayout>
 
-                <View style="@style/divider_line_wea_vertical" />
+                <View style="@style/divider_line_wea_vertical"/>
 
                 <LinearLayout style="@style/wea_forecast_llyt">
 
                     <TextView
                         style="@style/wea_forecast_title"
-                        android:text="明天" />
+                        android:text="明天"/>
 
                     <LinearLayout style="@style/wea_forecast_content_llyt">
 
                         <ImageView
                             style="@style/wea_forecast_content_iv"
-                            android:src="@drawable/ic_wea_sunny" />
+                            android:src="@drawable/ic_wea_sunny"/>
 
                         <RelativeLayout style="@style/wea_forecast_content_degree_rlyt">
 
                             <TextView
                                 style="@style/wea_forecast_content_degree_rlyt_tv"
                                 android:layout_alignParentTop="true"
-                                android:text="32°" />
+                                android:text="32°"/>
 
                             <TextView
                                 style="@style/wea_forecast_content_degree_rlyt_tv"
                                 android:layout_alignParentBottom="true"
-                                android:text="22°" />
+                                android:text="22°"/>
                         </RelativeLayout>
                     </LinearLayout>
 
                     <TextView
                         style="@style/wea_forecast_content_detail"
-                        android:text="晴" />
+                        android:text="晴"/>
                 </LinearLayout>
 
-                <View style="@style/divider_line_wea_vertical" />
+                <View style="@style/divider_line_wea_vertical"/>
 
                 <LinearLayout style="@style/wea_forecast_llyt">
 
                     <TextView
                         style="@style/wea_forecast_title"
-                        android:text="后天" />
+                        android:text="后天"/>
 
                     <LinearLayout style="@style/wea_forecast_content_llyt">
 
                         <ImageView
                             style="@style/wea_forecast_content_iv"
-                            android:src="@drawable/ic_wea_cloudy" />
+                            android:src="@drawable/ic_wea_cloudy"/>
 
                         <RelativeLayout style="@style/wea_forecast_content_degree_rlyt">
 
                             <TextView
                                 style="@style/wea_forecast_content_degree_rlyt_tv"
                                 android:layout_alignParentTop="true"
-                                android:text="33°" />
+                                android:text="33°"/>
 
                             <TextView
                                 style="@style/wea_forecast_content_degree_rlyt_tv"
                                 android:layout_alignParentBottom="true"
-                                android:text="21°" />
+                                android:text="21°"/>
                         </RelativeLayout>
                     </LinearLayout>
 
                     <TextView
                         style="@style/wea_forecast_content_detail"
-                        android:text="多云转晴" />
+                        android:text="多云转晴"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -257,51 +257,82 @@
                     android:layout_height="wrap_content"
                     android:text="多天预报"
                     android:textColor="@color/white_trans90"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"/>
 
                 <View
                     style="@style/divider_line_wea"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginLeft="10dp"/>
             </LinearLayout>
 
-            <!--<lecho.lib.hellocharts.view.LineChartView
-                android:id="@+id/chart"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
 
-            <lecho.lib.hellocharts.view.LineChartView
-                android:id="@+id/chart2"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp" />-->
+                <LinearLayout
+                    style="@style/wea_days_forecast_llyt"
+                    >
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_week1"
+                        style="@style/wea_days_forecast_tv_llyt"
+                        android:text="昨天"
+                        android:textColor="@color/white_trans40"/>
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_week2"
+                        style="@style/wea_days_forecast_tv_llyt"
+                        android:text="今天"/>
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_week3"
+                        style="@style/wea_days_forecast_tv_llyt"
+                        android:text="周二"/>
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_week4"
+                        style="@style/wea_days_forecast_tv_llyt"
+                        android:text="周三"/>
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_week5"
+                        style="@style/wea_days_forecast_tv_llyt"
+                        android:text="周四"/>
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_week6"
+                        style="@style/wea_days_forecast_tv_llyt"
+                        android:text="周五"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <com.kaku.weac.view.LineChartView
-                android:id="@+id/line_chart"
+                android:id="@+id/line_char_day"
                 android:layout_width="match_parent"
-                android:layout_height="70dp" />
+                android:layout_height="70dp"/>
 
             <com.kaku.weac.view.LineChartView
-                android:id="@+id/line_chart2"
+                android:id="@+id/line_chart_night"
                 android:layout_width="match_parent"
-                android:layout_height="70dp" />
+                android:layout_height="70dp"/>
 
 
             <Button
                 android:id="@+id/read_wea"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="读取" />
+                android:text="读取"/>
 
             <TextView
                 android:id="@+id/wea_prompt_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/black_trans50"
-                android:textColor="@color/white_trans90" />
+                android:textColor="@color/white_trans90"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

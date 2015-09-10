@@ -54,12 +54,17 @@
     <style name="new_alarm_clcok_repeat_days_tog_btn">
         <item name="android:layout_width">38dp</item>
         <item name="android:layout_height">38dp</item>
-        <item name="android:layout_gravity">center</item>
         <item name="android:background">@drawable/toggle_btn_repeat_week</item>
         <item name="android:checked">false</item>
-        <item name="android:layout_marginLeft">9dp</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@drawable/text_color_toggle_btn_circle</item>
+    </style>
+
+    <style name="new_alarm_clock_repeat_days_llyt">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
     </style>
 
     <style name="new_alarm_clcok_nap_edit_radio_btn">

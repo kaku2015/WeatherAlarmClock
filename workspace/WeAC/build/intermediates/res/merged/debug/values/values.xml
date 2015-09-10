@@ -37,6 +37,7 @@
     <color name="white">#FFFFFF</color>
     <color name="white_trans10">#1affffff</color>
     <color name="white_trans20">#33ffffff</color>
+    <color name="white_trans40">#66ffffff</color>
     <color name="white_trans60">#99FFFFFF</color>
     <color name="white_trans90">#e6ffffff</color>
     <color name="yellow_hot">#f9c000</color>
@@ -328,12 +329,16 @@
     <style name="new_alarm_clcok_repeat_days_tog_btn">
         <item name="android:layout_width">38dp</item>
         <item name="android:layout_height">38dp</item>
-        <item name="android:layout_gravity">center</item>
         <item name="android:background">@drawable/toggle_btn_repeat_week</item>
         <item name="android:checked">false</item>
-        <item name="android:layout_marginLeft">9dp</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@drawable/text_color_toggle_btn_circle</item>
+    </style>
+    <style name="new_alarm_clock_repeat_days_llyt">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
     </style>
     <style name="record_detail_content">
         <item name="android:layout_width">wrap_content</item>
@@ -406,6 +411,19 @@
     </style>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/stytles_wea.xml -->
     <eat-comment/>
+    <style name="wea_days_forecast_llyt">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+    <style name="wea_days_forecast_tv_llyt">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white_trans90</item>
+        <item name="android:textSize">16sp</item>
+    </style>
     <style name="wea_degree">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

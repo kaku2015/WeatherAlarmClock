@@ -373,7 +373,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
             // 天气
             case 1:
                 // 改变天气控件的图片和文字颜色
-                setTextView(R.drawable.ic_wea_select, tv_wea, mSelectColor);
+                setTextView(R.drawable.ic_weather_select, tv_wea, mSelectColor);
                 break;
             // 计时
             case 2:
@@ -397,7 +397,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         setTextView(R.drawable.ic_alarm_clock_unselect, tv_alarm_clock,
                 mUnSelectColor);
         // 设置天气Tab为未选中状态
-        setTextView(R.drawable.ic_wea_unselect, tv_wea, mUnSelectColor);
+        setTextView(R.drawable.ic_weather_unselect, tv_wea, mUnSelectColor);
         // 设置计时Tab为未选中状态
         setTextView(R.drawable.ic_time_unselect, tv_time, mUnSelectColor);
         // 设置更多Tab为未选中状态

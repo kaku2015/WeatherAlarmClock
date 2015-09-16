@@ -75,9 +75,9 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="42dp"
+                android:layout_marginBottom="45dp"
                 android:layout_marginLeft="19dp"
-                android:layout_marginTop="42dp"
+                android:layout_marginTop="45dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -244,450 +244,536 @@
 
             </LinearLayout>
 
-
             <LinearLayout
-                style="@style/wea_days_title_llyt">
-
-                <TextView
-                    style="@style/wea_days_title_tv"
-                    android:text="多天预报"/>
-
-                <View
-                    style="@style/divider_line_wea"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                style="@style/wea_area_llyt"
+                android:layout_marginTop="15dp"
                 >
 
                 <LinearLayout
-                    style="@style/wea_days_forecast_llyt"
-                    >
+                    style="@style/wea_days_title_llyt">
 
                     <TextView
-                        android:id="@+id/wea_days_forecast_week1"
-                        style="@style/wea_days_forecast_tv_trans"
-                        android:text="昨天"/>
-
-                    <TextView
-                        android:id="@+id/wea_days_forecast_week2"
-                        style="@style/wea_days_forecast_tv"
-                        android:text="今天"/>
-
-                    <TextView
-                        android:id="@+id/wea_days_forecast_week3"
-                        style="@style/wea_days_forecast_tv"
-                        android:text="周二"/>
-
-                    <TextView
-                        android:id="@+id/wea_days_forecast_week4"
-                        style="@style/wea_days_forecast_tv"
-                        android:text="周三"/>
-
-                    <TextView
-                        android:id="@+id/wea_days_forecast_week5"
-                        style="@style/wea_days_forecast_tv"
-                        android:text="周四"/>
-
-                    <TextView
-                        android:id="@+id/wea_days_forecast_week6"
-                        style="@style/wea_days_forecast_tv"
-                        android:text="周五"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    style="@style/wea_days_forecast_llyt"
-                    >
-
-                    <TextView
-                        android:id="@+id/wea_days_forecast_day1"
-                        style="@style/wea_days_forecast_tv2_trans"
-                        android:text="08/16"/>
-
-                    <TextView
-                        android:id="@+id/wea_days_forecast_day2"
-                        style="@style/wea_days_forecast_tv2"
-                        android:text="08/17"/>
-
-                    <TextView
-                        android:id="@+id/wea_days_forecast_day3"
-                        style="@style/wea_days_forecast_tv2"
-                        android:text="08/18"/>
-
-                    <TextView
-                        android:id="@+id/wea_days_forecast_day4"
-                        style="@style/wea_days_forecast_tv2"
-                        android:text="08/19"/>
-
-                    <TextView
-                        android:id="@+id/wea_days_forecast_day5"
-                        style="@style/wea_days_forecast_tv2"
-                        android:text="08/20"/>
-
-                    <TextView
-                        android:id="@+id/wea_days_forecast_day6"
-                        style="@style/wea_days_forecast_tv2"
-                        android:text="08/21"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    style="@style/wea_days_forecast_llyt"
-                    >
-
-                    <ImageView
-                        android:id="@+id/wea_days_forecast_weather_day_iv1"
-                        style="@style/wea_days_forecast_iv_trans"
-                        android:src="@drawable/ic_weather_sunny"/>
-
-                    <ImageView
-                        android:id="@+id/wea_days_forecast_weather_day_iv2"
-                        style="@style/wea_days_forecast_iv"
-                        android:src="@drawable/ic_weather_thunder_shower"/>
-
-                    <ImageView
-                        android:id="@+id/wea_days_forecast_weather_day_iv3"
-                        style="@style/wea_days_forecast_iv"
-                        android:src="@drawable/ic_weather_thunder_shower"/>
-
-                    <ImageView
-                        android:id="@+id/wea_days_forecast_weather_day_iv4"
-                        style="@style/wea_days_forecast_iv"
-                        android:src="@drawable/ic_weather_thunder_shower"/>
-
-                    <ImageView
-                        android:id="@+id/wea_days_forecast_weather_day_iv5"
-                        style="@style/wea_days_forecast_iv"
-                        android:src="@drawable/ic_weather_cloudy"/>
-
-                    <ImageView
-                        android:id="@+id/wea_days_forecast_weather_day_iv6"
-                        style="@style/wea_days_forecast_iv"
-                        android:src="@drawable/ic_weather_cloudy"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    style="@style/wea_days_forecast_llyt"
-                    >
-
-                    <TextView
-                        android:id="@+id/wea_days_forecast_weather_day_tv1"
-                        style="@style/wea_days_forecast_tv_trans"
-                        android:text="晴"/>
-
-                    <TextView
-                        android:id="@+id/wea_days_forecast_weather_day_tv2"
-                        style="@style/wea_days_forecast_tv"
-                        android:text="雷阵雨"/>
-
-                    <TextView
-                        android:id="@+id/wea_days_forecast_weather_day_tv3"
-                        style="@style/wea_days_forecast_tv"
-                        android:text="雷阵雨"/>
-
-                    <TextView
-                        android:id="@+id/wea_days_forecast_weather_day_tv4"
-                        style="@style/wea_days_forecast_tv"
-                        android:text="雷阵雨"/>
-
-                    <TextView
-                        android:id="@+id/wea_days_forecast_weather_day_tv5"
-                        style="@style/wea_days_forecast_tv"
-                        android:text="多云"/>
-
-                    <TextView
-                        android:id="@+id/wea_days_forecast_weather_day_tv6"
-                        style="@style/wea_days_forecast_tv"
-                        android:text="多云"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <com.kaku.weac.view.LineChartView
-                android:id="@+id/line_char_day"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginTop="15dp"/>
-
-            <com.kaku.weac.view.LineChartView
-                android:id="@+id/line_chart_night"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="10dp"/>
-
-            <LinearLayout
-                style="@style/wea_days_forecast_llyt"
-                >
-
-                <TextView
-                    android:id="@+id/wea_days_forecast_weather_night_tv1"
-                    style="@style/wea_days_forecast_tv_trans"
-                    android:layout_marginTop="0dp"
-                    android:text="多云"/>
-
-                <TextView
-                    android:id="@+id/wea_days_forecast_weather_night_tv2"
-                    style="@style/wea_days_forecast_tv"
-                    android:text="雷阵雨"/>
-
-                <TextView
-                    android:id="@+id/wea_days_forecast_weather_night_tv3"
-                    style="@style/wea_days_forecast_tv"
-                    android:text="雷阵雨"/>
-
-                <TextView
-                    android:id="@+id/wea_days_forecast_weather_night_tv4"
-                    style="@style/wea_days_forecast_tv"
-                    android:text="多云"/>
-
-                <TextView
-                    android:id="@+id/wea_days_forecast_weather_night_tv5"
-                    style="@style/wea_days_forecast_tv"
-                    android:text="晴"/>
-
-                <TextView
-                    android:id="@+id/wea_days_forecast_weather_night_tv6"
-                    style="@style/wea_days_forecast_tv"
-                    android:text="雷阵雨"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                style="@style/wea_days_forecast_llyt"
-                >
-
-                <ImageView
-                    android:id="@+id/wea_days_forecast_weather_night_iv1"
-                    style="@style/wea_days_forecast_iv_trans"
-                    android:src="@drawable/ic_weather_cloudy"/>
-
-                <ImageView
-                    android:id="@+id/wea_days_forecast_weather_night_iv2"
-                    style="@style/wea_days_forecast_iv"
-                    android:src="@drawable/ic_weather_thunder_shower"/>
-
-                <ImageView
-                    android:id="@+id/wea_days_forecast_weather_night_iv3"
-                    style="@style/wea_days_forecast_iv"
-                    android:src="@drawable/ic_weather_thunder_shower"/>
-
-                <ImageView
-                    android:id="@+id/wea_days_forecast_weather_night_iv4"
-                    style="@style/wea_days_forecast_iv"
-                    android:src="@drawable/ic_weather_cloudy"/>
-
-                <ImageView
-                    android:id="@+id/wea_days_forecast_weather_night_iv5"
-                    style="@style/wea_days_forecast_iv"
-                    android:src="@drawable/ic_weather_sunny"/>
-
-                <ImageView
-                    android:id="@+id/wea_days_forecast_weather_night_iv6"
-                    style="@style/wea_days_forecast_iv"
-                    android:src="@drawable/ic_weather_thunder_shower"/>
-            </LinearLayout>
-
-            <LinearLayout
-                style="@style/wea_days_forecast_llyt"
-                >
-
-                <TextView
-                    android:id="@+id/wea_days_forecast_wind_tv1"
-                    style="@style/wea_days_forecast_tv_trans"
-                    android:text="南风"/>
-
-                <TextView
-                    android:id="@+id/wea_days_forecast_wind_tv2"
-                    style="@style/wea_days_forecast_tv"
-                    android:text="南风"/>
-
-                <TextView
-                    android:id="@+id/wea_days_forecast_wind_tv3"
-                    style="@style/wea_days_forecast_tv"
-                    android:text="西风"/>
-
-                <TextView
-                    android:id="@+id/wea_days_forecast_wind_tv4"
-                    style="@style/wea_days_forecast_tv"
-                    android:text="西风"/>
-
-                <TextView
-                    android:id="@+id/wea_days_forecast_wind_tv5"
-                    style="@style/wea_days_forecast_tv"
-                    android:text="西风"/>
-
-                <TextView
-                    android:id="@+id/wea_days_forecast_wind_tv6"
-                    style="@style/wea_days_forecast_tv"
-                    android:text="东风"/>
-            </LinearLayout>
-
-            <LinearLayout
-                style="@style/wea_days_forecast_llyt"
-                >
-
-                <TextView
-                    android:id="@+id/wea_days_forecast_windscale_tv1"
-                    style="@style/wea_days_forecast_tv2_trans"
-                    android:text="3级"/>
-
-                <TextView
-                    android:id="@+id/wea_days_forecast_windscale_tv2"
-                    style="@style/wea_days_forecast_tv2"
-                    android:text="3级"/>
-
-                <TextView
-                    android:id="@+id/wea_days_forecast_windscale_tv3"
-                    style="@style/wea_days_forecast_tv2"
-                    android:text="2级"/>
-
-                <TextView
-                    android:id="@+id/wea_days_forecast_windscale_tv4"
-                    style="@style/wea_days_forecast_tv2"
-                    android:text="2级"/>
-
-                <TextView
-                    android:id="@+id/wea_days_forecast_windscale_tv5"
-                    style="@style/wea_days_forecast_tv2"
-                    android:text="1级"/>
-
-                <TextView
-                    android:id="@+id/wea_days_forecast_windscale_tv6"
-                    style="@style/wea_days_forecast_tv2"
-                    android:text="1级"/>
-
-            </LinearLayout>
-
-            <LinearLayout style="@style/wea_days_title_llyt">
-
-                <TextView
-                    style="@style/wea_days_title_tv"
-                    android:text="生活指数"/>
-
-                <View
-                    style="@style/divider_line_wea"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"/>
-            </LinearLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <View
-                    android:layout_width="0.5dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/white_trans20"
-                    />
-
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
-
-                    <TableRow>
-
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_weight="1"
-                            >
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_alignParentLeft="true"
-                                android:layout_centerInParent="true"
-                                android:layout_marginLeft="19dp"
-                                android:src="@drawable/ic_lifeindex_dress"
-                                />
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerInParent="true"
-                                android:layout_marginRight="19dp"
-                                android:orientation="vertical"
-                                >
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:text="炎热"
-                                    android:textColor="@color/white_trans60"
-                                    android:textSize="16sp"/>
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:text="穿衣"
-                                    android:textColor="@color/white_trans90"
-                                    android:textSize="18sp"/>
-
-                            </LinearLayout>
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            >
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_alignParentLeft="true"
-                                android:layout_marginLeft="15dp"
-                                android:src="@drawable/ic_lifeindex_dress"
-                                />
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_alignParentRight="true"
-                                android:layout_marginRight="15dp"
-                                android:orientation="vertical"
-                                >
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:text="炎热"
-                                    android:textColor="@color/white_trans90"
-                                    android:textSize="16sp"/>
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:text="穿衣"
-                                    android:textColor="@color/white_trans90"
-                                    android:textSize="18sp"/>
-
-                            </LinearLayout>
-                        </RelativeLayout>
-                    </TableRow>
+                        style="@style/wea_days_title_tv"
+                        android:text="多天预报"/>
 
                     <View
                         style="@style/divider_line_wea"
-                        android:layout_marginLeft="19dp"
-                        android:layout_marginRight="19dp"/>
-                </TableLayout>
-            </FrameLayout>
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <LinearLayout
+                        style="@style/wea_days_forecast_llyt"
+                        android:layout_marginTop="0dp"
+                        >
+
+                        <TextView
+                            android:id="@+id/wea_days_forecast_week1"
+                            style="@style/wea_days_forecast_tv_trans"
+                            android:text="昨天"/>
+
+                        <TextView
+                            android:id="@+id/wea_days_forecast_week2"
+                            style="@style/wea_days_forecast_tv"
+                            android:text="今天"/>
+
+                        <TextView
+                            android:id="@+id/wea_days_forecast_week3"
+                            style="@style/wea_days_forecast_tv"
+                            android:text="周二"/>
+
+                        <TextView
+                            android:id="@+id/wea_days_forecast_week4"
+                            style="@style/wea_days_forecast_tv"
+                            android:text="周三"/>
+
+                        <TextView
+                            android:id="@+id/wea_days_forecast_week5"
+                            style="@style/wea_days_forecast_tv"
+                            android:text="周四"/>
+
+                        <TextView
+                            android:id="@+id/wea_days_forecast_week6"
+                            style="@style/wea_days_forecast_tv"
+                            android:text="周五"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/wea_days_forecast_llyt"
+                        >
+
+                        <TextView
+                            android:id="@+id/wea_days_forecast_day1"
+                            style="@style/wea_days_forecast_tv2_trans"
+                            android:text="08/16"/>
+
+                        <TextView
+                            android:id="@+id/wea_days_forecast_day2"
+                            style="@style/wea_days_forecast_tv2"
+                            android:text="08/17"/>
+
+                        <TextView
+                            android:id="@+id/wea_days_forecast_day3"
+                            style="@style/wea_days_forecast_tv2"
+                            android:text="08/18"/>
+
+                        <TextView
+                            android:id="@+id/wea_days_forecast_day4"
+                            style="@style/wea_days_forecast_tv2"
+                            android:text="08/19"/>
+
+                        <TextView
+                            android:id="@+id/wea_days_forecast_day5"
+                            style="@style/wea_days_forecast_tv2"
+                            android:text="08/20"/>
+
+                        <TextView
+                            android:id="@+id/wea_days_forecast_day6"
+                            style="@style/wea_days_forecast_tv2"
+                            android:text="08/21"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/wea_days_forecast_llyt"
+                        >
+
+                        <ImageView
+                            android:id="@+id/wea_days_forecast_weather_day_iv1"
+                            style="@style/wea_days_forecast_iv_trans"
+                            android:src="@drawable/ic_weather_sunny"/>
+
+                        <ImageView
+                            android:id="@+id/wea_days_forecast_weather_day_iv2"
+                            style="@style/wea_days_forecast_iv"
+                            android:src="@drawable/ic_weather_thunder_shower"/>
+
+                        <ImageView
+                            android:id="@+id/wea_days_forecast_weather_day_iv3"
+                            style="@style/wea_days_forecast_iv"
+                            android:src="@drawable/ic_weather_thunder_shower"/>
+
+                        <ImageView
+                            android:id="@+id/wea_days_forecast_weather_day_iv4"
+                            style="@style/wea_days_forecast_iv"
+                            android:src="@drawable/ic_weather_thunder_shower"/>
+
+                        <ImageView
+                            android:id="@+id/wea_days_forecast_weather_day_iv5"
+                            style="@style/wea_days_forecast_iv"
+                            android:src="@drawable/ic_weather_cloudy"/>
+
+                        <ImageView
+                            android:id="@+id/wea_days_forecast_weather_day_iv6"
+                            style="@style/wea_days_forecast_iv"
+                            android:src="@drawable/ic_weather_cloudy"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/wea_days_forecast_llyt"
+                        >
+
+                        <TextView
+                            android:id="@+id/wea_days_forecast_weather_day_tv1"
+                            style="@style/wea_days_forecast_tv_trans"
+                            android:text="晴"/>
+
+                        <TextView
+                            android:id="@+id/wea_days_forecast_weather_day_tv2"
+                            style="@style/wea_days_forecast_tv"
+                            android:text="雷阵雨"/>
+
+                        <TextView
+                            android:id="@+id/wea_days_forecast_weather_day_tv3"
+                            style="@style/wea_days_forecast_tv"
+                            android:text="雷阵雨"/>
+
+                        <TextView
+                            android:id="@+id/wea_days_forecast_weather_day_tv4"
+                            style="@style/wea_days_forecast_tv"
+                            android:text="雷阵雨"/>
+
+                        <TextView
+                            android:id="@+id/wea_days_forecast_weather_day_tv5"
+                            style="@style/wea_days_forecast_tv"
+                            android:text="多云"/>
+
+                        <TextView
+                            android:id="@+id/wea_days_forecast_weather_day_tv6"
+                            style="@style/wea_days_forecast_tv"
+                            android:text="多云"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <com.kaku.weac.view.LineChartView
+                    android:id="@+id/line_char_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="15dp"/>
+
+                <com.kaku.weac.view.LineChartView
+                    android:id="@+id/line_chart_night"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="10dp"/>
+
+                <LinearLayout
+                    style="@style/wea_days_forecast_llyt"
+                    >
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_weather_night_tv1"
+                        style="@style/wea_days_forecast_tv_trans"
+                        android:layout_marginTop="0dp"
+                        android:text="多云"/>
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_weather_night_tv2"
+                        style="@style/wea_days_forecast_tv"
+                        android:text="雷阵雨"/>
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_weather_night_tv3"
+                        style="@style/wea_days_forecast_tv"
+                        android:text="雷阵雨"/>
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_weather_night_tv4"
+                        style="@style/wea_days_forecast_tv"
+                        android:text="多云"/>
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_weather_night_tv5"
+                        style="@style/wea_days_forecast_tv"
+                        android:text="晴"/>
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_weather_night_tv6"
+                        style="@style/wea_days_forecast_tv"
+                        android:text="雷阵雨"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/wea_days_forecast_llyt"
+                    >
+
+                    <ImageView
+                        android:id="@+id/wea_days_forecast_weather_night_iv1"
+                        style="@style/wea_days_forecast_iv_trans"
+                        android:src="@drawable/ic_weather_cloudy"/>
+
+                    <ImageView
+                        android:id="@+id/wea_days_forecast_weather_night_iv2"
+                        style="@style/wea_days_forecast_iv"
+                        android:src="@drawable/ic_weather_thunder_shower"/>
+
+                    <ImageView
+                        android:id="@+id/wea_days_forecast_weather_night_iv3"
+                        style="@style/wea_days_forecast_iv"
+                        android:src="@drawable/ic_weather_thunder_shower"/>
+
+                    <ImageView
+                        android:id="@+id/wea_days_forecast_weather_night_iv4"
+                        style="@style/wea_days_forecast_iv"
+                        android:src="@drawable/ic_weather_cloudy"/>
+
+                    <ImageView
+                        android:id="@+id/wea_days_forecast_weather_night_iv5"
+                        style="@style/wea_days_forecast_iv"
+                        android:src="@drawable/ic_weather_sunny"/>
+
+                    <ImageView
+                        android:id="@+id/wea_days_forecast_weather_night_iv6"
+                        style="@style/wea_days_forecast_iv"
+                        android:src="@drawable/ic_weather_thunder_shower"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/wea_days_forecast_llyt"
+                    >
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_wind_tv1"
+                        style="@style/wea_days_forecast_tv_trans"
+                        android:text="南风"/>
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_wind_tv2"
+                        style="@style/wea_days_forecast_tv"
+                        android:text="南风"/>
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_wind_tv3"
+                        style="@style/wea_days_forecast_tv"
+                        android:text="西风"/>
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_wind_tv4"
+                        style="@style/wea_days_forecast_tv"
+                        android:text="西风"/>
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_wind_tv5"
+                        style="@style/wea_days_forecast_tv"
+                        android:text="西风"/>
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_wind_tv6"
+                        style="@style/wea_days_forecast_tv"
+                        android:text="东风"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/wea_days_forecast_llyt"
+                    >
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_windscale_tv1"
+                        style="@style/wea_days_forecast_tv2_trans"
+                        android:text="3级"/>
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_windscale_tv2"
+                        style="@style/wea_days_forecast_tv2"
+                        android:text="3级"/>
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_windscale_tv3"
+                        style="@style/wea_days_forecast_tv2"
+                        android:text="2级"/>
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_windscale_tv4"
+                        style="@style/wea_days_forecast_tv2"
+                        android:text="2级"/>
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_windscale_tv5"
+                        style="@style/wea_days_forecast_tv2"
+                        android:text="1级"/>
+
+                    <TextView
+                        android:id="@+id/wea_days_forecast_windscale_tv6"
+                        style="@style/wea_days_forecast_tv2"
+                        android:text="1级"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <LinearLayout
+                style="@style/wea_area_llyt">
+
+                <LinearLayout
+                    style="@style/wea_days_title_llyt"
+                    android:layout_marginBottom="0dp"
+                    >
+
+                    <TextView
+                        style="@style/wea_days_title_tv"
+                        android:text="生活指数"/>
+
+                    <View
+                        style="@style/divider_line_wea"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"/>
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/white_trans20"
+                        />
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <TableRow>
+
+                            <RelativeLayout
+                                style="@style/wea_life_index_rlyt"
+                                >
+
+                                <ImageView
+                                    style="@style/wea_life_index_iv"
+                                    android:src="@drawable/ic_lifeindex_dress"
+                                    />
+
+                                <LinearLayout
+                                    style="@style/wea_life_index_llyt"
+                                    >
+
+                                    <TextView
+                                        style="@style/wea_life_index_tv_detail"
+                                        android:text="炎热"/>
+
+                                    <TextView
+                                        style="@style/wea_life_index_tv_title"
+                                        android:text="穿衣"/>
+
+                                </LinearLayout>
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                style="@style/wea_life_index_rlyt"
+                                >
+
+                                <ImageView
+                                    style="@style/wea_life_index_iv"
+                                    android:src="@drawable/ic_lifeindex_ultravioletrays"
+                                    />
+
+                                <LinearLayout
+                                    style="@style/wea_life_index_llyt"
+                                    >
+
+                                    <TextView
+                                        style="@style/wea_life_index_tv_detail"
+                                        android:text="较强"/>
+
+                                    <TextView
+                                        style="@style/wea_life_index_tv_title"
+                                        android:text="紫外线"/>
+
+                                </LinearLayout>
+                            </RelativeLayout>
+
+                        </TableRow>
+
+                        <View
+                            style="@style/divider_line_wea_life_index_horizontal"/>
+
+                        <TableRow>
+
+                            <RelativeLayout
+                                style="@style/wea_life_index_rlyt"
+                                >
+
+                                <ImageView
+                                    style="@style/wea_life_index_iv"
+                                    android:src="@drawable/ic_lifeindex_coldl"
+                                    />
+
+                                <LinearLayout
+                                    style="@style/wea_life_index_llyt"
+                                    >
+
+                                    <TextView
+                                        style="@style/wea_life_index_tv_detail"
+                                        android:text="少发"/>
+
+                                    <TextView
+                                        style="@style/wea_life_index_tv_title"
+                                        android:text="感冒"/>
+
+                                </LinearLayout>
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                style="@style/wea_life_index_rlyt"
+                                >
+
+                                <ImageView
+                                    style="@style/wea_life_index_iv"
+                                    android:src="@drawable/ic_lifeindex_sport"
+                                    />
+
+                                <LinearLayout
+                                    style="@style/wea_life_index_llyt"
+                                    >
+
+                                    <TextView
+                                        style="@style/wea_life_index_tv_detail"
+                                        android:text="不宜"/>
+
+                                    <TextView
+                                        style="@style/wea_life_index_tv_title"
+                                        android:text="运动"/>
+
+                                </LinearLayout>
+                            </RelativeLayout>
+
+                        </TableRow>
+
+                        <View
+                            style="@style/divider_line_wea_life_index_horizontal"/>
+
+                        <TableRow>
+
+                            <RelativeLayout
+                                style="@style/wea_life_index_rlyt"
+                                >
+
+                                <ImageView
+                                    style="@style/wea_life_index_iv"
+                                    android:src="@drawable/ic_lifeindex_carwash"
+                                    />
+
+                                <LinearLayout
+                                    style="@style/wea_life_index_llyt"
+                                    >
+
+                                    <TextView
+                                        style="@style/wea_life_index_tv_detail"
+                                        android:text="不宜"/>
+
+                                    <TextView
+                                        style="@style/wea_life_index_tv_title"
+                                        android:text="洗车"/>
+
+                                </LinearLayout>
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                style="@style/wea_life_index_rlyt"
+                                >
+
+                                <ImageView
+                                    style="@style/wea_life_index_iv"
+                                    android:src="@drawable/ic_lifeindex_fish"
+                                    />
+
+                                <LinearLayout
+                                    style="@style/wea_life_index_llyt"
+                                    >
+
+                                    <TextView
+                                        style="@style/wea_life_index_tv_detail"
+                                        android:text="不宜"/>
+
+                                    <TextView
+                                        style="@style/wea_life_index_tv_title"
+                                        android:text="钓鱼"/>
+
+                                </LinearLayout>
+                            </RelativeLayout>
+
+                        </TableRow>
+                    </TableLayout>
+                </FrameLayout>
+            </LinearLayout>
 
             <Button
                 android:id="@+id/read_wea"

@@ -240,6 +240,13 @@
         <item name="android:layout_height">0.5dp</item>
         <item name="android:background">@color/white_trans20</item>
     </style>
+    <style name="divider_line_wea_life_index_horizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:background">@color/white_trans20</item>
+        <item name="android:layout_marginLeft">19dp</item>
+        <item name="android:layout_marginRight">19dp</item>
+    </style>
     <style name="divider_line_wea_vertical">
         <item name="android:layout_width">0.5dp</item>
         <item name="android:layout_marginTop">10dp</item>
@@ -411,6 +418,14 @@
     </style>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/stytles_wea.xml -->
     <eat-comment/>
+    <style name="wea_area_llyt">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/black_trans20</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingTop">10dp</item>
+    </style>
     <style name="wea_days_forecast_iv">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
@@ -465,7 +480,6 @@
     <style name="wea_days_title_llyt">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">25dp</item>
         <item name="android:layout_marginLeft">19dp</item>
         <item name="android:layout_marginBottom">15dp</item>
         <item name="android:orientation">horizontal</item>
@@ -519,6 +533,42 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/white_trans90</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="wea_life_index_iv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_marginLeft">19dp</item>
+    </style>
+    <style name="wea_life_index_llyt">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_marginRight">19dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <style name="wea_life_index_rlyt">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginBottom">15dp</item>
+    </style>
+    <style name="wea_life_index_tv_detail">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">right</item>
+        <item name="android:textColor">@color/white_trans60</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="wea_life_index_tv_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">right</item>
         <item name="android:textColor">@color/white_trans90</item>
         <item name="android:textSize">16sp</item>
     </style>

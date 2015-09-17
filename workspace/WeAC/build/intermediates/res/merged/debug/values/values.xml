@@ -6,6 +6,7 @@
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/color.xml -->
     <eat-comment/>
     <color name="black">#000000</color>
+    <color name="black_trans10">#1a000000</color>
     <color name="black_trans15">#26000000</color>
     <color name="black_trans20">#33000000</color>
     <color name="black_trans50">#80000000</color>
@@ -543,14 +544,6 @@
         <item name="android:layout_centerInParent">true</item>
         <item name="android:layout_marginLeft">19dp</item>
     </style>
-    <style name="wea_life_index_llyt">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_alignParentRight">true</item>
-        <item name="android:layout_centerInParent">true</item>
-        <item name="android:layout_marginRight">19dp</item>
-        <item name="android:orientation">vertical</item>
-    </style>
     <style name="wea_life_index_rlyt">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -561,6 +554,8 @@
     <style name="wea_life_index_tv_detail">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginRight">19dp</item>
         <item name="android:gravity">right</item>
         <item name="android:textColor">@color/white_trans60</item>
         <item name="android:textSize">14sp</item>
@@ -568,6 +563,7 @@
     <style name="wea_life_index_tv_title">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">19dp</item>
         <item name="android:gravity">right</item>
         <item name="android:textColor">@color/white_trans90</item>
         <item name="android:textSize">16sp</item>

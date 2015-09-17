@@ -618,22 +618,19 @@
 
                                 <ImageView
                                     style="@style/wea_life_index_iv"
-                                    android:src="@drawable/ic_lifeindex_dress"
+                                    android:src="@drawable/ic_lifeindex_umbrella"
                                     />
 
-                                <LinearLayout
-                                    style="@style/wea_life_index_llyt"
-                                    >
+                                <TextView
+                                    android:id="@+id/wea_life_index_tv_umbrella"
+                                    style="@style/wea_life_index_tv_detail"
+                                    android:text="带伞"/>
 
-                                    <TextView
-                                        style="@style/wea_life_index_tv_detail"
-                                        android:text="炎热"/>
+                                <TextView
+                                    style="@style/wea_life_index_tv_title"
+                                    android:layout_below="@id/wea_life_index_tv_umbrella"
+                                    android:text="雨伞"/>
 
-                                    <TextView
-                                        style="@style/wea_life_index_tv_title"
-                                        android:text="穿衣"/>
-
-                                </LinearLayout>
                             </RelativeLayout>
 
                             <RelativeLayout
@@ -642,22 +639,19 @@
 
                                 <ImageView
                                     style="@style/wea_life_index_iv"
-                                    android:src="@drawable/ic_lifeindex_ultravioletrays"
+                                    android:src="@drawable/ic_lifeindex_ultraviolet_rays"
                                     />
 
-                                <LinearLayout
-                                    style="@style/wea_life_index_llyt"
-                                    >
+                                <TextView
+                                    android:id="@+id/wea_life_index_tv_ultraviolet_rays"
+                                    style="@style/wea_life_index_tv_detail"
+                                    android:text="较强"/>
 
-                                    <TextView
-                                        style="@style/wea_life_index_tv_detail"
-                                        android:text="较强"/>
+                                <TextView
+                                    style="@style/wea_life_index_tv_title"
+                                    android:layout_below="@id/wea_life_index_tv_ultraviolet_rays"
+                                    android:text="紫外线"/>
 
-                                    <TextView
-                                        style="@style/wea_life_index_tv_title"
-                                        android:text="紫外线"/>
-
-                                </LinearLayout>
                             </RelativeLayout>
 
                         </TableRow>
@@ -673,22 +667,68 @@
 
                                 <ImageView
                                     style="@style/wea_life_index_iv"
+                                    android:src="@drawable/ic_lifeindex_dress"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/wea_life_tv_index_dress"
+                                    style="@style/wea_life_index_tv_detail"
+                                    android:text="炎热"/>
+
+                                <TextView
+                                    style="@style/wea_life_index_tv_title"
+                                    android:layout_below="@id/wea_life_tv_index_dress"
+                                    android:text="穿衣"/>
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                style="@style/wea_life_index_rlyt"
+                                >
+
+                                <ImageView
+                                    style="@style/wea_life_index_iv"
                                     android:src="@drawable/ic_lifeindex_coldl"
                                     />
 
-                                <LinearLayout
-                                    style="@style/wea_life_index_llyt"
-                                    >
+                                <TextView
+                                    android:id="@+id/wea_life_index_tv_coldl"
+                                    style="@style/wea_life_index_tv_detail"
+                                    android:text="少发"/>
 
-                                    <TextView
-                                        style="@style/wea_life_index_tv_detail"
-                                        android:text="少发"/>
+                                <TextView
+                                    style="@style/wea_life_index_tv_title"
+                                    android:layout_below="@id/wea_life_index_tv_coldl"
+                                    android:text="感冒"/>
 
-                                    <TextView
-                                        style="@style/wea_life_index_tv_title"
-                                        android:text="感冒"/>
+                            </RelativeLayout>
 
-                                </LinearLayout>
+                        </TableRow>
+
+                        <View
+                            style="@style/divider_line_wea_life_index_horizontal"/>
+
+                        <TableRow>
+
+                            <RelativeLayout
+                                style="@style/wea_life_index_rlyt"
+                                >
+
+                                <ImageView
+                                    style="@style/wea_life_index_iv"
+                                    android:src="@drawable/ic_lifeindex_morning_exercise"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/wea_life_index_tv_morning_exercise"
+                                    style="@style/wea_life_index_tv_detail"
+                                    android:text="较不宜"/>
+
+                                <TextView
+                                    style="@style/wea_life_index_tv_title"
+                                    android:layout_below="@id/wea_life_index_tv_morning_exercise"
+                                    android:text="晨练"/>
+
                             </RelativeLayout>
 
                             <RelativeLayout
@@ -700,19 +740,16 @@
                                     android:src="@drawable/ic_lifeindex_sport"
                                     />
 
-                                <LinearLayout
-                                    style="@style/wea_life_index_llyt"
-                                    >
+                                <TextView
+                                    android:id="@+id/wea_life_index_tv_sport"
+                                    style="@style/wea_life_index_tv_detail"
+                                    android:text="不宜"/>
 
-                                    <TextView
-                                        style="@style/wea_life_index_tv_detail"
-                                        android:text="不宜"/>
+                                <TextView
+                                    style="@style/wea_life_index_tv_title"
+                                    android:layout_below="@id/wea_life_index_tv_sport"
+                                    android:text="运动"/>
 
-                                    <TextView
-                                        style="@style/wea_life_index_tv_title"
-                                        android:text="运动"/>
-
-                                </LinearLayout>
                             </RelativeLayout>
 
                         </TableRow>
@@ -731,19 +768,16 @@
                                     android:src="@drawable/ic_lifeindex_carwash"
                                     />
 
-                                <LinearLayout
-                                    style="@style/wea_life_index_llyt"
-                                    >
+                                <TextView
+                                    android:id="@+id/wea_life_index_tv_car_wash"
+                                    style="@style/wea_life_index_tv_detail"
+                                    android:text="不宜"/>
 
-                                    <TextView
-                                        style="@style/wea_life_index_tv_detail"
-                                        android:text="不宜"/>
+                                <TextView
+                                    style="@style/wea_life_index_tv_title"
+                                    android:layout_below="@id/wea_life_index_tv_car_wash"
+                                    android:text="洗车"/>
 
-                                    <TextView
-                                        style="@style/wea_life_index_tv_title"
-                                        android:text="洗车"/>
-
-                                </LinearLayout>
                             </RelativeLayout>
 
                             <RelativeLayout
@@ -755,19 +789,16 @@
                                     android:src="@drawable/ic_lifeindex_fish"
                                     />
 
-                                <LinearLayout
-                                    style="@style/wea_life_index_llyt"
-                                    >
+                                <TextView
+                                    android:id="@+id/wea_life_index_tv_fish"
+                                    style="@style/wea_life_index_tv_detail"
+                                    android:text="不宜"/>
 
-                                    <TextView
-                                        style="@style/wea_life_index_tv_detail"
-                                        android:text="不宜"/>
+                                <TextView
+                                    style="@style/wea_life_index_tv_title"
+                                    android:layout_below="@id/wea_life_index_tv_fish"
+                                    android:text="钓鱼"/>
 
-                                    <TextView
-                                        style="@style/wea_life_index_tv_title"
-                                        android:text="钓鱼"/>
-
-                                </LinearLayout>
                             </RelativeLayout>
 
                         </TableRow>

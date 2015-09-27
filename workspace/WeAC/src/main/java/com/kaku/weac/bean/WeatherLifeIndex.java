@@ -6,7 +6,7 @@ package com.kaku.weac.bean;
  * @author 咖枯
  * @version 1.0 2015/0918
  */
-public class WeatherIndex {
+public class WeatherLifeIndex {
 
     /**
      * 指数名

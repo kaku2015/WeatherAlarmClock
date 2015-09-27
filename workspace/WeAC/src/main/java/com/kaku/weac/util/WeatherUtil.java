@@ -3,7 +3,7 @@ package com.kaku.weac.util;
 import android.util.Xml;
 
 import com.kaku.weac.bean.WeatherForecast;
-import com.kaku.weac.bean.WeatherIndex;
+import com.kaku.weac.bean.WeatherLifeIndex;
 import com.kaku.weac.bean.WeatherInfo;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -48,7 +48,7 @@ public class WeatherUtil {
 //                        response.append(line);
 //                    }
                     if (listener != null) {
-                        listener.onFinish(weatherInfo.toString());
+                        listener.onFinish(weatherInfo);
                     }
                 } catch (Exception e) {
                     LogUtil.e(LOG_TAG, e.toString());
@@ -68,11 +68,11 @@ public class WeatherUtil {
     public static WeatherInfo handleWeatherResponse(InputStream inputStream) {
         WeatherInfo weatherInfo = new WeatherInfo();
         List<WeatherForecast> weatherForecasts = new ArrayList<>();
-        List<WeatherIndex> weatherIndexes = new ArrayList<>();
+        List<WeatherLifeIndex> weatherLifeIndexes = new ArrayList<>();
         boolean isForcast = false;
         boolean isDay = false;
         WeatherForecast weatherForecast = null;
-        WeatherIndex weatherIndex = null;
+        WeatherLifeIndex weatherLifeIndex = null;
         try {
             XmlPullParser parser = Xml.newPullParser();
             parser.setInput(inputStream, "UTF-8");
@@ -92,7 +92,7 @@ public class WeatherUtil {
                                 break;
                             case "fengli":
                                 if (!isForcast)
-                                    weatherInfo.setWingPower(parser.nextText());
+                                    weatherInfo.setWindPower(parser.nextText());
                                 else {
                                     if (isDay) {
                                         if (weatherForecast != null)
@@ -101,9 +101,7 @@ public class WeatherUtil {
                                         if (weatherForecast != null)
                                             weatherForecast.setWindPowerNight(parser.nextText());
                                     }
-                                    break;
                                 }
-
                                 break;
                             case "shidu":
                                 weatherInfo.setHumidity(parser.nextText());
@@ -221,21 +219,21 @@ public class WeatherUtil {
                                 }
                                 break;
                             case "zhishu":
-                                weatherIndex = new WeatherIndex();
+                                weatherLifeIndex = new WeatherLifeIndex();
                                 break;
                             case "name":
-                                if (weatherIndex != null) {
-                                    weatherIndex.setIndexName(parser.nextText());
+                                if (weatherLifeIndex != null) {
+                                    weatherLifeIndex.setIndexName(parser.nextText());
                                 }
                                 break;
                             case "value":
-                                if (weatherIndex != null) {
-                                    weatherIndex.setIndexValue(parser.nextText());
+                                if (weatherLifeIndex != null) {
+                                    weatherLifeIndex.setIndexValue(parser.nextText());
                                 }
                                 break;
                             case "detail":
-                                if (weatherIndex != null) {
-                                    weatherIndex.setIndexDetail(parser.nextText());
+                                if (weatherLifeIndex != null) {
+                                    weatherLifeIndex.setIndexDetail(parser.nextText());
                                 }
                                 break;
                         }
@@ -249,8 +247,8 @@ public class WeatherUtil {
                                 weatherForecast = null;
                                 break;
                             case "zhishu":
-                                weatherIndexes.add(weatherIndex);
-                                weatherIndex = null;
+                                weatherLifeIndexes.add(weatherLifeIndex);
+                                weatherLifeIndex = null;
                                 break;
                         }
 
@@ -261,10 +259,12 @@ public class WeatherUtil {
 
         } catch (Exception e) {
             LogUtil.e(LOG_TAG, e.toString());
+        } finally {
+            weatherInfo.setWeatherForecast(weatherForecasts);
+            weatherInfo.setWeatherLifeIndex(weatherLifeIndexes);
+            return weatherInfo;
+
         }
-        weatherInfo.setWeatherForcast(weatherForecasts);
-        weatherInfo.setWeatherIndex(weatherIndexes);
-        return weatherInfo;
     }
 
 }

@@ -47,6 +47,7 @@
                 android:layout_marginTop="10dp">
 
                 <TextView
+                    android:id="@+id/alarm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -63,6 +64,7 @@
                     android:textSize="16sp"/>
 
                 <TextView
+                    android:id="@+id/update_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -86,11 +88,13 @@
                     android:orientation="horizontal">
 
                     <ImageView
+                        android:id="@+id/temperature1"
                         style="@style/wea_degree"
                         android:contentDescription="@null"
                         android:src="@drawable/number_2"/>
 
                     <ImageView
+                        android:id="@+id/temperature2"
                         style="@style/wea_degree"
                         android:contentDescription="@null"
                         android:src="@drawable/number_8"/>
@@ -107,6 +111,7 @@
                             android:src="@drawable/centigrade"/>
 
                         <TextView
+                            android:id="@+id/weather_type"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
@@ -119,6 +124,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/aqi"
                     style="@style/wea_prompt"
                     android:layout_marginTop="20dp"
                     android:drawableLeft="@drawable/ic_weather_air"
@@ -126,11 +132,13 @@
                     android:text="轻度污染 156"/>
 
                 <TextView
+                    android:id="@+id/humidity"
                     style="@style/wea_prompt"
                     android:drawableLeft="@drawable/ic_weather_wet"
                     android:text="湿度 65%"/>
 
                 <TextView
+                    android:id="@+id/wind_power"
                     style="@style/wea_prompt"
                     android:drawableLeft="@drawable/ic_weather_wind"
                     android:text="西南风 3级"/>
@@ -154,17 +162,20 @@
                     <LinearLayout style="@style/wea_forecast_content_llyt">
 
                         <ImageView
+                            android:id="@+id/weather_type_iv_today"
                             style="@style/wea_forecast_content_iv"
                             android:src="@drawable/ic_weather_thunder_shower"/>
 
                         <RelativeLayout style="@style/wea_forecast_content_degree_rlyt">
 
                             <TextView
+                                android:id="@+id/temp_high_today"
                                 style="@style/wea_forecast_content_degree_rlyt_tv"
                                 android:layout_alignParentTop="true"
                                 android:text="28°"/>
 
                             <TextView
+                                android:id="@+id/temp_low_today"
                                 style="@style/wea_forecast_content_degree_rlyt_tv"
                                 android:layout_alignParentBottom="true"
                                 android:text="20°"/>
@@ -172,6 +183,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/weather_type_tv_today"
                         style="@style/wea_forecast_content_detail"
                         android:text="雷阵雨转中雨"/>
                 </LinearLayout>
@@ -187,17 +199,20 @@
                     <LinearLayout style="@style/wea_forecast_content_llyt">
 
                         <ImageView
+                            android:id="@+id/weather_type_iv_tomorrow"
                             style="@style/wea_forecast_content_iv"
                             android:src="@drawable/ic_weather_sunny"/>
 
                         <RelativeLayout style="@style/wea_forecast_content_degree_rlyt">
 
                             <TextView
+                                android:id="@+id/temp_high_tomorrow"
                                 style="@style/wea_forecast_content_degree_rlyt_tv"
                                 android:layout_alignParentTop="true"
                                 android:text="32°"/>
 
                             <TextView
+                                android:id="@+id/temp_low_tomorrow"
                                 style="@style/wea_forecast_content_degree_rlyt_tv"
                                 android:layout_alignParentBottom="true"
                                 android:text="22°"/>
@@ -205,6 +220,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/weather_type_tv_tomorrow"
                         style="@style/wea_forecast_content_detail"
                         android:text="晴"/>
                 </LinearLayout>
@@ -220,17 +236,20 @@
                     <LinearLayout style="@style/wea_forecast_content_llyt">
 
                         <ImageView
+                            android:id="@+id/weather_type_iv_day_after_tomorrow"
                             style="@style/wea_forecast_content_iv"
                             android:src="@drawable/ic_weather_cloudy"/>
 
                         <RelativeLayout style="@style/wea_forecast_content_degree_rlyt">
 
                             <TextView
+                                android:id="@+id/temp_high_day_after_tomorrow"
                                 style="@style/wea_forecast_content_degree_rlyt_tv"
                                 android:layout_alignParentTop="true"
                                 android:text="33°"/>
 
                             <TextView
+                                android:id="@+id/temp_low_day_after_tomorrow"
                                 style="@style/wea_forecast_content_degree_rlyt_tv"
                                 android:layout_alignParentBottom="true"
                                 android:text="21°"/>
@@ -238,6 +257,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/weather_type_tv_day_after_tomorrow"
                         style="@style/wea_forecast_content_detail"
                         android:text="多云转晴"/>
                 </LinearLayout>
@@ -503,32 +523,32 @@
                     >
 
                     <TextView
-                        android:id="@+id/wea_days_forecast_wind_tv1"
+                        android:id="@+id/wea_days_forecast_wind_direction_tv1"
                         style="@style/wea_days_forecast_tv_trans"
                         android:text="南风"/>
 
                     <TextView
-                        android:id="@+id/wea_days_forecast_wind_tv2"
+                        android:id="@+id/wea_days_forecast_wind_direction_tv2"
                         style="@style/wea_days_forecast_tv"
                         android:text="南风"/>
 
                     <TextView
-                        android:id="@+id/wea_days_forecast_wind_tv3"
+                        android:id="@+id/wea_days_forecast_wind_direction_tv3"
                         style="@style/wea_days_forecast_tv"
                         android:text="西风"/>
 
                     <TextView
-                        android:id="@+id/wea_days_forecast_wind_tv4"
+                        android:id="@+id/wea_days_forecast_wind_direction_tv4"
                         style="@style/wea_days_forecast_tv"
                         android:text="西风"/>
 
                     <TextView
-                        android:id="@+id/wea_days_forecast_wind_tv5"
+                        android:id="@+id/wea_days_forecast_wind_direction_tv5"
                         style="@style/wea_days_forecast_tv"
                         android:text="西风"/>
 
                     <TextView
-                        android:id="@+id/wea_days_forecast_wind_tv6"
+                        android:id="@+id/wea_days_forecast_wind_direction_tv6"
                         style="@style/wea_days_forecast_tv"
                         android:text="东风"/>
                 </LinearLayout>
@@ -538,32 +558,32 @@
                     >
 
                     <TextView
-                        android:id="@+id/wea_days_forecast_windscale_tv1"
+                        android:id="@+id/wea_days_forecast_wind_power_tv1"
                         style="@style/wea_days_forecast_tv2_trans"
                         android:text="3级"/>
 
                     <TextView
-                        android:id="@+id/wea_days_forecast_windscale_tv2"
+                        android:id="@+id/wea_days_forecast_wind_power_tv2"
                         style="@style/wea_days_forecast_tv2"
                         android:text="3级"/>
 
                     <TextView
-                        android:id="@+id/wea_days_forecast_windscale_tv3"
+                        android:id="@+id/wea_days_forecast_wind_power_tv3"
                         style="@style/wea_days_forecast_tv2"
                         android:text="2级"/>
 
                     <TextView
-                        android:id="@+id/wea_days_forecast_windscale_tv4"
+                        android:id="@+id/wea_days_forecast_wind_power_tv4"
                         style="@style/wea_days_forecast_tv2"
                         android:text="2级"/>
 
                     <TextView
-                        android:id="@+id/wea_days_forecast_windscale_tv5"
+                        android:id="@+id/wea_days_forecast_wind_power_tv5"
                         style="@style/wea_days_forecast_tv2"
                         android:text="1级"/>
 
                     <TextView
-                        android:id="@+id/wea_days_forecast_windscale_tv6"
+                        android:id="@+id/wea_days_forecast_wind_power_tv6"
                         style="@style/wea_days_forecast_tv2"
                         android:text="1级"/>
 
@@ -692,13 +712,13 @@
                                     />
 
                                 <TextView
-                                    android:id="@+id/wea_life_index_tv_coldl"
+                                    android:id="@+id/wea_life_index_tv_cold"
                                     style="@style/wea_life_index_tv_detail"
                                     android:text="少发"/>
 
-                                <TextView
+                                <TextViewMO
                                     style="@style/wea_life_index_tv_title"
-                                    android:layout_below="@id/wea_life_index_tv_coldl"
+                                    android:layout_below="@id/wea_life_index_tv_cold"
                                     android:text="感冒"/>
 
                             </RelativeLayout>

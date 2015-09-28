@@ -61,7 +61,8 @@
                     android:paddingTop="5dp"
                     android:text="雷电预警"
                     android:textColor="@color/white_trans90"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/update_time"
@@ -138,7 +139,7 @@
                     android:text="湿度 65%"/>
 
                 <TextView
-                    android:id="@+id/wind_power"
+                    android:id="@+id/wind"
                     style="@style/wea_prompt"
                     android:drawableLeft="@drawable/ic_weather_wind"
                     android:text="西南风 3级"/>
@@ -716,7 +717,7 @@
                                     style="@style/wea_life_index_tv_detail"
                                     android:text="少发"/>
 
-                                <TextViewMO
+                                <TextView
                                     style="@style/wea_life_index_tv_title"
                                     android:layout_below="@id/wea_life_index_tv_cold"
                                     android:text="感冒"/>

@@ -10,10 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kaku.weac.R;
+import com.kaku.weac.bean.WeatherForecast;
 import com.kaku.weac.bean.WeatherInfo;
+import com.kaku.weac.bean.WeatherLifeIndex;
 import com.kaku.weac.util.HttpCallbackListener;
 import com.kaku.weac.util.WeatherUtil;
 import com.kaku.weac.view.LineChartView;
+
+import java.util.Calendar;
+import java.util.List;
 
 /**
  * 天气fragment
@@ -27,99 +32,414 @@ public class WeaFragment extends Fragment {
      */
     private static final String LOG_TAG = "WeaFragment";
 
+    /**
+     * 城市名
+     */
     TextView mCityNameTv;
+
+    /**
+     * 警报
+     */
     TextView mAlarmTv;
+
+    /**
+     * 更新时间
+     */
     TextView mUpdateTimeTv;
 
+
+    /**
+     * 温度1
+     */
     ImageView mTemperature1Iv;
+
+    /**
+     * 温度2
+     */
     ImageView mTemperature2Iv;
+
+    /**
+     * 天气类型
+     */
     TextView mWeatherTypeTv;
 
-    TextView mAqiTv;
-    TextView mHumidityTv;
-    TextView mWindPowerTv;
 
-    TextView mWeatherTypeIvToday;
+    /**
+     * 大气环境
+     */
+    TextView mAqiTv;
+
+    /**
+     * 湿度
+     */
+    TextView mHumidityTv;
+
+    /**
+     * 风向、风力
+     */
+    TextView mWindTv;
+
+
+    /**
+     * 今天天气类型图片
+     */
+    ImageView mWeatherTypeIvToday;
+
+    /**
+     * 今天高温
+     */
     TextView mTempHighTvToday;
+
+    /**
+     * 今天低温
+     */
     TextView mTemplowTvToday;
+
+    /**
+     * 今天天气类型文字
+     */
     TextView mWeatherTypeTvToday;
 
-    TextView mWeatherTypeIvTomorrow;
+
+    /**
+     * 明天天气类型图片
+     */
+    ImageView mWeatherTypeIvTomorrow;
+
+    /**
+     * 明天高温
+     */
     TextView mTempHighTvTomorrow;
+
+    /**
+     * 明天低温
+     */
     TextView mTemplowTvTomorrow;
+
+    /**
+     * 明天天气类型文字
+     */
     TextView mWeatherTypeTvTomorrow;
 
-    TextView mWeatherTypeIvDayAfterTomorrow;
+
+    /**
+     * 后天天气类型图片
+     */
+    ImageView mWeatherTypeIvDayAfterTomorrow;
+
+    /**
+     * 后天高温
+     */
     TextView mTempHighTvDayAfterTomorrow;
+
+    /**
+     * 后天低温
+     */
     TextView mTemplowTvDayAfterTomorrow;
+
+    /**
+     * 后天天气类型文字
+     */
     TextView mWeatherTypeTvDayAfterTomorrow;
 
+
+    /**
+     * 多天预报标题1
+     */
     TextView mDaysForecastTvWeek1;
+
+    /**
+     * 多天预报标题2
+     */
     TextView mDaysForecastTvWeek2;
+
+    /**
+     * 多天预报标题3
+     */
     TextView mDaysForecastTvWeek3;
+
+    /**
+     * 多天预报标题4
+     */
     TextView mDaysForecastTvWeek4;
+
+    /**
+     * 多天预报标题5
+     */
     TextView mDaysForecastTvWeek5;
+
+    /**
+     * 多天预报标题6
+     */
     TextView mDaysForecastTvWeek6;
 
+
+    /**
+     * 多天预报日期1
+     */
     TextView mDaysForecastTvDay1;
+
+    /**
+     * 多天预报日期2
+     */
     TextView mDaysForecastTvDay2;
+
+    /**
+     * 多天预报日期3
+     */
     TextView mDaysForecastTvDay3;
+
+    /**
+     * 多天预报日期4
+     */
     TextView mDaysForecastTvDay4;
+
+    /**
+     * 多天预报日期5
+     */
     TextView mDaysForecastTvDay5;
+
+    /**
+     * 多天预报日期6
+     */
     TextView mDaysForecastTvDay6;
 
-    TextView mDaysForecastWeaTypeDayIv1;
-    TextView mDaysForecastWeaTypeDayIv2;
-    TextView mDaysForecastWeaTypeDayIv3;
-    TextView mDaysForecastWeaTypeDayIv4;
-    TextView mDaysForecastWeaTypeDayIv5;
-    TextView mDaysForecastWeaTypeDayIv6;
 
+    /**
+     * 多天预报白天天气类型图片1
+     */
+    ImageView mDaysForecastWeaTypeDayIv1;
+
+    /**
+     * 多天预报白天天气类型图片2
+     */
+    ImageView mDaysForecastWeaTypeDayIv2;
+
+    /**
+     * 多天预报白天天气类型图片3
+     */
+    ImageView mDaysForecastWeaTypeDayIv3;
+
+    /**
+     * 多天预报白天天气类型图片4
+     */
+    ImageView mDaysForecastWeaTypeDayIv4;
+
+    /**
+     * 多天预报白天天气类型图片5
+     */
+    ImageView mDaysForecastWeaTypeDayIv5;
+
+    /**
+     * 多天预报白天天气类型图片6
+     */
+    ImageView mDaysForecastWeaTypeDayIv6;
+
+
+    /**
+     * 多天预报白天天气类型文字1
+     */
     TextView mDaysForecastWeaTypeDayTv1;
+
+    /**
+     * 多天预报白天天气类型文字2
+     */
     TextView mDaysForecastWeaTypeDayTv2;
+
+    /**
+     * 多天预报白天天气类型文字3
+     */
     TextView mDaysForecastWeaTypeDayTv3;
+
+    /**
+     * 多天预报白天天气类型文字4
+     */
     TextView mDaysForecastWeaTypeDayTv4;
+
+    /**
+     * 多天预报白天天气类型文字5
+     */
     TextView mDaysForecastWeaTypeDayTv5;
+
+    /**
+     * 多天预报白天天气类型文字6
+     */
     TextView mDaysForecastWeaTypeDayTv6;
 
+
+    /**
+     * 白天温度曲线
+     */
     LineChartView mCharDay;
+
+    /**
+     * 夜间温度曲线
+     */
     LineChartView mCharNight;
 
-    TextView mDaysForecastWeaTypeNightIv1;
-    TextView mDaysForecastWeaTypeNightIv2;
-    TextView mDaysForecastWeaTypeNightIv3;
-    TextView mDaysForecastWeaTypeNightIv4;
-    TextView mDaysForecastWeaTypeNightIv5;
-    TextView mDaysForecastWeaTypeNightIv6;
 
+    /**
+     * 多天预报夜间天气类型图片1
+     */
+    ImageView mDaysForecastWeaTypeNightIv1;
+
+    /**
+     * 多天预报夜间天气类型图片2
+     */
+    ImageView mDaysForecastWeaTypeNightIv2;
+
+    /**
+     * 多天预报夜间天气类型图片3
+     */
+    ImageView mDaysForecastWeaTypeNightIv3;
+
+    /**
+     * 多天预报夜间天气类型图片4
+     */
+    ImageView mDaysForecastWeaTypeNightIv4;
+
+    /**
+     * 多天预报夜间天气类型图片5
+     */
+    ImageView mDaysForecastWeaTypeNightIv5;
+
+    /**
+     * 多天预报夜间天气类型图片6
+     */
+    ImageView mDaysForecastWeaTypeNightIv6;
+
+
+    /**
+     * 多天预报夜间天气类型文字1
+     */
     TextView mDaysForecastWeaTypeNightTv1;
+
+    /**
+     * 多天预报夜间天气类型文字2
+     */
     TextView mDaysForecastWeaTypeNightTv2;
+
+    /**
+     * 多天预报夜间天气类型文字3
+     */
     TextView mDaysForecastWeaTypeNightTv3;
+
+    /**
+     * 多天预报夜间天气类型文字4
+     */
     TextView mDaysForecastWeaTypeNightTv4;
+
+    /**
+     * 多天预报夜间天气类型文字5
+     */
     TextView mDaysForecastWeaTypeNightTv5;
+
+    /**
+     * 多天预报夜间天气类型文字6
+     */
     TextView mDaysForecastWeaTypeNightTv6;
 
+
+    /**
+     * 多天预报风向1
+     */
     TextView mDaysForecastWindDirectionTv1;
+
+    /**
+     * 多天预报风向2
+     */
     TextView mDaysForecastWindDirectionTv2;
+
+    /**
+     * 多天预报风向3
+     */
     TextView mDaysForecastWindDirectionTv3;
+
+    /**
+     * 多天预报风向4
+     */
     TextView mDaysForecastWindDirectionTv4;
+
+    /**
+     * 多天预报风向5
+     */
     TextView mDaysForecastWindDirectionTv5;
+
+    /**
+     * 多天预报风向6
+     */
     TextView mDaysForecastWindDirectionTv6;
 
+
+    /**
+     * 多天预报风力1
+     */
     TextView mDaysForecastWindPowerTv1;
+
+    /**
+     * 多天预报风力2
+     */
     TextView mDaysForecastWindPowerTv2;
+
+    /**
+     * 多天预报风力3
+     */
     TextView mDaysForecastWindPowerTv3;
+
+    /**
+     * 多天预报风力4
+     */
     TextView mDaysForecastWindPowerTv4;
+
+    /**
+     * 多天预报风力5
+     */
     TextView mDaysForecastWindPowerTv5;
+
+    /**
+     * 多天预报风力6
+     */
     TextView mDaysForecastWindPowerTv6;
 
+
+    /**
+     * 雨伞指数
+     */
     TextView mLifeIndexUmbrellaTv;
+
+    /**
+     * 紫外线指数
+     */
     TextView mLifeIndexulTravioletRaysTv;
+
+    /**
+     * 穿衣指数
+     */
     TextView mLifeIndexDressTv;
+
+    /**
+     * 感冒指数
+     */
     TextView mLifeIndexcoldTv;
+
+    /**
+     * 晨练指数
+     */
     TextView mLifeIndexMorningExerciseTv;
+
+    /**
+     * 运动指数
+     */
     TextView mLifeIndexSportTv;
+
+    /**
+     * 洗车指数
+     */
     TextView mLifeIndexCarWashTv;
+
+    /**
+     * 钓鱼指数
+     */
     TextView mLifeIndexFishTv;
 
 
@@ -131,7 +451,7 @@ public class WeaFragment extends Fragment {
 
         init(view);
 
-        LineChartView chartDay = (LineChartView) view.findViewById(R.id.line_char_day);
+        /*LineChartView chartDay = (LineChartView) view.findViewById(R.id.line_char_day);
         chartDay.setTemp(new int[]{32, 31, 31, 30, 25, 26});
         chartDay.setTextSpace(10);
         int colorDay = getResources().getColor(R.color.yellow_hot);
@@ -143,7 +463,7 @@ public class WeaFragment extends Fragment {
         chartNight.setTextSpace(-10);
         int colorNight = getResources().getColor(R.color.blue_ice);
         chartNight.setLineColor(colorNight);
-        chartNight.setPointColor(colorNight);
+        chartNight.setPointColor(colorNight);*/
 
 
         Button readButton = (Button) view.findViewById(R.id.read_wea);
@@ -158,6 +478,50 @@ public class WeaFragment extends Fragment {
                                 getActivity().runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
+                                        // 多天预报信息
+                                        List<WeatherForecast> weatherForecasts = weatherInfo.getWeatherForecast();
+                                        // 生活指数信息
+                                        List<WeatherLifeIndex> weatherLifeIndexes = weatherInfo.getWeatherLifeIndex();
+
+                                        // 设置城市名
+                                        mCityNameTv.setText(weatherInfo.getCity());
+                                        // 设置预警信息
+                                        if (weatherInfo.getAlarmType() != null) {
+                                            mAlarmTv.setVisibility(View.VISIBLE);
+                                            mAlarmTv.setText(weatherInfo.getAlarmType() + "预警");
+                                        }
+                                        // 设置更新时间
+                                        mUpdateTimeTv.setText(weatherInfo.getUpdateTime() + "发布");
+
+                                        // 设置温度
+                                        String temp = weatherInfo.getTemperature();
+                                        int temp1 = Integer.parseInt(temp.substring(0, 1));
+                                        int temp2 = Integer.parseInt(temp.substring(1));
+                                        setTemperatureImage(temp1, mTemperature1Iv);
+                                        setTemperatureImage(temp2, mTemperature2Iv);
+
+                                        // 今天天气信息
+                                        WeatherForecast weatherToday = weatherForecasts.get(0);
+                                        Calendar calendar = Calendar.getInstance();
+                                        // 现在小时
+                                        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                                        // 设置天气类型
+                                        if (hour <= 18) {
+                                            // 白天天气
+                                            mWeatherTypeTv.setText(weatherToday.getTypeDay());
+                                        } else {
+                                            // 夜间天气
+                                            mWeatherTypeTv.setText(weatherToday.getTypeNight());
+                                        }
+
+                                        // 设置大气环境
+                                        mAqiTv.setText(weatherInfo.getQuality() + " " + weatherInfo.getAQI());
+                                        // 设置湿度
+                                        mHumidityTv.setText("湿度 " + weatherInfo.getHumidity());
+                                        // 设置风向、风力
+                                        mWindTv.setText(weatherInfo.getWindDirection() + " " + weatherInfo.getWindPower());
+
+                                        // 今天天气信息
 
 
 //                                        tv.setText(weatherInfo);
@@ -181,6 +545,49 @@ public class WeaFragment extends Fragment {
                                             e.printStackTrace();
                                         }*/
                                     }
+
+                                    /**
+                                     * 设置温度图片
+                                     * @param temp1 温度
+                                     * @param imageView imageView控件
+                                     */
+                                    private void setTemperatureImage(int temp1, ImageView imageView) {
+                                        switch (temp1) {
+                                            case 0:
+                                                imageView.setImageResource(R.drawable.number_0);
+                                                break;
+                                            case 1:
+                                                imageView.setImageResource(R.drawable.number_1);
+                                                break;
+                                            case 2:
+                                                imageView.setImageResource(R.drawable.number_2);
+                                                break;
+                                            case 3:
+                                                imageView.setImageResource(R.drawable.number_3);
+                                                break;
+                                            case 4:
+                                                imageView.setImageResource(R.drawable.number_4);
+                                                break;
+                                            case 5:
+                                                imageView.setImageResource(R.drawable.number_5);
+                                                break;
+                                            case 6:
+                                                imageView.setImageResource(R.drawable.number_6);
+                                                break;
+                                            case 7:
+                                                imageView.setImageResource(R.drawable.number_7);
+                                                break;
+                                            case 8:
+                                                imageView.setImageResource(R.drawable.number_8);
+                                                break;
+                                            case 9:
+                                                imageView.setImageResource(R.drawable.number_9);
+                                                break;
+                                            default:
+                                                imageView.setImageResource(R.drawable.number_0);
+                                                break;
+                                        }
+                                    }
                                 });
                             }
 
@@ -200,7 +607,107 @@ public class WeaFragment extends Fragment {
         return view;
     }
 
+    /**
+     * 初始化控件
+     *
+     * @param view view
+     */
     private void init(View view) {
+        mCityNameTv = (TextView) view.findViewById(R.id.action_title);
+        mAlarmTv = (TextView) view.findViewById(R.id.alarm);
+        mUpdateTimeTv = (TextView) view.findViewById(R.id.update_time);
+
+        mTemperature1Iv = (ImageView) view.findViewById(R.id.temperature1);
+        mTemperature2Iv = (ImageView) view.findViewById(R.id.temperature2);
+        mWeatherTypeTv = (TextView) view.findViewById(R.id.weather_type);
+
+        mAqiTv = (TextView) view.findViewById(R.id.aqi);
+        mHumidityTv = (TextView) view.findViewById(R.id.humidity);
+        mWindTv = (TextView) view.findViewById(R.id.wind);
+
+        mWeatherTypeIvToday = (ImageView) view.findViewById(R.id.weather_type_iv_today);
+        mWeatherTypeIvTomorrow = (ImageView) view.findViewById(R.id.weather_type_iv_tomorrow);
+        mWeatherTypeIvDayAfterTomorrow = (ImageView) view.findViewById(R.id.weather_type_iv_day_after_tomorrow);
+
+        mTempHighTvToday = (TextView) view.findViewById(R.id.temp_high_today);
+        mTempHighTvTomorrow = (TextView) view.findViewById(R.id.temp_high_tomorrow);
+        mTempHighTvDayAfterTomorrow = (TextView) view.findViewById(R.id.temp_high_day_after_tomorrow);
+
+        mTemplowTvToday = (TextView) view.findViewById(R.id.temp_low_today);
+        mTemplowTvTomorrow = (TextView) view.findViewById(R.id.temp_low_tomorrow);
+        mTemplowTvDayAfterTomorrow = (TextView) view.findViewById(R.id.temp_low_day_after_tomorrow);
+
+        mWeatherTypeTvToday = (TextView) view.findViewById(R.id.weather_type_tv_today);
+        mWeatherTypeTvTomorrow = (TextView) view.findViewById(R.id.weather_type_tv_tomorrow);
+        mWeatherTypeTvDayAfterTomorrow = (TextView) view.findViewById(R.id.weather_type_tv_day_after_tomorrow);
+
+        mDaysForecastTvWeek1 = (TextView) view.findViewById(R.id.wea_days_forecast_week1);
+        mDaysForecastTvWeek2 = (TextView) view.findViewById(R.id.wea_days_forecast_week2);
+        mDaysForecastTvWeek3 = (TextView) view.findViewById(R.id.wea_days_forecast_week3);
+        mDaysForecastTvWeek4 = (TextView) view.findViewById(R.id.wea_days_forecast_week4);
+        mDaysForecastTvWeek5 = (TextView) view.findViewById(R.id.wea_days_forecast_week5);
+        mDaysForecastTvWeek6 = (TextView) view.findViewById(R.id.wea_days_forecast_week6);
+
+        mDaysForecastTvDay1 = (TextView) view.findViewById(R.id.wea_days_forecast_day1);
+        mDaysForecastTvDay2 = (TextView) view.findViewById(R.id.wea_days_forecast_day2);
+        mDaysForecastTvDay3 = (TextView) view.findViewById(R.id.wea_days_forecast_day3);
+        mDaysForecastTvDay4 = (TextView) view.findViewById(R.id.wea_days_forecast_day4);
+        mDaysForecastTvDay5 = (TextView) view.findViewById(R.id.wea_days_forecast_day5);
+        mDaysForecastTvDay6 = (TextView) view.findViewById(R.id.wea_days_forecast_day6);
+
+        mDaysForecastWeaTypeDayIv1 = (ImageView) view.findViewById(R.id.wea_days_forecast_weather_day_iv1);
+        mDaysForecastWeaTypeDayIv2 = (ImageView) view.findViewById(R.id.wea_days_forecast_weather_day_iv2);
+        mDaysForecastWeaTypeDayIv3 = (ImageView) view.findViewById(R.id.wea_days_forecast_weather_day_iv3);
+        mDaysForecastWeaTypeDayIv4 = (ImageView) view.findViewById(R.id.wea_days_forecast_weather_day_iv4);
+        mDaysForecastWeaTypeDayIv5 = (ImageView) view.findViewById(R.id.wea_days_forecast_weather_day_iv5);
+        mDaysForecastWeaTypeDayIv6 = (ImageView) view.findViewById(R.id.wea_days_forecast_weather_day_iv6);
+
+        mDaysForecastWeaTypeDayTv1 = (TextView) view.findViewById(R.id.wea_days_forecast_weather_day_tv1);
+        mDaysForecastWeaTypeDayTv2 = (TextView) view.findViewById(R.id.wea_days_forecast_weather_day_tv2);
+        mDaysForecastWeaTypeDayTv3 = (TextView) view.findViewById(R.id.wea_days_forecast_weather_day_tv3);
+        mDaysForecastWeaTypeDayTv4 = (TextView) view.findViewById(R.id.wea_days_forecast_weather_day_tv4);
+        mDaysForecastWeaTypeDayTv5 = (TextView) view.findViewById(R.id.wea_days_forecast_weather_day_tv5);
+        mDaysForecastWeaTypeDayTv6 = (TextView) view.findViewById(R.id.wea_days_forecast_weather_day_tv6);
+
+        mCharDay = (LineChartView) view.findViewById(R.id.line_char_day);
+        mCharNight = (LineChartView) view.findViewById(R.id.line_chart_night);
+
+        mDaysForecastWeaTypeNightIv1 = (ImageView) view.findViewById(R.id.wea_days_forecast_weather_night_iv1);
+        mDaysForecastWeaTypeNightIv2 = (ImageView) view.findViewById(R.id.wea_days_forecast_weather_night_iv2);
+        mDaysForecastWeaTypeNightIv3 = (ImageView) view.findViewById(R.id.wea_days_forecast_weather_night_iv3);
+        mDaysForecastWeaTypeNightIv4 = (ImageView) view.findViewById(R.id.wea_days_forecast_weather_night_iv4);
+        mDaysForecastWeaTypeNightIv5 = (ImageView) view.findViewById(R.id.wea_days_forecast_weather_night_iv5);
+        mDaysForecastWeaTypeNightIv6 = (ImageView) view.findViewById(R.id.wea_days_forecast_weather_night_iv6);
+
+        mDaysForecastWeaTypeNightTv1 = (TextView) view.findViewById(R.id.wea_days_forecast_weather_night_tv1);
+        mDaysForecastWeaTypeNightTv2 = (TextView) view.findViewById(R.id.wea_days_forecast_weather_night_tv2);
+        mDaysForecastWeaTypeNightTv3 = (TextView) view.findViewById(R.id.wea_days_forecast_weather_night_tv3);
+        mDaysForecastWeaTypeNightTv4 = (TextView) view.findViewById(R.id.wea_days_forecast_weather_night_tv4);
+        mDaysForecastWeaTypeNightTv5 = (TextView) view.findViewById(R.id.wea_days_forecast_weather_night_tv5);
+        mDaysForecastWeaTypeNightTv6 = (TextView) view.findViewById(R.id.wea_days_forecast_weather_night_tv6);
+
+        mDaysForecastWindDirectionTv1 = (TextView) view.findViewById(R.id.wea_days_forecast_wind_direction_tv1);
+        mDaysForecastWindDirectionTv2 = (TextView) view.findViewById(R.id.wea_days_forecast_wind_direction_tv2);
+        mDaysForecastWindDirectionTv3 = (TextView) view.findViewById(R.id.wea_days_forecast_wind_direction_tv3);
+        mDaysForecastWindDirectionTv4 = (TextView) view.findViewById(R.id.wea_days_forecast_wind_direction_tv4);
+        mDaysForecastWindDirectionTv5 = (TextView) view.findViewById(R.id.wea_days_forecast_wind_direction_tv5);
+        mDaysForecastWindDirectionTv6 = (TextView) view.findViewById(R.id.wea_days_forecast_wind_direction_tv6);
+
+        mDaysForecastWindPowerTv1 = (TextView) view.findViewById(R.id.wea_days_forecast_wind_power_tv1);
+        mDaysForecastWindPowerTv2 = (TextView) view.findViewById(R.id.wea_days_forecast_wind_power_tv2);
+        mDaysForecastWindPowerTv3 = (TextView) view.findViewById(R.id.wea_days_forecast_wind_power_tv3);
+        mDaysForecastWindPowerTv4 = (TextView) view.findViewById(R.id.wea_days_forecast_wind_power_tv4);
+        mDaysForecastWindPowerTv5 = (TextView) view.findViewById(R.id.wea_days_forecast_wind_power_tv5);
+        mDaysForecastWindPowerTv6 = (TextView) view.findViewById(R.id.wea_days_forecast_wind_power_tv6);
+
+        mLifeIndexUmbrellaTv = (TextView) view.findViewById(R.id.wea_life_index_tv_umbrella);
+        mLifeIndexulTravioletRaysTv = (TextView) view.findViewById(R.id.wea_life_index_tv_ultraviolet_rays);
+        mLifeIndexDressTv = (TextView) view.findViewById(R.id.wea_life_tv_index_dress);
+        mLifeIndexcoldTv = (TextView) view.findViewById(R.id.wea_life_index_tv_cold);
+        mLifeIndexMorningExerciseTv = (TextView) view.findViewById(R.id.wea_life_index_tv_morning_exercise);
+        mLifeIndexSportTv = (TextView) view.findViewById(R.id.wea_life_index_tv_sport);
+        mLifeIndexCarWashTv = (TextView) view.findViewById(R.id.wea_life_index_tv_sport);
+        mLifeIndexFishTv = (TextView) view.findViewById(R.id.wea_life_index_tv_fish);
     }
 
 }

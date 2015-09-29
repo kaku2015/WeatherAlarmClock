@@ -519,9 +519,14 @@ public class WeaFragment extends Fragment {
                                         // 设置湿度
                                         mHumidityTv.setText("湿度 " + weatherInfo.getHumidity());
                                         // 设置风向、风力
-                                        mWindTv.setText(weatherInfo.getWindDirection() + " " + weatherInfo.getWindPower());
+                                        mWindTv.setText(weatherInfo.getWindDirection() + " "
+                                                + weatherInfo.getWindPower());
 
-                                        // 今天天气信息
+
+                                        // 取得天气类型图片id
+                                        int weatherId = getWeatherTypeImageID(weatherToday.getTypeDay(), hour, false);
+                                        // 设置今天天气类型图片
+                                        mWeatherTypeIvToday.setImageResource(weatherId);
 
 
 //                                        tv.setText(weatherInfo);
@@ -587,6 +592,113 @@ public class WeaFragment extends Fragment {
                                                 imageView.setImageResource(R.drawable.number_0);
                                                 break;
                                         }
+                                    }
+
+                                    /**
+                                     * 取得对应的天气类型图片id
+                                     * @param type 天气类型
+                                     * @param hour 现在小时
+                                     * @param isDaysForecast 是否为多天预报
+                                     * @return 天气类型图片id
+                                     */
+                                    private int getWeatherTypeImageID(String type, int hour, boolean isDaysForecast) {
+                                        int weatherId;
+                                        // 是否为白天
+                                        boolean isDay;
+                                        isDay = hour >= 6 && hour < 18;
+
+                                        switch (type) {
+                                            case "晴":
+                                                if (isDaysForecast) {
+                                                    if (isDay) {
+                                                        weatherId = R.drawable.ic_weather_sunny_day;
+                                                    } else {
+                                                        weatherId = R.drawable.ic_weather_sunny_night;
+                                                    }
+                                                } else {
+                                                    weatherId = R.drawable.ic_weather_sunny_day;
+                                                }
+                                                break;
+                                            case "多云":
+                                                if (isDaysForecast) {
+                                                    if (isDay) {
+                                                        weatherId = R.drawable.ic_weather_cloudy_day;
+                                                    } else {
+                                                        weatherId = R.drawable.ic_weather_cloudy_night;
+                                                    }
+                                                } else {
+                                                    weatherId = R.drawable.ic_weather_cloudy_day;
+                                                }
+                                                break;
+                                            case "阴":
+                                                weatherId = R.drawable.ic_weather_overcast;
+                                                break;
+                                            case "雷阵雨":
+                                            case "雷阵雨伴有冰雹":
+                                                weatherId = R.drawable.ic_weather_thunder_shower;
+                                                break;
+                                            case "雨夹雪":
+                                            case "冻雨":
+                                                weatherId = R.drawable.ic_weather_sleet;
+                                                break;
+                                            case "小雨":
+                                            case "阵雨":
+                                                weatherId = R.drawable.ic_weather_light_rain_or_shower;
+                                                break;
+                                            case "中雨":
+                                                weatherId = R.drawable.ic_weather_moderate_rain;
+                                                break;
+                                            case "大雨":
+                                                weatherId = R.drawable.ic_weather_heavy_rain;
+                                                break;
+                                            case "暴雨":
+                                            case "大暴雨":
+                                            case "特大暴雨":
+                                                weatherId = R.drawable.ic_weather_storm;
+                                                break;
+                                            case "阵雪":
+                                            case "小雪":
+                                                weatherId = R.drawable.ic_weather_light_snow;
+                                                break;
+                                            case "中雪":
+                                                weatherId = R.drawable.ic_weather_moderate_snow;
+                                                break;
+                                            case "大雪":
+                                                weatherId = R.drawable.ic_weather_heavy_snow;
+                                                break;
+                                            case "暴雪":
+                                                weatherId = R.drawable.ic_weather_snowstrom;
+                                                break;
+                                            case "雾":
+                                            case "霾":
+                                                weatherId = R.drawable.ic_weather_foggy;
+                                                break;
+                                            case "沙尘暴":
+                                                weatherId = R.drawable.ic_weather_duststorm;
+                                                break;
+                                            case "强沙尘暴":
+                                                weatherId = R.drawable.ic_weather_sandstorm;
+                                                break;
+                                            case "浮尘":
+                                            case "扬沙":
+                                                weatherId = R.drawable.ic_weather_sand_or_dust;
+                                                break;
+                                            default:
+                                                if (type.contains("尘") || type.contains("沙")) {
+                                                    weatherId = R.drawable.ic_weather_sand_or_dust;
+                                                } else if (type.contains("雾") || type.contains("霾")) {
+                                                    weatherId = R.drawable.ic_weather_foggy;
+                                                } else if (type.contains("雨")) {
+                                                    weatherId = R.drawable.ic_weather_sleet;
+                                                } else if (type.contains("雪") || type.contains("冰雹")) {
+                                                    weatherId = R.drawable.ic_weather_moderate_snow;
+                                                } else {
+                                                    weatherId = R.drawable.ic_weather_no;
+                                                }
+                                                break;
+
+                                        }
+                                        return weatherId;
                                     }
                                 });
                             }
@@ -706,7 +818,7 @@ public class WeaFragment extends Fragment {
         mLifeIndexcoldTv = (TextView) view.findViewById(R.id.wea_life_index_tv_cold);
         mLifeIndexMorningExerciseTv = (TextView) view.findViewById(R.id.wea_life_index_tv_morning_exercise);
         mLifeIndexSportTv = (TextView) view.findViewById(R.id.wea_life_index_tv_sport);
-        mLifeIndexCarWashTv = (TextView) view.findViewById(R.id.wea_life_index_tv_sport);
+        mLifeIndexCarWashTv = (TextView) view.findViewById(R.id.wea_life_index_tv_car_wash);
         mLifeIndexFishTv = (TextView) view.findViewById(R.id.wea_life_index_tv_fish);
     }
 

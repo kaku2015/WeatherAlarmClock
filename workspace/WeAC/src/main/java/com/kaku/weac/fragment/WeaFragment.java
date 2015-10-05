@@ -14,6 +14,7 @@ import com.kaku.weac.bean.WeatherForecast;
 import com.kaku.weac.bean.WeatherInfo;
 import com.kaku.weac.bean.WeatherLifeIndex;
 import com.kaku.weac.util.HttpCallbackListener;
+import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.WeatherUtil;
 import com.kaku.weac.view.LineChartView;
 
@@ -501,7 +502,7 @@ public class WeaFragment extends Fragment {
                                         setTemperatureImage(temp2, mTemperature2Iv);
 
                                         // 今天天气信息
-                                        WeatherForecast weatherToday = weatherForecasts.get(0);
+                                        WeatherForecast weatherToday = weatherForecasts.get(1);
                                         Calendar calendar = Calendar.getInstance();
                                         // 现在小时
                                         int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -522,11 +523,86 @@ public class WeaFragment extends Fragment {
                                         mWindTv.setText(weatherInfo.getWindDirection() + " "
                                                 + weatherInfo.getWindPower());
 
+                                        // 明天天气信息
+                                        WeatherForecast weatherTomorrow = weatherForecasts.get(2);
+                                        // 后天天气信息
+                                        WeatherForecast weatherDayOfTomorrow = weatherForecasts.get(3);
+                                        int weatherId;
 
-                                        // 取得天气类型图片id
-                                        int weatherId = getWeatherTypeImageID(weatherToday.getTypeDay(), hour, false);
-                                        // 设置今天天气类型图片
+                                        // 设置今天天气信息
+                                        weatherId = getWeatherTypeImageID(weatherToday.getTypeDay(), hour, false);
                                         mWeatherTypeIvToday.setImageResource(weatherId);
+                                        mTempHighTvToday.setText(weatherToday.getHigh().substring(3));
+                                        mTemplowTvToday.setText(weatherToday.getLow().substring(3));
+                                        mWeatherTypeTvToday.setText(getWeatherType
+                                                (weatherToday.getTypeDay(), weatherToday.getTypeNight()));
+
+                                        // 设置明天天气信息
+                                        weatherId = getWeatherTypeImageID(weatherTomorrow.getTypeDay(), hour, false);
+                                        mWeatherTypeIvTomorrow.setImageResource(weatherId);
+                                        mTempHighTvTomorrow.setText(weatherTomorrow.getHigh().substring(3));
+                                        mTemplowTvTomorrow.setText(weatherTomorrow.getLow().substring(3));
+                                        mWeatherTypeTvTomorrow.setText(getWeatherType
+                                                (weatherTomorrow.getTypeDay(), weatherTomorrow.getTypeNight()));
+
+                                        // 设置后天天气信息
+                                        weatherId = getWeatherTypeImageID(weatherDayOfTomorrow.getTypeDay(), hour, false);
+                                        mWeatherTypeIvDayAfterTomorrow.setImageResource(weatherId);
+                                        mTempHighTvDayAfterTomorrow.setText(weatherDayOfTomorrow.getHigh().substring(3));
+                                        mTemplowTvDayAfterTomorrow.setText(weatherDayOfTomorrow.getLow().substring(3));
+                                        mWeatherTypeTvDayAfterTomorrow.setText(getWeatherType
+                                                (weatherDayOfTomorrow.getTypeDay(), weatherDayOfTomorrow.getTypeNight()));
+
+                                        // 设置多天天气预报
+
+                                        // 昨天天气信息
+                                        WeatherForecast weatherYesterday = weatherForecasts.get(0);
+                                        // 第五天天天气信息
+                                        WeatherForecast weatherFifth = weatherForecasts.get(4);
+                                        // 第六天天气信息
+                                        WeatherForecast weatherSixth = weatherForecasts.get(5);
+
+                                        // 日期和星期标题 【数组0：日期 数组1：星期】
+                                        String[] day1 = getDay(weatherYesterday.getDate());
+                                        String[] day2 = getDay(weatherToday.getDate());
+                                        String[] day3 = getDay(weatherTomorrow.getDate());
+                                        String[] day4 = getDay(weatherDayOfTomorrow.getDate());
+                                        String[] day5 = getDay(weatherFifth.getDate());
+                                        String[] day6 = getDay(weatherSixth.getDate());
+
+                                        // 设置标题星期
+                                        mDaysForecastTvWeek1.setText("昨天");
+                                        mDaysForecastTvWeek2.setText("今天");
+                                        mDaysForecastTvWeek3.setText(getWeek(day3[1]));
+                                        mDaysForecastTvWeek4.setText(getWeek(day4[1]));
+                                        mDaysForecastTvWeek5.setText(getWeek(day5[1]));
+                                        mDaysForecastTvWeek6.setText(getWeek(day6[1]));
+
+                                        //设置标题日期
+                                        Calendar c = Calendar.getInstance();
+                                        // 当前月份
+                                        String month = MyUtil.addZero(c.get(Calendar.MONTH) + 1);
+
+                                        // 日
+                                        String day01 = MyUtil.addZero(
+                                                Integer.parseInt(day1[0].split("日")[0]));
+                                        String day02 = MyUtil.addZero(
+                                                Integer.parseInt(day2[0].split("日")[0]));
+                                        String day03 = MyUtil.addZero(
+                                                Integer.parseInt(day3[0].split("日")[0]));
+                                        String day04 = MyUtil.addZero(
+                                                Integer.parseInt(day4[0].split("日")[0]));
+                                        String day05 = MyUtil.addZero(
+                                                Integer.parseInt(day5[0].split("日")[0]));
+                                        String day06 = MyUtil.addZero(
+                                                Integer.parseInt(day6[0].split("日")[0]));
+
+                                        mDaysForecastTvDay1.setText(month + "/" + day01);
+                                        mDaysForecastTvDay2.setText(month + "/" + day02);
+                                        mDaysForecastTvDay3.setText(month + "/" + day03);
+                                        mDaysForecastTvDay4.setText(month + "/" + day04);
+                                        mDaysForecastTvDay5.setText(month + "/" + day05);
+                                        mDaysForecastTvDay6.setText(month + "/" + day06);
 
 
 //                                        tv.setText(weatherInfo);
@@ -550,6 +626,76 @@ public class WeaFragment extends Fragment {
                                             e.printStackTrace();
                                         }*/
                                     }
+
+                                    /**
+                                     * 截取日期和星期
+                                     *
+                                     * @param date 日期信息
+                                     * @return 包含日期和星期的数组
+                                     */
+                                    private String[] getDay(String date) {
+                                        String[] date1 = new String[2];
+                                        if (date.length() == 5) {
+                                            date1[0] = date.substring(0, 2);
+                                            date1[1] = date.substring(2);
+                                        } else {
+                                            date1[0] = date.substring(0, 3);
+                                            date1[1] = date.substring(3);
+                                        }
+                                        return date1;
+                                    }
+
+                                    /**
+                                     * 转换周的标题
+                                     * @param week 需要转换的周标题
+                                     * @return 周的标题
+                                     */
+                                    private String getWeek(String week) {
+                                        String week1;
+                                        switch (week) {
+                                            case "星期一":
+                                                week1 = "周一";
+                                                break;
+                                            case "星期二":
+                                                week1 = "周二";
+                                                break;
+                                            case "星期三":
+                                                week1 = "周三";
+                                                break;
+                                            case "星期四":
+                                                week1 = "周四";
+                                                break;
+                                            case "星期五":
+                                                week1 = "周五";
+                                                break;
+                                            case "星期六":
+                                                week1 = "周六";
+                                                break;
+                                            case "星期日":
+                                                week1 = "周日";
+                                                break;
+                                            default:
+                                                week1 = week;
+                                                break;
+                                        }
+                                        return week1;
+                                    }
+
+                                    /**
+                                     * 取得天气类型描述
+                                     * @param type1 白天天气类型
+                                     * @param type2 夜间天气类型
+                                     * @return 天气类型
+                                     */
+                                    private String getWeatherType(String type1, String type2) {
+                                        // 白天和夜间类型相同
+                                        if (type1.equals(type2)) {
+                                            return type1;
+                                        } else {
+                                            return type1 + "转" + type2;
+                                        }
+                                    }
+
 
                                     /**
                                      * 设置温度图片
@@ -642,28 +788,36 @@ public class WeaFragment extends Fragment {
                                                 weatherId = R.drawable.ic_weather_sleet;
                                                 break;
                                             case "小雨":
+                                            case "小到中雨":
                                             case "阵雨":
                                                 weatherId = R.drawable.ic_weather_light_rain_or_shower;
                                                 break;
                                             case "中雨":
+                                            case "中到大雨":
                                                 weatherId = R.drawable.ic_weather_moderate_rain;
                                                 break;
                                             case "大雨":
+                                            case "大到暴雨":
                                                 weatherId = R.drawable.ic_weather_heavy_rain;
                                                 break;
                                             case "暴雨":
                                             case "大暴雨":
                                             case "特大暴雨":
+                                            case "暴雨到大暴雨":
+                                            case "大暴雨到特大暴雨":
                                                 weatherId = R.drawable.ic_weather_storm;
                                                 break;
                                             case "阵雪":
                                             case "小雪":
+                                            case "小到中雪":
                                                 weatherId = R.drawable.ic_weather_light_snow;
                                                 break;
                                             case "中雪":
+                                            case "中到大雪":
                                                 weatherId = R.drawable.ic_weather_moderate_snow;
                                                 break;
                                             case "大雪":
+                                            case "大到暴雪":
                                                 weatherId = R.drawable.ic_weather_heavy_snow;
                                                 break;
                                             case "暴雪":

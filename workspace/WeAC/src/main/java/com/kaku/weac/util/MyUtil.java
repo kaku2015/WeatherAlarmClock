@@ -208,7 +208,7 @@ public class MyUtil {
      * @param time 需要补零的时间
      * @return 补零后的时间
      */
-    private static String addZero(int time) {
+    public static String addZero(int time) {
         if (String.valueOf(time).length() == 1) {
             return "0" + time;
         }

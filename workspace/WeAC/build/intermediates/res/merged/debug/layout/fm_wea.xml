@@ -186,7 +186,7 @@
                     <TextView
                         android:id="@+id/weather_type_tv_today"
                         style="@style/wea_forecast_content_detail"
-                        android:text="雷阵雨转中雨"/>
+                        android:text="雷阵雨转大暴雨到特大暴雨"/>
                 </LinearLayout>
 
                 <View style="@style/divider_line_wea_vertical"/>
@@ -297,32 +297,32 @@
                         <TextView
                             android:id="@+id/wea_days_forecast_week1"
                             style="@style/wea_days_forecast_tv_trans"
-                            android:text="昨天"/>
+                            android:text="--"/>
 
                         <TextView
                             android:id="@+id/wea_days_forecast_week2"
                             style="@style/wea_days_forecast_tv"
-                            android:text="今天"/>
+                            android:text="--"/>
 
                         <TextView
                             android:id="@+id/wea_days_forecast_week3"
                             style="@style/wea_days_forecast_tv"
-                            android:text="周二"/>
+                            android:text="--"/>
 
                         <TextView
                             android:id="@+id/wea_days_forecast_week4"
                             style="@style/wea_days_forecast_tv"
-                            android:text="周三"/>
+                            android:text="--"/>
 
                         <TextView
                             android:id="@+id/wea_days_forecast_week5"
                             style="@style/wea_days_forecast_tv"
-                            android:text="周四"/>
+                            android:text="--"/>
 
                         <TextView
                             android:id="@+id/wea_days_forecast_week6"
                             style="@style/wea_days_forecast_tv"
-                            android:text="周五"/>
+                            android:text="--"/>
 
                     </LinearLayout>
 

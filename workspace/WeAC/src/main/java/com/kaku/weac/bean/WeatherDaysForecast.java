@@ -6,51 +6,51 @@ package com.kaku.weac.bean;
  * @author 咖枯
  * @version 1.0 2015/09/18
  */
-public class WeatherForecast {
+public class WeatherDaysForecast {
     /**
      * 日期
      */
-    String mDate;
+    private String mDate;
 
     /**
      * 高温
      */
-    String mHigh;
+    private String mHigh;
 
     /**
      * 低温
      */
-    String mLow;
+    private String mLow;
 
     /**
      * 白天天气类型
      */
-    String mTypeDay;
+    private String mTypeDay;
 
     /**
      * 晚上天气类型
      */
-    String mTypeNight;
+    private String mTypeNight;
 
     /**
      * 白天风向
      */
-    String mWindDirectionDay;
+    private String mWindDirectionDay;
 
     /**
      * 晚上风向
      */
-    String mWindDirectionNight;
+    private String mWindDirectionNight;
 
     /**
      * 白天风力
      */
-    String mWindPowerDay;
+    private String mWindPowerDay;
 
     /**
      * 晚上风力
      */
-    String mWindPowerNight;
+    private String mWindPowerNight;
 
     public String getDate() {
         return mDate;

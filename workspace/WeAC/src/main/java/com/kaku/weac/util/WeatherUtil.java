@@ -2,7 +2,7 @@ package com.kaku.weac.util;
 
 import android.util.Xml;
 
-import com.kaku.weac.bean.WeatherForecast;
+import com.kaku.weac.bean.WeatherDaysForecast;
 import com.kaku.weac.bean.WeatherLifeIndex;
 import com.kaku.weac.bean.WeatherInfo;
 
@@ -84,7 +84,7 @@ public class WeatherUtil {
         // 天气信息
         WeatherInfo weatherInfo = new WeatherInfo();
         // 多天预报信息集合
-        List<WeatherForecast> weatherForecasts = new ArrayList<>();
+        List<WeatherDaysForecast> weatherDaysForecasts = new ArrayList<>();
         // 生活指数信息集合
         List<WeatherLifeIndex> weatherLifeIndexes = new ArrayList<>();
         // 是否为多天天气
@@ -92,7 +92,7 @@ public class WeatherUtil {
         // 是否为白天
         boolean isDay = false;
         // 多天预报信息
-        WeatherForecast weatherForecast = null;
+        WeatherDaysForecast weatherDaysForecast = null;
         // 生活指数信息
         WeatherLifeIndex weatherLifeIndex = null;
         try {
@@ -121,12 +121,12 @@ public class WeatherUtil {
                                 if (!isDaysForecast)
                                     weatherInfo.setWindPower(parser.nextText());
                                 else {
-                                    if (weatherForecast != null) {
+                                    if (weatherDaysForecast != null) {
                                         // 白天
                                         if (isDay) {
-                                            weatherForecast.setWindPowerDay(parser.nextText());
+                                            weatherDaysForecast.setWindPowerDay(parser.nextText());
                                         } else {
-                                            weatherForecast.setWindPowerNight(parser.nextText());
+                                            weatherDaysForecast.setWindPowerNight(parser.nextText());
                                         }
                                     }
                                 }
@@ -140,11 +140,11 @@ public class WeatherUtil {
                                 if (!isDaysForecast)
                                     weatherInfo.setWindDirection(parser.nextText());
                                 else {
-                                    if (weatherForecast != null) {
+                                    if (weatherDaysForecast != null) {
                                         if (isDay) {
-                                            weatherForecast.setWindDirectionDay(parser.nextText());
+                                            weatherDaysForecast.setWindDirectionDay(parser.nextText());
                                         } else {
-                                            weatherForecast.setWindDirectionNight(parser.nextText());
+                                            weatherDaysForecast.setWindDirectionNight(parser.nextText());
                                         }
                                     }
                                 }
@@ -180,22 +180,22 @@ public class WeatherUtil {
                             // 多天预报，昨天
                             case "yesterday":
                                 isDaysForecast = true;
-                                weatherForecast = new WeatherForecast();
+                                weatherDaysForecast = new WeatherDaysForecast();
                                 break;
                             // 日期
                             case "date_1":
-                                if (weatherForecast != null)
-                                    weatherForecast.setDate(parser.nextText());
+                                if (weatherDaysForecast != null)
+                                    weatherDaysForecast.setDate(parser.nextText());
                                 break;
                             // 高温
                             case "high_1":
-                                if (weatherForecast != null)
-                                    weatherForecast.setHigh(parser.nextText());
+                                if (weatherDaysForecast != null)
+                                    weatherDaysForecast.setHigh(parser.nextText());
                                 break;
                             // 低温
                             case "low_1":
-                                if (weatherForecast != null)
-                                    weatherForecast.setLow(parser.nextText());
+                                if (weatherDaysForecast != null)
+                                    weatherDaysForecast.setLow(parser.nextText());
                                 break;
                             // 白天
                             case "day_1":
@@ -207,52 +207,52 @@ public class WeatherUtil {
                                 break;
                             // 天气类型
                             case "type_1":
-                                if (weatherForecast != null) {
+                                if (weatherDaysForecast != null) {
                                     if (isDay) {
-                                        weatherForecast.setTypeDay(parser.nextText());
+                                        weatherDaysForecast.setTypeDay(parser.nextText());
                                     } else {
-                                        weatherForecast.setTypeNight(parser.nextText());
+                                        weatherDaysForecast.setTypeNight(parser.nextText());
                                     }
                                 }
                                 break;
                             // 风向
                             case "fx_1":
-                                if (weatherForecast != null) {
+                                if (weatherDaysForecast != null) {
                                     if (isDay) {
-                                        weatherForecast.setWindDirectionDay(parser.nextText());
+                                        weatherDaysForecast.setWindDirectionDay(parser.nextText());
                                     } else {
-                                        weatherForecast.setWindDirectionNight(parser.nextText());
+                                        weatherDaysForecast.setWindDirectionNight(parser.nextText());
                                     }
                                 }
                                 break;
                             // 风力
                             case "fl_1":
-                                if (weatherForecast != null) {
+                                if (weatherDaysForecast != null) {
                                     if (isDay) {
-                                        weatherForecast.setWindPowerDay(parser.nextText());
+                                        weatherDaysForecast.setWindPowerDay(parser.nextText());
                                     } else {
-                                        weatherForecast.setWindPowerNight(parser.nextText());
+                                        weatherDaysForecast.setWindPowerNight(parser.nextText());
                                     }
                                 }
                                 break;
                             // 多天天气
                             case "weather":
-                                weatherForecast = new WeatherForecast();
+                                weatherDaysForecast = new WeatherDaysForecast();
                                 break;
                             // 日期
                             case "date":
-                                if (weatherForecast != null)
-                                    weatherForecast.setDate(parser.nextText());
+                                if (weatherDaysForecast != null)
+                                    weatherDaysForecast.setDate(parser.nextText());
                                 break;
                             // 高温
                             case "high":
-                                if (weatherForecast != null)
-                                    weatherForecast.setHigh(parser.nextText());
+                                if (weatherDaysForecast != null)
+                                    weatherDaysForecast.setHigh(parser.nextText());
                                 break;
                             // 低温
                             case "low":
-                                if (weatherForecast != null)
-                                    weatherForecast.setLow(parser.nextText());
+                                if (weatherDaysForecast != null)
+                                    weatherDaysForecast.setLow(parser.nextText());
                                 break;
                             // 白天
                             case "day":
@@ -264,11 +264,11 @@ public class WeatherUtil {
                                 break;
                             // 天气类型
                             case "type":
-                                if (weatherForecast != null) {
+                                if (weatherDaysForecast != null) {
                                     if (isDay) {
-                                        weatherForecast.setTypeDay(parser.nextText());
+                                        weatherDaysForecast.setTypeDay(parser.nextText());
                                     } else {
-                                        weatherForecast.setTypeNight(parser.nextText());
+                                        weatherDaysForecast.setTypeNight(parser.nextText());
                                     }
                                 }
                                 break;
@@ -303,8 +303,8 @@ public class WeatherUtil {
                             case "yesterday":
                                 // 多天，天气
                             case "weather":
-                                weatherForecasts.add(weatherForecast);
-                                weatherForecast = null;
+                                weatherDaysForecasts.add(weatherDaysForecast);
+                                weatherDaysForecast = null;
                                 break;
                             // 指数
                             case "zhishu":
@@ -321,7 +321,7 @@ public class WeatherUtil {
         } catch (Exception e) {
             LogUtil.e(LOG_TAG, e.toString());
         }
-        weatherInfo.setWeatherForecast(weatherForecasts);
+        weatherInfo.setWeatherDaysForecast(weatherDaysForecasts);
         weatherInfo.setWeatherLifeIndex(weatherLifeIndexes);
         return weatherInfo;
     }

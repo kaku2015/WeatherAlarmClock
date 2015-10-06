@@ -11,17 +11,17 @@ public class WeatherLifeIndex {
     /**
      * 指数名
      */
-    String mIndexName;
+    private String mIndexName;
 
     /**
      * 指数建议
      */
-    String mIndexValue;
+    private String mIndexValue;
 
     /**
      * 指数详细
      */
-    String mIndexDetail;
+    private String mIndexDetail;
 
     public String getIndexDetail() {
         return mIndexDetail;

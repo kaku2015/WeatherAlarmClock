@@ -12,72 +12,72 @@ public class WeatherInfo {
     /**
      * 城市
      */
-    String mCity;
+    private String mCity;
 
     /**
      * 更新时间
      */
-    String mUpdateTime;
+    private String mUpdateTime;
 
     /**
      * 温度
      */
-    String mTemperature;
+    private String mTemperature;
 
     /***
      * 湿度
      */
-    String mHumidity;
+    private String mHumidity;
 
     /**
      * 风力
      */
-    String mWindPower;
+    private String mWindPower;
 
     /**
      * 风向
      */
-    String mWindDirection;
+    private String mWindDirection;
 
     /**
      * 日出
      */
-    String mSunrise;
+    private String mSunrise;
 
     /**
      * 日落
      */
-    String mSunset;
+    private String mSunset;
 
     /**
      * 空气指数
      */
-    String mAQI;
+    private String mAQI;
 
     /**
      * 空气质量
      */
-    String mQuality;
+    private String mQuality;
 
     /**
      * 警报类型
      */
-    String mAlarmType;
+    private String mAlarmType;
 
     /**
      * 警报内容
      */
-    String mAlarmDetail;
+    private String mAlarmDetail;
 
     /**
      * 多天预报信息
      */
-    List<WeatherForecast> mWeatherForecast;
+    private List<WeatherDaysForecast> mWeatherDaysForecast;
 
     /**
      * 生活指数
      */
-    List<WeatherLifeIndex> mWeatherLifeIndex;
+    private List<WeatherLifeIndex> mWeatherLifeIndex;
 
     public String getAlarmDetail() {
         return mAlarmDetail;
@@ -159,12 +159,12 @@ public class WeatherInfo {
         mUpdateTime = updateTime;
     }
 
-    public List<WeatherForecast> getWeatherForecast() {
-        return mWeatherForecast;
+    public List<WeatherDaysForecast> getWeatherDaysForecast() {
+        return mWeatherDaysForecast;
     }
 
-    public void setWeatherForecast(List<WeatherForecast> weatherForecast) {
-        mWeatherForecast = weatherForecast;
+    public void setWeatherDaysForecast(List<WeatherDaysForecast> weatherDaysForecast) {
+        mWeatherDaysForecast = weatherDaysForecast;
     }
 
     public List<WeatherLifeIndex> getWeatherLifeIndex() {

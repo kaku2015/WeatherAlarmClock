@@ -645,7 +645,7 @@
                                 <TextView
                                     android:id="@+id/wea_life_index_tv_umbrella"
                                     style="@style/wea_life_index_tv_detail"
-                                    android:text="带伞"/>
+                                    android:text="无"/>
 
                                 <TextView
                                     style="@style/wea_life_index_tv_title"
@@ -666,7 +666,7 @@
                                 <TextView
                                     android:id="@+id/wea_life_index_tv_ultraviolet_rays"
                                     style="@style/wea_life_index_tv_detail"
-                                    android:text="较强"/>
+                                    android:text="无"/>
 
                                 <TextView
                                     style="@style/wea_life_index_tv_title"
@@ -694,7 +694,7 @@
                                 <TextView
                                     android:id="@+id/wea_life_tv_index_dress"
                                     style="@style/wea_life_index_tv_detail"
-                                    android:text="炎热"/>
+                                    android:text="无"/>
 
                                 <TextView
                                     style="@style/wea_life_index_tv_title"
@@ -715,7 +715,7 @@
                                 <TextView
                                     android:id="@+id/wea_life_index_tv_cold"
                                     style="@style/wea_life_index_tv_detail"
-                                    android:text="少发"/>
+                                    android:text="无"/>
 
                                 <TextView
                                     style="@style/wea_life_index_tv_title"
@@ -743,7 +743,7 @@
                                 <TextView
                                     android:id="@+id/wea_life_index_tv_morning_exercise"
                                     style="@style/wea_life_index_tv_detail"
-                                    android:text="较不宜"/>
+                                    android:text="无"/>
 
                                 <TextView
                                     style="@style/wea_life_index_tv_title"
@@ -764,7 +764,7 @@
                                 <TextView
                                     android:id="@+id/wea_life_index_tv_sport"
                                     style="@style/wea_life_index_tv_detail"
-                                    android:text="不宜"/>
+                                    android:text="无"/>
 
                                 <TextView
                                     style="@style/wea_life_index_tv_title"
@@ -792,7 +792,7 @@
                                 <TextView
                                     android:id="@+id/wea_life_index_tv_car_wash"
                                     style="@style/wea_life_index_tv_detail"
-                                    android:text="不宜"/>
+                                    android:text="无"/>
 
                                 <TextView
                                     style="@style/wea_life_index_tv_title"
@@ -813,7 +813,7 @@
                                 <TextView
                                     android:id="@+id/wea_life_index_tv_fish"
                                     style="@style/wea_life_index_tv_detail"
-                                    android:text="不宜"/>
+                                    android:text="无"/>
 
                                 <TextView
                                     style="@style/wea_life_index_tv_title"
@@ -826,19 +826,6 @@
                     </TableLayout>
                 </FrameLayout>
             </LinearLayout>
-
-            <Button
-                android:id="@+id/read_wea"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="读取"/>
-
-            <TextView
-                android:id="@+id/wea_prompt_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/black_trans50"
-                android:textColor="@color/white_trans90"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

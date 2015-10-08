@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.kaku.weac.R;
@@ -27,7 +28,7 @@ import java.util.List;
  * @author 咖枯
  * @version 1.0 2015/9
  */
-public class WeaFragment extends Fragment {
+public class WeaFragment extends Fragment implements View.OnClickListener {
     /**
      * Log tag ：WeaFragment
      */
@@ -402,16 +403,54 @@ public class WeaFragment extends Fragment {
      */
     private TextView mDaysForecastWindPowerTv6;
 
+    /**
+     * 雨伞指数控件
+     */
+    private RelativeLayout mLifeIndexUmbrellaRlyt;
 
+    /**
+     * 紫外线强度控件
+     */
+    private RelativeLayout mLifeIndexUltravioletRaysRlyt;
+
+    /**
+     * 穿衣指数控件
+     */
+    private RelativeLayout mLifeIndexDressRlyt;
+
+    /**
+     * 感冒指数控件
+     */
+    private RelativeLayout mLifeIndexColdRlyt;
+
+    /**
+     * 晨练指数控件
+     */
+    private RelativeLayout mLifeIndexMorningExerciseRlyt;
+
+    /**
+     * 运动指数控件
+     */
+    private RelativeLayout mLifeIndexSportRlyt;
+
+    /**
+     * 洗车指数控件
+     */
+    private RelativeLayout mLifeIndexCarWashRlyt;
+
+    /**
+     * 钓鱼指数控件
+     */
+    private RelativeLayout mLifeIndexFishRlyt;
     /**
      * 雨伞指数
      */
     private TextView mLifeIndexUmbrellaTv;
 
     /**
-     * 紫外线指数
+     * 紫外线强度
      */
-    private TextView mLifeIndexulTravioletRaysTv;
+    private TextView mLifeIndexUltravioletRaysTv;
 
     /**
      * 穿衣指数
@@ -421,7 +460,7 @@ public class WeaFragment extends Fragment {
     /**
      * 感冒指数
      */
-    private TextView mLifeIndexcoldTv;
+    private TextView mLifeIndexColdTv;
 
     /**
      * 晨练指数
@@ -476,36 +515,50 @@ public class WeaFragment extends Fragment {
 
 
         mRefreshBtn = (ImageView) view.findViewById(R.id.action_refresh);
-        mRefreshBtn.setOnClickListener(new OnClickListenerImpl());
+        mRefreshBtn.setOnClickListener(this);
 
         return view;
     }
 
-    private class OnClickListenerImpl implements View.OnClickListener {
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            // 刷新按钮
+            case R.id.action_refresh:
+                // 刷新天气
+                refreshWeather();
+                break;
+            case R.id.wea_life_index_rlyt_umbrella:
 
-        @Override
-        public void onClick(View v) {
-            WeatherUtil.sendHttpRequest("http://wthrcdn.etouch.cn/WeatherApi?citykey=101030100",
-                    new HttpCallbackListener() {
-                        @Override
-                        public void onFinish(WeatherInfo weatherInfo) {
-                            mWeatherInfo = weatherInfo;
-                            getActivity().runOnUiThread(new SetWeatherInfoRunnable());
-                        }
+                break;
+        }
 
-                        @Override
-                        public void onError(final Exception e) {
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    LogUtil.e(LOG_TAG, "读取失败：" + e.toString());
-                                }
-                            });
-                        }
+    }
+
+    /**
+     * 刷新天气
+     */
+    private void refreshWeather() {
+        WeatherUtil.sendHttpRequest("http://wthrcdn.etouch.cn/WeatherApi?citykey=101030100",
+                new HttpCallbackListener() {
+                    @Override
+                    public void onFinish(WeatherInfo weatherInfo) {
+                        mWeatherInfo = weatherInfo;
+                        getActivity().runOnUiThread(new SetWeatherInfoRunnable());
                     }
 
-            );
-        }
+                    @Override
+                    public void onError(final Exception e) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                LogUtil.e(LOG_TAG, "读取失败：" + e.toString());
+                            }
+                        });
+                    }
+                }
+
+        );
     }
 
     /**
@@ -539,7 +592,12 @@ public class WeaFragment extends Fragment {
 
             // 今天天气信息
             WeatherDaysForecast weather2 = weatherDaysForecasts.get(1);
+
             Calendar calendar = Calendar.getInstance();
+            // 明天天气信息
+            WeatherDaysForecast weather3 = weatherDaysForecasts.get(2);
+            // 后天天气信息
+            WeatherDaysForecast weather4 = weatherDaysForecasts.get(3);
             // 现在小时
             int hour = calendar.get(Calendar.HOUR_OF_DAY);
             // 设置天气类型
@@ -559,10 +617,6 @@ public class WeaFragment extends Fragment {
             mWindTv.setText(mWeatherInfo.getWindDirection() + " "
                     + mWeatherInfo.getWindPower());
 
-            // 明天天气信息
-            WeatherDaysForecast weather3 = weatherDaysForecasts.get(2);
-            // 后天天气信息
-            WeatherDaysForecast weather4 = weatherDaysForecasts.get(3);
             int weatherId;
 
             // 设置今天天气信息
@@ -716,6 +770,62 @@ public class WeaFragment extends Fragment {
             mDaysForecastWeaTypeNightIv5.setImageResource(weatherNightId5);
             mDaysForecastWeaTypeNightIv6.setImageResource(weatherNightId6);
 
+            // 设置风向
+            mDaysForecastWindDirectionTv1.setText(weather1.getWindDirectionDay());
+            mDaysForecastWindDirectionTv2.setText(weather2.getWindDirectionDay());
+            mDaysForecastWindDirectionTv3.setText(weather3.getWindDirectionDay());
+            mDaysForecastWindDirectionTv4.setText(weather4.getWindDirectionDay());
+            mDaysForecastWindDirectionTv5.setText(weather5.getWindDirectionDay());
+            mDaysForecastWindDirectionTv6.setText(weather6.getWindDirectionDay());
+
+            // 设置风力
+            mDaysForecastWindPowerTv1.setText(weather1.getWindPowerDay());
+            mDaysForecastWindPowerTv2.setText(weather2.getWindPowerDay());
+            mDaysForecastWindPowerTv3.setText(weather3.getWindPowerDay());
+            mDaysForecastWindPowerTv4.setText(weather4.getWindPowerDay());
+            mDaysForecastWindPowerTv5.setText(weather5.getWindPowerDay());
+            mDaysForecastWindPowerTv6.setText(weather6.getWindPowerDay());
+
+            // 设置生活指数
+            for (WeatherLifeIndex index : weatherLifeIndexes) {
+                setLifeIndex(index);
+            }
+
+        }
+
+        /**
+         * 设置生活指数
+         *
+         * @param index 生活指数信息
+         */
+        private void setLifeIndex(WeatherLifeIndex index) {
+            switch (index.getIndexName()) {
+                case "雨伞指数":
+                    mLifeIndexUmbrellaTv.setText(index.getIndexValue());
+                    break;
+                case "紫外线强度":
+                    mLifeIndexUltravioletRaysTv.setText(index.getIndexValue());
+                    break;
+                case "穿衣指数":
+                    mLifeIndexDressTv.setText(index.getIndexValue());
+                    break;
+                case "感冒指数":
+                    mLifeIndexColdTv.setText(index.getIndexValue());
+                    break;
+                case "晨练指数":
+                    mLifeIndexMorningExerciseTv.setText(index.getIndexValue());
+                    break;
+                case "运动指数":
+                    mLifeIndexSportTv.setText(index.getIndexValue());
+                    break;
+                case "洗车指数":
+                    mLifeIndexCarWashTv.setText(index.getIndexValue());
+                    break;
+                case "钓鱼指数":
+                    mLifeIndexFishTv.setText(index.getIndexValue());
+                    break;
+
+            }
         }
 
         /**
@@ -1058,13 +1168,31 @@ public class WeaFragment extends Fragment {
         mDaysForecastWindPowerTv6 = (TextView) view.findViewById(R.id.wea_days_forecast_wind_power_tv6);
 
         mLifeIndexUmbrellaTv = (TextView) view.findViewById(R.id.wea_life_index_tv_umbrella);
-        mLifeIndexulTravioletRaysTv = (TextView) view.findViewById(R.id.wea_life_index_tv_ultraviolet_rays);
+        mLifeIndexUltravioletRaysTv = (TextView) view.findViewById(R.id.wea_life_index_tv_ultraviolet_rays);
         mLifeIndexDressTv = (TextView) view.findViewById(R.id.wea_life_tv_index_dress);
-        mLifeIndexcoldTv = (TextView) view.findViewById(R.id.wea_life_index_tv_cold);
+        mLifeIndexColdTv = (TextView) view.findViewById(R.id.wea_life_index_tv_cold);
         mLifeIndexMorningExerciseTv = (TextView) view.findViewById(R.id.wea_life_index_tv_morning_exercise);
         mLifeIndexSportTv = (TextView) view.findViewById(R.id.wea_life_index_tv_sport);
         mLifeIndexCarWashTv = (TextView) view.findViewById(R.id.wea_life_index_tv_car_wash);
         mLifeIndexFishTv = (TextView) view.findViewById(R.id.wea_life_index_tv_fish);
+
+        mLifeIndexUmbrellaRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_umbrella);
+        mLifeIndexUltravioletRaysRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_ultraviolet_rays);
+        mLifeIndexDressRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_dress);
+        mLifeIndexColdRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_cold);
+        mLifeIndexMorningExerciseRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_morning_exercise);
+        mLifeIndexSportRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_sport);
+        mLifeIndexCarWashRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_carwash);
+        mLifeIndexFishRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_fish);
+
+        mLifeIndexUmbrellaRlyt.setOnClickListener(this);
+        mLifeIndexUltravioletRaysRlyt.setOnClickListener(this);
+        mLifeIndexDressRlyt.setOnClickListener(this);
+        mLifeIndexColdRlyt.setOnClickListener(this);
+        mLifeIndexMorningExerciseRlyt.setOnClickListener(this);
+        mLifeIndexSportRlyt.setOnClickListener(this);
+        mLifeIndexCarWashRlyt.setOnClickListener(this);
+        mLifeIndexFishRlyt.setOnClickListener(this);
     }
 
 }

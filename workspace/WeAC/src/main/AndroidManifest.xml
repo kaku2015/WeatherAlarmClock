@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kaku.weac"
-    android:versionCode="1"
-    android:versionName="1.0">
+<manifest package="com.kaku.weac"
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          android:versionCode="1"
+          android:versionName="1.0">
 
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
     <!-- 操作SD卡 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
 
     <application
         android:allowBackup="true"
@@ -22,73 +22,76 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.SET_ALARM" />
+                <action android:name="android.intent.action.SET_ALARM"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
 
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ThemeActivity" />
+        <activity android:name=".activities.ThemeActivity"/>
         <activity
             android:name=".activities.AlarmClockNewActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Transparent" />
+            android:theme="@style/Transparent"/>
         <activity
             android:name=".activities.AlarmClockEditActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Transparent" />
+            android:theme="@style/Transparent"/>
         <activity
             android:name=".activities.RingSelectActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Transparent" />
+            android:theme="@style/Transparent"/>
         <activity
             android:name=".activities.AlarmClockOntimeActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Wallpaper.NoTitleBar" />
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar"/>
         <activity
             android:name=".activities.AlarmClockNapNotificationActivity"
-            android:theme="@android:style/Theme.NoDisplay" />
+            android:theme="@android:style/Theme.NoDisplay"/>
         <activity
             android:name=".activities.NapEditActivity"
-            android:theme="@style/Theme.MyDialog" />
+            android:theme="@style/Theme.MyDialog"/>
         <activity
             android:name=".activities.RecordOperateActivity"
-            android:theme="@style/Theme.MyDialog" />
+            android:theme="@style/Theme.MyDialog"/>
         <activity
             android:name=".activities.RecordDetailActivity"
-            android:theme="@style/Theme.MyDialog" />
+            android:theme="@style/Theme.MyDialog"/>
         <activity
             android:name=".activities.RecordRenameActivity"
-            android:theme="@style/Theme.MyDialog" />
+            android:theme="@style/Theme.MyDialog"/>
         <activity
             android:name=".activities.RecordDeleteActivity"
-            android:theme="@style/Theme.MyDialog" />
+            android:theme="@style/Theme.MyDialog"/>
         <activity
             android:name=".activities.RecordDeleteBatchActivity"
-            android:theme="@style/Transparent" />
+            android:theme="@style/Transparent"/>
+        <activity
+            android:name=".activities.LifeIndexDetailActivity"
+            android:theme="@style/Transparent"/>
 
         <receiver
             android:name=".broadcast.AlarmClockBroadcast"
-            android:process=":remote" />
+            android:process=":remote"/>
         <receiver android:name=".broadcast.BootBroadcastReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
 
         <provider
             android:name=".db.AlarmClockProvider"
             android:authorities="com.kaku.weac"
-            android:exported="false" />
+            android:exported="false"/>
 
         <service
             android:name=".service.GuardMasterService"
             android:exported="false">
             <intent-filter android:priority="1000">
-                <action android:name="com.kaku.GuardMasterService" />
+                <action android:name="com.kaku.GuardMasterService"/>
             </intent-filter>
         </service>
     </application>

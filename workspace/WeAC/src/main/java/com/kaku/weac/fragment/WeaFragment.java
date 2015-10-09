@@ -1,5 +1,6 @@
 package com.kaku.weac.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.kaku.weac.R;
+import com.kaku.weac.activities.LifeIndexDetailActivity;
 import com.kaku.weac.bean.WeatherDaysForecast;
 import com.kaku.weac.bean.WeatherInfo;
 import com.kaku.weac.bean.WeatherLifeIndex;
@@ -529,7 +531,9 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
                 refreshWeather();
                 break;
             case R.id.wea_life_index_rlyt_umbrella:
-
+                Intent intent = new Intent(getActivity(), LifeIndexDetailActivity.class);
+                intent.putExtra("life_index_title", "雨伞指数详情");
+//                intent.putExtra("life_index_detail",)
                 break;
         }
 

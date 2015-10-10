@@ -482,7 +482,6 @@ public class AlarmClockNewFragment extends Fragment implements OnClickListener,
         switch (v.getId()) {
             // 当点击取消按钮
             case R.id.action_cancel:
-                getActivity().finish();
                 drawAnimation();
                 break;
             // 当点击确认按钮
@@ -490,7 +489,6 @@ public class AlarmClockNewFragment extends Fragment implements OnClickListener,
                 Intent data = new Intent();
                 data.putExtra(WeacConstants.ALARM_CLOCK, mAlarmClock);
                 getActivity().setResult(Activity.RESULT_OK, data);
-                getActivity().finish();
                 drawAnimation();
                 break;
             // 当点击铃声
@@ -523,6 +521,7 @@ public class AlarmClockNewFragment extends Fragment implements OnClickListener,
      * 结束新建闹钟界面时开启渐变缩小效果动画
      */
     private void drawAnimation() {
+        getActivity().finish();
         getActivity().overridePendingTransition(0, R.anim.zoomout);
     }
 

@@ -88,4 +88,13 @@ public class WeacConstants {
      * 最大录音时常10分钟
      */
     public static final int MAX_RECORD_LENGTH = 1000 * 60 * 10;
+
+    /**
+     * 标题
+     */
+    public static final String TITLE = "title";
+    /**
+     * 详情
+     */
+    public static final String DETAIL = "detail";
 }

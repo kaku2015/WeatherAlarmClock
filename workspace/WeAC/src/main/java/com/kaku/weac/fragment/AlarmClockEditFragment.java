@@ -490,7 +490,6 @@ public class AlarmClockEditFragment extends Fragment implements
         switch (v.getId()) {
             // 当点击取消按钮
             case R.id.action_cancel:
-                getActivity().finish();
                 drawAnimation();
                 break;
             // 当点击确认按钮
@@ -498,7 +497,6 @@ public class AlarmClockEditFragment extends Fragment implements
                 Intent data = new Intent();
                 data.putExtra(WeacConstants.ALARM_CLOCK, mAlarmClock);
                 getActivity().setResult(Activity.RESULT_OK, data);
-                getActivity().finish();
                 drawAnimation();
                 break;
 
@@ -535,6 +533,7 @@ public class AlarmClockEditFragment extends Fragment implements
      * 结束新建闹钟界面时开启移动退出效果动画
      */
     private void drawAnimation() {
+        getActivity().finish();
         getActivity().overridePendingTransition(0, R.anim.move_out_bottom);
     }
 

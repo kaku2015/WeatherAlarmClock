@@ -91,7 +91,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/white_trans90</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="wea_area_llyt">
@@ -104,7 +104,7 @@
     </style>
 
     <style name="wea_days_forecast_llyt">
-        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:layout_marginTop">3dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:orientation">horizontal</item>
@@ -162,15 +162,34 @@
         <item name="android:alpha">0.4</item>
     </style>
 
-    <style name="wea_life_index_rlyt">
+    <style name="wea_life_index_rlyt_left">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:layout_marginTop">15dp</item>
-        <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:background">@drawable/bg_life_index_item_pressed</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:layout_marginLeft">19dp</item>
+        <item name="android:paddingBottom">15dp</item>
     </style>
 
-    <style name="wea_life_index_iv">
+    <style name="wea_life_index_rlyt_right">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/bg_life_index_item_pressed</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:layout_marginRight">19dp</item>
+        <item name="android:paddingBottom">15dp</item>
+    </style>
+
+    <style name="wea_life_index_iv_left">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
+
+    <style name="wea_life_index_iv_right">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_alignParentLeft">true</item>

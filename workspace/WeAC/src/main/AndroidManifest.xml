@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.kaku.weac"
-          xmlns:android="http://schemas.android.com/apk/res/android"
-          android:versionCode="1"
-          android:versionName="1.0">
+<manifest
+    package="com.kaku.weac"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:versionCode="1"
+    android:versionName="1.0">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
@@ -67,10 +68,10 @@
             android:name=".activities.RecordDeleteActivity"
             android:theme="@style/Theme.MyDialog"/>
         <activity
-            android:name=".activities.RecordDeleteBatchActivity"
-            android:theme="@style/Transparent"/>
-        <activity
             android:name=".activities.LifeIndexDetailActivity"
+            android:theme="@style/Theme.MyDialog"/>
+        <activity
+            android:name=".activities.RecordDeleteBatchActivity"
             android:theme="@style/Transparent"/>
 
         <receiver

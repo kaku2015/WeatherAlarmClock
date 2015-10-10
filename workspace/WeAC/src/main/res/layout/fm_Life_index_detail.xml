@@ -1,39 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     style="@style/dialog_llyt"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
         android:id="@+id/index_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="雨伞指数详情"
-        android:textColor="@color/dark_blue"
-        android:textSize="18sp"/>
+        style="@style/dialog_title"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/dark_blue_line"
-        />
+    <View style="@style/line_blue"/>
 
     <TextView
         android:id="@+id/index_detail"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="天气较好，您在出门的时候无须带雨伞。"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:textColor="@color/gray_ring_select_title"
-        android:textSize="18sp"
+        android:textSize="16sp"
         />
 
     <Button
         android:id="@+id/roger_btn"
-        style="@style/single_btn"
-        android:text="@string/roger"/>
+        style="@style/single_btn"/>
 
 </LinearLayout>

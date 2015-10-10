@@ -92,7 +92,7 @@ public class LineChartView extends View {
         mDensity = getResources().getDisplayMetrics().density;
         mTextSize = 14 * mDensity;
         mRadius = 3 * mDensity;
-        mSpace = 1 * mDensity;
+        mSpace = 3 * mDensity;
         mTextSpace = 8 * mDensity;
         mStokeWidth = 2 * mDensity;
         mLineColor = Color.WHITE;

@@ -3,8 +3,8 @@ package com.kaku.weac.util;
 import android.util.Xml;
 
 import com.kaku.weac.bean.WeatherDaysForecast;
-import com.kaku.weac.bean.WeatherLifeIndex;
 import com.kaku.weac.bean.WeatherInfo;
+import com.kaku.weac.bean.WeatherLifeIndex;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -48,12 +48,12 @@ public class WeatherUtil {
                     // 天气信息
                     WeatherInfo weatherInfo = handleWeatherResponse(in);
 
-//                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-//                    StringBuilder response = new StringBuilder();
-//                    String line;
-//                    while ((line = reader.readLine()) != null) {
-//                        response.append(line);
-//                    }
+/*                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                    StringBuilder response = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        response.append(line);
+                    }*/
                     if (listener != null) {
                         // 加载完成返回
                         listener.onFinish(weatherInfo);
@@ -168,6 +168,10 @@ public class WeatherUtil {
                             // 警报类型
                             case "alarmType":
                                 weatherInfo.setAlarmType(parser.nextText());
+                                break;
+                            // 警报等级
+                            case "alarmDegree":
+                                weatherInfo.setAlarmDegree(parser.nextText());
                                 break;
                             // 警报详细
                             case "alarm_details":

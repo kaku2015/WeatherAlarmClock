@@ -71,6 +71,9 @@
             android:name="com.kaku.weac.activities.RecordDeleteActivity"
             android:theme="@style/Theme.MyDialog" />
         <activity
+            android:name="com.kaku.weac.activities.LifeIndexDetailActivity"
+            android:theme="@style/Theme.MyDialog" />
+        <activity
             android:name="com.kaku.weac.activities.RecordDeleteBatchActivity"
             android:theme="@style/Transparent" />
 

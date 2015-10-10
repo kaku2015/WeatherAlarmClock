@@ -65,6 +65,11 @@ public class WeatherInfo {
     private String mAlarmType;
 
     /**
+     * 警报等级
+     */
+    private String mAlarmDegree;
+
+    /**
      * 警报内容
      */
     private String mAlarmDetail;
@@ -189,5 +194,13 @@ public class WeatherInfo {
 
     public void setWindPower(String windPower) {
         mWindPower = windPower;
+    }
+
+    public String getAlarmDegree() {
+        return mAlarmDegree;
+    }
+
+    public void setAlarmDegree(String alarmDegree) {
+        mAlarmDegree = alarmDegree;
     }
 }

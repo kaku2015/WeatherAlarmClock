@@ -15,6 +15,7 @@ import com.kaku.weac.activities.LifeIndexDetailActivity;
 import com.kaku.weac.bean.WeatherDaysForecast;
 import com.kaku.weac.bean.WeatherInfo;
 import com.kaku.weac.bean.WeatherLifeIndex;
+import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.HttpCallbackListener;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
@@ -97,7 +98,7 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
     /**
      * 今天低温
      */
-    private TextView mTemplowTvToday;
+    private TextView mTempLowTvToday;
 
     /**
      * 今天天气类型文字
@@ -118,7 +119,7 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
     /**
      * 明天低温
      */
-    private TextView mTemplowTvTomorrow;
+    private TextView mTempLowTvTomorrow;
 
     /**
      * 明天天气类型文字
@@ -139,7 +140,7 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
     /**
      * 后天低温
      */
-    private TextView mTemplowTvDayAfterTomorrow;
+    private TextView mTempLowTvDayAfterTomorrow;
 
     /**
      * 后天天气类型文字
@@ -405,94 +406,98 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
      */
     private TextView mDaysForecastWindPowerTv6;
 
-    /**
-     * 雨伞指数控件
-     */
-    private RelativeLayout mLifeIndexUmbrellaRlyt;
 
     /**
-     * 紫外线强度控件
-     */
-    private RelativeLayout mLifeIndexUltravioletRaysRlyt;
-
-    /**
-     * 穿衣指数控件
-     */
-    private RelativeLayout mLifeIndexDressRlyt;
-
-    /**
-     * 感冒指数控件
-     */
-    private RelativeLayout mLifeIndexColdRlyt;
-
-    /**
-     * 晨练指数控件
-     */
-    private RelativeLayout mLifeIndexMorningExerciseRlyt;
-
-    /**
-     * 运动指数控件
-     */
-    private RelativeLayout mLifeIndexSportRlyt;
-
-    /**
-     * 洗车指数控件
-     */
-    private RelativeLayout mLifeIndexCarWashRlyt;
-
-    /**
-     * 钓鱼指数控件
-     */
-    private RelativeLayout mLifeIndexFishRlyt;
-    /**
-     * 雨伞指数
+     * 雨伞指数TextView
      */
     private TextView mLifeIndexUmbrellaTv;
 
     /**
-     * 紫外线强度
+     * 紫外线指数TextView
      */
     private TextView mLifeIndexUltravioletRaysTv;
 
     /**
-     * 穿衣指数
+     * 穿衣指数TextView
      */
     private TextView mLifeIndexDressTv;
 
     /**
-     * 感冒指数
+     * 感冒指数TextView
      */
     private TextView mLifeIndexColdTv;
 
     /**
-     * 晨练指数
+     * 晨练指数TextView
      */
     private TextView mLifeIndexMorningExerciseTv;
 
     /**
-     * 运动指数
+     * 运动指数TextView
      */
     private TextView mLifeIndexSportTv;
 
     /**
-     * 洗车指数
+     * 洗车指数TextView
      */
     private TextView mLifeIndexCarWashTv;
 
     /**
-     * 钓鱼指数
+     * 钓鱼指数TextView
      */
     private TextView mLifeIndexFishTv;
 
-    /**
-     * 刷新按钮
-     */
-    private ImageView mRefreshBtn;
 
     /**
-     * 保存天气信息类
+     * 雨伞指数详细
+     */
+    private String mLifeIndexUmbrellaDetail;
+
+    /**
+     * 紫外线指数详细
+     */
+    private String mLifeIndexUltravioletRaysDetail;
+
+    /**
+     * 穿衣指数详细
+     */
+    private String mLifeIndexDressDetail;
+
+    /**
+     * 感冒指数详细
+     */
+    private String mLifeIndexColdDetail;
+
+    /**
+     * 晨练指数详细
+     */
+    private String mLifeIndexMorningExerciseDetail;
+
+    /**
+     * 运动指数详细
+     */
+    private String mLifeIndexSportDetail;
+
+    /**
+     * 洗车指数详细
+     */
+    private String mLifeIndexCarWashDetail;
+
+    /**
+     * 钓鱼指数详细
+     */
+    private String mLifeIndexFishDetail;
+
+
+    /**
+     * 天气信息类
      */
     private WeatherInfo mWeatherInfo;
+
+    /**
+     * 生活指数信息
+     */
+    List<WeatherLifeIndex> mWeatherLifeIndexes;
 
     @Override
 
@@ -501,24 +506,11 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
         final View view = inflater.inflate(R.layout.fm_wea, container, false);
         init(view);
 
-        /*LineChartView chartDay = (LineChartView) view.findViewById(R.id.line_char_day);
-        chartDay.setTemp(new int[]{32, 31, 31, 30, 25, 26});
-        chartDay.setTextSpace(10);
-        int colorDay = getResources().getColor(R.color.yellow_hot);
-        chartDay.setLineColor(colorDay);
-        chartDay.setPointColor(colorDay);
-
-        LineChartView chartNight = (LineChartView) view.findViewById(R.id.line_chart_night);
-        chartNight.setTemp(new int[]{20, 25, 24, 25, 20, 20});
-        chartNight.setTextSpace(-10);
-        int colorNight = getResources().getColor(R.color.blue_ice);
-        chartNight.setLineColor(colorNight);
-        chartNight.setPointColor(colorNight);*/
-
-
-        mRefreshBtn = (ImageView) view.findViewById(R.id.action_refresh);
-        mRefreshBtn.setOnClickListener(this);
-
+        // 刷新按钮
+        ImageView refreshBtn = (ImageView) view.findViewById(R.id.action_refresh);
+        refreshBtn.setOnClickListener(this);
+        // 刷新天气
+        refreshWeather();
         return view;
     }
 
@@ -530,13 +522,53 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
                 // 刷新天气
                 refreshWeather();
                 break;
+            // 雨伞指数
             case R.id.wea_life_index_rlyt_umbrella:
-                Intent intent = new Intent(getActivity(), LifeIndexDetailActivity.class);
-                intent.putExtra("life_index_title", "雨伞指数详情");
-//                intent.putExtra("life_index_detail",)
+                skipToDetailInterface("雨伞指数详情", mLifeIndexUmbrellaDetail);
+                break;
+            // 紫外线指数
+            case R.id.wea_life_index_rlyt_ultraviolet_rays:
+                skipToDetailInterface("紫外线指数详情", mLifeIndexUltravioletRaysDetail);
+                break;
+            // 穿衣指数
+            case R.id.wea_life_index_rlyt_dress:
+                skipToDetailInterface("穿衣指数详情", mLifeIndexDressDetail);
+                break;
+            // 感冒指数
+            case R.id.wea_life_index_rlyt_cold:
+                skipToDetailInterface("感冒指数详情", mLifeIndexColdDetail);
+                break;
+            // 晨练指数
+            case R.id.wea_life_index_rlyt_morning_exercise:
+                skipToDetailInterface("晨练指数详情", mLifeIndexMorningExerciseDetail);
+                break;
+            // 运动指数
+            case R.id.wea_life_index_rlyt_sport:
+                skipToDetailInterface("运动指数详情", mLifeIndexSportDetail);
+                break;
+            // 洗车指数
+            case R.id.wea_life_index_rlyt_carwash:
+                skipToDetailInterface("洗车指数详情", mLifeIndexCarWashDetail);
+                break;
+            // 钓鱼指数
+            case R.id.wea_life_index_rlyt_fish:
+                skipToDetailInterface("钓鱼指数详情", mLifeIndexFishDetail);
                 break;
         }
 
+    }
+
+    /**
+     * 跳转到详情界面
+     *
+     * @param title  标题
+     * @param detail 详情
+     */
+    private void skipToDetailInterface(String title, String detail) {
+        Intent intent = new Intent(getActivity(), LifeIndexDetailActivity.class);
+        intent.putExtra(WeacConstants.TITLE, title);
+        intent.putExtra(WeacConstants.DETAIL, detail);
+        startActivity(intent);
     }
 
     /**
@@ -575,7 +607,7 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
             // 多天预报信息
             List<WeatherDaysForecast> weatherDaysForecasts = mWeatherInfo.getWeatherDaysForecast();
             // 生活指数信息
-            List<WeatherLifeIndex> weatherLifeIndexes = mWeatherInfo.getWeatherLifeIndex();
+            mWeatherLifeIndexes = mWeatherInfo.getWeatherLifeIndex();
 
             // 设置城市名
             mCityNameTv.setText(mWeatherInfo.getCity());
@@ -583,6 +615,15 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
             if (mWeatherInfo.getAlarmType() != null) {
                 mAlarmTv.setVisibility(View.VISIBLE);
                 mAlarmTv.setText(mWeatherInfo.getAlarmType() + "预警");
+                mAlarmTv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        skipToDetailInterface(mWeatherInfo.getAlarmType() +
+                                mWeatherInfo.getAlarmDegree() + "预警", mWeatherInfo.getAlarmDetail());
+                    }
+                });
+            } else {
+                mAlarmTv.setVisibility(View.GONE);
             }
             // 设置更新时间
             mUpdateTimeTv.setText(mWeatherInfo.getUpdateTime() + "发布");
@@ -596,13 +637,12 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
 
             // 今天天气信息
             WeatherDaysForecast weather2 = weatherDaysForecasts.get(1);
-
-            Calendar calendar = Calendar.getInstance();
             // 明天天气信息
             WeatherDaysForecast weather3 = weatherDaysForecasts.get(2);
             // 后天天气信息
             WeatherDaysForecast weather4 = weatherDaysForecasts.get(3);
             // 现在小时
+            Calendar calendar = Calendar.getInstance();
             int hour = calendar.get(Calendar.HOUR_OF_DAY);
             // 设置天气类型
             if (hour < 18) {
@@ -636,7 +676,7 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
             }
             mWeatherTypeIvToday.setImageResource(weatherId);
             mTempHighTvToday.setText(weather2.getHigh().substring(3));
-            mTemplowTvToday.setText(weather2.getLow().substring(3));
+            mTempLowTvToday.setText(weather2.getLow().substring(3));
             mWeatherTypeTvToday.setText(getWeatherType
                     (weather2.getTypeDay(), weather2.getTypeNight()));
 
@@ -644,7 +684,7 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
             weatherId = getWeatherTypeImageID(weather3.getTypeDay(), true);
             mWeatherTypeIvTomorrow.setImageResource(weatherId);
             mTempHighTvTomorrow.setText(weather3.getHigh().substring(3));
-            mTemplowTvTomorrow.setText(weather3.getLow().substring(3));
+            mTempLowTvTomorrow.setText(weather3.getLow().substring(3));
             mWeatherTypeTvTomorrow.setText(getWeatherType
                     (weather3.getTypeDay(), weather3.getTypeNight()));
 
@@ -652,7 +692,7 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
             weatherId = getWeatherTypeImageID(weather4.getTypeDay(), true);
             mWeatherTypeIvDayAfterTomorrow.setImageResource(weatherId);
             mTempHighTvDayAfterTomorrow.setText(weather4.getHigh().substring(3));
-            mTemplowTvDayAfterTomorrow.setText(weather4.getLow().substring(3));
+            mTempLowTvDayAfterTomorrow.setText(weather4.getLow().substring(3));
             mWeatherTypeTvDayAfterTomorrow.setText(getWeatherType
                     (weather4.getTypeDay(), weather4.getTypeNight()));
 
@@ -681,10 +721,8 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
             mDaysForecastTvWeek5.setText(getWeek(day5[1]));
             mDaysForecastTvWeek6.setText(getWeek(day6[1]));
 
-            //设置标题日期
-            Calendar c = Calendar.getInstance();
             // 当前月份
-            String month = MyUtil.addZero(c.get(Calendar.MONTH) + 1);
+            String month = MyUtil.addZero(calendar.get(Calendar.MONTH) + 1);
 
             // 日
             String day01 = day1[0].split("日")[0];
@@ -733,6 +771,7 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
                     getTemp(weather6.getHigh())});
             // 设置文字距离坐标距离
             mCharDay.setTextSpace(10);
+            //noinspection deprecation
             int colorDay = getResources().getColor(R.color.yellow_hot);
             mCharDay.setLineColor(colorDay);
             mCharDay.setPointColor(colorDay);
@@ -745,6 +784,7 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
                     getTemp(weather4.getLow()), getTemp(weather5.getLow()),
                     getTemp(weather6.getLow())});
             mCharNight.setTextSpace(-10);
+            //noinspection deprecation
             int colorNight = getResources().getColor(R.color.blue_ice);
             mCharNight.setLineColor(colorNight);
             mCharNight.setPointColor(colorNight);
@@ -791,7 +831,7 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
             mDaysForecastWindPowerTv6.setText(weather6.getWindPowerDay());
 
             // 设置生活指数
-            for (WeatherLifeIndex index : weatherLifeIndexes) {
+            for (WeatherLifeIndex index : mWeatherLifeIndexes) {
                 setLifeIndex(index);
             }
 
@@ -806,27 +846,35 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
             switch (index.getIndexName()) {
                 case "雨伞指数":
                     mLifeIndexUmbrellaTv.setText(index.getIndexValue());
+                    mLifeIndexUmbrellaDetail = index.getIndexDetail();
                     break;
                 case "紫外线强度":
                     mLifeIndexUltravioletRaysTv.setText(index.getIndexValue());
+                    mLifeIndexUltravioletRaysDetail = index.getIndexDetail();
                     break;
                 case "穿衣指数":
                     mLifeIndexDressTv.setText(index.getIndexValue());
+                    mLifeIndexDressDetail = index.getIndexDetail();
                     break;
                 case "感冒指数":
                     mLifeIndexColdTv.setText(index.getIndexValue());
+                    mLifeIndexColdDetail = index.getIndexDetail();
                     break;
                 case "晨练指数":
                     mLifeIndexMorningExerciseTv.setText(index.getIndexValue());
+                    mLifeIndexMorningExerciseDetail = index.getIndexDetail();
                     break;
                 case "运动指数":
                     mLifeIndexSportTv.setText(index.getIndexValue());
+                    mLifeIndexSportDetail = index.getIndexDetail();
                     break;
                 case "洗车指数":
                     mLifeIndexCarWashTv.setText(index.getIndexValue());
+                    mLifeIndexCarWashDetail = index.getIndexDetail();
                     break;
                 case "钓鱼指数":
                     mLifeIndexFishTv.setText(index.getIndexValue());
+                    mLifeIndexFishDetail = index.getIndexDetail();
                     break;
 
             }
@@ -1104,9 +1152,9 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
         mTempHighTvTomorrow = (TextView) view.findViewById(R.id.temp_high_tomorrow);
         mTempHighTvDayAfterTomorrow = (TextView) view.findViewById(R.id.temp_high_day_after_tomorrow);
 
-        mTemplowTvToday = (TextView) view.findViewById(R.id.temp_low_today);
-        mTemplowTvTomorrow = (TextView) view.findViewById(R.id.temp_low_tomorrow);
-        mTemplowTvDayAfterTomorrow = (TextView) view.findViewById(R.id.temp_low_day_after_tomorrow);
+        mTempLowTvToday = (TextView) view.findViewById(R.id.temp_low_today);
+        mTempLowTvTomorrow = (TextView) view.findViewById(R.id.temp_low_tomorrow);
+        mTempLowTvDayAfterTomorrow = (TextView) view.findViewById(R.id.temp_low_day_after_tomorrow);
 
         mWeatherTypeTvToday = (TextView) view.findViewById(R.id.weather_type_tv_today);
         mWeatherTypeTvTomorrow = (TextView) view.findViewById(R.id.weather_type_tv_tomorrow);
@@ -1180,23 +1228,31 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
         mLifeIndexCarWashTv = (TextView) view.findViewById(R.id.wea_life_index_tv_car_wash);
         mLifeIndexFishTv = (TextView) view.findViewById(R.id.wea_life_index_tv_fish);
 
-        mLifeIndexUmbrellaRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_umbrella);
-        mLifeIndexUltravioletRaysRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_ultraviolet_rays);
-        mLifeIndexDressRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_dress);
-        mLifeIndexColdRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_cold);
-        mLifeIndexMorningExerciseRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_morning_exercise);
-        mLifeIndexSportRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_sport);
-        mLifeIndexCarWashRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_carwash);
-        mLifeIndexFishRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_fish);
+        // 雨伞指数控件
+        RelativeLayout lifeIndexUmbrellaRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_umbrella);
+        // 紫外线指数控件
+        RelativeLayout lifeIndexUltravioletRaysRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_ultraviolet_rays);
+        // 穿衣指数控件
+        RelativeLayout lifeIndexDressRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_dress);
+        // 感冒指数控件
+        RelativeLayout lifeIndexColdRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_cold);
+        // 晨练指数控件
+        RelativeLayout lifeIndexMorningExerciseRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_morning_exercise);
+        //  运动指数控件
+        RelativeLayout lifeIndexSportRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_sport);
+        // 洗车指数控件
+        RelativeLayout lifeIndexCarWashRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_carwash);
+        //  钓鱼指数控件
+        RelativeLayout lifeIndexFishRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_fish);
 
-        mLifeIndexUmbrellaRlyt.setOnClickListener(this);
-        mLifeIndexUltravioletRaysRlyt.setOnClickListener(this);
-        mLifeIndexDressRlyt.setOnClickListener(this);
-        mLifeIndexColdRlyt.setOnClickListener(this);
-        mLifeIndexMorningExerciseRlyt.setOnClickListener(this);
-        mLifeIndexSportRlyt.setOnClickListener(this);
-        mLifeIndexCarWashRlyt.setOnClickListener(this);
-        mLifeIndexFishRlyt.setOnClickListener(this);
+        lifeIndexUmbrellaRlyt.setOnClickListener(this);
+        lifeIndexUltravioletRaysRlyt.setOnClickListener(this);
+        lifeIndexDressRlyt.setOnClickListener(this);
+        lifeIndexColdRlyt.setOnClickListener(this);
+        lifeIndexMorningExerciseRlyt.setOnClickListener(this);
+        lifeIndexSportRlyt.setOnClickListener(this);
+        lifeIndexCarWashRlyt.setOnClickListener(this);
+        lifeIndexFishRlyt.setOnClickListener(this);
     }
 
 }

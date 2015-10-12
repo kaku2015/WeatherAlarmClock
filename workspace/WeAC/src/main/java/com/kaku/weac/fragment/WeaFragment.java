@@ -896,9 +896,9 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
                 }
             } else {
                 if (temp.length() == 7) {
-                    temperature = temp.substring(4, 6);
+                    temperature = temp.substring(3, 6);
                 } else {
-                    temperature = temp.substring(4, 5);
+                    temperature = temp.substring(3, 5);
                 }
             }
             return Integer.parseInt(temperature);

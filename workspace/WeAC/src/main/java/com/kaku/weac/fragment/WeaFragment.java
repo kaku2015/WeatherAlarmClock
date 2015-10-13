@@ -1,6 +1,7 @@
 package com.kaku.weac.fragment;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,8 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.LifeIndexDetailActivity;
 import com.kaku.weac.bean.WeatherDaysForecast;
@@ -499,19 +504,71 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
      */
     List<WeatherLifeIndex> mWeatherLifeIndexes;
 
+    /**
+     * 下拉刷新ScrollView
+     */
+    PullToRefreshScrollView mPullRefreshScrollView;
+
+//    ScrollView mScrollView;
+
     @Override
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fm_wea, container, false);
         init(view);
-
         // 刷新按钮
         ImageView refreshBtn = (ImageView) view.findViewById(R.id.action_refresh);
         refreshBtn.setOnClickListener(this);
+        // 设置下拉刷新
+        setPullToRefresh();
         // 刷新天气
         refreshWeather();
         return view;
+    }
+
+    /**
+     * 设置下拉刷新
+     */
+    private void setPullToRefresh() {
+        mPullRefreshScrollView.getLoadingLayoutProxy().setPullLabel("下拉更新");
+        mPullRefreshScrollView.getLoadingLayoutProxy().setRefreshingLabel(
+                "正在更新...");
+        mPullRefreshScrollView.getLoadingLayoutProxy().setReleaseLabel("放开以更新");
+        mPullRefreshScrollView
+                .setOnRefreshListener(new OnRefreshListener<ScrollView>() {
+
+                    @Override
+                    public void onRefresh(
+                            PullToRefreshBase<ScrollView> refreshView) {
+                        new GetDataTask().execute();
+                    }
+                });
+
+//        mScrollView = mPullRefreshScrollView.getRefreshableView();
+    }
+
+    private class GetDataTask extends AsyncTask<Void, Void, String[]> {
+
+        @Override
+        protected String[] doInBackground(Void... params) {
+            refreshWeather();
+/*            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
+            }*/
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String[] result) {
+            // Do some stuff here
+
+            // Call onRefreshComplete when the list has been refreshed.
+//            mPullRefreshScrollView.onRefreshComplete();
+
+            super.onPostExecute(result);
+        }
     }
 
     @Override
@@ -588,6 +645,9 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                mPullRefreshScrollView.getLoadingLayoutProxy().
+                                        setLastUpdatedLabel("更新失败");
+                                mPullRefreshScrollView.onRefreshComplete();
                                 LogUtil.e(LOG_TAG, "读取失败：" + e.toString());
                             }
                         });
@@ -604,6 +664,9 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
 
         @Override
         public void run() {
+            mPullRefreshScrollView.getLoadingLayoutProxy().
+                    setLastUpdatedLabel("更新成功");
+            mPullRefreshScrollView.onRefreshComplete();
             // 多天预报信息
             List<WeatherDaysForecast> weatherDaysForecasts = mWeatherInfo.getWeatherDaysForecast();
             // 生活指数信息
@@ -1253,6 +1316,9 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
         lifeIndexSportRlyt.setOnClickListener(this);
         lifeIndexCarWashRlyt.setOnClickListener(this);
         lifeIndexFishRlyt.setOnClickListener(this);
+
+        mPullRefreshScrollView = (PullToRefreshScrollView) view
+                .findViewById(R.id.pull_refresh_scrollview);
     }
 
 }

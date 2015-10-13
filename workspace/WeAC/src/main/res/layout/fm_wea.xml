@@ -29,10 +29,12 @@
             android:src="@drawable/ic_action_refresh"/>
     </RelativeLayout>
 
-    <ScrollView
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        android:id="@+id/pull_refresh_scrollview"
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none">
+        ptr:ptrAnimationStyle="rotate">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -833,5 +835,5 @@
                 </FrameLayout>
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 </LinearLayout>

@@ -7,10 +7,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.os.Handler;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
@@ -448,9 +452,9 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
     private TextView mLifeIndexCarWashTv;
 
     /**
-     * 钓鱼指数TextView
+     * 晾晒指数TextView
      */
-    private TextView mLifeIndexFishTv;
+    private TextView mLifeIndexAirCureTv;
 
 
     /**
@@ -489,9 +493,9 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
     private String mLifeIndexCarWashDetail;
 
     /**
-     * 钓鱼指数详细
+     * 晾晒指数详细
      */
-    private String mLifeIndexFishDetail;
+    private String mLifeIndexAirCureDetail;
 
 
     /**
@@ -509,32 +513,48 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
      */
     PullToRefreshScrollView mPullRefreshScrollView;
 
-//    ScrollView mScrollView;
+    /**
+     * 刷新按钮
+     */
+    ImageView mRefreshBtn;
 
     @Override
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fm_wea, container, false);
         init(view);
-        // 刷新按钮
-        ImageView refreshBtn = (ImageView) view.findViewById(R.id.action_refresh);
-        refreshBtn.setOnClickListener(this);
+
+        mRefreshBtn = (ImageView) view.findViewById(R.id.action_refresh);
+        mRefreshBtn.setOnClickListener(this);
+
         // 设置下拉刷新
         setPullToRefresh();
-        // 刷新天气
-        refreshWeather();
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        // 刷新天气，还未获取到顶部下拉刷新的高度，适当的延时
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mPullRefreshScrollView.setRefreshing();
+            }
+        }, 1000);
     }
 
     /**
      * 设置下拉刷新
      */
+
     private void setPullToRefresh() {
         mPullRefreshScrollView.getLoadingLayoutProxy().setPullLabel("下拉更新");
         mPullRefreshScrollView.getLoadingLayoutProxy().setRefreshingLabel(
                 "正在更新...");
-        mPullRefreshScrollView.getLoadingLayoutProxy().setReleaseLabel("放开以更新");
+        mPullRefreshScrollView.getLoadingLayoutProxy().setReleaseLabel("松手可更新");
+//        mPullRefreshScrollView.getLoadingLayoutProxy().
+//                setLastUpdatedLabel("更新成功");
         mPullRefreshScrollView
                 .setOnRefreshListener(new OnRefreshListener<ScrollView>() {
 
@@ -545,7 +565,6 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
                     }
                 });
 
-//        mScrollView = mPullRefreshScrollView.getRefreshableView();
     }
 
     private class GetDataTask extends AsyncTask<Void, Void, String[]> {
@@ -553,20 +572,11 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
         @Override
         protected String[] doInBackground(Void... params) {
             refreshWeather();
-/*            try {
-                Thread.sleep(4000);
-            } catch (InterruptedException e) {
-            }*/
             return null;
         }
 
         @Override
         protected void onPostExecute(String[] result) {
-            // Do some stuff here
-
-            // Call onRefreshComplete when the list has been refreshed.
-//            mPullRefreshScrollView.onRefreshComplete();
-
             super.onPostExecute(result);
         }
     }
@@ -576,6 +586,12 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             // 刷新按钮
             case R.id.action_refresh:
+                Animation operatingAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate);
+                // 匀速
+                LinearInterpolator lin = new LinearInterpolator();
+                // 设置速率
+                operatingAnim.setInterpolator(lin);
+                mRefreshBtn.startAnimation(operatingAnim);
                 // 刷新天气
                 refreshWeather();
                 break;
@@ -607,9 +623,9 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
             case R.id.wea_life_index_rlyt_carwash:
                 skipToDetailInterface("洗车指数详情", mLifeIndexCarWashDetail);
                 break;
-            // 钓鱼指数
-            case R.id.wea_life_index_rlyt_fish:
-                skipToDetailInterface("钓鱼指数详情", mLifeIndexFishDetail);
+            // 晾晒指数
+            case R.id.wea_life_index_rlyt_air_cure:
+                skipToDetailInterface("晾晒指数详情", mLifeIndexAirCureDetail);
                 break;
         }
 
@@ -645,8 +661,10 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                mPullRefreshScrollView.getLoadingLayoutProxy().
-                                        setLastUpdatedLabel("更新失败");
+//                                mPullRefreshScrollView.getLoadingLayoutProxy().
+//                                        setLastUpdatedLabel("更新失败");
+                                // 取消刷新旋转动画
+                                mRefreshBtn.clearAnimation();
                                 mPullRefreshScrollView.onRefreshComplete();
                                 LogUtil.e(LOG_TAG, "读取失败：" + e.toString());
                             }
@@ -664,8 +682,9 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
 
         @Override
         public void run() {
-            mPullRefreshScrollView.getLoadingLayoutProxy().
-                    setLastUpdatedLabel("更新成功");
+            // 取消刷新旋转动画
+            mRefreshBtn.clearAnimation();
+            // 下拉刷新完成
             mPullRefreshScrollView.onRefreshComplete();
             // 多天预报信息
             List<WeatherDaysForecast> weatherDaysForecasts = mWeatherInfo.getWeatherDaysForecast();
@@ -935,9 +954,9 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
                     mLifeIndexCarWashTv.setText(index.getIndexValue());
                     mLifeIndexCarWashDetail = index.getIndexDetail();
                     break;
-                case "钓鱼指数":
-                    mLifeIndexFishTv.setText(index.getIndexValue());
-                    mLifeIndexFishDetail = index.getIndexDetail();
+                case "晾晒指数":
+                    mLifeIndexAirCureTv.setText(index.getIndexValue());
+                    mLifeIndexAirCureDetail = index.getIndexDetail();
                     break;
 
             }
@@ -1289,7 +1308,7 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
         mLifeIndexMorningExerciseTv = (TextView) view.findViewById(R.id.wea_life_index_tv_morning_exercise);
         mLifeIndexSportTv = (TextView) view.findViewById(R.id.wea_life_index_tv_sport);
         mLifeIndexCarWashTv = (TextView) view.findViewById(R.id.wea_life_index_tv_car_wash);
-        mLifeIndexFishTv = (TextView) view.findViewById(R.id.wea_life_index_tv_fish);
+        mLifeIndexAirCureTv = (TextView) view.findViewById(R.id.wea_life_index_tv_air_cure);
 
         // 雨伞指数控件
         RelativeLayout lifeIndexUmbrellaRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_umbrella);
@@ -1305,8 +1324,8 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
         RelativeLayout lifeIndexSportRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_sport);
         // 洗车指数控件
         RelativeLayout lifeIndexCarWashRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_carwash);
-        //  钓鱼指数控件
-        RelativeLayout lifeIndexFishRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_fish);
+        // 晾晒指数控件
+        RelativeLayout lifeIndexAirCureRlyt = (RelativeLayout) view.findViewById(R.id.wea_life_index_rlyt_air_cure);
 
         lifeIndexUmbrellaRlyt.setOnClickListener(this);
         lifeIndexUltravioletRaysRlyt.setOnClickListener(this);
@@ -1315,7 +1334,7 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
         lifeIndexMorningExerciseRlyt.setOnClickListener(this);
         lifeIndexSportRlyt.setOnClickListener(this);
         lifeIndexCarWashRlyt.setOnClickListener(this);
-        lifeIndexFishRlyt.setOnClickListener(this);
+        lifeIndexAirCureRlyt.setOnClickListener(this);
 
         mPullRefreshScrollView = (PullToRefreshScrollView) view
                 .findViewById(R.id.pull_refresh_scrollview);

@@ -810,24 +810,24 @@
                             </RelativeLayout>
 
                             <RelativeLayout
-                                android:id="@+id/wea_life_index_rlyt_fish"
+                                android:id="@+id/wea_life_index_rlyt_air_cure"
                                 style="@style/wea_life_index_rlyt_right"
                                 >
 
                                 <ImageView
                                     style="@style/wea_life_index_iv_right"
-                                    android:src="@drawable/ic_lifeindex_fish"
+                                    android:src="@drawable/ic_lifeindex_air_cure"
                                     />
 
                                 <TextView
-                                    android:id="@+id/wea_life_index_tv_fish"
+                                    android:id="@+id/wea_life_index_tv_air_cure"
                                     style="@style/wea_life_index_tv_detail"
-                                    android:text="@string/no"/>
+                                    android:text="@string/initial"/>
 
                                 <TextView
                                     style="@style/wea_life_index_tv_title"
-                                    android:layout_below="@id/wea_life_index_tv_fish"
-                                    android:text="@string/fish"/>
+                                    android:layout_below="@id/wea_life_index_tv_air_cure"
+                                    android:text="@string/air_cure"/>
 
                             </RelativeLayout>
                         </TableRow>

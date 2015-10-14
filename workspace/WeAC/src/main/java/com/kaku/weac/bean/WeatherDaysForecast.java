@@ -1,12 +1,14 @@
 package com.kaku.weac.bean;
 
+import java.io.Serializable;
+
 /**
  * 天气多天预报信息
  *
  * @author 咖枯
  * @version 1.0 2015/09/18
  */
-public class WeatherDaysForecast {
+public class WeatherDaysForecast implements Serializable {
     /**
      * 日期
      */

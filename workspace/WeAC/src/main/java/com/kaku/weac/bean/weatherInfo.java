@@ -1,5 +1,6 @@
 package com.kaku.weac.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  * @author 咖枯
  * @version 1.0 2015/09/18
  */
-public class WeatherInfo {
+public class WeatherInfo implements Serializable {
     /**
      * 城市
      */

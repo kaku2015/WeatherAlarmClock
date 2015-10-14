@@ -523,6 +523,8 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fm_wea, container, false);
         init(view);
+        // 初始化天气
+        initWeather(WeatherUtil.readWeatherInfo(getActivity(), "天津"));
 
         mRefreshBtn = (ImageView) view.findViewById(R.id.action_refresh);
         mRefreshBtn.setOnClickListener(this);
@@ -653,6 +655,8 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onFinish(WeatherInfo weatherInfo) {
                         mWeatherInfo = weatherInfo;
+                        // 保存天气信息
+                        WeatherUtil.saveWeatherInfo(mWeatherInfo, getActivity());
                         getActivity().runOnUiThread(new SetWeatherInfoRunnable());
                     }
 
@@ -686,526 +690,535 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
             mRefreshBtn.clearAnimation();
             // 下拉刷新完成
             mPullRefreshScrollView.onRefreshComplete();
-            // 多天预报信息
-            List<WeatherDaysForecast> weatherDaysForecasts = mWeatherInfo.getWeatherDaysForecast();
-            // 生活指数信息
-            mWeatherLifeIndexes = mWeatherInfo.getWeatherLifeIndex();
-
-            // 设置城市名
-            mCityNameTv.setText(mWeatherInfo.getCity());
-            // 设置预警信息
-            if (mWeatherInfo.getAlarmType() != null) {
-                mAlarmTv.setVisibility(View.VISIBLE);
-                mAlarmTv.setText(mWeatherInfo.getAlarmType() + "预警");
-                mAlarmTv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        skipToDetailInterface(mWeatherInfo.getAlarmType() +
-                                mWeatherInfo.getAlarmDegree() + "预警", mWeatherInfo.getAlarmDetail());
-                    }
-                });
-            } else {
-                mAlarmTv.setVisibility(View.GONE);
-            }
-            // 设置更新时间
-            mUpdateTimeTv.setText(mWeatherInfo.getUpdateTime() + "发布");
-
-            // 设置温度
-            String temp = mWeatherInfo.getTemperature();
-            int temp1 = Integer.parseInt(temp.substring(0, 1));
-            int temp2 = Integer.parseInt(temp.substring(1));
-            setTemperatureImage(temp1, mTemperature1Iv);
-            setTemperatureImage(temp2, mTemperature2Iv);
-
-            // 今天天气信息
-            WeatherDaysForecast weather2 = weatherDaysForecasts.get(1);
-            // 明天天气信息
-            WeatherDaysForecast weather3 = weatherDaysForecasts.get(2);
-            // 后天天气信息
-            WeatherDaysForecast weather4 = weatherDaysForecasts.get(3);
-            // 现在小时
-            Calendar calendar = Calendar.getInstance();
-            int hour = calendar.get(Calendar.HOUR_OF_DAY);
-            // 设置天气类型
-            if (hour < 18) {
-                // 白天天气
-                mWeatherTypeTv.setText(weather2.getTypeDay());
-            } else {
-                // 夜间天气
-                mWeatherTypeTv.setText(weather2.getTypeNight());
-            }
-
-            // 设置大气环境
-            mAqiTv.setText(mWeatherInfo.getQuality() + " " + mWeatherInfo.getAQI());
-            // 设置湿度
-            mHumidityTv.setText("湿度 " + mWeatherInfo.getHumidity());
-            // 设置风向、风力
-            mWindTv.setText(mWeatherInfo.getWindDirection() + " "
-                    + mWeatherInfo.getWindPower());
-
-            int weatherId;
-
-            // 设置今天天气信息
-            // 当前为凌晨
-            if (hour >= 0 && hour < 6) {
-                weatherId = getWeatherTypeImageID(weather2.getTypeDay(), false);
-                // 当前为白天时
-            } else if (hour >= 6 && hour < 18) {
-                weatherId = getWeatherTypeImageID(weather2.getTypeDay(), true);
-                // 当前为夜间
-            } else {
-                weatherId = getWeatherTypeImageID(weather2.getTypeNight(), false);
-            }
-            mWeatherTypeIvToday.setImageResource(weatherId);
-            mTempHighTvToday.setText(weather2.getHigh().substring(3));
-            mTempLowTvToday.setText(weather2.getLow().substring(3));
-            mWeatherTypeTvToday.setText(getWeatherType
-                    (weather2.getTypeDay(), weather2.getTypeNight()));
-
-            // 设置明天天气信息
-            weatherId = getWeatherTypeImageID(weather3.getTypeDay(), true);
-            mWeatherTypeIvTomorrow.setImageResource(weatherId);
-            mTempHighTvTomorrow.setText(weather3.getHigh().substring(3));
-            mTempLowTvTomorrow.setText(weather3.getLow().substring(3));
-            mWeatherTypeTvTomorrow.setText(getWeatherType
-                    (weather3.getTypeDay(), weather3.getTypeNight()));
-
-            // 设置后天天气信息
-            weatherId = getWeatherTypeImageID(weather4.getTypeDay(), true);
-            mWeatherTypeIvDayAfterTomorrow.setImageResource(weatherId);
-            mTempHighTvDayAfterTomorrow.setText(weather4.getHigh().substring(3));
-            mTempLowTvDayAfterTomorrow.setText(weather4.getLow().substring(3));
-            mWeatherTypeTvDayAfterTomorrow.setText(getWeatherType
-                    (weather4.getTypeDay(), weather4.getTypeNight()));
-
-            // 设置多天天气预报
-
-            // 昨天天气信息
-            WeatherDaysForecast weather1 = weatherDaysForecasts.get(0);
-            // 第五天天天气信息
-            WeatherDaysForecast weather5 = weatherDaysForecasts.get(4);
-            // 第六天天气信息
-            WeatherDaysForecast weather6 = weatherDaysForecasts.get(5);
-
-            // 日期和星期标题 【索引0：日期;索引1：星期】
-            String[] day1 = getDay(weather1.getDate());
-            String[] day2 = getDay(weather2.getDate());
-            String[] day3 = getDay(weather3.getDate());
-            String[] day4 = getDay(weather4.getDate());
-            String[] day5 = getDay(weather5.getDate());
-            String[] day6 = getDay(weather6.getDate());
-
-            // 设置标题星期
-            mDaysForecastTvWeek1.setText("昨天");
-            mDaysForecastTvWeek2.setText("今天");
-            mDaysForecastTvWeek3.setText(getWeek(day3[1]));
-            mDaysForecastTvWeek4.setText(getWeek(day4[1]));
-            mDaysForecastTvWeek5.setText(getWeek(day5[1]));
-            mDaysForecastTvWeek6.setText(getWeek(day6[1]));
-
-            // 当前月份
-            String month = MyUtil.addZero(calendar.get(Calendar.MONTH) + 1);
-
-            // 日
-            String day01 = day1[0].split("日")[0];
-            String day02 = day2[0].split("日")[0];
-            String day03 = day3[0].split("日")[0];
-            String day04 = day4[0].split("日")[0];
-            String day05 = day5[0].split("日")[0];
-            String day06 = day6[0].split("日")[0];
-
-            // 设置日期
-            mDaysForecastTvDay1.setText(month + "/" + day01);
-            mDaysForecastTvDay2.setText(month + "/" + day02);
-            mDaysForecastTvDay3.setText(month + "/" + day03);
-            mDaysForecastTvDay4.setText(month + "/" + day04);
-            mDaysForecastTvDay5.setText(month + "/" + day05);
-            mDaysForecastTvDay6.setText(month + "/" + day06);
-
-            // 取得白天天气类型图片id
-            int weatherDayId1 = getWeatherTypeImageID(weather1.getTypeDay(), true);
-            int weatherDayId2 = getWeatherTypeImageID(weather2.getTypeDay(), true);
-            int weatherDayId3 = getWeatherTypeImageID(weather3.getTypeDay(), true);
-            int weatherDayId4 = getWeatherTypeImageID(weather4.getTypeDay(), true);
-            int weatherDayId5 = getWeatherTypeImageID(weather5.getTypeDay(), true);
-            int weatherDayId6 = getWeatherTypeImageID(weather6.getTypeDay(), true);
-
-            //设置白天天气类型图片
-            mDaysForecastWeaTypeDayIv1.setImageResource(weatherDayId1);
-            mDaysForecastWeaTypeDayIv2.setImageResource(weatherDayId2);
-            mDaysForecastWeaTypeDayIv3.setImageResource(weatherDayId3);
-            mDaysForecastWeaTypeDayIv4.setImageResource(weatherDayId4);
-            mDaysForecastWeaTypeDayIv5.setImageResource(weatherDayId5);
-            mDaysForecastWeaTypeDayIv6.setImageResource(weatherDayId6);
-
-            // 设置白天天气类型文字
-            mDaysForecastWeaTypeDayTv1.setText(weather1.getTypeDay());
-            mDaysForecastWeaTypeDayTv2.setText(weather2.getTypeDay());
-            mDaysForecastWeaTypeDayTv3.setText(weather3.getTypeDay());
-            mDaysForecastWeaTypeDayTv4.setText(weather4.getTypeDay());
-            mDaysForecastWeaTypeDayTv5.setText(weather5.getTypeDay());
-            mDaysForecastWeaTypeDayTv6.setText(weather6.getTypeDay());
-
-            // 设置白天温度曲线
-            mCharDay.setTemp(new int[]{getTemp(weather1.getHigh()),
-                    getTemp(weather2.getHigh()), getTemp(weather3.getHigh()),
-                    getTemp(weather4.getHigh()), getTemp(weather5.getHigh()),
-                    getTemp(weather6.getHigh())});
-            // 设置文字距离坐标距离
-            mCharDay.setTextSpace(10);
-            //noinspection deprecation
-            int colorDay = getResources().getColor(R.color.yellow_hot);
-            mCharDay.setLineColor(colorDay);
-            mCharDay.setPointColor(colorDay);
-            // 重新绘制
-            mCharDay.invalidate();
-
-            // 设置夜间温度曲线
-            mCharNight.setTemp(new int[]{getTemp(weather1.getLow()),
-                    getTemp(weather2.getLow()), getTemp(weather3.getLow()),
-                    getTemp(weather4.getLow()), getTemp(weather5.getLow()),
-                    getTemp(weather6.getLow())});
-            mCharNight.setTextSpace(-10);
-            //noinspection deprecation
-            int colorNight = getResources().getColor(R.color.blue_ice);
-            mCharNight.setLineColor(colorNight);
-            mCharNight.setPointColor(colorNight);
-            mCharNight.invalidate();
-
-            // 设置夜间天气类型文字
-            mDaysForecastWeaTypeNightTv1.setText(weather1.getTypeNight());
-            mDaysForecastWeaTypeNightTv2.setText(weather2.getTypeNight());
-            mDaysForecastWeaTypeNightTv3.setText(weather3.getTypeNight());
-            mDaysForecastWeaTypeNightTv4.setText(weather4.getTypeNight());
-            mDaysForecastWeaTypeNightTv5.setText(weather5.getTypeNight());
-            mDaysForecastWeaTypeNightTv6.setText(weather6.getTypeNight());
-
-            // 取得夜间天气类型图片id
-            int weatherNightId1 = getWeatherTypeImageID(weather1.getTypeNight(), false);
-            int weatherNightId2 = getWeatherTypeImageID(weather2.getTypeNight(), false);
-            int weatherNightId3 = getWeatherTypeImageID(weather3.getTypeNight(), false);
-            int weatherNightId4 = getWeatherTypeImageID(weather4.getTypeNight(), false);
-            int weatherNightId5 = getWeatherTypeImageID(weather5.getTypeNight(), false);
-            int weatherNightId6 = getWeatherTypeImageID(weather6.getTypeNight(), false);
-
-            //设置夜间天气类型图片
-            mDaysForecastWeaTypeNightIv1.setImageResource(weatherNightId1);
-            mDaysForecastWeaTypeNightIv2.setImageResource(weatherNightId2);
-            mDaysForecastWeaTypeNightIv3.setImageResource(weatherNightId3);
-            mDaysForecastWeaTypeNightIv4.setImageResource(weatherNightId4);
-            mDaysForecastWeaTypeNightIv5.setImageResource(weatherNightId5);
-            mDaysForecastWeaTypeNightIv6.setImageResource(weatherNightId6);
-
-            // 设置风向
-            mDaysForecastWindDirectionTv1.setText(weather1.getWindDirectionDay());
-            mDaysForecastWindDirectionTv2.setText(weather2.getWindDirectionDay());
-            mDaysForecastWindDirectionTv3.setText(weather3.getWindDirectionDay());
-            mDaysForecastWindDirectionTv4.setText(weather4.getWindDirectionDay());
-            mDaysForecastWindDirectionTv5.setText(weather5.getWindDirectionDay());
-            mDaysForecastWindDirectionTv6.setText(weather6.getWindDirectionDay());
-
-            // 设置风力
-            mDaysForecastWindPowerTv1.setText(weather1.getWindPowerDay());
-            mDaysForecastWindPowerTv2.setText(weather2.getWindPowerDay());
-            mDaysForecastWindPowerTv3.setText(weather3.getWindPowerDay());
-            mDaysForecastWindPowerTv4.setText(weather4.getWindPowerDay());
-            mDaysForecastWindPowerTv5.setText(weather5.getWindPowerDay());
-            mDaysForecastWindPowerTv6.setText(weather6.getWindPowerDay());
-
-            // 设置生活指数
-            for (WeatherLifeIndex index : mWeatherLifeIndexes) {
-                setLifeIndex(index);
-            }
-
+            initWeather(mWeatherInfo);
         }
+    }
 
-        /**
-         * 设置生活指数
-         *
-         * @param index 生活指数信息
-         */
-        private void setLifeIndex(WeatherLifeIndex index) {
-            switch (index.getIndexName()) {
-                case "雨伞指数":
-                    mLifeIndexUmbrellaTv.setText(index.getIndexValue());
-                    mLifeIndexUmbrellaDetail = index.getIndexDetail();
-                    break;
-                case "紫外线强度":
-                    mLifeIndexUltravioletRaysTv.setText(index.getIndexValue());
-                    mLifeIndexUltravioletRaysDetail = index.getIndexDetail();
-                    break;
-                case "穿衣指数":
-                    mLifeIndexDressTv.setText(index.getIndexValue());
-                    mLifeIndexDressDetail = index.getIndexDetail();
-                    break;
-                case "感冒指数":
-                    mLifeIndexColdTv.setText(index.getIndexValue());
-                    mLifeIndexColdDetail = index.getIndexDetail();
-                    break;
-                case "晨练指数":
-                    mLifeIndexMorningExerciseTv.setText(index.getIndexValue());
-                    mLifeIndexMorningExerciseDetail = index.getIndexDetail();
-                    break;
-                case "运动指数":
-                    mLifeIndexSportTv.setText(index.getIndexValue());
-                    mLifeIndexSportDetail = index.getIndexDetail();
-                    break;
-                case "洗车指数":
-                    mLifeIndexCarWashTv.setText(index.getIndexValue());
-                    mLifeIndexCarWashDetail = index.getIndexDetail();
-                    break;
-                case "晾晒指数":
-                    mLifeIndexAirCureTv.setText(index.getIndexValue());
-                    mLifeIndexAirCureDetail = index.getIndexDetail();
-                    break;
+    /**
+     * 初始化天气
+     *
+     * @param weatherInfo 天气信息类
+     */
+    private void initWeather(final WeatherInfo weatherInfo) {
+        // 多天预报信息
+        List<WeatherDaysForecast> weatherDaysForecasts = weatherInfo.getWeatherDaysForecast();
+        // 生活指数信息
+        mWeatherLifeIndexes = weatherInfo.getWeatherLifeIndex();
 
-            }
-        }
-
-        /**
-         * 取得温度
-         *
-         * @param temp 温度信息
-         * @return 温度
-         */
-        private int getTemp(String temp) {
-            String temperature;
-            if (!temp.contains("-")) {
-                if (temp.length() == 6) {
-                    temperature = temp.substring(3, 5);
-                } else {
-                    temperature = temp.substring(3, 4);
+        // 设置城市名
+        mCityNameTv.setText(weatherInfo.getCity());
+        // 设置预警信息
+        if (weatherInfo.getAlarmType() != null) {
+            mAlarmTv.setVisibility(View.VISIBLE);
+            mAlarmTv.setText(weatherInfo.getAlarmType() + "预警");
+            mAlarmTv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    skipToDetailInterface(weatherInfo.getAlarmType() +
+                            weatherInfo.getAlarmDegree() + "预警", weatherInfo.getAlarmDetail());
                 }
+            });
+        } else {
+            mAlarmTv.setVisibility(View.GONE);
+        }
+        // 设置更新时间
+        mUpdateTimeTv.setText(weatherInfo.getUpdateTime() + "发布");
+
+        // 设置温度
+        String temp = weatherInfo.getTemperature();
+        int temp1 = Integer.parseInt(temp.substring(0, 1));
+        int temp2 = Integer.parseInt(temp.substring(1));
+        setTemperatureImage(temp1, mTemperature1Iv);
+        setTemperatureImage(temp2, mTemperature2Iv);
+
+        // 今天天气信息
+        WeatherDaysForecast weather2 = weatherDaysForecasts.get(1);
+        // 明天天气信息
+        WeatherDaysForecast weather3 = weatherDaysForecasts.get(2);
+        // 后天天气信息
+        WeatherDaysForecast weather4 = weatherDaysForecasts.get(3);
+        // 现在小时
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        // 设置天气类型
+        if (hour < 18) {
+            // 白天天气
+            mWeatherTypeTv.setText(weather2.getTypeDay());
+        } else {
+            // 夜间天气
+            mWeatherTypeTv.setText(weather2.getTypeNight());
+        }
+
+        // 设置大气环境
+        mAqiTv.setText(weatherInfo.getQuality() + " " + weatherInfo.getAQI());
+        // 设置湿度
+        mHumidityTv.setText("湿度 " + weatherInfo.getHumidity());
+        // 设置风向、风力
+        mWindTv.setText(weatherInfo.getWindDirection() + " "
+                + weatherInfo.getWindPower());
+
+        int weatherId;
+
+        // 设置今天天气信息
+        // 当前为凌晨
+        if (hour >= 0 && hour < 6) {
+            weatherId = getWeatherTypeImageID(weather2.getTypeDay(), false);
+            // 当前为白天时
+        } else if (hour >= 6 && hour < 18) {
+            weatherId = getWeatherTypeImageID(weather2.getTypeDay(), true);
+            // 当前为夜间
+        } else {
+            weatherId = getWeatherTypeImageID(weather2.getTypeNight(), false);
+        }
+        mWeatherTypeIvToday.setImageResource(weatherId);
+        mTempHighTvToday.setText(weather2.getHigh().substring(3));
+        mTempLowTvToday.setText(weather2.getLow().substring(3));
+        mWeatherTypeTvToday.setText(getWeatherType
+                (weather2.getTypeDay(), weather2.getTypeNight()));
+
+        // 设置明天天气信息
+        weatherId = getWeatherTypeImageID(weather3.getTypeDay(), true);
+        mWeatherTypeIvTomorrow.setImageResource(weatherId);
+        mTempHighTvTomorrow.setText(weather3.getHigh().substring(3));
+        mTempLowTvTomorrow.setText(weather3.getLow().substring(3));
+        mWeatherTypeTvTomorrow.setText(getWeatherType
+                (weather3.getTypeDay(), weather3.getTypeNight()));
+
+        // 设置后天天气信息
+        weatherId = getWeatherTypeImageID(weather4.getTypeDay(), true);
+        mWeatherTypeIvDayAfterTomorrow.setImageResource(weatherId);
+        mTempHighTvDayAfterTomorrow.setText(weather4.getHigh().substring(3));
+        mTempLowTvDayAfterTomorrow.setText(weather4.getLow().substring(3));
+        mWeatherTypeTvDayAfterTomorrow.setText(getWeatherType
+                (weather4.getTypeDay(), weather4.getTypeNight()));
+
+        // 设置多天天气预报
+
+        // 昨天天气信息
+        WeatherDaysForecast weather1 = weatherDaysForecasts.get(0);
+        // 第五天天天气信息
+        WeatherDaysForecast weather5 = weatherDaysForecasts.get(4);
+        // 第六天天气信息
+        WeatherDaysForecast weather6 = weatherDaysForecasts.get(5);
+
+        // 日期和星期标题 【索引0：日期;索引1：星期】
+        String[] day1 = getDay(weather1.getDate());
+        String[] day2 = getDay(weather2.getDate());
+        String[] day3 = getDay(weather3.getDate());
+        String[] day4 = getDay(weather4.getDate());
+        String[] day5 = getDay(weather5.getDate());
+        String[] day6 = getDay(weather6.getDate());
+
+        // 设置标题星期
+        mDaysForecastTvWeek1.setText("昨天");
+        mDaysForecastTvWeek2.setText("今天");
+        mDaysForecastTvWeek3.setText(getWeek(day3[1]));
+        mDaysForecastTvWeek4.setText(getWeek(day4[1]));
+        mDaysForecastTvWeek5.setText(getWeek(day5[1]));
+        mDaysForecastTvWeek6.setText(getWeek(day6[1]));
+
+        // 当前月份
+        String month = MyUtil.addZero(calendar.get(Calendar.MONTH) + 1);
+
+        // 日
+        String day01 = day1[0].split("日")[0];
+        String day02 = day2[0].split("日")[0];
+        String day03 = day3[0].split("日")[0];
+        String day04 = day4[0].split("日")[0];
+        String day05 = day5[0].split("日")[0];
+        String day06 = day6[0].split("日")[0];
+
+        // 设置日期
+        mDaysForecastTvDay1.setText(month + "/" + day01);
+        mDaysForecastTvDay2.setText(month + "/" + day02);
+        mDaysForecastTvDay3.setText(month + "/" + day03);
+        mDaysForecastTvDay4.setText(month + "/" + day04);
+        mDaysForecastTvDay5.setText(month + "/" + day05);
+        mDaysForecastTvDay6.setText(month + "/" + day06);
+
+        // 取得白天天气类型图片id
+        int weatherDayId1 = getWeatherTypeImageID(weather1.getTypeDay(), true);
+        int weatherDayId2 = getWeatherTypeImageID(weather2.getTypeDay(), true);
+        int weatherDayId3 = getWeatherTypeImageID(weather3.getTypeDay(), true);
+        int weatherDayId4 = getWeatherTypeImageID(weather4.getTypeDay(), true);
+        int weatherDayId5 = getWeatherTypeImageID(weather5.getTypeDay(), true);
+        int weatherDayId6 = getWeatherTypeImageID(weather6.getTypeDay(), true);
+
+        //设置白天天气类型图片
+        mDaysForecastWeaTypeDayIv1.setImageResource(weatherDayId1);
+        mDaysForecastWeaTypeDayIv2.setImageResource(weatherDayId2);
+        mDaysForecastWeaTypeDayIv3.setImageResource(weatherDayId3);
+        mDaysForecastWeaTypeDayIv4.setImageResource(weatherDayId4);
+        mDaysForecastWeaTypeDayIv5.setImageResource(weatherDayId5);
+        mDaysForecastWeaTypeDayIv6.setImageResource(weatherDayId6);
+
+        // 设置白天天气类型文字
+        mDaysForecastWeaTypeDayTv1.setText(weather1.getTypeDay());
+        mDaysForecastWeaTypeDayTv2.setText(weather2.getTypeDay());
+        mDaysForecastWeaTypeDayTv3.setText(weather3.getTypeDay());
+        mDaysForecastWeaTypeDayTv4.setText(weather4.getTypeDay());
+        mDaysForecastWeaTypeDayTv5.setText(weather5.getTypeDay());
+        mDaysForecastWeaTypeDayTv6.setText(weather6.getTypeDay());
+
+        // 设置白天温度曲线
+        mCharDay.setTemp(new int[]{getTemp(weather1.getHigh()),
+                getTemp(weather2.getHigh()), getTemp(weather3.getHigh()),
+                getTemp(weather4.getHigh()), getTemp(weather5.getHigh()),
+                getTemp(weather6.getHigh())});
+        // 设置文字距离坐标距离
+        mCharDay.setTextSpace(10);
+        //noinspection deprecation
+        int colorDay = getResources().getColor(R.color.yellow_hot);
+        mCharDay.setLineColor(colorDay);
+        mCharDay.setPointColor(colorDay);
+        // 重新绘制
+        mCharDay.invalidate();
+
+        // 设置夜间温度曲线
+        mCharNight.setTemp(new int[]{getTemp(weather1.getLow()),
+                getTemp(weather2.getLow()), getTemp(weather3.getLow()),
+                getTemp(weather4.getLow()), getTemp(weather5.getLow()),
+                getTemp(weather6.getLow())});
+        mCharNight.setTextSpace(-10);
+        //noinspection deprecation
+        int colorNight = getResources().getColor(R.color.blue_ice);
+        mCharNight.setLineColor(colorNight);
+        mCharNight.setPointColor(colorNight);
+        mCharNight.invalidate();
+
+        // 设置夜间天气类型文字
+        mDaysForecastWeaTypeNightTv1.setText(weather1.getTypeNight());
+        mDaysForecastWeaTypeNightTv2.setText(weather2.getTypeNight());
+        mDaysForecastWeaTypeNightTv3.setText(weather3.getTypeNight());
+        mDaysForecastWeaTypeNightTv4.setText(weather4.getTypeNight());
+        mDaysForecastWeaTypeNightTv5.setText(weather5.getTypeNight());
+        mDaysForecastWeaTypeNightTv6.setText(weather6.getTypeNight());
+
+        // 取得夜间天气类型图片id
+        int weatherNightId1 = getWeatherTypeImageID(weather1.getTypeNight(), false);
+        int weatherNightId2 = getWeatherTypeImageID(weather2.getTypeNight(), false);
+        int weatherNightId3 = getWeatherTypeImageID(weather3.getTypeNight(), false);
+        int weatherNightId4 = getWeatherTypeImageID(weather4.getTypeNight(), false);
+        int weatherNightId5 = getWeatherTypeImageID(weather5.getTypeNight(), false);
+        int weatherNightId6 = getWeatherTypeImageID(weather6.getTypeNight(), false);
+
+        //设置夜间天气类型图片
+        mDaysForecastWeaTypeNightIv1.setImageResource(weatherNightId1);
+        mDaysForecastWeaTypeNightIv2.setImageResource(weatherNightId2);
+        mDaysForecastWeaTypeNightIv3.setImageResource(weatherNightId3);
+        mDaysForecastWeaTypeNightIv4.setImageResource(weatherNightId4);
+        mDaysForecastWeaTypeNightIv5.setImageResource(weatherNightId5);
+        mDaysForecastWeaTypeNightIv6.setImageResource(weatherNightId6);
+
+        // 设置风向
+        mDaysForecastWindDirectionTv1.setText(weather1.getWindDirectionDay());
+        mDaysForecastWindDirectionTv2.setText(weather2.getWindDirectionDay());
+        mDaysForecastWindDirectionTv3.setText(weather3.getWindDirectionDay());
+        mDaysForecastWindDirectionTv4.setText(weather4.getWindDirectionDay());
+        mDaysForecastWindDirectionTv5.setText(weather5.getWindDirectionDay());
+        mDaysForecastWindDirectionTv6.setText(weather6.getWindDirectionDay());
+
+        // 设置风力
+        mDaysForecastWindPowerTv1.setText(weather1.getWindPowerDay());
+        mDaysForecastWindPowerTv2.setText(weather2.getWindPowerDay());
+        mDaysForecastWindPowerTv3.setText(weather3.getWindPowerDay());
+        mDaysForecastWindPowerTv4.setText(weather4.getWindPowerDay());
+        mDaysForecastWindPowerTv5.setText(weather5.getWindPowerDay());
+        mDaysForecastWindPowerTv6.setText(weather6.getWindPowerDay());
+
+        // 设置生活指数
+        for (WeatherLifeIndex index : mWeatherLifeIndexes) {
+            setLifeIndex(index);
+        }
+    }
+
+    /**
+     * 设置生活指数
+     *
+     * @param index 生活指数信息
+     */
+
+    private void setLifeIndex(WeatherLifeIndex index) {
+        switch (index.getIndexName()) {
+            case "雨伞指数":
+                mLifeIndexUmbrellaTv.setText(index.getIndexValue());
+                mLifeIndexUmbrellaDetail = index.getIndexDetail();
+                break;
+            case "紫外线强度":
+                mLifeIndexUltravioletRaysTv.setText(index.getIndexValue());
+                mLifeIndexUltravioletRaysDetail = index.getIndexDetail();
+                break;
+            case "穿衣指数":
+                mLifeIndexDressTv.setText(index.getIndexValue());
+                mLifeIndexDressDetail = index.getIndexDetail();
+                break;
+            case "感冒指数":
+                mLifeIndexColdTv.setText(index.getIndexValue());
+                mLifeIndexColdDetail = index.getIndexDetail();
+                break;
+            case "晨练指数":
+                mLifeIndexMorningExerciseTv.setText(index.getIndexValue());
+                mLifeIndexMorningExerciseDetail = index.getIndexDetail();
+                break;
+            case "运动指数":
+                mLifeIndexSportTv.setText(index.getIndexValue());
+                mLifeIndexSportDetail = index.getIndexDetail();
+                break;
+            case "洗车指数":
+                mLifeIndexCarWashTv.setText(index.getIndexValue());
+                mLifeIndexCarWashDetail = index.getIndexDetail();
+                break;
+            case "晾晒指数":
+                mLifeIndexAirCureTv.setText(index.getIndexValue());
+                mLifeIndexAirCureDetail = index.getIndexDetail();
+                break;
+
+        }
+    }
+
+    /**
+     * 取得温度
+     *
+     * @param temp 温度信息
+     * @return 温度
+     */
+    private int getTemp(String temp) {
+        String temperature;
+        if (!temp.contains("-")) {
+            if (temp.length() == 6) {
+                temperature = temp.substring(3, 5);
             } else {
-                if (temp.length() == 7) {
-                    temperature = temp.substring(3, 6);
+                temperature = temp.substring(3, 4);
+            }
+        } else {
+            if (temp.length() == 7) {
+                temperature = temp.substring(3, 6);
+            } else {
+                temperature = temp.substring(3, 5);
+            }
+        }
+        return Integer.parseInt(temperature);
+    }
+
+    /**
+     * 截取日期和星期
+     *
+     * @param date 日期信息
+     * @return 包含日期和星期的数组
+     */
+    private String[] getDay(String date) {
+        String[] date1 = new String[2];
+        if (date.length() == 5) {
+            date1[0] = date.substring(0, 2);
+            date1[1] = date.substring(2);
+        } else {
+            date1[0] = date.substring(0, 3);
+            date1[1] = date.substring(3);
+        }
+        return date1;
+    }
+
+    /**
+     * 转换周的标题
+     *
+     * @param week 需要转换的周标题
+     * @return 周的标题
+     */
+    private String getWeek(String week) {
+        String week1;
+        switch (week) {
+            case "星期一":
+                week1 = "周一";
+                break;
+            case "星期二":
+                week1 = "周二";
+                break;
+            case "星期三":
+                week1 = "周三";
+                break;
+            case "星期四":
+                week1 = "周四";
+                break;
+            case "星期五":
+                week1 = "周五";
+                break;
+            case "星期六":
+                week1 = "周六";
+                break;
+            case "星期天":
+            case "星期日":
+                week1 = "周日";
+                break;
+            default:
+                week1 = week;
+                break;
+        }
+        return week1;
+    }
+
+    /**
+     * 取得天气类型描述
+     *
+     * @param type1 白天天气类型
+     * @param type2 夜间天气类型
+     * @return 天气类型
+     */
+    private String getWeatherType(String type1, String type2) {
+        // 白天和夜间类型相同
+        if (type1.equals(type2)) {
+            return type1;
+        } else {
+            return type1 + "转" + type2;
+        }
+    }
+
+
+    /**
+     * 设置温度图片
+     *
+     * @param temp1     温度
+     * @param imageView imageView控件
+     */
+    private void setTemperatureImage(int temp1, ImageView imageView) {
+        switch (temp1) {
+            case 0:
+                imageView.setImageResource(R.drawable.number_0);
+                break;
+            case 1:
+                imageView.setImageResource(R.drawable.number_1);
+                break;
+            case 2:
+                imageView.setImageResource(R.drawable.number_2);
+                break;
+            case 3:
+                imageView.setImageResource(R.drawable.number_3);
+                break;
+            case 4:
+                imageView.setImageResource(R.drawable.number_4);
+                break;
+            case 5:
+                imageView.setImageResource(R.drawable.number_5);
+                break;
+            case 6:
+                imageView.setImageResource(R.drawable.number_6);
+                break;
+            case 7:
+                imageView.setImageResource(R.drawable.number_7);
+                break;
+            case 8:
+                imageView.setImageResource(R.drawable.number_8);
+                break;
+            case 9:
+                imageView.setImageResource(R.drawable.number_9);
+                break;
+            default:
+                imageView.setImageResource(R.drawable.number_0);
+                break;
+        }
+    }
+
+    /**
+     * 取得对应的天气类型图片id
+     *
+     * @param type  天气类型
+     * @param isDay 是否为白天
+     * @return 天气类型图片id
+     */
+    private int getWeatherTypeImageID(String type, boolean isDay) {
+        int weatherId;
+        switch (type) {
+            case "晴":
+                if (isDay) {
+                    weatherId = R.drawable.ic_weather_sunny_day;
                 } else {
-                    temperature = temp.substring(3, 5);
+                    weatherId = R.drawable.ic_weather_sunny_night;
                 }
-            }
-            return Integer.parseInt(temperature);
-        }
-
-        /**
-         * 截取日期和星期
-         *
-         * @param date 日期信息
-         * @return 包含日期和星期的数组
-         */
-        private String[] getDay(String date) {
-            String[] date1 = new String[2];
-            if (date.length() == 5) {
-                date1[0] = date.substring(0, 2);
-                date1[1] = date.substring(2);
-            } else {
-                date1[0] = date.substring(0, 3);
-                date1[1] = date.substring(3);
-            }
-            return date1;
-        }
-
-        /**
-         * 转换周的标题
-         *
-         * @param week 需要转换的周标题
-         * @return 周的标题
-         */
-        private String getWeek(String week) {
-            String week1;
-            switch (week) {
-                case "星期一":
-                    week1 = "周一";
-                    break;
-                case "星期二":
-                    week1 = "周二";
-                    break;
-                case "星期三":
-                    week1 = "周三";
-                    break;
-                case "星期四":
-                    week1 = "周四";
-                    break;
-                case "星期五":
-                    week1 = "周五";
-                    break;
-                case "星期六":
-                    week1 = "周六";
-                    break;
-                case "星期天":
-                case "星期日":
-                    week1 = "周日";
-                    break;
-                default:
-                    week1 = week;
-                    break;
-            }
-            return week1;
-        }
-
-        /**
-         * 取得天气类型描述
-         *
-         * @param type1 白天天气类型
-         * @param type2 夜间天气类型
-         * @return 天气类型
-         */
-        private String getWeatherType(String type1, String type2) {
-            // 白天和夜间类型相同
-            if (type1.equals(type2)) {
-                return type1;
-            } else {
-                return type1 + "转" + type2;
-            }
-        }
-
-
-        /**
-         * 设置温度图片
-         *
-         * @param temp1     温度
-         * @param imageView imageView控件
-         */
-        private void setTemperatureImage(int temp1, ImageView imageView) {
-            switch (temp1) {
-                case 0:
-                    imageView.setImageResource(R.drawable.number_0);
-                    break;
-                case 1:
-                    imageView.setImageResource(R.drawable.number_1);
-                    break;
-                case 2:
-                    imageView.setImageResource(R.drawable.number_2);
-                    break;
-                case 3:
-                    imageView.setImageResource(R.drawable.number_3);
-                    break;
-                case 4:
-                    imageView.setImageResource(R.drawable.number_4);
-                    break;
-                case 5:
-                    imageView.setImageResource(R.drawable.number_5);
-                    break;
-                case 6:
-                    imageView.setImageResource(R.drawable.number_6);
-                    break;
-                case 7:
-                    imageView.setImageResource(R.drawable.number_7);
-                    break;
-                case 8:
-                    imageView.setImageResource(R.drawable.number_8);
-                    break;
-                case 9:
-                    imageView.setImageResource(R.drawable.number_9);
-                    break;
-                default:
-                    imageView.setImageResource(R.drawable.number_0);
-                    break;
-            }
-        }
-
-        /**
-         * 取得对应的天气类型图片id
-         *
-         * @param type  天气类型
-         * @param isDay 是否为白天
-         * @return 天气类型图片id
-         */
-        private int getWeatherTypeImageID(String type, boolean isDay) {
-            int weatherId;
-            switch (type) {
-                case "晴":
-                    if (isDay) {
-                        weatherId = R.drawable.ic_weather_sunny_day;
-                    } else {
-                        weatherId = R.drawable.ic_weather_sunny_night;
-                    }
-                    break;
-                case "多云":
-                    if (isDay) {
-                        weatherId = R.drawable.ic_weather_cloudy_day;
-                    } else {
-                        weatherId = R.drawable.ic_weather_cloudy_night;
-                    }
-                    break;
-                case "阴":
-                    weatherId = R.drawable.ic_weather_overcast;
-                    break;
-                case "雷阵雨":
-                case "雷阵雨伴有冰雹":
-                    weatherId = R.drawable.ic_weather_thunder_shower;
-                    break;
-                case "雨夹雪":
-                case "冻雨":
-                    weatherId = R.drawable.ic_weather_sleet;
-                    break;
-                case "小雨":
-                case "小到中雨":
-                case "阵雨":
-                    weatherId = R.drawable.ic_weather_light_rain_or_shower;
-                    break;
-                case "中雨":
-                case "中到大雨":
-                    weatherId = R.drawable.ic_weather_moderate_rain;
-                    break;
-                case "大雨":
-                case "大到暴雨":
-                    weatherId = R.drawable.ic_weather_heavy_rain;
-                    break;
-                case "暴雨":
-                case "大暴雨":
-                case "特大暴雨":
-                case "暴雨到大暴雨":
-                case "大暴雨到特大暴雨":
-                    weatherId = R.drawable.ic_weather_storm;
-                    break;
-                case "阵雪":
-                case "小雪":
-                case "小到中雪":
-                    weatherId = R.drawable.ic_weather_light_snow;
-                    break;
-                case "中雪":
-                case "中到大雪":
-                    weatherId = R.drawable.ic_weather_moderate_snow;
-                    break;
-                case "大雪":
-                case "大到暴雪":
-                    weatherId = R.drawable.ic_weather_heavy_snow;
-                    break;
-                case "暴雪":
-                    weatherId = R.drawable.ic_weather_snowstrom;
-                    break;
-                case "雾":
-                case "霾":
-                    weatherId = R.drawable.ic_weather_foggy;
-                    break;
-                case "沙尘暴":
-                    weatherId = R.drawable.ic_weather_duststorm;
-                    break;
-                case "强沙尘暴":
-                    weatherId = R.drawable.ic_weather_sandstorm;
-                    break;
-                case "浮尘":
-                case "扬沙":
+                break;
+            case "多云":
+                if (isDay) {
+                    weatherId = R.drawable.ic_weather_cloudy_day;
+                } else {
+                    weatherId = R.drawable.ic_weather_cloudy_night;
+                }
+                break;
+            case "阴":
+                weatherId = R.drawable.ic_weather_overcast;
+                break;
+            case "雷阵雨":
+            case "雷阵雨伴有冰雹":
+                weatherId = R.drawable.ic_weather_thunder_shower;
+                break;
+            case "雨夹雪":
+            case "冻雨":
+                weatherId = R.drawable.ic_weather_sleet;
+                break;
+            case "小雨":
+            case "小到中雨":
+            case "阵雨":
+                weatherId = R.drawable.ic_weather_light_rain_or_shower;
+                break;
+            case "中雨":
+            case "中到大雨":
+                weatherId = R.drawable.ic_weather_moderate_rain;
+                break;
+            case "大雨":
+            case "大到暴雨":
+                weatherId = R.drawable.ic_weather_heavy_rain;
+                break;
+            case "暴雨":
+            case "大暴雨":
+            case "特大暴雨":
+            case "暴雨到大暴雨":
+            case "大暴雨到特大暴雨":
+                weatherId = R.drawable.ic_weather_storm;
+                break;
+            case "阵雪":
+            case "小雪":
+            case "小到中雪":
+                weatherId = R.drawable.ic_weather_light_snow;
+                break;
+            case "中雪":
+            case "中到大雪":
+                weatherId = R.drawable.ic_weather_moderate_snow;
+                break;
+            case "大雪":
+            case "大到暴雪":
+                weatherId = R.drawable.ic_weather_heavy_snow;
+                break;
+            case "暴雪":
+                weatherId = R.drawable.ic_weather_snowstrom;
+                break;
+            case "雾":
+            case "霾":
+                weatherId = R.drawable.ic_weather_foggy;
+                break;
+            case "沙尘暴":
+                weatherId = R.drawable.ic_weather_duststorm;
+                break;
+            case "强沙尘暴":
+                weatherId = R.drawable.ic_weather_sandstorm;
+                break;
+            case "浮尘":
+            case "扬沙":
+                weatherId = R.drawable.ic_weather_sand_or_dust;
+                break;
+            default:
+                if (type.contains("尘") || type.contains("沙")) {
                     weatherId = R.drawable.ic_weather_sand_or_dust;
-                    break;
-                default:
-                    if (type.contains("尘") || type.contains("沙")) {
-                        weatherId = R.drawable.ic_weather_sand_or_dust;
-                    } else if (type.contains("雾") || type.contains("霾")) {
-                        weatherId = R.drawable.ic_weather_foggy;
-                    } else if (type.contains("雨")) {
-                        weatherId = R.drawable.ic_weather_sleet;
-                    } else if (type.contains("雪") || type.contains("冰雹")) {
-                        weatherId = R.drawable.ic_weather_moderate_snow;
-                    } else {
-                        weatherId = R.drawable.ic_weather_no;
-                    }
-                    break;
+                } else if (type.contains("雾") || type.contains("霾")) {
+                    weatherId = R.drawable.ic_weather_foggy;
+                } else if (type.contains("雨")) {
+                    weatherId = R.drawable.ic_weather_sleet;
+                } else if (type.contains("雪") || type.contains("冰雹")) {
+                    weatherId = R.drawable.ic_weather_moderate_snow;
+                } else {
+                    weatherId = R.drawable.ic_weather_no;
+                }
+                break;
 
-            }
-
-            return weatherId;
         }
+
+        return weatherId;
     }
 
     /**

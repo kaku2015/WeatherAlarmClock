@@ -93,8 +93,14 @@ public class WeacConstants {
      * 标题
      */
     public static final String TITLE = "title";
+
     /**
      * 详情
      */
     public static final String DETAIL = "detail";
+
+    /**
+     * base64编码
+     */
+    public static final String BASE64 = "base64";
 }

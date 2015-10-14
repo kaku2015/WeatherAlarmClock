@@ -1,12 +1,14 @@
 package com.kaku.weac.bean;
 
+import java.io.Serializable;
+
 /**
  * 生活指数
  *
  * @author 咖枯
  * @version 1.0 2015/0918
  */
-public class WeatherLifeIndex {
+public class WeatherLifeIndex implements Serializable {
 
     /**
      * 指数名

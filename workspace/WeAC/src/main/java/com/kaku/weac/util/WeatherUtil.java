@@ -1,14 +1,24 @@
 package com.kaku.weac.util;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Base64;
 import android.util.Xml;
 
 import com.kaku.weac.bean.WeatherDaysForecast;
 import com.kaku.weac.bean.WeatherInfo;
 import com.kaku.weac.bean.WeatherLifeIndex;
+import com.kaku.weac.common.WeacConstants;
 
 import org.xmlpull.v1.XmlPullParser;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -330,4 +340,56 @@ public class WeatherUtil {
         return weatherInfo;
     }
 
+    /**
+     * 将天气信息类转换成Base64编码，并保存转换后的字符串
+     *
+     * @param weatherInfo 天气信息类
+     * @param context     context
+     */
+    public static void saveWeatherInfo(WeatherInfo weatherInfo, Context context) {
+        SharedPreferences preferences = context.getSharedPreferences(WeacConstants.BASE64,
+                Activity.MODE_PRIVATE);
+        // 创建字节输出流
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            // 创建对象输出流，并封装字节流
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            // 将对象写入字节流
+            oos.writeObject(weatherInfo);
+            // 将字节流编码成base64的字符串
+            String weatherInfoBase64 = Base64.encodeToString(baos
+                    .toByteArray(), 1);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString(weatherInfo.getCity(), weatherInfoBase64);
+            editor.apply();
+        } catch (IOException e) {
+            LogUtil.e(LOG_TAG, e.toString());
+        }
+    }
+
+    /**
+     * 取得保存的Base64编码天气信息，并解码
+     *
+     * @param context context
+     * @param city    需要取得天气信息的城市名
+     * @return 天气信息类
+     */
+    public static WeatherInfo readWeatherInfo(Context context, String city) {
+        WeatherInfo weatherInfo = null;
+        SharedPreferences preferences = context.getSharedPreferences(WeacConstants.BASE64,
+                Activity.MODE_PRIVATE);
+        String weatherInfoBase64 = preferences.getString(city, "");
+        //读取字节
+        byte[] base64 = Base64.decode(weatherInfoBase64.getBytes(), 1);
+        //封装到字节流
+        ByteArrayInputStream bais = new ByteArrayInputStream(base64);
+        try {
+            //再次封装
+            ObjectInputStream bis = new ObjectInputStream(bais);
+            weatherInfo = (WeatherInfo) bis.readObject();
+        } catch (Exception e) {
+            LogUtil.e(LOG_TAG, e.toString());
+        }
+        return weatherInfo;
+    }
 }

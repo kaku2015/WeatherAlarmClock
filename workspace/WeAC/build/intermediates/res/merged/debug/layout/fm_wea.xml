@@ -18,8 +18,7 @@
             android:id="@+id/action_title"
             style="@style/action_title"
             android:drawableLeft="@drawable/ic_gps"
-            android:drawablePadding="5dp"
-            android:text="@string/initial"/>
+            android:drawablePadding="5dp"/>
 
         <ImageView
             android:id="@+id/action_refresh"
@@ -70,7 +69,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="@string/initial"
                     android:textColor="@color/white_trans60"
                     android:textSize="14sp"/>
 
@@ -92,14 +90,12 @@
                     <ImageView
                         android:id="@+id/temperature1"
                         style="@style/wea_degree"
-                        android:contentDescription="@null"
-                        android:src="@drawable/number_0"/>
+                        android:contentDescription="@null"/>
 
                     <ImageView
                         android:id="@+id/temperature2"
                         style="@style/wea_degree"
-                        android:contentDescription="@null"
-                        android:src="@drawable/number_0"/>
+                        android:contentDescription="@null"/>
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
@@ -118,7 +114,6 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
                             android:paddingLeft="5dp"
-                            android:text="@string/initial"
                             android:textColor="@color/white_trans90"
                             android:textSize="18sp"/>
                     </RelativeLayout>
@@ -130,20 +125,17 @@
                     style="@style/wea_prompt"
                     android:layout_marginTop="20dp"
                     android:drawableLeft="@drawable/ic_weather_air"
-                    android:drawablePadding="11dp"
-                    android:text="@string/initial"/>
+                    android:drawablePadding="11dp"/>
 
                 <TextView
                     android:id="@+id/humidity"
                     style="@style/wea_prompt"
-                    android:drawableLeft="@drawable/ic_weather_wet"
-                    android:text="@string/initial"/>
+                    android:drawableLeft="@drawable/ic_weather_wet"/>
 
                 <TextView
                     android:id="@+id/wind"
                     style="@style/wea_prompt"
-                    android:drawableLeft="@drawable/ic_weather_wind"
-                    android:text="@string/initial"/>
+                    android:drawableLeft="@drawable/ic_weather_wind"/>
             </LinearLayout>
 
             <View
@@ -165,29 +157,25 @@
 
                         <ImageView
                             android:id="@+id/weather_type_iv_today"
-                            style="@style/wea_forecast_content_iv"
-                            android:src="@drawable/ic_weather_no"/>
+                            style="@style/wea_forecast_content_iv"/>
 
                         <RelativeLayout style="@style/wea_forecast_content_degree_rlyt">
 
                             <TextView
                                 android:id="@+id/temp_high_today"
                                 style="@style/wea_forecast_content_degree_rlyt_tv"
-                                android:layout_alignParentTop="true"
-                                android:text="@string/initial"/>
+                                android:layout_alignParentTop="true"/>
 
                             <TextView
                                 android:id="@+id/temp_low_today"
                                 style="@style/wea_forecast_content_degree_rlyt_tv"
-                                android:layout_alignParentBottom="true"
-                                android:text="@string/initial"/>
+                                android:layout_alignParentBottom="true"/>
                         </RelativeLayout>
                     </LinearLayout>
 
                     <TextView
                         android:id="@+id/weather_type_tv_today"
-                        style="@style/wea_forecast_content_detail"
-                        android:text="@string/initial"/>
+                        style="@style/wea_forecast_content_detail"/>
                 </LinearLayout>
 
                 <View style="@style/divider_line_wea_vertical"/>
@@ -202,29 +190,25 @@
 
                         <ImageView
                             android:id="@+id/weather_type_iv_tomorrow"
-                            style="@style/wea_forecast_content_iv"
-                            android:src="@drawable/ic_weather_no"/>
+                            style="@style/wea_forecast_content_iv"/>
 
                         <RelativeLayout style="@style/wea_forecast_content_degree_rlyt">
 
                             <TextView
                                 android:id="@+id/temp_high_tomorrow"
                                 style="@style/wea_forecast_content_degree_rlyt_tv"
-                                android:layout_alignParentTop="true"
-                                android:text="@string/initial"/>
+                                android:layout_alignParentTop="true"/>
 
                             <TextView
                                 android:id="@+id/temp_low_tomorrow"
                                 style="@style/wea_forecast_content_degree_rlyt_tv"
-                                android:layout_alignParentBottom="true"
-                                android:text="@string/initial"/>
+                                android:layout_alignParentBottom="true"/>
                         </RelativeLayout>
                     </LinearLayout>
 
                     <TextView
                         android:id="@+id/weather_type_tv_tomorrow"
-                        style="@style/wea_forecast_content_detail"
-                        android:text="@string/initial"/>
+                        style="@style/wea_forecast_content_detail"/>
                 </LinearLayout>
 
                 <View style="@style/divider_line_wea_vertical"/>
@@ -239,29 +223,25 @@
 
                         <ImageView
                             android:id="@+id/weather_type_iv_day_after_tomorrow"
-                            style="@style/wea_forecast_content_iv"
-                            android:src="@drawable/ic_weather_no"/>
+                            style="@style/wea_forecast_content_iv"/>
 
                         <RelativeLayout style="@style/wea_forecast_content_degree_rlyt">
 
                             <TextView
                                 android:id="@+id/temp_high_day_after_tomorrow"
                                 style="@style/wea_forecast_content_degree_rlyt_tv"
-                                android:layout_alignParentTop="true"
-                                android:text="@string/initial"/>
+                                android:layout_alignParentTop="true"/>
 
                             <TextView
                                 android:id="@+id/temp_low_day_after_tomorrow"
                                 style="@style/wea_forecast_content_degree_rlyt_tv"
-                                android:layout_alignParentBottom="true"
-                                android:text="@string/initial"/>
+                                android:layout_alignParentBottom="true"/>
                         </RelativeLayout>
                     </LinearLayout>
 
                     <TextView
                         android:id="@+id/weather_type_tv_day_after_tomorrow"
-                        style="@style/wea_forecast_content_detail"
-                        android:text="@string/initial"/>
+                        style="@style/wea_forecast_content_detail"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -297,33 +277,27 @@
 
                         <TextView
                             android:id="@+id/wea_days_forecast_week1"
-                            style="@style/wea_days_forecast_tv_trans"
-                            android:text="@string/initial"/>
+                            style="@style/wea_days_forecast_tv_trans"/>
 
                         <TextView
                             android:id="@+id/wea_days_forecast_week2"
-                            style="@style/wea_days_forecast_tv"
-                            android:text="@string/initial"/>
+                            style="@style/wea_days_forecast_tv"/>
 
                         <TextView
                             android:id="@+id/wea_days_forecast_week3"
-                            style="@style/wea_days_forecast_tv"
-                            android:text="@string/initial"/>
+                            style="@style/wea_days_forecast_tv"/>
 
                         <TextView
                             android:id="@+id/wea_days_forecast_week4"
-                            style="@style/wea_days_forecast_tv"
-                            android:text="@string/initial"/>
+                            style="@style/wea_days_forecast_tv"/>
 
                         <TextView
                             android:id="@+id/wea_days_forecast_week5"
-                            style="@style/wea_days_forecast_tv"
-                            android:text="@string/initial"/>
+                            style="@style/wea_days_forecast_tv"/>
 
                         <TextView
                             android:id="@+id/wea_days_forecast_week6"
-                            style="@style/wea_days_forecast_tv"
-                            android:text="@string/initial"/>
+                            style="@style/wea_days_forecast_tv"/>
 
                     </LinearLayout>
 
@@ -333,33 +307,27 @@
 
                         <TextView
                             android:id="@+id/wea_days_forecast_day1"
-                            style="@style/wea_days_forecast_tv2_trans"
-                            android:text="@string/initial"/>
+                            style="@style/wea_days_forecast_tv2_trans"/>
 
                         <TextView
                             android:id="@+id/wea_days_forecast_day2"
-                            style="@style/wea_days_forecast_tv2"
-                            android:text="@string/initial"/>
+                            style="@style/wea_days_forecast_tv2"/>
 
                         <TextView
                             android:id="@+id/wea_days_forecast_day3"
-                            style="@style/wea_days_forecast_tv2"
-                            android:text="@string/initial"/>
+                            style="@style/wea_days_forecast_tv2"/>
 
                         <TextView
                             android:id="@+id/wea_days_forecast_day4"
-                            style="@style/wea_days_forecast_tv2"
-                            android:text="@string/initial"/>
+                            style="@style/wea_days_forecast_tv2"/>
 
                         <TextView
                             android:id="@+id/wea_days_forecast_day5"
-                            style="@style/wea_days_forecast_tv2"
-                            android:text="@string/initial"/>
+                            style="@style/wea_days_forecast_tv2"/>
 
                         <TextView
                             android:id="@+id/wea_days_forecast_day6"
-                            style="@style/wea_days_forecast_tv2"
-                            android:text="@string/initial"/>
+                            style="@style/wea_days_forecast_tv2"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -368,33 +336,27 @@
 
                         <ImageView
                             android:id="@+id/wea_days_forecast_weather_day_iv1"
-                            style="@style/wea_days_forecast_iv_trans"
-                            android:src="@drawable/ic_weather_no"/>
+                            style="@style/wea_days_forecast_iv_trans"/>
 
                         <ImageView
                             android:id="@+id/wea_days_forecast_weather_day_iv2"
-                            style="@style/wea_days_forecast_iv"
-                            android:src="@drawable/ic_weather_no"/>
+                            style="@style/wea_days_forecast_iv"/>
 
                         <ImageView
                             android:id="@+id/wea_days_forecast_weather_day_iv3"
-                            style="@style/wea_days_forecast_iv"
-                            android:src="@drawable/ic_weather_no"/>
+                            style="@style/wea_days_forecast_iv"/>
 
                         <ImageView
                             android:id="@+id/wea_days_forecast_weather_day_iv4"
-                            style="@style/wea_days_forecast_iv"
-                            android:src="@drawable/ic_weather_no"/>
+                            style="@style/wea_days_forecast_iv"/>
 
                         <ImageView
                             android:id="@+id/wea_days_forecast_weather_day_iv5"
-                            style="@style/wea_days_forecast_iv"
-                            android:src="@drawable/ic_weather_no"/>
+                            style="@style/wea_days_forecast_iv"/>
 
                         <ImageView
                             android:id="@+id/wea_days_forecast_weather_day_iv6"
-                            style="@style/wea_days_forecast_iv"
-                            android:src="@drawable/ic_weather_no"/>
+                            style="@style/wea_days_forecast_iv"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -403,33 +365,27 @@
 
                         <TextView
                             android:id="@+id/wea_days_forecast_weather_day_tv1"
-                            style="@style/wea_days_forecast_tv_trans"
-                            android:text="@string/initial"/>
+                            style="@style/wea_days_forecast_tv_trans"/>
 
                         <TextView
                             android:id="@+id/wea_days_forecast_weather_day_tv2"
-                            style="@style/wea_days_forecast_tv"
-                            android:text="@string/initial"/>
+                            style="@style/wea_days_forecast_tv"/>
 
                         <TextView
                             android:id="@+id/wea_days_forecast_weather_day_tv3"
-                            style="@style/wea_days_forecast_tv"
-                            android:text="@string/initial"/>
+                            style="@style/wea_days_forecast_tv"/>
 
                         <TextView
                             android:id="@+id/wea_days_forecast_weather_day_tv4"
-                            style="@style/wea_days_forecast_tv"
-                            android:text="@string/initial"/>
+                            style="@style/wea_days_forecast_tv"/>
 
                         <TextView
                             android:id="@+id/wea_days_forecast_weather_day_tv5"
-                            style="@style/wea_days_forecast_tv"
-                            android:text="@string/initial"/>
+                            style="@style/wea_days_forecast_tv"/>
 
                         <TextView
                             android:id="@+id/wea_days_forecast_weather_day_tv6"
-                            style="@style/wea_days_forecast_tv"
-                            android:text="@string/initial"/>
+                            style="@style/wea_days_forecast_tv"/>
 
                     </LinearLayout>
 
@@ -455,33 +411,27 @@
                     <TextView
                         android:id="@+id/wea_days_forecast_weather_night_tv1"
                         style="@style/wea_days_forecast_tv_trans"
-                        android:layout_marginTop="0dp"
-                        android:text="@string/initial"/>
+                        android:layout_marginTop="0dp"/>
 
                     <TextView
                         android:id="@+id/wea_days_forecast_weather_night_tv2"
-                        style="@style/wea_days_forecast_tv"
-                        android:text="@string/initial"/>
+                        style="@style/wea_days_forecast_tv"/>
 
                     <TextView
                         android:id="@+id/wea_days_forecast_weather_night_tv3"
-                        style="@style/wea_days_forecast_tv"
-                        android:text="@string/initial"/>
+                        style="@style/wea_days_forecast_tv"/>
 
                     <TextView
                         android:id="@+id/wea_days_forecast_weather_night_tv4"
-                        style="@style/wea_days_forecast_tv"
-                        android:text="@string/initial"/>
+                        style="@style/wea_days_forecast_tv"/>
 
                     <TextView
                         android:id="@+id/wea_days_forecast_weather_night_tv5"
-                        style="@style/wea_days_forecast_tv"
-                        android:text="@string/initial"/>
+                        style="@style/wea_days_forecast_tv"/>
 
                     <TextView
                         android:id="@+id/wea_days_forecast_weather_night_tv6"
-                        style="@style/wea_days_forecast_tv"
-                        android:text="@string/initial"/>
+                        style="@style/wea_days_forecast_tv"/>
 
                 </LinearLayout>
 
@@ -491,33 +441,27 @@
 
                     <ImageView
                         android:id="@+id/wea_days_forecast_weather_night_iv1"
-                        style="@style/wea_days_forecast_iv_trans"
-                        android:src="@drawable/ic_weather_no"/>
+                        style="@style/wea_days_forecast_iv_trans"/>
 
                     <ImageView
                         android:id="@+id/wea_days_forecast_weather_night_iv2"
-                        style="@style/wea_days_forecast_iv"
-                        android:src="@drawable/ic_weather_no"/>
+                        style="@style/wea_days_forecast_iv"/>
 
                     <ImageView
                         android:id="@+id/wea_days_forecast_weather_night_iv3"
-                        style="@style/wea_days_forecast_iv"
-                        android:src="@drawable/ic_weather_no"/>
+                        style="@style/wea_days_forecast_iv"/>
 
                     <ImageView
                         android:id="@+id/wea_days_forecast_weather_night_iv4"
-                        style="@style/wea_days_forecast_iv"
-                        android:src="@drawable/ic_weather_no"/>
+                        style="@style/wea_days_forecast_iv"/>
 
                     <ImageView
                         android:id="@+id/wea_days_forecast_weather_night_iv5"
-                        style="@style/wea_days_forecast_iv"
-                        android:src="@drawable/ic_weather_no"/>
+                        style="@style/wea_days_forecast_iv"/>
 
                     <ImageView
                         android:id="@+id/wea_days_forecast_weather_night_iv6"
-                        style="@style/wea_days_forecast_iv"
-                        android:src="@drawable/ic_weather_no"/>
+                        style="@style/wea_days_forecast_iv"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -526,33 +470,27 @@
 
                     <TextView
                         android:id="@+id/wea_days_forecast_wind_direction_tv1"
-                        style="@style/wea_days_forecast_tv_trans"
-                        android:text="@string/initial"/>
+                        style="@style/wea_days_forecast_tv_trans"/>
 
                     <TextView
                         android:id="@+id/wea_days_forecast_wind_direction_tv2"
-                        style="@style/wea_days_forecast_tv"
-                        android:text="@string/initial"/>
+                        style="@style/wea_days_forecast_tv"/>
 
                     <TextView
                         android:id="@+id/wea_days_forecast_wind_direction_tv3"
-                        style="@style/wea_days_forecast_tv"
-                        android:text="@string/initial"/>
+                        style="@style/wea_days_forecast_tv"/>
 
                     <TextView
                         android:id="@+id/wea_days_forecast_wind_direction_tv4"
-                        style="@style/wea_days_forecast_tv"
-                        android:text="@string/initial"/>
+                        style="@style/wea_days_forecast_tv"/>
 
                     <TextView
                         android:id="@+id/wea_days_forecast_wind_direction_tv5"
-                        style="@style/wea_days_forecast_tv"
-                        android:text="@string/initial"/>
+                        style="@style/wea_days_forecast_tv"/>
 
                     <TextView
                         android:id="@+id/wea_days_forecast_wind_direction_tv6"
-                        style="@style/wea_days_forecast_tv"
-                        android:text="@string/initial"/>
+                        style="@style/wea_days_forecast_tv"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -561,33 +499,27 @@
 
                     <TextView
                         android:id="@+id/wea_days_forecast_wind_power_tv1"
-                        style="@style/wea_days_forecast_tv2_trans"
-                        android:text="@string/initial"/>
+                        style="@style/wea_days_forecast_tv2_trans"/>
 
                     <TextView
                         android:id="@+id/wea_days_forecast_wind_power_tv2"
-                        style="@style/wea_days_forecast_tv2"
-                        android:text="@string/initial"/>
+                        style="@style/wea_days_forecast_tv2"/>
 
                     <TextView
                         android:id="@+id/wea_days_forecast_wind_power_tv3"
-                        style="@style/wea_days_forecast_tv2"
-                        android:text="@string/initial"/>
+                        style="@style/wea_days_forecast_tv2"/>
 
                     <TextView
                         android:id="@+id/wea_days_forecast_wind_power_tv4"
-                        style="@style/wea_days_forecast_tv2"
-                        android:text="@string/initial"/>
+                        style="@style/wea_days_forecast_tv2"/>
 
                     <TextView
                         android:id="@+id/wea_days_forecast_wind_power_tv5"
-                        style="@style/wea_days_forecast_tv2"
-                        android:text="@string/initial"/>
+                        style="@style/wea_days_forecast_tv2"/>
 
                     <TextView
                         android:id="@+id/wea_days_forecast_wind_power_tv6"
-                        style="@style/wea_days_forecast_tv2"
-                        android:text="@string/initial"/>
+                        style="@style/wea_days_forecast_tv2"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -646,8 +578,7 @@
 
                                 <TextView
                                     android:id="@+id/wea_life_index_tv_umbrella"
-                                    style="@style/wea_life_index_tv_detail"
-                                    android:text="@string/initial"/>
+                                    style="@style/wea_life_index_tv_detail"/>
 
                                 <TextView
                                     style="@style/wea_life_index_tv_title"
@@ -668,8 +599,7 @@
 
                                 <TextView
                                     android:id="@+id/wea_life_index_tv_ultraviolet_rays"
-                                    style="@style/wea_life_index_tv_detail"
-                                    android:text="@string/initial"/>
+                                    style="@style/wea_life_index_tv_detail"/>
 
                                 <TextView
                                     style="@style/wea_life_index_tv_title"
@@ -697,8 +627,7 @@
 
                                 <TextView
                                     android:id="@+id/wea_life_tv_index_dress"
-                                    style="@style/wea_life_index_tv_detail"
-                                    android:text="@string/initial"/>
+                                    style="@style/wea_life_index_tv_detail"/>
 
                                 <TextView
                                     style="@style/wea_life_index_tv_title"
@@ -719,8 +648,7 @@
 
                                 <TextView
                                     android:id="@+id/wea_life_index_tv_cold"
-                                    style="@style/wea_life_index_tv_detail"
-                                    android:text="@string/initial"/>
+                                    style="@style/wea_life_index_tv_detail"/>
 
                                 <TextView
                                     style="@style/wea_life_index_tv_title"
@@ -748,8 +676,7 @@
 
                                 <TextView
                                     android:id="@+id/wea_life_index_tv_morning_exercise"
-                                    style="@style/wea_life_index_tv_detail"
-                                    android:text="@string/initial"/>
+                                    style="@style/wea_life_index_tv_detail"/>
 
                                 <TextView
                                     style="@style/wea_life_index_tv_title"
@@ -770,8 +697,7 @@
 
                                 <TextView
                                     android:id="@+id/wea_life_index_tv_sport"
-                                    style="@style/wea_life_index_tv_detail"
-                                    android:text="@string/initial"/>
+                                    style="@style/wea_life_index_tv_detail"/>
 
                                 <TextView
                                     style="@style/wea_life_index_tv_title"
@@ -799,8 +725,7 @@
 
                                 <TextView
                                     android:id="@+id/wea_life_index_tv_car_wash"
-                                    style="@style/wea_life_index_tv_detail"
-                                    android:text="@string/initial"/>
+                                    style="@style/wea_life_index_tv_detail"/>
 
                                 <TextView
                                     style="@style/wea_life_index_tv_title"
@@ -821,8 +746,7 @@
 
                                 <TextView
                                     android:id="@+id/wea_life_index_tv_air_cure"
-                                    style="@style/wea_life_index_tv_detail"
-                                    android:text="@string/initial"/>
+                                    style="@style/wea_life_index_tv_detail"/>
 
                                 <TextView
                                     style="@style/wea_life_index_tv_title"

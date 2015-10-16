@@ -555,7 +555,7 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        LogUtil.i(LOG_TAG, "WeaFragmet:  onCreateView");
+        LogUtil.i(LOG_TAG, "WeaFragmet:  onActivityCreated");
         mIsRan = false;
         // 刷新天气，还未获取到顶部下拉刷新的高度，适当的延时
         mHandler = new Handler();

@@ -34,7 +34,7 @@ public class LifeIndexDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActivity().setFinishOnTouchOutside(false);
+//        getActivity().setFinishOnTouchOutside(false);
         mTitle = getActivity().getIntent().getStringExtra(WeacConstants.TITLE);
         mDetail = getActivity().getIntent().getStringExtra(WeacConstants.DETAIL);
 

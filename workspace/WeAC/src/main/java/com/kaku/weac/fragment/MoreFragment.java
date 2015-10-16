@@ -74,7 +74,7 @@ public class MoreFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        LogUtil.i(LOG_TAG, "MoreFragmet:  onCreateView");
+        LogUtil.i(LOG_TAG, "MoreFragmet:  onActivityCreated");
     }
 
     @Override

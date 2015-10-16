@@ -1,5 +1,6 @@
 package com.kaku.weac.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -506,21 +507,38 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
     /**
      * 生活指数信息
      */
-    List<WeatherLifeIndex> mWeatherLifeIndexes;
+    private List<WeatherLifeIndex> mWeatherLifeIndexes;
 
     /**
      * 下拉刷新ScrollView
      */
-    PullToRefreshScrollView mPullRefreshScrollView;
+    private PullToRefreshScrollView mPullRefreshScrollView;
 
     /**
      * 刷新按钮
      */
-    ImageView mRefreshBtn;
+    private ImageView mRefreshBtn;
+
+    /**
+     * 延迟刷新线程是否已经启动
+     */
+    private boolean mIsRan;
+
+    /**
+     * 延迟刷新Handler
+     */
+    private Handler mHandler;
+
+    /**
+     * 延迟刷新Runnable
+     */
+    private Runnable mRun;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        LogUtil.i(LOG_TAG, "WeaFragmet:  onCreateView");
+
         final View view = inflater.inflate(R.layout.fm_wea, container, false);
         init(view);
         // 初始化天气
@@ -537,13 +555,85 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        LogUtil.i(LOG_TAG, "WeaFragmet:  onCreateView");
+        mIsRan = false;
         // 刷新天气，还未获取到顶部下拉刷新的高度，适当的延时
-        new Handler().postDelayed(new Runnable() {
+        mHandler = new Handler();
+        mRun = new Runnable() {
             @Override
             public void run() {
+                mIsRan = true;
                 mPullRefreshScrollView.setRefreshing();
             }
-        }, 1000);
+        };
+        mHandler.postDelayed(mRun, 1000);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        LogUtil.i(LOG_TAG, "WeaFragmet:  onDestroyView");
+        if (mHandler != null && !mIsRan) {
+            mHandler.removeCallbacks(mRun);
+            LogUtil.i(LOG_TAG, "removeCallbacks(mRun)");
+            mIsRan = false;
+        }
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        LogUtil.i(LOG_TAG, "WeaFragmet:  onStop");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        LogUtil.i(LOG_TAG, "WeaFragmet:  onStart");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogUtil.i(LOG_TAG, "WeaFragmet:  onResume");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LogUtil.i(LOG_TAG, "WeaFragmet:  onPause");
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        LogUtil.i(LOG_TAG, "WeaFragmet:  onDetach");
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        LogUtil.i(LOG_TAG, "WeaFragmet:  onAttach");
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        LogUtil.i(LOG_TAG, "WeaFragmet:  onCreate");
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        LogUtil.i(LOG_TAG, "WeaFragmet:  onViewCreated");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        LogUtil.i(LOG_TAG, "WeaFragmet:  onDestroy");
+
     }
 
     /**

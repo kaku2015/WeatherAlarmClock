@@ -274,6 +274,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         // 设置ViewPager
         mViewPager = (ViewPager) findViewById(R.id.fragment_container);
         mViewPager.setAdapter(new MyFragmentPagerAdapter(mFm));
+        mViewPager.setOffscreenPageLimit(3);
         // TODO：切换渐变
         mViewPager.addOnPageChangeListener(new OnPageChangeListener() {
 

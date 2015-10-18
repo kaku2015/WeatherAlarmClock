@@ -1,10 +1,13 @@
 package com.kaku.weac.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.os.Handler;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
@@ -41,7 +43,7 @@ import java.util.List;
  * @author 咖枯
  * @version 1.0 2015/9
  */
-public class WeaFragment extends Fragment implements View.OnClickListener {
+public class WeaFragment extends BaseFragment implements View.OnClickListener {
     /**
      * Log tag ：WeaFragment
      */
@@ -505,11 +507,6 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
     private WeatherInfo mWeatherInfo;
 
     /**
-     * 生活指数信息
-     */
-    private List<WeatherLifeIndex> mWeatherLifeIndexes;
-
-    /**
      * 下拉刷新ScrollView
      */
     private PullToRefreshScrollView mPullRefreshScrollView;
@@ -522,155 +519,73 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
     /**
      * 延迟刷新线程是否已经启动
      */
-    private boolean mIsRan;
+    public static boolean sIsPostDelayed;
 
     /**
      * 延迟刷新Handler
      */
-    private Handler mHandler;
+    public static Handler sHandler;
 
     /**
      * 延迟刷新Runnable
      */
-    private Runnable mRun;
+    public static Runnable sRun;
+
+    /**
+     * 标志位，标志已经初始化完成
+     */
+    private boolean isPrepared;
+
+    /**
+     * 是否已被加载过一次，第二次就不再去请求数据了
+     */
+    private boolean mHasLoadedOnce;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        LogUtil.i(LOG_TAG, "WeaFragmet:  onCreateView");
+        LogUtil.i(LOG_TAG, "onCreateView");
 
         final View view = inflater.inflate(R.layout.fm_wea, container, false);
         init(view);
         // 初始化天气
         initWeather(WeatherUtil.readWeatherInfo(getActivity(), "天津"));
-
-        mRefreshBtn = (ImageView) view.findViewById(R.id.action_refresh);
-        mRefreshBtn.setOnClickListener(this);
-
-        // 设置下拉刷新
-        setPullToRefresh();
+        isPrepared = true;
+        lazyLoad();
         return view;
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        LogUtil.i(LOG_TAG, "WeaFragmet:  onActivityCreated");
-        mIsRan = false;
-        // 刷新天气，还未获取到顶部下拉刷新的高度，适当的延时
-        mHandler = new Handler();
-        mRun = new Runnable() {
-            @Override
-            public void run() {
-                mIsRan = true;
-                mPullRefreshScrollView.setRefreshing();
-            }
-        };
-        mHandler.postDelayed(mRun, 1000);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        LogUtil.i(LOG_TAG, "WeaFragmet:  onDestroyView");
-        if (mHandler != null && !mIsRan) {
-            mHandler.removeCallbacks(mRun);
-            LogUtil.i(LOG_TAG, "removeCallbacks(mRun)");
-            mIsRan = false;
+    protected void lazyLoad() {
+        if (!isPrepared || !mIsVisible || mHasLoadedOnce) {
+            return;
         }
-
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        LogUtil.i(LOG_TAG, "WeaFragmet:  onStop");
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        LogUtil.i(LOG_TAG, "WeaFragmet:  onStart");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        LogUtil.i(LOG_TAG, "WeaFragmet:  onResume");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        LogUtil.i(LOG_TAG, "WeaFragmet:  onPause");
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        LogUtil.i(LOG_TAG, "WeaFragmet:  onDetach");
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        LogUtil.i(LOG_TAG, "WeaFragmet:  onAttach");
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        LogUtil.i(LOG_TAG, "WeaFragmet:  onCreate");
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        LogUtil.i(LOG_TAG, "WeaFragmet:  onViewCreated");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        LogUtil.i(LOG_TAG, "WeaFragmet:  onDestroy");
-
+        // 自动下拉刷新
+        pullToRefresh();
     }
 
     /**
-     * 设置下拉刷新
+     * 下拉刷新
      */
-
-    private void setPullToRefresh() {
-        mPullRefreshScrollView.getLoadingLayoutProxy().setPullLabel("下拉更新");
-        mPullRefreshScrollView.getLoadingLayoutProxy().setRefreshingLabel(
-                "正在更新...");
-        mPullRefreshScrollView.getLoadingLayoutProxy().setReleaseLabel("松手可更新");
-//        mPullRefreshScrollView.getLoadingLayoutProxy().
-//                setLastUpdatedLabel("更新成功");
-        mPullRefreshScrollView
-                .setOnRefreshListener(new OnRefreshListener<ScrollView>() {
-
-                    @Override
-                    public void onRefresh(
-                            PullToRefreshBase<ScrollView> refreshView) {
-                        new GetDataTask().execute();
+    private void pullToRefresh() {
+        sHandler = new Handler();
+        sRun = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    sIsPostDelayed = false;
+                    if (!getActivity().isFinishing()) {
+                        mPullRefreshScrollView.setRefreshing();
+                        // 加载成功
+//                        mHasLoadedOnce = true;
                     }
-                });
-
-    }
-
-    private class GetDataTask extends AsyncTask<Void, Void, String[]> {
-
-        @Override
-        protected String[] doInBackground(Void... params) {
-            refreshWeather();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String[] result) {
-            super.onPostExecute(result);
-        }
+                } catch (Exception e) {
+                    LogUtil.e(LOG_TAG, e.toString());
+                }
+            }
+        };
+        sHandler.postDelayed(sRun, 1000);
+        sIsPostDelayed = true;
     }
 
     @Override
@@ -689,39 +604,87 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
                 break;
             // 雨伞指数
             case R.id.wea_life_index_rlyt_umbrella:
-                skipToDetailInterface("雨伞指数详情", mLifeIndexUmbrellaDetail);
+                skipToDetailInterface(getString(R.string.umbrella_detail), mLifeIndexUmbrellaDetail);
                 break;
             // 紫外线指数
             case R.id.wea_life_index_rlyt_ultraviolet_rays:
-                skipToDetailInterface("紫外线指数详情", mLifeIndexUltravioletRaysDetail);
+                skipToDetailInterface(getString(R.string.ultraviolet_Rays_detail), mLifeIndexUltravioletRaysDetail);
                 break;
             // 穿衣指数
             case R.id.wea_life_index_rlyt_dress:
-                skipToDetailInterface("穿衣指数详情", mLifeIndexDressDetail);
+                skipToDetailInterface(getString(R.string.dress_detail), mLifeIndexDressDetail);
                 break;
             // 感冒指数
             case R.id.wea_life_index_rlyt_cold:
-                skipToDetailInterface("感冒指数详情", mLifeIndexColdDetail);
+                skipToDetailInterface(getString(R.string.cold_detail), mLifeIndexColdDetail);
                 break;
             // 晨练指数
             case R.id.wea_life_index_rlyt_morning_exercise:
-                skipToDetailInterface("晨练指数详情", mLifeIndexMorningExerciseDetail);
+                skipToDetailInterface(getString(R.string.morning_exercise_detail), mLifeIndexMorningExerciseDetail);
                 break;
             // 运动指数
             case R.id.wea_life_index_rlyt_sport:
-                skipToDetailInterface("运动指数详情", mLifeIndexSportDetail);
+                skipToDetailInterface(getString(R.string.sport_detail), mLifeIndexSportDetail);
                 break;
             // 洗车指数
             case R.id.wea_life_index_rlyt_carwash:
-                skipToDetailInterface("洗车指数详情", mLifeIndexCarWashDetail);
+                skipToDetailInterface(getString(R.string.car_wash_detail), mLifeIndexCarWashDetail);
                 break;
             // 晾晒指数
             case R.id.wea_life_index_rlyt_air_cure:
-                skipToDetailInterface("晾晒指数详情", mLifeIndexAirCureDetail);
+                skipToDetailInterface(getString(R.string.air_cure_detail), mLifeIndexAirCureDetail);
                 break;
         }
 
     }
+
+/*    private String getUpdateLabel() {
+        String label;
+        String format;
+        long now = System.currentTimeMillis();
+        SharedPreferences share = getActivity().getSharedPreferences(
+                "update_time", Activity.MODE_PRIVATE);
+        long updateTime = share.getInt(mWeatherInfo.getCity(), 0);
+        if (updateTime == 0){
+            return null;
+        }
+        // 更新间隔毫秒数
+        long ms = now - updateTime ;
+
+        // 单位秒
+        int ss = 1000;
+        // 单位分
+        int mm = ss * 60;
+        // 单位小时
+        int hh = mm * 60;
+        // 单位天
+        int dd = hh * 24;
+
+        // 间隔天数
+        long intervalDay = ms / dd;
+        // 间隔小时
+        long intervalHour = (ms - intervalDay * dd) / hh;
+        // 间隔分钟
+        long intervalMinute = (ms - intervalDay * dd - intervalHour * hh) / mm;
+
+        // 当剩余天数大于0时显示【X天X小时X分】格式
+        if (intervalDay > 0) {
+            format = getString(R.string.interval_day);
+            label = String.format(format, intervalDay);
+            // 当剩余小时大于0时显示【X小时X分】格式
+        } else if (intervalHour > 0) {
+            format = getString(R.string.interval_hour);
+            label = String.format(format, intervalHour);
+        } else if (intervalMinute > 0) {
+            format = getString(R.string.interval_minute);
+            label = String.format(format, intervalMinute);
+
+        } else {
+            label = getString(R.string.interval_just);
+
+        }
+        return label;
+    }*/
 
     /**
      * 跳转到详情界面
@@ -755,17 +718,20 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                try {
 //                                mPullRefreshScrollView.getLoadingLayoutProxy().
 //                                        setLastUpdatedLabel("更新失败");
-                                // 取消刷新旋转动画
-                                mRefreshBtn.clearAnimation();
-                                mPullRefreshScrollView.onRefreshComplete();
-                                LogUtil.e(LOG_TAG, "读取失败：" + e.toString());
+                                    // 取消刷新旋转动画
+                                    mRefreshBtn.clearAnimation();
+                                    mPullRefreshScrollView.onRefreshComplete();
+                                    LogUtil.e(LOG_TAG, "读取失败：" + e.toString());
+                                } catch (Exception e1) {
+                                    LogUtil.e(LOG_TAG, e.toString());
+                                }
                             }
                         });
                     }
                 }
-
         );
     }
 
@@ -776,11 +742,15 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
 
         @Override
         public void run() {
-            // 取消刷新旋转动画
-            mRefreshBtn.clearAnimation();
-            // 下拉刷新完成
-            mPullRefreshScrollView.onRefreshComplete();
-            initWeather(mWeatherInfo);
+            try {
+                // 取消刷新旋转动画
+                mRefreshBtn.clearAnimation();
+                // 下拉刷新完成
+                mPullRefreshScrollView.onRefreshComplete();
+                initWeather(mWeatherInfo);
+            } catch (Exception e) {
+                LogUtil.e(LOG_TAG, e.toString());
+            }
         }
     }
 
@@ -793,26 +763,29 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
         // 多天预报信息
         List<WeatherDaysForecast> weatherDaysForecasts = weatherInfo.getWeatherDaysForecast();
         // 生活指数信息
-        mWeatherLifeIndexes = weatherInfo.getWeatherLifeIndex();
+        List<WeatherLifeIndex> weatherLifeIndexes = weatherInfo.getWeatherLifeIndex();
 
         // 设置城市名
         mCityNameTv.setText(weatherInfo.getCity());
         // 设置预警信息
         if (weatherInfo.getAlarmType() != null) {
+            // 预警
+            final String alarm = getString(R.string.alarm);
             mAlarmTv.setVisibility(View.VISIBLE);
-            mAlarmTv.setText(weatherInfo.getAlarmType() + "预警");
+            mAlarmTv.setText(weatherInfo.getAlarmType());
             mAlarmTv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     skipToDetailInterface(weatherInfo.getAlarmType() +
-                            weatherInfo.getAlarmDegree() + "预警", weatherInfo.getAlarmDetail());
+                            weatherInfo.getAlarmDegree() + alarm, weatherInfo.getAlarmDetail());
                 }
             });
         } else {
             mAlarmTv.setVisibility(View.GONE);
         }
         // 设置更新时间
-        mUpdateTimeTv.setText(weatherInfo.getUpdateTime() + "发布");
+        mUpdateTimeTv.setText(String.format(getString(R.string.update_time),
+                weatherInfo.getUpdateTime()));
 
         // 设置温度
         String temp = weatherInfo.getTemperature();
@@ -839,13 +812,24 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
             mWeatherTypeTv.setText(weather2.getTypeNight());
         }
 
-        // 设置大气环境
-        mAqiTv.setText(weatherInfo.getQuality() + " " + weatherInfo.getAQI());
+
+        // 设置空气质量图片
+        setImage(mAqiTv, getQualityImageId(weatherInfo.getQuality()));
+        // 设置空气质量
+        mAqiTv.setText(String.format(getString(R.string.aqi),
+                weatherInfo.getQuality(), weatherInfo.getAQI()));
+
+        // 设置湿度图片
+        setImage(mHumidityTv, getHumidityImageId(weatherInfo.getHumidity()));
         // 设置湿度
-        mHumidityTv.setText("湿度 " + weatherInfo.getHumidity());
+        mHumidityTv.setText(String.format(getString(R.string.humidity),
+                weatherInfo.getHumidity()));
+
+        // 设置风向图片
+        setImage(mWindTv, getWindImageId(weatherInfo.getWindDirection()));
         // 设置风向、风力
-        mWindTv.setText(weatherInfo.getWindDirection() + " "
-                + weatherInfo.getWindPower());
+        mWindTv.setText(String.format(getString(R.string.aqi)
+                , weatherInfo.getWindDirection(), weatherInfo.getWindPower()));
 
         int weatherId;
 
@@ -900,8 +884,8 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
         String[] day6 = getDay(weather6.getDate());
 
         // 设置标题星期
-        mDaysForecastTvWeek1.setText("昨天");
-        mDaysForecastTvWeek2.setText("今天");
+        mDaysForecastTvWeek1.setText(getString(R.string.yesterday));
+        mDaysForecastTvWeek2.setText(getString(R.string.today));
         mDaysForecastTvWeek3.setText(getWeek(day3[1]));
         mDaysForecastTvWeek4.setText(getWeek(day4[1]));
         mDaysForecastTvWeek5.setText(getWeek(day5[1]));
@@ -918,13 +902,15 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
         String day05 = day5[0].split("日")[0];
         String day06 = day6[0].split("日")[0];
 
+        // 斜杠
+        String date = getString(R.string.date);
         // 设置日期
-        mDaysForecastTvDay1.setText(month + "/" + day01);
-        mDaysForecastTvDay2.setText(month + "/" + day02);
-        mDaysForecastTvDay3.setText(month + "/" + day03);
-        mDaysForecastTvDay4.setText(month + "/" + day04);
-        mDaysForecastTvDay5.setText(month + "/" + day05);
-        mDaysForecastTvDay6.setText(month + "/" + day06);
+        mDaysForecastTvDay1.setText(String.format(date, month, day01));
+        mDaysForecastTvDay2.setText(String.format(date, month, day02));
+        mDaysForecastTvDay3.setText(String.format(date, month, day03));
+        mDaysForecastTvDay4.setText(String.format(date, month, day04));
+        mDaysForecastTvDay5.setText(String.format(date, month, day05));
+        mDaysForecastTvDay6.setText(String.format(date, month, day06));
 
         // 取得白天天气类型图片id
         int weatherDayId1 = getWeatherTypeImageID(weather1.getTypeDay(), true);
@@ -1017,9 +1003,134 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
         mDaysForecastWindPowerTv6.setText(weather6.getWindPowerDay());
 
         // 设置生活指数
-        for (WeatherLifeIndex index : mWeatherLifeIndexes) {
+        for (WeatherLifeIndex index : weatherLifeIndexes) {
             setLifeIndex(index);
         }
+    }
+
+    /**
+     * 取得风向图片id
+     *
+     * @param windDirection 风向
+     * @return 风向图片id
+     */
+    private int getWindImageId(String windDirection) {
+        int imgId;
+        switch (windDirection) {
+            case "南风":
+                imgId = R.drawable.ic_wind_1;
+                break;
+            case "西南风":
+                imgId = R.drawable.ic_wind_2;
+                break;
+            case "西风":
+                imgId = R.drawable.ic_wind_3;
+                break;
+            case "西北风":
+                imgId = R.drawable.ic_wind_4;
+                break;
+            case "北风":
+                imgId = R.drawable.ic_wind_5;
+                break;
+            case "东北风":
+                imgId = R.drawable.ic_wind_6;
+                break;
+            case "东风":
+                imgId = R.drawable.ic_wind_7;
+                break;
+            case "东南风":
+                imgId = R.drawable.ic_wind_8;
+                break;
+            default:
+                imgId = R.drawable.ic_wind_1;
+                break;
+        }
+        return imgId;
+    }
+
+    /**
+     * 取得湿度图片id
+     *
+     * @param humidity 湿度
+     * @return 湿度图片id
+     */
+    private int getHumidityImageId(String humidity) {
+        int imgId;
+        int num = Integer.parseInt(humidity.split("%")[0]);
+        if (num == 0)
+            imgId = R.drawable.ic_humidity0;
+        else if (num <= 10)
+            imgId = R.drawable.ic_humidity10;
+        else if (num <= 20)
+            imgId = R.drawable.ic_humidity20;
+        else if (num <= 30)
+            imgId = R.drawable.ic_humidity30;
+        else if (num <= 40)
+            imgId = R.drawable.ic_humidity40;
+        else if (num <= 50)
+            imgId = R.drawable.ic_humidity50;
+        else if (num <= 60)
+            imgId = R.drawable.ic_humidity60;
+        else if (num <= 70)
+            imgId = R.drawable.ic_humidity70;
+        else if (num <= 80)
+            imgId = R.drawable.ic_humidity80;
+        else if (num <= 90)
+            imgId = R.drawable.ic_humidity90;
+        else if (num <= 100)
+            imgId = R.drawable.ic_humidity100;
+        else imgId = R.drawable.ic_humidity20;
+        return imgId;
+    }
+
+    /**
+     * 设置左侧图片
+     *
+     * @param tv      textView
+     * @param imageId 图片id
+     */
+    private void setImage(TextView tv, int imageId) {
+        Drawable drawable = getResources().getDrawable(imageId);
+        if (drawable != null) {
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(),
+                    drawable.getMinimumHeight());
+            // 设置图片
+            tv.setCompoundDrawables(drawable, null, null, null);
+        }
+    }
+
+    /**
+     * 取得aqi图片id
+     *
+     * @param quality 大气质量
+     * @return aqi图片id
+     */
+    private int getQualityImageId(String quality) {
+        int imgId;
+        switch (quality) {
+            case "优":
+                imgId = R.drawable.ic_quality_nice;
+                break;
+            case "良":
+                imgId = R.drawable.ic_quality_good;
+                break;
+            case "轻度污染":
+                imgId = R.drawable.ic_quality_little;
+                break;
+            case "中度污染":
+                imgId = R.drawable.ic_quality_medium;
+                break;
+            case "重度污染":
+                imgId = R.drawable.ic_quality_serious;
+                break;
+            case "严重污染":
+                imgId = R.drawable.ic_quality_terrible;
+                break;
+            default:
+                imgId = R.drawable.ic_quality_nice;
+                break;
+        }
+        return imgId;
     }
 
     /**
@@ -1118,26 +1229,26 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
         String week1;
         switch (week) {
             case "星期一":
-                week1 = "周一";
+                week1 = getString(R.string.monday);
                 break;
             case "星期二":
-                week1 = "周二";
+                week1 = getString(R.string.tuesday);
                 break;
             case "星期三":
-                week1 = "周三";
+                week1 = getString(R.string.wednesday);
                 break;
             case "星期四":
-                week1 = "周四";
+                week1 = getString(R.string.thursday);
                 break;
             case "星期五":
-                week1 = "周五";
+                week1 = getString(R.string.friday);
                 break;
             case "星期六":
-                week1 = "周六";
+                week1 = getString(R.string.saturday);
                 break;
             case "星期天":
             case "星期日":
-                week1 = "周日";
+                week1 = getString(R.string.sunday);
                 break;
             default:
                 week1 = week;
@@ -1158,10 +1269,9 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
         if (type1.equals(type2)) {
             return type1;
         } else {
-            return type1 + "转" + type2;
+            return String.format(getString(R.string.turn), type1, type2);
         }
     }
-
 
     /**
      * 设置温度图片
@@ -1206,6 +1316,7 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
 
     /**
      * 取得对应的天气类型图片id
@@ -1317,6 +1428,9 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
      * @param view view
      */
     private void init(View view) {
+        mRefreshBtn = (ImageView) view.findViewById(R.id.action_refresh);
+        mRefreshBtn.setOnClickListener(this);
+
         mCityNameTv = (TextView) view.findViewById(R.id.action_title);
         mAlarmTv = (TextView) view.findViewById(R.id.alarm);
         mUpdateTimeTv = (TextView) view.findViewById(R.id.update_time);
@@ -1441,6 +1555,43 @@ public class WeaFragment extends Fragment implements View.OnClickListener {
 
         mPullRefreshScrollView = (PullToRefreshScrollView) view
                 .findViewById(R.id.pull_refresh_scrollview);
+        // 设置下拉刷新
+        setPullToRefresh();
+    }
+
+    /**
+     * 设置下拉刷新
+     */
+
+    private void setPullToRefresh() {
+        mPullRefreshScrollView.getLoadingLayoutProxy().setPullLabel(getString(R.string.pull_to_refresh));
+        mPullRefreshScrollView.getLoadingLayoutProxy().setRefreshingLabel(
+                getString(R.string.refreshing));
+        mPullRefreshScrollView.getLoadingLayoutProxy().setReleaseLabel(getString(R.string.leave_to_refresh));
+        mPullRefreshScrollView
+                .setOnRefreshListener(new OnRefreshListener<ScrollView>() {
+
+                    @Override
+                    public void onRefresh(
+                            PullToRefreshBase<ScrollView> refreshView) {
+                        new GetDataTask().execute();
+                    }
+                });
+
+    }
+
+    private class GetDataTask extends AsyncTask<Void, Void, String[]> {
+
+        @Override
+        protected String[] doInBackground(Void... params) {
+            refreshWeather();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String[] result) {
+            super.onPostExecute(result);
+        }
     }
 
 }

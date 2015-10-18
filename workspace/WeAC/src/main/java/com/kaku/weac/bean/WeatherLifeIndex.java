@@ -10,6 +10,7 @@ import java.io.Serializable;
  */
 public class WeatherLifeIndex implements Serializable {
 
+    private static final long serialVersionUID = -3927234831261262032L;
     /**
      * 指数名
      */

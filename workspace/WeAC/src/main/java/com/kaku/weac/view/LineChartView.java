@@ -147,6 +147,12 @@ public class LineChartView extends View {
                     mYAxis[i] = mHeight - (yAxisHeight / 2) - mRadius - mSpace;
                 }
             } else {
+                // 当温度相差小于等于4
+                if (parts <= 3) {
+                    yAxisHeight /= 2;
+                } else if (parts <= 5) {
+                    yAxisHeight /= 1.5;
+                }
                 // 份数值
                 float partValue = yAxisHeight / parts;
                 for (int i = 0; i < mLength; i++) {
@@ -162,6 +168,11 @@ public class LineChartView extends View {
                     mYAxis[i] = mHeight - (yAxisHeight / 2) - mSpace + mTextSpace - mTextSize;
                 }
             } else {
+                if (parts <= 3) {
+                    yAxisHeight /= 2;
+                } else if (parts <= 5) {
+                    yAxisHeight /= 1.5;
+                }
                 // 份数值
                 float partValue = yAxisHeight / parts;
                 for (int i = 0; i < mLength; i++) {

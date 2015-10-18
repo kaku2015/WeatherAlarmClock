@@ -10,6 +10,7 @@ import java.util.List;
  * @version 1.0 2015/09/18
  */
 public class WeatherInfo implements Serializable {
+    private static final long serialVersionUID = 479963920700063837L;
     /**
      * 城市
      */

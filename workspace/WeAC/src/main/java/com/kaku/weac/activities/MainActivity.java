@@ -357,6 +357,15 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         if (mCurrentIndex == index) {
             return;
         }
+
+        // 当不是天气界面并且已经开始延迟刷新天气线程
+        if (index != 1 && WeaFragment.sHandler != null && WeaFragment.sIsPostDelayed) {
+            // 取消线程
+            WeaFragment.sHandler.removeCallbacks(WeaFragment.sRun);
+            WeaFragment.sIsPostDelayed = false;
+            LogUtil.i(LOG_TAG, "已移除刷新天气线程");
+        }
+
         // 设置当前Tab的Index值为传入的Index值
         mCurrentIndex = index;
         // 改变ViewPager视图

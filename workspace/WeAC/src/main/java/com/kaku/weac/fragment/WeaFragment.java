@@ -1,13 +1,11 @@
 package com.kaku.weac.fragment;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +29,7 @@ import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.HttpCallbackListener;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
+import com.kaku.weac.util.ToastUtil;
 import com.kaku.weac.util.WeatherUtil;
 import com.kaku.weac.view.LineChartView;
 
@@ -541,6 +540,11 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
      */
     private boolean mHasLoadedOnce;
 
+    /**
+     * 上次主动更新时间
+     */
+    private long mLastActiveUpdateTime;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -549,7 +553,7 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         final View view = inflater.inflate(R.layout.fm_wea, container, false);
         init(view);
         // 初始化天气
-        initWeather(WeatherUtil.readWeatherInfo(getActivity(), "天津"));
+        initWeather(WeatherUtil.readWeatherInfo(getActivity(), "津"));
         isPrepared = true;
         lazyLoad();
         return view;
@@ -575,7 +579,9 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
                 try {
                     sIsPostDelayed = false;
                     if (!getActivity().isFinishing()) {
-                        mPullRefreshScrollView.setRefreshing();
+                        if (!hasActiveUpdated()) {
+                            mPullRefreshScrollView.setRefreshing();
+                        }
                         // 加载成功
 //                        mHasLoadedOnce = true;
                     }
@@ -584,8 +590,24 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
                 }
             }
         };
-        sHandler.postDelayed(sRun, 1000);
+        sHandler.postDelayed(sRun, 2000);
         sIsPostDelayed = true;
+    }
+
+
+    /**
+     * 是否3秒内主动更新过
+     *
+     * @return 主动更新与否
+     */
+    private boolean hasActiveUpdated() {
+        if (mLastActiveUpdateTime == 0) {
+            return false;
+        }
+        long now = System.currentTimeMillis();
+        long timeD = now - mLastActiveUpdateTime;
+        // 间隔3秒内不再自动更新
+        return timeD <= 3000;
     }
 
     @Override
@@ -707,6 +729,8 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
                 new HttpCallbackListener() {
                     @Override
                     public void onFinish(WeatherInfo weatherInfo) {
+                        // 最近一次更细时间
+                        mLastActiveUpdateTime = System.currentTimeMillis();
                         mWeatherInfo = weatherInfo;
                         // 保存天气信息
                         WeatherUtil.saveWeatherInfo(mWeatherInfo, getActivity());
@@ -721,12 +745,15 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
                                 try {
 //                                mPullRefreshScrollView.getLoadingLayoutProxy().
 //                                        setLastUpdatedLabel("更新失败");
+                                    // 最近一次更细时间
+                                    mLastActiveUpdateTime = System.currentTimeMillis();
                                     // 取消刷新旋转动画
-                                    mRefreshBtn.clearAnimation();
                                     mPullRefreshScrollView.onRefreshComplete();
-                                    LogUtil.e(LOG_TAG, "读取失败：" + e.toString());
+                                    mRefreshBtn.clearAnimation();
+                                    ToastUtil.showLongToast(getActivity(),
+                                            getString(R.string.Internet_fail));
                                 } catch (Exception e1) {
-                                    LogUtil.e(LOG_TAG, e.toString());
+                                    LogUtil.e(LOG_TAG, e1.toString());
                                 }
                             }
                         });
@@ -760,6 +787,9 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
      * @param weatherInfo 天气信息类
      */
     private void initWeather(final WeatherInfo weatherInfo) {
+        if (weatherInfo == null) {
+            return;
+        }
         // 多天预报信息
         List<WeatherDaysForecast> weatherDaysForecasts = weatherInfo.getWeatherDaysForecast();
         // 生活指数信息
@@ -1574,7 +1604,13 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
                     @Override
                     public void onRefresh(
                             PullToRefreshBase<ScrollView> refreshView) {
-                        new GetDataTask().execute();
+                        String label = DateUtils.formatDateTime(
+                                getActivity().getApplicationContext(), System.currentTimeMillis(),
+                                DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
+                        // Update the LastUpdatedLabel
+                        mPullRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+                        refreshWeather();
+//                        new GetDataTask().execute();
                     }
                 });
 
@@ -1584,7 +1620,9 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
 
         @Override
         protected String[] doInBackground(Void... params) {
-            refreshWeather();
+//            if (!hasActiveUpdated) {
+//                refreshWeather();
+//            }
             return null;
         }
 

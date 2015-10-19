@@ -47,26 +47,7 @@ public class ToastUtil {
      * @param msg     需要显示的信息
      */
     public static void showShortToast(Context context, String msg) {
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.toast, new LinearLayout(context),
-                false);
-        TextView tv = (TextView) view.findViewById(R.id.toast_tv);
-        tv.setText(msg);
-        // 删除指定的Runnable对象，使线程对象停止运行。
-        sHandler.removeCallbacks(sRun);
-        // 只有mToast==null时才重新创建，否则只需更改提示文字
-        if (sToast == null) {
-            sToast = new Toast(context);
-            sToast.setDuration(Toast.LENGTH_SHORT);
-            sToast.setGravity(Gravity.CENTER, 0, 320);
-            sToast.setView(view);
-        } else {
-            sToast.setView(view);
-        }
-        // 延迟1.5秒隐藏toast
-        sHandler.postDelayed(sRun, 1500);
-        sToast.show();
+        showToast(context, msg, Toast.LENGTH_SHORT, 1500);
 
     }
 
@@ -77,6 +58,19 @@ public class ToastUtil {
      * @param msg     需要显示的信息
      */
     public static void showLongToast(Context context, String msg) {
+        showToast(context, msg, Toast.LENGTH_LONG, 3000);
+
+    }
+
+    /**
+     * 显示toast
+     *
+     * @param context     context
+     * @param msg         需要显示的信息
+     * @param duration    显示时间
+     * @param delayMillis 延迟关闭时间
+     */
+    private static void showToast(Context context, String msg, int duration, int delayMillis) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.toast, new LinearLayout(context),
@@ -88,15 +82,14 @@ public class ToastUtil {
         // 只有mToast==null时才重新创建，否则只需更改提示文字
         if (sToast == null) {
             sToast = new Toast(context);
-            sToast.setDuration(Toast.LENGTH_LONG);
+            sToast.setDuration(duration);
             sToast.setGravity(Gravity.CENTER, 0, 320);
             sToast.setView(view);
         } else {
             sToast.setView(view);
         }
-        // 延迟3秒隐藏toast
-        sHandler.postDelayed(sRun, 3000);
+        // 延迟1.5秒隐藏toast
+        sHandler.postDelayed(sRun, delayMillis);
         sToast.show();
-
     }
 }

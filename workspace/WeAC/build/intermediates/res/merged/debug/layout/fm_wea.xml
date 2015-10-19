@@ -90,7 +90,8 @@
                     <ImageView
                         android:id="@+id/temperature1"
                         style="@style/wea_degree"
-                        android:contentDescription="@null"/>
+                        android:contentDescription="@null"
+                        android:src="@drawable/number_0"/>
 
                     <ImageView
                         android:id="@+id/temperature2"
@@ -114,6 +115,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
                             android:paddingLeft="5dp"
+                            android:text="@string/no_data"
                             android:textColor="@color/white_trans90"
                             android:textSize="18sp"/>
                     </RelativeLayout>
@@ -123,15 +125,18 @@
                 <TextView
                     android:id="@+id/aqi"
                     style="@style/wea_prompt"
-                    android:layout_marginTop="20dp"/>
+                    android:layout_marginTop="20dp"
+                    android:drawableLeft="@drawable/ic_quality_nice"/>
 
                 <TextView
                     android:id="@+id/humidity"
-                    style="@style/wea_prompt"/>
+                    style="@style/wea_prompt"
+                    android:drawableLeft="@drawable/ic_humidity20"/>
 
                 <TextView
                     android:id="@+id/wind"
-                    style="@style/wea_prompt"/>
+                    style="@style/wea_prompt"
+                    android:drawableLeft="@drawable/ic_wind_3"/>
             </LinearLayout>
 
             <View

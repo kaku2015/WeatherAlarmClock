@@ -12,6 +12,7 @@
     <color name="black_trans25">#40000000</color>
     <color name="black_trans30">#4d000000</color>
     <color name="black_trans50">#80000000</color>
+    <color name="black_trans70">#b3000000</color>
     <color name="black_trans80">#CC000000</color>
     <color name="black_trans90">#E6000000</color>
     <color name="blue_green">#0CCDF6</color>
@@ -58,6 +59,7 @@
     <item name="webview" type="id"/>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="Internet_fail">网络连接失败，请检查网络设置</string>
     <string name="add_alarm_clock">  添加闹钟  </string>
     <string name="air_cure">晾晒</string>
     <string name="air_cure_detail">晾晒指数详情</string>
@@ -78,6 +80,8 @@
     <string name="countdown_day_hour_minute">距闹钟响起还有%1$d天%2$d小时%3$d分</string>
     <string name="countdown_hour_minute">距闹钟响起还有%1$d小时%2$d分</string>
     <string name="countdown_minute">距闹钟响起还有%1$d分钟</string>
+    <string name="dash">--</string>
+    <string name="dash_degree">--℃</string>
     <string name="date">%1$s/%2$s</string>
     <string name="day">日</string>
     <string name="days_forecast">多天预报</string>
@@ -119,7 +123,8 @@
     <string name="nap_time">小睡%1$d分钟</string>
     <string name="nap_to">小睡至%1$s闹钟再次响起，轻触取消</string>
     <string name="new_alarm_clock">新建闹钟</string>
-    <string name="no">无</string>
+    <string name="no">暂无</string>
+    <string name="no_data">暂无数据</string>
     <string name="no_local_music_file">没有本地音乐文件</string>
     <string name="no_record_file">没有录音文件</string>
     <string name="no_ring">无铃声</string>
@@ -145,7 +150,7 @@
     <string name="record_fail">录音失败</string>
     <string name="record_fail_confirm">录音失败，请检查录音权限是否开启或录音已被其他应用占用。</string>
     <string name="record_file_name">/录音%1$s.amr</string>
-    <string name="refreshing">正在更新...</string>
+    <string name="refreshing">正在更新…</string>
     <string name="rename">重命名</string>
     <string name="rename_success">重命名成功</string>
     <string name="repeat">重复</string>
@@ -564,18 +569,21 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/white_trans90</item>
+        <item name="android:text">@string/dash_degree</item>
         <item name="android:textSize">14sp</item>
     </style>
     <style name="wea_forecast_content_detail">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
+        <item name="android:text">@string/no</item>
         <item name="android:textColor">@color/white_trans90</item>
         <item name="android:textSize">14sp</item>
     </style>
     <style name="wea_forecast_content_iv">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/ic_weather_no</item>
     </style>
     <style name="wea_forecast_content_llyt">
         <item name="android:layout_width">match_parent</item>
@@ -631,6 +639,7 @@
     <style name="wea_life_index_tv_detail">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">@string/no</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_marginRight">19dp</item>
         <item name="android:gravity">right</item>
@@ -650,6 +659,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">3dp</item>
         <item name="android:drawablePadding">15dp</item>
+        <item name="android:text">@string/dash</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/white_trans90</item>

@@ -98,6 +98,10 @@
                 <action android:name="com.kaku.GuardMasterService" />
             </intent-filter>
         </service>
+        <service
+            android:name="com.kaku.weac.service.AutoUpdateService"
+            android:exported="false" >
+        </service>
     </application>
 
 </manifest>

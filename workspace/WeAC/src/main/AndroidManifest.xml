@@ -95,6 +95,10 @@
                 <action android:name="com.kaku.GuardMasterService"/>
             </intent-filter>
         </service>
+        <service
+            android:name=".service.AutoUpdateService"
+            android:exported="false">
+        </service>
     </application>
 
 </manifest>

@@ -1,11 +1,15 @@
 package com.kaku.weac.fragment;
 
+import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.format.DateUtils;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +30,7 @@ import com.kaku.weac.bean.WeatherDaysForecast;
 import com.kaku.weac.bean.WeatherInfo;
 import com.kaku.weac.bean.WeatherLifeIndex;
 import com.kaku.weac.common.WeacConstants;
+import com.kaku.weac.service.AutoUpdateService;
 import com.kaku.weac.util.HttpCallbackListener;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
@@ -73,6 +78,11 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
      * 温度2
      */
     private ImageView mTemperature2Iv;
+
+    /**
+     * 温度3
+     */
+    private ImageView mTemperature3Iv;
 
     /**
      * 天气类型
@@ -508,7 +518,7 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
     /**
      * 下拉刷新ScrollView
      */
-    private PullToRefreshScrollView mPullRefreshScrollView;
+    public static PullToRefreshScrollView sPullRefreshScrollView;
 
     /**
      * 刷新按钮
@@ -545,6 +555,11 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
      */
     private long mLastActiveUpdateTime;
 
+    /**
+     * HOME按钮
+     */
+    private ImageView mHomeBtn;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -553,7 +568,11 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         final View view = inflater.inflate(R.layout.fm_wea, container, false);
         init(view);
         // 初始化天气
-        initWeather(WeatherUtil.readWeatherInfo(getActivity(), "津"));
+        try {
+            initWeather(WeatherUtil.readWeatherInfo(getActivity(), "津"));
+        } catch (Exception e) {
+            LogUtil.e(LOG_TAG, e.toString());
+        }
         isPrepared = true;
         lazyLoad();
         return view;
@@ -580,7 +599,7 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
                     sIsPostDelayed = false;
                     if (!getActivity().isFinishing()) {
                         if (!hasActiveUpdated()) {
-                            mPullRefreshScrollView.setRefreshing();
+                            sPullRefreshScrollView.setRefreshing();
                         }
                         // 加载成功
 //                        mHasLoadedOnce = true;
@@ -623,6 +642,31 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
                 mRefreshBtn.startAnimation(operatingAnim);
                 // 刷新天气
                 refreshWeather();
+
+
+                ////////////////////////
+                Intent intent = new Intent(getActivity(), AutoUpdateService.class);
+                PendingIntent pi = PendingIntent.getService(getActivity(),
+                        1000, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                AlarmManager alarmManager = (AlarmManager) getActivity()
+                        .getSystemService(Context.ALARM_SERVICE);
+
+                // 取得下次响铃时间
+                long nextTime = SystemClock.elapsedRealtime();
+
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, nextTime, 1000 * 60 * 20, pi);
+/////////////////////////////////////////////////
+                break;
+            // HOME按钮
+            case R.id.action_home:
+                //////////////////////
+                Intent i = new Intent(getActivity(), AutoUpdateService.class);
+                PendingIntent p = PendingIntent.getService(getActivity(), 1000,
+                        i, PendingIntent.FLAG_UPDATE_CURRENT);
+                AlarmManager am = (AlarmManager) getActivity()
+                        .getSystemService(Activity.ALARM_SERVICE);
+                am.cancel(p);
+                //////////////////////////
                 break;
             // 雨伞指数
             case R.id.wea_life_index_rlyt_umbrella:
@@ -729,8 +773,6 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
                 new HttpCallbackListener() {
                     @Override
                     public void onFinish(WeatherInfo weatherInfo) {
-                        // 最近一次更细时间
-                        mLastActiveUpdateTime = System.currentTimeMillis();
                         mWeatherInfo = weatherInfo;
                         // 保存天气信息
                         WeatherUtil.saveWeatherInfo(mWeatherInfo, getActivity());
@@ -743,13 +785,7 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
                             @Override
                             public void run() {
                                 try {
-//                                mPullRefreshScrollView.getLoadingLayoutProxy().
-//                                        setLastUpdatedLabel("更新失败");
-                                    // 最近一次更细时间
-                                    mLastActiveUpdateTime = System.currentTimeMillis();
-                                    // 取消刷新旋转动画
-                                    mPullRefreshScrollView.onRefreshComplete();
-                                    mRefreshBtn.clearAnimation();
+                                    stopRefresh();
                                     ToastUtil.showLongToast(getActivity(),
                                             getString(R.string.Internet_fail));
                                 } catch (Exception e1) {
@@ -763,6 +799,18 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
     }
 
     /**
+     * 停止正在刷新动画
+     */
+    private void stopRefresh() {
+        // 停止正在刷新动画
+        sPullRefreshScrollView.onRefreshComplete();
+        // 取消刷新按钮的动画
+        mRefreshBtn.clearAnimation();
+        // 最近一次更细时间
+        mLastActiveUpdateTime = System.currentTimeMillis();
+    }
+
+    /**
      * 设置天气信息
      */
     private class SetWeatherInfoRunnable implements Runnable {
@@ -770,10 +818,7 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         @Override
         public void run() {
             try {
-                // 取消刷新旋转动画
-                mRefreshBtn.clearAnimation();
-                // 下拉刷新完成
-                mPullRefreshScrollView.onRefreshComplete();
+                stopRefresh();
                 initWeather(mWeatherInfo);
             } catch (Exception e) {
                 LogUtil.e(LOG_TAG, e.toString());
@@ -796,7 +841,10 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         List<WeatherLifeIndex> weatherLifeIndexes = weatherInfo.getWeatherLifeIndex();
 
         // 设置城市名
-        mCityNameTv.setText(weatherInfo.getCity());
+        if (weatherInfo.getCity() != null) {
+            mCityNameTv.setText(weatherInfo.getCity());
+        }
+
         // 设置预警信息
         if (weatherInfo.getAlarmType() != null) {
             // 预警
@@ -806,23 +854,55 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
             mAlarmTv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    skipToDetailInterface(weatherInfo.getAlarmType() +
-                            weatherInfo.getAlarmDegree() + alarm, weatherInfo.getAlarmDetail());
+                    if (weatherInfo.getAlarmDegree() != null && weatherInfo.getAlarmDetail() != null) {
+                        skipToDetailInterface(weatherInfo.getAlarmType() +
+                                weatherInfo.getAlarmDegree() + alarm, weatherInfo.getAlarmDetail());
+                    }
                 }
             });
         } else {
             mAlarmTv.setVisibility(View.GONE);
         }
         // 设置更新时间
-        mUpdateTimeTv.setText(String.format(getString(R.string.update_time),
-                weatherInfo.getUpdateTime()));
+        if (weatherInfo.getUpdateTime() != null)
+            mUpdateTimeTv.setText(String.format(getString(R.string.update_time),
+                    weatherInfo.getUpdateTime()));
 
         // 设置温度
         String temp = weatherInfo.getTemperature();
-        int temp1 = Integer.parseInt(temp.substring(0, 1));
-        int temp2 = Integer.parseInt(temp.substring(1));
-        setTemperatureImage(temp1, mTemperature1Iv);
-        setTemperatureImage(temp2, mTemperature2Iv);
+        if (temp != null) {
+            // 两位正数
+            if (temp.length() == 2 && !temp.contains("-")) {
+                int temp1 = Integer.parseInt(temp.substring(0, 1));
+                setTemperatureImage(temp1, mTemperature1Iv);
+                int temp2 = Integer.parseInt(temp.substring(1));
+                setTemperatureImage(temp2, mTemperature2Iv);
+                mTemperature3Iv.setImageResource(0);
+                // 一位
+            } else if (temp.length() == 1 && !temp.contains("-")) {
+                int temp1 = Integer.parseInt(temp);
+                setTemperatureImage(temp1, mTemperature1Iv);
+                mTemperature2Iv.setImageResource(0);
+                mTemperature3Iv.setImageResource(0);
+                // 两位负数
+            } else if (temp.length() == 2 && temp.contains("-")) {
+                mTemperature1Iv.setImageResource(R.drawable.minus);
+                int temp2 = Integer.parseInt(temp.substring(1));
+                setTemperatureImage(temp2, mTemperature2Iv);
+                mTemperature3Iv.setImageResource(0);
+                // 三位负数
+            } else if (temp.length() == 3 && temp.contains("-")) {
+                mTemperature1Iv.setImageResource(R.drawable.minus);
+                int temp2 = Integer.parseInt(temp.substring(1, 2));
+                setTemperatureImage(temp2, mTemperature2Iv);
+                int temp3 = Integer.parseInt(temp.substring(2));
+                setTemperatureImage(temp3, mTemperature3Iv);
+            } else {
+                mTemperature1Iv.setImageResource(R.drawable.number_0);
+                mTemperature2Iv.setImageResource(R.drawable.number_0);
+                mTemperature3Iv.setImageResource(R.drawable.number_0);
+            }
+        }
 
         // 今天天气信息
         WeatherDaysForecast weather2 = weatherDaysForecasts.get(1);
@@ -830,6 +910,7 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         WeatherDaysForecast weather3 = weatherDaysForecasts.get(2);
         // 后天天气信息
         WeatherDaysForecast weather4 = weatherDaysForecasts.get(3);
+
         // 现在小时
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -843,24 +924,31 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         }
 
 
-        // 设置空气质量图片
-        setImage(mAqiTv, getQualityImageId(weatherInfo.getQuality()));
-        // 设置空气质量
-        mAqiTv.setText(String.format(getString(R.string.aqi),
-                weatherInfo.getQuality(), weatherInfo.getAQI()));
+        if (weatherInfo.getQuality() != null && weatherInfo.getAQI() != null) {
+            // 设置空气质量图片
+            setImage(mAqiTv, getQualityImageId(weatherInfo.getQuality()));
+            // 设置空气质量
+            mAqiTv.setText(String.format(getString(R.string.aqi),
+                    weatherInfo.getQuality(), weatherInfo.getAQI()));
+        }
 
-        // 设置湿度图片
-        setImage(mHumidityTv, getHumidityImageId(weatherInfo.getHumidity()));
-        // 设置湿度
-        mHumidityTv.setText(String.format(getString(R.string.humidity),
-                weatherInfo.getHumidity()));
+        if (weatherInfo.getHumidity() != null) {
+            // 设置湿度图片
+            setImage(mHumidityTv, getHumidityImageId(weatherInfo.getHumidity()));
+            // 设置湿度
+            mHumidityTv.setText(String.format(getString(R.string.humidity),
+                    weatherInfo.getHumidity()));
+        }
 
-        // 设置风向图片
-        setImage(mWindTv, getWindImageId(weatherInfo.getWindDirection()));
-        // 设置风向、风力
-        mWindTv.setText(String.format(getString(R.string.aqi)
-                , weatherInfo.getWindDirection(), weatherInfo.getWindPower()));
+        if (weatherInfo.getWindDirection() != null && weatherInfo.getWindPower() != null) {
+            // 设置风向图片
+            setImage(mWindTv, getWindImageId(weatherInfo.getWindDirection()));
+            // 设置风向、风力
+            mWindTv.setText(String.format(getString(R.string.aqi)
+                    , weatherInfo.getWindDirection(), weatherInfo.getWindPower()));
+        }
 
+        // 天气类型图片id
         int weatherId;
 
         // 设置今天天气信息
@@ -1072,7 +1160,7 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
                 imgId = R.drawable.ic_wind_8;
                 break;
             default:
-                imgId = R.drawable.ic_wind_1;
+                imgId = R.drawable.ic_wind_3;
                 break;
         }
         return imgId;
@@ -1105,9 +1193,9 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
             imgId = R.drawable.ic_humidity70;
         else if (num <= 80)
             imgId = R.drawable.ic_humidity80;
-        else if (num <= 90)
+        else if (num < 100)
             imgId = R.drawable.ic_humidity90;
-        else if (num <= 100)
+        else if (num == 100)
             imgId = R.drawable.ic_humidity100;
         else imgId = R.drawable.ic_humidity20;
         return imgId;
@@ -1460,6 +1548,8 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
     private void init(View view) {
         mRefreshBtn = (ImageView) view.findViewById(R.id.action_refresh);
         mRefreshBtn.setOnClickListener(this);
+        mHomeBtn = (ImageView) view.findViewById(R.id.action_home);
+        mHomeBtn.setOnClickListener(this);
 
         mCityNameTv = (TextView) view.findViewById(R.id.action_title);
         mAlarmTv = (TextView) view.findViewById(R.id.alarm);
@@ -1467,6 +1557,7 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
 
         mTemperature1Iv = (ImageView) view.findViewById(R.id.temperature1);
         mTemperature2Iv = (ImageView) view.findViewById(R.id.temperature2);
+        mTemperature3Iv = (ImageView) view.findViewById(R.id.temperature3);
         mWeatherTypeTv = (TextView) view.findViewById(R.id.weather_type);
 
         mAqiTv = (TextView) view.findViewById(R.id.aqi);
@@ -1583,7 +1674,7 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         lifeIndexCarWashRlyt.setOnClickListener(this);
         lifeIndexAirCureRlyt.setOnClickListener(this);
 
-        mPullRefreshScrollView = (PullToRefreshScrollView) view
+        sPullRefreshScrollView = (PullToRefreshScrollView) view
                 .findViewById(R.id.pull_refresh_scrollview);
         // 设置下拉刷新
         setPullToRefresh();
@@ -1594,21 +1685,16 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
      */
 
     private void setPullToRefresh() {
-        mPullRefreshScrollView.getLoadingLayoutProxy().setPullLabel(getString(R.string.pull_to_refresh));
-        mPullRefreshScrollView.getLoadingLayoutProxy().setRefreshingLabel(
+        sPullRefreshScrollView.getLoadingLayoutProxy().setPullLabel(getString(R.string.pull_to_refresh));
+        sPullRefreshScrollView.getLoadingLayoutProxy().setRefreshingLabel(
                 getString(R.string.refreshing));
-        mPullRefreshScrollView.getLoadingLayoutProxy().setReleaseLabel(getString(R.string.leave_to_refresh));
-        mPullRefreshScrollView
+        sPullRefreshScrollView.getLoadingLayoutProxy().setReleaseLabel(getString(R.string.leave_to_refresh));
+        sPullRefreshScrollView
                 .setOnRefreshListener(new OnRefreshListener<ScrollView>() {
 
                     @Override
                     public void onRefresh(
                             PullToRefreshBase<ScrollView> refreshView) {
-                        String label = DateUtils.formatDateTime(
-                                getActivity().getApplicationContext(), System.currentTimeMillis(),
-                                DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
-                        // Update the LastUpdatedLabel
-                        mPullRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                         refreshWeather();
 //                        new GetDataTask().execute();
                     }

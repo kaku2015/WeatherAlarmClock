@@ -55,15 +55,43 @@ public class WeatherUtil {
                     connection.setConnectTimeout(8000);
                     connection.setReadTimeout(8000);
                     InputStream in = connection.getInputStream();
+
+
+/*                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    byte[] buffer = new byte[1024];
+                    int len;
+                    while ((len = in.read(buffer)) > -1) {
+                        baos.write(buffer, 0, len);
+                    }
+                    baos.flush();
+
+                    InputStream stream1 = new ByteArrayInputStream(baos.toByteArray());
+                    InputStream stream2 = new ByteArrayInputStream(baos.toByteArray());*/
+
+
                     // 天气信息
                     WeatherInfo weatherInfo = handleWeatherResponse(in);
 
-/*                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+/*                    BufferedReader reader = new BufferedReader(new InputStreamReader(stream2));
                     StringBuilder response = new StringBuilder();
                     String line;
                     while ((line = reader.readLine()) != null) {
                         response.append(line);
-                    }*/
+                    }
+
+                    File file = new File(Environment.getExternalStorageDirectory()
+                            .getAbsolutePath() + "/WeaAlarmClock/test/" +
+                            new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date())
+                            + ".txt");
+                    if (!file.exists()){
+                        file.createNewFile();
+                    }
+                    FileWriter fw = new FileWriter(file);
+                    fw.write(response.toString());
+                    fw.flush();
+                    fw.close();*/
+
+
                     if (listener != null) {
                         // 加载完成返回
                         listener.onFinish(weatherInfo);

@@ -3,13 +3,11 @@ package com.kaku.weac.fragment;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +28,8 @@ import com.kaku.weac.bean.WeatherDaysForecast;
 import com.kaku.weac.bean.WeatherInfo;
 import com.kaku.weac.bean.WeatherLifeIndex;
 import com.kaku.weac.common.WeacConstants;
-import com.kaku.weac.service.AutoUpdateService;
+import com.kaku.weac.test.AutoUpdateReceiver;
+import com.kaku.weac.test.AutoUpdateService;
 import com.kaku.weac.util.HttpCallbackListener;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
@@ -646,22 +645,14 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
 
                 ////////////////////////
                 Intent intent = new Intent(getActivity(), AutoUpdateService.class);
-                PendingIntent pi = PendingIntent.getService(getActivity(),
-                        1000, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                AlarmManager alarmManager = (AlarmManager) getActivity()
-                        .getSystemService(Context.ALARM_SERVICE);
-
-                // 取得下次响铃时间
-                long nextTime = SystemClock.elapsedRealtime();
-
-                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, nextTime, 1000 * 60 * 20, pi);
+                getActivity().startService(intent);
 /////////////////////////////////////////////////
                 break;
             // HOME按钮
             case R.id.action_home:
                 //////////////////////
-                Intent i = new Intent(getActivity(), AutoUpdateService.class);
-                PendingIntent p = PendingIntent.getService(getActivity(), 1000,
+                Intent i = new Intent(getActivity(), AutoUpdateReceiver.class);
+                PendingIntent p = PendingIntent.getBroadcast(getActivity(), 1000,
                         i, PendingIntent.FLAG_UPDATE_CURRENT);
                 AlarmManager am = (AlarmManager) getActivity()
                         .getSystemService(Activity.ALARM_SERVICE);

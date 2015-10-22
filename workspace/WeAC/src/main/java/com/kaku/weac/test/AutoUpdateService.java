@@ -1,7 +1,11 @@
-package com.kaku.weac.service;
+package com.kaku.weac.test;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Environment;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
@@ -73,6 +77,23 @@ public class AutoUpdateService extends Service {
             }
 
         }).start();
-        return super.onStartCommand(intent, flags, startId);
+
+        Intent i = new Intent(this, AutoUpdateReceiver.class);
+        PendingIntent pi = PendingIntent.getBroadcast(this,
+                1000, i, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) this
+                .getSystemService(Context.ALARM_SERVICE);
+
+        // 取得下次响铃时间
+        long nextTime = System.currentTimeMillis() + 1000 * 60 * 20;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, nextTime, pi);
+        } else {
+            alarmManager.set(AlarmManager.RTC_WAKEUP, nextTime, pi);
+
+        }
+
+        return super.onStartCommand(i, flags, startId);
     }
 }

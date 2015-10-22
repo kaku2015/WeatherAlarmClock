@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:2:1-104:12
+ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:2:1-109:12
 	xmlns:android
 		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:4:5-63
 	package
@@ -42,7 +42,7 @@ ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:
 	android:name
 		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:15:22-81
 application
-ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:17:5-102:19
+ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:17:5-107:19
 MERGED from [com.android.support:support-v4:23.0.0] D:\AndroidStudioProjects\workspace\WeAC\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.0\AndroidManifest.xml:22:5-20
 MERGED from [workspace:PullToRefresh:unspecified] D:\AndroidStudioProjects\workspace\WeAC\build\intermediates\exploded-aar\workspace\PullToRefresh\unspecified\AndroidManifest.xml:11:5-20
 MERGED from [com.android.support:support-v4:23.0.0] D:\AndroidStudioProjects\workspace\WeAC\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.0\AndroidManifest.xml:22:5-20
@@ -200,12 +200,18 @@ action#com.kaku.GuardMasterService
 ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:95:17-69
 	android:name
 		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:95:25-67
-service#com.kaku.weac.service.AutoUpdateService
-ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:98:9-101:19
+service#com.kaku.weac.test.AutoUpdateService
+ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:99:9-102:19
 	android:exported
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:100:13-37
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:101:13-37
 	android:name
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:99:13-54
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:100:13-51
+receiver#com.kaku.weac.test.AutoUpdateReceiver
+ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:104:9-106:38
+	android:process
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:106:13-36
+	android:name
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:105:13-52
 uses-sdk
 INJECTED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [workspace:PagerSlidingTabStrip:unspecified] D:\AndroidStudioProjects\workspace\WeAC\build\intermediates\exploded-aar\workspace\PagerSlidingTabStrip\unspecified\AndroidManifest.xml:6:5-8:41

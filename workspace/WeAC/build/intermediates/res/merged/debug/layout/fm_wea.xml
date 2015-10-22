@@ -400,18 +400,18 @@
                 <com.kaku.weac.view.LineChartView
                     android:id="@+id/line_char_day"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:layout_marginTop="15dp"/>
+                    android:layout_height="80dp"
+                    android:layout_marginTop="10dp"/>
 
                 <com.kaku.weac.view.LineChartView
                     android:id="@+id/line_chart_night"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_height="80dp"
+                    android:layout_marginBottom="10dp"/>
 
                 <LinearLayout
                     style="@style/wea_days_forecast_llyt"
+                    android:layout_marginTop="0dp"
                     >
 
                     <TextView

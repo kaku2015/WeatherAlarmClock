@@ -147,7 +147,7 @@ public class LineChartView extends View {
                     mYAxis[i] = mHeight - (yAxisHeight / 2) - mRadius - mSpace;
                 }
             } else {
-                // 当温度相差小于等于4
+                // 当温度相差小于等于3
                 if (parts <= 3) {
                     yAxisHeight /= 2;
                 } else if (parts <= 5) {

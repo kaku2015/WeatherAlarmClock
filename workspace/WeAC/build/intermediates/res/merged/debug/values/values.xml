@@ -72,6 +72,7 @@
     <string name="cancel">取消</string>
     <string name="car_wash">洗车</string>
     <string name="car_wash_detail">洗车指数详情</string>
+    <string name="city_manage">城市管理</string>
     <string name="click_record">点击录音</string>
     <string name="click_stop">点击结束</string>
     <string name="close_alarm_clock">关闭闹钟</string>
@@ -232,6 +233,7 @@
         <item name="android:background">@drawable/bg_action_bar_button</item>
         <item name="android:paddingLeft">15dp</item>
         <item name="android:paddingRight">15dp</item>
+        <item name="android:layout_gravity">center</item>
     </style>
     <style name="action_llyt">
         <item name="android:layout_width">match_parent</item>
@@ -564,6 +566,7 @@
     <style name="wea_forecast_content_degree_rlyt">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">38dp</item>
+        <item name="android:layout_gravity">center</item>
         <item name="android:layout_marginLeft">10dp</item>
     </style>
     <style name="wea_forecast_content_degree_rlyt_tv">
@@ -584,6 +587,7 @@
     <style name="wea_forecast_content_iv">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
         <item name="android:src">@drawable/ic_weather_no</item>
     </style>
     <style name="wea_forecast_content_llyt">

@@ -15,6 +15,7 @@ public class AutoUpdateReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Intent i = new Intent(context, AutoUpdateService.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startService(i);
 
     }

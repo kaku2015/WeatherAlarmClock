@@ -23,6 +23,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.kaku.weac.R;
+import com.kaku.weac.activities.CityManageActivity;
 import com.kaku.weac.activities.LifeIndexDetailActivity;
 import com.kaku.weac.bean.WeatherDaysForecast;
 import com.kaku.weac.bean.WeatherInfo;
@@ -38,6 +39,7 @@ import com.kaku.weac.util.WeatherUtil;
 import com.kaku.weac.view.LineChartView;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -567,8 +569,9 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         final View view = inflater.inflate(R.layout.fm_wea, container, false);
         init(view);
         // 初始化天气
+        // FIXME: 2015/10/29
         try {
-            initWeather(WeatherUtil.readWeatherInfo(getActivity(), "津"));
+            initWeather(WeatherUtil.readWeatherInfo(getActivity(), "天津"));
         } catch (Exception e) {
             LogUtil.e(LOG_TAG, e.toString());
         }
@@ -650,6 +653,10 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
                 break;
             // HOME按钮
             case R.id.action_home:
+                Intent intent1 = new Intent(getActivity(), CityManageActivity.class);
+                getActivity().startActivity(intent1);
+
+
                 //////////////////////
                 Intent i = new Intent(getActivity(), AutoUpdateReceiver.class);
                 PendingIntent p = PendingIntent.getBroadcast(getActivity(), 1000,
@@ -828,8 +835,23 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         }
         // 多天预报信息
         List<WeatherDaysForecast> weatherDaysForecasts = weatherInfo.getWeatherDaysForecast();
-        // 生活指数信息
-        List<WeatherLifeIndex> weatherLifeIndexes = weatherInfo.getWeatherLifeIndex();
+
+        // 昨天天气信息
+        WeatherDaysForecast weather1 = weatherDaysForecasts.get(0);
+        // 今天天气信息
+        WeatherDaysForecast weather2 = weatherDaysForecasts.get(1);
+        // 明天天气信息
+        WeatherDaysForecast weather3 = weatherDaysForecasts.get(2);
+        // 后天天气信息
+        WeatherDaysForecast weather4 = weatherDaysForecasts.get(3);
+        // 第五天天天气信息
+        WeatherDaysForecast weather5 = weatherDaysForecasts.get(4);
+        // 第六天天气信息
+        WeatherDaysForecast weather6 = weatherDaysForecasts.get(5);
+
+        Calendar calendar = Calendar.getInstance();
+        // 现在小时
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
 
         // 设置城市名
         if (weatherInfo.getCity() != null) {
@@ -855,9 +877,10 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
             mAlarmTv.setVisibility(View.GONE);
         }
         // 设置更新时间
-        if (weatherInfo.getUpdateTime() != null)
+        if (weatherInfo.getUpdateTime() != null) {
             mUpdateTimeTv.setText(String.format(getString(R.string.update_time),
                     weatherInfo.getUpdateTime()));
+        }
 
         // 设置温度
         String temp = weatherInfo.getTemperature();
@@ -895,16 +918,7 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
             }
         }
 
-        // 今天天气信息
-        WeatherDaysForecast weather2 = weatherDaysForecasts.get(1);
-        // 明天天气信息
-        WeatherDaysForecast weather3 = weatherDaysForecasts.get(2);
-        // 后天天气信息
-        WeatherDaysForecast weather4 = weatherDaysForecasts.get(3);
 
-        // 现在小时
-        Calendar calendar = Calendar.getInstance();
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
         // 设置天气类型
         if (hour < 18) {
             // 白天天气
@@ -977,13 +991,6 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
 
         // 设置多天天气预报
 
-        // 昨天天气信息
-        WeatherDaysForecast weather1 = weatherDaysForecasts.get(0);
-        // 第五天天天气信息
-        WeatherDaysForecast weather5 = weatherDaysForecasts.get(4);
-        // 第六天天气信息
-        WeatherDaysForecast weather6 = weatherDaysForecasts.get(5);
-
         // 日期和星期标题 【索引0：日期;索引1：星期】
         String[] day1 = getDay(weather1.getDate());
         String[] day2 = getDay(weather2.getDate());
@@ -1000,8 +1007,19 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         mDaysForecastTvWeek5.setText(getWeek(day5[1]));
         mDaysForecastTvWeek6.setText(getWeek(day6[1]));
 
-        // 当前月份
-        String month = MyUtil.addZero(calendar.get(Calendar.MONTH) + 1);
+        // 月份
+        calendar.add(Calendar.DATE, -1);
+        String month1 = MyUtil.addZero(calendar.get(Calendar.MONTH) + 1);
+        calendar.add(Calendar.DATE, 1);
+        String month2 = MyUtil.addZero(calendar.get(Calendar.MONTH) + 1);
+        calendar.add(Calendar.DATE, 1);
+        String month3 = MyUtil.addZero(calendar.get(Calendar.MONTH) + 1);
+        calendar.add(Calendar.DATE, 1);
+        String month4 = MyUtil.addZero(calendar.get(Calendar.MONTH) + 1);
+        calendar.add(Calendar.DATE, 1);
+        String month5 = MyUtil.addZero(calendar.get(Calendar.MONTH) + 1);
+        calendar.add(Calendar.DATE, 1);
+        String month6 = MyUtil.addZero(calendar.get(Calendar.MONTH) + 1);
 
         // 日
         String day01 = day1[0].split("日")[0];
@@ -1014,12 +1032,12 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         // 斜杠
         String date = getString(R.string.date);
         // 设置日期
-        mDaysForecastTvDay1.setText(String.format(date, month, day01));
-        mDaysForecastTvDay2.setText(String.format(date, month, day02));
-        mDaysForecastTvDay3.setText(String.format(date, month, day03));
-        mDaysForecastTvDay4.setText(String.format(date, month, day04));
-        mDaysForecastTvDay5.setText(String.format(date, month, day05));
-        mDaysForecastTvDay6.setText(String.format(date, month, day06));
+        mDaysForecastTvDay1.setText(String.format(date, month1, day01));
+        mDaysForecastTvDay2.setText(String.format(date, month2, day02));
+        mDaysForecastTvDay3.setText(String.format(date, month3, day03));
+        mDaysForecastTvDay4.setText(String.format(date, month4, day04));
+        mDaysForecastTvDay5.setText(String.format(date, month5, day05));
+        mDaysForecastTvDay6.setText(String.format(date, month6, day06));
 
         // 取得白天天气类型图片id
         int weatherDayId1 = getWeatherTypeImageID(weather1.getTypeDay(), true);
@@ -1045,11 +1063,33 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         mDaysForecastWeaTypeDayTv5.setText(weather5.getTypeDay());
         mDaysForecastWeaTypeDayTv6.setText(weather6.getTypeDay());
 
+
+       /* // 白天温差
+        int diffDay = WeatherUtil.calculateTempDiff(new int[]{getTemp(weather1.getHigh()),
+                getTemp(weather2.getHigh()), getTemp(weather3.getHigh()),
+                getTemp(weather4.getHigh()), getTemp(weather5.getHigh()),
+                getTemp(weather6.getHigh())});
+        // 夜间温差
+        int diffNight = WeatherUtil.calculateTempDiff(new int[]{getTemp(weather1.getLow()),
+                getTemp(weather2.getLow()), getTemp(weather3.getLow()),
+                getTemp(weather4.getLow()), getTemp(weather5.getLow()),
+                getTemp(weather6.getLow())});
+        // 比较白天温差与夜间温差的大小，以此来决定温度曲线
+        int diff = diffDay - diffNight;
+
+        // 当夜间温差大以夜间温度曲线为基准
+        if (diff < 0) {
+            mCharDay.setDiff(diffNight);
+        } else {
+            mCharDay.setDiff(-1);
+        }*/
+
         // 设置白天温度曲线
         mCharDay.setTemp(new int[]{getTemp(weather1.getHigh()),
                 getTemp(weather2.getHigh()), getTemp(weather3.getHigh()),
                 getTemp(weather4.getHigh()), getTemp(weather5.getHigh()),
                 getTemp(weather6.getHigh())});
+//        mCharDay.setTemp(new int[]{3,4,6,5,5,3});
         // 设置文字距离坐标距离
         mCharDay.setTextSpace(10);
         //noinspection deprecation
@@ -1059,11 +1099,19 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         // 重新绘制
         mCharDay.invalidate();
 
+       /* // 当白天温差大以白天温度曲线为基准
+        if (diff > 0) {
+            mCharNight.setDiff(diffDay);
+        } else {
+            mCharNight.setDiff(-1);
+        }*/
+
         // 设置夜间温度曲线
         mCharNight.setTemp(new int[]{getTemp(weather1.getLow()),
                 getTemp(weather2.getLow()), getTemp(weather3.getLow()),
                 getTemp(weather4.getLow()), getTemp(weather5.getLow()),
                 getTemp(weather6.getLow())});
+//        mCharNight.setTemp(new int[]{1,2,6,5,10,8});
         mCharNight.setTextSpace(-10);
         //noinspection deprecation
         int colorNight = getResources().getColor(R.color.blue_ice);
@@ -1111,6 +1159,9 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         mDaysForecastWindPowerTv5.setText(weather5.getWindPowerDay());
         mDaysForecastWindPowerTv6.setText(weather6.getWindPowerDay());
 
+
+        // 生活指数信息
+        List<WeatherLifeIndex> weatherLifeIndexes = weatherInfo.getWeatherLifeIndex();
         // 设置生活指数
         for (WeatherLifeIndex index : weatherLifeIndexes) {
             setLifeIndex(index);

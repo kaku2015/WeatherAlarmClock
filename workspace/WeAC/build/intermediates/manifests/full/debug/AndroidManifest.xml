@@ -76,6 +76,9 @@
         <activity
             android:name="com.kaku.weac.activities.RecordDeleteBatchActivity"
             android:theme="@style/Transparent" />
+        <activity
+            android:name="com.kaku.weac.activities.CityManageActivity"
+            android:theme="@style/Transparent" />
 
         <receiver
             android:name="com.kaku.weac.broadcast.AlarmClockBroadcast"

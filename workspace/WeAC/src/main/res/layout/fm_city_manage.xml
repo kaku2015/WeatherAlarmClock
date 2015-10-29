@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/city_manage_background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout style="@style/action_llyt">
+
+        <ImageView
+            android:id="@+id/action_return"
+            style="@style/action_icon"
+            android:layout_alignParentLeft="true"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_action_previous_item"/>
+
+        <TextView
+            android:id="@+id/action_title"
+            style="@style/action_title"
+            android:text="@string/city_manage"/>
+
+        <ImageView
+            android:id="@+id/action_edit"
+            style="@style/action_icon"
+            android:layout_alignParentRight="true"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_action_edit"/>
+
+        <ImageView
+            android:id="@+id/action_refresh"
+            style="@style/action_icon"
+            android:layout_toLeftOf="@id/action_edit"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_action_refresh"
+            />
+    </RelativeLayout>
+
+    <GridView
+        android:id="@+id/gv_city_manage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:horizontalSpacing="10dp"
+        android:numColumns="3"
+        android:verticalSpacing="10dp">
+
+    </GridView>
+</LinearLayout>

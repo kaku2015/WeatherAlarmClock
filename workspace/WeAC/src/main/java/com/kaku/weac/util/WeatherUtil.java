@@ -420,4 +420,32 @@ public class WeatherUtil {
         }
         return weatherInfo;
     }
+/*
+    *//**
+     * 计算一周气温最大值与最小值的差值
+     *
+     * @param temp 温度数组
+     * @return 温差值
+     *//*
+    public static int calculateTempDiff(int[] temp) {
+        // 存放最低温度
+        int minTemp = 0;
+        // 存放最高温度
+        int maxTemp = 0;
+        for (int item : temp) {
+            if (minTemp == 0) {
+                minTemp = item;
+            }
+            if (maxTemp == 0) {
+                maxTemp = item;
+            }
+            if (item < minTemp) {
+                minTemp = item;
+            }
+            if (item > maxTemp) {
+                maxTemp = item;
+            }
+        }
+        return maxTemp - minTemp;
+    }*/
 }

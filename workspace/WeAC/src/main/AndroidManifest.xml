@@ -73,6 +73,9 @@
         <activity
             android:name=".activities.RecordDeleteBatchActivity"
             android:theme="@style/Transparent"/>
+        <activity
+            android:name=".activities.CityManageActivity"
+            android:theme="@style/Transparent"/>
 
         <receiver
             android:name=".broadcast.AlarmClockBroadcast"

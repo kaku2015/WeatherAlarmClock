@@ -87,6 +87,11 @@ public class LineChartView extends View {
      */
     private float mSpace;
 
+/*    *//**
+     * 温差值
+     *//*
+    private int mDiff = -1;*/
+
     public LineChartView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mDensity = getResources().getDisplayMetrics().density;
@@ -137,6 +142,13 @@ public class LineChartView extends View {
         }
         // 份数
         float parts = maxTemp - minTemp;
+
+        /*if (mDiff == -1) {
+            parts = maxTemp - minTemp;
+        } else {
+            parts = mDiff;
+        }*/
+
         // 白天气温
         if (mTextSpace >= 0) {
             // y轴高度
@@ -329,4 +341,8 @@ public class LineChartView extends View {
     public void setPointColor(int pointColor) {
         mPointColor = pointColor;
     }
+/*
+    public void setDiff(int diff) {
+        mDiff = diff;
+    }*/
 }

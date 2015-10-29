@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="150dp"
+              android:background="@drawable/bg_gv_city_manage"
+              android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/city_weather"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/city_name"
+                style="@style/wea_forecast_title"
+                android:maxLength="6"
+                android:padding="10dp"
+                android:text="@string/dash"
+                android:textSize="16sp"/>
+
+            <LinearLayout style="@style/wea_forecast_content_llyt">
+
+                <ImageView
+                    android:id="@+id/weather_type_iv"
+                    style="@style/wea_forecast_content_iv"/>
+
+                <RelativeLayout style="@style/wea_forecast_content_degree_rlyt">
+
+                    <TextView
+                        android:id="@+id/temp_high"
+                        style="@style/wea_forecast_content_degree_rlyt_tv"
+                        android:layout_alignParentTop="true"/>
+
+                    <TextView
+                        android:id="@+id/temp_low"
+                        style="@style/wea_forecast_content_degree_rlyt_tv"
+                        android:layout_alignParentBottom="true"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/weather_type_tv"
+                style="@style/wea_forecast_content_detail"
+                android:padding="10dp"
+                android:text="@string/no"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/add_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_action_new"
+            android:visibility="gone"/>
+    </FrameLayout>
+
+</LinearLayout>

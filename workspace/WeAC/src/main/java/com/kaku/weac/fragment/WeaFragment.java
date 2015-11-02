@@ -39,7 +39,6 @@ import com.kaku.weac.util.WeatherUtil;
 import com.kaku.weac.view.LineChartView;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -771,26 +770,30 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
                 new HttpCallbackListener() {
                     @Override
                     public void onFinish(WeatherInfo weatherInfo) {
-                        mWeatherInfo = weatherInfo;
-                        // 保存天气信息
-                        WeatherUtil.saveWeatherInfo(mWeatherInfo, getActivity());
-                        getActivity().runOnUiThread(new SetWeatherInfoRunnable());
+                        try {
+                            mWeatherInfo = weatherInfo;
+                            // 保存天气信息
+                            WeatherUtil.saveWeatherInfo(mWeatherInfo, getActivity());
+                            getActivity().runOnUiThread(new SetWeatherInfoRunnable());
+                        } catch (Exception e) {
+                            LogUtil.e(LOG_TAG, e.toString());
+                        }
                     }
 
                     @Override
                     public void onError(final Exception e) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
+                        try {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
                                     stopRefresh();
                                     ToastUtil.showLongToast(getActivity(),
                                             getString(R.string.Internet_fail));
-                                } catch (Exception e1) {
-                                    LogUtil.e(LOG_TAG, e1.toString());
                                 }
-                            }
-                        });
+                            });
+                        } catch (Exception e1) {
+                            LogUtil.e(LOG_TAG, e1.toString());
+                        }
                     }
                 }
         );

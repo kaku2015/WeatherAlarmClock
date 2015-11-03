@@ -15,6 +15,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -32,12 +33,14 @@ import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.test.AutoUpdateReceiver;
 import com.kaku.weac.test.AutoUpdateService;
 import com.kaku.weac.util.HttpCallbackListener;
+import com.kaku.weac.util.HttpUtil;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.ToastUtil;
 import com.kaku.weac.util.WeatherUtil;
 import com.kaku.weac.view.LineChartView;
 
+import java.io.ByteArrayInputStream;
 import java.util.Calendar;
 import java.util.List;
 
@@ -566,6 +569,11 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         LogUtil.i(LOG_TAG, "onCreateView");
 
         final View view = inflater.inflate(R.layout.fm_wea, container, false);
+
+//        LinearLayout backGround = (LinearLayout) view.findViewById(R.id.wea_background);
+//        // 设置页面背景
+//        backGround.setBackground(MyUtil.getWallPaperDrawable(getActivity()));
+
         init(view);
         // 初始化天气
         // FIXME: 2015/10/29
@@ -766,12 +774,13 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
      * 刷新天气
      */
     private void refreshWeather() {
-        WeatherUtil.sendHttpRequest("http://wthrcdn.etouch.cn/WeatherApi?citykey=101030100",
+        HttpUtil.sendHttpRequest("http://wthrcdn.etouch.cn/WeatherApi?citykey=101030100",
                 new HttpCallbackListener() {
                     @Override
-                    public void onFinish(WeatherInfo weatherInfo) {
+                    public void onFinish(String response) {
                         try {
-                            mWeatherInfo = weatherInfo;
+                            mWeatherInfo = WeatherUtil.handleWeatherResponse(
+                                    new ByteArrayInputStream(response.getBytes()));
                             // 保存天气信息
                             WeatherUtil.saveWeatherInfo(mWeatherInfo, getActivity());
                             getActivity().runOnUiThread(new SetWeatherInfoRunnable());

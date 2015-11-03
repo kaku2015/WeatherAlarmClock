@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
     android:id="@+id/llyt_activity_main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="wrap_content"
+        android:paddingBottom="54dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="54dp"
+        android:layout_gravity="bottom"
         android:baselineAligned="false"
         android:orientation="horizontal">
 
@@ -24,7 +25,7 @@
             <TextView
                 android:id="@+id/tv_alarm_clock"
                 style="@style/tab_tv"
-                android:text="@string/alarm_clock" />
+                android:text="@string/alarm_clock"/>
         </LinearLayout>
 
         <LinearLayout
@@ -34,7 +35,7 @@
             <TextView
                 android:id="@+id/tv_wea"
                 style="@style/tab_tv"
-                android:text="@string/wea" />
+                android:text="@string/wea"/>
         </LinearLayout>
 
         <LinearLayout
@@ -44,7 +45,7 @@
             <TextView
                 android:id="@+id/tv_time"
                 style="@style/tab_tv"
-                android:text="@string/time" />
+                android:text="@string/time"/>
         </LinearLayout>
 
 
@@ -55,8 +56,8 @@
             <TextView
                 android:id="@+id/tv_more"
                 style="@style/tab_tv"
-                android:text="@string/more" />
+                android:text="@string/more"/>
         </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</FrameLayout>

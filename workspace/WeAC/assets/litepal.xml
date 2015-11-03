@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="weac"></dbname>
+
+    <version value="1"></version>
+
+    <list>
+        <mapping class="com.kaku.weac.model.Province"></mapping>
+        <mapping class="com.kaku.weac.model.City"></mapping>
+        <mapping class="com.kaku.weac.model.Country"></mapping>
+    </list>
+</litepal>  

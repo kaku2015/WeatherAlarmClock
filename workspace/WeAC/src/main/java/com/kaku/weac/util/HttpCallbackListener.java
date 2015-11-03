@@ -12,12 +12,14 @@ public interface HttpCallbackListener {
 
     /**
      * 加载完成
-     * @param weatherInfo 天气信息
+     *
+     * @param response http返回信息
      */
-    void onFinish(WeatherInfo weatherInfo);
+    void onFinish(String response);
 
     /**
      * 加载失败
+     *
      * @param e 错误信息
      */
     void onError(Exception e);

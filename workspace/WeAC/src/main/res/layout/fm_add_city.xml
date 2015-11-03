@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/city_manage_background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout style="@style/action_llyt">
+
+        <ImageView
+            android:id="@+id/action_return"
+            style="@style/action_icon"
+            android:layout_alignParentLeft="true"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_action_previous_item"/>
+
+        <TextView
+            android:id="@+id/action_title"
+            style="@style/action_title"
+            android:text="@string/add_city"/>
+
+    </RelativeLayout>
+
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="19dp"
+        android:queryHint="请输入城市名称"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="19dp"
+        android:text="@string/hot_city"
+        android:textColor="@color/white_trans90"
+        android:textSize="18sp"
+        />
+
+    <View
+        style="@style/divider_line_wea"
+        android:layout_height="1dp"
+        android:layout_marginLeft="19dp"
+        android:layout_marginRight="19dp"
+        android:layout_marginTop="5dp"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="@style/hot_city_item_llyt"
+                >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        style="@style/hot_city_item_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="0"
+                        android:drawableLeft="@drawable/ic_gps"
+                        android:drawablePadding="5dp"
+                        android:text="@string/location"/>
+                </LinearLayout>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/beijing"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/tianjin"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/shanghai"/>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/hot_city_item_llyt"
+                >
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/guangzhou"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/shenzhen"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/chongqing"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/fuzhou"/>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/hot_city_item_llyt"
+                >
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/xian"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/nanning"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/kunming"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/jinan"/>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/hot_city_item_llyt"
+                >
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/wuhan"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/haikou"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/sanya"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/changchun"/>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/hot_city_item_llyt"
+                >
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/hefei"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/zhengzhou"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/taiyuan"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/nanchang"/>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/hot_city_item_llyt"
+                >
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/lasa"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/xining"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/shijiazhuang"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/haerbin"/>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/hot_city_item_llyt"
+                >
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/qingdao"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/wuxi"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/xiamen"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/changsha"/>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/hot_city_item_llyt"
+                >
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/hangzhou"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/xianggang"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/aomen"/>
+
+                <TextView
+                    style="@style/hot_city_item_tv"
+                    android:text="@string/taibei"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="19dp"
+                android:layout_marginRight="19dp"
+                android:background="@drawable/bg_gv_city_manage"
+                android:gravity="center"
+                android:text="@string/more_city"
+                android:textColor="@color/white_trans90"
+                android:textSize="16sp"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

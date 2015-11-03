@@ -19,8 +19,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,81 +34,6 @@ public class WeatherUtil {
      * Log tag ：WeatherUtil
      */
     private static final String LOG_TAG = "WeatherUtil";
-
-    /**
-     * 发送http请求
-     *
-     * @param address  网址
-     * @param listener 响应监听
-     */
-    public static void sendHttpRequest(final String address, final HttpCallbackListener listener) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                HttpURLConnection connection = null;
-                try {
-                    URL url = new URL(address);
-                    connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("GET");
-                    connection.setConnectTimeout(8000);
-                    connection.setReadTimeout(8000);
-                    InputStream in = connection.getInputStream();
-
-
-/*                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    byte[] buffer = new byte[1024];
-                    int len;
-                    while ((len = in.read(buffer)) > -1) {
-                        baos.write(buffer, 0, len);
-                    }
-                    baos.flush();
-
-                    InputStream stream1 = new ByteArrayInputStream(baos.toByteArray());
-                    InputStream stream2 = new ByteArrayInputStream(baos.toByteArray());*/
-
-
-                    // 天气信息
-                    WeatherInfo weatherInfo = handleWeatherResponse(in);
-
-/*                    BufferedReader reader = new BufferedReader(new InputStreamReader(stream2));
-                    StringBuilder response = new StringBuilder();
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        response.append(line);
-                    }
-
-                    File file = new File(Environment.getExternalStorageDirectory()
-                            .getAbsolutePath() + "/WeaAlarmClock/test/" +
-                            new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date())
-                            + ".txt");
-                    if (!file.exists()){
-                        file.createNewFile();
-                    }
-                    FileWriter fw = new FileWriter(file);
-                    fw.write(response.toString());
-                    fw.flush();
-                    fw.close();*/
-
-
-                    if (listener != null) {
-                        // 加载完成返回
-                        listener.onFinish(weatherInfo);
-                    }
-                } catch (Exception e) {
-                    LogUtil.e(LOG_TAG, e.toString());
-                    if (listener != null) {
-                        // 加载失败
-                        listener.onError(e);
-                    }
-                } finally {
-                    if (connection != null) {
-                        connection.disconnect();
-                    }
-
-                }
-            }
-        }).start();
-    }
 
     /**
      * 解析天气信息XML
@@ -420,32 +343,4 @@ public class WeatherUtil {
         }
         return weatherInfo;
     }
-/*
-    *//**
-     * 计算一周气温最大值与最小值的差值
-     *
-     * @param temp 温度数组
-     * @return 温差值
-     *//*
-    public static int calculateTempDiff(int[] temp) {
-        // 存放最低温度
-        int minTemp = 0;
-        // 存放最高温度
-        int maxTemp = 0;
-        for (int item : temp) {
-            if (minTemp == 0) {
-                minTemp = item;
-            }
-            if (maxTemp == 0) {
-                maxTemp = item;
-            }
-            if (item < minTemp) {
-                minTemp = item;
-            }
-            if (item > maxTemp) {
-                maxTemp = item;
-            }
-        }
-        return maxTemp - minTemp;
-    }*/
 }

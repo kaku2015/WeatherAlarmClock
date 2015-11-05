@@ -69,8 +69,16 @@ public class MoreFragment extends Fragment {
                     R.id.llyt_activity_main);
             // 更新壁纸
             vg.setBackgroundResource(MyUtil.getWallPaper(getActivity()));
+
+            // 更新天气高斯模糊背景
+            if (WeaFragment.sBlurDrawable != null && WeaFragment.sBackGround != null) {
+                WeaFragment.sBlurDrawable = MyUtil.getWallPaperDrawable(getActivity());
+                WeaFragment.sBlurDrawable.setAlpha(WeaFragment.sAlpha);
+                WeaFragment.sBackGround.setBackground(WeaFragment.sBlurDrawable);
+            }
         }
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

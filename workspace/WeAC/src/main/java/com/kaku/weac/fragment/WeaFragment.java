@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+import com.handmark.pulltorefresh.library.ScrollViewListener;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.CityManageActivity;
 import com.kaku.weac.activities.LifeIndexDetailActivity;
@@ -563,17 +564,32 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
      */
     private ImageView mHomeBtn;
 
+    /**
+     * 设置壁纸
+     */
+    public static LinearLayout sBackGround;
+
+    /**
+     * 模糊处理过的Drawable
+     */
+    public static Drawable sBlurDrawable;
+
+    /**
+     * 屏幕密度
+     */
+    private float mDensity;
+
+    /**
+     * 透明
+     */
+    public static int sAlpha = 0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         LogUtil.i(LOG_TAG, "onCreateView");
 
         final View view = inflater.inflate(R.layout.fm_wea, container, false);
-
-//        LinearLayout backGround = (LinearLayout) view.findViewById(R.id.wea_background);
-//        // 设置页面背景
-//        backGround.setBackground(MyUtil.getWallPaperDrawable(getActivity()));
-
         init(view);
         // 初始化天气
         // FIXME: 2015/10/29
@@ -1728,10 +1744,31 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         lifeIndexCarWashRlyt.setOnClickListener(this);
         lifeIndexAirCureRlyt.setOnClickListener(this);
 
+        mDensity = getResources().getDisplayMetrics().density;
+        sBlurDrawable = MyUtil.getWallPaperDrawable(getActivity());
+        sBackGround = (LinearLayout) view.findViewById(R.id.wea_background);
+
         sPullRefreshScrollView = (PullToRefreshScrollView) view
                 .findViewById(R.id.pull_refresh_scrollview);
         // 设置下拉刷新
         setPullToRefresh();
+        sPullRefreshScrollView.setScrollViewListener(new ScrollViewListener() {
+            @Override
+            public void onScrollChanged(PullToRefreshScrollView scrollView, int x, int y, int oldx, int oldy) {
+//                LogUtil.i(LOG_TAG, "x: " + x + "y: " + y + "oldx: " + oldx + "oldy: " + oldy);
+                // scroll最大滚动距离（xxxh：2320）/密度（xxxh：3）/1.5  =  515
+                sAlpha = Math.round(Math.round(y / mDensity / 1.5));
+                if (sAlpha > 255) {
+                    sAlpha = 255;
+                } else if (sAlpha < 0) {
+                    sAlpha = 0;
+                }
+                // 设置模糊处理后drawable的透明度
+                sBlurDrawable.setAlpha(sAlpha);
+                // 设置背景
+                sBackGround.setBackground(sBlurDrawable);
+            }
+        });
     }
 
     /**
@@ -1772,4 +1809,9 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        sAlpha = 0;
+    }
 }

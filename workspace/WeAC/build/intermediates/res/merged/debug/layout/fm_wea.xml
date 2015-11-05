@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/wea_background"
-              xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<LinearLayout
+    android:id="@+id/wea_background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
     <RelativeLayout style="@style/action_llyt">
@@ -744,6 +745,7 @@
                             <RelativeLayout
                                 android:id="@+id/wea_life_index_rlyt_air_cure"
                                 style="@style/wea_life_index_rlyt_right"
+                                android:paddingBottom="0dp"
                                 >
 
                                 <ImageView

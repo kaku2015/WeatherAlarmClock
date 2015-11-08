@@ -859,18 +859,43 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         // 多天预报信息
         List<WeatherDaysForecast> weatherDaysForecasts = weatherInfo.getWeatherDaysForecast();
 
+        // 昨天天气信息（23：45开始到05：20以前的数据的日期和周）
+        WeatherDaysForecast weather;
         // 昨天天气信息
-        WeatherDaysForecast weather1 = weatherDaysForecasts.get(0);
+        WeatherDaysForecast weather1;
         // 今天天气信息
-        WeatherDaysForecast weather2 = weatherDaysForecasts.get(1);
+        WeatherDaysForecast weather2;
         // 明天天气信息
-        WeatherDaysForecast weather3 = weatherDaysForecasts.get(2);
+        WeatherDaysForecast weather3;
         // 后天天气信息
-        WeatherDaysForecast weather4 = weatherDaysForecasts.get(3);
+        WeatherDaysForecast weather4;
         // 第五天天天气信息
-        WeatherDaysForecast weather5 = weatherDaysForecasts.get(4);
+        WeatherDaysForecast weather5;
         // 第六天天气信息
-        WeatherDaysForecast weather6 = weatherDaysForecasts.get(5);
+        WeatherDaysForecast weather6;
+
+        String time[] = weatherInfo.getUpdateTime().split(":");
+        int hour1 = Integer.parseInt(time[0]);
+        int minute1 = Integer.parseInt(time[1]);
+        //更新时间从23：45开始到05：20以前的数据，后移一天填充
+        if ((hour1 == 23 && minute1 >= 45) || (hour1 < 5) ||
+                ((hour1 == 5) && (minute1 < 20))) {
+            weather = weatherDaysForecasts.get(0);
+            weather1 = weatherDaysForecasts.get(1);
+            weather2 = weatherDaysForecasts.get(2);
+            weather3 = weatherDaysForecasts.get(3);
+            weather4 = weatherDaysForecasts.get(4);
+            weather5 = weatherDaysForecasts.get(5);
+            weather6 = weatherDaysForecasts.get(5);
+        } else {
+            weather = weatherDaysForecasts.get(0);
+            weather1 = weatherDaysForecasts.get(0);
+            weather2 = weatherDaysForecasts.get(1);
+            weather3 = weatherDaysForecasts.get(2);
+            weather4 = weatherDaysForecasts.get(3);
+            weather5 = weatherDaysForecasts.get(4);
+            weather6 = weatherDaysForecasts.get(5);
+        }
 
         Calendar calendar = Calendar.getInstance();
         // 现在小时
@@ -1013,12 +1038,27 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         // 设置多天天气预报
 
         // 日期和星期标题 【索引0：日期;索引1：星期】
-        String[] day1 = getDay(weather1.getDate());
-        String[] day2 = getDay(weather2.getDate());
-        String[] day3 = getDay(weather3.getDate());
-        String[] day4 = getDay(weather4.getDate());
-        String[] day5 = getDay(weather5.getDate());
-        String[] day6 = getDay(weather6.getDate());
+        String[] day1;
+        String[] day2;
+        String[] day3;
+        String[] day4;
+        String[] day5;
+        String[] day6;
+        if ((hour1 == 23 && minute1 >= 45) || (hour1 < 5) || ((hour1 == 5) && (minute1 < 20))) {
+            day1 = getDay(weather.getDate());
+            day2 = getDay(weather1.getDate());
+            day3 = getDay(weather2.getDate());
+            day4 = getDay(weather3.getDate());
+            day5 = getDay(weather4.getDate());
+            day6 = getDay(weather5.getDate());
+        } else {
+            day1 = getDay(weather1.getDate());
+            day2 = getDay(weather2.getDate());
+            day3 = getDay(weather3.getDate());
+            day4 = getDay(weather4.getDate());
+            day5 = getDay(weather5.getDate());
+            day6 = getDay(weather6.getDate());
+        }
 
         // 设置标题星期
         mDaysForecastTvWeek1.setText(getString(R.string.yesterday));

@@ -883,16 +883,14 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
 
         // 设置预警信息
         if (weatherInfo.getAlarmType() != null) {
-            // 预警
-            final String alarm = getString(R.string.alarm);
             mAlarmTv.setVisibility(View.VISIBLE);
-            mAlarmTv.setText(weatherInfo.getAlarmType() + alarm);
+            mAlarmTv.setText(getString(R.string.alarm, weatherInfo.getAlarmType()));
             mAlarmTv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (weatherInfo.getAlarmDegree() != null && weatherInfo.getAlarmDetail() != null) {
-                        skipToDetailInterface(weatherInfo.getAlarmType() +
-                                weatherInfo.getAlarmDegree() + alarm, weatherInfo.getAlarmDetail());
+                        skipToDetailInterface(getString(R.string.alarm_title, weatherInfo.getAlarmType(),
+                                weatherInfo.getAlarmDegree()), weatherInfo.getAlarmDetail());
                     }
                 }
             });

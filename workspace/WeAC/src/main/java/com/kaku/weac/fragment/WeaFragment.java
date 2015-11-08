@@ -1086,60 +1086,16 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         mDaysForecastWeaTypeDayTv5.setText(weather5.getTypeDay());
         mDaysForecastWeaTypeDayTv6.setText(weather6.getTypeDay());
 
-
-       /* // 白天温差
-        int diffDay = WeatherUtil.calculateTempDiff(new int[]{getTemp(weather1.getHigh()),
+        // 设置白天温度曲线
+        mCharView.setTempDay(new int[]{getTemp(weather1.getHigh()),
                 getTemp(weather2.getHigh()), getTemp(weather3.getHigh()),
                 getTemp(weather4.getHigh()), getTemp(weather5.getHigh()),
                 getTemp(weather6.getHigh())});
-        // 夜间温差
-        int diffNight = WeatherUtil.calculateTempDiff(new int[]{getTemp(weather1.getLow()),
+        // 设置夜间温度曲线
+        mCharView.setTempNight(new int[]{getTemp(weather1.getLow()),
                 getTemp(weather2.getLow()), getTemp(weather3.getLow()),
                 getTemp(weather4.getLow()), getTemp(weather5.getLow()),
                 getTemp(weather6.getLow())});
-        // 比较白天温差与夜间温差的大小，以此来决定温度曲线
-        int diff = diffDay - diffNight;
-
-        // 当夜间温差大以夜间温度曲线为基准
-        if (diff < 0) {
-            mCharDay.setDiff(diffNight);
-        } else {
-            mCharDay.setDiff(-1);
-        }*/
-
-        // 设置白天温度曲线
-//        mCharView.setTempDay(new int[]{getTemp(weather1.getHigh()),
-//                getTemp(weather2.getHigh()), getTemp(weather3.getHigh()),
-//                getTemp(weather4.getHigh()), getTemp(weather5.getHigh()),
-//                getTemp(weather6.getHigh())});
-        mCharView.setTempDay(new int[]{5, 5, 6, 8, 5, 5});
-        // 设置文字距离坐标距离
-//        mCharDay.setTextSpace(10);
-        //noinspection deprecation
-//        int colorDay = getResources().getColor(R.color.yellow_hot);
-//        mCharDay.setLineColor(colorDay);
-//        mCharDay.setPointColor(colorDay);
-        // 重新绘制
-//        mCharDay.invalidate();
-
-       /* // 当白天温差大以白天温度曲线为基准
-        if (diff > 0) {
-            mCharNight.setDiff(diffDay);
-        } else {
-            mCharNight.setDiff(-1);
-        }*/
-
-        // 设置夜间温度曲线
-//        mCharView.setTempNight(new int[]{getTemp(weather1.getLow()),
-//                getTemp(weather2.getLow()), getTemp(weather3.getLow()),
-//                getTemp(weather4.getLow()), getTemp(weather5.getLow()),
-//                getTemp(weather6.getLow())});
-        mCharView.setTempNight(new int[]{3, 4, 3, 5, 4, 3});
-//        mCharNight.setTextSpace(-10);
-        //noinspection deprecation
-//        int colorNight = getResources().getColor(R.color.blue_ice);
-//        mCharNight.setLineColor(colorNight);
-//        mCharNight.setPointColor(colorNight);
         mCharView.invalidate();
 
         // 设置夜间天气类型文字

@@ -196,42 +196,11 @@ public class LineChartViewDouble extends View {
                 mYAxisNight[i] = yAxisHeight / 2 + length;
             }
         } else {
-            // 白天，夜间的单独最大温差
-            float diff = (maxTempDay - minTempDay) > (maxTempNight - minTempNight) ?
-                    (maxTempDay - minTempDay) : (maxTempNight - minTempNight);
-            // 当温度相差小于等于3
-            if (diff <= 3) {
-                // 设置y轴集合
-                setYAxis(minTemp, parts, length, yAxisHeight, yAxisHeight / 2);
-                // 当温度相差小于等于5
-            } else if (diff <= 5) {
-                setYAxis(minTemp, parts, length, yAxisHeight, Math.round(yAxisHeight / 1.5));
-            } else {
-                // 份数值
-                float partValue = yAxisHeight / parts;
-                for (int i = 0; i < LENGTH; i++) {
-                    mYAxisDay[i] = mHeight - partValue * (mTempDay[i] - minTemp) - length;
-                    mYAxisNight[i] = mHeight - partValue * (mTempNight[i] - minTemp) - length;
-                }
+            float partValue = yAxisHeight / parts;
+            for (int i = 0; i < LENGTH; i++) {
+                mYAxisDay[i] = mHeight - partValue * (mTempDay[i] - minTemp) - length;
+                mYAxisNight[i] = mHeight - partValue * (mTempNight[i] - minTemp) - length;
             }
-        }
-    }
-
-    /**
-     * 设置y轴集合
-     *
-     * @param minTemp     最小温度
-     * @param parts       份数
-     * @param length      集合大小
-     * @param yAxisHeight y轴高度
-     * @param scaleHeight 调整后的y轴高度
-     */
-    private void setYAxis(int minTemp, float parts, float length, float yAxisHeight, float scaleHeight) {
-        // 份数值
-        float partValue = scaleHeight / parts;
-        for (int i = 0; i < LENGTH; i++) {
-            mYAxisDay[i] = mHeight - partValue * (mTempDay[i] - minTemp) - length - (yAxisHeight - scaleHeight) / 2;
-            mYAxisNight[i] = mHeight - partValue * (mTempNight[i] - minTemp) - length - (yAxisHeight - scaleHeight) / 2;
         }
     }
 

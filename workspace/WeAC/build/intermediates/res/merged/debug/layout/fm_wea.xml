@@ -399,17 +399,13 @@
 
                 </LinearLayout>
 
-                <com.kaku.weac.view.LineChartView
-                    android:id="@+id/line_char_day"
+                <com.kaku.weac.view.LineChartViewDouble
+                    android:id="@+id/line_char"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginTop="10dp"/>
-
-                <com.kaku.weac.view.LineChartView
-                    android:id="@+id/line_chart_night"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_height="160dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    />
 
                 <LinearLayout
                     style="@style/wea_days_forecast_llyt"

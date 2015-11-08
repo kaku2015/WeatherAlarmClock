@@ -255,8 +255,14 @@ public class AlarmClockNewFragment extends Fragment implements OnClickListener,
     }
 
     private void initVolume(View view) {
+        final SharedPreferences share = getActivity().getSharedPreferences(WeacConstants.EXTRA_WEAC_SHARE,
+                Activity.MODE_PRIVATE);
+        // 音量
+        final int volume = share.getInt(WeacConstants.AlARM_VOLUME, 8);
         // 音量选择SeekBar
         mVolumeSkBar = (SeekBar) view.findViewById(R.id.volumn_sk);
+        // 设置当前音量显示
+        mVolumeSkBar.setProgress(volume);
         mVolumeSkBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
             @Override
@@ -264,6 +270,9 @@ public class AlarmClockNewFragment extends Fragment implements OnClickListener,
                 // 保存设置的音量
                 mAlarmClock.setVolume(seekBar.getProgress());
 
+                final SharedPreferences.Editor editor = share.edit();
+                editor.putInt(WeacConstants.AlARM_VOLUME, seekBar.getProgress());
+                editor.apply();
             }
 
             @Override
@@ -278,7 +287,7 @@ public class AlarmClockNewFragment extends Fragment implements OnClickListener,
             }
         });
         // 初始化闹钟实例的音量
-        mAlarmClock.setVolume(mVolumeSkBar.getProgress());
+        mAlarmClock.setVolume(volume);
 
     }
 

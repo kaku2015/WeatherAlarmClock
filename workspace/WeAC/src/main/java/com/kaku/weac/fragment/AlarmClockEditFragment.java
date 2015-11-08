@@ -2,6 +2,7 @@ package com.kaku.weac.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -270,6 +271,12 @@ public class AlarmClockEditFragment extends Fragment implements
             public void onStopTrackingTouch(SeekBar seekBar) {
                 // 保存设置的音量
                 mAlarmClock.setVolume(seekBar.getProgress());
+
+                final SharedPreferences share = getActivity().getSharedPreferences(WeacConstants.EXTRA_WEAC_SHARE,
+                        Activity.MODE_PRIVATE);
+                final SharedPreferences.Editor editor = share.edit();
+                editor.putInt(WeacConstants.AlARM_VOLUME, seekBar.getProgress());
+                editor.apply();
 
             }
 

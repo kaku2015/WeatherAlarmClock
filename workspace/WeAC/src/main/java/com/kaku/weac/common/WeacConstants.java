@@ -24,6 +24,11 @@ public class WeacConstants {
     public static final String WALLPAPER_POSITION = "wallpaper_position";
 
     /**
+     * 保存的闹钟铃声音量
+     */
+    public static final String AlARM_VOLUME = "alarm_volume";
+
+    /**
      * 铃声名
      */
     public static final String RING_NAME = "ring_name";

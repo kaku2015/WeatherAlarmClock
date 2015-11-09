@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.kaku.weac.R;
@@ -25,10 +26,22 @@ import java.util.List;
  * @author 咖枯
  * @version 1.0 2015/10/22
  */
-public class CityManageFragment extends Fragment {
+public class CityManageFragment extends Fragment implements View.OnClickListener {
 
+    /**
+     * 城市管理列表
+     */
     private List<CityManage> mCityManageList;
+
+    /**
+     * 城市管理adapter
+     */
     private CityManageAdapter mCityManageAdapter;
+
+    /**
+     * 返回按钮
+     */
+    private ImageView mReturnBtn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,8 +75,19 @@ public class CityManageFragment extends Fragment {
             }
         });
 
+        mReturnBtn = (ImageView) view.findViewById(R.id.action_return);
+        mReturnBtn.setOnClickListener(this);
 
         return view;
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            // 返回按钮
+            case R.id.action_return:
+                getActivity().finish();
+                break;
+        }
+    }
 }

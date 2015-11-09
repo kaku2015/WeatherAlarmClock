@@ -58,9 +58,9 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
                     .findViewById(R.id.temp_low);
             viewHolder.weatherTypeTv = (TextView) convertView
                     .findViewById(R.id.weather_type_tv);
-            convertView.setTag(viewHolder);
             viewHolder.addCityIv = (ImageView) convertView
                     .findViewById(R.id.add_city);
+            convertView.setTag(viewHolder);
 
         } else {
             viewHolder = (ViewHolder) convertView.getTag();

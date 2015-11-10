@@ -5,6 +5,7 @@ import com.kaku.weac.model.Country;
 import com.kaku.weac.model.Province;
 
 import org.litepal.crud.DataSupport;
+import org.litepal.tablemanager.Connector;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class WeatherDBOperate {
     private static WeatherDBOperate mWeatherDBOperate;
 
     public WeatherDBOperate() {
-//        SQLiteDatabase db = Connector.getDatabase();
+        Connector.getDatabase();
     }
 
     public synchronized static WeatherDBOperate getInstance() {

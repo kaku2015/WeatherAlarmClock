@@ -1742,7 +1742,7 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         setPullToRefresh();
         sPullRefreshScrollView.setScrollViewListener(new ScrollViewListener() {
             @Override
-            public void onScrollChanged(PullToRefreshScrollView scrollView, int x, int y, int oldx, int oldy) {
+            public void onScrollChanged(ScrollView scrollView, int x, int y, int oldx, int oldy) {
 //                LogUtil.i(LOG_TAG, "x: " + x + "y: " + y + "oldx: " + oldx + "oldy: " + oldy);
                 // scroll最大滚动距离（xxxh：2320）/密度（xxxh：3）/1.5  =  515
                 sAlpha = Math.round(Math.round(y / mDensity / 1.5));

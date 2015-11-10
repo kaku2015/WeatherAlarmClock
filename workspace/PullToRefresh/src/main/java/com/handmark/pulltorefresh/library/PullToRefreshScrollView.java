@@ -109,7 +109,7 @@ public class PullToRefreshScrollView extends PullToRefreshBase<ScrollView> {
         protected void onScrollChanged(int l, int t, int oldl, int oldt) {
             super.onScrollChanged(l, t, oldl, oldt);
             if (mScrollViewListener != null) {
-                mScrollViewListener.onScrollChanged(PullToRefreshScrollView.this, l, t, oldl, oldt);
+                mScrollViewListener.onScrollChanged(this, l, t, oldl, oldt);
             }
         }
 

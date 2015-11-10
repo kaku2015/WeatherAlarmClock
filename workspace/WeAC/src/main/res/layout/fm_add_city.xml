@@ -32,6 +32,7 @@
         />
 
     <TextView
+        android:id="@+id/gv_add_city_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="19dp"
@@ -56,16 +57,17 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/more_city_btn"
+            android:id="@+id/more_city_and_return_btn"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="20dp"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/bg_gv_city_manage">
 
             <TextView
+                android:id="@+id/more_city_and_return_btn_tv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -80,7 +82,8 @@
             android:id="@+id/gv_add_city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@id/more_city_btn"
+            android:layout_above="@id/more_city_and_return_btn"
+            android:layout_alignParentTop="true"
             android:numColumns="4">
 
         </GridView>

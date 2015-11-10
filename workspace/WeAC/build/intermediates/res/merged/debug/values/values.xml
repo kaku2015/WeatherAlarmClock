@@ -104,17 +104,14 @@
     <string name="alarm_clock">闹钟</string>
     <string name="alarm_title">%1$s%2$s预警</string>
     <string name="alter_time">修改时间：</string>
-    <string name="aomen">澳门</string>
     <string name="app_name">天气闹钟</string>
     <string name="aqi">%1$s %2$s</string>
-    <string name="beijing">北京</string>
+    <string name="back">返回</string>
     <string name="caesura">、</string>
     <string name="cancel">取消</string>
     <string name="car_wash">洗车</string>
     <string name="car_wash_detail">洗车指数详情</string>
-    <string name="changchun">长春</string>
-    <string name="changsha">长沙</string>
-    <string name="chongqing">重庆</string>
+    <string name="china">中国</string>
     <string name="city_manage">城市管理</string>
     <string name="click_record">点击录音</string>
     <string name="click_stop">点击结束</string>
@@ -148,12 +145,6 @@
     <string name="five_h">五</string>
     <string name="four_h">四</string>
     <string name="friday">周五</string>
-    <string name="fuzhou">福州</string>
-    <string name="guangzhou">广州</string>
-    <string name="haerbin">哈尔滨</string>
-    <string name="haikou">海口</string>
-    <string name="hangzhou">杭州</string>
-    <string name="hefei">合肥</string>
     <string name="hot_city">热门城市</string>
     <string name="humidity">湿度 %1$s</string>
     <string name="input_empty">输入内容为空</string>
@@ -162,20 +153,14 @@
     <string name="interval_hour">%1$d小时前更新</string>
     <string name="interval_just">刚刚更新</string>
     <string name="interval_minute">%1$d分钟前更新</string>
-    <string name="jinan">济南</string>
-    <string name="kunming">昆明</string>
-    <string name="lasa">拉萨</string>
     <string name="leave_to_refresh">松手可更新</string>
     <string name="life_index">生活指数</string>
     <string name="local_music">本地音乐</string>
-    <string name="location">定位</string>
     <string name="monday">周一</string>
     <string name="more">更多</string>
     <string name="more_city">更多城市</string>
     <string name="morning_exercise">晨练</string>
     <string name="morning_exercise_detail">晨练指数详情</string>
-    <string name="nanchang">南昌</string>
-    <string name="nanning">南宁</string>
     <string name="nap">小睡</string>
     <string name="nap_set">小睡设置</string>
     <string name="nap_time">小睡%1$d分钟</string>
@@ -187,6 +172,7 @@
     <string name="no_record_file">没有录音文件</string>
     <string name="no_ring">无铃声</string>
     <string name="no_system_ring_file">没有系统铃声文件</string>
+    <string name="now_loading">正在加载…</string>
     <string name="num">60</string>
     <string name="one">1</string>
     <string name="one_h">一</string>
@@ -204,7 +190,6 @@
     <string name="pull_to_refresh_release_label">Release to refresh…</string>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="qingdao">青岛</string>
     <string name="record">录音</string>
     <string name="record_fail">录音失败</string>
     <string name="record_fail_confirm">录音失败，请检查录音权限是否开启或录音已被其他应用占用。</string>
@@ -217,16 +202,12 @@
     <string name="ring">铃声</string>
     <string name="ring_select">铃声选择</string>
     <string name="roger">知道了</string>
-    <string name="sanya">三亚</string>
     <string name="saturday">周六</string>
     <string name="save">保存</string>
     <string name="save_path">保存路径：</string>
     <string name="select_all">全选</string>
     <string name="select_all_cancel">取消全选</string>
     <string name="selected_xx_item">已选择%1$d项</string>
-    <string name="shanghai">上海</string>
-    <string name="shenzhen">深圳</string>
-    <string name="shijiazhuang">石家庄</string>
     <string name="six_h">六</string>
     <string name="sport">运动</string>
     <string name="sport_detail">运动指数详情</string>
@@ -235,8 +216,6 @@
     <string name="sure_delete">确定要删除吗？</string>
     <string name="system_ring">系统铃声</string>
     <string name="tag">标签</string>
-    <string name="taibei">台北</string>
-    <string name="taiyuan">太原</string>
     <string name="ten">10</string>
     <string name="the_day_of_tomorrow">后天</string>
     <string name="theme_wallpaper">主题壁纸</string>
@@ -244,7 +223,6 @@
     <string name="three">3</string>
     <string name="three_h">三</string>
     <string name="thursday">周四</string>
-    <string name="tianjin">天津</string>
     <string name="time">计时</string>
     <string name="times">次数</string>
     <string name="today">今天</string>
@@ -268,16 +246,9 @@
     <string name="week">周</string>
     <string name="week_day">平日</string>
     <string name="week_end">周末</string>
-    <string name="wuhan">武汉</string>
-    <string name="wuxi">无锡</string>
-    <string name="xiamen">厦门</string>
-    <string name="xian">西安</string>
-    <string name="xianggang">香港</string>
-    <string name="xining">西宁</string>
     <string name="xx_naping">%1$s (小睡中……)</string>
     <string name="yesterday">昨天</string>
     <string name="zero_zero">00:00</string>
-    <string name="zhengzhou">郑州</string>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="Theme.MyDialog" parent="@android:style/Theme.Dialog">

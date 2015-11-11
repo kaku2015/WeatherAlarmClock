@@ -17,6 +17,8 @@ import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.kaku.weac.R;
 import com.kaku.weac.bean.AlarmClock;
@@ -42,12 +44,37 @@ public class MyUtil {
      */
     public static int getWallPaper(Context context) {
         // 取得主题背景配置信息
-        SharedPreferences share = context.getApplicationContext()
-                .getSharedPreferences(WeacConstants.EXTRA_WEAC_SHARE,
-                        Activity.MODE_PRIVATE);
+        SharedPreferences share = context.getSharedPreferences(WeacConstants.EXTRA_WEAC_SHARE,
+                Activity.MODE_PRIVATE);
         // 设置页面背景
         return share.getInt(WeacConstants.WALLPAPER_ID,
                 R.drawable.wallpaper_1);
+    }
+
+    /**
+     * 设置壁纸
+     *
+     * @param vg       viewGroup
+     * @param activity activity
+     */
+    public static void setBackground(ViewGroup vg, Activity activity) {
+        vg.setBackgroundResource(getWallPaper(activity));
+        // 如果版本在4.4以上
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            // 状态栏高度
+            int height;
+            int resourceId = activity.getResources().getIdentifier("status_bar_height", "dimen", "android");
+            if (resourceId <= 0) {
+                return;
+            }
+            height = activity.getResources().getDimensionPixelSize(resourceId);
+            // 设置距离顶部状态栏垂直距离
+            vg.setPadding(0, height, 0, 0);
+            // 状态栏透明
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            // 导航栏透明
+//            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
     }
 
     /**

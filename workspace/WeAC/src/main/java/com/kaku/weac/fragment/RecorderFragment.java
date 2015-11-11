@@ -354,7 +354,9 @@ public class RecorderFragment extends Fragment implements OnClickListener {
                     String fileName = getRecordDirectory();
                     File file = new File(fileName);
                     if (!file.exists()) {
-                        file.mkdirs();
+                        if (!file.mkdirs()) {
+                            return;
+                        }
                     }
                     // 当前系统时间
                     String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",
@@ -487,9 +489,11 @@ public class RecorderFragment extends Fragment implements OnClickListener {
                 String newUrl = data.getStringExtra(WeacConstants.NEW_URL);
                 File oldFile = new File(oldUrl);
                 // 重命名文件
-                oldFile.renameTo(new File(newUrl));
-                ToastUtil.showShortToast(getActivity(),
-                        getString(R.string.rename_success));
+                boolean result = oldFile.renameTo(new File(newUrl));
+                if (result) {
+                    ToastUtil.showShortToast(getActivity(),
+                            getString(R.string.rename_success));
+                }
                 // 刷新列表显示
                 refreshList();
                 break;
@@ -497,9 +501,11 @@ public class RecorderFragment extends Fragment implements OnClickListener {
                 String ringUrl2 = data.getStringExtra(WeacConstants.RING_URL);
                 File file = new File(ringUrl2);
                 // 删除文件
-                file.delete();
-                ToastUtil.showShortToast(getActivity(),
-                        getString(R.string.delete_success));
+                boolean result2 = file.delete();
+                if (result2) {
+                    ToastUtil.showShortToast(getActivity(),
+                            getString(R.string.delete_success));
+                }
                 // 刷新列表显示
                 refreshList();
                 break;

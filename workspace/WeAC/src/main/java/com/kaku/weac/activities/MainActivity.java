@@ -215,7 +215,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
      */
     private void setThemeWallpaper() {
         ViewGroup vg = (ViewGroup) findViewById(R.id.llyt_activity_main);
-        vg.setBackgroundResource(MyUtil.getWallPaper(this));
+        MyUtil.setBackground(vg, this);
     }
 
     // XXX

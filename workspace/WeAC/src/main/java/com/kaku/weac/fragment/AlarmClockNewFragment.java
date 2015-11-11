@@ -299,7 +299,7 @@ public class AlarmClockNewFragment extends Fragment implements OnClickListener,
     private void setBackground(View view) {
         mViewGroup = (ViewGroup) view.findViewById(R.id.new_alarm_clock_llyt);
         // 设置页面背景
-        mViewGroup.setBackgroundResource(MyUtil.getWallPaper(getActivity()));
+        MyUtil.setBackground(mViewGroup, getActivity());
     }
 
     /**

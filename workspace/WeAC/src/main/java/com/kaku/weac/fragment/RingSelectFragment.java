@@ -105,7 +105,7 @@ public class RingSelectFragment extends Fragment implements OnClickListener {
         View view = inflater.inflate(R.layout.fm_ring_select, container, false);
         mViewGroup = (ViewGroup) view.findViewById(R.id.ring_select_llyt);
         // 设置页面背景
-        mViewGroup.setBackgroundResource(MyUtil.getWallPaper(getActivity()));
+        MyUtil.setBackground(mViewGroup, getActivity());
 
         // 设置显示铃声列表的Fragment
         initFragment();

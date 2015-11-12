@@ -61,19 +61,41 @@ public class MyUtil {
         vg.setBackgroundResource(getWallPaper(activity));
         // 如果版本在4.4以上
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            // 状态栏高度
-            int height;
             int resourceId = activity.getResources().getIdentifier("status_bar_height", "dimen", "android");
             if (resourceId <= 0) {
                 return;
             }
-            height = activity.getResources().getDimensionPixelSize(resourceId);
+            // 状态栏高度
+            int height = activity.getResources().getDimensionPixelSize(resourceId);
             // 设置距离顶部状态栏垂直距离
             vg.setPadding(0, height, 0, 0);
             // 状态栏透明
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             // 导航栏透明
 //            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
+    }
+
+    /**
+     * 设置模糊壁纸
+     *
+     * @param vg       viewGroup
+     * @param activity activity
+     */
+    public static void setBackgroundBlur(ViewGroup vg, Activity activity) {
+        vg.setBackground(getWallPaperDrawable(activity));
+        // 如果版本在4.4以上
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            int resourceId = activity.getResources().getIdentifier("status_bar_height", "dimen", "android");
+            if (resourceId <= 0) {
+                return;
+            }
+            // 状态栏高度
+            int height = activity.getResources().getDimensionPixelSize(resourceId);
+            // 设置距离顶部状态栏垂直距离
+            vg.setPadding(0, height, 0, 0);
+            // 状态栏透明
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
     }
 
@@ -280,7 +302,7 @@ public class MyUtil {
 
 
     /**
-     * 取得壁纸资源Drawable
+     * 取得模糊处理后的壁纸资源Drawable
      *
      * @param context context
      * @return 壁纸资源 Drawable
@@ -297,7 +319,7 @@ public class MyUtil {
         options.inJustDecodeBounds = false;
         // 使用设置的inSampleSize值再次解析图片
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resId, options);
-        // 取得经过毛玻璃模糊度20处理后的Bitmap
+        // 返回经过毛玻璃模糊度20处理后的Bitmap
         return new BitmapDrawable(context.getResources(), fastBlur(context, resId, bitmap, 20));
     }
 
@@ -524,9 +546,7 @@ public class MyUtil {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static Bitmap blurBitmap(Context context, Bitmap sentBitmap, int radius) {
-
         Bitmap bitmap = sentBitmap.copy(sentBitmap.getConfig(), true);
-
         final RenderScript rs = RenderScript.create(context);
         final Allocation input = Allocation.createFromBitmap(rs, sentBitmap, Allocation.MipmapControl.MIPMAP_NONE,
                 Allocation.USAGE_SCRIPT);

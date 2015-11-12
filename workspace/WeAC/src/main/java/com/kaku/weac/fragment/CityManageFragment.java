@@ -61,7 +61,7 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
         View view = inflater.inflate(R.layout.fm_city_manage, container, false);
         LinearLayout backGround = (LinearLayout) view.findViewById(R.id.city_manage_background);
         // 设置页面背景
-        MyUtil.setBackground(backGround, getActivity());
+        MyUtil.setBackgroundBlur(backGround, getActivity());
 
         GridView mGridView = (GridView) view.findViewById(R.id.gv_city_manage);
         mGridView.setAdapter(mCityManageAdapter);

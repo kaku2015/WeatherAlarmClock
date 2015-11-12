@@ -146,7 +146,7 @@ public class AddCityFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fm_add_city, container, false);
         final LinearLayout backGround = (LinearLayout) view.findViewById(R.id.city_manage_background);
         // 设置页面背景
-        MyUtil.setBackground(backGround, getActivity());
+        MyUtil.setBackgroundBlur(backGround, getActivity());
 
         mReturnBtn = (ImageView) view.findViewById(R.id.action_return);
         mReturnBtn.setOnClickListener(this);
@@ -382,4 +382,5 @@ public class AddCityFragment extends Fragment implements View.OnClickListener {
             mProgressDialog.dismiss();
         }
     }
+
 }

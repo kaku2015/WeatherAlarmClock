@@ -382,5 +382,4 @@ public class AddCityFragment extends Fragment implements View.OnClickListener {
             mProgressDialog.dismiss();
         }
     }
-
 }

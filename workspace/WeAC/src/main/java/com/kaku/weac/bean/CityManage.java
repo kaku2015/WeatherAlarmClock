@@ -13,11 +13,6 @@ public class CityManage {
     private String mCityName;
 
     /**
-     * 天气类型图片
-     */
-    private int mImageId;
-
-    /**
      * 高温
      */
     private String mTempHigh;
@@ -28,9 +23,30 @@ public class CityManage {
     private String mTempLow;
 
     /**
+     * 天气类型图片
+     */
+    private int mImageId;
+
+    /**
      * 天气类型
      */
     private String mWeatherType;
+
+    /**
+     * 天气代码
+     */
+    private String mWeatherCode;
+
+    public String getWeatherCode() {
+        return mWeatherCode;
+    }
+
+    public void setWeatherCode(String weatherCode) {
+        mWeatherCode = weatherCode;
+    }
+
+    public CityManage() {
+    }
 
     public CityManage(String cityName, int imageId, String tempHigh,
                       String tempLow, String weatherType) {

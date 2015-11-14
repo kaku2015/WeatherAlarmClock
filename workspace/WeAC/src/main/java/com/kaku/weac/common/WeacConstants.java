@@ -123,4 +123,19 @@ public class WeacConstants {
      * 县
      */
     public static final String COUNTRY = "country";
+
+    /**
+     * 县级代号
+     */
+    public static final String COUNTRY_CODE = "country_code";
+
+    /**
+     * 天气代号
+     */
+    public static final String WEATHER_CODE = "weather_code";
+
+    /**
+     * 默认城市名
+     */
+    public static final String DEFAULT_CITY_NAME = "default_city_name";
 }

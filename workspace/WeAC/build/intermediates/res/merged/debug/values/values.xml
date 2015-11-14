@@ -190,6 +190,8 @@
     <string name="pull_to_refresh_release_label">Release to refresh…</string>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="query_weather_code">http://www.weather.com.cn/data/list3/city%1$s.xml</string>
+    <string name="query_weather_info">http://wthrcdn.etouch.cn/WeatherApi?citykey=%1$s</string>
     <string name="record">录音</string>
     <string name="record_fail">录音失败</string>
     <string name="record_fail_confirm">录音失败，请检查录音权限是否开启或录音已被其他应用占用。</string>
@@ -626,13 +628,14 @@
     </style>
     <style name="wea_forecast_content_degree_rlyt">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">38dp</item>
+        <item name="android:layout_height">40dp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_marginLeft">10dp</item>
     </style>
     <style name="wea_forecast_content_degree_rlyt_tv">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
         <item name="android:textColor">@color/white_trans90</item>
         <item name="android:text">@string/dash_degree</item>
         <item name="android:textSize">14sp</item>

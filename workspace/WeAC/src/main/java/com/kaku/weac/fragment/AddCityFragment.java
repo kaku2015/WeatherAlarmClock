@@ -1,6 +1,8 @@
 package com.kaku.weac.fragment;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -42,6 +44,7 @@ public class AddCityFragment extends Fragment implements View.OnClickListener {
      * 热门城市标志
      */
     private static final int LEVEL_HOT_CITY = 0;
+
     /**
      * 省标志
      */
@@ -61,16 +64,6 @@ public class AddCityFragment extends Fragment implements View.OnClickListener {
      * 更多城市和返回按钮的TextView
      */
     private TextView mMoreCityAndReturnBtnTv;
-
-    /**
-     * 返回按钮
-     */
-    private ImageView mReturnBtn;
-
-    /**
-     * 更多城市和返回按钮
-     */
-    private LinearLayout mMoreCityAndReturnBtn;
 
     /**
      * 添加城市列表
@@ -127,17 +120,11 @@ public class AddCityFragment extends Fragment implements View.OnClickListener {
      */
     private ProgressDialog mProgressDialog;
 
-    /**
-     * 城市列表GridView
-     */
-    private GridView mAddCityGridView;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAddCityList = new ArrayList<>();
         mAddCityAdapter = new CityAdapter(getActivity(), mAddCityList);
-
     }
 
     @Override
@@ -148,17 +135,20 @@ public class AddCityFragment extends Fragment implements View.OnClickListener {
         // 设置页面背景
         MyUtil.setBackgroundBlur(backGround, getActivity());
 
-        mReturnBtn = (ImageView) view.findViewById(R.id.action_return);
-        mReturnBtn.setOnClickListener(this);
+        // 返回按钮
+        ImageView returnBtn = (ImageView) view.findViewById(R.id.action_return);
+        returnBtn.setOnClickListener(this);
 
-        mMoreCityAndReturnBtn = (LinearLayout) view.findViewById(R.id.more_city_and_return_btn);
-        mMoreCityAndReturnBtn.setOnClickListener(this);
+        // 更多城市和返回按钮
+        LinearLayout moreCityAndReturnBtn = (LinearLayout) view.findViewById(R.id.more_city_and_return_btn);
+        moreCityAndReturnBtn.setOnClickListener(this);
         mMoreCityAndReturnBtnTv = (TextView) view.findViewById(R.id.more_city_and_return_btn_tv);
 
+        // 城市列表GridView
         mGvTitle = (TextView) view.findViewById(R.id.gv_add_city_title);
-        mAddCityGridView = (GridView) view.findViewById(R.id.gv_add_city);
-        mAddCityGridView.setAdapter(mAddCityAdapter);
-        mAddCityGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        GridView addCityGridView = (GridView) view.findViewById(R.id.gv_add_city);
+        addCityGridView.setAdapter(mAddCityAdapter);
+        addCityGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // 当前选择的城市等级
@@ -177,6 +167,15 @@ public class AddCityFragment extends Fragment implements View.OnClickListener {
                         // 查询县
                         queryCounties();
                         break;
+                    // 县
+                    case LEVEL_COUNTY:
+                        // 当前选中的县
+                        mSelectedCountry = mCountryList.get(position);
+                        Intent intent = getActivity().getIntent();
+                        intent.putExtra(WeacConstants.COUNTRY_CODE, mSelectedCountry.getCountryCode());
+                        getActivity().setResult(Activity.RESULT_OK, intent);
+                        getActivity().finish();
+                        break;
                 }
             }
         });
@@ -185,6 +184,9 @@ public class AddCityFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
+    /**
+     * 显示热门城市
+     */
     private void queryHotCities() {
         mAddCityList.clear();
         String[] city = getResources().getStringArray(R.array.city);
@@ -295,13 +297,16 @@ public class AddCityFragment extends Fragment implements View.OnClickListener {
      * @param type 城市类型
      */
     private void queryFromServer(final String code, final String type) {
+        // 查询地址
         String address;
         if (!TextUtils.isEmpty(code)) {
-            address = "http://www.weather.com.cn/data/list3/city" + code + ".xml";
+            address = getString(R.string.address_city, code);
         } else {
-            address = "http://www.weather.com.cn/data/list3/city.xml";
+            address = getString(R.string.address_city, "");
         }
+        // 显示查询进度对话框
         showProgressDialog();
+
         HttpUtil.sendHttpRequest(address, new HttpCallbackListener() {
             @Override
             public void onFinish(String response) {

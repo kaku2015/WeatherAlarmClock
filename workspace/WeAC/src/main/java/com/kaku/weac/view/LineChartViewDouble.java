@@ -144,12 +144,6 @@ public class LineChartViewDouble extends View {
         // 存放白天最高温度
         int maxTempDay = 0;
         for (int item : mTempDay) {
-            if (minTempDay == 0) {
-                minTempDay = item;
-            }
-            if (maxTempDay == 0) {
-                maxTempDay = item;
-            }
             if (item < minTempDay) {
                 minTempDay = item;
             }
@@ -163,12 +157,6 @@ public class LineChartViewDouble extends View {
         // 存放夜间最高温度
         int maxTempNight = 0;
         for (int item : mTempNight) {
-            if (minTempNight == 0) {
-                minTempNight = item;
-            }
-            if (maxTempNight == 0) {
-                maxTempNight = item;
-            }
             if (item < minTempNight) {
                 minTempNight = item;
             }

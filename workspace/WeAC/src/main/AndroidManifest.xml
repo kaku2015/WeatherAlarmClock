@@ -77,11 +77,9 @@
             android:theme="@style/Transparent"/>
         <activity
             android:name=".activities.CityManageActivity"
-            android:launchMode="singleTop"
             android:theme="@style/Transparent"/>
         <activity
             android:name=".activities.AddCityActivity"
-            android:launchMode="singleTop"
             android:theme="@style/Transparent"/>
 
         <receiver

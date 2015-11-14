@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +58,11 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
      * Log tag ：WeaFragment
      */
     private static final String LOG_TAG = "WeaFragment";
+
+    /**
+     * 天气的requestCode
+     */
+    private static final int REQUEST_WEA = 1;
 
     /**
      * 城市名
@@ -555,11 +562,6 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
     private long mLastActiveUpdateTime;
 
     /**
-     * HOME按钮
-     */
-    private ImageView mHomeBtn;
-
-    /**
      * 设置壁纸
      */
     public static LinearLayout sBackGround;
@@ -588,11 +590,11 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         init(view);
         // 初始化天气
         // FIXME: 2015/10/29
-        try {
-            initWeather(WeatherUtil.readWeatherInfo(getActivity(), "天津"));
-        } catch (Exception e) {
-            LogUtil.e(LOG_TAG, e.toString());
-        }
+//        try {
+        initWeather(WeatherUtil.readWeatherInfo(getActivity(), getDefaultCityName()));
+//        } catch (Exception e) {
+//            LogUtil.e(LOG_TAG, e.toString());
+//        }
         isPrepared = true;
         lazyLoad();
         return view;
@@ -663,7 +665,6 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
                 // 刷新天气
                 refreshWeather();
 
-
                 ////////////////////////
                 Intent intent = new Intent(getActivity(), AutoUpdateService.class);
                 getActivity().startService(intent);
@@ -672,7 +673,7 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
             // HOME按钮
             case R.id.action_home:
                 Intent intent1 = new Intent(getActivity(), CityManageActivity.class);
-                getActivity().startActivity(intent1);
+                startActivityForResult(intent1, REQUEST_WEA);
 
 
                 //////////////////////
@@ -720,6 +721,39 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        if (requestCode == REQUEST_WEA) {
+            initWeather(WeatherUtil.readWeatherInfo(getActivity(), getDefaultCityName()));
+            sPullRefreshScrollView.getRefreshableView().scrollTo(0, 0);
+        }
+    }
+
+    /**
+     * 取得默认城市名
+     *
+     * @return 默认城市名
+     */
+    private String getDefaultCityName() {
+        SharedPreferences share = getActivity().getSharedPreferences(
+                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+        return share.getString(WeacConstants.DEFAULT_CITY_NAME, "北京");
+    }
+
+    /**
+     * 取得默认天气代号
+     *
+     * @return 默认天气代号
+     */
+    private String getWeatherCode() {
+        SharedPreferences share = getActivity().getSharedPreferences(
+                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+        return share.getString(WeacConstants.WEATHER_CODE, "101010100");
+    }
 /*    private String getUpdateLabel() {
         String label;
         String format;
@@ -785,35 +819,35 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
      * 刷新天气
      */
     private void refreshWeather() {
-        HttpUtil.sendHttpRequest("http://wthrcdn.etouch.cn/WeatherApi?citykey=101030100",
+        HttpUtil.sendHttpRequest(getString(R.string.address_weather, getWeatherCode()),
                 new HttpCallbackListener() {
                     @Override
                     public void onFinish(String response) {
-                        try {
-                            mWeatherInfo = WeatherUtil.handleWeatherResponse(
-                                    new ByteArrayInputStream(response.getBytes()));
-                            // 保存天气信息
-                            WeatherUtil.saveWeatherInfo(mWeatherInfo, getActivity());
-                            getActivity().runOnUiThread(new SetWeatherInfoRunnable());
-                        } catch (Exception e) {
-                            LogUtil.e(LOG_TAG, e.toString());
-                        }
+//                        try {
+                        mWeatherInfo = WeatherUtil.handleWeatherResponse(
+                                new ByteArrayInputStream(response.getBytes()));
+                        // 保存天气信息
+                        WeatherUtil.saveWeatherInfo(mWeatherInfo, getActivity());
+                        getActivity().runOnUiThread(new SetWeatherInfoRunnable());
+//                        } catch (Exception e) {
+//                            LogUtil.e(LOG_TAG, e.toString());
+//                        }
                     }
 
                     @Override
                     public void onError(final Exception e) {
-                        try {
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    stopRefresh();
-                                    ToastUtil.showLongToast(getActivity(),
-                                            getString(R.string.Internet_fail));
-                                }
-                            });
-                        } catch (Exception e1) {
-                            LogUtil.e(LOG_TAG, e1.toString());
-                        }
+//                        try {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                stopRefresh();
+                                ToastUtil.showLongToast(getActivity(),
+                                        getString(R.string.Internet_fail));
+                            }
+                        });
+//                        } catch (Exception e1) {
+//                            LogUtil.e(LOG_TAG, e1.toString());
+//                        }
                     }
                 }
         );
@@ -914,8 +948,12 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
                 @Override
                 public void onClick(View v) {
                     if (weatherInfo.getAlarmDegree() != null && weatherInfo.getAlarmDetail() != null) {
+                        // 警报详情
+                        String detail = weatherInfo.getAlarmDetail();
+                        // 替换换行"\r\n"
+                        detail = detail.replaceAll("\\\\r\\\\n", "");
                         skipToDetailInterface(getString(R.string.alarm_title, weatherInfo.getAlarmType(),
-                                weatherInfo.getAlarmDegree()), weatherInfo.getAlarmDetail());
+                                weatherInfo.getAlarmDegree()), detail);
                     }
                 }
             });
@@ -1502,7 +1540,7 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
      * @param isDay 是否为白天
      * @return 天气类型图片id
      */
-    private int getWeatherTypeImageID(String type, boolean isDay) {
+    public static int getWeatherTypeImageID(String type, boolean isDay) {
         int weatherId;
         switch (type) {
             case "晴":
@@ -1607,8 +1645,9 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
     private void init(View view) {
         mRefreshBtn = (ImageView) view.findViewById(R.id.action_refresh);
         mRefreshBtn.setOnClickListener(this);
-        mHomeBtn = (ImageView) view.findViewById(R.id.action_home);
-        mHomeBtn.setOnClickListener(this);
+      // HOME按钮
+        ImageView homeBtn = (ImageView) view.findViewById(R.id.action_home);
+        homeBtn.setOnClickListener(this);
 
         mCityNameTv = (TextView) view.findViewById(R.id.action_title);
         mAlarmTv = (TextView) view.findViewById(R.id.alarm);

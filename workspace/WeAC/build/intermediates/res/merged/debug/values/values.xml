@@ -98,6 +98,8 @@
     <string name="Internet_fail">网络连接失败，请检查网络设置</string>
     <string name="add_alarm_clock">  添加闹钟  </string>
     <string name="add_city">添加城市</string>
+    <string name="address_city">http://www.weather.com.cn/data/list3/city%1$s.xml</string>
+    <string name="address_weather">http://wthrcdn.etouch.cn/WeatherApi?citykey=%1$s</string>
     <string name="air_cure">晾晒</string>
     <string name="air_cure_detail">晾晒指数详情</string>
     <string name="alarm">%1$s预警</string>
@@ -172,7 +174,7 @@
     <string name="no_record_file">没有录音文件</string>
     <string name="no_ring">无铃声</string>
     <string name="no_system_ring_file">没有系统铃声文件</string>
-    <string name="now_loading">正在加载…</string>
+    <string name="now_loading">正在加载城市，请稍候…</string>
     <string name="num">60</string>
     <string name="one">1</string>
     <string name="one_h">一</string>
@@ -190,8 +192,6 @@
     <string name="pull_to_refresh_release_label">Release to refresh…</string>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="query_weather_code">http://www.weather.com.cn/data/list3/city%1$s.xml</string>
-    <string name="query_weather_info">http://wthrcdn.etouch.cn/WeatherApi?citykey=%1$s</string>
     <string name="record">录音</string>
     <string name="record_fail">录音失败</string>
     <string name="record_fail_confirm">录音失败，请检查录音权限是否开启或录音已被其他应用占用。</string>

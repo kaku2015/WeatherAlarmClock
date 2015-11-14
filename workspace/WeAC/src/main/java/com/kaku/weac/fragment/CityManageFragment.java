@@ -78,10 +78,16 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mCityManageList = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            CityManage cityManage = new CityManage("城市" + i, R.drawable.ic_weather_cloudy, "29", "20", "多云");
-            mCityManageList.add(cityManage);
-        }
+        CityManage cityManage1 = new CityManage("城市", R.drawable.ic_weather_cloudy, "29", "20", "多云");
+        CityManage cityManage2 = new CityManage("城市城市城", R.drawable.ic_weather_cloudy, "29", "20", "多云");
+        CityManage cityManage3 = new CityManage("城市城市城市", R.drawable.ic_weather_cloudy, "29", "20", "多云");
+        CityManage cityManage4 = new CityManage("城市城市城市城市城市", R.drawable.ic_weather_cloudy, "29", "20", "多云");
+        CityManage cityManage5 = new CityManage("城市城市城市城市", R.drawable.ic_weather_cloudy, "29", "20", "多云");
+        mCityManageList.add(cityManage1);
+        mCityManageList.add(cityManage2);
+        mCityManageList.add(cityManage3);
+        mCityManageList.add(cityManage4);
+        mCityManageList.add(cityManage5);
         mCityManageAdapter = new CityManageAdapter(getActivity(), mCityManageList);
 
 
@@ -143,7 +149,7 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
      * 根据传入的代号和类型从服务器上查询天气代号、天气数据
      *
      * @param address 查询地址
-     * @param type 查询类型
+     * @param type    查询类型
      */
     private void queryFormServer(String address, final String type) {
         showProgressDialog();
@@ -155,12 +161,12 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
                     // 天气代号
                     case WeacConstants.WEATHER_CODE:
 //                        try {
-                            mWeatherInfo = WeatherUtil.handleWeatherResponse(
-                                    new ByteArrayInputStream(response.getBytes()));
-                            // 保存天气信息
-                            WeatherUtil.saveWeatherInfo(mWeatherInfo, getActivity());
-                            // 添加城市列表
-                            getActivity().runOnUiThread(new SetCityInfoRunnable());
+                        mWeatherInfo = WeatherUtil.handleWeatherResponse(
+                                new ByteArrayInputStream(response.getBytes()));
+                        // 保存天气信息
+                        WeatherUtil.saveWeatherInfo(mWeatherInfo, getActivity());
+                        // 添加城市列表
+                        getActivity().runOnUiThread(new SetCityInfoRunnable());
 //                        } catch (Exception e) {
 //                            LogUtil.e(LOG_TAG, e.toString());
 //                        }
@@ -181,13 +187,13 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
             @Override
             public void onError(Exception e) {
 //                try {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ToastUtil.showLongToast(getActivity(),
-                                    getString(R.string.Internet_fail));
-                        }
-                    });
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showLongToast(getActivity(),
+                                getString(R.string.Internet_fail));
+                    }
+                });
 //                } catch (Exception e1) {
 //                    LogUtil.e(LOG_TAG, e1.toString());
 //                }

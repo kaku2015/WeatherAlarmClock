@@ -19,8 +19,13 @@
             <TextView
                 android:id="@+id/city_name"
                 style="@style/wea_forecast_title"
-                android:maxLength="6"
-                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="10dp"
+                android:singleLine="true"
                 android:text="@string/dash"
                 android:textSize="16sp"/>
 

@@ -140,10 +140,14 @@ public class LineChartViewDouble extends View {
      */
     private void computeYAxisValues() {
         // 存放白天最低温度
-        int minTempDay = 0;
+        int minTempDay = mTempDay[1];
         // 存放白天最高温度
-        int maxTempDay = 0;
+        int maxTempDay = mTempDay[1];
         for (int item : mTempDay) {
+            if (item == -1000) {
+                continue;
+            }
+
             if (item < minTempDay) {
                 minTempDay = item;
             }
@@ -153,10 +157,14 @@ public class LineChartViewDouble extends View {
         }
 
         // 存放夜间最低温度
-        int minTempNight = 0;
+        int minTempNight = mTempNight[1];
         // 存放夜间最高温度
-        int maxTempNight = 0;
+        int maxTempNight = mTempNight[1];
         for (int item : mTempNight) {
+            if (item == -1000) {
+                continue;
+            }
+
             if (item < minTempNight) {
                 minTempNight = item;
             }
@@ -180,12 +188,24 @@ public class LineChartViewDouble extends View {
         // 当温度都相同时（被除数不能为0）
         if (parts == 0) {
             for (int i = 0; i < LENGTH; i++) {
+                if (mTempDay[i] == -1000 || mTempNight[i] == -1000) {
+                    mYAxisDay[i] = -1000;
+                    mYAxisNight[i] = -1000;
+                    continue;
+                }
+
                 mYAxisDay[i] = yAxisHeight / 2 + length;
                 mYAxisNight[i] = yAxisHeight / 2 + length;
             }
         } else {
             float partValue = yAxisHeight / parts;
             for (int i = 0; i < LENGTH; i++) {
+                if (mTempDay[i] == -1000 || mTempNight[i] == -1000) {
+                    mYAxisDay[i] = -1000;
+                    mYAxisNight[i] = -1000;
+                    continue;
+                }
+
                 mYAxisDay[i] = mHeight - partValue * (mTempDay[i] - minTemp) - length;
                 mYAxisNight[i] = mHeight - partValue * (mTempNight[i] - minTemp) - length;
             }
@@ -228,6 +248,10 @@ public class LineChartViewDouble extends View {
         int alpha1 = 102;
         int alpha2 = 255;
         for (int i = 0; i < LENGTH; i++) {
+            if (yAxis[i] == -1000) {
+                continue;
+            }
+
             // 画线
             if (i < LENGTH - 1) {
                 // 昨天

@@ -9,7 +9,6 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -914,21 +913,42 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         //更新时间从23：45开始到05：20以前的数据，后移一天填充
         if ((hour1 == 23 && minute1 >= 45) || (hour1 < 5) ||
                 ((hour1 == 5) && (minute1 < 20))) {
-            weather = weatherDaysForecasts.get(0);
-            weather1 = weatherDaysForecasts.get(1);
-            weather2 = weatherDaysForecasts.get(2);
-            weather3 = weatherDaysForecasts.get(3);
-            weather4 = weatherDaysForecasts.get(4);
-            weather5 = weatherDaysForecasts.get(5);
-            weather6 = weatherDaysForecasts.get(5);
+            if (weatherDaysForecasts.size() == 6) {
+                weather = weatherDaysForecasts.get(0);
+                weather1 = weatherDaysForecasts.get(1);
+                weather2 = weatherDaysForecasts.get(2);
+                weather3 = weatherDaysForecasts.get(3);
+                weather4 = weatherDaysForecasts.get(4);
+                weather5 = weatherDaysForecasts.get(5);
+                weather6 = weatherDaysForecasts.get(5);
+            } else {
+                weather = null;
+                weather1 = weatherDaysForecasts.get(0);
+                weather2 = weatherDaysForecasts.get(1);
+                weather3 = weatherDaysForecasts.get(2);
+                weather4 = weatherDaysForecasts.get(3);
+                weather5 = weatherDaysForecasts.get(4);
+                weather6 = weatherDaysForecasts.get(4);
+
+            }
         } else {
-            weather = weatherDaysForecasts.get(0);
-            weather1 = weatherDaysForecasts.get(0);
-            weather2 = weatherDaysForecasts.get(1);
-            weather3 = weatherDaysForecasts.get(2);
-            weather4 = weatherDaysForecasts.get(3);
-            weather5 = weatherDaysForecasts.get(4);
-            weather6 = weatherDaysForecasts.get(5);
+            if (weatherDaysForecasts.size() == 6) {
+                weather = weatherDaysForecasts.get(0);
+                weather1 = weatherDaysForecasts.get(0);
+                weather2 = weatherDaysForecasts.get(1);
+                weather3 = weatherDaysForecasts.get(2);
+                weather4 = weatherDaysForecasts.get(3);
+                weather5 = weatherDaysForecasts.get(4);
+                weather6 = weatherDaysForecasts.get(5);
+            } else {
+                weather = null;
+                weather1 = null;
+                weather2 = weatherDaysForecasts.get(0);
+                weather3 = weatherDaysForecasts.get(1);
+                weather4 = weatherDaysForecasts.get(2);
+                weather5 = weatherDaysForecasts.get(3);
+                weather6 = weatherDaysForecasts.get(4);
+            }
         }
 
         Calendar calendar = Calendar.getInstance();
@@ -938,6 +958,8 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         // 设置城市名
         if (weatherInfo.getCity() != null) {
             mCityNameTv.setText(weatherInfo.getCity());
+        } else {
+            mCityNameTv.setText(getString(R.string.dash));
         }
 
         // 设置预警信息
@@ -964,10 +986,15 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         if (weatherInfo.getUpdateTime() != null) {
             mUpdateTimeTv.setText(String.format(getString(R.string.update_time),
                     weatherInfo.getUpdateTime()));
+        } else {
+            mUpdateTimeTv.setText(getString(R.string.dash));
         }
 
         // 设置温度
         String temp = weatherInfo.getTemperature();
+        mTemperature1Iv.setVisibility(View.VISIBLE);
+        mTemperature2Iv.setVisibility(View.VISIBLE);
+        mTemperature3Iv.setVisibility(View.VISIBLE);
         if (temp != null) {
             // 两位正数
             if (temp.length() == 2 && !temp.contains("-")) {
@@ -975,19 +1002,19 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
                 setTemperatureImage(temp1, mTemperature1Iv);
                 int temp2 = Integer.parseInt(temp.substring(1));
                 setTemperatureImage(temp2, mTemperature2Iv);
-                mTemperature3Iv.setImageResource(0);
+                mTemperature3Iv.setVisibility(View.GONE);
                 // 一位
             } else if (temp.length() == 1 && !temp.contains("-")) {
                 int temp1 = Integer.parseInt(temp);
                 setTemperatureImage(temp1, mTemperature1Iv);
-                mTemperature2Iv.setImageResource(0);
-                mTemperature3Iv.setImageResource(0);
+                mTemperature2Iv.setVisibility(View.GONE);
+                mTemperature3Iv.setVisibility(View.GONE);
                 // 两位负数
             } else if (temp.length() == 2 && temp.contains("-")) {
                 mTemperature1Iv.setImageResource(R.drawable.minus);
                 int temp2 = Integer.parseInt(temp.substring(1));
                 setTemperatureImage(temp2, mTemperature2Iv);
-                mTemperature3Iv.setImageResource(0);
+                mTemperature3Iv.setVisibility(View.GONE);
                 // 三位负数
             } else if (temp.length() == 3 && temp.contains("-")) {
                 mTemperature1Iv.setImageResource(R.drawable.minus);
@@ -1000,6 +1027,10 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
                 mTemperature2Iv.setImageResource(R.drawable.number_0);
                 mTemperature3Iv.setImageResource(R.drawable.number_0);
             }
+        } else {
+            mTemperature1Iv.setImageResource(R.drawable.number_0);
+            mTemperature2Iv.setImageResource(R.drawable.number_0);
+            mTemperature3Iv.setImageResource(R.drawable.number_0);
         }
 
 
@@ -1019,6 +1050,9 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
             // 设置空气质量
             mAqiTv.setText(String.format(getString(R.string.aqi),
                     weatherInfo.getQuality(), weatherInfo.getAQI()));
+        } else {
+            setImage(mAqiTv, R.drawable.ic_quality_nice);
+            mAqiTv.setText(R.string.no);
         }
 
         if (weatherInfo.getHumidity() != null) {
@@ -1027,6 +1061,9 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
             // 设置湿度
             mHumidityTv.setText(String.format(getString(R.string.humidity),
                     weatherInfo.getHumidity()));
+        } else {
+            setImage(mHumidityTv, R.drawable.ic_humidity20);
+            mHumidityTv.setText(R.string.no);
         }
 
         if (weatherInfo.getWindDirection() != null && weatherInfo.getWindPower() != null) {
@@ -1035,6 +1072,9 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
             // 设置风向、风力
             mWindTv.setText(String.format(getString(R.string.aqi)
                     , weatherInfo.getWindDirection(), weatherInfo.getWindPower()));
+        } else {
+            setImage(mWindTv, R.drawable.ic_wind_3);
+            mWindTv.setText(R.string.no);
         }
 
         // 天气类型图片id
@@ -1083,14 +1123,25 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         String[] day5;
         String[] day6;
         if ((hour1 == 23 && minute1 >= 45) || (hour1 < 5) || ((hour1 == 5) && (minute1 < 20))) {
-            day1 = getDay(weather.getDate());
+            if (weather != null) {
+                day1 = getDay(weather.getDate());
+            } else {
+                day1 = null;
+            }
+
+            assert weather1 != null;
             day2 = getDay(weather1.getDate());
             day3 = getDay(weather2.getDate());
             day4 = getDay(weather3.getDate());
             day5 = getDay(weather4.getDate());
             day6 = getDay(weather5.getDate());
         } else {
-            day1 = getDay(weather1.getDate());
+            if (weather1 != null) {
+                day1 = getDay(weather1.getDate());
+            } else {
+                day1 = null;
+            }
+
             day2 = getDay(weather2.getDate());
             day3 = getDay(weather3.getDate());
             day4 = getDay(weather4.getDate());
@@ -1121,7 +1172,13 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         String month6 = MyUtil.addZero(calendar.get(Calendar.MONTH) + 1);
 
         // 日
-        String day01 = day1[0].split("日")[0];
+        String day01;
+        if (day1 != null) {
+            day01 = day1[0].split("日")[0];
+        } else {
+            day01 = null;
+        }
+
         String day02 = day2[0].split("日")[0];
         String day03 = day3[0].split("日")[0];
         String day04 = day4[0].split("日")[0];
@@ -1131,7 +1188,12 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         // 斜杠
         String date = getString(R.string.date);
         // 设置日期
-        mDaysForecastTvDay1.setText(String.format(date, month1, day01));
+        if (day01 != null) {
+            mDaysForecastTvDay1.setText(String.format(date, month1, day01));
+        } else {
+            mDaysForecastTvDay1.setText(R.string.dash);
+        }
+
         mDaysForecastTvDay2.setText(String.format(date, month2, day02));
         mDaysForecastTvDay3.setText(String.format(date, month3, day03));
         mDaysForecastTvDay4.setText(String.format(date, month4, day04));
@@ -1139,7 +1201,13 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         mDaysForecastTvDay6.setText(String.format(date, month6, day06));
 
         // 取得白天天气类型图片id
-        int weatherDayId1 = getWeatherTypeImageID(weather1.getTypeDay(), true);
+        int weatherDayId1;
+        if (weather != null) {
+            assert weather1 != null;
+            weatherDayId1 = getWeatherTypeImageID(weather1.getTypeDay(), true);
+        } else {
+            weatherDayId1 = R.drawable.ic_weather_no;
+        }
         int weatherDayId2 = getWeatherTypeImageID(weather2.getTypeDay(), true);
         int weatherDayId3 = getWeatherTypeImageID(weather3.getTypeDay(), true);
         int weatherDayId4 = getWeatherTypeImageID(weather4.getTypeDay(), true);
@@ -1155,7 +1223,11 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         mDaysForecastWeaTypeDayIv6.setImageResource(weatherDayId6);
 
         // 设置白天天气类型文字
-        mDaysForecastWeaTypeDayTv1.setText(weather1.getTypeDay());
+        if (weather != null) {
+            mDaysForecastWeaTypeDayTv1.setText(weather1.getTypeDay());
+        } else {
+            mDaysForecastWeaTypeDayTv1.setText(R.string.dash);
+        }
         mDaysForecastWeaTypeDayTv2.setText(weather2.getTypeDay());
         mDaysForecastWeaTypeDayTv3.setText(weather3.getTypeDay());
         mDaysForecastWeaTypeDayTv4.setText(weather4.getTypeDay());
@@ -1163,19 +1235,37 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         mDaysForecastWeaTypeDayTv6.setText(weather6.getTypeDay());
 
         // 设置白天温度曲线
-        mCharView.setTempDay(new int[]{getTemp(weather1.getHigh()),
-                getTemp(weather2.getHigh()), getTemp(weather3.getHigh()),
-                getTemp(weather4.getHigh()), getTemp(weather5.getHigh()),
-                getTemp(weather6.getHigh())});
+        if (weather != null) {
+            mCharView.setTempDay(new int[]{getTemp(weather1.getHigh()),
+                    getTemp(weather2.getHigh()), getTemp(weather3.getHigh()),
+                    getTemp(weather4.getHigh()), getTemp(weather5.getHigh()),
+                    getTemp(weather6.getHigh())});
+        } else {
+            mCharView.setTempDay(new int[]{-1000,
+                    getTemp(weather2.getHigh()), getTemp(weather3.getHigh()),
+                    getTemp(weather4.getHigh()), getTemp(weather5.getHigh()),
+                    getTemp(weather6.getHigh())});
+        }
         // 设置夜间温度曲线
-        mCharView.setTempNight(new int[]{getTemp(weather1.getLow()),
-                getTemp(weather2.getLow()), getTemp(weather3.getLow()),
-                getTemp(weather4.getLow()), getTemp(weather5.getLow()),
-                getTemp(weather6.getLow())});
+        if (weather != null) {
+            mCharView.setTempNight(new int[]{getTemp(weather1.getLow()),
+                    getTemp(weather2.getLow()), getTemp(weather3.getLow()),
+                    getTemp(weather4.getLow()), getTemp(weather5.getLow()),
+                    getTemp(weather6.getLow())});
+        } else {
+            mCharView.setTempNight(new int[]{-1000,
+                    getTemp(weather2.getLow()), getTemp(weather3.getLow()),
+                    getTemp(weather4.getLow()), getTemp(weather5.getLow()),
+                    getTemp(weather6.getLow())});
+        }
         mCharView.invalidate();
 
         // 设置夜间天气类型文字
-        mDaysForecastWeaTypeNightTv1.setText(weather1.getTypeNight());
+        if (weather != null) {
+            mDaysForecastWeaTypeNightTv1.setText(weather1.getTypeNight());
+        } else {
+            mDaysForecastWeaTypeNightTv1.setText(R.string.dash);
+        }
         mDaysForecastWeaTypeNightTv2.setText(weather2.getTypeNight());
         mDaysForecastWeaTypeNightTv3.setText(weather3.getTypeNight());
         mDaysForecastWeaTypeNightTv4.setText(weather4.getTypeNight());
@@ -1183,7 +1273,12 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         mDaysForecastWeaTypeNightTv6.setText(weather6.getTypeNight());
 
         // 取得夜间天气类型图片id
-        int weatherNightId1 = getWeatherTypeImageID(weather1.getTypeNight(), false);
+        int weatherNightId1;
+        if (weather != null) {
+            weatherNightId1 = getWeatherTypeImageID(weather1.getTypeNight(), false);
+        } else {
+            weatherNightId1 = R.drawable.ic_weather_no;
+        }
         int weatherNightId2 = getWeatherTypeImageID(weather2.getTypeNight(), false);
         int weatherNightId3 = getWeatherTypeImageID(weather3.getTypeNight(), false);
         int weatherNightId4 = getWeatherTypeImageID(weather4.getTypeNight(), false);
@@ -1199,7 +1294,11 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         mDaysForecastWeaTypeNightIv6.setImageResource(weatherNightId6);
 
         // 设置风向
-        mDaysForecastWindDirectionTv1.setText(weather1.getWindDirectionDay());
+        if (weather != null) {
+            mDaysForecastWindDirectionTv1.setText(weather1.getWindDirectionDay());
+        } else {
+            mDaysForecastWindDirectionTv1.setText(R.string.dash);
+        }
         mDaysForecastWindDirectionTv2.setText(weather2.getWindDirectionDay());
         mDaysForecastWindDirectionTv3.setText(weather3.getWindDirectionDay());
         mDaysForecastWindDirectionTv4.setText(weather4.getWindDirectionDay());
@@ -1207,7 +1306,11 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         mDaysForecastWindDirectionTv6.setText(weather6.getWindDirectionDay());
 
         // 设置风力
-        mDaysForecastWindPowerTv1.setText(weather1.getWindPowerDay());
+        if (weather != null) {
+            mDaysForecastWindPowerTv1.setText(weather1.getWindPowerDay());
+        } else {
+            mDaysForecastWindPowerTv1.setText(R.string.dash);
+        }
         mDaysForecastWindPowerTv2.setText(weather2.getWindPowerDay());
         mDaysForecastWindPowerTv3.setText(weather3.getWindPowerDay());
         mDaysForecastWindPowerTv4.setText(weather4.getWindPowerDay());
@@ -1645,7 +1748,7 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
     private void init(View view) {
         mRefreshBtn = (ImageView) view.findViewById(R.id.action_refresh);
         mRefreshBtn.setOnClickListener(this);
-      // HOME按钮
+        // HOME按钮
         ImageView homeBtn = (ImageView) view.findViewById(R.id.action_home);
         homeBtn.setOnClickListener(this);
 

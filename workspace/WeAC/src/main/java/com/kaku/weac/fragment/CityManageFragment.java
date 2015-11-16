@@ -190,6 +190,7 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        closeProgressDialog();
                         ToastUtil.showLongToast(getActivity(),
                                 getString(R.string.Internet_fail));
                     }

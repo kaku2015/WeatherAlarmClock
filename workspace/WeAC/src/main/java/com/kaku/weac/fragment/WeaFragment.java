@@ -1045,14 +1045,14 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
 
 
         if (weatherInfo.getQuality() != null && weatherInfo.getAQI() != null) {
+            mAqiTv.setVisibility(View.VISIBLE);
             // 设置空气质量图片
             setImage(mAqiTv, getQualityImageId(weatherInfo.getQuality()));
             // 设置空气质量
             mAqiTv.setText(String.format(getString(R.string.aqi),
                     weatherInfo.getQuality(), weatherInfo.getAQI()));
         } else {
-            setImage(mAqiTv, R.drawable.ic_quality_nice);
-            mAqiTv.setText(R.string.no);
+            mAqiTv.setVisibility(View.GONE);
         }
 
         if (weatherInfo.getHumidity() != null) {

@@ -351,6 +351,13 @@ public class AddCityFragment extends Fragment implements View.OnClickListener {
                             }
                         }
                     });
+                } else {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            closeProgressDialog();
+                        }
+                    });
                 }
             }
 

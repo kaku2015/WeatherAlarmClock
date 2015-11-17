@@ -1,99 +1,90 @@
 package com.kaku.weac.bean;
 
+import org.litepal.crud.DataSupport;
+
 /**
  * 城市管理
  *
  * @author 咖枯
  * @version 1.0 2015/10/22
  */
-public class CityManage {
+public class CityManage extends DataSupport {
+
     /**
      * 城市名
      */
-    private String mCityName;
+    private String cityName;
 
     /**
      * 高温
      */
-    private String mTempHigh;
+    private String tempHigh;
 
     /**
      * 低温
      */
-    private String mTempLow;
+    private String tempLow;
 
     /**
      * 天气类型图片
      */
-    private int mImageId;
+    private int imageId;
 
     /**
      * 天气类型
      */
-    private String mWeatherType;
+    private String weatherType;
 
     /**
      * 天气代码
      */
-    private String mWeatherCode;
+    private String weatherCode;
 
     public String getWeatherCode() {
-        return mWeatherCode;
+        return weatherCode;
     }
 
     public void setWeatherCode(String weatherCode) {
-        mWeatherCode = weatherCode;
-    }
-
-    public CityManage() {
-    }
-
-    public CityManage(String cityName, int imageId, String tempHigh,
-                      String tempLow, String weatherType) {
-        mCityName = cityName;
-        mImageId = imageId;
-        mTempHigh = tempHigh;
-        mTempLow = tempLow;
-        mWeatherType = weatherType;
+        this.weatherCode = weatherCode;
     }
 
     public String getCityName() {
-        return mCityName;
+        return cityName;
     }
 
     public void setCityName(String cityName) {
-        mCityName = cityName;
+        this.cityName = cityName;
     }
 
     public int getImageId() {
-        return mImageId;
+        return imageId;
     }
 
     public void setImageId(int imageId) {
-        mImageId = imageId;
+        this.imageId = imageId;
     }
 
     public String getTempHigh() {
-        return mTempHigh;
+        return tempHigh;
     }
 
     public void setTempHigh(String tempHigh) {
-        mTempHigh = tempHigh;
+        this.tempHigh = tempHigh;
     }
 
     public String getTempLow() {
-        return mTempLow;
+        return tempLow;
     }
 
     public void setTempLow(String tempLow) {
-        mTempLow = tempLow;
+        this.tempLow = tempLow;
     }
 
     public String getWeatherType() {
-        return mWeatherType;
+        return weatherType;
     }
 
     public void setWeatherType(String weatherType) {
-        mWeatherType = weatherType;
+        this.weatherType = weatherType;
     }
 }

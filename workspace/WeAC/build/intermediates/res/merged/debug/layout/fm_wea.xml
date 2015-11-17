@@ -87,17 +87,20 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/temperature1"
                         style="@style/wea_degree"
-                        android:contentDescription="@null"/>
+                        android:contentDescription="@null"
+                        android:src="@drawable/number_0"/>
 
                     <ImageView
                         android:id="@+id/temperature2"
                         style="@style/wea_degree"
-                        android:contentDescription="@null"/>
+                        android:contentDescription="@null"
+                        android:src="@drawable/number_0"/>
 
                     <ImageView
                         android:id="@+id/temperature3"
@@ -130,7 +133,6 @@
                 <TextView
                     android:id="@+id/aqi"
                     style="@style/wea_prompt"
-                    android:layout_marginTop="20dp"
                     android:drawableLeft="@drawable/ic_quality_nice"/>
 
                 <TextView

@@ -21,6 +21,7 @@ import com.kaku.weac.bean.CityManage;
 import com.kaku.weac.bean.WeatherDaysForecast;
 import com.kaku.weac.bean.WeatherInfo;
 import com.kaku.weac.common.WeacConstants;
+import com.kaku.weac.db.WeatherDBOperate;
 import com.kaku.weac.util.HttpCallbackListener;
 import com.kaku.weac.util.HttpUtil;
 import com.kaku.weac.util.MyUtil;
@@ -78,18 +79,11 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mCityManageList = new ArrayList<>();
-        CityManage cityManage1 = new CityManage("城市", R.drawable.ic_weather_cloudy, "29", "20", "多云");
-        CityManage cityManage2 = new CityManage("城市城市城", R.drawable.ic_weather_cloudy, "29", "20", "多云");
-        CityManage cityManage3 = new CityManage("城市城市城市", R.drawable.ic_weather_cloudy, "29", "20", "多云");
-        CityManage cityManage4 = new CityManage("城市城市城市城市城市", R.drawable.ic_weather_cloudy, "29", "20", "多云");
-        CityManage cityManage5 = new CityManage("城市城市城市城市", R.drawable.ic_weather_cloudy, "29", "20", "多云");
+        mCityManageList = WeatherDBOperate.getInstance().loadCityManages();
+        // 添加城市按钮用
+        CityManage cityManage1 = new CityManage();
         mCityManageList.add(cityManage1);
-        mCityManageList.add(cityManage2);
-        mCityManageList.add(cityManage3);
-        mCityManageList.add(cityManage4);
-        mCityManageList.add(cityManage5);
         mCityManageAdapter = new CityManageAdapter(getActivity(), mCityManageList);
-
 
     }
 
@@ -161,12 +155,22 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
                     // 天气代号
                     case WeacConstants.WEATHER_CODE:
 //                        try {
-                        mWeatherInfo = WeatherUtil.handleWeatherResponse(
-                                new ByteArrayInputStream(response.getBytes()));
-                        // 保存天气信息
-                        WeatherUtil.saveWeatherInfo(mWeatherInfo, getActivity());
-                        // 添加城市列表
-                        getActivity().runOnUiThread(new SetCityInfoRunnable());
+                        if (!response.contains("error")) {
+                            mWeatherInfo = WeatherUtil.handleWeatherResponse(
+                                    new ByteArrayInputStream(response.getBytes()));
+                            // 保存天气信息
+                            WeatherUtil.saveWeatherInfo(mWeatherInfo, getActivity());
+                            // 添加城市列表
+                            getActivity().runOnUiThread(new SetCityInfoRunnable());
+                        } else {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    closeProgressDialog();
+                                    ToastUtil.showLongToast(getActivity(), getString(R.string.no_city_info));
+                                }
+                            });
+                        }
 //                        } catch (Exception e) {
 //                            LogUtil.e(LOG_TAG, e.toString());
 //                        }
@@ -255,8 +259,10 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
             }
 
             // 插在最后一项（添加）之前
-            mCityManageList.add(mCityManageList.size() - 1, cityManage);
             mCityManageAdapter.notifyDataSetChanged();
+            mCityManageList.add(mCityManageList.size() - 1, cityManage);
+            // 存储城市管理信息
+            WeatherDBOperate.getInstance().saveCityManage(cityManage);
         }
     }
 

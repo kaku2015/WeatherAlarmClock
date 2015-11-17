@@ -1,5 +1,6 @@
 package com.kaku.weac.db;
 
+import com.kaku.weac.bean.CityManage;
 import com.kaku.weac.model.City;
 import com.kaku.weac.model.Country;
 import com.kaku.weac.model.Province;
@@ -97,6 +98,29 @@ public class WeatherDBOperate {
         List<Country> countryList;
         countryList = DataSupport.where("cityId = ?", String.valueOf(cityId)).find(Country.class);
         return countryList;
+
+    }
+
+    /**
+     * 将城市管理实例存储到数据库
+     *
+     * @param cityManage 县实例
+     */
+    public void saveCityManage(CityManage cityManage) {
+        if (cityManage != null) {
+            cityManage.save();
+        }
+    }
+
+    /**
+     * 从数据库读取城市管理信息
+     *
+     * @return 城市管理信息
+     */
+    public List<CityManage> loadCityManages() {
+        List<CityManage> cityManageList;
+        cityManageList = DataSupport.findAll(CityManage.class);
+        return cityManageList;
 
     }
 

@@ -22,7 +22,8 @@ import com.kaku.weac.bean.WeatherDaysForecast;
 import com.kaku.weac.bean.WeatherInfo;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.db.WeatherDBOperate;
-import com.kaku.weac.util.HttpCallbackListener;
+import com.kaku.weac.Listener.DBObserverListener;
+import com.kaku.weac.Listener.HttpCallbackListener;
 import com.kaku.weac.util.HttpUtil;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.ToastUtil;
@@ -75,6 +76,26 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
      */
     private String mWeatherCode;
 
+    /**
+     * 城市管理GridView
+     */
+    private GridView mGridView;
+
+    /**
+     * 操作栏编辑按钮
+     */
+    private ImageView mEditAction;
+
+    /**
+     * 操作栏编辑完成按钮
+     */
+    private ImageView mAcceptAction;
+
+    /**
+     * 监听城市点击事件Listener
+     */
+    private AdapterView.OnItemClickListener mOnItemClickListener;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +105,18 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
         CityManage cityManage1 = new CityManage();
         mCityManageList.add(cityManage1);
         mCityManageAdapter = new CityManageAdapter(getActivity(), mCityManageList);
+        // 城市列表为空的更新回调
+        mCityManageAdapter.setDBObserverListener(new DBObserverListener() {
+            @Override
+            public void onDBDataChanged() {
+                // 允许列表item点击
+                mGridView.setOnItemClickListener(mOnItemClickListener);
+                // 显示编辑按钮
+                mEditAction.setVisibility(View.VISIBLE);
+                // 隐藏完成按钮
+                mAcceptAction.setVisibility(View.GONE);
+            }
+        });
 
     }
 
@@ -95,30 +128,18 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
         // 设置页面背景
         MyUtil.setBackgroundBlur(backGround, getActivity());
 
-        GridView mGridView = (GridView) view.findViewById(R.id.gv_city_manage);
+        mOnItemClickListener = new OnItemClickListenerImpl();
+        mGridView = (GridView) view.findViewById(R.id.gv_city_manage);
         mGridView.setAdapter(mCityManageAdapter);
-        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mGridView.setOnItemClickListener(mOnItemClickListener);
+        mGridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // 当为列表最后一项（添加城市）
-                if (position == (mCityManageList.size() - 1)) {
-                    Intent intent = new Intent(getActivity(), AddCityActivity.class);
-                    startActivityForResult(intent, REQUEST_CITY_MANAGE);
-                } else {
-                    SharedPreferences share = getActivity().getSharedPreferences(
-                            WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = share.edit();
-                    CityManage cityManage = mCityManageAdapter.getItem(position);
-                    // 保存默认的天气代码
-                    editor.putString(WeacConstants.WEATHER_CODE, cityManage.getWeatherCode());
-                    // 保存默认的城市名
-                    editor.putString(WeacConstants.DEFAULT_CITY_NAME, cityManage.getCityName());
-                    editor.apply();
-
-                    Intent intent = getActivity().getIntent();
-                    getActivity().setResult(Activity.RESULT_OK, intent);
-                    getActivity().finish();
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position != (mCityManageList.size() - 1)) {
+                    // 显示删除，完成按钮，隐藏修改按钮
+                    displayDeleteAccept();
                 }
+                return true;
             }
         });
 
@@ -126,7 +147,64 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
         ImageView returnBtn = (ImageView) view.findViewById(R.id.action_return);
         returnBtn.setOnClickListener(this);
 
+        // 编辑闹钟
+        mEditAction = (ImageView) view.findViewById(R.id.action_edit);
+        mEditAction.setOnClickListener(this);
+
+        // 完成按钮
+        mAcceptAction = (ImageView) view.findViewById(R.id.action_accept);
+        mAcceptAction.setOnClickListener(this);
+
         return view;
+    }
+
+    class OnItemClickListenerImpl implements AdapterView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            // 当为列表最后一项（添加城市）
+            if (position == (mCityManageList.size() - 1)) {
+                Intent intent = new Intent(getActivity(), AddCityActivity.class);
+                startActivityForResult(intent, REQUEST_CITY_MANAGE);
+            } else {
+                SharedPreferences share = getActivity().getSharedPreferences(
+                        WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+                SharedPreferences.Editor editor = share.edit();
+                CityManage cityManage = mCityManageAdapter.getItem(position);
+                // 保存默认的天气代码
+                editor.putString(WeacConstants.WEATHER_CODE, cityManage.getWeatherCode());
+                // 保存默认的城市名
+                editor.putString(WeacConstants.DEFAULT_CITY_NAME, cityManage.getCityName());
+                editor.apply();
+
+                Intent intent = getActivity().getIntent();
+                getActivity().setResult(Activity.RESULT_OK, intent);
+                getActivity().finish();
+            }
+        }
+    }
+
+    /**
+     * 显示删除，完成按钮，隐藏修改按钮
+     */
+    private void displayDeleteAccept() {
+        // 禁止gridView点击事件
+        mGridView.setOnItemClickListener(null);
+        mCityManageAdapter.setCityDeleteButton(true);
+        mCityManageAdapter.notifyDataSetChanged();
+        mEditAction.setVisibility(View.GONE);
+        mAcceptAction.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 隐藏删除，完成按钮,显示修改按钮
+     */
+    private void hideDeleteAccept() {
+        mGridView.setOnItemClickListener(mOnItemClickListener);
+        mCityManageAdapter.setCityDeleteButton(false);
+        mCityManageAdapter.notifyDataSetChanged();
+        mAcceptAction.setVisibility(View.GONE);
+        mEditAction.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -135,6 +213,20 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
             // 返回按钮
             case R.id.action_return:
                 getActivity().finish();
+                break;
+            // 编辑按钮
+            case R.id.action_edit:
+                // 当列表内容为空时禁止响应编辑事件
+                if (mGridView.getChildCount() == 1) {
+                    return;
+                }
+                // 显示删除，完成按钮，隐藏修改按钮
+                displayDeleteAccept();
+                break;
+            // 完成按钮
+            case R.id.action_accept:
+                // 隐藏删除，完成按钮,显示修改按钮
+                hideDeleteAccept();
                 break;
         }
     }
@@ -215,47 +307,55 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
         public void run() {
             closeProgressDialog();
 
-            WeatherDaysForecast weather;
-
-            String time[] = mWeatherInfo.getUpdateTime().split(":");
-            int hour = Integer.parseInt(time[0]);
-            int minute = Integer.parseInt(time[1]);
-
-            //更新时间从23：45开始到05：20以前的数据，后移一天填充
-            if ((hour == 23 && minute >= 45) || (hour < 5) ||
-                    ((hour == 5) && (minute < 20))) {
-                weather = mWeatherInfo.getWeatherDaysForecast().get(2);
-            } else {
-                weather = mWeatherInfo.getWeatherDaysForecast().get(1);
-            }
-
             CityManage cityManage = new CityManage();
             cityManage.setWeatherCode(mWeatherCode);
             cityManage.setCityName(mWeatherInfo.getCity());
-            cityManage.setTempHigh(weather.getHigh().substring(3));
-            cityManage.setTempLow(weather.getLow().substring(3));
 
-            // 天气类型图片id
-            int weatherId;
-            // 设置今天天气信息
-            // 当前为凌晨
-            if (hour >= 0 && hour < 6) {
-                weatherId = WeaFragment.getWeatherTypeImageID(weather.getTypeDay(), false);
-                // 当前为白天时
-            } else if (hour >= 6 && hour < 18) {
-                weatherId = WeaFragment.getWeatherTypeImageID(weather.getTypeDay(), true);
-                // 当前为夜间
-            } else {
-                weatherId = WeaFragment.getWeatherTypeImageID(weather.getTypeNight(), false);
-            }
-            cityManage.setImageId(weatherId);
+            if (mWeatherInfo.getWeatherDaysForecast().size() == 6) {
+                WeatherDaysForecast weather;
 
-            // 白天和夜间类型相同
-            if (weather.getTypeDay().equals(weather.getTypeNight())) {
-                cityManage.setWeatherType(weather.getTypeDay());
+                String time[] = mWeatherInfo.getUpdateTime().split(":");
+                int hour = Integer.parseInt(time[0]);
+                int minute = Integer.parseInt(time[1]);
+
+                //更新时间从23：45开始到05：20以前的数据，后移一天填充
+                if ((hour == 23 && minute >= 45) || (hour < 5) ||
+                        ((hour == 5) && (minute < 20))) {
+                    weather = mWeatherInfo.getWeatherDaysForecast().get(2);
+                } else {
+                    weather = mWeatherInfo.getWeatherDaysForecast().get(1);
+                }
+
+                cityManage.setTempHigh(weather.getHigh().substring(3));
+                cityManage.setTempLow(weather.getLow().substring(3));
+
+                // 天气类型图片id
+                int weatherId;
+                // 设置今天天气信息
+                // 当前为凌晨
+                if (hour >= 0 && hour < 6) {
+                    weatherId = WeaFragment.getWeatherTypeImageID(weather.getTypeDay(), false);
+                    // 当前为白天时
+                } else if (hour >= 6 && hour < 18) {
+                    weatherId = WeaFragment.getWeatherTypeImageID(weather.getTypeDay(), true);
+                    // 当前为夜间
+                } else {
+                    weatherId = WeaFragment.getWeatherTypeImageID(weather.getTypeNight(), false);
+                }
+                cityManage.setImageId(weatherId);
+
+                // 白天和夜间类型相同
+                if (weather.getTypeDay().equals(weather.getTypeNight())) {
+                    cityManage.setWeatherType(weather.getTypeDay());
+                } else {
+                    cityManage.setWeatherType(String.format(getString(R.string.turn),
+                            weather.getTypeDay(), weather.getTypeNight()));
+                }
             } else {
-                cityManage.setWeatherType(String.format(getString(R.string.turn),
-                        weather.getTypeDay(), weather.getTypeNight()));
+                cityManage.setTempHigh(getString(R.string.dash));
+                cityManage.setTempLow(getString(R.string.dash));
+                cityManage.setImageId(R.drawable.ic_weather_no);
+                cityManage.setWeatherType(getString(R.string.no));
             }
 
             // 插在最后一项（添加）之前

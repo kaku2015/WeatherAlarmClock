@@ -34,7 +34,7 @@ import com.kaku.weac.bean.WeatherLifeIndex;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.test.AutoUpdateReceiver;
 import com.kaku.weac.test.AutoUpdateService;
-import com.kaku.weac.util.HttpCallbackListener;
+import com.kaku.weac.Listener.HttpCallbackListener;
 import com.kaku.weac.util.HttpUtil;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;

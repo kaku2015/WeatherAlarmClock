@@ -21,19 +21,31 @@
             android:text="@string/city_manage"/>
 
         <ImageView
-            android:id="@+id/action_edit"
+            android:id="@+id/action_refresh"
             style="@style/action_icon"
             android:layout_alignParentRight="true"
             android:contentDescription="@null"
-            android:src="@drawable/ic_action_edit"/>
-
-        <ImageView
-            android:id="@+id/action_refresh"
-            style="@style/action_icon"
-            android:layout_toLeftOf="@id/action_edit"
-            android:contentDescription="@null"
             android:src="@drawable/ic_action_refresh"
             />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/action_refresh">
+
+            <ImageView
+                android:id="@+id/action_edit"
+                style="@style/action_icon"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_action_edit"/>
+
+            <ImageView
+                android:id="@+id/action_accept"
+                style="@style/action_icon"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_action_accept"
+                android:visibility="gone"/>
+        </FrameLayout>
     </RelativeLayout>
 
     <GridView
@@ -41,10 +53,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        android:horizontalSpacing="10dp"
         android:listSelector="@android:color/transparent"
         android:numColumns="3"
-        android:verticalSpacing="10dp">
+        android:verticalSpacing="5dp">
 
     </GridView>
 </LinearLayout>

@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.kaku.weac.R;
 import com.kaku.weac.bean.CityManage;
+import com.kaku.weac.db.WeatherDBOperate;
+import com.kaku.weac.Listener.DBObserverListener;
 
 import java.util.List;
 
@@ -26,6 +28,20 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
     private List<CityManage> mList;
 
     /**
+     * db数据观察者
+     */
+    private DBObserverListener mDBObserverListener;
+
+    public void setDBObserverListener(DBObserverListener DBObserverListener) {
+        mDBObserverListener = DBObserverListener;
+    }
+
+    /**
+     * 删除城市按钮状态
+     */
+    private boolean mIsVisible;
+
+    /**
      * 城市管理适配器构造方法
      *
      * @param context context
@@ -38,6 +54,15 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
 
     }
 
+    /**
+     * 更新删除城市按钮状态
+     *
+     * @param isVisible 删除按钮是否可见
+     */
+    public void setCityDeleteButton(boolean isVisible) {
+        mIsVisible = isVisible;
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final CityManage cityManage = getItem(position);
@@ -46,6 +71,7 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
             convertView = LayoutInflater.from(mContext).inflate(
                     R.layout.gv_city_manage, parent, false);
             viewHolder = new ViewHolder();
+            viewHolder.background = (ViewGroup) convertView.findViewById(R.id.background);
             viewHolder.cityWeather = (LinearLayout) convertView
                     .findViewById(R.id.city_weather);
             viewHolder.cityName = (TextView) convertView
@@ -61,23 +87,58 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
             viewHolder.addCityIv = (ImageView) convertView
                     .findViewById(R.id.add_city);
             convertView.setTag(viewHolder);
-
+            viewHolder.deleteCityBtn = (ImageView) convertView.findViewById(R.id.city_delete_btn);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+
+        // 当显示删除按钮并且不是添加城市按钮
+        if (mIsVisible && (position != mList.size() - 1)) {
+            viewHolder.deleteCityBtn.setVisibility(View.VISIBLE);
+            viewHolder.deleteCityBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    WeatherDBOperate.getInstance().deleteCityManage(cityManage);
+                    mList.remove(cityManage);
+                    notifyDataSetChanged();
+                }
+            });
+            // 当显示删除按钮并且是添加城市按钮
+        } else if (mIsVisible && (position == mList.size() - 1) && mList.size() != 1) {
+            // 隐藏添加城市按钮
+            viewHolder.background.setVisibility(View.INVISIBLE);
+            // 当不显示删除按钮并且不是添加城市按钮
+        } else if (!mIsVisible && (position != mList.size() - 1)) {
+            // 隐藏删除按钮
+            viewHolder.deleteCityBtn.setVisibility(View.GONE);
+            // 当不显示删除按钮并且是添加城市按钮
+        } else if (!mIsVisible && (position == mList.size() - 1)) {
+            // 显示添加城市按钮
+            viewHolder.background.setVisibility(View.VISIBLE);
+
+        }
+
+        // 当为最后一项（添加城市按钮）
         if (position == mList.size() - 1) {
             viewHolder.addCityIv.setVisibility(View.VISIBLE);
             viewHolder.cityWeather.setVisibility(View.GONE);
+            viewHolder.deleteCityBtn.setVisibility(View.GONE);
         } else {
             viewHolder.addCityIv.setVisibility(View.GONE);
             viewHolder.cityWeather.setVisibility(View.VISIBLE);
-
             viewHolder.cityName.setText(cityManage.getCityName());
             viewHolder.weatherTypeIv.setImageResource(cityManage.getImageId());
             viewHolder.tempHigh.setText(cityManage.getTempHigh());
             viewHolder.tempLow.setText(cityManage.getTempLow());
             viewHolder.weatherTypeTv.setText(cityManage.getWeatherType());
         }
+
+        // 当列表为空（仅有添加按钮）
+        if (mIsVisible && (mList.size() == 1)) {
+            mIsVisible = false;
+            mDBObserverListener.onDBDataChanged();
+        }
+
         return convertView;
     }
 
@@ -99,5 +160,9 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
         TextView weatherTypeTv;
         // 添加城市按钮
         ImageView addCityIv;
+        // 删除城市按钮
+        ImageView deleteCityBtn;
+        // 控件布局
+        ViewGroup background;
     }
 }

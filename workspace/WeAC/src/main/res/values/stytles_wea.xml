@@ -59,14 +59,16 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
+        <item name="android:layout_centerInParent">true</item>
         <item name="android:textColor">@color/white_trans90</item>
         <item name="android:text">@string/dash_degree</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="wea_forecast_content_detail">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center</item>
         <item name="android:text">@string/no</item>
         <item name="android:textColor">@color/white_trans90</item>
@@ -81,8 +83,6 @@
 
     <style name="divider_line_wea_vertical">
         <item name="android:layout_width">0.5dp</item>
-        <item name="android:layout_marginTop">10dp</item>
-        <item name="android:layout_marginBottom">10dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">@color/white_trans20</item>
     </style>
@@ -121,7 +121,7 @@
     <style name="wea_days_forecast_tv">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/white_trans90</item>
         <item name="android:textSize">14sp</item>
@@ -130,7 +130,7 @@
     <style name="wea_days_forecast_tv_trans">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/white_trans40</item>
         <item name="android:textSize">14sp</item>
@@ -140,7 +140,7 @@
     <style name="wea_days_forecast_tv2">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/white_trans90</item>
         <item name="android:textSize">12sp</item>
@@ -149,7 +149,7 @@
     <style name="wea_days_forecast_tv2_trans">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/white_trans40</item>
         <item name="android:textSize">12sp</item>
@@ -158,8 +158,8 @@
     <style name="wea_days_forecast_iv">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <style name="wea_days_forecast_iv_trans">

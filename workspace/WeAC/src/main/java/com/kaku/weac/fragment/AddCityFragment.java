@@ -23,7 +23,7 @@ import com.kaku.weac.model.City;
 import com.kaku.weac.model.Country;
 import com.kaku.weac.model.Province;
 import com.kaku.weac.util.CityUtil;
-import com.kaku.weac.util.HttpCallbackListener;
+import com.kaku.weac.Listener.HttpCallbackListener;
 import com.kaku.weac.util.HttpUtil;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.ToastUtil;

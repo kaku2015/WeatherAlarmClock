@@ -104,7 +104,7 @@ public class WeatherDBOperate {
     /**
      * 将城市管理实例存储到数据库
      *
-     * @param cityManage 县实例
+     * @param cityManage 城市管理实例
      */
     public void saveCityManage(CityManage cityManage) {
         if (cityManage != null) {
@@ -124,4 +124,14 @@ public class WeatherDBOperate {
 
     }
 
+    /**
+     * 将城市管理实例从数据库中删除
+     *
+     * @param cityManage 城市管理实例
+     */
+    public void deleteCityManage(CityManage cityManage) {
+        if (cityManage != null) {
+            cityManage.delete();
+        }
+    }
 }

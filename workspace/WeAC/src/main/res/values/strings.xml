@@ -159,7 +159,7 @@
     <string name="interval_hour">%1$d小时前更新</string>
     <string name="interval_minute">%1$d分钟前更新</string>
     <string name="interval_just">刚刚更新</string>
-    <string name="Internet_fail">网络连接失败，请检查网络设置</string>
+    <string name="Internet_fail">连接失败，请重新尝试</string>
 
     <!-- 城市管理 -->
     <string name="city_manage">城市管理</string>
@@ -171,5 +171,5 @@
     <string name="now_loading">正在加载城市，请稍候…</string>
     <string name="address_city">http://www.weather.com.cn/data/list3/city%1$s.xml</string>
     <string name="address_weather">http://wthrcdn.etouch.cn/WeatherApi?citykey=%1$s</string>
-    <string name="no_city_info">无法获得当前城市信息</string>
+    <string name="no_city_info">当前城市不存在</string>
 </resources>

@@ -1,6 +1,4 @@
-package com.kaku.weac.util;
-
-import com.kaku.weac.bean.WeatherInfo;
+package com.kaku.weac.Listener;
 
 /**
  * Http访问返回回调接口

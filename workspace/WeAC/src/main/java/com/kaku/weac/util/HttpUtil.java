@@ -1,5 +1,7 @@
 package com.kaku.weac.util;
 
+import com.kaku.weac.Listener.HttpCallbackListener;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;

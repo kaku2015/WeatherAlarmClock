@@ -103,6 +103,8 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
                     notifyDataSetChanged();
                 }
             });
+            // 不加这个编辑状态会错乱
+            viewHolder.background.setVisibility(View.VISIBLE);
             // 当显示删除按钮并且是添加城市按钮
         } else if (mIsVisible && (position == mList.size() - 1) && mList.size() != 1) {
             // 隐藏添加城市按钮

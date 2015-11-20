@@ -55,6 +55,10 @@ public class HttpUtil {
                     StringBuilder response = new StringBuilder();
                     String line;
                     while ((line = reader.readLine()) != null) {
+                        if (line.contains("无法访问")) {
+                            listener.onError(new Exception());
+                            return;
+                        }
                         response.append(line);
                     }
 

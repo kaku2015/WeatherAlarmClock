@@ -153,6 +153,15 @@ public class AddCityFragment extends Fragment implements View.OnClickListener {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // 当前选择的城市等级
                 switch (mCurrentLevel) {
+                    case LEVEL_HOT_CITY:
+                        String cityName = mAddCityAdapter.getItem(position);
+                        // 当尚未添加此城市
+                        if (isCityNoAdd(cityName)) {
+                            addCity(cityName);
+                        } else {
+                            ToastUtil.showLongToast(getContext(), getString(R.string.city_already_added));
+                        }
+                        break;
                     // 省
                     case LEVEL_PROVINCE:
                         // 当前选中的省
@@ -171,10 +180,15 @@ public class AddCityFragment extends Fragment implements View.OnClickListener {
                     case LEVEL_COUNTY:
                         // 当前选中的县
                         mSelectedCountry = mCountryList.get(position);
-                        Intent intent = getActivity().getIntent();
-                        intent.putExtra(WeacConstants.COUNTRY_CODE, mSelectedCountry.getCountryCode());
-                        getActivity().setResult(Activity.RESULT_OK, intent);
-                        getActivity().finish();
+                        // 当尚未添加此城市
+                        if (isCityNoAdd(mSelectedCountry.getCountryName())) {
+                            Intent intent = getActivity().getIntent();
+                            intent.putExtra(WeacConstants.COUNTRY_CODE, mSelectedCountry.getCountryCode());
+                            getActivity().setResult(Activity.RESULT_OK, intent);
+                            getActivity().finish();
+                        } else {
+                            ToastUtil.showLongToast(getContext(), getString(R.string.city_already_added));
+                        }
                         break;
                 }
             }
@@ -182,6 +196,135 @@ public class AddCityFragment extends Fragment implements View.OnClickListener {
         // 初始化查询热门城市
         queryHotCities();
         return view;
+    }
+
+    /**
+     * 添加城市
+     *
+     * @param cityName 城市名
+     */
+    private void addCity(String cityName) {
+        switch (cityName) {
+            case "定位":
+                finish("");
+                break;
+            case "北京":
+                finish("010101");
+                break;
+            case "天津":
+                finish("030101");
+                break;
+            case "上海":
+                finish("020101");
+                break;
+            case "广州":
+                finish("280101");
+                break;
+            case "深圳":
+                finish("280601");
+                break;
+            case "重庆":
+                finish("040101");
+                break;
+            case "福州":
+                finish("230101");
+                break;
+            case "西安":
+                finish("110101");
+                break;
+            case "南宁":
+                finish("300101");
+                break;
+            case "昆明":
+                finish("290101");
+                break;
+            case "济南":
+                finish("120101");
+                break;
+            case "武汉":
+                finish("200101");
+                break;
+            case "海口":
+                finish("310101");
+                break;
+            case "三亚":
+                finish("310301");
+                break;
+            case "长春":
+                finish("060101");
+                break;
+            case "合肥":
+                finish("220101");
+                break;
+            case "郑州":
+                finish("180101");
+                break;
+            case "太原":
+                finish("100101");
+                break;
+            case "南昌":
+                finish("240101");
+                break;
+            case "拉萨":
+                finish("140101");
+                break;
+            case "西宁":
+                finish("150101");
+                break;
+            case "石家庄":
+                finish("090101");
+                break;
+            case "哈尔滨":
+                finish("050101");
+                break;
+            case "青岛":
+                finish("120201");
+                break;
+            case "无锡":
+                finish("190201");
+                break;
+            case "厦门":
+                finish("230201");
+                break;
+            case "长沙":
+                finish("250101");
+                break;
+            case "杭州":
+                finish("210101");
+                break;
+            case "香港":
+                finish("320101");
+                break;
+            case "澳门":
+                finish("330101");
+                break;
+            case "台北":
+                finish("340101");
+                break;
+        }
+    }
+
+    /**
+     * 检查城市是否还没有添加到城市管理表
+     *
+     * @param cityName 城市名
+     * @return 是否没有添加过
+     */
+    private boolean isCityNoAdd(String cityName) {
+        int number = WeatherDBOperate.getInstance().queryCity(cityName);
+        return number == 0;
+    }
+
+    /**
+     * 结束activity，返回结果到添加城市activity
+     *
+     * @param cityCode 城市代码
+     */
+    private void finish(String cityCode) {
+        Intent intent = getActivity().getIntent();
+        intent.putExtra(WeacConstants.COUNTRY_CODE, cityCode);
+        getActivity().setResult(Activity.RESULT_OK, intent);
+        getActivity().finish();
     }
 
     /**

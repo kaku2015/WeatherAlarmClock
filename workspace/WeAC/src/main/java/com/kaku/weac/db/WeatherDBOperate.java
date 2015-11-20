@@ -134,4 +134,14 @@ public class WeatherDBOperate {
             cityManage.delete();
         }
     }
+
+    /**
+     * 查询带添加的县是否已存在城市管理列表
+     *
+     * @param cityName 城市名
+     * @return 件数
+     */
+    public int queryCity(String cityName) {
+        return DataSupport.where("cityName = ?", cityName).count(CityManage.class);
+    }
 }

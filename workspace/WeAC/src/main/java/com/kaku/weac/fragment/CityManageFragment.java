@@ -238,8 +238,6 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
      * @param type    查询类型
      */
     private void queryFormServer(String address, final String type) {
-        showProgressDialog();
-
         HttpUtil.sendHttpRequest(address, new HttpCallbackListener() {
             @Override
             public void onFinish(String response) {
@@ -255,13 +253,7 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
                             // 添加城市列表
                             getActivity().runOnUiThread(new SetCityInfoRunnable());
                         } else {
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    closeProgressDialog();
-                                    ToastUtil.showLongToast(getActivity(), getString(R.string.no_city_info));
-                                }
-                            });
+                            runOnUi(getString(R.string.no_city_info));
                         }
 //                        } catch (Exception e) {
 //                            LogUtil.e(LOG_TAG, e.toString());
@@ -275,6 +267,8 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
                             // 查询天气代号
                             queryFormServer(getString(R.string.address_weather, mWeatherCode),
                                     WeacConstants.WEATHER_CODE);
+                        } else {
+                            runOnUi(getString(R.string.no_city_info));
                         }
                         break;
                 }
@@ -283,17 +277,25 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
             @Override
             public void onError(Exception e) {
 //                try {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        closeProgressDialog();
-                        ToastUtil.showLongToast(getActivity(),
-                                getString(R.string.Internet_fail));
-                    }
-                });
+                runOnUi(getString(R.string.Internet_fail));
 //                } catch (Exception e1) {
 //                    LogUtil.e(LOG_TAG, e1.toString());
 //                }
+            }
+        });
+    }
+
+    /**
+     * 执行UI方法
+     *
+     * @param info 显示的错误信息
+     */
+    private void runOnUi(final String info) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                closeProgressDialog();
+                ToastUtil.showLongToast(getActivity(), info);
             }
         });
     }
@@ -374,6 +376,7 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
         }
         if (requestCode == REQUEST_CITY_MANAGE) {
             String countryCode = data.getStringExtra(WeacConstants.COUNTRY_CODE);
+            showProgressDialog();
             queryFormServer(getString(R.string.address_city, countryCode),
                     WeacConstants.COUNTRY_CODE);
         }

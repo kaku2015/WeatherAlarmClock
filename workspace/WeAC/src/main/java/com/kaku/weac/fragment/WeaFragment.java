@@ -727,8 +727,22 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
             return;
         }
         if (requestCode == REQUEST_WEA) {
-            initWeather(WeatherUtil.readWeatherInfo(getActivity(), getDefaultCityName()));
+            // 滚动到顶端
             sPullRefreshScrollView.getRefreshableView().scrollTo(0, 0);
+            WeatherInfo weatherInfo = WeatherUtil.readWeatherInfo(getActivity(), getDefaultCityName());
+            initWeather(weatherInfo);
+
+            long now = System.currentTimeMillis();
+            SharedPreferences share = getActivity().getSharedPreferences(
+                    WeacConstants.BASE64, Activity.MODE_PRIVATE);
+            // 最近一次天气更新时间
+            long lastTime = share.getLong(getString(R.string.city_weather_update_time,
+                    weatherInfo.getCity()), 0);
+            long minuteD = (now - lastTime) / 1000 / 60;
+            // 更新间隔大于10分钟自动下拉刷新
+            if (minuteD > 10) {
+                sPullRefreshScrollView.setRefreshing();
+            }
         }
     }
 
@@ -1943,5 +1957,8 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
     public void onDestroy() {
         super.onDestroy();
         sAlpha = 0;
+        if (sHandler != null) {
+            sHandler.removeCallbacks(sRun);
+        }
     }
 }

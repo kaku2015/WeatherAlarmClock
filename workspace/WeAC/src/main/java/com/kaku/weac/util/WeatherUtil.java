@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.util.Base64;
 import android.util.Xml;
 
+import com.kaku.weac.R;
 import com.kaku.weac.bean.WeatherDaysForecast;
 import com.kaku.weac.bean.WeatherInfo;
 import com.kaku.weac.bean.WeatherLifeIndex;
@@ -312,6 +313,9 @@ public class WeatherUtil {
                     .toByteArray(), 1);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString(weatherInfo.getCity(), weatherInfoBase64);
+            // 保存天气更新时间
+            editor.putLong(context.getString(R.string.city_weather_update_time,
+                    weatherInfo.getCity()), System.currentTimeMillis());
             editor.apply();
         } catch (IOException e) {
             LogUtil.e(LOG_TAG, e.toString());

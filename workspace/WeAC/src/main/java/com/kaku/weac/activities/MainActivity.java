@@ -367,7 +367,9 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
                 LogUtil.i(LOG_TAG, "已移除刷新天气线程");
             }
             if (WeaFragment.sPullRefreshScrollView != null) {
+                // 当正在刷新
                 if (WeaFragment.sPullRefreshScrollView.isRefreshing()) {
+                    // 停止刷新
                     WeaFragment.sPullRefreshScrollView.onRefreshComplete();
                     LogUtil.i(LOG_TAG, "已停止刷新天气动画");
                 }

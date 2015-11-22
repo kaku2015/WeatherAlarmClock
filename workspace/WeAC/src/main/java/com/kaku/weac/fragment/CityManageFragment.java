@@ -1,11 +1,9 @@
 package com.kaku.weac.fragment;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,6 +52,21 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
     private static final int REQUEST_CITY_MANAGE = 1;
 
     /**
+     * 查询天气
+     */
+    private static final int QUERY_WEATHER = 1;
+
+    /**
+     * 查询县
+     */
+    private static final int QUERY_COUNTRY = 2;
+
+    /**
+     * 添加城市
+     */
+    private static final int ADD_CITY = -1;
+
+    /**
      * 城市管理列表
      */
     private List<CityManage> mCityManageList;
@@ -62,16 +75,6 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
      * 城市管理adapter
      */
     private CityManageAdapter mCityManageAdapter;
-
-    /**
-     * 天气信息
-     */
-    private WeatherInfo mWeatherInfo;
-
-    /**
-     * 进度对话框
-     */
-    private ProgressDialog mProgressDialog;
 
     /**
      * 天气代码
@@ -97,6 +100,8 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
      * 监听城市点击事件Listener
      */
     private AdapterView.OnItemClickListener mOnItemClickListener;
+
+    private CityManage mCityManage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -232,13 +237,19 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
                 // 隐藏删除，完成按钮,显示修改按钮
                 hideDeleteAccept();
                 break;
+            // 刷新按钮
             case R.id.action_refresh:
-                for (int i = 0; i < mCityManageList.size() - 1; i++) {
-                    showProgressDialog();
-                    queryFormServer(getString(R.string.address_weather,
-                                    mCityManageList.get(i).getWeatherCode()),
-                            1, i);
+                if (mEditBtn.getVisibility() == View.GONE) {
+                    // 隐藏删除，完成按钮,显示修改按钮
+                    hideDeleteAccept();
                 }
+
+                // 显示第一项的进度条
+                mCityManageAdapter.displayProgressBar(0);
+                mCityManageAdapter.notifyDataSetChanged();
+                queryFormServer(getString(R.string.address_weather,
+                                mCityManageList.get(0).getWeatherCode()),
+                        QUERY_WEATHER, 0);
                 break;
         }
     }
@@ -248,65 +259,54 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
      *
      * @param address  查询地址
      * @param type     查询类型:1,查询天气;2,查询县
-     * @param position 更新位置:-1,添加城市；其他，更新城市
+     * @param position 更新位置:-1,添加城市；其他，更新城市的位置
      */
     private void queryFormServer(String address, final int type, final int position) {
         HttpUtil.sendHttpRequest(address, new HttpCallbackListener() {
                     @Override
                     public void onFinish(String response) {
-                        switch (type) {
-                            // 天气代号
-                            case 1:
-//                        try {
-                                if (!response.contains("error")) {
-                                    // 添加城市
-                                    if (position == -1) {
-                                        mWeatherInfo = WeatherUtil.handleWeatherResponse(
-                                                new ByteArrayInputStream(response.getBytes()));
-                                        // 保存天气信息
-                                        WeatherUtil.saveWeatherInfo(mWeatherInfo, getActivity());
-                                        // 添加城市列表
-                                        getActivity().runOnUiThread(new SetCityInfoRunnable());
-                                        // 更新城市信息
-                                    } else {
+                        try {
+                            switch (type) {
+                                // 天气代号
+                                case 1:
+                                    if (!response.contains("error")) {
                                         WeatherInfo weatherInfo = WeatherUtil.handleWeatherResponse(
                                                 new ByteArrayInputStream(response.getBytes()));
                                         // 保存天气信息
                                         WeatherUtil.saveWeatherInfo(weatherInfo, getActivity());
-                                        Message message = mHandler.obtainMessage(1, position, 0, weatherInfo);
-                                        mHandler.sendMessage(message);
+                                        getActivity().runOnUiThread(new SetCityInfoRunnable(weatherInfo, position));
+                                    } else {
+                                        runOnUi(getString(R.string.no_city_info), position);
                                     }
-                                } else {
-                                    runOnUi(getString(R.string.no_city_info));
-                                }
-//                        } catch (Exception e) {
-//                            LogUtil.e(LOG_TAG, e.toString());
-//                        }
-                                break;
-                            // 县代号
-                            case 2:
-                                String[] array = response.split("\\|");
-                                if (array.length == 2) {
-                                    mWeatherCode = array[1];
-                                    // 查询天气代号
-                                    queryFormServer(getString(R.string.address_weather, mWeatherCode),
-                                            1, -1);
-                                } else {
-                                    runOnUi(getString(R.string.no_city_info));
-                                }
-                                break;
+
+                                    break;
+                                // 县代号
+                                case 2:
+                                    String[] array = response.split("\\|");
+                                    if (array.length == 2) {
+                                        mWeatherCode = array[1];
+                                        // 查询天气代号
+                                        queryFormServer(getString(R.string.address_weather, mWeatherCode),
+                                                QUERY_WEATHER, -1);
+                                    } else {
+                                        runOnUi(getString(R.string.no_city_info), position);
+                                    }
+                                    break;
+                            }
+                        } catch (Exception e) {
+                            LogUtil.e(LOG_TAG, e.toString());
                         }
                     }
 
                     @Override
                     public void onError(Exception e) {
-                        LogUtil.e(LOG_TAG, e.toString());
-                        // FIXME: 可能在此崩溃需要try一下
-//                try {
-                        runOnUi(getString(R.string.Internet_fail));
-//                } catch (Exception e1) {
-//                    LogUtil.e(LOG_TAG, e1.toString());
-//                }
+                        try {
+                            LogUtil.e(LOG_TAG, e.toString());
+                            // FIXME: 可能在此崩溃需要try一下
+                            runOnUi(getString(R.string.Internet_fail), position);
+                        } catch (Exception e1) {
+                            LogUtil.e(LOG_TAG, e1.toString());
+                        }
                     }
                 }
 
@@ -319,59 +319,82 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
      * @param info 显示的错误信息
      */
 
-    private void runOnUi(final String info) {
+    private void runOnUi(final String info, final int position) {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                closeProgressDialog();
+                // 添加城市
+                if (position == -1) {
+                    // 移除临时添加的新城市item
+                    mCityManageList.remove(mCityManageList.size() - 2);
+                    mCityManageAdapter.notifyDataSetChanged();
+                    // GridView设置点击事件
+                    mGridView.setOnItemClickListener(mOnItemClickListener);
+                } else {
+                    // 不显示进度条
+                    mCityManageAdapter.displayProgressBar(-1);
+                    mCityManageAdapter.notifyDataSetChanged();
+                }
                 ToastUtil.showLongToast(getActivity(), info);
             }
         });
     }
 
     /**
-     * 设置添加城市列表信息
+     * 设置添加/更新城市列表信息Runnable
      */
     private class SetCityInfoRunnable implements Runnable {
 
-        @Override
-        public void run() {
-            closeProgressDialog();
+        private WeatherInfo mWeatherInfo;
+        private int mPosition;
 
-            CityManage cityManage = new CityManage();
-            cityManage.setWeatherCode(mWeatherCode);
-            cityManage.setCityName(mWeatherInfo.getCity());
-            // 设置城市管理列表item信息
-            setCityManageInfo(cityManage, mWeatherInfo);
-            // 插在最后一项（添加）之前
-            mCityManageList.add(mCityManageList.size() - 1, cityManage);
-            mCityManageAdapter.notifyDataSetChanged();
-            // 存储城市管理item信息
-            WeatherDBOperate.getInstance().saveCityManage(cityManage);
+        public SetCityInfoRunnable(WeatherInfo weatherInfo, int position) {
+            mWeatherInfo = weatherInfo;
+            mPosition = position;
         }
 
-    }
-
-    // FIXME: static 弱引用
-    private android.os.Handler mHandler = new android.os.Handler() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == 1) {
-                closeProgressDialog();
-
-                WeatherInfo weatherInfo = (WeatherInfo) msg.obj;
-                int position = msg.arg1;
-                // 取得城市管理列表对应的城市管理item
-                CityManage cityManage = mCityManageList.get(position);
-                // 更新城市管理列表item信息
-                setCityManageInfo(cityManage, weatherInfo);
+        public void run() {
+            // 添加城市
+            if (mPosition == -1) {
+                mCityManage.setCityName(mWeatherInfo.getCity());
+                mCityManage.setWeatherCode(mWeatherCode);
+                // 设置城市管理列表item信息
+                setCityManageInfo(mCityManage, mWeatherInfo);
+                // 隐藏进度条
+                mCityManageAdapter.displayProgressBar(-1);
                 mCityManageAdapter.notifyDataSetChanged();
+                // GridView设置点击事件
+                mGridView.setOnItemClickListener(mOnItemClickListener);
+
+                // 存储城市管理item信息
+                WeatherDBOperate.getInstance().saveCityManage(mCityManage);
+            } else {
+                // 取得城市管理列表对应的城市管理item
+                CityManage cityManage = mCityManageList.get(mPosition);
+                // 更新城市管理列表item信息
+                setCityManageInfo(cityManage, mWeatherInfo);
+
+                // 当为列表最后一项
+                if (mPosition >= (mCityManageList.size() - 2)) {
+                    mCityManageAdapter.displayProgressBar(-1);
+                    mCityManageAdapter.notifyDataSetChanged();
+                    return;
+                }
+                // 下一项显示进度条
+                mCityManageAdapter.displayProgressBar(mPosition + 1);
+                mCityManageAdapter.notifyDataSetChanged();
+                // 更新查询下一项
+                queryFormServer(getString(R.string.address_weather,
+                                mCityManageList.get(mPosition + 1).getWeatherCode()),
+                        QUERY_WEATHER, mPosition + 1);
                 // 修改城市管理item信息
                 WeatherDBOperate.getInstance().updateCityManage(cityManage);
             }
+
         }
-    };
+
+    }
 
     /**
      * 设置城市管理列表item信息
@@ -400,7 +423,6 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
 
             // 天气类型图片id
             int weatherId;
-            // 设置今天天气信息
             // 当前为凌晨
             if (hour >= 0 && hour < 6) {
                 weatherId = WeaFragment.getWeatherTypeImageID(weather.getTypeDay(), false);
@@ -429,45 +451,25 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mHandler != null) {
-            mHandler.removeCallbacksAndMessages(null);
-        }
-    }
-
-    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) {
             return;
         }
         if (requestCode == REQUEST_CITY_MANAGE) {
+            // GridView禁用点击事件
+            mGridView.setOnItemClickListener(null);
+
+            mCityManage = new CityManage();
+            // 插在最后一项（添加按钮）之前
+            mCityManageList.add(mCityManageList.size() - 1, mCityManage);
+            // 显示progressBar
+            mCityManageAdapter.displayProgressBar(mCityManageList.size() - 2);
+            mCityManageAdapter.notifyDataSetChanged();
+
             String countryCode = data.getStringExtra(WeacConstants.COUNTRY_CODE);
-            showProgressDialog();
             queryFormServer(getString(R.string.address_city, countryCode),
-                    2, -1);
-        }
-    }
-
-    /**
-     * 显示进度对话框
-     */
-    private void showProgressDialog() {
-        if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(getActivity());
-            mProgressDialog.setMessage(getString(R.string.now_loading));
-            mProgressDialog.setCancelable(false);
-        }
-        mProgressDialog.show();
-    }
-
-    /**
-     * 关闭进度对话框
-     */
-    private void closeProgressDialog() {
-        if (mProgressDialog != null) {
-            mProgressDialog.dismiss();
+                    QUERY_COUNTRY, ADD_CITY);
         }
     }
 }

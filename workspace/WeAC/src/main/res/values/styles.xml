@@ -92,4 +92,11 @@
         <!-- 是否浮现在activity之上 -->
     </style>
 
+    <style name="progress_weather">
+        <item name="android:indeterminateDrawable">@drawable/progressbar_circle_1</item>
+        <item name="android:minWidth">22dp</item>
+        <item name="android:minHeight">22dp</item>
+        <item name="android:maxWidth">22dp</item>
+        <item name="android:maxHeight">22dp</item>
+    </style>
 </resources>

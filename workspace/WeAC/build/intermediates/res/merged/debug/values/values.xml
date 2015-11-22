@@ -479,6 +479,17 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
     </style>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="progress_weather">
+        <item name="android:indeterminateDrawable">@drawable/progressbar_circle_1</item>
+        <item name="android:minWidth">22dp</item>
+        <item name="android:minHeight">22dp</item>
+        <item name="android:maxWidth">22dp</item>
+        <item name="android:maxHeight">22dp</item>
+    </style>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles_new_alarm_clock.xml -->
+    <eat-comment/>
     <style name="record_detail_content">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

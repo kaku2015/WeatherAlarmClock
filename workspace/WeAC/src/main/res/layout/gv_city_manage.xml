@@ -22,17 +22,16 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/bg_gv_city_manage">
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/city_weather"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/city_name"
                 style="@style/wea_forecast_title"
                 android:layout_width="match_parent"
+                android:layout_alignParentTop="true"
                 android:gravity="center"
                 android:paddingBottom="10dp"
                 android:paddingLeft="3dp"
@@ -42,7 +41,10 @@
                 android:text="@string/dash"
                 android:textSize="16sp"/>
 
-            <LinearLayout style="@style/wea_forecast_content_llyt">
+            <LinearLayout
+                style="@style/wea_forecast_content_llyt"
+                android:layout_centerInParent="true"
+                >
 
                 <ImageView
                     android:id="@+id/weather_type_iv"
@@ -66,7 +68,8 @@
             <TextView
                 android:id="@+id/weather_type_tv"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
                 android:gravity="center"
                 android:paddingBottom="10dp"
                 android:paddingLeft="3dp"
@@ -76,7 +79,7 @@
                 android:text="@string/no"
                 android:textColor="@color/white_trans90"
                 android:textSize="16sp"/>
-        </LinearLayout>
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/add_city"
@@ -84,6 +87,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:src="@drawable/ic_action_new"
+            android:visibility="gone"/>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="@style/progress_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateDuration="1000"
             android:visibility="gone"/>
     </FrameLayout>
 

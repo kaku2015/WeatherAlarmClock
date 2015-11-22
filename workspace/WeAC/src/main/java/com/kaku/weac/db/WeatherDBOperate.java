@@ -113,6 +113,17 @@ public class WeatherDBOperate {
     }
 
     /**
+     * 更新市管理实例
+     *
+     * @param cityManage 城市管理实例
+     */
+    public void updateCityManage(CityManage cityManage) {
+        if (cityManage != null) {
+            cityManage.update(cityManage.getId());
+        }
+    }
+
+    /**
      * 从数据库读取城市管理信息
      *
      * @return 城市管理信息

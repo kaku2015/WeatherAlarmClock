@@ -108,7 +108,7 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
             // 当显示删除按钮并且是添加城市按钮
         } else if (mIsVisible && (position == mList.size() - 1) && mList.size() != 1) {
             // 隐藏添加城市按钮
-            viewHolder.background.setVisibility(View.INVISIBLE);
+            viewHolder.background.setVisibility(View.GONE);
             // 当不显示删除按钮并且不是添加城市按钮
         } else if (!mIsVisible && (position != mList.size() - 1)) {
             // 隐藏删除按钮

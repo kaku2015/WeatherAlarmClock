@@ -9,6 +9,15 @@ import org.litepal.crud.DataSupport;
  * @version 1.0 2015/10/22
  */
 public class CityManage extends DataSupport {
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     /**
      * 城市名

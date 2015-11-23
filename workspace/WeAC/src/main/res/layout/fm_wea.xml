@@ -627,11 +627,13 @@
 
                                 <TextView
                                     android:id="@+id/wea_life_index_tv_ultraviolet_rays"
-                                    style="@style/wea_life_index_tv_detail"/>
+                                    style="@style/wea_life_index_tv_detail"
+                                    android:layout_marginRight="0dp"/>
 
                                 <TextView
                                     style="@style/wea_life_index_tv_title"
                                     android:layout_below="@id/wea_life_index_tv_ultraviolet_rays"
+                                    android:layout_marginRight="0dp"
                                     android:text="@string/ultraviolet_rays"/>
 
                             </RelativeLayout>
@@ -676,11 +678,13 @@
 
                                 <TextView
                                     android:id="@+id/wea_life_index_tv_cold"
-                                    style="@style/wea_life_index_tv_detail"/>
+                                    style="@style/wea_life_index_tv_detail"
+                                    android:layout_marginRight="0dp"/>
 
                                 <TextView
                                     style="@style/wea_life_index_tv_title"
                                     android:layout_below="@id/wea_life_index_tv_cold"
+                                    android:layout_marginRight="0dp"
                                     android:text="@string/cold"/>
 
                             </RelativeLayout>
@@ -725,11 +729,13 @@
 
                                 <TextView
                                     android:id="@+id/wea_life_index_tv_sport"
-                                    style="@style/wea_life_index_tv_detail"/>
+                                    style="@style/wea_life_index_tv_detail"
+                                    android:layout_marginRight="0dp"/>
 
                                 <TextView
                                     style="@style/wea_life_index_tv_title"
                                     android:layout_below="@id/wea_life_index_tv_sport"
+                                    android:layout_marginRight="0dp"
                                     android:text="@string/sport"/>
 
                             </RelativeLayout>
@@ -775,11 +781,13 @@
 
                                 <TextView
                                     android:id="@+id/wea_life_index_tv_air_cure"
-                                    style="@style/wea_life_index_tv_detail"/>
+                                    style="@style/wea_life_index_tv_detail"
+                                    android:layout_marginRight="0dp"/>
 
                                 <TextView
                                     style="@style/wea_life_index_tv_title"
                                     android:layout_below="@id/wea_life_index_tv_air_cure"
+                                    android:layout_marginRight="0dp"
                                     android:text="@string/air_cure"/>
 
                             </RelativeLayout>

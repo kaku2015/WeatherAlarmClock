@@ -81,6 +81,11 @@ public class AlarmClockFragment extends Fragment implements OnClickListener,
      */
     private long mLastClickTime = 0;
 
+    /**
+     * 监听闹铃item点击事件Listener
+     */
+    private AdapterView.OnItemClickListener mOnItemClickListener;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,27 +108,8 @@ public class AlarmClockFragment extends Fragment implements OnClickListener,
         // 注册上下文菜单
         registerForContextMenu(mListView);
         mListView.setAdapter(mAdapter);
-        mListView.setOnItemClickListener(new OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                // 不响应重复点击
-                if (isFastDoubleClick()) {
-                    return;
-                }
-                AlarmClock alarmClock = mAdapter.getItem(position);
-                Intent intent = new Intent(getActivity(),
-                        AlarmClockEditActivity.class);
-                intent.putExtra(WeacConstants.ALARM_CLOCK, alarmClock);
-                // 开启编辑闹钟界面
-                startActivityForResult(intent, REQUEST_ALARM_CLOCK_EDIT);
-                // 启动移动进入效果动画
-                getActivity().overridePendingTransition(R.anim.move_in_bottom,
-                        0);
-
-            }
-        });
+        mOnItemClickListener = new OnItemClickListenerImpl();
+        mListView.setOnItemClickListener(mOnItemClickListener);
         mListView.setOnItemLongClickListener(new OnItemLongClickListener() {
 
             @Override
@@ -148,6 +134,25 @@ public class AlarmClockFragment extends Fragment implements OnClickListener,
         mAcceptAction = (ImageView) view.findViewById(R.id.action_accept);
         mAcceptAction.setOnClickListener(this);
         return view;
+    }
+
+    class OnItemClickListenerImpl implements AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            // 不响应重复点击
+            if (isFastDoubleClick()) {
+                return;
+            }
+            AlarmClock alarmClock = mAdapter.getItem(position);
+            Intent intent = new Intent(getActivity(),
+                    AlarmClockEditActivity.class);
+            intent.putExtra(WeacConstants.ALARM_CLOCK, alarmClock);
+            // 开启编辑闹钟界面
+            startActivityForResult(intent, REQUEST_ALARM_CLOCK_EDIT);
+            // 启动移动进入效果动画
+            getActivity().overridePendingTransition(R.anim.move_in_bottom,
+                    0);
+        }
     }
 
     @Override
@@ -185,6 +190,7 @@ public class AlarmClockFragment extends Fragment implements OnClickListener,
      * 显示删除，完成按钮，隐藏修改按钮
      */
     private void displayDeleteAccept() {
+        mListView.setOnItemClickListener(null);
         mAdapter.displayDeleteButton(true);
         mAdapter.notifyDataSetChanged();
         mEditAction.setVisibility(View.GONE);
@@ -195,6 +201,7 @@ public class AlarmClockFragment extends Fragment implements OnClickListener,
      * 隐藏删除，完成按钮,显示修改按钮
      */
     private void hideDeleteAccept() {
+        mListView.setOnItemClickListener(mOnItemClickListener);
         mAdapter.displayDeleteButton(false);
         mAdapter.notifyDataSetChanged();
         mAcceptAction.setVisibility(View.GONE);

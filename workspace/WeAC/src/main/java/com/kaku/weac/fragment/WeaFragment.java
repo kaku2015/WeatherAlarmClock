@@ -25,16 +25,18 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.handmark.pulltorefresh.library.ScrollViewListener;
+import com.kaku.weac.Listener.HttpCallbackListener;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.CityManageActivity;
 import com.kaku.weac.activities.LifeIndexDetailActivity;
+import com.kaku.weac.bean.CityManage;
 import com.kaku.weac.bean.WeatherDaysForecast;
 import com.kaku.weac.bean.WeatherInfo;
 import com.kaku.weac.bean.WeatherLifeIndex;
 import com.kaku.weac.common.WeacConstants;
+import com.kaku.weac.db.WeatherDBOperate;
 import com.kaku.weac.test.AutoUpdateReceiver;
 import com.kaku.weac.test.AutoUpdateService;
-import com.kaku.weac.Listener.HttpCallbackListener;
 import com.kaku.weac.util.HttpUtil;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
@@ -1337,6 +1339,26 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         // 设置生活指数
         for (WeatherLifeIndex index : weatherLifeIndexes) {
             setLifeIndex(index);
+        }
+
+
+        CityManage cityManage = new CityManage();
+        cityManage.setImageId(weatherId);
+        cityManage.setTempHigh(weather2.getHigh().substring(3));
+        cityManage.setTempLow(weather2.getLow().substring(3));
+        cityManage.setWeatherType(getWeatherType
+                (weather2.getTypeDay(), weather2.getTypeNight()));
+
+        // CityManage表中存在此城市时
+        if (1 == WeatherDBOperate.getInstance().queryCity(weatherInfo.getCity())) {
+
+            // 修改城市管理item信息
+            WeatherDBOperate.getInstance().updateCityManage(cityManage, weatherInfo.getCity());
+        } else {
+            cityManage.setCityName(weatherInfo.getCity());
+            cityManage.setWeatherCode(getWeatherCode());
+            // 存储城市管理item信息
+            WeatherDBOperate.getInstance().saveCityManage(cityManage);
         }
     }
 

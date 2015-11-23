@@ -113,13 +113,25 @@ public class WeatherDBOperate {
     }
 
     /**
-     * 更新市管理实例
+     * 更新城市管理实例
      *
      * @param cityManage 城市管理实例
      */
     public void updateCityManage(CityManage cityManage) {
         if (cityManage != null) {
             cityManage.update(cityManage.getId());
+        }
+    }
+
+    /**
+     * 从WeaFragment界面更新城市管理实例
+     *
+     * @param cityManage 城市管理实例
+     * @param cityName   城市名
+     */
+    public void updateCityManage(CityManage cityManage, String cityName) {
+        if (cityManage != null) {
+            cityManage.updateAll("cityName = ?", cityName);
         }
     }
 

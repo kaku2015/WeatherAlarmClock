@@ -374,6 +374,10 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
                     LogUtil.i(LOG_TAG, "已停止刷新天气动画");
                 }
             }
+            // 停止刷新动画
+            if (WeaFragment.sRefreshBtn != null) {
+                WeaFragment.sRefreshBtn.clearAnimation();
+            }
         }
 
         // 设置当前Tab的Index值为传入的Index值

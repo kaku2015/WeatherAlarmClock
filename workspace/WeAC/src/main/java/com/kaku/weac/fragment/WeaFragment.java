@@ -530,7 +530,7 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
     /**
      * 刷新按钮
      */
-    private ImageView mRefreshBtn;
+    public static ImageView sRefreshBtn;
 
     /**
      * 延迟刷新线程是否已经启动
@@ -662,7 +662,7 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
                 LinearInterpolator lin = new LinearInterpolator();
                 // 设置速率
                 operatingAnim.setInterpolator(lin);
-                mRefreshBtn.startAnimation(operatingAnim);
+                sRefreshBtn.startAnimation(operatingAnim);
                 // 刷新天气
                 refreshWeather();
 
@@ -829,7 +829,7 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
         // 停止正在刷新动画
         sPullRefreshScrollView.onRefreshComplete();
         // 取消刷新按钮的动画
-        mRefreshBtn.clearAnimation();
+        sRefreshBtn.clearAnimation();
         // 最近一次更细时间
         mLastActiveUpdateTime = System.currentTimeMillis();
     }
@@ -1736,8 +1736,8 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
      * @param view view
      */
     private void init(View view) {
-        mRefreshBtn = (ImageView) view.findViewById(R.id.action_refresh);
-        mRefreshBtn.setOnClickListener(this);
+        sRefreshBtn = (ImageView) view.findViewById(R.id.action_refresh);
+        sRefreshBtn.setOnClickListener(this);
         // HOME按钮
         ImageView homeBtn = (ImageView) view.findViewById(R.id.action_home);
         homeBtn.setOnClickListener(this);

@@ -769,53 +769,6 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
                 WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
         return share.getString(WeacConstants.WEATHER_CODE, "101010100");
     }
-/*    private String getUpdateLabel() {
-        String label;
-        String format;
-        long now = System.currentTimeMillis();
-        SharedPreferences share = getActivity().getSharedPreferences(
-                "update_time", Activity.MODE_PRIVATE);
-        long updateTime = share.getInt(mWeatherInfo.getCity(), 0);
-        if (updateTime == 0){
-            return null;
-        }
-        // 更新间隔毫秒数
-        long ms = now - updateTime ;
-
-        // 单位秒
-        int ss = 1000;
-        // 单位分
-        int mm = ss * 60;
-        // 单位小时
-        int hh = mm * 60;
-        // 单位天
-        int dd = hh * 24;
-
-        // 间隔天数
-        long intervalDay = ms / dd;
-        // 间隔小时
-        long intervalHour = (ms - intervalDay * dd) / hh;
-        // 间隔分钟
-        long intervalMinute = (ms - intervalDay * dd - intervalHour * hh) / mm;
-
-        // 当剩余天数大于0时显示【X天X小时X分】格式
-        if (intervalDay > 0) {
-            format = getString(R.string.interval_day);
-            label = String.format(format, intervalDay);
-            // 当剩余小时大于0时显示【X小时X分】格式
-        } else if (intervalHour > 0) {
-            format = getString(R.string.interval_hour);
-            label = String.format(format, intervalHour);
-        } else if (intervalMinute > 0) {
-            format = getString(R.string.interval_minute);
-            label = String.format(format, intervalMinute);
-
-        } else {
-            label = getString(R.string.interval_just);
-
-        }
-        return label;
-    }*/
 
     /**
      * 跳转到详情界面
@@ -834,6 +787,7 @@ public class WeaFragment extends BaseFragment implements View.OnClickListener {
      * 刷新天气
      */
     private void refreshWeather() {
+        // FIXME：回调try catch
         HttpUtil.sendHttpRequest(getString(R.string.address_weather, getWeatherCode()),
                 new HttpCallbackListener() {
                     @Override

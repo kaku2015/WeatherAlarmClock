@@ -51,7 +51,12 @@
       </config>
     </shared>
     <layouts>
-      <layout url="file://$PROJECT_DIR$/WeAC/src/main/res/layout/fm_add_city.xml">
+      <layout url="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_add_city.xml">
+        <config>
+          <theme>@android:style/Theme.Material</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_city_manage.xml">
         <config>
           <theme>@android:style/Theme.Material</theme>
         </config>
@@ -59,11 +64,6 @@
       <layout url="file://$PROJECT_DIR$/WeAC/src/main/res/layout/fm_alarm_clock_new_edit.xml">
         <config>
           <theme>@android:style/Theme.Material.Light</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/WeAC/src/main/res/layout/fm_city_manage.xml">
-        <config>
-          <theme>@android:style/Theme.Material</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/WeAC/src/main/res/layout/fm_wea.xml">
@@ -92,11 +92,18 @@
     <bookmark url="file://$PROJECT_DIR$/PullToRefresh/src/main/java/com/handmark/pulltorefresh/library/PullToRefreshBase.java" line="86" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1944a92-0092-45ec-a41c-7a4f0b350017" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/BaseActivity.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/BaseActivity.java" />
+    <list default="true" id="d1944a92-0092-45ec-a41c-7a4f0b350017" name="Default" comment="add city 12 - AddCityActivity onBackPressed">
+      <change type="DELETED" beforePath="D:\AndroidStudioProjects\workspace\WeAC\src\main\java\com\kaku\weac\fragment\AddCityFragment.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/res/resources-debug.ap_" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/res/resources-debug.ap_" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/AddCityActivity.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/AddCityActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/CityManageActivity.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/CityManageActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/CityManageFragment.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/CityManageFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/generated/source/r/debug/com/kaku/weac/R.java" afterPath="$PROJECT_DIR$/WeAC/build/generated/source/r/debug/com/kaku/weac/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/symbols/debug/R.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/WeaFragment.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/WeaFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/incremental/mergeResourcesdebug/merger.xml" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/incremental/mergeResourcesdebug/merger.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="D:\AndroidStudioProjects\workspace\WeAC\src\main\res\layout\fm_add_city.xml" afterPath="$PROJECT_DIR$/WeAC/src/main/res/layout/activity_add_city.xml" />
+      <change type="MOVED" beforePath="D:\AndroidStudioProjects\workspace\WeAC\src\main\res\layout\fm_city_manage.xml" afterPath="$PROJECT_DIR$/WeAC/src/main/res/layout/activity_city_manage.xml" />
     </list>
     <ignored path="workspace.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -126,56 +133,109 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CityManageFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/CityManageFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="99" column="23" selection-start-line="99" selection-start-column="23" selection-end-line="99" selection-end-column="23" />
-              <folding>
-                <element signature="e#2890#3267#0" expanded="true" />
-                <element signature="e#3266#3267#0" expanded="true" />
-                <element signature="e#3975#4360#0" expanded="true" />
-                <element signature="e#4359#4360#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.14285715">
+            <state vertical-scroll-proportion="0.0">
               <caret line="215" column="17" selection-start-line="215" selection-start-column="17" selection-end-line="215" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CityManageActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="WeaFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/WeaFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.26489028">
+              <caret line="789" column="15" selection-start-line="789" selection-start-column="15" selection-end-line="789" selection-end-column="15" />
+              <folding>
+                <element signature="e#17227#17280#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CityManageActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/CityManageActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.661442">
-              <caret line="38" column="31" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="317" column="29" selection-start-line="317" selection-start-column="29" selection-end-line="317" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3145#3522#0" expanded="true" />
-                <element signature="e#3521#3522#0" expanded="true" />
-                <element signature="e#3881#4266#0" expanded="true" />
-                <element signature="e#4265#4266#0" expanded="true" />
-                <element signature="e#7821#7929#0" expanded="true" />
-                <element signature="e#9210#9242#0" expanded="true" />
-                <element signature="e#9724#9773#0" expanded="true" />
-                <element signature="e#9936#9968#0" expanded="true" />
-                <element signature="e#10464#10497#0" expanded="true" />
-                <element signature="e#10860#11574#0" expanded="true" />
-                <element signature="e#11573#11574#0" expanded="true" />
-                <element signature="e#13332#13452#0" expanded="true" />
-                <element signature="e#15410#15434#0" expanded="true" />
-                <element signature="e#15574#15598#0" expanded="true" />
-                <element signature="e#15635#15659#0" expanded="true" />
-                <element signature="e#15761#15783#0" expanded="true" />
-                <element signature="e#16594#16639#0" expanded="true" />
+                <element signature="e#3155#3532#0" expanded="true" />
+                <element signature="e#3531#3532#0" expanded="true" />
+                <element signature="e#3891#4276#0" expanded="true" />
+                <element signature="e#4275#4276#0" expanded="true" />
+                <element signature="e#7831#7939#0" expanded="true" />
+                <element signature="e#9220#9252#0" expanded="true" />
+                <element signature="e#9734#9783#0" expanded="true" />
+                <element signature="e#9946#9978#0" expanded="true" />
+                <element signature="e#10474#10507#0" expanded="true" />
+                <element signature="e#10870#11584#0" expanded="true" />
+                <element signature="e#11583#11584#0" expanded="true" />
+                <element signature="e#13342#13462#0" expanded="true" />
+                <element signature="e#15420#15444#0" expanded="true" />
+                <element signature="e#15584#15608#0" expanded="true" />
+                <element signature="e#15645#15669#0" expanded="true" />
+                <element signature="e#15771#15793#0" expanded="true" />
+                <element signature="e#16604#16649#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AddCityActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/AddCityActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="463" column="16" selection-start-line="463" selection-start-column="11" selection-end-line="463" selection-end-column="16" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3432#5455#0" expanded="true" />
+                <element signature="e#4020#4058#0" expanded="true" />
+                <element signature="e#5316#5354#0" expanded="true" />
+                <element signature="e#5454#5455#0" expanded="true" />
+                <element signature="e#9017#9034#0" expanded="true" />
+                <element signature="e#9877#9901#0" expanded="true" />
+                <element signature="e#10256#10285#0" expanded="true" />
+                <element signature="e#11029#11043#0" expanded="true" />
+                <element signature="e#12747#12785#0" expanded="true" />
+                <element signature="e#12826#12862#0" expanded="true" />
+                <element signature="e#14992#15185#0" expanded="true" />
+                <element signature="e#15184#15185#0" expanded="true" />
+                <element signature="e#15320#15599#0" expanded="true" />
+                <element signature="e#15524#15557#0" expanded="true" />
+                <element signature="e#15598#15599#0" expanded="true" />
+                <element signature="e#15840#15871#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_add_city.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_add_city.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.733334">
+              <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+              <folding>
+                <element signature="e#2485#2504#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_city_manage.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_city_manage.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.2">
+              <caret line="12" column="38" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -219,19 +279,6 @@
             <state vertical-scroll-proportion="-3.6">
               <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CityManage.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/CityManage.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="27" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="27" />
-              <folding>
-                <element signature="e#217#218#0" expanded="true" />
-                <element signature="e#242#243#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -3413,7 +3460,6 @@
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockEditFragment.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockNewFragment.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockFragment.java" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/AddCityActivity.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/model/CityManage.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/MyUtil.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/view/LineChartViewDouble.java" />
@@ -3439,10 +3485,11 @@
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/HttpUtil.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/adapter/CityManageAdapter.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/WeatherDBOperate.java" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/WeaFragment.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/CityManageFragment.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/BaseActivity.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/CityManageActivity.java" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/AddCityActivity.java" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/WeaFragment.java" />
       </list>
     </option>
   </component>
@@ -3975,7 +4022,7 @@
     <property name="settings.editor.selected.configurable" value="Errors" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="emulator-5554" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="DU2NKM152D032217" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="2.3.3" />
     <property name="android.project.structure.last.selected" value="WeAC" />
     <property name="android.project.structure.proportion" value="0.15" />
@@ -4216,18 +4263,6 @@
       <created>1440756620966</created>
       <option name="number" value="Default" />
       <updated>1440756620966</updated>
-    </task>
-    <task id="LOCAL-00001" summary="android strap ignore file">
-      <created>1440757700009</created>
-      <option name="number" value="00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1440757700009</updated>
-    </task>
-    <task id="LOCAL-00002" summary="android strap ignore file after">
-      <created>1440759582979</created>
-      <option name="number" value="00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1440759582979</updated>
     </task>
     <task id="LOCAL-00003" summary="wea day first">
       <created>1441037772160</created>
@@ -4511,7 +4546,19 @@
       <option name="project" value="LOCAL" />
       <updated>1448268764178</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="add city 11 - CityManageActivity onBackPressed">
+      <created>1448273143710</created>
+      <option name="number" value="00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1448273143711</updated>
+    </task>
+    <task id="LOCAL-00051" summary="add city 11 - CityManageActivity onBackPressed">
+      <created>1448273430693</created>
+      <option name="number" value="00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1448273430693</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -4573,8 +4620,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix2 minus" />
-    <MESSAGE value="test auto update" />
     <MESSAGE value="city manage1" />
     <MESSAGE value="city manage2" />
     <MESSAGE value="city add" />
@@ -4598,7 +4643,9 @@
     <MESSAGE value="add city 8" />
     <MESSAGE value="add city 9(refresh)" />
     <MESSAGE value="add city 10" />
-    <option name="LAST_COMMIT_MESSAGE" value="add city 10" />
+    <MESSAGE value="add city 11 - CityManageActivity onBackPressed" />
+    <MESSAGE value="add city 12 - AddCityActivity onBackPressed" />
+    <option name="LAST_COMMIT_MESSAGE" value="add city 12 - AddCityActivity onBackPressed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -4642,13 +4689,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/model/Province.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5681063">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="24" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/model/City.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.07973422">
@@ -4681,14 +4721,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="137" column="0" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AddCityFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="362" column="41" selection-start-line="362" selection-start-column="41" selection-end-line="362" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4926,17 +4958,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/fm_city_manage.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.32954547">
-          <caret line="12" column="38" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockOntimeFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -5042,17 +5063,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/WeaFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1446" column="64" selection-start-line="1446" selection-start-column="64" selection-end-line="1446" selection-end-column="64" />
-          <folding>
-            <element signature="e#18666#18719#0" expanded="true" />
-            <element signature="e#24544#24665#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockNewFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.28346458">
@@ -5114,7 +5124,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14285715">
+        <state vertical-scroll-proportion="0.0">
           <caret line="215" column="17" selection-start-line="215" selection-start-column="17" selection-end-line="215" selection-end-column="17" />
           <folding />
         </state>
@@ -5139,42 +5149,89 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/CityManageFragment.java">
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_add_city.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.733334">
+          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+          <folding>
+            <element signature="e#2485#2504#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_city_manage.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.2">
+          <caret line="12" column="38" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/AddCityActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="99" column="23" selection-start-line="99" selection-start-column="23" selection-end-line="99" selection-end-column="23" />
+          <caret line="463" column="16" selection-start-line="463" selection-start-column="11" selection-end-line="463" selection-end-column="16" />
           <folding>
-            <element signature="e#2890#3267#0" expanded="true" />
-            <element signature="e#3266#3267#0" expanded="true" />
-            <element signature="e#3975#4360#0" expanded="true" />
-            <element signature="e#4359#4360#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#3432#5455#0" expanded="true" />
+            <element signature="e#4020#4058#0" expanded="true" />
+            <element signature="e#5316#5354#0" expanded="true" />
+            <element signature="e#5454#5455#0" expanded="true" />
+            <element signature="e#9017#9034#0" expanded="true" />
+            <element signature="e#9877#9901#0" expanded="true" />
+            <element signature="e#10256#10285#0" expanded="true" />
+            <element signature="e#11029#11043#0" expanded="true" />
+            <element signature="e#12747#12785#0" expanded="true" />
+            <element signature="e#12826#12862#0" expanded="true" />
+            <element signature="e#14992#15185#0" expanded="true" />
+            <element signature="e#15184#15185#0" expanded="true" />
+            <element signature="e#15320#15599#0" expanded="true" />
+            <element signature="e#15524#15557#0" expanded="true" />
+            <element signature="e#15598#15599#0" expanded="true" />
+            <element signature="e#15840#15871#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/CityManageActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.661442">
-          <caret line="38" column="31" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="317" column="29" selection-start-line="317" selection-start-column="29" selection-end-line="317" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3145#3522#0" expanded="true" />
-            <element signature="e#3521#3522#0" expanded="true" />
-            <element signature="e#3881#4266#0" expanded="true" />
-            <element signature="e#4265#4266#0" expanded="true" />
-            <element signature="e#7821#7929#0" expanded="true" />
-            <element signature="e#9210#9242#0" expanded="true" />
-            <element signature="e#9724#9773#0" expanded="true" />
-            <element signature="e#9936#9968#0" expanded="true" />
-            <element signature="e#10464#10497#0" expanded="true" />
-            <element signature="e#10860#11574#0" expanded="true" />
-            <element signature="e#11573#11574#0" expanded="true" />
-            <element signature="e#13332#13452#0" expanded="true" />
-            <element signature="e#15410#15434#0" expanded="true" />
-            <element signature="e#15574#15598#0" expanded="true" />
-            <element signature="e#15635#15659#0" expanded="true" />
-            <element signature="e#15761#15783#0" expanded="true" />
-            <element signature="e#16594#16639#0" expanded="true" />
+            <element signature="e#3155#3532#0" expanded="true" />
+            <element signature="e#3531#3532#0" expanded="true" />
+            <element signature="e#3891#4276#0" expanded="true" />
+            <element signature="e#4275#4276#0" expanded="true" />
+            <element signature="e#7831#7939#0" expanded="true" />
+            <element signature="e#9220#9252#0" expanded="true" />
+            <element signature="e#9734#9783#0" expanded="true" />
+            <element signature="e#9946#9978#0" expanded="true" />
+            <element signature="e#10474#10507#0" expanded="true" />
+            <element signature="e#10870#11584#0" expanded="true" />
+            <element signature="e#11583#11584#0" expanded="true" />
+            <element signature="e#13342#13462#0" expanded="true" />
+            <element signature="e#15420#15444#0" expanded="true" />
+            <element signature="e#15584#15608#0" expanded="true" />
+            <element signature="e#15645#15669#0" expanded="true" />
+            <element signature="e#15771#15793#0" expanded="true" />
+            <element signature="e#16604#16649#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/WeaFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26489028">
+          <caret line="789" column="15" selection-start-line="789" selection-start-column="15" selection-end-line="789" selection-end-column="15" />
+          <folding>
+            <element signature="e#17227#17280#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -111,9 +111,9 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fm_city_manage);
+        setContentView(R.layout.activity_city_manage);
         LinearLayout backGround = (LinearLayout) findViewById(R.id.city_manage_background);
-        // 设置页面背景
+        // 设置页面高斯模糊背景
         MyUtil.setBackgroundBlur(backGround, this);
         // 设置adapter
         initAdapter();

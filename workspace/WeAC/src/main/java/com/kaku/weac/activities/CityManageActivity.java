@@ -157,6 +157,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position != (mCityManageList.size() - 1)) {
+                    mIsRefreshing = false;
                     // 显示删除，完成按钮，隐藏修改按钮
                     displayDeleteAccept();
                 }
@@ -182,6 +183,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            mIsRefreshing = false;
             // 当为列表最后一项（添加城市）
             if (position == (mCityManageList.size() - 1)) {
                 Intent intent = new Intent(CityManageActivity.this, AddCityActivity.class);

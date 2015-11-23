@@ -44,8 +44,10 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">@drawable/bg_action_bar_button</item>
-        <item name="android:paddingLeft">15dp</item>
-        <item name="android:paddingRight">15dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
+        <item name="android:paddingRight">8dp</item>
         <item name="android:layout_gravity">center</item>
     </style>
 
@@ -56,9 +58,10 @@
         <item name="android:gravity">center</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:alpha">0.9</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:paddingLeft">19dp</item>
-        <item name="android:paddingRight">19dp</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
     </style>
 
     <style name="divider_line">

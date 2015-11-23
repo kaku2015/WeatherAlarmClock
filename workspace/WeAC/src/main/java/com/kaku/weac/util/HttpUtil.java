@@ -22,7 +22,7 @@ public class HttpUtil {
      * @param address  网址
      * @param listener 响应监听
      */
-    public static synchronized void sendHttpRequest(final String address, final HttpCallbackListener listener) {
+    public static void sendHttpRequest(final String address, final HttpCallbackListener listener) {
         new Thread(new Runnable() {
             @Override
             public void run() {

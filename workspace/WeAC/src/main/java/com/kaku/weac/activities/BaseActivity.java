@@ -2,6 +2,7 @@ package com.kaku.weac.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Window;
 
 import com.kaku.weac.util.LogUtil;
 
@@ -23,6 +24,7 @@ public class BaseActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         LogUtil.d(LOG_TAG, getClass().getSimpleName());
     }
 }

@@ -101,7 +101,15 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
      */
     private AdapterView.OnItemClickListener mOnItemClickListener;
 
+    /**
+     * 城市管理实例
+     */
     private CityManage mCityManage;
+
+    /**
+     * 是否正在刷新
+     */
+    private boolean mIsRefreshing;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -221,6 +229,7 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
         switch (v.getId()) {
             // 返回按钮
             case R.id.action_return:
+                mIsRefreshing = false;
                 getActivity().finish();
                 break;
             // 编辑按钮
@@ -229,6 +238,7 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
                 if (mGridView.getChildCount() == 1) {
                     return;
                 }
+                mIsRefreshing = false;
                 // 显示删除，完成按钮，隐藏修改按钮
                 displayDeleteAccept();
                 break;
@@ -247,6 +257,7 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
                 // 显示第一项的进度条
                 mCityManageAdapter.displayProgressBar(0);
                 mCityManageAdapter.notifyDataSetChanged();
+                mIsRefreshing = true;
                 queryFormServer(getString(R.string.address_weather,
                                 mCityManageList.get(0).getWeatherCode()),
                         QUERY_WEATHER, 0);
@@ -375,8 +386,8 @@ public class CityManageFragment extends Fragment implements View.OnClickListener
                 // 更新城市管理列表item信息
                 setCityManageInfo(cityManage, mWeatherInfo);
 
-                // 当为列表最后一项
-                if (mPosition >= (mCityManageList.size() - 2)) {
+                // 当为列表最后一项或者不是正在刷新状态
+                if (mPosition >= (mCityManageList.size() - 2) || !mIsRefreshing) {
                     mCityManageAdapter.displayProgressBar(-1);
                     mCityManageAdapter.notifyDataSetChanged();
                     return;

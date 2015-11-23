@@ -19,7 +19,7 @@ import java.util.List;
 public class WeatherDBOperate {
     private static WeatherDBOperate mWeatherDBOperate;
 
-    public WeatherDBOperate() {
+    private WeatherDBOperate() {
         Connector.getDatabase();
     }
 

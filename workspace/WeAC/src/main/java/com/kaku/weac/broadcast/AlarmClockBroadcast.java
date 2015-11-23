@@ -32,7 +32,7 @@ public class AlarmClockBroadcast extends BroadcastReceiver {
                 .getParcelableExtra(WeacConstants.ALARM_CLOCK);
         // 单次响铃
         if (alarmClock.getWeeks() == null) {
-            new TabAlarmClockOperate(context).update(0,
+            TabAlarmClockOperate.getInstance(context).update(0,
                     alarmClock.getAlarmClockCode());
         } else {
             // 重复周期闹钟

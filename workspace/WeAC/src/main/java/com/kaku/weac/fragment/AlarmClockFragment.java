@@ -77,11 +77,6 @@ public class AlarmClockFragment extends Fragment implements OnClickListener,
     private ImageView mAcceptAction;
 
     /**
-     * 操作栏新建按钮
-     */
-    private ImageView mNewAction;
-
-    /**
      * 新建编辑闹钟按钮点击时间
      */
     private long mLastClickTime = 0;
@@ -141,8 +136,9 @@ public class AlarmClockFragment extends Fragment implements OnClickListener,
         });
 
         // 新建闹钟
-        mNewAction = (ImageView) view.findViewById(R.id.action_new);
-        mNewAction.setOnClickListener(this);
+        // 操作栏新建按钮
+        ImageView newAction = (ImageView) view.findViewById(R.id.action_new);
+        newAction.setOnClickListener(this);
 
         // 编辑闹钟
         mEditAction = (ImageView) view.findViewById(R.id.action_edit);
@@ -217,12 +213,12 @@ public class AlarmClockFragment extends Fragment implements OnClickListener,
             // 新建闹钟
             case REQUEST_ALARM_CLOCK_NEW:
                 // 插入新闹钟数据
-                new TabAlarmClockOperate(getActivity()).insert(ac);
+                TabAlarmClockOperate.getInstance(getActivity()).insert(ac);
                 break;
             // 修改闹钟
             case REQUEST_ALARM_CLOCK_EDIT:
                 // 更新闹钟数据
-                new TabAlarmClockOperate(getActivity()).update(ac);
+                TabAlarmClockOperate.getInstance(getActivity()).update(ac);
                 break;
 
         }

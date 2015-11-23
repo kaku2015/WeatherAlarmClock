@@ -102,7 +102,7 @@ public class AlarmClockAdapter extends ArrayAdapter<AlarmClock> {
                 @Override
                 public void onClick(View v) {
                     // 删除闹钟数据
-                    new TabAlarmClockOperate(mContext).delete(alarmClock
+                    TabAlarmClockOperate.getInstance(mContext).delete(alarmClock
                             .getAlarmClockCode());
 
                     // 关闭闹钟
@@ -178,7 +178,7 @@ public class AlarmClockAdapter extends ArrayAdapter<AlarmClock> {
                      */
                     private void updateTab(int onOff) {
                         // 更新闹钟数据
-                        new TabAlarmClockOperate(getContext()).update(onOff,
+                        TabAlarmClockOperate.getInstance(getContext()).update(onOff,
                                 alarmClock.getAlarmClockCode());
                     }
                 });

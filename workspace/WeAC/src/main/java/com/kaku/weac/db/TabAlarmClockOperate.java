@@ -14,20 +14,26 @@ import com.kaku.weac.bean.AlarmClock;
  */
 public class TabAlarmClockOperate {
 
-    private final SQLiteDatabase mDb;
     private final Context mContext;
+    private static TabAlarmClockOperate mTabAlarmClockOperate;
+    private AlarmClockOpenHelper mHelper;
 
     /**
      * 表AlarmClock操作类构造方法
      *
      * @param context context
      */
-    public TabAlarmClockOperate(Context context) {
+    private TabAlarmClockOperate(Context context) {
         super();
         mContext = context;
-        AlarmClockOpenHelper helper = new AlarmClockOpenHelper(mContext);
-        mDb = helper.getWritableDatabase();
+        mHelper = new AlarmClockOpenHelper(mContext);
+    }
 
+    public synchronized static TabAlarmClockOperate getInstance(Context context) {
+        if (mTabAlarmClockOperate == null) {
+            mTabAlarmClockOperate = new TabAlarmClockOperate(context);
+        }
+        return mTabAlarmClockOperate;
     }
 
     /**
@@ -36,10 +42,11 @@ public class TabAlarmClockOperate {
      * @param ac alarmClock实例
      */
     public void insert(AlarmClock ac) {
+        SQLiteDatabase db = mHelper.getWritableDatabase();
         ContentValues cv = setACContentValues(ac);
         // 插入AlarmClock表
-        mDb.insert(WeacDBMetaData.TABLE_NAME, null, cv);
-        mDb.close();
+        db.insert(WeacDBMetaData.TABLE_NAME, null, cv);
+        db.close();
         // 通知Uri观察者数据库有更新
         mContext.getContentResolver().notifyChange(WeacDBMetaData.CONTENT_URI,
                 null);
@@ -51,11 +58,12 @@ public class TabAlarmClockOperate {
      * @param id AlarmClock表的Id
      */
     public void delete(int id) {
+        SQLiteDatabase db = mHelper.getWritableDatabase();
         String whereClause = "id = ?";
         String whereArgs[] = new String[]{String.valueOf(id)};
         // 删除对应Id的闹钟数据
-        mDb.delete(WeacDBMetaData.TABLE_NAME, whereClause, whereArgs);
-        mDb.close();
+        db.delete(WeacDBMetaData.TABLE_NAME, whereClause, whereArgs);
+        db.close();
 
         mContext.getContentResolver().notifyChange(WeacDBMetaData.CONTENT_URI,
                 null);
@@ -67,6 +75,7 @@ public class TabAlarmClockOperate {
      * @param ac AlarmClock实例
      */
     public void update(AlarmClock ac) {
+        SQLiteDatabase mDb = mHelper.getWritableDatabase();
         ContentValues cv = setACContentValues(ac);
 
         String whereClause = "id = ?";
@@ -87,13 +96,14 @@ public class TabAlarmClockOperate {
      * @param id    对应的id
      */
     public void update(int onOff, int id) {
+        SQLiteDatabase db = mHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(WeacDBMetaData.AC_ON_OFF, onOff);
         String whereClause = "id = ?";
         String whereArgs[] = new String[]{String.valueOf(id)};
         // 更新AlarmClock表
-        mDb.update(WeacDBMetaData.TABLE_NAME, cv, whereClause, whereArgs);
-        mDb.close();
+        db.update(WeacDBMetaData.TABLE_NAME, cv, whereClause, whereArgs);
+        db.close();
 
         mContext.getContentResolver().notifyChange(WeacDBMetaData.CONTENT_URI,
                 null);

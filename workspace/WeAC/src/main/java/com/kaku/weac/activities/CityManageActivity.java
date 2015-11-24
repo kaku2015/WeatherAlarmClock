@@ -391,6 +391,9 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 // 更新城市管理列表item信息
                 setCityManageInfo(cityManage, mWeatherInfo);
 
+                // 修改城市管理item信息
+                WeatherDBOperate.getInstance().updateCityManage(cityManage);
+
                 // 当为列表最后一项或者不是正在刷新状态
                 if (mPosition >= (mCityManageList.size() - 2) || !mIsRefreshing) {
                     mCityManageAdapter.displayProgressBar(-1);
@@ -404,8 +407,6 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 queryFormServer(getString(R.string.address_weather,
                                 mCityManageList.get(mPosition + 1).getWeatherCode()),
                         QUERY_WEATHER, mPosition + 1);
-                // 修改城市管理item信息
-                WeatherDBOperate.getInstance().updateCityManage(cityManage);
             }
 
         }

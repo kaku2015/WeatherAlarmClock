@@ -6,7 +6,7 @@ import android.os.IBinder;
 
 import com.kaku.weac.util.LogUtil;
 
-public class GuardMasterService extends Service {
+public class NotificationCenter extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -62,8 +62,8 @@ public class GuardMasterService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        LogUtil.w("GuardMasterService", "onDestroy");
-        Intent i = new Intent("com.kaku.GuardMasterService");
+        LogUtil.w("NotificationCenter", "onDestroy");
+        Intent i = new Intent("com.kaku.NotificationCenter");
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startService(i);
         // Intent it = new Intent("com.kaku.GuardSecondaryService");

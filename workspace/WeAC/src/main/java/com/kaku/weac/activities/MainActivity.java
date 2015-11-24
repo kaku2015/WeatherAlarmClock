@@ -20,7 +20,7 @@ import com.kaku.weac.fragment.AlarmClockFragment;
 import com.kaku.weac.fragment.MoreFragment;
 import com.kaku.weac.fragment.TimeFragment;
 import com.kaku.weac.fragment.WeaFragment;
-import com.kaku.weac.service.GuardMasterService;
+import com.kaku.weac.service.NotificationCenter;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
 
@@ -192,7 +192,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = new Intent(this, GuardMasterService.class);
+        Intent intent = new Intent(this, NotificationCenter.class);
         startService(intent);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);

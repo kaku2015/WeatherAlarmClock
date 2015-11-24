@@ -97,8 +97,9 @@
             android:exported="false"/>
 
         <service
-            android:name=".service.GuardMasterService"
-            android:exported="false">
+            android:name=".service.NotificationCenter"
+            android:exported="false"
+            android:process=":pushservice">
             <intent-filter android:priority="1000">
                 <action android:name="com.kaku.GuardMasterService"/>
             </intent-filter>

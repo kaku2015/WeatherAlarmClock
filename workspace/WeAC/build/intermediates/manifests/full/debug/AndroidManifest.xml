@@ -101,7 +101,8 @@
 
         <service
             android:name="com.kaku.weac.service.GuardMasterService"
-            android:exported="false" >
+            android:exported="false"
+            android:process=":pushservice" >
             <intent-filter android:priority="1000" >
                 <action android:name="com.kaku.GuardMasterService" />
             </intent-filter>

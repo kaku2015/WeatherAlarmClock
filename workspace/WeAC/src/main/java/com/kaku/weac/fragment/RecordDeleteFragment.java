@@ -1,9 +1,11 @@
+/*
+ * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
+ */
 package com.kaku.weac.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,7 +21,7 @@ import com.kaku.weac.R;
  * @author 咖枯
  * @version 1.0 2015/08
  */
-public class RecordDeleteFragment extends Fragment implements OnClickListener {
+public class RecordDeleteFragment extends BaseFragment implements OnClickListener {
 
     /**
      * 取消按钮

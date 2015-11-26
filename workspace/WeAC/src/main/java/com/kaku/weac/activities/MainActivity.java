@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
+ */
 package com.kaku.weac.activities;
 
 import android.content.Intent;
@@ -15,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
 
+import com.kaku.weac.LeakCanaryApplication;
 import com.kaku.weac.R;
 import com.kaku.weac.fragment.AlarmClockFragment;
 import com.kaku.weac.fragment.MoreFragment;
@@ -23,6 +27,7 @@ import com.kaku.weac.fragment.WeaFragment;
 import com.kaku.weac.service.NotificationCenter;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
+import com.squareup.leakcanary.RefWatcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -452,6 +457,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         LogUtil.d(LOG_TAG, "onDestroy()");
 //        Process.killProcess(Process.myPid());
         super.onDestroy();
+        RefWatcher refWatcher = LeakCanaryApplication.getRefWatcher(this);
+        refWatcher.watch(this);
     }
 
 }

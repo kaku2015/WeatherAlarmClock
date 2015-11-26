@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
+ */
 package com.kaku.weac.activities;
 
 import android.os.Bundle;
@@ -6,7 +9,9 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.Window;
 
+import com.kaku.weac.LeakCanaryApplication;
 import com.kaku.weac.R;
+import com.squareup.leakcanary.RefWatcher;
 
 /**
  * fragment activity的公共抽象类
@@ -37,5 +42,12 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
 
         }
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = LeakCanaryApplication.getRefWatcher(this);
+        refWatcher.watch(this);
     }
 }

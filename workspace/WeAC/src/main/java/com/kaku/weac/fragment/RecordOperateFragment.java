@@ -1,8 +1,10 @@
+/*
+ * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
+ */
 package com.kaku.weac.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,7 +21,7 @@ import com.kaku.weac.common.WeacConstants;
  * @author 咖枯
  * @version 1.0 2015/07
  */
-public class RecordOperateFragment extends Fragment implements OnClickListener {
+public class RecordOperateFragment extends BaseFragment implements OnClickListener {
 
     private TextView mRecordRenameTv;
     private TextView mRecordDeleteTv;

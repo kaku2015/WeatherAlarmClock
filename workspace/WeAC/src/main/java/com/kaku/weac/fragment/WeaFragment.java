@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
+ */
 package com.kaku.weac.fragment;
 
 import android.app.Activity;
@@ -54,7 +57,7 @@ import java.util.List;
  * @author 咖枯
  * @version 1.0 2015/9
  */
-public class WeaFragment extends BaseFragment implements View.OnClickListener {
+public class WeaFragment extends LazyLoadFragment implements View.OnClickListener {
     /**
      * Log tag ：WeaFragment
      */

@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
+ */
 package com.kaku.weac.fragment;
 
 import android.annotation.TargetApi;
@@ -15,7 +18,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +45,7 @@ import java.util.Locale;
  * @author 咖枯
  * @version 1.0 2015/06/25
  */
-public class AlarmClockOntimeFragment extends Fragment implements
+public class AlarmClockOntimeFragment extends BaseFragment implements
         OnClickListener {
 
     /**

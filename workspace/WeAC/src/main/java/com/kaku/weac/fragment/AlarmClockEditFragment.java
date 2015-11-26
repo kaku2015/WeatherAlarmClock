@@ -1,10 +1,12 @@
+/*
+ * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
+ */
 package com.kaku.weac.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -39,7 +41,7 @@ import java.util.TreeMap;
  * @author 咖枯
  * @version 1.0 2015/06/14
  */
-public class AlarmClockEditFragment extends Fragment implements
+public class AlarmClockEditFragment extends BaseFragment implements
         OnClickListener, OnCheckedChangeListener {
 
     /**

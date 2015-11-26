@@ -1,9 +1,11 @@
+/*
+ * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
+ */
 package com.kaku.weac.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,7 +26,7 @@ import com.kaku.weac.util.LogUtil;
  * @author 咖枯
  * @version 1.0 2015/07
  */
-public class NapEditFragment extends Fragment implements OnClickListener {
+public class NapEditFragment extends BaseFragment implements OnClickListener {
 
     /**
      * Log tag ：NapEditFragment

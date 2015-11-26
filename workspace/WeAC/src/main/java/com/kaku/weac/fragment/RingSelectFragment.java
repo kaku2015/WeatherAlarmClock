@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
+ */
 package com.kaku.weac.fragment;
 
 import android.app.Activity;
@@ -32,7 +35,7 @@ import java.util.List;
  * @author 咖枯
  * @version 1.0 2015/05/18
  */
-public class RingSelectFragment extends Fragment implements OnClickListener {
+public class RingSelectFragment extends BaseFragment implements OnClickListener {
 
     /**
      * 铃声选择界面

@@ -1,10 +1,12 @@
+/*
+ * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
+ */
 package com.kaku.weac.fragment;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,7 +24,7 @@ import com.kaku.weac.util.MyUtil;
  * @author 咖枯
  * @version 1.0 2015
  */
-public class MoreFragment extends Fragment {
+public class MoreFragment extends BaseFragment {
     /**
      * Log tag ：MoreFragment
      */

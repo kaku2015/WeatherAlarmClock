@@ -1,6 +1,8 @@
+/*
+ * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
+ */
 package com.kaku.weac.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import com.kaku.weac.bean.AlarmClock;
@@ -13,7 +15,7 @@ import com.kaku.weac.util.MyUtil;
  * @author 咖枯
  * @version 1.0 2015
  */
-public class AlarmClockNapNotificationActivity extends Activity {
+public class AlarmClockNapNotificationActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

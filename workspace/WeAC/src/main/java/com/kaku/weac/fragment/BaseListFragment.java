@@ -3,20 +3,18 @@
  */
 package com.kaku.weac.fragment;
 
-
-import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 
 import com.kaku.weac.LeakCanaryApplication;
 import com.squareup.leakcanary.RefWatcher;
 
-
 /**
- * Fragment管理类
+ * ListFragment管理类
  *
  * @author 咖枯
  * @version 1.0 2015/11/25
  */
-public class BaseFragment extends Fragment {
+public class BaseListFragment extends ListFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();

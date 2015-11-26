@@ -1,10 +1,15 @@
+/*
+ * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
+ */
 package com.kaku.weac.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Window;
 
+import com.kaku.weac.LeakCanaryApplication;
 import com.kaku.weac.util.LogUtil;
+import com.squareup.leakcanary.RefWatcher;
 
 //TODO 未使用
 
@@ -25,6 +30,13 @@ public class BaseActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        LogUtil.d(LOG_TAG, getClass().getSimpleName());
+        LogUtil.i(LOG_TAG, getClass().getSimpleName());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = LeakCanaryApplication.getRefWatcher(this);
+        refWatcher.watch(this);
     }
 }

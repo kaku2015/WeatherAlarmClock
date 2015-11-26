@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
+ */
 package com.kaku.weac.fragment;
 
 import android.app.Activity;
@@ -5,7 +8,6 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -33,7 +35,7 @@ import java.util.Map;
  * @author 咖枯
  * @version 1.0 2015/05
  */
-public class LocalMusicFragment extends ListFragment implements
+public class LocalMusicFragment extends BaseListFragment implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
     /**

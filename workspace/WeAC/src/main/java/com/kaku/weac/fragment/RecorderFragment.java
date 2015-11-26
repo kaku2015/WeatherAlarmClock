@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
+ */
 package com.kaku.weac.fragment;
 
 import android.app.Activity;
@@ -7,7 +10,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -52,7 +54,7 @@ import java.util.Map;
  * @author 咖枯
  * @version 1.0 2015/05
  */
-public class RecorderFragment extends Fragment implements OnClickListener {
+public class RecorderFragment extends BaseFragment implements OnClickListener {
 
     /**
      * Log tag ：RecorderFragment
@@ -381,8 +383,12 @@ public class RecorderFragment extends Fragment implements OnClickListener {
                     if (!AudioRecorder.getInstance(getActivity()).mIsStarted) {
                         // 删除录音文件
                         File f = new File(fileName);
+                        boolean result = false;
                         if (f.exists()) {
-                            f.delete();
+                            result = f.delete();
+                        }
+                        if (!result) {
+                            ToastUtil.showShortToast(getActivity(), getString(R.string.error_delete_fail));
                         }
                         break;
                     }

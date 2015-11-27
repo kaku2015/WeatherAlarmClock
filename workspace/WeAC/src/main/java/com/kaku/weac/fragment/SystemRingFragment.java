@@ -11,6 +11,8 @@ import android.provider.MediaStore;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,19 +42,9 @@ public class SystemRingFragment extends BaseListFragment implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
     /**
-     * 保存铃声信息的List
-     */
-    private List<Map<String, String>> mList;
-
-    /**
      * 保存铃声信息的Adapter
      */
-    static RingSelectAdapter sAdapter;
-
-    /**
-     * 铃声名标记位置
-     */
-    private String mRingName;
+    RingSelectAdapter mSystemRingAdapter;
 
     /**
      * loader Id
@@ -64,11 +56,6 @@ public class SystemRingFragment extends BaseListFragment implements
      */
     private int mPosition = 0;
 
-    /**
-     * 管理cursor
-     */
-    private LoaderManager loaderManager;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -79,7 +66,8 @@ public class SystemRingFragment extends BaseListFragment implements
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        loaderManager = getLoaderManager();
+        // 管理cursor
+        LoaderManager loaderManager = getLoaderManager();
         // 注册Loader
         loaderManager.initLoader(LOADER_ID, null, this);
         // initAdapter();
@@ -88,15 +76,15 @@ public class SystemRingFragment extends BaseListFragment implements
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        Map<String, String> map = sAdapter.getItem(position);
+        Map<String, String> map = mSystemRingAdapter.getItem(position);
         // 取得铃声名
         String ringName = map.get(WeacConstants.RING_NAME);
         // 取得播放地址
         String ringUrl = map.get(WeacConstants.RING_URL);
         // 更新当前铃声选中的位置
-        sAdapter.updateSelection(ringName);
+        mSystemRingAdapter.updateSelection(ringName);
         // 更新适配器刷新铃声列表显示
-        sAdapter.notifyDataSetChanged();
+        mSystemRingAdapter.notifyDataSetChanged();
         // 设置最后一次选中的铃声选择界面位置为系统铃声界面
         RingSelectItem.getInstance().setRingPager(0);
 
@@ -116,15 +104,19 @@ public class SystemRingFragment extends BaseListFragment implements
                 break;
         }
 
+        ViewPager pager = (ViewPager) getActivity().findViewById(R.id.fragment_ring_select_sort);
+        PagerAdapter f = pager.getAdapter();
+        LocalMusicFragment localMusicFragment = (LocalMusicFragment) f.instantiateItem(pager, 1);
+        RecorderFragment recorderFragment = (RecorderFragment) f.instantiateItem(pager, 2);
         // 取消本地音乐选中标记
-        if (LocalMusicFragment.sAdapter != null) {
-            LocalMusicFragment.sAdapter.updateSelection("");
-            LocalMusicFragment.sAdapter.notifyDataSetChanged();
+        if (localMusicFragment.mLocalMusicAdapter != null) {
+            localMusicFragment.mLocalMusicAdapter.updateSelection("");
+            localMusicFragment.mLocalMusicAdapter.notifyDataSetChanged();
         }
         // 取消录音选中标记
-        if (RecorderFragment.sAdapter != null) {
-            RecorderFragment.sAdapter.updateSelection("");
-            RecorderFragment.sAdapter.notifyDataSetChanged();
+        if (recorderFragment.mRecorderAdapter != null) {
+            recorderFragment.mRecorderAdapter.updateSelection("");
+            recorderFragment.mRecorderAdapter.notifyDataSetChanged();
         }
     }
 
@@ -143,39 +135,41 @@ public class SystemRingFragment extends BaseListFragment implements
         switch (loader.getId()) {
             case LOADER_ID:
                 // 当为编辑闹钟状态时，铃声名为闹钟单例铃声名
+                String ringName1;
                 if (RingSelectFragment.sRingName != null) {
-                    mRingName = RingSelectFragment.sRingName;
+                    ringName1 = RingSelectFragment.sRingName;
                 } else {
                     SharedPreferences share = getActivity().getSharedPreferences(
                             WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
                     // 当为新建闹钟状态时，铃声名为最近一次选择保存的铃声名,没有的话为默认铃声
-                    mRingName = share.getString(WeacConstants.RING_NAME,
+                    ringName1 = share.getString(WeacConstants.RING_NAME,
                             getString(R.string.default_ring));
                 }
 
                 // 过滤重复音频文件的Set
                 HashSet<String> set = new HashSet<>();
 
-                mList = new ArrayList<>();
+                //  保存铃声信息的List
+                List<Map<String, String>> list = new ArrayList<>();
                 // 添加默认铃声
                 Map<String, String> defaultRing = new HashMap<>();
                 defaultRing.put(WeacConstants.RING_NAME,
                         getString(R.string.default_ring));
                 defaultRing.put(WeacConstants.RING_URL,
                         WeacConstants.DEFAULT_RING_URL);
-                mList.add(defaultRing);
+                list.add(defaultRing);
                 set.add(getString(R.string.default_ring));
 
                 // 添加无铃声
                 Map<String, String> noRing = new HashMap<>();
                 noRing.put(WeacConstants.RING_NAME, getString(R.string.no_ring));
                 noRing.put(WeacConstants.RING_URL, WeacConstants.NO_RING_URL);
-                mList.add(noRing);
+                list.add(noRing);
                 set.add(getString(R.string.no_ring));
 
                 // 当列表中存在与保存的铃声名一致时，设置该列表的显示位置
-                if (getString(R.string.no_ring).equals(mRingName)) {
-                    mPosition = mList.size() - 1;
+                if (getString(R.string.no_ring).equals(ringName1)) {
+                    mPosition = list.size() - 1;
                 }
 
                 for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor
@@ -196,16 +190,16 @@ public class SystemRingFragment extends BaseListFragment implements
                             Map<String, String> map = new HashMap<>();
                             map.put(WeacConstants.RING_NAME, ringName);
                             map.put(WeacConstants.RING_URL, ringUrl);
-                            mList.add(map);
+                            list.add(map);
                             // 当列表中存在与保存的铃声名一致时，设置该列表的显示位置
-                            if (ringName.equals(mRingName)) {
-                                mPosition = mList.size() - 1;
+                            if (ringName.equals(ringName1)) {
+                                mPosition = list.size() - 1;
                             }
                         }
                     }
                 }
-                sAdapter = new RingSelectAdapter(getActivity(), mList, mRingName);
-                setListAdapter(sAdapter);
+                mSystemRingAdapter = new RingSelectAdapter(getActivity(), list, ringName1);
+                setListAdapter(mSystemRingAdapter);
                 setSelection(mPosition);
                 break;
         }

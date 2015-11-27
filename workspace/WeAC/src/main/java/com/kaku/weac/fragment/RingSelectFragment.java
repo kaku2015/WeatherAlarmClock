@@ -38,44 +38,9 @@ import java.util.List;
 public class RingSelectFragment extends BaseFragment implements OnClickListener {
 
     /**
-     * 铃声选择界面
-     */
-    private ViewGroup mViewGroup;
-
-    /**
-     * 铃声种类
-     */
-    private ViewPager mViewPager;
-
-    /**
      * 铃声种类集合
      */
     private List<Fragment> mFragmentList;
-
-    /**
-     * 展示系统铃声的Fragment
-     */
-    private SystemRingFragment mSystemRingFragment;
-
-    /**
-     * 展示录音的Fragment
-     */
-    private RecorderFragment mRecordFragment;
-
-    /**
-     * 展示本地铃声的Fragment
-     */
-    private LocalMusicFragment mLocalMusicFragment;
-
-    /**
-     * 返回按钮
-     */
-    private ImageView mActionCancel;
-
-    /**
-     * 保存按钮
-     */
-    private TextView mActionSave;
 
     /**
      * 铃声名
@@ -106,9 +71,10 @@ public class RingSelectFragment extends BaseFragment implements OnClickListener 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fm_ring_select, container, false);
-        mViewGroup = (ViewGroup) view.findViewById(R.id.ring_select_llyt);
+        // 铃声选择界面
+        ViewGroup viewGroup = (ViewGroup) view.findViewById(R.id.ring_select_llyt);
         // 设置页面背景
-        MyUtil.setBackground(mViewGroup, getActivity());
+        MyUtil.setBackground(viewGroup, getActivity());
 
         // 设置显示铃声列表的Fragment
         initFragment();
@@ -116,12 +82,12 @@ public class RingSelectFragment extends BaseFragment implements OnClickListener 
         initViewPager(view);
 
         // 返回按钮
-        mActionCancel = (ImageView) view.findViewById(R.id.ring_select_cancel);
-        mActionCancel.setOnClickListener(this);
+        ImageView actionCancel = (ImageView) view.findViewById(R.id.ring_select_cancel);
+        actionCancel.setOnClickListener(this);
 
         // 保存按钮
-        mActionSave = (TextView) view.findViewById(R.id.ring_select_save);
-        mActionSave.setOnClickListener(this);
+        TextView actionSave = (TextView) view.findViewById(R.id.ring_select_save);
+        actionSave.setOnClickListener(this);
 
         return view;
     }
@@ -176,14 +142,17 @@ public class RingSelectFragment extends BaseFragment implements OnClickListener 
      * 设置显示铃声列表的Fragment
      */
     private void initFragment() {
-        mSystemRingFragment = new SystemRingFragment();
-        mRecordFragment = new RecorderFragment();
-        mLocalMusicFragment = new LocalMusicFragment();
+        // 展示系统铃声的Fragment
+        SystemRingFragment systemRingFragment = new SystemRingFragment();
+        // 展示录音的Fragment
+        RecorderFragment recordFragment = new RecorderFragment();
+        // 展示本地铃声的Fragment
+        LocalMusicFragment localMusicFragment = new LocalMusicFragment();
 
         mFragmentList = new ArrayList<>();
-        mFragmentList.add(mSystemRingFragment);
-        mFragmentList.add(mLocalMusicFragment);
-        mFragmentList.add(mRecordFragment);
+        mFragmentList.add(systemRingFragment);
+        mFragmentList.add(localMusicFragment);
+        mFragmentList.add(recordFragment);
     }
 
     /**
@@ -192,9 +161,10 @@ public class RingSelectFragment extends BaseFragment implements OnClickListener 
      * @param view view
      */
     private void initViewPager(View view) {
-        mViewPager = (ViewPager) view
+//      铃声种类
+        ViewPager viewPager = (ViewPager) view
                 .findViewById(R.id.fragment_ring_select_sort);
-        mViewPager.setAdapter(new MyFragmentPagerAdapter(getActivity()
+        viewPager.setAdapter(new MyFragmentPagerAdapter(getActivity()
                 .getSupportFragmentManager()));
 
         // 铃声界面位置
@@ -202,20 +172,20 @@ public class RingSelectFragment extends BaseFragment implements OnClickListener 
         // 当由编辑闹钟界面跳转时
         if (sRingPager != -1) {
             // 设置闹钟界面为保存的铃声界面位置
-            mViewPager.setCurrentItem(sRingPager);
+            viewPager.setCurrentItem(sRingPager);
             currentIndex = sRingPager;
         } else {
             // 取得最近一次选择的闹钟界面位置信息
             SharedPreferences shares = getActivity().getSharedPreferences(
                     WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
             int position = shares.getInt(WeacConstants.RING_PAGER, 0);
-            mViewPager.setCurrentItem(position);
+            viewPager.setCurrentItem(position);
             currentIndex = position;
         }
 
         PagerSlidingTabStrip strip = (PagerSlidingTabStrip) view
                 .findViewById(R.id.tabstrip);
-        strip.setViewPager(mViewPager);
+        strip.setViewPager(viewPager);
         // 设置当前铃声界面位置，来初始化选中文字颜色
         strip.setCurrentIndex(currentIndex);
         // 普通字体

@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -84,7 +86,7 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
     /**
      * 保存录音信息的Adapter
      */
-    static RingSelectAdapter sAdapter;
+    RingSelectAdapter mRecorderAdapter;
 
     /**
      * 录音按钮
@@ -135,11 +137,6 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
      * 录音时间线程标记
      */
     private static final int UPDATE_TIME = 1;
-
-    /**
-     * 录音ListView
-     */
-    private ListView mRecordListView;
 
     /**
      * 麦克风状态Handler
@@ -224,7 +221,7 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
         }
         // 设置录音List
         setRingList();
-        sAdapter = new RingSelectAdapter(getActivity(), mList, mRingName);
+        mRecorderAdapter = new RingSelectAdapter(getActivity(), mList, mRingName);
     }
 
     @Override
@@ -269,17 +266,18 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
         View view = inflater.inflate(R.layout.fm_ring_recorder, container,
                 false);
 
-        mRecordListView = (ListView) view.findViewById(R.id.ring_record_lv);
+        // 录音ListView
+        ListView recordListView = (ListView) view.findViewById(R.id.ring_record_lv);
         // 当录音List内容为空时显示的TextView
         TextView emptyView = (TextView) view
                 .findViewById(R.id.ring_record_empty);
         // 设置录音List内容为空时的视图
-        mRecordListView.setEmptyView(emptyView);
-        mRecordListView.setAdapter(sAdapter);
+        recordListView.setEmptyView(emptyView);
+        recordListView.setAdapter(mRecorderAdapter);
         // 设置列表初始化显示的位置
-        mRecordListView.setSelection(mPosition);
-        mRecordListView.setOnItemClickListener(new OnItemClickListenerImpl());
-        mRecordListView
+        recordListView.setSelection(mPosition);
+        recordListView.setOnItemClickListener(new OnItemClickListenerImpl());
+        recordListView
                 .setOnItemLongClickListener(new onItemLongClickListenerImpl());
         // 录音按钮组件
         mRecordBtn = (ImageButton) view.findViewById(R.id.ring_record_record);
@@ -302,29 +300,34 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
-            Map<String, String> map = sAdapter.getItem(position);
+            Map<String, String> map = mRecorderAdapter.getItem(position);
             // 取得铃声名
             String ringName = map.get(WeacConstants.RING_NAME);
             // 取得播放地址
             String ringUrl = map.get(WeacConstants.RING_URL);
             // 更新当前录音选中的位置
-            sAdapter.updateSelection(ringName);
+            mRecorderAdapter.updateSelection(ringName);
             // 更新适配器刷新录音列表显示
-            sAdapter.notifyDataSetChanged();
+            mRecorderAdapter.notifyDataSetChanged();
             // 播放音频文件
             AudioPlayer.getInstance(getActivity()).play(ringUrl, false, false);
             // 设置最后一次选中的铃声选择界面位置为录音界面
             RingSelectItem.getInstance().setRingPager(2);
 
+
+            ViewPager pager = (ViewPager) getActivity().findViewById(R.id.fragment_ring_select_sort);
+            PagerAdapter f = pager.getAdapter();
+            LocalMusicFragment localMusicFragment = (LocalMusicFragment) f.instantiateItem(pager, 1);
+            SystemRingFragment systemRingFragment = (SystemRingFragment) f.instantiateItem(pager, 0);
             // 清空本地音乐界面选中标记
-            if (LocalMusicFragment.sAdapter != null) {
-                LocalMusicFragment.sAdapter.updateSelection("");
-                LocalMusicFragment.sAdapter.notifyDataSetChanged();
+            if (localMusicFragment.mLocalMusicAdapter != null) {
+                localMusicFragment.mLocalMusicAdapter.updateSelection("");
+                localMusicFragment.mLocalMusicAdapter.notifyDataSetChanged();
             }
             // 清空系统铃声界面选中标记
-            if (SystemRingFragment.sAdapter != null) {
-                SystemRingFragment.sAdapter.updateSelection("");
-                SystemRingFragment.sAdapter.notifyDataSetChanged();
+            if (systemRingFragment.mSystemRingAdapter != null) {
+                systemRingFragment.mSystemRingAdapter.updateSelection("");
+                systemRingFragment.mSystemRingAdapter.notifyDataSetChanged();
             }
         }
     }
@@ -446,7 +449,7 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
             // 录音操作
             case REQUEST_RECORD_OPERATE:
                 int position = data.getIntExtra(WeacConstants.POSITION, 0);
-                Map<String, String> map = sAdapter.getItem(position);
+                Map<String, String> map = mRecorderAdapter.getItem(position);
                 // 文件名
                 String ringName = map.get(WeacConstants.RING_NAME);
                 // 文件路径
@@ -567,7 +570,7 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
     private void refreshList() {
         mList.clear();
         setRingList();
-        sAdapter.notifyDataSetChanged();
+        mRecorderAdapter.notifyDataSetChanged();
 
     }
 

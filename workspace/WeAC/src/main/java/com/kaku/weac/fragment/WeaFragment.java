@@ -528,27 +528,27 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
     /**
      * 下拉刷新ScrollView
      */
-    public static PullToRefreshScrollView sPullRefreshScrollView;
+    public PullToRefreshScrollView mPullRefreshScrollView;
 
     /**
      * 刷新按钮
      */
-    public static ImageView sRefreshBtn;
+    public ImageView mRefreshBtn;
 
     /**
      * 延迟刷新线程是否已经启动
      */
-    public static boolean sIsPostDelayed;
+    public boolean mIsPostDelayed;
 
     /**
      * 延迟刷新Handler
      */
-    public static Handler sHandler;
+    public Handler mHandler;
 
     /**
      * 延迟刷新Runnable
      */
-    public static Runnable sRun;
+    public Runnable mRun;
 
     /**
      * 标志位，标志已经初始化完成
@@ -568,12 +568,12 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
     /**
      * 设置壁纸
      */
-    public static LinearLayout sBackGround;
+    LinearLayout mBackGround;
 
     /**
      * 模糊处理过的Drawable
      */
-    public static Drawable sBlurDrawable;
+    Drawable mBlurDrawable;
 
     /**
      * 屏幕密度
@@ -583,7 +583,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
     /**
      * 透明
      */
-    public static int sAlpha = 0;
+    int mAlpha = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -617,15 +617,15 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
      * 下拉刷新
      */
     private void pullToRefresh() {
-        sHandler = new Handler();
-        sRun = new Runnable() {
+        mHandler = new Handler();
+        mRun = new Runnable() {
             @Override
             public void run() {
                 try {
-                    sIsPostDelayed = false;
+                    mIsPostDelayed = false;
                     if (!getActivity().isFinishing()) {
                         if (!hasActiveUpdated()) {
-                            sPullRefreshScrollView.setRefreshing();
+                            mPullRefreshScrollView.setRefreshing();
                         }
                         // 加载成功
 //                        mHasLoadedOnce = true;
@@ -635,8 +635,8 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                 }
             }
         };
-        sHandler.postDelayed(sRun, 2000);
-        sIsPostDelayed = true;
+        mHandler.postDelayed(mRun, 2000);
+        mIsPostDelayed = true;
     }
 
 
@@ -665,7 +665,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                 LinearInterpolator lin = new LinearInterpolator();
                 // 设置速率
                 operatingAnim.setInterpolator(lin);
-                sRefreshBtn.startAnimation(operatingAnim);
+                mRefreshBtn.startAnimation(operatingAnim);
                 // 刷新天气
                 refreshWeather();
 
@@ -733,7 +733,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         }
         if (requestCode == REQUEST_WEA) {
             // 滚动到顶端
-            sPullRefreshScrollView.getRefreshableView().scrollTo(0, 0);
+            mPullRefreshScrollView.getRefreshableView().scrollTo(0, 0);
             WeatherInfo weatherInfo = WeatherUtil.readWeatherInfo(getActivity(), getDefaultCityName());
             initWeather(weatherInfo);
 
@@ -746,7 +746,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
             long minuteD = (now - lastTime) / 1000 / 60;
             // 更新间隔大于10分钟自动下拉刷新
             if (minuteD > 10) {
-                sPullRefreshScrollView.setRefreshing();
+                mPullRefreshScrollView.setRefreshing();
             }
         }
     }
@@ -830,9 +830,9 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
      */
     private void stopRefresh() {
         // 停止正在刷新动画
-        sPullRefreshScrollView.onRefreshComplete();
+        mPullRefreshScrollView.onRefreshComplete();
         // 取消刷新按钮的动画
-        sRefreshBtn.clearAnimation();
+        mRefreshBtn.clearAnimation();
         // 最近一次更细时间
         mLastActiveUpdateTime = System.currentTimeMillis();
     }
@@ -1739,8 +1739,8 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
      * @param view view
      */
     private void init(View view) {
-        sRefreshBtn = (ImageView) view.findViewById(R.id.action_refresh);
-        sRefreshBtn.setOnClickListener(this);
+        mRefreshBtn = (ImageView) view.findViewById(R.id.action_refresh);
+        mRefreshBtn.setOnClickListener(this);
         // HOME按钮
         ImageView homeBtn = (ImageView) view.findViewById(R.id.action_home);
         homeBtn.setOnClickListener(this);
@@ -1868,28 +1868,28 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         lifeIndexAirCureRlyt.setOnClickListener(this);
 
         mDensity = getResources().getDisplayMetrics().density;
-        sBlurDrawable = MyUtil.getWallPaperDrawable(getActivity());
-        sBackGround = (LinearLayout) view.findViewById(R.id.wea_background);
+        mBlurDrawable = MyUtil.getWallPaperDrawable(getActivity());
+        mBackGround = (LinearLayout) view.findViewById(R.id.wea_background);
 
-        sPullRefreshScrollView = (PullToRefreshScrollView) view
+        mPullRefreshScrollView = (PullToRefreshScrollView) view
                 .findViewById(R.id.pull_refresh_scrollview);
         // 设置下拉刷新
         setPullToRefresh();
-        sPullRefreshScrollView.setScrollViewListener(new ScrollViewListener() {
+        mPullRefreshScrollView.setScrollViewListener(new ScrollViewListener() {
             @Override
             public void onScrollChanged(ScrollView scrollView, int x, int y, int oldx, int oldy) {
 //                LogUtil.i(LOG_TAG, "x: " + x + "y: " + y + "oldx: " + oldx + "oldy: " + oldy);
                 // scroll最大滚动距离（xxxh：2320）/密度（xxxh：3）/1.5  =  515
-                sAlpha = Math.round(Math.round(y / mDensity / 1.5));
-                if (sAlpha > 255) {
-                    sAlpha = 255;
-                } else if (sAlpha < 0) {
-                    sAlpha = 0;
+                mAlpha = Math.round(Math.round(y / mDensity / 1.5));
+                if (mAlpha > 255) {
+                    mAlpha = 255;
+                } else if (mAlpha < 0) {
+                    mAlpha = 0;
                 }
                 // 设置模糊处理后drawable的透明度
-                sBlurDrawable.setAlpha(sAlpha);
+                mBlurDrawable.setAlpha(mAlpha);
                 // 设置背景
-                sBackGround.setBackground(sBlurDrawable);
+                mBackGround.setBackground(mBlurDrawable);
             }
         });
     }
@@ -1899,11 +1899,11 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
      */
 
     private void setPullToRefresh() {
-        sPullRefreshScrollView.getLoadingLayoutProxy().setPullLabel(getString(R.string.pull_to_refresh));
-        sPullRefreshScrollView.getLoadingLayoutProxy().setRefreshingLabel(
+        mPullRefreshScrollView.getLoadingLayoutProxy().setPullLabel(getString(R.string.pull_to_refresh));
+        mPullRefreshScrollView.getLoadingLayoutProxy().setRefreshingLabel(
                 getString(R.string.refreshing));
-        sPullRefreshScrollView.getLoadingLayoutProxy().setReleaseLabel(getString(R.string.leave_to_refresh));
-        sPullRefreshScrollView
+        mPullRefreshScrollView.getLoadingLayoutProxy().setReleaseLabel(getString(R.string.leave_to_refresh));
+        mPullRefreshScrollView
                 .setOnRefreshListener(new OnRefreshListener<ScrollView>() {
 
                     @Override
@@ -1935,9 +1935,9 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
     @Override
     public void onDestroy() {
         super.onDestroy();
-        sAlpha = 0;
-        if (sHandler != null) {
-            sHandler.removeCallbacks(sRun);
+        mAlpha = 0;
+        if (mHandler != null) {
+            mHandler.removeCallbacks(mRun);
         }
     }
 }

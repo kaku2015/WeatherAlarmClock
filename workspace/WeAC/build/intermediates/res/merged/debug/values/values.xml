@@ -465,6 +465,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
         <item name="android:orientation">vertical</item>
     </style>
     <style name="new_alarm_clcok_nap_edit_options_radio_group">
@@ -482,7 +483,6 @@
     <style name="new_alarm_clcok_nap_edit_radio_btn">
         <item name="android:layout_width">38dp</item>
         <item name="android:layout_height">38dp</item>
-        <item name="android:layout_marginLeft">20dp</item>
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/toggle_btn_repeat_week</item>
         <item name="android:button">@null</item>
@@ -496,6 +496,11 @@
         <item name="android:checked">false</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@drawable/text_color_toggle_btn_circle</item>
+    </style>
+    <style name="new_alarm_clock_nap_edit_radio_btn_space">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">38dp</item>
+        <item name="android:layout_weight">1</item>
     </style>
     <style name="new_alarm_clock_repeat_days_llyt">
         <item name="android:layout_width">0dp</item>

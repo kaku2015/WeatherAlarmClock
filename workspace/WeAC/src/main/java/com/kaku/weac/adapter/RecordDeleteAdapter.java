@@ -13,9 +13,9 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.kaku.weac.Listener.RecordCheckChangedListener;
 import com.kaku.weac.R;
 import com.kaku.weac.bean.RecordDeleteItem;
-import com.kaku.weac.fragment.RecordDeleteBatchFragment;
 
 import java.util.List;
 
@@ -27,6 +27,14 @@ import java.util.List;
  */
 public class RecordDeleteAdapter extends ArrayAdapter<RecordDeleteItem> {
     private final Context mContext;
+    /**
+     * 批量录音删除选中回调接口
+     */
+    private RecordCheckChangedListener mRecordCheckChangedListener;
+
+    public void setRecordCheckChangedListener(RecordCheckChangedListener recordCheckChangedListener) {
+        mRecordCheckChangedListener = recordCheckChangedListener;
+    }
 
     /**
      * 录音批量删除适配器
@@ -68,13 +76,12 @@ public class RecordDeleteAdapter extends ArrayAdapter<RecordDeleteItem> {
                         if (isChecked) {
                             if (!recordItem.isSelected()) {
                                 // 选中处理
-                                RecordDeleteBatchFragment.onCheck(recordItem);
-
+                                mRecordCheckChangedListener.onChecked(recordItem);
                             }
                         } else {
                             if (recordItem.isSelected()) {
                                 // 解除选中处理
-                                RecordDeleteBatchFragment.unCheck(recordItem);
+                                mRecordCheckChangedListener.unChecked(recordItem);
                             }
                         }
                     }

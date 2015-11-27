@@ -95,6 +95,10 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
      */
     private int mCurrentIndex = -1;
 
+    /**
+     * 展示天气的Fragment
+     */
+    WeaFragment mWeaFragment;
     // @Override
     // public void onLowMemory() {
     // super.onLowMemory();
@@ -266,7 +270,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         // 展示闹钟的Fragment
         AlarmClockFragment mAlarmClockFragment = new AlarmClockFragment();
         // 展示天气的Fragment
-        WeaFragment mWeaFragment = new WeaFragment();
+        mWeaFragment = new WeaFragment();
         // 展示计时的Fragment
         TimeFragment mTimeFragment = new TimeFragment();
         // 展示更多的Fragment
@@ -279,6 +283,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         // 设置ViewPager
         mViewPager = (ViewPager) findViewById(R.id.fragment_container);
         mViewPager.setAdapter(new MyFragmentPagerAdapter(mFm));
+        // 设置一边加载的page数
         mViewPager.setOffscreenPageLimit(3);
         // TODO：切换渐变
         mViewPager.addOnPageChangeListener(new OnPageChangeListener() {
@@ -365,23 +370,23 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 
         if (index != 1) {
             // 当不是天气界面并且已经开始延迟刷新天气线程
-            if (WeaFragment.sHandler != null && WeaFragment.sIsPostDelayed) {
+            if (mWeaFragment.mHandler != null && mWeaFragment.mIsPostDelayed) {
                 // 取消线程
-                WeaFragment.sHandler.removeCallbacks(WeaFragment.sRun);
-                WeaFragment.sIsPostDelayed = false;
+                mWeaFragment.mHandler.removeCallbacks(mWeaFragment.mRun);
+                mWeaFragment.mIsPostDelayed = false;
                 LogUtil.i(LOG_TAG, "已移除刷新天气线程");
             }
-            if (WeaFragment.sPullRefreshScrollView != null) {
+            if (mWeaFragment.mPullRefreshScrollView != null) {
                 // 当正在刷新
-                if (WeaFragment.sPullRefreshScrollView.isRefreshing()) {
+                if (mWeaFragment.mPullRefreshScrollView.isRefreshing()) {
                     // 停止刷新
-                    WeaFragment.sPullRefreshScrollView.onRefreshComplete();
+                    mWeaFragment.mPullRefreshScrollView.onRefreshComplete();
                     LogUtil.i(LOG_TAG, "已停止刷新天气动画");
                 }
             }
             // 停止刷新动画
-            if (WeaFragment.sRefreshBtn != null) {
-                WeaFragment.sRefreshBtn.clearAnimation();
+            if (mWeaFragment.mRefreshBtn != null) {
+                mWeaFragment.mRefreshBtn.clearAnimation();
             }
         }
 

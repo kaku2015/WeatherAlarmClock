@@ -49,8 +49,8 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
      */
     private DBObserverListener mDBObserverListener;
 
-    public void setDBObserverListener(DBObserverListener DBObserverListener) {
-        mDBObserverListener = DBObserverListener;
+    public void setDBObserverListener(DBObserverListener dbObserverListener) {
+        mDBObserverListener = dbObserverListener;
     }
 
     /**

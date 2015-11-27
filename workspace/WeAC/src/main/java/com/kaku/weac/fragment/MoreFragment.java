@@ -7,6 +7,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -72,11 +74,14 @@ public class MoreFragment extends BaseFragment {
             // 更新壁纸
             vg.setBackgroundResource(MyUtil.getWallPaper(getActivity()));
 
+            ViewPager pager = (ViewPager) getActivity().findViewById(R.id.fragment_container);
+            PagerAdapter f = pager.getAdapter();
+            WeaFragment weaFragment = (WeaFragment) f.instantiateItem(pager, 1);
             // 更新天气高斯模糊背景
-            if (WeaFragment.sBlurDrawable != null && WeaFragment.sBackGround != null) {
-                WeaFragment.sBlurDrawable = MyUtil.getWallPaperDrawable(getActivity());
-                WeaFragment.sBlurDrawable.setAlpha(WeaFragment.sAlpha);
-                WeaFragment.sBackGround.setBackground(WeaFragment.sBlurDrawable);
+            if (weaFragment.mBlurDrawable != null && weaFragment.mBackGround != null) {
+                weaFragment.mBlurDrawable = MyUtil.getWallPaperDrawable(getActivity());
+                weaFragment.mBlurDrawable.setAlpha(weaFragment.mAlpha);
+                weaFragment.mBackGround.setBackground(weaFragment.mBlurDrawable);
             }
         }
     }

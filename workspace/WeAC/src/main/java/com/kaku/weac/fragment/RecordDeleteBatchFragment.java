@@ -5,7 +5,6 @@ package com.kaku.weac.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -20,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.kaku.weac.Listener.RecordCheckChangedListener;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.RecordDeleteActivity;
 import com.kaku.weac.adapter.RecordDeleteAdapter;
@@ -48,44 +48,34 @@ public class RecordDeleteBatchFragment extends BaseFragment implements
     private static final int REQUEST_DELETE = 1;
 
     /**
-     * 取消按钮
-     */
-    private ImageView mCancelBtn;
-
-    /**
      * 标题
      */
-    private static TextView sTitleTv;
+    private TextView mTitleTv;
 
     /**
      * 全选按钮
      */
-    private static TextView sSelectAllBtn;
+    private TextView mSelectAllBtn;
 
     /**
      * 取消全选按钮
      */
-    private static TextView sSelectNoneBtn;
+    private TextView mSelectNoneBtn;
 
     /**
      * 删除按钮
      */
-    private static Button sDeleteBtn;
-
-    /**
-     * 录音批量删除画面
-     */
-    private ViewGroup mViewGroup;
+    private Button mDeleteBtn;
 
     /**
      * 保存录音信息的List
      */
-    private static List<RecordDeleteItem> sRecordList;
+    private List<RecordDeleteItem> mRecordList;
 
     /**
      * 保存选中删除的录音路径
      */
-    private static List<String> sDeleteList;
+    private List<String> mDeleteList;
 
     /**
      * 保存录音信息的Adapter
@@ -93,34 +83,44 @@ public class RecordDeleteBatchFragment extends BaseFragment implements
     private RecordDeleteAdapter mAdapter;
 
     /**
-     * 录音ListView
-     */
-    private ListView mRecordLv;
-
-    /**
      * 标题内容格式
      */
-    private static String sTitleFormat;
+    private String mTitleFormat;
 
     /**
      * 删除按钮可用文字灰白色
      */
-    private static final int sColorWhite = Color.parseColor("#F4F4F4");
+    private int mColorWhite;
 
     /**
      * 删除按钮不可用文字0.6透明白色
      */
-    private static final int sColorWhiteTrans = Color.parseColor("#9affffff");
+    private int mColorWhiteTrans;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sDeleteList = new ArrayList<>();
-        sRecordList = new ArrayList<>();
+        initAdapter();
+    }
+
+    private void initAdapter() {
+        mDeleteList = new ArrayList<>();
+        mRecordList = new ArrayList<>();
         // 设置录音List
         setRingList();
-        mAdapter = new RecordDeleteAdapter(getActivity(), sRecordList);
-        sTitleFormat = getString(R.string.selected_xx_item);
+        mAdapter = new RecordDeleteAdapter(getActivity(), mRecordList);
+        mAdapter.setRecordCheckChangedListener(new RecordCheckChangedListener() {
+            @Override
+            public void onChecked(RecordDeleteItem recordDeleteItem) {
+                onCheck(recordDeleteItem);
+            }
+
+            @Override
+            public void unChecked(RecordDeleteItem recordDeleteItem) {
+                unCheck(recordDeleteItem);
+            }
+        });
+        mTitleFormat = getString(R.string.selected_xx_item);
     }
 
     @Override
@@ -128,14 +128,19 @@ public class RecordDeleteBatchFragment extends BaseFragment implements
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fm_record_delete_batch,
                 container, false);
-        mViewGroup = (ViewGroup) view
+        // 录音批量删除画面
+        ViewGroup viewGroup = (ViewGroup) view
                 .findViewById(R.id.record_delete_batch_llyt);
         // 设置页面背景
-        MyUtil.setBackground(mViewGroup, getActivity());
+        MyUtil.setBackground(viewGroup, getActivity());
 
-        mRecordLv = (ListView) view.findViewById(R.id.record_delete_batch_lv);
-        mRecordLv.setAdapter(mAdapter);
-        mRecordLv.setOnItemClickListener(new OnItemClickListener() {
+        mColorWhite = getResources().getColor(R.color.gray_background_color);
+        mColorWhiteTrans = getResources().getColor(R.color.white_trans60);
+
+        // 录音ListView
+        ListView recordLv = (ListView) view.findViewById(R.id.record_delete_batch_lv);
+        recordLv.setAdapter(mAdapter);
+        recordLv.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
@@ -156,19 +161,20 @@ public class RecordDeleteBatchFragment extends BaseFragment implements
             }
         });
 
-        sTitleTv = (TextView) view.findViewById(R.id.title_tv);
-        sTitleTv.setText(String.format(sTitleFormat, 0));
+        mTitleTv = (TextView) view.findViewById(R.id.title_tv);
+        mTitleTv.setText(String.format(mTitleFormat, 0));
 
-        mCancelBtn = (ImageView) view.findViewById(R.id.cancel_btn);
-        sSelectAllBtn = (TextView) view.findViewById(R.id.select_all_btn);
-        sSelectNoneBtn = (TextView) view.findViewById(R.id.select_none_btn);
-        sDeleteBtn = (Button) view.findViewById(R.id.delete_btn);
+        // 取消按钮
+        ImageView cancelBtn = (ImageView) view.findViewById(R.id.cancel_btn);
+        mSelectAllBtn = (TextView) view.findViewById(R.id.select_all_btn);
+        mSelectNoneBtn = (TextView) view.findViewById(R.id.select_none_btn);
+        mDeleteBtn = (Button) view.findViewById(R.id.delete_btn);
 
-        mCancelBtn.setOnClickListener(this);
-        sSelectAllBtn.setOnClickListener(this);
-        sSelectNoneBtn.setOnClickListener(this);
-        sDeleteBtn.setOnClickListener(this);
-        sDeleteBtn.setClickable(false);
+        cancelBtn.setOnClickListener(this);
+        mSelectAllBtn.setOnClickListener(this);
+        mSelectNoneBtn.setOnClickListener(this);
+        mDeleteBtn.setOnClickListener(this);
+        mDeleteBtn.setClickable(false);
 
         return view;
     }
@@ -183,50 +189,50 @@ public class RecordDeleteBatchFragment extends BaseFragment implements
             // 全选按钮
             case R.id.select_all_btn:
                 // 隐藏全选显示取消全选按钮
-                sSelectAllBtn.setVisibility(View.GONE);
-                sSelectNoneBtn.setVisibility(View.VISIBLE);
+                mSelectAllBtn.setVisibility(View.GONE);
+                mSelectNoneBtn.setVisibility(View.VISIBLE);
 
                 // 设置删除按钮可用
-                sDeleteBtn.setClickable(true);
-                sDeleteBtn.setBackgroundResource(R.drawable.bg_btn_sure);
-                sDeleteBtn.setTextColor(sColorWhite);
+                mDeleteBtn.setClickable(true);
+                mDeleteBtn.setBackgroundResource(R.drawable.bg_btn_sure);
+                mDeleteBtn.setTextColor(mColorWhite);
 
                 // 清除录音删除列表
-                sDeleteList.clear();
+                mDeleteList.clear();
 
                 // 设置录音列表
-                for (int i = 0; i < sRecordList.size(); i++) {
+                for (int i = 0; i < mRecordList.size(); i++) {
                     // 设置为选中
-                    sRecordList.get(i).setSelected(true);
+                    mRecordList.get(i).setSelected(true);
                     // 添加录音路径
-                    sDeleteList.add(sRecordList.get(i).getRingUrl());
+                    mDeleteList.add(mRecordList.get(i).getRingUrl());
                 }
                 // 设置标题为全部选中
-                sTitleTv.setText(String.format(sTitleFormat, sDeleteList.size()));
+                mTitleTv.setText(String.format(mTitleFormat, mDeleteList.size()));
                 mAdapter.notifyDataSetChanged();
                 break;
             // 取消全选按钮
             case R.id.select_none_btn:
                 // 隐藏取消全选显示全选按钮
-                sSelectNoneBtn.setVisibility(View.GONE);
-                sSelectAllBtn.setVisibility(View.VISIBLE);
+                mSelectNoneBtn.setVisibility(View.GONE);
+                mSelectAllBtn.setVisibility(View.VISIBLE);
 
                 // 设置删除按钮不可用
-                sDeleteBtn.setClickable(false);
-                sDeleteBtn
+                mDeleteBtn.setClickable(false);
+                mDeleteBtn
                         .setBackgroundResource(R.drawable.shape_circle_btn_sure_invalidate);
-                sDeleteBtn.setTextColor(sColorWhiteTrans);
+                mDeleteBtn.setTextColor(mColorWhiteTrans);
 
                 // 清除录音删除列表
-                sDeleteList.clear();
+                mDeleteList.clear();
 
                 // 设置录音列表
-                for (int i = 0; i < sRecordList.size(); i++) {
+                for (int i = 0; i < mRecordList.size(); i++) {
                     // 设置为未选中
-                    sRecordList.get(i).setSelected(false);
+                    mRecordList.get(i).setSelected(false);
                 }
                 // 设置标题为选中0件
-                sTitleTv.setText(String.format(sTitleFormat, 0));
+                mTitleTv.setText(String.format(mTitleFormat, 0));
                 mAdapter.notifyDataSetChanged();
                 break;
             // 删除按钮
@@ -249,9 +255,9 @@ public class RecordDeleteBatchFragment extends BaseFragment implements
         if (requestCode == REQUEST_DELETE) {
             boolean result = false;
             // 遍历删除列表
-            int length = sDeleteList.size();
+            int length = mDeleteList.size();
             for (int i = 0; i < length; i++) {
-                File file = new File(sDeleteList.get(i));
+                File file = new File(mDeleteList.get(i));
                 // 删除文件
                 result = file.delete();
             }
@@ -261,23 +267,23 @@ public class RecordDeleteBatchFragment extends BaseFragment implements
             }
 
             // 清空删除列表
-            sDeleteList.clear();
+            mDeleteList.clear();
             // 刷新录音列表
             refreshList();
 
             // 当录音列表为空
-            if (sRecordList.size() == 0) {
+            if (mRecordList.size() == 0) {
                 // 返回到铃声选择界面
                 getActivity().finish();
             } else {
                 // 设置标题为选中0件
-                sTitleTv.setText(String.format(sTitleFormat, 0));
+                mTitleTv.setText(String.format(mTitleFormat, 0));
 
                 // 设置删除按钮不可用
-                sDeleteBtn.setClickable(false);
-                sDeleteBtn
+                mDeleteBtn.setClickable(false);
+                mDeleteBtn
                         .setBackgroundResource(R.drawable.shape_circle_btn_sure_invalidate);
-                sDeleteBtn.setTextColor(sColorWhiteTrans);
+                mDeleteBtn.setTextColor(mColorWhiteTrans);
             }
 
         }
@@ -311,18 +317,18 @@ public class RecordDeleteBatchFragment extends BaseFragment implements
             // 录音删除信息实例
             RecordDeleteItem item = new RecordDeleteItem(ringUrl, ringName,
                     false);
-            sRecordList.add(item);
+            mRecordList.add(item);
         }
 
         // 排序铃声列表
-        Collections.sort(sRecordList, new RecordItemDeleteComparator());
+        Collections.sort(mRecordList, new RecordItemDeleteComparator());
     }
 
     /**
      * 更新录音列表显示
      */
     private void refreshList() {
-        sRecordList.clear();
+        mRecordList.clear();
         // 设置录音列表
         setRingList();
         mAdapter.notifyDataSetChanged();
@@ -348,29 +354,29 @@ public class RecordDeleteBatchFragment extends BaseFragment implements
      *
      * @param recordItem 录音项目实例
      */
-    public static void onCheck(final RecordDeleteItem recordItem) {
+    private void onCheck(final RecordDeleteItem recordItem) {
         recordItem.setSelected(true);
         // 添加到录音删除列表
-        sDeleteList.add(recordItem.getRingUrl());
+        mDeleteList.add(recordItem.getRingUrl());
         // 录音删除列表已添加的项目个数
-        int size = sDeleteList.size();
+        int size = mDeleteList.size();
         // 设置标题显示选中的个数
-        sTitleTv.setText(String.format(sTitleFormat, size));
+        mTitleTv.setText(String.format(mTitleFormat, size));
 
         // 当录音删除个数为1时
         if (size == 1) {
             // 设置删除按钮可用
-            sDeleteBtn.setClickable(true);
-            sDeleteBtn.setBackgroundResource(R.drawable.bg_btn_sure);
+            mDeleteBtn.setClickable(true);
+            mDeleteBtn.setBackgroundResource(R.drawable.bg_btn_sure);
 
-            sDeleteBtn.setTextColor(sColorWhite);
+            mDeleteBtn.setTextColor(mColorWhite);
 
         }
         // 当录音删除个数为录音列表最大个数时
-        if (size == sRecordList.size()) {
+        if (size == mRecordList.size()) {
             // 隐藏全选按钮，显示取消全选按钮
-            sSelectAllBtn.setVisibility(View.GONE);
-            sSelectNoneBtn.setVisibility(View.VISIBLE);
+            mSelectAllBtn.setVisibility(View.GONE);
+            mSelectNoneBtn.setVisibility(View.VISIBLE);
         }
     }
 
@@ -379,31 +385,31 @@ public class RecordDeleteBatchFragment extends BaseFragment implements
      *
      * @param recordItem 录音项目实例
      */
-    public static void unCheck(final RecordDeleteItem recordItem) {
+    private void unCheck(final RecordDeleteItem recordItem) {
         recordItem.setSelected(false);
         // 移除录音删除列表
-        sDeleteList.remove(recordItem.getRingUrl());
+        mDeleteList.remove(recordItem.getRingUrl());
         // 录音删除列表已添加的项目个数
-        int size = sDeleteList.size();
+        int size = mDeleteList.size();
 
         // 设置标题显示选中的个数
-        sTitleTv.setText(String.format(sTitleFormat, size));
+        mTitleTv.setText(String.format(mTitleFormat, size));
 
         // 当录音删除个数为0时
         if (size == 0) {
             // 设置删除按钮不可用
-            sDeleteBtn.setClickable(false);
-            sDeleteBtn
+            mDeleteBtn.setClickable(false);
+            mDeleteBtn
                     .setBackgroundResource(R.drawable.shape_circle_btn_sure_invalidate);
-            sDeleteBtn.setTextColor(sColorWhiteTrans);
+            mDeleteBtn.setTextColor(mColorWhiteTrans);
 
         }
 
         // 当没有显示全选按钮时
-        if ((sSelectAllBtn.getVisibility() == View.GONE)) {
+        if ((mSelectAllBtn.getVisibility() == View.GONE)) {
             // 显示全选按钮，隐藏取消全选按钮
-            sSelectAllBtn.setVisibility(View.VISIBLE);
-            sSelectNoneBtn.setVisibility(View.GONE);
+            mSelectAllBtn.setVisibility(View.VISIBLE);
+            mSelectNoneBtn.setVisibility(View.GONE);
 
         }
     }

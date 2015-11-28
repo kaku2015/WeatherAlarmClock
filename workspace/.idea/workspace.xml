@@ -106,18 +106,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1944a92-0092-45ec-a41c-7a4f0b350017" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PagerSlidingTabStrip/build/outputs/aar/PagerSlidingTabStrip-debug.aar" afterPath="$PROJECT_DIR$/PagerSlidingTabStrip/build/outputs/aar/PagerSlidingTabStrip-debug.aar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PagerSlidingTabStrip/build/outputs/aar/PagerSlidingTabStrip-release.aar" afterPath="$PROJECT_DIR$/PagerSlidingTabStrip/build/outputs/aar/PagerSlidingTabStrip-release.aar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PagerSlidingTabStrip/build/intermediates/bundles/debug/classes.jar" afterPath="$PROJECT_DIR$/PagerSlidingTabStrip/build/intermediates/bundles/debug/classes.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PagerSlidingTabStrip/build/intermediates/bundles/release/classes.jar" afterPath="$PROJECT_DIR$/PagerSlidingTabStrip/build/intermediates/bundles/release/classes.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/exploded-aar/workspace/PagerSlidingTabStrip/unspecified/jars/classes.jar" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/exploded-aar/workspace/PagerSlidingTabStrip/unspecified/jars/classes.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PagerSlidingTabStrip/build/intermediates/res/resources-debug-androidTest.ap_" afterPath="$PROJECT_DIR$/PagerSlidingTabStrip/build/intermediates/res/resources-debug-androidTest.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/res/resources-debug-androidTest.ap_" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/res/resources-debug-androidTest.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/res/resources-debug.ap_" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/res/resources-debug.ap_" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockOntimeFragment.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockOntimeFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/RecorderFragment.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/RecorderFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/TabAlarmClockOperate.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/TabAlarmClockOperate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/WeAC.iml" afterPath="$PROJECT_DIR$/WeAC/WeAC.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="8f7646f0-6645-4028-a6ce-2f53352c2ac5" name="Failed commit: Default" comment="leak canary and copyright" />
@@ -384,21 +374,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="RecordDeleteBatchFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/RecordDeleteBatchFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="400" column="43" selection-start-line="400" selection-start-column="43" selection-end-line="400" selection-end-column="43" />
-              <folding>
-                <element signature="e#2560#2561#0" expanded="true" />
-                <element signature="e#2617#2618#0" expanded="true" />
-                <element signature="e#2711#2712#0" expanded="true" />
-                <element signature="e#2768#2769#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="MoreFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/MoreFragment.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -470,20 +445,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RecorderFragment.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RecorderFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/RecorderFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.42762062">
-              <caret line="154" column="34" selection-start-line="154" selection-start-column="34" selection-end-line="154" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="205" column="9" selection-start-line="205" selection-start-column="9" selection-end-line="205" selection-end-column="9" />
               <folding>
-                <element signature="e#9522#9616#0" expanded="true" />
-                <element signature="e#10596#10633#0" expanded="true" />
-                <element signature="e#10971#11001#0" expanded="true" />
-                <element signature="e#11313#11386#0" expanded="true" />
-                <element signature="e#12146#12179#0" expanded="true" />
-                <element signature="e#15348#15382#0" expanded="true" />
-                <element signature="e#15835#15869#0" expanded="true" />
-                <element signature="e#17989#18021#0" expanded="true" />
+                <element signature="e#9753#9847#0" expanded="true" />
+                <element signature="e#10827#10864#0" expanded="true" />
+                <element signature="e#11202#11232#0" expanded="true" />
+                <element signature="e#11544#11617#0" expanded="true" />
+                <element signature="e#12377#12410#0" expanded="true" />
+                <element signature="e#15579#15613#0" expanded="true" />
+                <element signature="e#16066#16100#0" expanded="true" />
+                <element signature="e#18220#18252#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AlarmClockOntimeFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockOntimeFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.37104824">
+              <caret line="316" column="39" selection-start-line="316" selection-start-column="39" selection-end-line="316" selection-end-column="39" />
+              <folding>
+                <element signature="e#5620#5654#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -3688,7 +3675,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/Listener/DBObserverListener.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/Listener/HttpCallbackListener.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/model/City.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/model/Country.java" />
@@ -3739,6 +3725,7 @@
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/LocalMusicFragment.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/TabAlarmClockOperate.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/RecorderFragment.java" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockOntimeFragment.java" />
       </list>
     </option>
   </component>
@@ -4595,12 +4582,6 @@
       <option name="number" value="Default" />
       <updated>1440756620966</updated>
     </task>
-    <task id="LOCAL-00014" summary="set weather info3">
-      <created>1444061939800</created>
-      <option name="number" value="00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1444061939800</updated>
-    </task>
     <task id="LOCAL-00015" summary="set weather info5">
       <created>1444316353665</created>
       <option name="number" value="00015" />
@@ -4889,7 +4870,13 @@
       <option name="project" value="LOCAL" />
       <updated>1448643870121</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="record fragment static weak reference">
+      <created>1448687648694</created>
+      <option name="number" value="00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1448687648695</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TodoView">
@@ -4952,7 +4939,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="weather alarm edit" />
     <MESSAGE value="add early morning weather condition" />
     <MESSAGE value="volume alter" />
     <MESSAGE value="add city1" />
@@ -4977,7 +4963,8 @@
     <MESSAGE value="leak canary and copyright" />
     <MESSAGE value="nap edit toggle button and static cacel callback" />
     <MESSAGE value="ring select fragment static cancel" />
-    <option name="LAST_COMMIT_MESSAGE" value="ring select fragment static cancel" />
+    <MESSAGE value="record fragment static weak reference" />
+    <option name="LAST_COMMIT_MESSAGE" value="record fragment static weak reference" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -5021,13 +5008,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/view/LineChartViewDouble.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -5420,17 +5400,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/RecorderFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42762062">
-          <caret line="154" column="34" selection-start-line="154" selection-start-column="34" selection-end-line="154" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="205" column="9" selection-start-line="205" selection-start-column="9" selection-end-line="205" selection-end-column="9" />
           <folding>
-            <element signature="e#9522#9616#0" expanded="true" />
-            <element signature="e#10596#10633#0" expanded="true" />
-            <element signature="e#10971#11001#0" expanded="true" />
-            <element signature="e#11313#11386#0" expanded="true" />
-            <element signature="e#12146#12179#0" expanded="true" />
-            <element signature="e#15348#15382#0" expanded="true" />
-            <element signature="e#15835#15869#0" expanded="true" />
-            <element signature="e#17989#18021#0" expanded="true" />
+            <element signature="e#9753#9847#0" expanded="true" />
+            <element signature="e#10827#10864#0" expanded="true" />
+            <element signature="e#11202#11232#0" expanded="true" />
+            <element signature="e#11544#11617#0" expanded="true" />
+            <element signature="e#12377#12410#0" expanded="true" />
+            <element signature="e#15579#15613#0" expanded="true" />
+            <element signature="e#16066#16100#0" expanded="true" />
+            <element signature="e#18220#18252#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockOntimeFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37104824">
+          <caret line="316" column="39" selection-start-line="316" selection-start-column="39" selection-end-line="316" selection-end-column="39" />
+          <folding>
+            <element signature="e#5620#5654#0" expanded="true" />
           </folding>
         </state>
       </provider>

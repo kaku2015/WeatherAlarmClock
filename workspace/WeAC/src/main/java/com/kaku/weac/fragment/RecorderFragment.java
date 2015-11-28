@@ -201,7 +201,12 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
     public void onDestroy() {
         LogUtil.i(LOG_TAG, "onDestroy()");
         super.onDestroy();
-
+        if (mMicStatusHandler != null) {
+            mMicStatusHandler.removeCallbacksAndMessages(null);
+        }
+        if (mRecordTimeHandler != null) {
+            mRecordTimeHandler.removeCallbacksAndMessages(null);
+        }
     }
 
     @Override
@@ -688,8 +693,8 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
 
         @Override
         public void handleMessage(Message msg) {
-            RecorderFragment recorderFragment = mWeakReference.get();
             super.handleMessage(msg);
+            RecorderFragment recorderFragment = mWeakReference.get();
             // 设置麦克风状态图
             switch (msg.what) {
                 case 1:
@@ -745,8 +750,8 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
 
         @Override
         public void handleMessage(Message msg) {
-            RecorderFragment recorderFragment = mWeakReference.get();
             super.handleMessage(msg);
+            RecorderFragment recorderFragment = mWeakReference.get();
             switch (msg.what) {
                 case UPDATE_TIME:
                     recorderFragment.mRecordTime.setText(msg.obj.toString());

@@ -35,6 +35,7 @@ import com.kaku.weac.common.WeacStatus;
 import com.kaku.weac.util.AudioPlayer;
 import com.kaku.weac.util.LogUtil;
 
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -56,22 +57,7 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
     /**
      * 当前时间
      */
-    private static TextView sTimeTv;
-
-    /**
-     * 标签
-     */
-    private TextView mTagTv;
-
-    /**
-     * 小睡按键
-     */
-    private TextView mNapTv;
-
-    /**
-     * 关闭按钮
-     */
-    private TextView mCloseTv;
+    private TextView mTimeTv;
 
     /**
      * 闹钟实例
@@ -124,21 +110,33 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
     private int mCurrentVolume;
 
     /**
+     * 显示当前时间Handler
+     */
+    private ShowTimeHandler mShowTimeHandler;
+
+    /**
      * 显示当前时间
      */
-    private static final Handler sHandler = new Handler() {
+    static class ShowTimeHandler extends Handler {
+        private WeakReference<AlarmClockOntimeFragment> mWeakReference;
+
+        public ShowTimeHandler(AlarmClockOntimeFragment alarmClockOntimeFragment) {
+            mWeakReference = new WeakReference<>(alarmClockOntimeFragment);
+        }
 
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            AlarmClockOntimeFragment alarmClockOntimeFragment = mWeakReference.get();
+
             switch (msg.what) {
                 case UPDATE_TIME:
-                    sTimeTv.setText(msg.obj.toString());
+                    alarmClockOntimeFragment.mTimeTv.setText(msg.obj.toString());
                     break;
             }
         }
 
-    };
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -178,6 +176,8 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
                 .getSystemService(Activity.NOTIFICATION_SERVICE);
         // 取消下拉列表通知消息
         mNotificationManager.cancel(mAlarmClock.getAlarmClockCode());
+
+        mShowTimeHandler = new ShowTimeHandler(this);
     }
 
     @Override
@@ -187,37 +187,37 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
 
         View view = inflater.inflate(R.layout.fm_alarm_clock_ontime, container,
                 false);
-        sTimeTv = (TextView) view.findViewById(R.id.ontime_time);
+        mTimeTv = (TextView) view.findViewById(R.id.ontime_time);
         // 显示现在时间
-        sTimeTv.setText(new SimpleDateFormat("HH:mm", Locale.getDefault())
+        mTimeTv.setText(new SimpleDateFormat("HH:mm", Locale.getDefault())
                 .format(new Date()));
         // 启动更新时间线程
         new Thread(new TimeUpdateThread()).start();
 
         // 标签
-        mTagTv = (TextView) view.findViewById(R.id.ontime_tag);
-        mTagTv.setText(mAlarmClock.getTag());
+        TextView tagTv = (TextView) view.findViewById(R.id.ontime_tag);
+        tagTv.setText(mAlarmClock.getTag());
 
         // 小睡按钮
-        mNapTv = (TextView) view.findViewById(R.id.ontime_nap);
+        TextView napTv = (TextView) view.findViewById(R.id.ontime_nap);
         // 小睡开启状态
         if (mAlarmClock.isNap()) {
             // 当执行X次小睡后隐藏小睡按钮
             if (mNapTimesRan != mNapTimes) {
                 // 设置小睡
-                mNapTv.setText(String.format(
+                napTv.setText(String.format(
                         getString(R.string.touch_here_nap), mNapInterval));
-                mNapTv.setOnClickListener(this);
+                napTv.setOnClickListener(this);
             } else {
-                mNapTv.setVisibility(View.GONE);
+                napTv.setVisibility(View.GONE);
             }
         } else {
-            mNapTv.setVisibility(View.GONE);
+            napTv.setVisibility(View.GONE);
         }
 
         // 关闭按钮
-        mCloseTv = (TextView) view.findViewById(R.id.ontime_close);
-        mCloseTv.setOnClickListener(this);
+        TextView closeTv = (TextView) view.findViewById(R.id.ontime_close);
+        closeTv.setOnClickListener(this);
 
         LogUtil.i(LOG_TAG, "小睡次数：" + mNapTimes);
 
@@ -313,10 +313,10 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
         // 启动的Activity个数减一
         WeacStatus.sActivityNumber--;
 
-        // XXX： 需不需要使用（防止内存泄露，但是mHandler已经声明为static）
         // If null, all callbacks and messages will be removed.
-        if (sHandler != null)
-            sHandler.removeCallbacksAndMessages(null);
+        if (mShowTimeHandler != null) {
+            mShowTimeHandler.removeCallbacksAndMessages(null);
+        }
 
         // 复原手机媒体音量
         mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
@@ -539,12 +539,12 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
                     CharSequence currentTime = new SimpleDateFormat("HH:mm",
                             Locale.getDefault()).format(System
                             .currentTimeMillis());
-                    Message msg = sHandler.obtainMessage(UPDATE_TIME,
+                    Message msg = mShowTimeHandler.obtainMessage(UPDATE_TIME,
                             currentTime);
                     // 延迟一秒发送
                     Thread.sleep(1000);
                     // 发送消息
-                    sHandler.sendMessage(msg);
+                    mShowTimeHandler.sendMessage(msg);
                 } catch (InterruptedException | NullPointerException e) {
                     LogUtil.e(LOG_TAG, "run方法出现错误：" + e.toString());
                 }

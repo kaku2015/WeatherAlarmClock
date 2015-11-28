@@ -27,6 +27,11 @@ public class WeacConstants {
     public static final String WALLPAPER_POSITION = "wallpaper_position";
 
     /**
+     * 快速点击时间范围
+     */
+    public static final int QUICK_CLICK = 1000;
+
+    /**
      * 保存的闹钟铃声音量
      */
     public static final String AlARM_VOLUME = "alarm_volume";

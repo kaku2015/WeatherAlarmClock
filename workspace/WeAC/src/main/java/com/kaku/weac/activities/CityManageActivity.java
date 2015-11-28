@@ -111,6 +111,11 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
      */
     private boolean mIsRefreshing;
 
+    /**
+     * 添加城市按钮点击时间
+     */
+    private long mLastClickTime = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -189,6 +194,10 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
             mIsRefreshing = false;
             // 当为列表最后一项（添加城市）
             if (position == (mCityManageList.size() - 1)) {
+                // 不响应重复点击
+                if (isFastDoubleClick()) {
+                    return;
+                }
                 Intent intent = new Intent(CityManageActivity.this, AddCityActivity.class);
                 startActivityForResult(intent, REQUEST_CITY_MANAGE);
             } else {
@@ -499,6 +508,23 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
             super.onBackPressed();
         } else {
             mIsRefreshing = false;
+        }
+    }
+
+    private boolean isFastDoubleClick() {
+        long time = System.currentTimeMillis();
+        // 初次点击响应事件
+        if (mLastClickTime == 0) {
+            mLastClickTime = time;
+            return false;
+        }
+        long timeD = time - mLastClickTime;
+        // 间隔x秒以内重复点击不多次响应
+        if (timeD <= WeacConstants.QUICK_CLICK) {
+            return true;
+        } else {
+            mLastClickTime = time;
+            return false;
         }
     }
 }

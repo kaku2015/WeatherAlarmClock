@@ -843,8 +843,8 @@ public class AlarmClockNewFragment extends BaseFragment implements OnClickListen
             return false;
         }
         long timeD = time - mLastClickTime;
-        // 间隔一秒以内重复点击不多次响应
-        if (timeD >= 0 && timeD <= 1000) {
+        // 间隔x秒以内重复点击不多次响应
+        if (timeD <= WeacConstants.QUICK_CLICK) {
             return true;
         } else {
             mLastClickTime = time;

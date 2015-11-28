@@ -41,6 +41,7 @@ import com.kaku.weac.util.RingItemComparator;
 import com.kaku.weac.util.ToastUtil;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -116,12 +117,12 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
     /**
      * 麦克风状态图
      */
-    private static ImageView sRecordMicStatusImage;
+    private ImageView mRecordMicStatusImage;
 
     /**
      * 录音时长
      */
-    private static TextView sRecordTime;
+    private TextView mRecordTime;
 
     /**
      * 是否正在录音
@@ -141,70 +142,12 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
     /**
      * 麦克风状态Handler
      */
-    private static final Handler sMicStatusHandler = new Handler() {
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            // 设置麦克风状态图
-            switch (msg.what) {
-                case 1:
-                    sRecordMicStatusImage
-                            .setImageResource(R.drawable.ic_ring_record_mic_status1);
-                    break;
-                case 2:
-                    sRecordMicStatusImage
-                            .setImageResource(R.drawable.ic_ring_record_mic_status2);
-                    break;
-                case 3:
-                    sRecordMicStatusImage
-                            .setImageResource(R.drawable.ic_ring_record_mic_status3);
-                    break;
-                case 4:
-                    sRecordMicStatusImage
-                            .setImageResource(R.drawable.ic_ring_record_mic_status4);
-                    break;
-                case 5:
-                    sRecordMicStatusImage
-                            .setImageResource(R.drawable.ic_ring_record_mic_status5);
-                    break;
-                case 6:
-                    sRecordMicStatusImage
-                            .setImageResource(R.drawable.ic_ring_record_mic_status6);
-                    break;
-                case 7:
-                    sRecordMicStatusImage
-                            .setImageResource(R.drawable.ic_ring_record_mic_status7);
-                    break;
-                case 8:
-                    sRecordMicStatusImage
-                            .setImageResource(R.drawable.ic_ring_record_mic_status8);
-                    break;
-                case 9:
-                    sRecordMicStatusImage
-                            .setImageResource(R.drawable.ic_ring_record_mic_status9);
-                    break;
-            }
-
-        }
-    };
+    private MicStatusHandler mMicStatusHandler;
 
     /**
      * 录音时间Handler
      */
-    private static final Handler sRecordTimeHandler = new Handler() {
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case UPDATE_TIME:
-                    sRecordTime.setText(msg.obj.toString());
-                    break;
-            }
-        }
-
-    };
+    private RecordTimeHandler mRecordTimeHandler;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -222,6 +165,8 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
         // 设置录音List
         setRingList();
         mRecorderAdapter = new RingSelectAdapter(getActivity(), mList, mRingName);
+        mMicStatusHandler = new MicStatusHandler(this);
+        mRecordTimeHandler = new RecordTimeHandler(this);
     }
 
     @Override
@@ -289,9 +234,9 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
 
         // 麦克风状态图组件
         mRecordMic = (ViewGroup) view.findViewById(R.id.ring_record_mic_llyt);
-        sRecordMicStatusImage = (ImageView) view
+        mRecordMicStatusImage = (ImageView) view
                 .findViewById(R.id.ring_record_mic_status);
-        sRecordTime = (TextView) view.findViewById(R.id.ring_record_time);
+        mRecordTime = (TextView) view.findViewById(R.id.ring_record_time);
         return view;
     }
 
@@ -330,6 +275,7 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
                 systemRingFragment.mSystemRingAdapter.notifyDataSetChanged();
             }
         }
+
     }
 
     private class onItemLongClickListenerImpl implements
@@ -409,7 +355,7 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
 
                     // 开启线程，后台更新麦克风状态
                     new Thread(new UpdateMicStatus()).start();
-                    sRecordTime.setText(getResources()
+                    mRecordTime.setText(getResources()
                             .getString(R.string.zero_zero));
                     new Thread(new updateRecorderTime()).start();
 
@@ -694,8 +640,8 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
                     } else {
                         micStatus = 9;
                     }
-                    Message msg = sMicStatusHandler.obtainMessage(micStatus);
-                    sMicStatusHandler.sendMessage(msg);
+                    Message msg = mMicStatusHandler.obtainMessage(micStatus);
+                    mMicStatusHandler.sendMessage(msg);
                 } catch (Exception e) {
                     LogUtil.e(LOG_TAG, "run方法出现错误：" + e.toString());
                 }
@@ -719,9 +665,9 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
                     Thread.sleep(1000);
                     CharSequence recordTime = new SimpleDateFormat("mm:ss",
                             Locale.getDefault()).format(time * 1000);
-                    Message msg = sRecordTimeHandler.obtainMessage(UPDATE_TIME,
+                    Message msg = mRecordTimeHandler.obtainMessage(UPDATE_TIME,
                             recordTime);
-                    sRecordTimeHandler.sendMessage(msg);
+                    mRecordTimeHandler.sendMessage(msg);
                     time++;
                 } catch (Exception e) {
                     LogUtil.e(LOG_TAG, "run方法出现错误：" + e.toString());
@@ -730,4 +676,83 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
         }
     }
 
+    /**
+     * 麦克风状态Handler
+     */
+    static class MicStatusHandler extends Handler {
+        WeakReference<RecorderFragment> mWeakReference;
+
+        public MicStatusHandler(RecorderFragment recorderFragment) {
+            mWeakReference = new WeakReference<>(recorderFragment);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            RecorderFragment recorderFragment = mWeakReference.get();
+            super.handleMessage(msg);
+            // 设置麦克风状态图
+            switch (msg.what) {
+                case 1:
+                    recorderFragment.mRecordMicStatusImage
+                            .setImageResource(R.drawable.ic_ring_record_mic_status1);
+                    break;
+                case 2:
+                    recorderFragment.mRecordMicStatusImage
+                            .setImageResource(R.drawable.ic_ring_record_mic_status2);
+                    break;
+                case 3:
+                    recorderFragment.mRecordMicStatusImage
+                            .setImageResource(R.drawable.ic_ring_record_mic_status3);
+                    break;
+                case 4:
+                    recorderFragment.mRecordMicStatusImage
+                            .setImageResource(R.drawable.ic_ring_record_mic_status4);
+                    break;
+                case 5:
+                    recorderFragment.mRecordMicStatusImage
+                            .setImageResource(R.drawable.ic_ring_record_mic_status5);
+                    break;
+                case 6:
+                    recorderFragment.mRecordMicStatusImage
+                            .setImageResource(R.drawable.ic_ring_record_mic_status6);
+                    break;
+                case 7:
+                    recorderFragment.mRecordMicStatusImage
+                            .setImageResource(R.drawable.ic_ring_record_mic_status7);
+                    break;
+                case 8:
+                    recorderFragment.mRecordMicStatusImage
+                            .setImageResource(R.drawable.ic_ring_record_mic_status8);
+                    break;
+                case 9:
+                    recorderFragment.mRecordMicStatusImage
+                            .setImageResource(R.drawable.ic_ring_record_mic_status9);
+                    break;
+            }
+
+        }
+    }
+
+    /**
+     * 录音时间Handler
+     */
+    static class RecordTimeHandler extends Handler {
+        WeakReference<RecorderFragment> mWeakReference;
+
+        public RecordTimeHandler(RecorderFragment recorderFragment) {
+            mWeakReference = new WeakReference<>(recorderFragment);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            RecorderFragment recorderFragment = mWeakReference.get();
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case UPDATE_TIME:
+                    recorderFragment.mRecordTime.setText(msg.obj.toString());
+                    break;
+            }
+        }
+
+    }
 }

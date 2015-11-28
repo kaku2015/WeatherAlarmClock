@@ -18,25 +18,25 @@ import com.kaku.weac.bean.AlarmClock;
 public class TabAlarmClockOperate {
 
     private final Context mContext;
-    private static TabAlarmClockOperate mTabAlarmClockOperate;
+    private static TabAlarmClockOperate sTabAlarmClockOperate;
     private AlarmClockOpenHelper mHelper;
 
     /**
      * 表AlarmClock操作类构造方法
      *
-     * @param context context
+     * @param appContext appContext
      */
-    private TabAlarmClockOperate(Context context) {
+    private TabAlarmClockOperate(Context appContext) {
         super();
-        mContext = context;
+        mContext = appContext;
         mHelper = new AlarmClockOpenHelper(mContext);
     }
 
     public synchronized static TabAlarmClockOperate getInstance(Context context) {
-        if (mTabAlarmClockOperate == null) {
-            mTabAlarmClockOperate = new TabAlarmClockOperate(context);
+        if (sTabAlarmClockOperate == null) {
+            sTabAlarmClockOperate = new TabAlarmClockOperate(context.getApplicationContext());
         }
-        return mTabAlarmClockOperate;
+        return sTabAlarmClockOperate;
     }
 
     /**

@@ -430,8 +430,6 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 // 隐藏进度条
                 mCityManageAdapter.displayProgressBar(-1);
                 mCityManageAdapter.notifyDataSetChanged();
-//                // GridView设置点击事件
-//                mGridView.setOnItemClickListener(mOnItemClickListener);
 
                 // 存储城市管理item信息
                 WeatherDBOperate.getInstance().saveCityManage(mCityManage);

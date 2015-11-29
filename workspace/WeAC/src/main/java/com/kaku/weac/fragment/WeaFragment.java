@@ -525,12 +525,6 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
      */
     private String mLifeIndexAirCureDetail;
 
-
-    /**
-     * 天气信息类
-     */
-    private WeatherInfo mWeatherInfo;
-
     /**
      * 下拉刷新ScrollView
      */
@@ -811,11 +805,11 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                     @Override
                     public void onFinish(String response) {
 //                        try {
-                        mWeatherInfo = WeatherUtil.handleWeatherResponse(
+                        WeatherInfo weatherInfo = WeatherUtil.handleWeatherResponse(
                                 new ByteArrayInputStream(response.getBytes()));
                         // 保存天气信息
-                        WeatherUtil.saveWeatherInfo(mWeatherInfo, getActivity());
-                        getActivity().runOnUiThread(new SetWeatherInfoRunnable());
+                        WeatherUtil.saveWeatherInfo(weatherInfo, getActivity());
+                        getActivity().runOnUiThread(new SetWeatherInfoRunnable(weatherInfo));
 //                        } catch (Exception e) {
 //                            LogUtil.e(LOG_TAG, e.toString());
 //                        }
@@ -855,7 +849,13 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
     /**
      * 设置天气信息
      */
-    private class SetWeatherInfoRunnable implements Runnable {
+    class SetWeatherInfoRunnable implements Runnable {
+
+        private WeatherInfo mWeatherInfo;
+
+        public SetWeatherInfoRunnable(WeatherInfo weatherInfo) {
+            mWeatherInfo = weatherInfo;
+        }
 
         @Override
         public void run() {

@@ -97,6 +97,16 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
     private ImageView mAcceptBtn;
 
     /**
+     * 刷新按钮
+     */
+    private ImageView mRefreshBtn;
+
+    /**
+     * 取消刷新按钮
+     */
+    private ImageView mCancelRefreshBtn;
+
+    /**
      * 监听城市点击事件Listener
      */
     private AdapterView.OnItemClickListener mOnItemClickListener;
@@ -183,8 +193,11 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
         mAcceptBtn = (ImageView) findViewById(R.id.action_accept);
         mAcceptBtn.setOnClickListener(this);
         // 刷新按钮
-        ImageView refreshBtn = (ImageView) findViewById(R.id.action_refresh);
-        refreshBtn.setOnClickListener(this);
+        mRefreshBtn = (ImageView) findViewById(R.id.action_refresh);
+        mRefreshBtn.setOnClickListener(this);
+        // 取消刷新按钮
+        mCancelRefreshBtn = (ImageView) findViewById(R.id.action_refresh_cancel);
+        mCancelRefreshBtn.setOnClickListener(this);
     }
 
     class OnItemClickListenerImpl implements AdapterView.OnItemClickListener {
@@ -240,6 +253,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
         mCityManageAdapter.notifyDataSetChanged();
         mAcceptBtn.setVisibility(View.GONE);
         mEditBtn.setVisibility(View.VISIBLE);
+
     }
 
     @Override
@@ -272,13 +286,21 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                     hideDeleteAccept();
                 }
 
+                mRefreshBtn.setVisibility(View.INVISIBLE);
+                mCancelRefreshBtn.setVisibility(View.VISIBLE);
+
                 // 显示第一项的进度条
                 mCityManageAdapter.displayProgressBar(0);
                 mCityManageAdapter.notifyDataSetChanged();
                 mIsRefreshing = true;
                 queryFormServer(getString(R.string.address_weather,
                                 mCityManageList.get(0).getWeatherCode()),
-                        QUERY_WEATHER, 0);
+                        QUERY_WEATHER, 0, mCityManageList.get(0).getCityName());
+                break;
+            case R.id.action_refresh_cancel:
+                mIsRefreshing = false;
+                mRefreshBtn.setVisibility(View.VISIBLE);
+                mCancelRefreshBtn.setVisibility(View.GONE);
                 break;
         }
     }
@@ -289,8 +311,9 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
      * @param address  查询地址
      * @param type     查询类型:1,查询天气;2,查询县
      * @param position 更新位置:-1,添加城市；其他，更新城市的位置
+     * @param cityName 刷新城市名
      */
-    private void queryFormServer(String address, final int type, final int position) {
+    private void queryFormServer(String address, final int type, final int position, final String cityName) {
         HttpUtil.sendHttpRequest(address, new HttpCallbackListener() {
                     @Override
                     public void onFinish(String response) {
@@ -316,7 +339,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                                         mWeatherCode = array[1];
                                         // 查询天气代号
                                         queryFormServer(getString(R.string.address_weather, mWeatherCode),
-                                                QUERY_WEATHER, -1);
+                                                QUERY_WEATHER, -1, null);
                                     } else {
                                         runOnUi(getString(R.string.no_city_info), position);
                                     }
@@ -331,7 +354,12 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                     public void onError(Exception e) {
                         try {
                             LogUtil.e(LOG_TAG, e.toString());
-                            runOnUi(getString(R.string.Internet_fail), position);
+                            // 添加城市
+                            if (position == -1) {
+                                runOnUi(getString(R.string.add_city_fail), position);
+                            } else {
+                                runOnUi(String.format(getString(R.string.refresh_fail), cityName), position);
+                            }
                         } catch (Exception e1) {
                             LogUtil.e(LOG_TAG, e1.toString());
                         }
@@ -410,6 +438,9 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 if (mPosition >= (mCityManageList.size() - 2) || !mIsRefreshing) {
                     mCityManageAdapter.displayProgressBar(-1);
                     mCityManageAdapter.notifyDataSetChanged();
+
+                    mRefreshBtn.setVisibility(View.VISIBLE);
+                    mCancelRefreshBtn.setVisibility(View.GONE);
                     return;
                 }
                 // 下一项显示进度条
@@ -418,7 +449,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 // 更新查询下一项
                 queryFormServer(getString(R.string.address_weather,
                                 mCityManageList.get(mPosition + 1).getWeatherCode()),
-                        QUERY_WEATHER, mPosition + 1);
+                        QUERY_WEATHER, mPosition + 1, null);
             }
 
         }
@@ -498,7 +529,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
 
             String countryCode = data.getStringExtra(WeacConstants.COUNTRY_CODE);
             queryFormServer(getString(R.string.address_city, countryCode),
-                    QUERY_COUNTRY, ADD_CITY);
+                    QUERY_COUNTRY, ADD_CITY, null);
         }
     }
 

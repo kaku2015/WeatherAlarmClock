@@ -98,7 +98,7 @@
     <integer name="__leak_canary_max_stored_leaks">7</integer>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="Internet_fail">连接失败，请重新尝试</string>
+    <string name="Internet_fail">连接失败，请重新尝试连接</string>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.squareup.leakcanary/leakcanary-android/1.3/res/values/values.xml -->
     <eat-comment/>
     <string name="__leak_canary_class_has_leaked">%s has leaked</string>
@@ -112,6 +112,7 @@
     <eat-comment/>
     <string name="add_alarm_clock">  添加闹钟  </string>
     <string name="add_city">添加城市</string>
+    <string name="add_city_fail">添加城市失败，请重新尝试添加</string>
     <string name="address_city">http://www.weather.com.cn/data/list3/city%1$s.xml</string>
     <string name="address_weather">http://wthrcdn.etouch.cn/WeatherApi?citykey=%1$s</string>
     <string name="air_cure">晾晒</string>
@@ -214,6 +215,7 @@
     <string name="record_fail">录音失败</string>
     <string name="record_fail_confirm">录音失败，请检查录音权限是否开启或录音已被其他应用占用。</string>
     <string name="record_file_name">/录音%1$s.amr</string>
+    <string name="refresh_fail">城市（%1$s）刷新失败</string>
     <string name="refreshing">正在更新…</string>
     <string name="rename">重命名</string>
     <string name="rename_success">重命名成功</string>

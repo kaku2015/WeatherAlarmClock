@@ -143,9 +143,9 @@ public class LineChartViewDouble extends View {
      */
     private void computeYAxisValues() {
         // 存放白天最低温度
-        int minTempDay = mTempDay[1];
+        int minTempDay = mTempDay[0];
         // 存放白天最高温度
-        int maxTempDay = mTempDay[1];
+        int maxTempDay = mTempDay[0];
         for (int item : mTempDay) {
             if (item == -1000) {
                 continue;
@@ -160,9 +160,9 @@ public class LineChartViewDouble extends View {
         }
 
         // 存放夜间最低温度
-        int minTempNight = mTempNight[1];
+        int minTempNight = mTempNight[0];
         // 存放夜间最高温度
-        int maxTempNight = mTempNight[1];
+        int maxTempNight = mTempNight[0];
         for (int item : mTempNight) {
             if (item == -1000) {
                 continue;
@@ -218,7 +218,7 @@ public class LineChartViewDouble extends View {
     /**
      * 画折线图
      *
-     * @param canvas canvas
+     * @param canvas 画布
      * @param color  画图颜色
      * @param temp   温度集合
      * @param yAxis  y轴集合
@@ -304,6 +304,15 @@ public class LineChartViewDouble extends View {
         }
     }
 
+    /**
+     * 绘制文字
+     * @param canvas 画布
+     * @param textPaint 画笔
+     * @param i 索引
+     * @param temp 温度集合
+     * @param yAxis y轴集合
+     * @param type 折线种类：0，白天；1，夜间
+     */
     private void drawText(Canvas canvas, Paint textPaint, int i, int[] temp, float[] yAxis, int type) {
         switch (type) {
             case 0:

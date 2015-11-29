@@ -20,18 +20,32 @@
             style="@style/action_title"
             android:text="@string/city_manage"/>
 
-        <ImageView
-            android:id="@+id/action_refresh"
-            style="@style/action_icon"
-            android:layout_alignParentRight="true"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_action_refresh"
-            />
+        <FrameLayout
+            android:id="@+id/action_refresh_flyt"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true">
+
+            <ImageView
+                android:id="@+id/action_refresh"
+                style="@style/action_icon"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_action_refresh"
+                />
+
+            <ImageView
+                android:id="@+id/action_refresh_cancel"
+                style="@style/action_icon"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_action_cancel"
+                android:visibility="gone"/>
+        </FrameLayout>
+
 
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_toLeftOf="@id/action_refresh">
+            android:layout_toLeftOf="@id/action_refresh_flyt">
 
             <ImageView
                 android:id="@+id/action_edit"

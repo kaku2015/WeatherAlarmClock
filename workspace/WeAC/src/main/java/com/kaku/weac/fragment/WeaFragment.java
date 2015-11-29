@@ -12,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -659,7 +660,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         if (mLastActiveUpdateTime == 0) {
             return false;
         }
-        long now = System.currentTimeMillis();
+        long now = SystemClock.elapsedRealtime();
         long timeD = now - mLastActiveUpdateTime;
         // 间隔3秒内不再自动更新
         return timeD <= 3000;
@@ -848,7 +849,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         // 取消刷新按钮的动画
         mRefreshBtn.clearAnimation();
         // 最近一次更细时间
-        mLastActiveUpdateTime = System.currentTimeMillis();
+        mLastActiveUpdateTime = SystemClock.elapsedRealtime();
     }
 
     /**
@@ -1995,7 +1996,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
     }
 
     private boolean isFastDoubleClick() {
-        long time = System.currentTimeMillis();
+        long time = SystemClock.elapsedRealtime();
         // 初次点击响应事件
         if (mLastClickTime == 0) {
             mLastClickTime = time;

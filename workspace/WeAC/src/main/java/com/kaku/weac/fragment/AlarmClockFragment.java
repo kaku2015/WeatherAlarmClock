@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -313,7 +314,7 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener,
      * @return 点击多次与否
      */
     private boolean isFastDoubleClick() {
-        long time = System.currentTimeMillis();
+        long time = SystemClock.elapsedRealtime();
         // 初次点击响应事件
         if (mLastClickTime == 0) {
             mLastClickTime = time;

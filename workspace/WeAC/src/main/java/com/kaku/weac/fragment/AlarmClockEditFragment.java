@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -849,7 +850,7 @@ public class AlarmClockEditFragment extends BaseFragment implements
      * @return 点击多次与否
      */
     private boolean isFastDoubleClick() {
-        long time = System.currentTimeMillis();
+        long time = SystemClock.elapsedRealtime();
         // 初次点击响应事件
         if (mLastClickTime == 0) {
             mLastClickTime = time;

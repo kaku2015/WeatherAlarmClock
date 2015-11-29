@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -554,7 +555,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
     }
 
     private boolean isFastDoubleClick() {
-        long time = System.currentTimeMillis();
+        long time = SystemClock.elapsedRealtime();
         // 初次点击响应事件
         if (mLastClickTime == 0) {
             mLastClickTime = time;

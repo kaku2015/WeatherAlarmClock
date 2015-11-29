@@ -75,6 +75,16 @@ public class WeatherInfo implements Serializable {
     private String mAlarmDegree;
 
     /**
+     * 警报正文
+     */
+    private String mAlarmText;
+
+    /**
+     * 警报时间
+     */
+    private String mAlarmTime;
+
+    /**
      * 警报内容
      */
     private String mAlarmDetail;
@@ -115,6 +125,22 @@ public class WeatherInfo implements Serializable {
 
     public String getCity() {
         return mCity;
+    }
+
+    public String getAlarmText() {
+        return mAlarmText;
+    }
+
+    public void setAlarmText(String alarmText) {
+        mAlarmText = alarmText;
+    }
+
+    public String getAlarmTime() {
+        return mAlarmTime;
+    }
+
+    public void setAlarmTime(String alarmTime) {
+        mAlarmTime = alarmTime;
     }
 
     public void setCity(String city) {

@@ -138,9 +138,17 @@ public class WeatherUtil {
                             case "alarmDegree":
                                 weatherInfo.setAlarmDegree(parser.nextText());
                                 break;
+                            // 警报正文
+                            case "alarmText":
+                                weatherInfo.setAlarmText(parser.nextText());
+                                break;
                             // 警报详细
                             case "alarm_details":
                                 weatherInfo.setAlarmDetail(parser.nextText());
+                                break;
+                            // 警报时间
+                            case "time":
+                                weatherInfo.setAlarmTime(parser.nextText());
                                 break;
                             // 多天预报
                             case "forecast":

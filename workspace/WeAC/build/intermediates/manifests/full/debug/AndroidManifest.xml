@@ -76,6 +76,10 @@
             android:launchMode="singleTop"
             android:theme="@style/Theme.MyDialog" />
         <activity
+            android:name="com.kaku.weac.activities.WeatherAlarmActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.MyDialog" />
+        <activity
             android:name="com.kaku.weac.activities.RecordDeleteBatchActivity"
             android:theme="@style/Transparent" />
         <activity
@@ -103,9 +107,6 @@
             android:name="com.kaku.weac.service.NotificationCenter"
             android:exported="false"
             android:process=":pushservice" >
-            <intent-filter android:priority="1000" >
-                <action android:name="com.kaku.GuardMasterService" />
-            </intent-filter>
         </service>
         <service
             android:name="com.kaku.weac.test.AutoUpdateService"

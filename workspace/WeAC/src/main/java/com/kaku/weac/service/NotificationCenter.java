@@ -66,11 +66,8 @@ public class NotificationCenter extends Service {
     public void onDestroy() {
         super.onDestroy();
         LogUtil.w("NotificationCenter", "onDestroy");
-        Intent i = new Intent("com.kaku.NotificationCenter");
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        this.startService(i);
-        // Intent it = new Intent("com.kaku.GuardSecondaryService");
-        // startService(it);
+        Intent i = new Intent(this, NotificationCenter.class);
+        startService(i);
 
     }
 

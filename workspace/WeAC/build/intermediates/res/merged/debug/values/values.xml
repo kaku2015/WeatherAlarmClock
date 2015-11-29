@@ -73,7 +73,7 @@
     <color name="gray_ring_select_title">#4B4B4B</color>
     <color name="gray_seekbar">#C0C0C0</color>
     <color name="gray_tab">#989898</color>
-    <color name="red">#FF0000</color>
+    <color name="red">#E6FF0000</color>
     <color name="white">#FFFFFF</color>
     <color name="white_trans10">#1affffff</color>
     <color name="white_trans20">#33ffffff</color>
@@ -98,7 +98,7 @@
     <integer name="__leak_canary_max_stored_leaks">7</integer>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="Internet_fail">连接失败，请重新尝试连接</string>
+    <string name="Internet_fail">连接失败，请重新尝试</string>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.squareup.leakcanary/leakcanary-android/1.3/res/values/values.xml -->
     <eat-comment/>
     <string name="__leak_canary_class_has_leaked">%s has leaked</string>
@@ -112,7 +112,7 @@
     <eat-comment/>
     <string name="add_alarm_clock">  添加闹钟  </string>
     <string name="add_city">添加城市</string>
-    <string name="add_city_fail">添加城市失败，请重新尝试添加</string>
+    <string name="add_city_fail">添加城市失败，请重新尝试</string>
     <string name="address_city">http://www.weather.com.cn/data/list3/city%1$s.xml</string>
     <string name="address_weather">http://wthrcdn.etouch.cn/WeatherApi?citykey=%1$s</string>
     <string name="air_cure">晾晒</string>
@@ -142,6 +142,7 @@
     <string name="countdown_minute">距闹钟响起还有%1$d分钟</string>
     <string name="dash">--</string>
     <string name="dash_degree">--℃</string>
+    <string name="data_void">数据过期</string>
     <string name="date">%1$s/%2$s</string>
     <string name="day">日</string>
     <string name="days_forecast">多天预报</string>
@@ -217,6 +218,7 @@
     <string name="record_file_name">/录音%1$s.amr</string>
     <string name="refresh_fail">城市（%1$s）刷新失败</string>
     <string name="refreshing">正在更新…</string>
+    <string name="release_time">%1$s发布</string>
     <string name="rename">重命名</string>
     <string name="rename_success">重命名成功</string>
     <string name="repeat">重复</string>
@@ -259,7 +261,8 @@
     <string name="umbrella">雨伞</string>
     <string name="umbrella_detail">雨伞指数详情</string>
     <string name="unknown">未知</string>
-    <string name="update_time">%1$s 发布</string>
+    <string name="update_time">%1$s发布</string>
+    <string name="update_time2">昨天%1$s发布</string>
     <string name="vibrate">振动</string>
     <string name="volume">音量</string>
     <string name="wea">天气</string>
@@ -421,7 +424,7 @@
         <item name="android:layout_marginRight">20dp</item>
         <item name="android:layout_marginBottom">10dp</item>
         <item name="android:layout_marginTop">10dp</item>
-        <item name="android:background">@color/dark_blue_line</item>
+        <item name="android:background">@color/dark_blue</item>
     </style>
     <style name="new_alarm_clcok_item">
         <item name="android:layout_width">match_parent</item>

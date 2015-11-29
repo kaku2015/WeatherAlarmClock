@@ -214,21 +214,30 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 Intent intent = new Intent(CityManageActivity.this, AddCityActivity.class);
                 startActivityForResult(intent, REQUEST_CITY_MANAGE);
             } else {
-                SharedPreferences share = getSharedPreferences(
-                        WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
-                SharedPreferences.Editor editor = share.edit();
-                CityManage cityManage = mCityManageAdapter.getItem(position);
-                // 保存默认的天气代码
-                editor.putString(WeacConstants.WEATHER_CODE, cityManage.getWeatherCode());
-                // 保存默认的城市名
-                editor.putString(WeacConstants.DEFAULT_CITY_NAME, cityManage.getCityName());
-                editor.apply();
-
-                Intent intent = getIntent();
-                setResult(Activity.RESULT_OK, intent);
-                finish();
+                saveDefaultCityInfoAndReturn(position);
             }
         }
+    }
+
+    /**
+     * 设置默认城市信息并返回
+     *
+     * @param position 保存默认城市的位置
+     */
+    private void saveDefaultCityInfoAndReturn(int position) {
+        SharedPreferences share = getSharedPreferences(
+                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = share.edit();
+        CityManage cityManage = mCityManageAdapter.getItem(position);
+        // 保存默认的天气代码
+        editor.putString(WeacConstants.WEATHER_CODE, cityManage.getWeatherCode());
+        // 保存默认的城市名
+        editor.putString(WeacConstants.DEFAULT_CITY_NAME, cityManage.getCityName());
+        editor.apply();
+
+        Intent intent = getIntent();
+        setResult(Activity.RESULT_OK, intent);
+        finish();
     }
 
     /**
@@ -420,11 +429,13 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 // 隐藏进度条
                 mCityManageAdapter.displayProgressBar(-1);
                 mCityManageAdapter.notifyDataSetChanged();
-                // GridView设置点击事件
-                mGridView.setOnItemClickListener(mOnItemClickListener);
+//                // GridView设置点击事件
+//                mGridView.setOnItemClickListener(mOnItemClickListener);
 
                 // 存储城市管理item信息
                 WeatherDBOperate.getInstance().saveCityManage(mCityManage);
+
+                saveDefaultCityInfoAndReturn(mCityManageList.size() - 2);
             } else {
                 // 取得城市管理列表对应的城市管理item
                 CityManage cityManage = mCityManageList.get(mPosition);

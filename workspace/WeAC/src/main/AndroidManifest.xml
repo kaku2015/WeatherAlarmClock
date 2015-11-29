@@ -73,6 +73,10 @@
             android:launchMode="singleTop"
             android:theme="@style/Theme.MyDialog"/>
         <activity
+            android:name=".activities.WeatherAlarmActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.MyDialog"/>
+        <activity
             android:name=".activities.RecordDeleteBatchActivity"
             android:theme="@style/Transparent"/>
         <activity
@@ -100,9 +104,6 @@
             android:name=".service.NotificationCenter"
             android:exported="false"
             android:process=":pushservice">
-            <intent-filter android:priority="1000">
-                <action android:name="com.kaku.GuardMasterService"/>
-            </intent-filter>
         </service>
 
         <service

@@ -113,6 +113,11 @@ public class WeacConstants {
     public static final String DETAIL = "detail";
 
     /**
+     * 时间
+     */
+    public static final String TIME = "time";
+
+    /**
      * base64编码
      */
     public static final String BASE64 = "base64";

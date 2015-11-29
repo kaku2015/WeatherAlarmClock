@@ -32,6 +32,7 @@ import com.kaku.weac.Listener.HttpCallbackListener;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.CityManageActivity;
 import com.kaku.weac.activities.LifeIndexDetailActivity;
+import com.kaku.weac.activities.WeatherAlarmActivity;
 import com.kaku.weac.bean.CityManage;
 import com.kaku.weac.bean.WeatherDaysForecast;
 import com.kaku.weac.bean.WeatherInfo;
@@ -48,8 +49,12 @@ import com.kaku.weac.util.WeatherUtil;
 import com.kaku.weac.view.LineChartViewDouble;
 
 import java.io.ByteArrayInputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * 天气fragment
@@ -951,14 +956,28 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
             mAlarmTv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (weatherInfo.getAlarmDegree() != null && weatherInfo.getAlarmDetail() != null) {
-                        // 警报详情
-                        String detail = weatherInfo.getAlarmDetail();
-                        // 替换换行"\r\n"
-                        detail = detail.replaceAll("\\\\r\\\\n", "");
-                        skipToDetailInterface(getString(R.string.alarm_title, weatherInfo.getAlarmType(),
-                                weatherInfo.getAlarmDegree()), detail);
+                    // 警报详情
+                    String detail = weatherInfo.getAlarmDetail();
+                    // 替换换行"\r\n"  \\\：转义字符
+                    detail = detail.replaceAll("\\\\r\\\\n", "");
+                    String format;
+                    try {
+                        Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+                                .parse(weatherInfo.getAlarmTime());
+                        format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm",
+                                Locale.getDefault()).format(date);
+                    } catch (ParseException e) {
+                        LogUtil.e(LOG_TAG, e.toString());
+                        format = weatherInfo.getAlarmTime();
                     }
+                    String time = getString(R.string.release_time, format);
+
+                    Intent intent = new Intent(getActivity(), WeatherAlarmActivity.class);
+                    intent.putExtra(WeacConstants.TITLE, getString(R.string.alarm_title,
+                            weatherInfo.getAlarmType(), weatherInfo.getAlarmDegree()));
+                    intent.putExtra(WeacConstants.DETAIL, detail);
+                    intent.putExtra(WeacConstants.TIME, time);
+                    startActivity(intent);
                 }
             });
         } else {
@@ -966,10 +985,35 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         }
         // 设置更新时间
         if (weatherInfo.getUpdateTime() != null) {
-            mUpdateTimeTv.setText(String.format(getString(R.string.update_time),
-                    weatherInfo.getUpdateTime()));
+            long now = System.currentTimeMillis();
+            SharedPreferences share = getActivity().getSharedPreferences(
+                    WeacConstants.BASE64, Activity.MODE_PRIVATE);
+            // 最近一次天气更新时间
+            long lastTime = share.getLong(getString(R.string.city_weather_update_time,
+                    weatherInfo.getCity()), 0);
+            // 更新间隔时间（小时）
+            long minuteD = (now - lastTime) / 1000 / 60 / 60;
+            // 更新时间
+            String updateTime;
+            if (minuteD < 24) {
+                updateTime = String.format(getString(R.string.update_time),
+                        weatherInfo.getUpdateTime());
+            } else if (minuteD >= 24 && minuteD < 48) {
+                updateTime = String.format(getString(R.string.update_time2),
+                        weatherInfo.getUpdateTime());
+            } else {
+                updateTime = getString(R.string.data_void);
+            }
+            mUpdateTimeTv.setText(updateTime);
+            // 当不是数据过期
+            if (!updateTime.equals(getString(R.string.data_void))) {
+                mUpdateTimeTv.setTextColor(getResources().getColor(R.color.white_trans60));
+            } else {
+                mUpdateTimeTv.setTextColor(getResources().getColor(R.color.red));
+            }
         } else {
             mUpdateTimeTv.setText(getString(R.string.dash));
+            mUpdateTimeTv.setTextColor(getResources().getColor(R.color.white_trans60));
         }
 
         // 设置温度

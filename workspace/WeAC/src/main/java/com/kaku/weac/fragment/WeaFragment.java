@@ -685,6 +685,21 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                 if (isFastDoubleClick()) {
                     return;
                 }
+
+                // 当不是天气界面并且已经开始延迟刷新天气线程
+                if (mHandler != null && mIsPostDelayed) {
+                    // 取消线程
+                    mHandler.removeCallbacks(mRun);
+                    mIsPostDelayed = false;
+                }
+                // 当正在刷新
+                if (mPullRefreshScrollView.isRefreshing()) {
+                    // 停止刷新
+                    mPullRefreshScrollView.onRefreshComplete();
+                }
+                // 停止刷新动画
+                mRefreshBtn.clearAnimation();
+
                 Intent intent1 = new Intent(getActivity(), CityManageActivity.class);
                 startActivityForResult(intent1, REQUEST_WEA);
 
@@ -965,8 +980,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                     try {
                         Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
                                 .parse(weatherInfo.getAlarmTime());
-                        format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm",
-                                Locale.getDefault()).format(date);
+                        format = new SimpleDateFormat("MM月dd日 HH:mm", Locale.getDefault()).format(date);
                     } catch (ParseException e) {
                         LogUtil.e(LOG_TAG, e.toString());
                         format = weatherInfo.getAlarmTime();

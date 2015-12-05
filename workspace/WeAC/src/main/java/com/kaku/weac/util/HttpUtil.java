@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 
 /**
  * http工具类
@@ -22,16 +23,24 @@ public class HttpUtil {
     /**
      * 发送http请求
      *
-     * @param address  网址
+     * @param address  访问地址
+     * @param cityName 城市名
      * @param listener 响应监听
      */
-    public static void sendHttpRequest(final String address, final HttpCallbackListener listener) {
+    public static void sendHttpRequest(final String address, final String cityName, final HttpCallbackListener listener) {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                // FIXME: okHttp
                 HttpURLConnection connection = null;
                 try {
-                    URL url = new URL(address);
+                    String address1;
+                    if (address == null ) {
+                        address1 = "http://wthrcdn.etouch.cn/WeatherApi?city=" + URLEncoder.encode(cityName, "UTF-8");
+                    } else {
+                        address1 = address;
+                    }
+                    URL url = new URL(address1);
                     connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     connection.setConnectTimeout(8000);

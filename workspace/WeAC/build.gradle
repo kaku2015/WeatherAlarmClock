@@ -25,4 +25,6 @@ dependencies {
     compile project(':PullToRefresh')
     compile 'com.android.support:support-v4:23.0.0'
     compile files('libs/litepal-1.3.0.jar')
+    compile 'com.squareup.okhttp:okhttp:2.6.0'
+    compile 'com.squareup.okio:okio:1.6.0'
 }

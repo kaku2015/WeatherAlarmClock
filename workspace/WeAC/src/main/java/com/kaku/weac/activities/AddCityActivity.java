@@ -3,10 +3,18 @@
  */
 package com.kaku.weac.activities;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,8 +33,15 @@ import com.kaku.weac.model.Country;
 import com.kaku.weac.model.Province;
 import com.kaku.weac.util.CityUtil;
 import com.kaku.weac.util.HttpUtil;
+import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.ToastUtil;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,6 +54,11 @@ import java.util.List;
  * @version 1.0 2015/11/02
  */
 public class AddCityActivity extends BaseActivity implements View.OnClickListener {
+
+    /**
+     * Log tag ：AddCityActivity
+     */
+    private static final String LOG_TAG = "AddCityActivity";
 
     /**
      * 热门城市标志
@@ -119,6 +139,16 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
      * 进度对话框
      */
     private ProgressDialog mProgressDialog;
+
+    /**
+     * 定位管理
+     */
+    private LocationManager mLocationManager;
+
+    /**
+     * 定位监听
+     */
+    private MyLocationListener mMyLocationListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,7 +234,34 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
     private void addCity(String cityName) {
         switch (cityName) {
             case "定位":
-                finish("");
+                int number = WeatherDBOperate.getInstance().queryCity(getString(R.string.auto_location));
+                // 当已添加自动定位
+                if (number == 1) {
+                    ToastUtil.showLongToast(AddCityActivity.this, getString(R.string.location_already_added));
+                    return;
+                }
+
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    ToastUtil.showShortToast(AddCityActivity.this, "请开启定位权限");
+                    return;
+                }
+
+                showProgressDialog(getString(R.string.now_locating));
+                // 初始化定位管理监听
+                initLocation();
+                // 注册请求定位
+                // minDistance:最小距离位置更新  0代表不更新
+                mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+                mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, mMyLocationListener);
                 break;
             case "北京":
                 finish("010101");
@@ -300,6 +357,203 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
                 finish("340101");
                 break;
         }
+    }
+
+
+    /**
+     * 初始化定位管理监听
+     */
+    private void initLocation() {
+        if (mLocationManager == null) {
+            mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        }
+        if (mMyLocationListener == null) {
+            mMyLocationListener = new MyLocationListener();
+        }
+    }
+
+
+    /**
+     * 定位监听接口
+     */
+    class MyLocationListener implements LocationListener {
+
+
+        @Override
+        public void onLocationChanged(Location location) {
+            LogUtil.d(LOG_TAG, "经度：" + location.getLongitude() + "，纬度：" + location.getLatitude());
+            if (ActivityCompat.checkSelfPermission(AddCityActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    AddCityActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
+                    PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            // 注销监听接口
+            mLocationManager.removeUpdates(mMyLocationListener);
+            new AnalyzeLocationAsyncTask().execute(location);
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+
+    }
+
+    /**
+     * 解析位置信息
+     */
+    class AnalyzeLocationAsyncTask extends AsyncTask<Location, Void, String> {
+
+        @Override
+        protected String doInBackground(Location... params) {
+            String cityName = null;
+            try {
+
+                OkHttpClient okHttpClient = new OkHttpClient();
+                Request request = new Request.Builder().url(
+                        "http://maps.google.cn/maps/api/geocode/json?latlng=" +
+                                params[0].getLatitude() + "," +
+                                params[0].getLongitude() +
+//                                "41.0177553606,111.9529258679"
+                                "&sensor=false&language=zh-CN").build();
+                Response response = okHttpClient.newCall(request).execute();
+                if (response.isSuccessful()) {
+                    JSONObject jsonObject = new JSONObject(response.body().string());
+                    // 取得results节点下的位置信息
+                    JSONArray resultArray = jsonObject.getJSONArray("results");
+                    if (resultArray.length() > 0) {
+                        JSONObject subObject = resultArray.getJSONObject(0);
+                        // 取得格式化后的位置信息
+                        cityName = formatCity(subObject.getString("formatted_address"));
+                    }
+                }
+            } catch (Exception e) {
+                ToastUtil.showShortToast(AddCityActivity.this, getString(R.string.location_fail));
+            }
+            return cityName;
+        }
+
+        @Override
+        protected void onPostExecute(String cityName) {
+            super.onPostExecute(cityName);
+            closeProgressDialog();
+            if (cityName != null) {
+                LogUtil.d(LOG_TAG, "城市名：" + cityName);
+                Intent intent = getIntent();
+                intent.putExtra(WeacConstants.CITY_NAME, cityName);
+                setResult(Activity.RESULT_OK, intent);
+                AddCityActivity.this.finish();
+            } else {
+                ToastUtil.showShortToast(AddCityActivity.this, getString(R.string.location_fail));
+            }
+
+        }
+    }
+
+    /**
+     * 将地址信息转换为城市
+     *
+     * @param address 地址
+     * @return 城市名称
+     */
+    private String formatCity(String address) {
+        String city = null;
+
+        // TODO: 数据测试
+        if (address.contains("自治州")) {
+            if (address.contains("市")) {
+                city = address.substring(address.indexOf("州") + 1, address.indexOf("市"));
+            } else if (address.contains("县")) {
+                city = address.substring(address.indexOf("州") + 1, address.indexOf("县"));
+            } else if (address.contains("地区")) {
+                city = address.substring(address.indexOf("州") + 1, address.indexOf("地区"));
+            }
+
+        } else if (address.contains("自治区")) {
+            if (address.contains("地区") && address.contains("县")) {
+                city = address.substring(address.indexOf("地区") + 2, address.indexOf("县"));
+            } else if (address.contains("地区")) {
+                city = address.substring(address.indexOf("区") + 1, address.indexOf("地区"));
+            } else if (address.contains("市")) {
+                city = address.substring(address.indexOf("区") + 1, address.indexOf("市"));
+            } else if (address.contains("县")) {
+                city = address.substring(address.indexOf("区") + 1, address.indexOf("县"));
+            }
+
+        } else if (address.contains("地区")) {
+            if (address.contains("县")) {
+                city = address.substring(address.indexOf("地区") + 2, address.indexOf("县"));
+            }
+
+        } else if (address.contains("香港")) {
+            if (address.contains("九龙")) {
+                city = "九龙";
+            } else if (address.contains("新界")) {
+                city = "新界";
+            } else {
+                city = "香港";
+            }
+
+        } else if (address.contains("澳门")) {
+            if (address.contains("氹仔")) {
+                city = "氹仔岛";
+            } else if (address.contains("路环")) {
+                city = "路环岛";
+            } else {
+                city = "澳门";
+            }
+
+        } else if (address.contains("台湾")) {
+            if (address.contains("台北")) {
+                city = "台北";
+            } else if (address.contains("高雄")) {
+                city = "高雄";
+            } else if (address.contains("台中")) {
+                city = "台中";
+            }
+
+        } else if (address.contains("省")) {
+            if (address.contains("市") && address.contains("县")) {
+                city = address.substring(address.lastIndexOf("市") + 1, address.indexOf("县"));
+            } else if (!address.contains("市") && address.contains("县")) {
+                city = address.substring(address.indexOf("省") + 1, address.indexOf("县"));
+            } else if (!address.contains("市")) {
+                int start = address.indexOf("市");
+                int end = address.lastIndexOf("市");
+                if (start == end) {
+                    city = address.substring(address.indexOf("省") + 1, end);
+                } else {
+                    city = address.substring(start, end);
+                }
+            }
+
+        } else if (address.contains("市")) {
+            if (address.contains("区")) {
+                city = address.substring(address.indexOf("市") + 1, address.indexOf("区"));
+            } else if (address.contains("县")) {
+                city = address.substring(address.indexOf("市") + 1, address.indexOf("县"));
+            }
+        }
+
+        return city;
     }
 
     /**
@@ -463,9 +717,9 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
             address = getString(R.string.address_city, "");
         }
         // 显示查询进度对话框
-        showProgressDialog();
+        showProgressDialog(getString(R.string.now_loading));
         // FIXME：回调try catch
-        HttpUtil.sendHttpRequest(address, new HttpCallbackListener() {
+        HttpUtil.sendHttpRequest(address, null, new HttpCallbackListener() {
             @Override
             public void onFinish(String response) {
                 boolean result = false;
@@ -535,10 +789,10 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
     /**
      * 显示进度对话框
      */
-    private void showProgressDialog() {
+    private void showProgressDialog(String message) {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setMessage(getString(R.string.now_loading));
+            mProgressDialog.setMessage(message);
             mProgressDialog.setCancelable(false);
         }
         mProgressDialog.show();

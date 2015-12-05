@@ -143,9 +143,14 @@ public class WeacConstants {
     public static final String COUNTRY_CODE = "country_code";
 
     /**
+     * 城市名
+     */
+    public static final String CITY_NAME = "city_name";
+
+    /**
      * 天气代号
      */
-    public static final String WEATHER_CODE = "weather_code";
+    public static final String DEFAULT_WEATHER_CODE = "default_weather_code";
 
     /**
      * 默认城市名

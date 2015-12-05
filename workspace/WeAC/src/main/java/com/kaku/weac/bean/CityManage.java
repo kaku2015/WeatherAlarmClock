@@ -22,6 +22,16 @@ public class CityManage extends DataSupport {
         this.id = id;
     }
 
+    public String getLocationCity() {
+        return locationCity;
+    }
+
+    public void setLocationCity(String locationCity) {
+        this.locationCity = locationCity;
+    }
+
+    private String locationCity;
+
     /**
      * 城市名
      */

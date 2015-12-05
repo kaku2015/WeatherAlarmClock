@@ -68,6 +68,11 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
     private static final int ADD_CITY = -1;
 
     /**
+     * 添加定位
+     */
+    private static final int ADD_LOCATION = -2;
+
+    /**
      * 城市管理列表
      */
     private List<CityManage> mCityManageList;
@@ -215,7 +220,14 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 Intent intent = new Intent(CityManageActivity.this, AddCityActivity.class);
                 startActivityForResult(intent, REQUEST_CITY_MANAGE);
             } else {
-                saveDefaultCityInfoAndReturn(position);
+                CityManage cityManage = mCityManageAdapter.getItem(position);
+                String cityName = cityManage.getCityName();
+                // 不是自动定位
+                if (!cityName.equals(getString(R.string.auto_location))) {
+                    saveDefaultCityInfoAndReturn(position, null);
+                } else {
+                    saveDefaultCityInfoAndReturn(position, cityManage.getLocationCity());
+                }
             }
         }
     }
@@ -223,17 +235,32 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
     /**
      * 设置默认城市信息并返回
      *
-     * @param position 保存默认城市的位置
+     * @param position     保存默认城市的位置
+     * @param locationCity 定位城市名
      */
-    private void saveDefaultCityInfoAndReturn(int position) {
+    private void saveDefaultCityInfoAndReturn(int position, String locationCity) {
         SharedPreferences share = getSharedPreferences(
                 WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = share.edit();
         CityManage cityManage = mCityManageAdapter.getItem(position);
-        // 保存默认的天气代码
-        editor.putString(WeacConstants.WEATHER_CODE, cityManage.getWeatherCode());
+
+        String weatherCode;
+        String cityName;
+        // 不是自定定位
+        if (locationCity == null) {
+            // 保存默认的城市名
+            cityName = cityManage.getCityName();
+            weatherCode = cityManage.getWeatherCode();
+            // 定位城市
+        } else {
+            cityName = locationCity;
+            weatherCode = getString(R.string.auto_location);
+        }
+
         // 保存默认的城市名
-        editor.putString(WeacConstants.DEFAULT_CITY_NAME, cityManage.getCityName());
+        editor.putString(WeacConstants.DEFAULT_CITY_NAME, cityName);
+        // 保存默认的天气代码
+        editor.putString(WeacConstants.DEFAULT_WEATHER_CODE, weatherCode);
         editor.apply();
 
         Intent intent = getIntent();
@@ -291,6 +318,11 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 break;
             // 刷新按钮
             case R.id.action_refresh:
+                // 列表为空（只有添加按钮）不刷新
+                if (mCityManageList.size() == 1) {
+                    return;
+                }
+
                 if (mEditBtn.getVisibility() == View.GONE) {
                     // 隐藏删除，完成按钮,显示修改按钮
                     hideDeleteAccept();
@@ -303,9 +335,20 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 mCityManageAdapter.displayProgressBar(0);
                 mCityManageAdapter.notifyDataSetChanged();
                 mIsRefreshing = true;
-                queryFormServer(getString(R.string.address_weather,
-                                mCityManageList.get(0).getWeatherCode()),
-                        QUERY_WEATHER, 0, mCityManageList.get(0).getCityName());
+
+                String cityName;
+                String address;
+                CityManage cityManage = mCityManageList.get(0);
+                // 不是自动定位
+                if (cityManage.getWeatherCode() != null) {
+                    cityName = cityManage.getCityName();
+                    address = getString(R.string.address_weather, cityManage.getWeatherCode());
+                } else {
+                    cityName = cityManage.getLocationCity();
+                    address = null;
+                }
+
+                queryFormServer(address, QUERY_WEATHER, 0, cityName);
                 break;
             case R.id.action_refresh_cancel:
                 mIsRefreshing = false;
@@ -320,16 +363,17 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
      *
      * @param address  查询地址
      * @param type     查询类型:1,查询天气;2,查询县
-     * @param position 更新位置:-1,添加城市；其他，更新城市的位置
+     * @param position 更新位置:-1,添加城市; -2,添加定位; 其他，更新城市的位置
      * @param cityName 刷新城市名
      */
-    private void queryFormServer(String address, final int type, final int position, final String cityName) {
-        HttpUtil.sendHttpRequest(address, new HttpCallbackListener() {
+    private void queryFormServer(final String address, final int type, final int position, final String cityName) {
+
+        HttpUtil.sendHttpRequest(address, cityName, new HttpCallbackListener() {
                     @Override
                     public void onFinish(String response) {
                         try {
                             switch (type) {
-                                // 天气代号
+                                // 查询天气
                                 case 1:
                                     if (!response.contains("error")) {
                                         WeatherInfo weatherInfo = WeatherUtil.handleWeatherResponse(
@@ -338,11 +382,18 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                                         WeatherUtil.saveWeatherInfo(weatherInfo, CityManageActivity.this);
                                         runOnUiThread(new SetCityInfoRunnable(weatherInfo, position));
                                     } else {
-                                        runOnUi(getString(R.string.no_city_info), position);
+                                        switch (position) {
+                                            case -1:
+                                                runOnUi(getString(R.string.no_city_info), position);
+                                                break;
+                                            case -2:
+                                                runOnUi(getString(R.string.location_fail), position);
+                                                break;
+                                        }
                                     }
 
                                     break;
-                                // 县代号
+                                // 查询县
                                 case 2:
                                     String[] array = response.split("\\|");
                                     if (array.length == 2) {
@@ -356,22 +407,28 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                                     break;
                             }
                         } catch (Exception e) {
-                            LogUtil.e(LOG_TAG, e.toString());
+                            LogUtil.e(LOG_TAG, "onFinish: " + e.toString());
                         }
                     }
 
                     @Override
                     public void onError(Exception e) {
                         try {
-                            LogUtil.e(LOG_TAG, e.toString());
+                            LogUtil.e(LOG_TAG, "onError(Exception e): " + e.toString());
                             // 添加城市
                             if (position == -1) {
                                 runOnUi(getString(R.string.add_city_fail), position);
                             } else {
-                                runOnUi(String.format(getString(R.string.refresh_fail), cityName), position);
+                                if (address != null) {
+                                    runOnUi(String.format(getString(R.string.refresh_fail), cityName), position);
+                                    // 自动定位
+                                } else {
+                                    runOnUi(String.format(getString(R.string.refresh_fail), getString(
+                                            R.string.auto_location)), position);
+                                }
                             }
                         } catch (Exception e1) {
-                            LogUtil.e(LOG_TAG, e1.toString());
+                            LogUtil.e(LOG_TAG, "(Exception e1): " + e1.toString());
                         }
                     }
                 }
@@ -389,21 +446,31 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                // 添加城市
-                if (position == -1) {
+                // 添加
+                if (position == -1 || position == -2) {
                     // 移除临时添加的新城市item
                     mCityManageList.remove(mCityManageList.size() - 2);
                     mCityManageAdapter.notifyDataSetChanged();
                     // GridView设置点击事件
                     mGridView.setOnItemClickListener(mOnItemClickListener);
                 } else {
-                    // 不显示进度条
-                    mCityManageAdapter.displayProgressBar(-1);
-                    mCityManageAdapter.notifyDataSetChanged();
+                    // 隐藏进度条显示刷新按钮
+                    hideProgressBarDisplayRefresh();
                 }
                 ToastUtil.showLongToast(CityManageActivity.this, info);
             }
         });
+    }
+
+    /**
+     * 隐藏进度条显示刷新按钮
+     */
+    private void hideProgressBarDisplayRefresh() {
+        mCityManageAdapter.displayProgressBar(-1);
+        mCityManageAdapter.notifyDataSetChanged();
+
+        mRefreshBtn.setVisibility(View.VISIBLE);
+        mCancelRefreshBtn.setVisibility(View.GONE);
     }
 
     /**
@@ -423,18 +490,11 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
         public void run() {
             // 添加城市
             if (mPosition == -1) {
-                mCityManage.setCityName(mWeatherInfo.getCity());
-                mCityManage.setWeatherCode(mWeatherCode);
-                // 设置城市管理列表item信息
-                setCityManageInfo(mCityManage, mWeatherInfo);
-                // 隐藏进度条
-                mCityManageAdapter.displayProgressBar(-1);
-                mCityManageAdapter.notifyDataSetChanged();
-
-                // 存储城市管理item信息
-                WeatherDBOperate.getInstance().saveCityManage(mCityManage);
-
-                saveDefaultCityInfoAndReturn(mCityManageList.size() - 2);
+                processCityManage(mWeatherInfo.getCity(), mWeatherCode);
+                // 添加定位
+            } else if (-2 == mPosition) {
+                mCityManage.setLocationCity(mWeatherInfo.getCity());
+                processCityManage(getString(R.string.auto_location), null);
             } else {
                 // 取得城市管理列表对应的城市管理item
                 CityManage cityManage = mCityManageList.get(mPosition);
@@ -446,22 +506,50 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
 
                 // 当为列表最后一项或者不是正在刷新状态
                 if (mPosition >= (mCityManageList.size() - 2) || !mIsRefreshing) {
-                    mCityManageAdapter.displayProgressBar(-1);
-                    mCityManageAdapter.notifyDataSetChanged();
-
-                    mRefreshBtn.setVisibility(View.VISIBLE);
-                    mCancelRefreshBtn.setVisibility(View.GONE);
+                    // 隐藏进度条显示刷新按钮
+                    hideProgressBarDisplayRefresh();
                     return;
                 }
                 // 下一项显示进度条
                 mCityManageAdapter.displayProgressBar(mPosition + 1);
                 mCityManageAdapter.notifyDataSetChanged();
+
+                String cityName;
+                String address;
+                CityManage cityManage1 = mCityManageList.get(mPosition + 1);
+                // 不是自动定位
+                if (cityManage1.getWeatherCode() != null) {
+                    cityName = cityManage1.getCityName();
+                    address = getString(R.string.address_weather, cityManage1.getWeatherCode());
+                } else {
+                    cityName = cityManage1.getLocationCity();
+                    address = null;
+                }
+
                 // 更新查询下一项
-                queryFormServer(getString(R.string.address_weather,
-                                mCityManageList.get(mPosition + 1).getWeatherCode()),
-                        QUERY_WEATHER, mPosition + 1, null);
+                queryFormServer(address, QUERY_WEATHER, mPosition + 1, cityName);
             }
 
+        }
+
+        private void processCityManage(String cityName, String weatherCode) {
+            mCityManage.setCityName(cityName);
+            mCityManage.setWeatherCode(weatherCode);
+            // 设置城市管理列表item信息
+            setCityManageInfo(mCityManage, mWeatherInfo);
+            // 隐藏进度条
+            mCityManageAdapter.displayProgressBar(-1);
+            mCityManageAdapter.notifyDataSetChanged();
+
+            // 存储城市管理item信息
+            WeatherDBOperate.getInstance().saveCityManage(mCityManage);
+            // 设置默认城市并且退出返回
+            if (weatherCode != null) {
+                saveDefaultCityInfoAndReturn(mCityManageList.size() - 2, null);
+                // 添加定位
+            } else {
+                saveDefaultCityInfoAndReturn(mCityManageList.size() - 2, mWeatherInfo.getCity());
+            }
         }
 
     }
@@ -538,8 +626,15 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
             mCityManageAdapter.notifyDataSetChanged();
 
             String countryCode = data.getStringExtra(WeacConstants.COUNTRY_CODE);
-            queryFormServer(getString(R.string.address_city, countryCode),
-                    QUERY_COUNTRY, ADD_CITY, null);
+            if (countryCode != null) {
+                queryFormServer(getString(R.string.address_city, countryCode),
+                        QUERY_COUNTRY, ADD_CITY, null);
+                // 添加定位
+            } else {
+                String cityName = data.getStringExtra(WeacConstants.CITY_NAME);
+                queryFormServer(null,
+                        QUERY_WEATHER, ADD_LOCATION, cityName);
+            }
         }
     }
 

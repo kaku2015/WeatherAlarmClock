@@ -251,17 +251,28 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
                     //                                          int[] grantResults)
                     // to handle the case where the user grants the permission. See the documentation
                     // for ActivityCompat#requestPermissions for more details.
-                    ToastUtil.showShortToast(AddCityActivity.this, "请开启定位权限");
+                    ToastUtil.showShortToast(AddCityActivity.this, "请打开位置权限");
+                    return;
+                }
+
+                // 初始化定位管理监听
+                initLocation();
+
+                String provider;
+                List<String> providerList = mLocationManager.getProviders(true);
+                if (providerList.contains(LocationManager.NETWORK_PROVIDER)) {
+                    provider = LocationManager.NETWORK_PROVIDER;
+                } else {
+                    ToastUtil.showShortToast(AddCityActivity.this, "请打开网络定位");
                     return;
                 }
 
                 showProgressDialog(getString(R.string.now_locating));
-                // 初始化定位管理监听
-                initLocation();
+
+                mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
                 // 注册请求定位
                 // minDistance:最小距离位置更新  0代表不更新
-                mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-                mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, mMyLocationListener);
+                mLocationManager.requestLocationUpdates(provider, 0, 0, mMyLocationListener);
                 break;
             case "北京":
                 finish("010101");
@@ -382,6 +393,8 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
         @Override
         public void onLocationChanged(Location location) {
             LogUtil.d(LOG_TAG, "经度：" + location.getLongitude() + "，纬度：" + location.getLatitude());
+            // 注销监听接口
+            mLocationManager.removeUpdates(mMyLocationListener);
             if (ActivityCompat.checkSelfPermission(AddCityActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
                     AddCityActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
@@ -393,10 +406,10 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
                 //                                          int[] grantResults)
                 // to handle the case where the user grants the permission. See the documentation
                 // for ActivityCompat#requestPermissions for more details.
+                closeProgressDialog();
                 return;
             }
-            // 注销监听接口
-            mLocationManager.removeUpdates(mMyLocationListener);
+
             new AnalyzeLocationAsyncTask().execute(location);
         }
 
@@ -446,7 +459,13 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
                     }
                 }
             } catch (Exception e) {
-                ToastUtil.showShortToast(AddCityActivity.this, getString(R.string.location_fail));
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        closeProgressDialog();
+                        ToastUtil.showShortToast(AddCityActivity.this, getString(R.string.location_fail));
+                    }
+                });
             }
             return cityName;
         }

@@ -4,12 +4,11 @@
 package com.kaku.weac.util;
 
 import com.kaku.weac.Listener.HttpCallbackListener;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLEncoder;
 
 /**
@@ -35,17 +34,30 @@ public class HttpUtil {
                 HttpURLConnection connection = null;
                 try {
                     String address1;
-                    if (address == null ) {
+                    if (address == null) {
                         address1 = "http://wthrcdn.etouch.cn/WeatherApi?city=" + URLEncoder.encode(cityName, "UTF-8");
                     } else {
                         address1 = address;
                     }
-                    URL url = new URL(address1);
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder().url(address1).build();
+                    Response response = client.newCall(request).execute();
+                    String result = response.body().string();
+                    // 访问：【http://www.weather.com.cn/data/list3/cityXXX.xml】的时候，
+                    // 如果城市代码错误会继续访问一些无关的东西
+//                    if (result.contains("无法访问")) {
+//                        listener.onError(new Exception());
+//                        return;
+//                    }
+
+
+
+/*                    URL url = new URL(address1);
                     connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     connection.setConnectTimeout(8000);
                     connection.setReadTimeout(8000);
-                    InputStream in = connection.getInputStream();
+                    InputStream in = connection.getInputStream();*/
 
 
 /*                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -63,7 +75,7 @@ public class HttpUtil {
                     // 天气信息
 //                    WeatherInfo weatherInfo = handleWeatherResponse(in);
 
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+/*                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                     StringBuilder response = new StringBuilder();
                     String line;
                     while ((line = reader.readLine()) != null) {
@@ -72,7 +84,7 @@ public class HttpUtil {
                             return;
                         }
                         response.append(line);
-                    }
+                    }*/
 
 /*
                     File file = new File(Environment.getExternalStorageDirectory()
@@ -90,18 +102,13 @@ public class HttpUtil {
 
                     if (listener != null) {
                         // 加载完成返回
-                        listener.onFinish(response.toString());
+                        listener.onFinish(result);
                     }
                 } catch (Exception e) {
                     if (listener != null) {
                         // 加载失败
                         listener.onError(e);
                     }
-                } finally {
-                    if (connection != null) {
-                        connection.disconnect();
-                    }
-
                 }
             }
         }).start();

@@ -428,7 +428,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
         option.setCoorType("bd09ll");//可选，默认gcj02，设置返回的定位结果坐标系
         option.setIsNeedAddress(true);//可选，设置是否需要地址信息，默认不需要
         option.setOpenGps(true);//可选，默认false,设置是否使用gps
-        option.disableCache(true);// 禁止启用缓存定位
+        option.disableCache(true);// 禁止启用缓存定位\
         mLocationClient.setLocOption(option);
 
 //        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy
@@ -616,8 +616,9 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
      * @return 城市名称
      */
     private String formatCity(String address) {
-        String city = null;
+        LogUtil.d(LOG_TAG, "address：" + address);
 
+        String city = null;
         // TODO: 数据测试
         if (address.contains("自治州")) {
             if (address.contains("市")) {
@@ -687,10 +688,15 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
             }
 
         } else if (address.contains("市")) {
-            if (address.contains("区")) {
+/*            if (address.contains("区")) {
                 city = address.substring(address.indexOf("市") + 1, address.indexOf("区"));
             } else if (address.contains("县")) {
                 city = address.substring(address.indexOf("市") + 1, address.indexOf("县"));
+            }*/
+            if (address.contains("中国")) {
+                city = address.substring(address.indexOf("国") + 1, address.indexOf("市"));
+            } else {
+                city = address.substring(0, address.indexOf("市"));
             }
         }
 

@@ -113,6 +113,16 @@ public class WeacConstants {
     public static final String DETAIL = "detail";
 
     /**
+     * 取消按钮文字
+     */
+    public static final String CANCEL_TEXT = "cancel_text";
+
+    /**
+     * 确定按钮文字
+     */
+    public static final String SURE_TEXT = "sure_text";
+
+    /**
      * 时间
      */
     public static final String TIME = "time";

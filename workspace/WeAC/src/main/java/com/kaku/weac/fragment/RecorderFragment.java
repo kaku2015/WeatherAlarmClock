@@ -378,7 +378,7 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
                     // handler.postDelayed(stopRecordRun,
                     // WeacConstants.MAX_RECORD_LENGTH);
                 } else {
-                    ToastUtil.showLongToast(getActivity(),
+                    ToastUtil.showShortToast(getActivity(),
                             getString(R.string.error_sd_card));
                 }
                 break;

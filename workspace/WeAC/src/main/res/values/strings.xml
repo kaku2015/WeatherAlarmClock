@@ -163,11 +163,12 @@
     <string name="interval_hour">%1$d小时前更新</string>
     <string name="interval_minute">%1$d分钟前更新</string>
     <string name="interval_just">刚刚更新</string>
-    <string name="Internet_fail">连接失败，请重新尝试</string>
+    <string name="internet_fail">连接失败，请重新尝试</string>
+    <string name="internet_error">网络异常,请检查网络设置</string>
+
+    <!-- 城市管理，添加城市 -->
     <string name="add_city_fail">添加城市失败，请重新尝试</string>
     <string name="refresh_fail">城市（%1$s）刷新失败</string>
-
-    <!-- 城市管理 -->
     <string name="city_manage">城市管理</string>
     <string name="add_city">添加城市</string>
     <string name="hot_city">热门城市</string>
@@ -179,10 +180,13 @@
     <string name="address_city">http://www.weather.com.cn/data/list3/city%1$s.xml</string>
     <string name="address_weather">http://wthrcdn.etouch.cn/WeatherApi?citykey=%1$s</string>
     <string name="no_city_info">城市不存在</string>
-    <string name="city_already_added">城市已添加</string>
-    <string name="location_already_added">定位已添加</string>
+    <string name="city_already_added">%1$s已添加</string>
+    <string name="location_already_added">自动定位已添加</string>
     <string name="city_weather_update_time">%1$s更新时间</string>
-    <string name="location_fail">定位失败</string>
+    <string name="location_fail">自动定位失败</string>
     <string name="can_not_find_current_location">无法获取当前位置</string>
     <string name="auto_location">自动定位</string>
+    <string name="prompt">提示</string>
+    <string name="retry">重试</string>
+    <string name="forbid_power">未开启读取位置权限</string>
 </resources>

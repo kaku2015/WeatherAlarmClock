@@ -96,11 +96,6 @@
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.squareup.leakcanary/leakcanary-android/1.3/res/values/values.xml -->
     <eat-comment/>
     <integer name="__leak_canary_max_stored_leaks">7</integer>
-    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/strings.xml -->
-    <eat-comment/>
-    <string name="Internet_fail">连接失败，请重新尝试</string>
-    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.squareup.leakcanary/leakcanary-android/1.3/res/values/values.xml -->
-    <eat-comment/>
     <string name="__leak_canary_class_has_leaked">%s has leaked</string>
     <string name="__leak_canary_display_activity_label">Leaks</string>
     <string name="__leak_canary_leak_list_title">Leaks in %s</string>
@@ -131,7 +126,7 @@
     <string name="car_wash">洗车</string>
     <string name="car_wash_detail">洗车指数详情</string>
     <string name="china">中国</string>
-    <string name="city_already_added">城市已添加</string>
+    <string name="city_already_added">%1$s已添加</string>
     <string name="city_manage">城市管理</string>
     <string name="city_weather_update_time">%1$s更新时间</string>
     <string name="click_record">点击录音</string>
@@ -166,11 +161,14 @@
     <string name="file_size">文件大小：</string>
     <string name="five">5</string>
     <string name="five_h">五</string>
+    <string name="forbid_power">未开启读取位置权限</string>
     <string name="four_h">四</string>
     <string name="friday">周五</string>
     <string name="hot_city">热门城市</string>
     <string name="humidity">湿度 %1$s</string>
     <string name="input_empty">输入内容为空</string>
+    <string name="internet_error">网络异常,请检查网络设置</string>
+    <string name="internet_fail">连接失败，请重新尝试</string>
     <string name="interval">间隔 (分钟)</string>
     <string name="interval_day">%1$d天前更新</string>
     <string name="interval_hour">%1$d小时前更新</string>
@@ -179,8 +177,8 @@
     <string name="leave_to_refresh">松手可更新</string>
     <string name="life_index">生活指数</string>
     <string name="local_music">本地音乐</string>
-    <string name="location_already_added">定位已添加</string>
-    <string name="location_fail">定位失败</string>
+    <string name="location_already_added">自动定位已添加</string>
+    <string name="location_fail">自动定位失败</string>
     <string name="monday">周一</string>
     <string name="more">更多</string>
     <string name="more_city">更多城市</string>
@@ -206,6 +204,7 @@
     <string name="play_duration">播放时长：</string>
     <string name="play_fail">播放失败</string>
     <string name="press_right_top">按右上的  </string>
+    <string name="prompt">提示</string>
     <string name="pull_to_refresh">下拉更新</string>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/workspace/PullToRefresh/unspecified/res/values/values.xml -->
     <eat-comment/>
@@ -228,6 +227,7 @@
     <string name="rename_success">重命名成功</string>
     <string name="repeat">重复</string>
     <string name="repeat_once">只响一次</string>
+    <string name="retry">重试</string>
     <string name="ring">铃声</string>
     <string name="ring_select">铃声选择</string>
     <string name="roger">知道了</string>

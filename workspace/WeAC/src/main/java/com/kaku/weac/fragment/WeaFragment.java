@@ -845,8 +845,8 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                             @Override
                             public void run() {
                                 stopRefresh();
-                                ToastUtil.showLongToast(getActivity(),
-                                        getString(R.string.Internet_fail));
+                                ToastUtil.showShortToast(getActivity(),
+                                        getString(R.string.internet_fail));
                             }
                         });
 //                        } catch (Exception e1) {

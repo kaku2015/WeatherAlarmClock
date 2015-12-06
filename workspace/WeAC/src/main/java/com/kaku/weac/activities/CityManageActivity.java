@@ -457,7 +457,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                     // 隐藏进度条显示刷新按钮
                     hideProgressBarDisplayRefresh();
                 }
-                ToastUtil.showLongToast(CityManageActivity.this, info);
+                ToastUtil.showShortToast(CityManageActivity.this, info);
             }
         });
     }

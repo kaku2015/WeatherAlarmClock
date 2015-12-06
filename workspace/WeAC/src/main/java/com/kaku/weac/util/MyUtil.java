@@ -11,6 +11,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Vibrator;
 import android.renderscript.Allocation;
@@ -557,5 +559,27 @@ public class MyUtil {
         script.forEach(output);
         output.copyTo(bitmap);
         return bitmap;
+    }
+
+    /**
+     * 检查当前网络是否可用
+     *
+     * @param context context
+     * @return 是否连接到网络
+     */
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getApplicationContext()
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connectivityManager != null) {
+            NetworkInfo info = connectivityManager.getActiveNetworkInfo();
+            if (info != null && info.isConnected()) {
+                if (info.getState() == NetworkInfo.State.CONNECTED) {
+
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

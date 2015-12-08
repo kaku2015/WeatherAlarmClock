@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -61,31 +60,6 @@ public class AlarmClockEditFragment extends BaseFragment implements
     private static final int REQUEST_NAP_EDIT = 2;
 
     /**
-     * 闹钟时间选择器
-     */
-    private TimePicker mTimePicker;
-
-    /**
-     * 闹钟修改界面
-     */
-    private ViewGroup mViewGroup;
-
-    /**
-     * 操作栏取消按钮
-     */
-    private ImageView mCancelAction;
-
-    /**
-     * 操作栏确定按钮
-     */
-    private ImageView mAcceptAction;
-
-    /**
-     * 操作栏标题
-     */
-    private TextView mActionTitle;
-
-    /**
      * 闹钟实例
      */
     private AlarmClock mAlarmClock;
@@ -94,46 +68,6 @@ public class AlarmClockEditFragment extends BaseFragment implements
      * 下次响铃时间提示控件
      */
     private TextView mTimePickerTv;
-
-    /**
-     * 响铃倒计时
-     */
-    private String countDown;
-
-    /**
-     * 周一按钮
-     */
-    private ToggleButton mMonday;
-
-    /**
-     * 周二按钮
-     */
-    private ToggleButton mTuesday;
-
-    /**
-     * 周三按钮
-     */
-    private ToggleButton mWednesday;
-
-    /**
-     * 周四按钮
-     */
-    private ToggleButton mThursday;
-
-    /**
-     * 周五按钮
-     */
-    private ToggleButton mFriday;
-
-    /**
-     * 周六按钮
-     */
-    private ToggleButton mSaturday;
-
-    /**
-     * 周日按钮
-     */
-    private ToggleButton mSunday;
 
     /**
      * 周一按钮状态，默认未选中
@@ -186,49 +120,9 @@ public class AlarmClockEditFragment extends BaseFragment implements
     private TreeMap<Integer, String> mMap;
 
     /**
-     * 标签描述控件
-     */
-    private EditText mTag;
-
-    /**
-     * 铃声控件
-     */
-    private ViewGroup mRing;
-
-    /**
      * 铃声描述
      */
     private TextView mRingDescribe;
-
-    /**
-     * 音量控制seekBar
-     */
-    private SeekBar mVolumeSkBar;
-
-    /**
-     * 振动
-     */
-    private ToggleButton mVibrateBtn;
-
-    /**
-     * 小睡
-     */
-    private ToggleButton mNapBtn;
-
-    /**
-     * 小睡组件
-     */
-    private ViewGroup mNap;
-
-    /**
-     * 天气提示
-     */
-    private ToggleButton mWeaPromptBtn;
-
-    /**
-     * 上一次铃声选择点击时间
-     */
-    private long mLastClickTime = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -264,11 +158,11 @@ public class AlarmClockEditFragment extends BaseFragment implements
     }
 
     private void initVolume(View view) {
-        // 音量选择SeekBar
-        mVolumeSkBar = (SeekBar) view.findViewById(R.id.volumn_sk);
+        // 音量控制seekBar
+        SeekBar volumeSkBar = (SeekBar) view.findViewById(R.id.volumn_sk);
         // 设置当前音量显示
-        mVolumeSkBar.setProgress(mAlarmClock.getVolume());
-        mVolumeSkBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+        volumeSkBar.setProgress(mAlarmClock.getVolume());
+        volumeSkBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
@@ -303,9 +197,10 @@ public class AlarmClockEditFragment extends BaseFragment implements
      * @param view view
      */
     private void setBackground(View view) {
-        mViewGroup = (ViewGroup) view.findViewById(R.id.new_alarm_clock_llyt);
+        // 闹钟修改界面
+        ViewGroup viewGroup = (ViewGroup) view.findViewById(R.id.new_alarm_clock_llyt);
         // 设置页面背景
-        MyUtil.setBackground(mViewGroup, getActivity());
+        MyUtil.setBackground(viewGroup, getActivity());
     }
 
     /**
@@ -314,15 +209,15 @@ public class AlarmClockEditFragment extends BaseFragment implements
      * @param view view
      */
     private void initActionBar(View view) {
-        // 取消按钮
-        mCancelAction = (ImageView) view.findViewById(R.id.action_cancel);
-        mCancelAction.setOnClickListener(this);
-        // 确定按钮
-        mAcceptAction = (ImageView) view.findViewById(R.id.action_accept);
-        mAcceptAction.setOnClickListener(this);
-        // 标题
-        mActionTitle = (TextView) view.findViewById(R.id.action_title);
-        mActionTitle.setText(getResources()
+        // 操作栏取消按钮
+        ImageView cancelAction = (ImageView) view.findViewById(R.id.action_cancel);
+        cancelAction.setOnClickListener(this);
+        // 操作栏确定按钮
+        ImageView acceptAction = (ImageView) view.findViewById(R.id.action_accept);
+        acceptAction.setOnClickListener(this);
+        // 操作栏标题
+        TextView actionTitle = (TextView) view.findViewById(R.id.action_title);
+        actionTitle.setText(getResources()
                 .getString(R.string.edit_alarm_clock));
     }
 
@@ -337,14 +232,14 @@ public class AlarmClockEditFragment extends BaseFragment implements
         // 计算倒计时显示
         displayCountDown();
         // 闹钟时间选择器
-        mTimePicker = (TimePicker) view.findViewById(R.id.time_picker);
-        mTimePicker.setIs24HourView(true);
+        TimePicker timePicker = (TimePicker) view.findViewById(R.id.time_picker);
+        timePicker.setIs24HourView(true);
         // 初始化时间选择器的小时
-        mTimePicker.setCurrentHour(mAlarmClock.getHour());
+        timePicker.setCurrentHour(mAlarmClock.getHour());
         // 初始化时间选择器的分钟
-        mTimePicker.setCurrentMinute(mAlarmClock.getMinute());
+        timePicker.setCurrentMinute(mAlarmClock.getMinute());
 
-        mTimePicker.setOnTimeChangedListener(new OnTimeChangedListener() {
+        timePicker.setOnTimeChangedListener(new OnTimeChangedListener() {
 
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
@@ -369,21 +264,28 @@ public class AlarmClockEditFragment extends BaseFragment implements
         mRepeatDescribe = (TextView) view.findViewById(R.id.repeat_describe);
 
         // 周选择按钮
-        mMonday = (ToggleButton) view.findViewById(R.id.tog_btn_monday);
-        mTuesday = (ToggleButton) view.findViewById(R.id.tog_btn_tuesday);
-        mWednesday = (ToggleButton) view.findViewById(R.id.tog_btn_wednesday);
-        mThursday = (ToggleButton) view.findViewById(R.id.tog_btn_thursday);
-        mFriday = (ToggleButton) view.findViewById(R.id.tog_btn_friday);
-        mSaturday = (ToggleButton) view.findViewById(R.id.tog_btn_saturday);
-        mSunday = (ToggleButton) view.findViewById(R.id.tog_btn_sunday);
+        // 周一按钮
+        ToggleButton monday = (ToggleButton) view.findViewById(R.id.tog_btn_monday);
+        // 周二按钮
+        ToggleButton tuesday = (ToggleButton) view.findViewById(R.id.tog_btn_tuesday);
+        // 周三按钮
+        ToggleButton wednesday = (ToggleButton) view.findViewById(R.id.tog_btn_wednesday);
+        // 周四按钮
+        ToggleButton thursday = (ToggleButton) view.findViewById(R.id.tog_btn_thursday);
+        // 周五按钮
+        ToggleButton friday = (ToggleButton) view.findViewById(R.id.tog_btn_friday);
+        // 周六按钮
+        ToggleButton saturday = (ToggleButton) view.findViewById(R.id.tog_btn_saturday);
+        // 周日按钮
+        ToggleButton sunday = (ToggleButton) view.findViewById(R.id.tog_btn_sunday);
 
-        mMonday.setOnCheckedChangeListener(this);
-        mTuesday.setOnCheckedChangeListener(this);
-        mWednesday.setOnCheckedChangeListener(this);
-        mThursday.setOnCheckedChangeListener(this);
-        mFriday.setOnCheckedChangeListener(this);
-        mSaturday.setOnCheckedChangeListener(this);
-        mSunday.setOnCheckedChangeListener(this);
+        monday.setOnCheckedChangeListener(this);
+        tuesday.setOnCheckedChangeListener(this);
+        wednesday.setOnCheckedChangeListener(this);
+        thursday.setOnCheckedChangeListener(this);
+        friday.setOnCheckedChangeListener(this);
+        saturday.setOnCheckedChangeListener(this);
+        sunday.setOnCheckedChangeListener(this);
 
         mRepeatStr = new StringBuilder();
         mMap = new TreeMap<>();
@@ -396,25 +298,25 @@ public class AlarmClockEditFragment extends BaseFragment implements
                 int week = Integer.parseInt(aWeeksValue);
                 switch (week) {
                     case 1:
-                        mSunday.setChecked(true);
+                        sunday.setChecked(true);
                         break;
                     case 2:
-                        mMonday.setChecked(true);
+                        monday.setChecked(true);
                         break;
                     case 3:
-                        mTuesday.setChecked(true);
+                        tuesday.setChecked(true);
                         break;
                     case 4:
-                        mWednesday.setChecked(true);
+                        wednesday.setChecked(true);
                         break;
                     case 5:
-                        mThursday.setChecked(true);
+                        thursday.setChecked(true);
                         break;
                     case 6:
-                        mFriday.setChecked(true);
+                        friday.setChecked(true);
                         break;
                     case 7:
-                        mSaturday.setChecked(true);
+                        saturday.setChecked(true);
                         break;
                 }
 
@@ -428,10 +330,10 @@ public class AlarmClockEditFragment extends BaseFragment implements
      * @param view view
      */
     private void initTag(View view) {
-        // 标签
-        mTag = (EditText) view.findViewById(R.id.tag_edit_text);
-        mTag.setText(mAlarmClock.getTag());
-        mTag.addTextChangedListener(new TextWatcher() {
+        // 标签描述控件
+        EditText tag = (EditText) view.findViewById(R.id.tag_edit_text);
+        tag.setText(mAlarmClock.getTag());
+        tag.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before,
@@ -460,9 +362,9 @@ public class AlarmClockEditFragment extends BaseFragment implements
      * @param view view
      */
     private void initRing(View view) {
-        // 铃声
-        mRing = (ViewGroup) view.findViewById(R.id.ring_llyt);
-        mRing.setOnClickListener(this);
+        // 铃声控件
+        ViewGroup ring = (ViewGroup) view.findViewById(R.id.ring_llyt);
+        ring.setOnClickListener(this);
         mRingDescribe = (TextView) view.findViewById(R.id.ring_describe);
         mRingDescribe.setText(mAlarmClock.getRingName());
     }
@@ -474,24 +376,24 @@ public class AlarmClockEditFragment extends BaseFragment implements
      */
     private void initToggleButton(View view) {
         // 振动
-        mVibrateBtn = (ToggleButton) view.findViewById(R.id.vibrate_btn);
+        ToggleButton vibrateBtn = (ToggleButton) view.findViewById(R.id.vibrate_btn);
 
         // 小睡
-        mNapBtn = (ToggleButton) view.findViewById(R.id.nap_btn);
+        ToggleButton napBtn = (ToggleButton) view.findViewById(R.id.nap_btn);
         // 小睡组件
-        mNap = (ViewGroup) view.findViewById(R.id.nap_llyt);
-        mNap.setOnClickListener(this);
+        ViewGroup nap = (ViewGroup) view.findViewById(R.id.nap_llyt);
+        nap.setOnClickListener(this);
 
         // 天气提示
-        mWeaPromptBtn = (ToggleButton) view.findViewById(R.id.wea_prompt_btn);
+        ToggleButton weaPromptBtn = (ToggleButton) view.findViewById(R.id.wea_prompt_btn);
 
-        mVibrateBtn.setOnCheckedChangeListener(this);
-        mNapBtn.setOnCheckedChangeListener(this);
-        mWeaPromptBtn.setOnCheckedChangeListener(this);
+        vibrateBtn.setOnCheckedChangeListener(this);
+        napBtn.setOnCheckedChangeListener(this);
+        weaPromptBtn.setOnCheckedChangeListener(this);
 
-        mVibrateBtn.setChecked(mAlarmClock.isVibrate());
-        mNapBtn.setChecked(mAlarmClock.isNap());
-        mWeaPromptBtn.setChecked(mAlarmClock.isWeaPrompt());
+        vibrateBtn.setChecked(mAlarmClock.isVibrate());
+        napBtn.setChecked(mAlarmClock.isNap());
+        weaPromptBtn.setChecked(mAlarmClock.isWeaPrompt());
 
     }
 
@@ -513,7 +415,7 @@ public class AlarmClockEditFragment extends BaseFragment implements
             // 当点击铃声
             case R.id.ring_llyt:
                 // 不响应重复点击
-                if (isFastDoubleClick()) {
+                if (MyUtil.isFastDoubleClick()) {
                     return;
                 }
                 // 铃声选择界面
@@ -526,7 +428,7 @@ public class AlarmClockEditFragment extends BaseFragment implements
             // 当点击小睡
             case R.id.nap_llyt:
                 // 不响应重复点击
-                if (isFastDoubleClick()) {
+                if (MyUtil.isFastDoubleClick()) {
                     return;
                 }
                 // 小睡界面
@@ -819,6 +721,8 @@ public class AlarmClockEditFragment extends BaseFragment implements
         // 剩余分钟
         long remainMinute = (ms - remainDay * dd - remainHour * hh) / mm;
 
+        // 响铃倒计时
+        String countDown;
         // 当剩余天数大于0时显示【X天X小时X分】格式
         if (remainDay > 0) {
             countDown = getString(R.string.countdown_day_hour_minute);
@@ -841,28 +745,6 @@ public class AlarmClockEditFragment extends BaseFragment implements
                 mTimePickerTv.setText(String.format(countDown, 1, 0, 0));
             }
 
-        }
-    }
-
-    /**
-     * 是否连续铃声选择多次
-     *
-     * @return 点击多次与否
-     */
-    private boolean isFastDoubleClick() {
-        long time = SystemClock.elapsedRealtime();
-        // 初次点击响应事件
-        if (mLastClickTime == 0) {
-            mLastClickTime = time;
-            return false;
-        }
-        long timeD = time - mLastClickTime;
-        // 间隔x秒以内重复点击不多次响应
-        if (timeD <= WeacConstants.QUICK_CLICK) {
-            return true;
-        } else {
-            mLastClickTime = time;
-            return false;
         }
     }
 }

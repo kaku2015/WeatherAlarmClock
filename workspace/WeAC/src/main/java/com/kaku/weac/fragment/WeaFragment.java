@@ -584,11 +584,6 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
      */
     int mAlpha = 0;
 
-    /**
-     * 城市管理按钮点击时间
-     */
-    private long mLastClickTime = 0;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -681,7 +676,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
             // 城市管理按钮
             case R.id.action_home:
                 // 不响应重复点击
-                if (isFastDoubleClick()) {
+                if (MyUtil.isFastDoubleClick()) {
                     return;
                 }
 
@@ -2044,23 +2039,6 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         mAlpha = 0;
         if (mHandler != null) {
             mHandler.removeCallbacks(mRun);
-        }
-    }
-
-    private boolean isFastDoubleClick() {
-        long time = SystemClock.elapsedRealtime();
-        // 初次点击响应事件
-        if (mLastClickTime == 0) {
-            mLastClickTime = time;
-            return false;
-        }
-        long timeD = time - mLastClickTime;
-        // 间隔x秒以内重复点击不多次响应
-        if (timeD <= WeacConstants.QUICK_CLICK) {
-            return true;
-        } else {
-            mLastClickTime = time;
-            return false;
         }
     }
 }

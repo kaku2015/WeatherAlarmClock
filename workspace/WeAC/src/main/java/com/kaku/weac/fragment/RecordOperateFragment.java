@@ -23,11 +23,6 @@ import com.kaku.weac.common.WeacConstants;
  */
 public class RecordOperateFragment extends BaseFragment implements OnClickListener {
 
-    private TextView mRecordRenameTv;
-    private TextView mRecordDeleteTv;
-    private TextView mRecordDeleteBatchTv;
-    private TextView mRecordDetailTv;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,16 +32,16 @@ public class RecordOperateFragment extends BaseFragment implements OnClickListen
         getActivity().getWindow().setLayout(LayoutParams.MATCH_PARENT,
                 LayoutParams.WRAP_CONTENT);
 
-        mRecordRenameTv = (TextView) view.findViewById(R.id.record_rename);
-        mRecordDeleteTv = (TextView) view.findViewById(R.id.record_delete);
-        mRecordDeleteBatchTv = (TextView) view
+        TextView recordRenameTv = (TextView) view.findViewById(R.id.record_rename);
+        TextView recordDeleteTv = (TextView) view.findViewById(R.id.record_delete);
+        TextView recordDeleteBatchTv = (TextView) view
                 .findViewById(R.id.record_delete_batch);
-        mRecordDetailTv = (TextView) view.findViewById(R.id.record_detail);
+        TextView recordDetailTv = (TextView) view.findViewById(R.id.record_detail);
 
-        mRecordRenameTv.setOnClickListener(this);
-        mRecordDeleteTv.setOnClickListener(this);
-        mRecordDeleteBatchTv.setOnClickListener(this);
-        mRecordDetailTv.setOnClickListener(this);
+        recordRenameTv.setOnClickListener(this);
+        recordDeleteTv.setOnClickListener(this);
+        recordDeleteBatchTv.setOnClickListener(this);
+        recordDetailTv.setOnClickListener(this);
         return view;
     }
 

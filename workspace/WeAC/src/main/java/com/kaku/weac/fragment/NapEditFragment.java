@@ -34,21 +34,6 @@ public class NapEditFragment extends BaseFragment implements OnClickListener {
     private static final String LOG_TAG = "NapEditFragment";
 
     /**
-     * 取消按钮
-     */
-    private Button mCancelBtn;
-
-    /**
-     * 完成按钮
-     */
-    private Button mFinishBtn;
-
-    /**
-     * 小睡间隔RadioGroup
-     */
-    private RadioGroup mNapIntervalRg;
-
-    /**
      * 小睡间隔RadioButton
      */
     private RadioButton mNapIntervalRbtn;
@@ -57,11 +42,6 @@ public class NapEditFragment extends BaseFragment implements OnClickListener {
      * 选中的小睡间隔RadioButtonId
      */
     private int mNapIntervalRbtnId;
-
-    /**
-     * 小睡次数RadioGroup
-     */
-    private RadioGroup mNapTimesRg;
 
     /**
      * 小睡次数RadioButton
@@ -103,11 +83,12 @@ public class NapEditFragment extends BaseFragment implements OnClickListener {
         getActivity().getWindow().setLayout(LayoutParams.MATCH_PARENT,
                 LayoutParams.WRAP_CONTENT);
 
-        mNapIntervalRg = (RadioGroup) view
+        // 小睡间隔RadioGroup
+        RadioGroup napIntervalRg = (RadioGroup) view
                 .findViewById(R.id.nap_interval_radio_group);
         // 设置默认选中的小睡间隔按钮Id
         initNapIntervalRbtnId();
-        mNapIntervalRg
+        napIntervalRg
                 .setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
                     @Override
@@ -123,13 +104,14 @@ public class NapEditFragment extends BaseFragment implements OnClickListener {
                     }
                 });
         // 默认选中小睡间隔按钮
-        mNapIntervalRg.check(mNapIntervalRbtnId);
+        napIntervalRg.check(mNapIntervalRbtnId);
 
-        mNapTimesRg = (RadioGroup) view
+        // 小睡次数RadioGroup
+        RadioGroup napTimesRg = (RadioGroup) view
                 .findViewById(R.id.nap_times_radio_group);
         // 设置默认选中的小睡次数按钮Id
         initNapTimesRbtnId();
-        mNapTimesRg.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+        napTimesRg.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -142,15 +124,15 @@ public class NapEditFragment extends BaseFragment implements OnClickListener {
             }
         });
         // 默认选中小睡次数按钮
-        mNapTimesRg.check(mNapTimesRbtnId);
+        napTimesRg.check(mNapTimesRbtnId);
 
         // 取消按钮
-        mCancelBtn = (Button) view.findViewById(R.id.cancel_btn);
-        mCancelBtn.setOnClickListener(this);
+        Button cancelBtn = (Button) view.findViewById(R.id.cancel_btn);
+        cancelBtn.setOnClickListener(this);
 
         // 完成按钮
-        mFinishBtn = (Button) view.findViewById(R.id.sure_btn);
-        mFinishBtn.setOnClickListener(this);
+        Button finishBtn = (Button) view.findViewById(R.id.sure_btn);
+        finishBtn.setOnClickListener(this);
 
         return view;
     }

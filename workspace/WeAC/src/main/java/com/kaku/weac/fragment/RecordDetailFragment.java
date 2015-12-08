@@ -62,46 +62,6 @@ public class RecordDetailFragment extends BaseFragment {
      */
     private String mPlayDuration;
 
-    /**
-     * 文件操作
-     */
-    private File mFile;
-
-    /**
-     * 文件名称TextView
-     */
-    private TextView mFileNameTv;
-
-    /**
-     * 文件格式TextView
-     */
-    private TextView mFileFormatTv;
-
-    /**
-     * 文件大小TextView
-     */
-    private TextView mFileSizeTv;
-
-    /**
-     * 修改时间TextView
-     */
-    private TextView mModifyTimeTv;
-
-    /**
-     * 播放时长TextView
-     */
-    private TextView mPlayDurationTv;
-
-    /**
-     * 保存路径TextView
-     */
-    private TextView mSavePathTv;
-
-    /**
-     * 知道了Button
-     */
-    private Button mRogerBtn;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,9 +70,10 @@ public class RecordDetailFragment extends BaseFragment {
                 WeacConstants.RING_NAME);
         mSavePath = getActivity().getIntent().getStringExtra(
                 WeacConstants.RING_URL);
-        mFile = new File(mSavePath);
-        mFileSize = MyUtil.FormatFileSize(mFile.length());
-        long time = mFile.lastModified();
+        // 文件操作
+        File file = new File(mSavePath);
+        mFileSize = MyUtil.FormatFileSize(file.length());
+        long time = file.lastModified();
         mModifyTime = new SimpleDateFormat("yyyy-MM-dd HH:mm",
                 Locale.getDefault()).format(time);
         try {
@@ -137,14 +98,21 @@ public class RecordDetailFragment extends BaseFragment {
         // 设置Dialog全屏显示
         getActivity().getWindow().setLayout(LayoutParams.MATCH_PARENT,
                 LayoutParams.WRAP_CONTENT);
-        mFileNameTv = (TextView) view.findViewById(R.id.fime_name);
-        mFileFormatTv = (TextView) view.findViewById(R.id.fime_format);
-        mFileSizeTv = (TextView) view.findViewById(R.id.fime_size);
-        mModifyTimeTv = (TextView) view.findViewById(R.id.modify_time);
-        mPlayDurationTv = (TextView) view.findViewById(R.id.play_duration);
-        mSavePathTv = (TextView) view.findViewById(R.id.save_path);
-        mRogerBtn = (Button) view.findViewById(R.id.roger_btn);
-        mRogerBtn.setOnClickListener(new OnClickListener() {
+        // 文件名称TextView
+        TextView fileNameTv = (TextView) view.findViewById(R.id.fime_name);
+        // 文件格式TextView
+        TextView fileFormatTv = (TextView) view.findViewById(R.id.fime_format);
+        // 文件大小TextView
+        TextView fileSizeTv = (TextView) view.findViewById(R.id.fime_size);
+        // 修改时间TextView
+        TextView modifyTimeTv = (TextView) view.findViewById(R.id.modify_time);
+        // 播放时长TextView
+        TextView playDurationTv = (TextView) view.findViewById(R.id.play_duration);
+        // 保存路径TextView
+        TextView savePathTv = (TextView) view.findViewById(R.id.save_path);
+        // 知道了Button
+        Button rogerBtn = (Button) view.findViewById(R.id.roger_btn);
+        rogerBtn.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -153,12 +121,12 @@ public class RecordDetailFragment extends BaseFragment {
             }
         });
 
-        mFileNameTv.setText(mFileName);
-        mFileFormatTv.setText("amr");
-        mFileSizeTv.setText(mFileSize);
-        mModifyTimeTv.setText(mModifyTime);
-        mPlayDurationTv.setText(mPlayDuration);
-        mSavePathTv.setText(mSavePath);
+        fileNameTv.setText(mFileName);
+        fileFormatTv.setText(getString(R.string.amr));
+        fileSizeTv.setText(mFileSize);
+        modifyTimeTv.setText(mModifyTime);
+        playDurationTv.setText(mPlayDuration);
+        savePathTv.setText(mSavePath);
 
         return view;
     }

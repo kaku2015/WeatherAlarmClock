@@ -8,7 +8,6 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
-import java.net.HttpURLConnection;
 import java.net.URLEncoder;
 
 /**
@@ -31,7 +30,7 @@ public class HttpUtil {
             @Override
             public void run() {
                 // FIXME: okHttp
-                HttpURLConnection connection = null;
+//                HttpURLConnection connection = null;
                 try {
                     String address1;
                     if (address == null) {

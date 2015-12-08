@@ -33,11 +33,6 @@ public class MoreFragment extends BaseFragment {
     private static final String LOG_TAG = "MoreFragment";
 
     /**
-     * 变更主题按钮
-     */
-    private Button mButton;
-
-    /**
      * 主题壁纸的requestCode
      */
     private static final int REQUEST_THEME_WALLPAPER = 1;
@@ -48,8 +43,9 @@ public class MoreFragment extends BaseFragment {
         LogUtil.i(LOG_TAG, "MoreFragmet:  onCreateView");
 
         View view = inflater.inflate(R.layout.fm_more, container, false);
-        mButton = (Button) view.findViewById(R.id.button);
-        mButton.setOnClickListener(new OnClickListener() {
+        // 变更主题按钮
+        Button button = (Button) view.findViewById(R.id.button);
+        button.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {

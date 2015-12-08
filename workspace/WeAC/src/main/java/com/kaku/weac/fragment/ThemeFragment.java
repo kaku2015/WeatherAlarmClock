@@ -47,11 +47,6 @@ public class ThemeFragment extends BaseFragment {
     private static final String EXTRA_WALLPAPER = "extra_theme_wallpaper_name";
 
     /**
-     * 显示主题壁纸的GridView
-     */
-    private GridView mGridView;
-
-    /**
      * 保存主题壁纸资源id的集合
      */
     private List<Integer> mList;
@@ -71,11 +66,6 @@ public class ThemeFragment extends BaseFragment {
      */
     private int mCurrentPosition;
 
-    /**
-     * 管理图片的缓存
-     */
-    private LruMemoryCache mMemoryCache;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,9 +79,10 @@ public class ThemeFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fm_theme, container, false);
-        mGridView = (GridView) view.findViewById(R.id.gv_change_theme);
-        mGridView.setAdapter(this.mAdapter);
-        mGridView.setOnItemClickListener(new OnItemClickListener() {
+        // 显示主题壁纸的GridView
+        GridView gridView = (GridView) view.findViewById(R.id.gv_change_theme);
+        gridView.setAdapter(this.mAdapter);
+        gridView.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
@@ -156,8 +147,8 @@ public class ThemeFragment extends BaseFragment {
         // 使用最大可用内存值的1/8作为缓存的大小。
         int cacheSize = maxMemory / 8;
         // LruCache通过构造函数传入缓存值，以KB为单位
-        mMemoryCache = new LruMemoryCache(cacheSize);
-        LogUtil.i(LOG_TAG, "缓存空间大小: " + mMemoryCache.maxSize() / 1024 + "MB");
+        LruMemoryCache memoryCache = new LruMemoryCache(cacheSize);
+        LogUtil.i(LOG_TAG, "缓存空间大小: " + memoryCache.maxSize() / 1024 + "MB");
 
         WindowManager manager = (WindowManager) getActivity().getSystemService(
                 Context.WINDOW_SERVICE);
@@ -171,6 +162,6 @@ public class ThemeFragment extends BaseFragment {
 
         // 创建主题壁纸适配器
         this.mAdapter = new ThemeAdapter(getActivity(), mList,
-                mWallpaperPosition, mMemoryCache, reqWidth, reqHeight);
+                mWallpaperPosition, memoryCache, reqWidth, reqHeight);
     }
 }

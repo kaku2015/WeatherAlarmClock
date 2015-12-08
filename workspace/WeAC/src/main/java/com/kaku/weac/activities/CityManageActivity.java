@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -127,11 +126,6 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
      */
     private boolean mIsRefreshing;
 
-    /**
-     * 添加城市按钮点击时间
-     */
-    private long mLastClickTime = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -214,7 +208,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
             // 当为列表最后一项（添加城市）
             if (position == (mCityManageList.size() - 1)) {
                 // 不响应重复点击
-                if (isFastDoubleClick()) {
+                if (MyUtil.isFastDoubleClick()) {
                     return;
                 }
                 Intent intent = new Intent(CityManageActivity.this, AddCityActivity.class);
@@ -224,9 +218,9 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 String cityName = cityManage.getCityName();
                 // 不是自动定位
                 if (!cityName.equals(getString(R.string.auto_location))) {
-                    saveDefaultCityInfoAndReturn(position, null);
+                    saveDefaultCityInfoAndReturn(position, null, false);
                 } else {
-                    saveDefaultCityInfoAndReturn(position, cityManage.getLocationCity());
+                    saveDefaultCityInfoAndReturn(position, cityManage.getLocationCity(), false);
                 }
             }
         }
@@ -237,8 +231,9 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
      *
      * @param position     保存默认城市的位置
      * @param locationCity 定位城市名
+     * @param isNew        是否为新添加的城市
      */
-    private void saveDefaultCityInfoAndReturn(int position, String locationCity) {
+    private void saveDefaultCityInfoAndReturn(int position, String locationCity, boolean isNew) {
         SharedPreferences share = getSharedPreferences(
                 WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = share.edit();
@@ -266,6 +261,10 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
         Intent intent = getIntent();
         setResult(Activity.RESULT_OK, intent);
         finish();
+        // 新添加
+        if (isNew) {
+            overridePendingTransition(0, 0);
+        }
     }
 
     /**
@@ -551,10 +550,10 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
             WeatherDBOperate.getInstance().saveCityManage(mCityManage);
             // 设置默认城市并且退出返回
             if (weatherCode != null) {
-                saveDefaultCityInfoAndReturn(mCityManageList.size() - 2, null);
+                saveDefaultCityInfoAndReturn(mCityManageList.size() - 2, null, true);
                 // 添加定位
             } else {
-                saveDefaultCityInfoAndReturn(mCityManageList.size() - 2, mWeatherInfo.getCity());
+                saveDefaultCityInfoAndReturn(mCityManageList.size() - 2, mWeatherInfo.getCity(), true);
             }
         }
 
@@ -650,23 +649,6 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
             super.onBackPressed();
         } else {
             mIsRefreshing = false;
-        }
-    }
-
-    private boolean isFastDoubleClick() {
-        long time = SystemClock.elapsedRealtime();
-        // 初次点击响应事件
-        if (mLastClickTime == 0) {
-            mLastClickTime = time;
-            return false;
-        }
-        long timeD = time - mLastClickTime;
-        // 间隔x秒以内重复点击不多次响应
-        if (timeD <= WeacConstants.QUICK_CLICK) {
-            return true;
-        } else {
-            mLastClickTime = time;
-            return false;
         }
     }
 }

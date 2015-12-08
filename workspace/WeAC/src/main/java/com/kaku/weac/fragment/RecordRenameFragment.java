@@ -53,24 +53,9 @@ public class RecordRenameFragment extends BaseFragment implements OnClickListene
     private EditText mRenameEt;
 
     /**
-     * 确定按钮
-     */
-    private Button mSureBtn;
-
-    /**
-     * 取消按钮
-     */
-    private Button mCancelBtn;
-
-    /**
      * 显示错误信息的TextView
      */
     private TextView mErrorTv;
-
-    /**
-     * 延时弹出软键盘
-     */
-    private Handler mHandler;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -93,10 +78,12 @@ public class RecordRenameFragment extends BaseFragment implements OnClickListene
 
         mRenameEt = (EditText) view.findViewById(R.id.record_rename_edit_text);
         mRenameEt.setText(mFileName);
-        mCancelBtn = (Button) view.findViewById(R.id.cancel_btn);
-        mSureBtn = (Button) view.findViewById(R.id.sure_btn);
-        mCancelBtn.setOnClickListener(this);
-        mSureBtn.setOnClickListener(this);
+        // 取消按钮
+        Button cancelBtn = (Button) view.findViewById(R.id.cancel_btn);
+        // 确定按钮
+        Button sureBtn = (Button) view.findViewById(R.id.sure_btn);
+        cancelBtn.setOnClickListener(this);
+        sureBtn.setOnClickListener(this);
         mErrorTv = (TextView) view.findViewById(R.id.record_rename_error);
         return view;
     }
@@ -104,8 +91,9 @@ public class RecordRenameFragment extends BaseFragment implements OnClickListene
     @Override
     public void onResume() {
         super.onResume();
-        mHandler = new Handler();
-        mHandler.postDelayed(new Runnable() {
+        // 延时弹出软键盘
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
 
             @Override
             public void run() {

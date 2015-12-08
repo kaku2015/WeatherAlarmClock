@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -79,11 +78,6 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener,
     private ImageView mAcceptAction;
 
     /**
-     * 新建编辑闹钟按钮点击时间
-     */
-    private long mLastClickTime = 0;
-
-    /**
      * 监听闹铃item点击事件Listener
      */
     private AdapterView.OnItemClickListener mOnItemClickListener;
@@ -142,7 +136,7 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener,
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             // 不响应重复点击
-            if (isFastDoubleClick()) {
+            if (MyUtil.isFastDoubleClick()) {
                 return;
             }
             AlarmClock alarmClock = mAdapter.getItem(position);
@@ -162,7 +156,7 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener,
         switch (v.getId()) {
             case R.id.action_new:
                 // 不响应重复点击
-                if (isFastDoubleClick()) {
+                if (MyUtil.isFastDoubleClick()) {
                     return;
                 }
                 Intent intent = new Intent(getActivity(),
@@ -306,27 +300,5 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener,
         super.onPause();
         // 隐藏删除，完成按钮,显示修改按钮
         hideDeleteAccept();
-    }
-
-    /**
-     * 是否连续点击新建或者编辑闹钟按钮多次
-     *
-     * @return 点击多次与否
-     */
-    private boolean isFastDoubleClick() {
-        long time = SystemClock.elapsedRealtime();
-        // 初次点击响应事件
-        if (mLastClickTime == 0) {
-            mLastClickTime = time;
-            return false;
-        }
-        long timeD = time - mLastClickTime;
-        // 间隔x秒以内重复点击不多次响应
-        if (timeD <= WeacConstants.QUICK_CLICK) {
-            return true;
-        } else {
-            mLastClickTime = time;
-            return false;
-        }
     }
 }

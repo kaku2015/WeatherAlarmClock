@@ -23,16 +23,6 @@ import com.kaku.weac.R;
  */
 public class RecordDeleteFragment extends BaseFragment implements OnClickListener {
 
-    /**
-     * 取消按钮
-     */
-    private Button mCancelBtn;
-
-    /**
-     * 确定按钮
-     */
-    private Button mSureBtn;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,10 +38,12 @@ public class RecordDeleteFragment extends BaseFragment implements OnClickListene
         getActivity().getWindow().setLayout(LayoutParams.MATCH_PARENT,
                 LayoutParams.WRAP_CONTENT);
 
-        mCancelBtn = (Button) view.findViewById(R.id.cancel_btn);
-        mSureBtn = (Button) view.findViewById(R.id.sure_btn);
-        mCancelBtn.setOnClickListener(this);
-        mSureBtn.setOnClickListener(this);
+        // 取消按钮
+        Button cancelBtn = (Button) view.findViewById(R.id.cancel_btn);
+        // 确定按钮
+        Button sureBtn = (Button) view.findViewById(R.id.sure_btn);
+        cancelBtn.setOnClickListener(this);
+        sureBtn.setOnClickListener(this);
         return view;
     }
 

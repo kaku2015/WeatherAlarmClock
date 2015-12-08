@@ -4,6 +4,7 @@
 package com.kaku.weac.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -169,6 +170,19 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
         } else if ((position != mPosition) && !(position == mList.size() - 1)) {
             viewHolder.cityWeather.setVisibility(View.VISIBLE);
             viewHolder.progressBar.setVisibility(View.GONE);
+        }
+
+        // 自动定位
+        if (mContext.getString(R.string.auto_location).equals(cityManage.getCityName())) {
+            Drawable drawable = mContext.getResources().getDrawable(R.drawable.ic_gps);
+            if (drawable != null) {
+                drawable.setBounds(0, 0, drawable.getMinimumWidth(),
+                        drawable.getMinimumHeight());
+                // 设置定位图标
+                viewHolder.cityName.setCompoundDrawables(drawable, null, null, null);
+            }
+        } else {
+            viewHolder.cityName.setCompoundDrawables(null, null, null, null);
         }
         return convertView;
     }

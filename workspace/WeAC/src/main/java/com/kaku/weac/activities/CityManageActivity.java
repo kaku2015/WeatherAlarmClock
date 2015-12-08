@@ -323,6 +323,12 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                     return;
                 }
 
+                // 判断网络是否可用
+                if (!MyUtil.isNetworkAvailable(this)) {
+                    ToastUtil.showShortToast(this, getString(R.string.internet_error));
+                    return;
+                }
+
                 if (mEditBtn.getVisibility() == View.GONE) {
                     // 隐藏删除，完成按钮,显示修改按钮
                     hideDeleteAccept();
@@ -387,7 +393,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                                                 runOnUi(getString(R.string.no_city_info), position);
                                                 break;
                                             case -2:
-                                                runOnUi(getString(R.string.location_fail), position);
+                                                runOnUi(getString(R.string.can_not_find_current_location), position);
                                                 break;
                                         }
                                     }

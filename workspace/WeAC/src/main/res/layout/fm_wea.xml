@@ -19,8 +19,8 @@
         <TextView
             android:id="@+id/action_title"
             style="@style/action_title"
-            android:drawableLeft="@drawable/ic_gps"
-            android:drawablePadding="5dp"/>
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"/>
 
         <ImageView
             android:id="@+id/action_refresh"

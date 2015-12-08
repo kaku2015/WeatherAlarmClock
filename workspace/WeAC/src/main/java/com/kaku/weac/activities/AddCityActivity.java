@@ -130,17 +130,6 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
      */
     private ProgressDialog mProgressDialog;
 
-/*    *//**
-     * 定位管理
-     *//*
-    private LocationManager mLocationManager;
-
-    */
-    /**
-     * 定位监听
-     *//*
-    private MyLocationListener mMyLocationListener;*/
-
     /**
      * 百度定位服务
      */
@@ -267,39 +256,6 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
             case "定位":
                 // 开始定位
                 startLocation();
-
-/*                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                        this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    ToastUtil.showShortToast(AddCityActivity.this, "请打开位置权限");
-                    return;
-                }
-
-                // 初始化定位管理监听
-                initLocation();
-
-                String provider;
-                List<String> providerList = mLocationManager.getProviders(true);
-                if (providerList.contains(LocationManager.NETWORK_PROVIDER)) {
-                    provider = LocationManager.NETWORK_PROVIDER;
-                } else {
-                    ToastUtil.showShortToast(AddCityActivity.this, "请打开网络定位");
-                    return;
-                }
-
-                showProgressDialog(getString(R.string.now_locating));
-
-                mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-                // 注册请求定位
-                // minDistance:最小距离位置更新  0代表不更新
-                mLocationManager.requestLocationUpdates(provider, 0, 0, mMyLocationListener);*/
                 break;
             case "北京":
                 finish("010101");
@@ -493,121 +449,6 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
             startLocation();
         }
     }
-/*    *//**
-     * 初始化定位管理监听
-     *//*
-    private void initLocation() {
-        if (mLocationManager == null) {
-            mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        }
-        if (mMyLocationListener == null) {
-            mMyLocationListener = new MyLocationListener();
-        }
-    }
-
-
-    *//**
-     * 定位监听接口
-     *//*
-    class MyLocationListener implements LocationListener {
-
-
-        @Override
-        public void onLocationChanged(Location location) {
-            LogUtil.d(LOG_TAG, "经度：" + location.getLongitude() + "，纬度：" + location.getLatitude());
-            // 注销监听接口
-            mLocationManager.removeUpdates(mMyLocationListener);
-            if (ActivityCompat.checkSelfPermission(AddCityActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                    AddCityActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
-                    PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                closeProgressDialog();
-                return;
-            }
-
-            new AnalyzeLocationAsyncTask().execute(location);
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-
-        }
-
-    }
-
-    *//**
-     * 解析位置信息
-     *//*
-    class AnalyzeLocationAsyncTask extends AsyncTask<Location, Void, String> {
-
-        @Override
-        protected String doInBackground(Location... params) {
-            String cityName = null;
-            try {
-
-                OkHttpClient okHttpClient = new OkHttpClient();
-                Request request = new Request.Builder().url(
-                        "http://maps.google.cn/maps/api/geocode/json?latlng=" +
-                                params[0].getLatitude() + "," +
-                                params[0].getLongitude() +
-//                                "41.0177553606,111.9529258679"
-                                "&sensor=false&language=zh-CN").build();
-                Response response = okHttpClient.newCall(request).execute();
-                if (response.isSuccessful()) {
-                    JSONObject jsonObject = new JSONObject(response.body().string());
-                    // 取得results节点下的位置信息
-                    JSONArray resultArray = jsonObject.getJSONArray("results");
-                    if (resultArray.length() > 0) {
-                        JSONObject subObject = resultArray.getJSONObject(0);
-                        // 取得格式化后的位置信息
-                        cityName = formatCity(subObject.getString("formatted_address"));
-                    }
-                }
-            } catch (Exception e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        closeProgressDialog();
-                        ToastUtil.showShortToast(AddCityActivity.this, getString(R.string.location_fail));
-                    }
-                });
-            }
-            return cityName;
-        }
-
-        @Override
-        protected void onPostExecute(String cityName) {
-            super.onPostExecute(cityName);
-            closeProgressDialog();
-            if (cityName != null) {
-                LogUtil.d(LOG_TAG, "城市名：" + cityName);
-                Intent intent = getIntent();
-                intent.putExtra(WeacConstants.CITY_NAME, cityName);
-                setResult(Activity.RESULT_OK, intent);
-                AddCityActivity.this.finish();
-            } else {
-                ToastUtil.showShortToast(AddCityActivity.this, getString(R.string.location_fail));
-            }
-
-        }
-    }*/
 
     /**
      * 将地址信息转换为城市

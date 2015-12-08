@@ -41,7 +41,6 @@ import com.kaku.weac.bean.WeatherLifeIndex;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.db.WeatherDBOperate;
 import com.kaku.weac.test.AutoUpdateReceiver;
-import com.kaku.weac.test.AutoUpdateService;
 import com.kaku.weac.util.HttpUtil;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
@@ -675,8 +674,8 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                 refreshWeather();
 
                 ////////////////////////
-                Intent intent = new Intent(getActivity(), AutoUpdateService.class);
-                getActivity().startService(intent);
+//                Intent intent = new Intent(getActivity(), AutoUpdateService.class);
+//                getActivity().startService(intent);
 /////////////////////////////////////////////////
                 break;
             // 城市管理按钮
@@ -814,6 +813,13 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
      * 刷新天气
      */
     private void refreshWeather() {
+        // 判断网络是否可用
+        if (!MyUtil.isNetworkAvailable(getActivity())) {
+            stopRefresh();
+            ToastUtil.showShortToast(getActivity(), getString(R.string.internet_error));
+            return;
+        }
+
         // FIXME：回调try catch
         String address = getString(R.string.address_weather, getDefaultWeatherCode());
         String cityName = null;
@@ -966,11 +972,24 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         // 现在小时
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
 
-        // 设置城市名
         if (weatherInfo.getCity() != null) {
+            // 设置城市名
             mCityNameTv.setText(weatherInfo.getCity());
+            // 不是自动定位
+            if (!getString(R.string.auto_location).equals(getDefaultWeatherCode())) {
+                mCityNameTv.setCompoundDrawables(null, null, null, null);
+            } else {
+                Drawable drawable = getResources().getDrawable(R.drawable.ic_gps);
+                if (drawable != null) {
+                    drawable.setBounds(0, 0, drawable.getMinimumWidth(),
+                            drawable.getMinimumHeight());
+                    // 设置图标
+                    mCityNameTv.setCompoundDrawables(drawable, null, null, null);
+                }
+            }
         } else {
             mCityNameTv.setText(getString(R.string.dash));
+            mCityNameTv.setCompoundDrawables(null, null, null, null);
         }
 
         // 设置预警信息

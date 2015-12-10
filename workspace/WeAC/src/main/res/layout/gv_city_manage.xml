@@ -3,7 +3,7 @@
     android:id="@+id/background"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp">
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/city_delete_btn"
@@ -22,29 +22,27 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/bg_gv_city_manage">
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/city_weather"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/city_name"
                 style="@style/wea_forecast_title"
-                android:layout_alignParentTop="true"
-                android:layout_centerInParent="true"
                 android:drawablePadding="2dp"
-                android:paddingBottom="10dp"
                 android:paddingLeft="3dp"
                 android:paddingRight="3dp"
-                android:paddingTop="10dp"
+                android:paddingTop="8dp"
                 android:singleLine="true"
                 android:text="@string/dash"
-                android:textSize="16sp"/>
+                android:textSize="15sp"/>
 
             <LinearLayout
                 style="@style/wea_forecast_content_llyt"
-                android:layout_centerInParent="true"
-                >
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp">
 
                 <ImageView
                     android:id="@+id/weather_type_iv"
@@ -69,17 +67,25 @@
                 android:id="@+id/weather_type_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:gravity="center"
-                android:paddingBottom="10dp"
+                android:paddingBottom="8dp"
                 android:paddingLeft="3dp"
                 android:paddingRight="3dp"
-                android:paddingTop="10dp"
                 android:singleLine="true"
                 android:text="@string/no"
                 android:textColor="@color/white_trans90"
-                android:textSize="16sp"/>
-        </RelativeLayout>
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/set_default"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@drawable/bg_gv_city_manage_set_default"
+                android:gravity="center"
+                android:text="@string/set_default"
+                android:textColor="@color/white_trans90"
+                android:textSize="15sp"/>
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/add_city"

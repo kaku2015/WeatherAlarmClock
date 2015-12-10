@@ -148,9 +148,14 @@ public class WeacConstants {
     public static final String COUNTRY_CODE = "country_code";
 
     /**
-     * 城市名
+     * 传递的城市名
      */
     public static final String CITY_NAME = "city_name";
+
+    /**
+     * 传递的天气代号
+     */
+    public static final String WEATHER_CODE = "weather_code";
 
     /**
      * 天气代号
@@ -161,4 +166,9 @@ public class WeacConstants {
      * 默认城市名
      */
     public static final String DEFAULT_CITY_NAME = "default_city_name";
+
+    /**
+     * 保存城市管理的默认城市
+     */
+    public static final String DEFAULT_CITY = "default_city";
 }

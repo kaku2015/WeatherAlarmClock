@@ -3,7 +3,9 @@
  */
 package com.kaku.weac.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +16,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.kaku.weac.Listener.DBObserverListener;
+import com.kaku.weac.Listener.NotifyListener;
 import com.kaku.weac.R;
 import com.kaku.weac.bean.CityManage;
+import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.db.WeatherDBOperate;
 
 import java.util.List;
@@ -55,9 +59,23 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
     }
 
     /**
+     * 默认城市改动
+     */
+    private NotifyListener mNotifyListener;
+
+    public void setNotifyListener(NotifyListener notifyListener) {
+        mNotifyListener = notifyListener;
+    }
+
+    /**
      * 删除城市按钮状态
      */
     private boolean mIsVisible;
+
+    /**
+     * 默认城市位置
+     */
+    private String mDefaultCity;
 
     /**
      * 城市管理适配器构造方法
@@ -70,6 +88,9 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
         mContext = context;
         mList = list;
 
+        SharedPreferences share = mContext.getSharedPreferences(
+                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+        mDefaultCity = share.getString(WeacConstants.DEFAULT_CITY, "");
     }
 
     /**
@@ -82,9 +103,9 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         final CityManage cityManage = getItem(position);
-        ViewHolder viewHolder;
+        final ViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(
                     R.layout.gv_city_manage, parent, false);
@@ -102,6 +123,8 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
                     .findViewById(R.id.temp_low);
             viewHolder.weatherTypeTv = (TextView) convertView
                     .findViewById(R.id.weather_type_tv);
+            viewHolder.setDefaultTv = (TextView) convertView
+                    .findViewById(R.id.set_default);
             viewHolder.addCityIv = (ImageView) convertView
                     .findViewById(R.id.add_city);
             convertView.setTag(viewHolder);
@@ -111,12 +134,68 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
+        // 设置默认按钮
+        viewHolder.setDefaultTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences share = mContext.getSharedPreferences(
+                        WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+                // 重复设置默认城市
+                if (share.getString(WeacConstants.DEFAULT_CITY, "").equals(cityManage.getCityName())) {
+                    return;
+                }
+
+                String weatherCode;
+                String cityName;
+                // 不是自定定位
+                if (cityManage.getLocationCity() == null) {
+                    // 保存默认的城市名
+                    cityName = cityManage.getCityName();
+                    weatherCode = cityManage.getWeatherCode();
+                    // 定位城市
+                } else {
+                    cityName = cityManage.getLocationCity();
+                    weatherCode = mContext.getString(R.string.auto_location);
+                }
+
+                SharedPreferences.Editor editor = share.edit();
+                // 保存城市管理的默认城市
+                editor.putString(WeacConstants.DEFAULT_CITY, cityManage.getCityName());
+                // 保存默认的城市名
+                editor.putString(WeacConstants.DEFAULT_CITY_NAME, cityName);
+                // 保存默认的天气代码
+                editor.putString(WeacConstants.DEFAULT_WEATHER_CODE, weatherCode);
+                editor.apply();
+
+                mDefaultCity = cityManage.getCityName();
+                notifyDataSetChanged();
+
+                // 通知默认城市改动
+                mNotifyListener.onChanged();
+            }
+        });
+        // 默认城市
+        if (mDefaultCity.equals(cityManage.getCityName())) {
+            viewHolder.setDefaultTv.setBackground(mContext.getResources().getDrawable(
+                    R.drawable.bg_gv_city_manage_default));
+            viewHolder.setDefaultTv.setText(R.string.my_default);
+        } else {
+            viewHolder.setDefaultTv.setBackground(mContext.getResources().getDrawable(
+                    R.drawable.bg_gv_city_manage_set_default));
+            viewHolder.setDefaultTv.setText(R.string.set_default);
+        }
+
+
         // 当显示删除按钮并且不是添加城市按钮
         if (mIsVisible && (position != mList.size() - 1)) {
             viewHolder.deleteCityBtn.setVisibility(View.VISIBLE);
             viewHolder.deleteCityBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // 默认城市不可删除
+                    if (mDefaultCity.equals(cityManage.getCityName())) {
+                        return;
+                    }
                     WeatherDBOperate.getInstance().deleteCityManage(cityManage);
                     mList.remove(cityManage);
                     notifyDataSetChanged();
@@ -172,8 +251,10 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
             viewHolder.progressBar.setVisibility(View.GONE);
         }
 
-        // 自动定位
-        if (mContext.getString(R.string.auto_location).equals(cityManage.getCityName())) {
+        // 不是自动定位
+        if (cityManage.getLocationCity() == null) {
+            viewHolder.cityName.setCompoundDrawables(null, null, null, null);
+        } else {
             Drawable drawable = mContext.getResources().getDrawable(R.drawable.ic_gps);
             if (drawable != null) {
                 drawable.setBounds(0, 0, drawable.getMinimumWidth(),
@@ -181,8 +262,6 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
                 // 设置定位图标
                 viewHolder.cityName.setCompoundDrawables(drawable, null, null, null);
             }
-        } else {
-            viewHolder.cityName.setCompoundDrawables(null, null, null, null);
         }
         return convertView;
     }
@@ -203,6 +282,8 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
         TextView tempLow;
         // 天气类型文字
         TextView weatherTypeTv;
+        // 设置默认
+        TextView setDefaultTv;
         // 添加城市按钮
         ImageView addCityIv;
         // 删除城市按钮

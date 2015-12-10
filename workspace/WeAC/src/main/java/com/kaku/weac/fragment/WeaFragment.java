@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -584,6 +585,16 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
      */
     int mAlpha = 0;
 
+    /**
+     * 当前天气预报城市名
+     */
+    private String mCityName;
+
+    /**
+     * 当前天气预报城市天气代码
+     */
+    private String mCityWeatherCode;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -591,10 +602,14 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
 
         final View view = inflater.inflate(R.layout.fm_wea, container, false);
         init(view);
+
+        mCityName = getDefaultCityName();
+        mCityWeatherCode = getDefaultWeatherCode();
+
         // 初始化天气
         // FIXME: 2015/10/29
 //        try {
-        initWeather(WeatherUtil.readWeatherInfo(getActivity(), getDefaultCityName()));
+        initWeather(WeatherUtil.readWeatherInfo(getActivity(), mCityName));
 //        } catch (Exception e) {
 //            LogUtil.e(LOG_TAG, e.toString());
 //        }
@@ -750,21 +765,27 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
             return;
         }
         if (requestCode == REQUEST_WEA) {
-            // 滚动到顶端
-            mPullRefreshScrollView.getRefreshableView().scrollTo(0, 0);
-            WeatherInfo weatherInfo = WeatherUtil.readWeatherInfo(getActivity(), getDefaultCityName());
-            initWeather(weatherInfo);
+            String cityName = data.getStringExtra(WeacConstants.CITY_NAME);
+            if (!TextUtils.isEmpty(cityName)) {
+                mCityName = cityName;
+                mCityWeatherCode = data.getStringExtra(WeacConstants.WEATHER_CODE);
 
-            long now = System.currentTimeMillis();
-            SharedPreferences share = getActivity().getSharedPreferences(
-                    WeacConstants.BASE64, Activity.MODE_PRIVATE);
-            // 最近一次天气更新时间
-            long lastTime = share.getLong(getString(R.string.city_weather_update_time,
-                    weatherInfo.getCity()), 0);
-            long minuteD = (now - lastTime) / 1000 / 60;
-            // 更新间隔大于10分钟自动下拉刷新
-            if (minuteD > 10) {
-                mPullRefreshScrollView.setRefreshing();
+                // 滚动到顶端
+                mPullRefreshScrollView.getRefreshableView().scrollTo(0, 0);
+                WeatherInfo weatherInfo = WeatherUtil.readWeatherInfo(getActivity(), mCityName);
+                initWeather(weatherInfo);
+
+                long now = System.currentTimeMillis();
+                SharedPreferences share = getActivity().getSharedPreferences(
+                        WeacConstants.BASE64, Activity.MODE_PRIVATE);
+                // 最近一次天气更新时间
+                long lastTime = share.getLong(getString(R.string.city_weather_update_time,
+                        weatherInfo.getCity()), 0);
+                long minuteD = (now - lastTime) / 1000 / 60;
+                // 更新间隔大于10分钟自动下拉刷新
+                if (minuteD > 10) {
+                    mPullRefreshScrollView.setRefreshing();
+                }
             }
         }
     }
@@ -816,12 +837,15 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         }
 
         // FIXME：回调try catch
-        String address = getString(R.string.address_weather, getDefaultWeatherCode());
-        String cityName = null;
+        String address;
+        String cityName;
         // 自动定位
-        if (getDefaultWeatherCode().equals(getString(R.string.auto_location))) {
-            cityName = getDefaultCityName();
+        if (mCityWeatherCode.equals(getString(R.string.auto_location))) {
+            cityName = mCityName;
             address = null;
+        } else {
+            cityName = null;
+            address = getString(R.string.address_weather, mCityWeatherCode);
         }
         HttpUtil.sendHttpRequest(address, cityName,
 //        HttpUtil.sendHttpRequest("http://wthrcdn.etouch.cn/WeatherApi?city=天津",
@@ -971,7 +995,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
             // 设置城市名
             mCityNameTv.setText(weatherInfo.getCity());
             // 不是自动定位
-            if (!getString(R.string.auto_location).equals(getDefaultWeatherCode())) {
+            if (!getString(R.string.auto_location).equals(mCityWeatherCode)) {
                 mCityNameTv.setCompoundDrawables(null, null, null, null);
             } else {
                 Drawable drawable = getResources().getDrawable(R.drawable.ic_gps);
@@ -1388,35 +1412,24 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
             setLifeIndex(index);
         }
 
-
-        CityManage cityManage = new CityManage();
-        cityManage.setImageId(weatherId);
-        cityManage.setTempHigh(weather2.getHigh().substring(3));
-        cityManage.setTempLow(weather2.getLow().substring(3));
-        cityManage.setWeatherType(getWeatherType
-                (weather2.getTypeDay(), weather2.getTypeNight()));
-
         String cityName;
-        String weatherCode = getDefaultWeatherCode();
         // 自动定位
-        if (getString(R.string.auto_location).equals(weatherCode)) {
-            cityName = getString(R.string.auto_location);
-            weatherCode = null;
-            cityManage.setLocationCity(weatherInfo.getCity());
+        if (getString(R.string.auto_location).equals(mCityWeatherCode)) {
+            cityName = mCityWeatherCode;
         } else {
             cityName = weatherInfo.getCity();
         }
-
-        cityManage.setCityName(cityName);
-        cityManage.setWeatherCode(weatherCode);
-
         // CityManage表中存在此城市时
         if (1 == WeatherDBOperate.getInstance().queryCity(cityName)) {
+            CityManage cityManage = new CityManage();
+            cityManage.setImageId(weatherId);
+            cityManage.setTempHigh(weather2.getHigh().substring(3));
+            cityManage.setTempLow(weather2.getLow().substring(3));
+            cityManage.setWeatherType(getWeatherType
+                    (weather2.getTypeDay(), weather2.getTypeNight()));
+
             // 修改城市管理item信息
             WeatherDBOperate.getInstance().updateCityManage(cityManage, cityName);
-        } else {
-            // 存储城市管理item信息
-            WeatherDBOperate.getInstance().saveCityManage(cityManage);
         }
     }
 

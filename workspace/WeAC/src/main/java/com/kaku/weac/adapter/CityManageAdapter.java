@@ -72,6 +72,10 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
      */
     private boolean mIsVisible;
 
+    public void setDefaultCity(String defaultCity) {
+        mDefaultCity = defaultCity;
+    }
+
     /**
      * 默认城市位置
      */

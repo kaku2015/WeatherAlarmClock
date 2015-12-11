@@ -4,8 +4,7 @@
 package com.kaku.weac.fragment;
 
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
@@ -26,6 +25,10 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
@@ -34,6 +37,7 @@ import com.kaku.weac.Listener.HttpCallbackListener;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.CityManageActivity;
 import com.kaku.weac.activities.LifeIndexDetailActivity;
+import com.kaku.weac.activities.MyDialogActivity;
 import com.kaku.weac.activities.WeatherAlarmActivity;
 import com.kaku.weac.bean.CityManage;
 import com.kaku.weac.bean.WeatherDaysForecast;
@@ -41,7 +45,6 @@ import com.kaku.weac.bean.WeatherInfo;
 import com.kaku.weac.bean.WeatherLifeIndex;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.db.WeatherDBOperate;
-import com.kaku.weac.test.AutoUpdateReceiver;
 import com.kaku.weac.util.HttpUtil;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
@@ -595,6 +598,42 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
      */
     private String mCityWeatherCode;
 
+
+    /**
+     * 百度定位服务
+     */
+    private LocationClient mLocationClient;
+
+    /**
+     * 百度定位监听
+     */
+    private BDLocationListener mBDLocationListener;
+
+    /**
+     * 进度对话框
+     */
+    private ProgressDialog mProgressDialog;
+
+    /**
+     * 请求MyDialogActivity
+     */
+    private static final int REQUEST_MY_DIALOG = 1;
+
+    /**
+     * 首次打开天气界面
+     */
+    private boolean mIsFirstUse = false;
+
+    /**
+     * 是否立刻刷新
+     */
+    private boolean mIsPromptRefresh = true;
+
+    /**
+     * 是否自动定位过
+     */
+    private boolean mIsLocated = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -606,16 +645,133 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         mCityName = getDefaultCityName();
         mCityWeatherCode = getDefaultWeatherCode();
 
-        // 初始化天气
-        // FIXME: 2015/10/29
+        // 不是第一次加载天气界面
+        if (mCityName != null) {
+            // 初始化天气
+            // FIXME: 2015/10/29
 //        try {
-        initWeather(WeatherUtil.readWeatherInfo(getActivity(), mCityName));
+            initWeather(WeatherUtil.readWeatherInfo(getActivity(), mCityName));
 //        } catch (Exception e) {
 //            LogUtil.e(LOG_TAG, e.toString());
 //        }
-        isPrepared = true;
-        lazyLoad();
+
+            // 不是自动定位
+            if (!mCityWeatherCode.equals(getString(R.string.auto_location))) {
+                isPrepared = true;
+                lazyLoad();
+            } else {
+                mIsFirstUse = false;
+                mIsPromptRefresh = false;
+                startLocation();
+            }
+        } else {
+            // 首次进入天气界面，自动定位天气
+            mIsFirstUse = true;
+            // 不立刻刷新
+            mIsPromptRefresh = false;
+            // 自动定位
+            startLocation();
+        }
         return view;
+    }
+
+    /**
+     * 开始定位
+     */
+    private void startLocation() {
+        if (!MyUtil.isNetworkAvailable(getActivity())) {
+            ToastUtil.showShortToast(getActivity(), getString(R.string.internet_error));
+            return;
+        }
+
+        // 初始化定位管理，监听
+        initLocationManager();
+        mLocationClient.registerLocationListener(mBDLocationListener);    //注册监听函数
+        initLocation();
+        mLocationClient.start();
+        mLocationClient.requestLocation();
+    }
+
+
+    /**
+     * 初始化定位管理监听
+     */
+    private void initLocationManager() {
+        if (mLocationClient == null) {
+            mLocationClient = new LocationClient(getActivity().getApplicationContext());
+        }
+        if (mBDLocationListener == null) {
+            mBDLocationListener = new MyLocationListener();
+        }
+    }
+
+    private void initLocation() {
+        LocationClientOption option = new LocationClientOption();
+        option.setCoorType("bd09ll");//可选，默认gcj02，设置返回的定位结果坐标系
+        option.setIsNeedAddress(true);//可选，设置是否需要地址信息，默认不需要
+        option.setOpenGps(true);//可选，默认false,设置是否使用gps
+        option.disableCache(true);// 禁止启用缓存定位\
+        mLocationClient.setLocOption(option);
+    }
+
+    class MyLocationListener implements BDLocationListener {
+
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            mLocationClient.stop();
+            mLocationClient.unRegisterLocationListener(mBDLocationListener);
+            if (location == null) {
+                ToastUtil.showShortToast(getActivity(), getString(R.string.location_fail));
+                return;
+            }
+            LogUtil.d(LOG_TAG, "纬度：" + location.getLatitude() + ",经度：" + location.getLongitude());
+
+            String address = location.getAddrStr();
+            // 定位成功
+            if (161 == location.getLocType() && address != null) {
+                String cityName = MyUtil.formatCity(address);
+                if (cityName != null) {
+                    LogUtil.d(LOG_TAG, "城市名：" + cityName);
+                    mCityName = cityName;
+                    mCityWeatherCode = getString(R.string.auto_location);
+
+                    // 初次加载定位保存
+                    if (mIsFirstUse) {
+                        SharedPreferences share = getActivity().getSharedPreferences(
+                                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = share.edit();
+                        // 保存默认的城市名
+                        editor.putString(WeacConstants.DEFAULT_CITY_NAME, mCityName);
+                        // 保存默认的天气代码
+                        editor.putString(WeacConstants.DEFAULT_WEATHER_CODE, mCityWeatherCode);
+                        editor.apply();
+                    }
+
+                    // 立刻更新
+                    if (mIsPromptRefresh) {
+                        LogUtil.d(LOG_TAG, "onReceiveLocation：refreshWeather()");
+                        refreshWeather();
+                    } else {
+                        mIsPromptRefresh = true;
+                        mIsLocated = true;
+                        isPrepared = true;
+                        LogUtil.d(LOG_TAG, "onReceiveLocation：lazyLoad()");
+                        lazyLoad();
+                    }
+                } else {
+                    ToastUtil.showShortToast(getActivity(), getString(R.string.can_not_find_current_location));
+                }
+                // 定位失败
+            } else {
+                LogUtil.d(LOG_TAG, "error code: " + location.getLocType());
+                Intent intent = new Intent(getActivity(), MyDialogActivity.class);
+                intent.putExtra(WeacConstants.TITLE, getString(R.string.prompt));
+                intent.putExtra(WeacConstants.DETAIL, getString(R.string.location_fail));
+                intent.putExtra(WeacConstants.SURE_TEXT, getString(R.string.retry));
+                startActivityForResult(intent, REQUEST_MY_DIALOG);
+            }
+
+        }
     }
 
     @Override
@@ -680,9 +836,13 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                 // 设置速率
                 operatingAnim.setInterpolator(lin);
                 mRefreshBtn.startAnimation(operatingAnim);
-                // 刷新天气
-                refreshWeather();
 
+                // 自动定位
+                if (mCityWeatherCode.equals(getString(R.string.auto_location))) {
+                    locationPromptRefresh();
+                } else {
+                    refreshWeather();
+                }
                 ////////////////////////
 //                Intent intent = new Intent(getActivity(), AutoUpdateService.class);
 //                getActivity().startService(intent);
@@ -710,16 +870,24 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                 mRefreshBtn.clearAnimation();
 
                 Intent intent1 = new Intent(getActivity(), CityManageActivity.class);
+                String cityName;
+                // 自动定位
+                if (mCityWeatherCode.equals(getString(R.string.auto_location))) {
+                    cityName = getString(R.string.auto_location);
+                } else {
+                    cityName = mCityName;
+                }
+                intent1.putExtra(WeacConstants.CITY_NAME, cityName);
                 startActivityForResult(intent1, REQUEST_WEA);
 
 
                 //////////////////////
-                Intent i = new Intent(getActivity(), AutoUpdateReceiver.class);
-                PendingIntent p = PendingIntent.getBroadcast(getActivity(), 1000,
-                        i, PendingIntent.FLAG_UPDATE_CURRENT);
-                AlarmManager am = (AlarmManager) getActivity()
-                        .getSystemService(Activity.ALARM_SERVICE);
-                am.cancel(p);
+//                Intent i = new Intent(getActivity(), AutoUpdateReceiver.class);
+//                PendingIntent p = PendingIntent.getBroadcast(getActivity(), 1000,
+//                        i, PendingIntent.FLAG_UPDATE_CURRENT);
+//                AlarmManager am = (AlarmManager) getActivity()
+//                        .getSystemService(Activity.ALARM_SERVICE);
+//                am.cancel(p);
                 //////////////////////////
                 break;
             // 雨伞指数
@@ -758,6 +926,15 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
 
     }
 
+    /**
+     * 定位并立即刷新
+     */
+    private void locationPromptRefresh() {
+        mIsFirstUse = false;
+        mIsPromptRefresh = true;
+        startLocation();
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -773,6 +950,9 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                 // 滚动到顶端
                 mPullRefreshScrollView.getRefreshableView().scrollTo(0, 0);
                 WeatherInfo weatherInfo = WeatherUtil.readWeatherInfo(getActivity(), mCityName);
+                if (weatherInfo == null) {
+                    return;
+                }
                 initWeather(weatherInfo);
 
                 long now = System.currentTimeMillis();
@@ -784,7 +964,12 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                 long minuteD = (now - lastTime) / 1000 / 60;
                 // 更新间隔大于10分钟自动下拉刷新
                 if (minuteD > 10) {
-                    mPullRefreshScrollView.setRefreshing();
+                    // 自动定位
+                    if (mCityWeatherCode.equals(getString(R.string.auto_location))) {
+                        locationPromptRefresh();
+                    } else {
+                        mPullRefreshScrollView.setRefreshing();
+                    }
                 }
             }
         }
@@ -798,7 +983,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
     private String getDefaultCityName() {
         SharedPreferences share = getActivity().getSharedPreferences(
                 WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
-        return share.getString(WeacConstants.DEFAULT_CITY_NAME, "北京");
+        return share.getString(WeacConstants.DEFAULT_CITY_NAME, null);
     }
 
     /**
@@ -1170,13 +1355,13 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         // 设置今天天气信息
         // 当前为凌晨
         if (hour >= 0 && hour < 6) {
-            weatherId = getWeatherTypeImageID(weather2.getTypeDay(), false);
+            weatherId = MyUtil.getWeatherTypeImageID(weather2.getTypeDay(), false);
             // 当前为白天时
         } else if (hour >= 6 && hour < 18) {
-            weatherId = getWeatherTypeImageID(weather2.getTypeDay(), true);
+            weatherId = MyUtil.getWeatherTypeImageID(weather2.getTypeDay(), true);
             // 当前为夜间
         } else {
-            weatherId = getWeatherTypeImageID(weather2.getTypeNight(), false);
+            weatherId = MyUtil.getWeatherTypeImageID(weather2.getTypeNight(), false);
         }
         mWeatherTypeIvToday.setImageResource(weatherId);
         mTempHighTvToday.setText(weather2.getHigh().substring(3));
@@ -1185,7 +1370,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                 (weather2.getTypeDay(), weather2.getTypeNight()));
 
         // 设置明天天气信息
-        weatherId = getWeatherTypeImageID(weather3.getTypeDay(), true);
+        weatherId = MyUtil.getWeatherTypeImageID(weather3.getTypeDay(), true);
         mWeatherTypeIvTomorrow.setImageResource(weatherId);
         mTempHighTvTomorrow.setText(weather3.getHigh().substring(3));
         mTempLowTvTomorrow.setText(weather3.getLow().substring(3));
@@ -1193,7 +1378,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                 (weather3.getTypeDay(), weather3.getTypeNight()));
 
         // 设置后天天气信息
-        weatherId = getWeatherTypeImageID(weather4.getTypeDay(), true);
+        weatherId = MyUtil.getWeatherTypeImageID(weather4.getTypeDay(), true);
         mWeatherTypeIvDayAfterTomorrow.setImageResource(weatherId);
         mTempHighTvDayAfterTomorrow.setText(weather4.getHigh().substring(3));
         mTempLowTvDayAfterTomorrow.setText(weather4.getLow().substring(3));
@@ -1291,15 +1476,15 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         int weatherDayId1;
         if (weather != null) {
             assert weather1 != null;
-            weatherDayId1 = getWeatherTypeImageID(weather1.getTypeDay(), true);
+            weatherDayId1 = MyUtil.getWeatherTypeImageID(weather1.getTypeDay(), true);
         } else {
             weatherDayId1 = R.drawable.ic_weather_no;
         }
-        int weatherDayId2 = getWeatherTypeImageID(weather2.getTypeDay(), true);
-        int weatherDayId3 = getWeatherTypeImageID(weather3.getTypeDay(), true);
-        int weatherDayId4 = getWeatherTypeImageID(weather4.getTypeDay(), true);
-        int weatherDayId5 = getWeatherTypeImageID(weather5.getTypeDay(), true);
-        int weatherDayId6 = getWeatherTypeImageID(weather6.getTypeDay(), true);
+        int weatherDayId2 = MyUtil.getWeatherTypeImageID(weather2.getTypeDay(), true);
+        int weatherDayId3 = MyUtil.getWeatherTypeImageID(weather3.getTypeDay(), true);
+        int weatherDayId4 = MyUtil.getWeatherTypeImageID(weather4.getTypeDay(), true);
+        int weatherDayId5 = MyUtil.getWeatherTypeImageID(weather5.getTypeDay(), true);
+        int weatherDayId6 = MyUtil.getWeatherTypeImageID(weather6.getTypeDay(), true);
 
         //设置白天天气类型图片
         mDaysForecastWeaTypeDayIv1.setImageResource(weatherDayId1);
@@ -1362,15 +1547,15 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         // 取得夜间天气类型图片id
         int weatherNightId1;
         if (weather != null) {
-            weatherNightId1 = getWeatherTypeImageID(weather1.getTypeNight(), false);
+            weatherNightId1 = MyUtil.getWeatherTypeImageID(weather1.getTypeNight(), false);
         } else {
             weatherNightId1 = R.drawable.ic_weather_no;
         }
-        int weatherNightId2 = getWeatherTypeImageID(weather2.getTypeNight(), false);
-        int weatherNightId3 = getWeatherTypeImageID(weather3.getTypeNight(), false);
-        int weatherNightId4 = getWeatherTypeImageID(weather4.getTypeNight(), false);
-        int weatherNightId5 = getWeatherTypeImageID(weather5.getTypeNight(), false);
-        int weatherNightId6 = getWeatherTypeImageID(weather6.getTypeNight(), false);
+        int weatherNightId2 = MyUtil.getWeatherTypeImageID(weather2.getTypeNight(), false);
+        int weatherNightId3 = MyUtil.getWeatherTypeImageID(weather3.getTypeNight(), false);
+        int weatherNightId4 = MyUtil.getWeatherTypeImageID(weather4.getTypeNight(), false);
+        int weatherNightId5 = MyUtil.getWeatherTypeImageID(weather5.getTypeNight(), false);
+        int weatherNightId6 = MyUtil.getWeatherTypeImageID(weather6.getTypeNight(), false);
 
         //设置夜间天气类型图片
         mDaysForecastWeaTypeNightIv1.setImageResource(weatherNightId1);
@@ -1419,18 +1604,44 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         } else {
             cityName = weatherInfo.getCity();
         }
+
+        CityManage cityManage = new CityManage();
+        cityManage.setImageId(weatherId);
+        cityManage.setTempHigh(weather2.getHigh().substring(3));
+        cityManage.setTempLow(weather2.getLow().substring(3));
+        cityManage.setWeatherType(getWeatherType
+                (weather2.getTypeDay(), weather2.getTypeNight()));
+
         // CityManage表中存在此城市时
         if (1 == WeatherDBOperate.getInstance().queryCity(cityName)) {
-            CityManage cityManage = new CityManage();
-            cityManage.setImageId(weatherId);
-            cityManage.setTempHigh(weather2.getHigh().substring(3));
-            cityManage.setTempLow(weather2.getLow().substring(3));
-            cityManage.setWeatherType(getWeatherType
-                    (weather2.getTypeDay(), weather2.getTypeNight()));
-
             // 修改城市管理item信息
             WeatherDBOperate.getInstance().updateCityManage(cityManage, cityName);
         }
+
+        // 首次进入天气界面
+        if (mIsFirstUse && mCityWeatherCode.equals(getString(R.string.auto_location))) {
+            int number = WeatherDBOperate.getInstance().queryCity(mCityWeatherCode);
+            if (number == 1) {
+                return;
+            }
+            cityManage.setCityName(mCityWeatherCode);
+            cityManage.setWeatherCode(mCityWeatherCode);
+            cityManage.setLocationCity(mCityName);
+
+            // 存储城市管理item信息
+            boolean result = WeatherDBOperate.getInstance().saveCityManage(cityManage);
+            // 存储成功
+            if (result) {
+                mIsFirstUse = false;
+                SharedPreferences share = getActivity().getSharedPreferences(
+                        WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+                SharedPreferences.Editor editor = share.edit();
+                // 保存城市管理的默认城市
+                editor.putString(WeacConstants.DEFAULT_CITY, mCityWeatherCode);
+                editor.apply();
+            }
+        }
+
     }
 
     /**
@@ -1742,111 +1953,6 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         }
     }
 
-
-    /**
-     * 取得对应的天气类型图片id
-     *
-     * @param type  天气类型
-     * @param isDay 是否为白天
-     * @return 天气类型图片id
-     */
-    public static int getWeatherTypeImageID(String type, boolean isDay) {
-        int weatherId;
-        switch (type) {
-            case "晴":
-                if (isDay) {
-                    weatherId = R.drawable.ic_weather_sunny_day;
-                } else {
-                    weatherId = R.drawable.ic_weather_sunny_night;
-                }
-                break;
-            case "多云":
-                if (isDay) {
-                    weatherId = R.drawable.ic_weather_cloudy_day;
-                } else {
-                    weatherId = R.drawable.ic_weather_cloudy_night;
-                }
-                break;
-            case "阴":
-                weatherId = R.drawable.ic_weather_overcast;
-                break;
-            case "雷阵雨":
-            case "雷阵雨伴有冰雹":
-                weatherId = R.drawable.ic_weather_thunder_shower;
-                break;
-            case "雨夹雪":
-            case "冻雨":
-                weatherId = R.drawable.ic_weather_sleet;
-                break;
-            case "小雨":
-            case "小到中雨":
-            case "阵雨":
-                weatherId = R.drawable.ic_weather_light_rain_or_shower;
-                break;
-            case "中雨":
-            case "中到大雨":
-                weatherId = R.drawable.ic_weather_moderate_rain;
-                break;
-            case "大雨":
-            case "大到暴雨":
-                weatherId = R.drawable.ic_weather_heavy_rain;
-                break;
-            case "暴雨":
-            case "大暴雨":
-            case "特大暴雨":
-            case "暴雨到大暴雨":
-            case "大暴雨到特大暴雨":
-                weatherId = R.drawable.ic_weather_storm;
-                break;
-            case "阵雪":
-            case "小雪":
-            case "小到中雪":
-                weatherId = R.drawable.ic_weather_light_snow;
-                break;
-            case "中雪":
-            case "中到大雪":
-                weatherId = R.drawable.ic_weather_moderate_snow;
-                break;
-            case "大雪":
-            case "大到暴雪":
-                weatherId = R.drawable.ic_weather_heavy_snow;
-                break;
-            case "暴雪":
-                weatherId = R.drawable.ic_weather_snowstrom;
-                break;
-            case "雾":
-            case "霾":
-                weatherId = R.drawable.ic_weather_foggy;
-                break;
-            case "沙尘暴":
-                weatherId = R.drawable.ic_weather_duststorm;
-                break;
-            case "强沙尘暴":
-                weatherId = R.drawable.ic_weather_sandstorm;
-                break;
-            case "浮尘":
-            case "扬沙":
-                weatherId = R.drawable.ic_weather_sand_or_dust;
-                break;
-            default:
-                if (type.contains("尘") || type.contains("沙")) {
-                    weatherId = R.drawable.ic_weather_sand_or_dust;
-                } else if (type.contains("雾") || type.contains("霾")) {
-                    weatherId = R.drawable.ic_weather_foggy;
-                } else if (type.contains("雨")) {
-                    weatherId = R.drawable.ic_weather_sleet;
-                } else if (type.contains("雪") || type.contains("冰雹")) {
-                    weatherId = R.drawable.ic_weather_moderate_snow;
-                } else {
-                    weatherId = R.drawable.ic_weather_no;
-                }
-                break;
-
-        }
-
-        return weatherId;
-    }
-
     /**
      * 初始化控件
      *
@@ -2023,7 +2129,16 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                     @Override
                     public void onRefresh(
                             PullToRefreshBase<ScrollView> refreshView) {
-                        refreshWeather();
+                        LogUtil.d(LOG_TAG, "  setPullToRefresh()");
+                        // 不是从自动定位返回
+                        if (!mIsLocated && mCityWeatherCode.equals(getString(R.string.auto_location))) {
+                            LogUtil.d(LOG_TAG, "  startLocation()");
+                            locationPromptRefresh();
+                        } else {
+                            LogUtil.d(LOG_TAG, "  refreshWeather()");
+                            mIsLocated = false;
+                            refreshWeather();
+                        }
 //                        new GetDataTask().execute();
                     }
                 });
@@ -2052,6 +2167,28 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         mAlpha = 0;
         if (mHandler != null) {
             mHandler.removeCallbacks(mRun);
+        }
+    }
+
+
+    /**
+     * 显示进度对话框
+     */
+    private void showProgressDialog(String message) {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(getActivity());
+            mProgressDialog.setMessage(message);
+            mProgressDialog.setCancelable(false);
+        }
+        mProgressDialog.show();
+    }
+
+    /**
+     * 关闭进度对话框
+     */
+    private void closeProgressDialog() {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
         }
     }
 }

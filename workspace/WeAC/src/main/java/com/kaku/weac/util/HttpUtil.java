@@ -9,6 +9,7 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.net.URLEncoder;
+import java.util.concurrent.TimeUnit;
 
 /**
  * http工具类
@@ -39,6 +40,9 @@ public class HttpUtil {
                         address1 = address;
                     }
                     OkHttpClient client = new OkHttpClient();
+                    client.setReadTimeout(5000, TimeUnit.MILLISECONDS);
+                    client.setConnectTimeout(5000, TimeUnit.MILLISECONDS);
+                    client.setWriteTimeout(5000, TimeUnit.MILLISECONDS);
                     Request request = new Request.Builder().url(address1).build();
                     Response response = client.newCall(request).execute();
                     String result = response.body().string();

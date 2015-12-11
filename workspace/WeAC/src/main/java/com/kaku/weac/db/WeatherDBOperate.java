@@ -108,11 +108,10 @@ public class WeatherDBOperate {
      * 将城市管理实例存储到数据库
      *
      * @param cityManage 城市管理实例
+     * @return 是否存储成功
      */
-    public void saveCityManage(CityManage cityManage) {
-        if (cityManage != null) {
-            cityManage.save();
-        }
+    public boolean saveCityManage(CityManage cityManage) {
+        return cityManage != null && cityManage.save();
     }
 
     /**
@@ -162,7 +161,7 @@ public class WeatherDBOperate {
     }
 
     /**
-     * 查询带添加的县是否已存在城市管理列表
+     * 查询城市是否已存在城市管理列表
      *
      * @param cityName 城市名
      * @return 件数

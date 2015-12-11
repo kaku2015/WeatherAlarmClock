@@ -133,12 +133,12 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
     /**
      * 百度定位服务
      */
-    public LocationClient mLocationClient;
+    private LocationClient mLocationClient;
 
     /**
      * 百度定位监听
      */
-    public BDLocationListener mBDLocationListener;
+    private BDLocationListener mBDLocationListener;
 
     /**
      * 请求MyDialogActivity
@@ -369,12 +369,13 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
             return;
         }
 
-        showProgressDialog(getString(R.string.now_locating));
-
         // 初始化定位管理，监听
         initLocationManager();
         mLocationClient.registerLocationListener(mBDLocationListener);    //注册监听函数
         initLocation();
+
+        showProgressDialog(getString(R.string.now_locating));
+
         mLocationClient.start();
         mLocationClient.requestLocation();
     }
@@ -399,7 +400,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
 //        option.setEnableSimulateGps(false);//可选，默认false，设置是否需要过滤gps仿真结果，默认需要
     }
 
-    public class MyLocationListener implements BDLocationListener {
+    class MyLocationListener implements BDLocationListener {
 
         @Override
         public void onReceiveLocation(BDLocation location) {
@@ -415,7 +416,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
             String address = location.getAddrStr();
             // 定位成功
             if (161 == location.getLocType() && address != null) {
-                String cityName = formatCity(address);
+                String cityName = MyUtil.formatCity(address);
                 if (cityName != null) {
                     LogUtil.d(LOG_TAG, "城市名：" + cityName);
                     Intent intent = getIntent();
@@ -448,100 +449,6 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
         if (requestCode == REQUEST_MY_DIALOG) {
             startLocation();
         }
-    }
-
-    /**
-     * 将地址信息转换为城市
-     *
-     * @param address 地址
-     * @return 城市名称
-     */
-    private String formatCity(String address) {
-        LogUtil.d(LOG_TAG, "address：" + address);
-
-        String city = null;
-        // TODO: 数据测试
-        if (address.contains("自治州")) {
-            if (address.contains("市")) {
-                city = address.substring(address.indexOf("州") + 1, address.indexOf("市"));
-            } else if (address.contains("县")) {
-                city = address.substring(address.indexOf("州") + 1, address.indexOf("县"));
-            } else if (address.contains("地区")) {
-                city = address.substring(address.indexOf("州") + 1, address.indexOf("地区"));
-            }
-
-        } else if (address.contains("自治区")) {
-            if (address.contains("地区") && address.contains("县")) {
-                city = address.substring(address.indexOf("地区") + 2, address.indexOf("县"));
-            } else if (address.contains("地区")) {
-                city = address.substring(address.indexOf("区") + 1, address.indexOf("地区"));
-            } else if (address.contains("市")) {
-                city = address.substring(address.indexOf("区") + 1, address.indexOf("市"));
-            } else if (address.contains("县")) {
-                city = address.substring(address.indexOf("区") + 1, address.indexOf("县"));
-            }
-
-        } else if (address.contains("地区")) {
-            if (address.contains("县")) {
-                city = address.substring(address.indexOf("地区") + 2, address.indexOf("县"));
-            }
-
-        } else if (address.contains("香港")) {
-            if (address.contains("九龙")) {
-                city = "九龙";
-            } else if (address.contains("新界")) {
-                city = "新界";
-            } else {
-                city = "香港";
-            }
-
-        } else if (address.contains("澳门")) {
-            if (address.contains("氹仔")) {
-                city = "氹仔岛";
-            } else if (address.contains("路环")) {
-                city = "路环岛";
-            } else {
-                city = "澳门";
-            }
-
-        } else if (address.contains("台湾")) {
-            if (address.contains("台北")) {
-                city = "台北";
-            } else if (address.contains("高雄")) {
-                city = "高雄";
-            } else if (address.contains("台中")) {
-                city = "台中";
-            }
-
-        } else if (address.contains("省")) {
-            if (address.contains("市") && address.contains("县")) {
-                city = address.substring(address.lastIndexOf("市") + 1, address.indexOf("县"));
-            } else if (!address.contains("市") && address.contains("县")) {
-                city = address.substring(address.indexOf("省") + 1, address.indexOf("县"));
-            } else if (!address.contains("市")) {
-                int start = address.indexOf("市");
-                int end = address.lastIndexOf("市");
-                if (start == end) {
-                    city = address.substring(address.indexOf("省") + 1, end);
-                } else {
-                    city = address.substring(start, end);
-                }
-            }
-
-        } else if (address.contains("市")) {
-/*            if (address.contains("区")) {
-                city = address.substring(address.indexOf("市") + 1, address.indexOf("区"));
-            } else if (address.contains("县")) {
-                city = address.substring(address.indexOf("市") + 1, address.indexOf("县"));
-            }*/
-            if (address.contains("中国")) {
-                city = address.substring(address.indexOf("国") + 1, address.indexOf("市"));
-            } else {
-                city = address.substring(0, address.indexOf("市"));
-            }
-        }
-
-        return city;
     }
 
     /**

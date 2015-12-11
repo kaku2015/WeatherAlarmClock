@@ -164,8 +164,10 @@
     <string name="interval_hour">%1$d小时前更新</string>
     <string name="interval_minute">%1$d分钟前更新</string>
     <string name="interval_just">刚刚更新</string>
-    <string name="internet_fail">连接失败，请重新尝试</string>
+    <string name="internet_fail">连接失败，请重试</string>
     <string name="internet_error">网络异常,请检查网络设置</string>
+    <string name="auto_location_error_retry">自动定位失败,请重试</string>
+
 
     <!-- 城市管理，添加城市 -->
     <string name="set_default">设为默认</string>
@@ -187,7 +189,7 @@
     <string name="location_already_added">自动定位已添加</string>
     <string name="city_weather_update_time">%1$s更新时间</string>
     <string name="location_fail">自动定位失败</string>
-    <string name="can_not_find_current_location">无法获取当前位置</string>
+    <string name="can_not_find_current_location">无法获取当前位置,请手动添加城市</string>
     <string name="auto_location">自动定位</string>
     <string name="prompt">提示</string>
     <string name="retry">重试</string>

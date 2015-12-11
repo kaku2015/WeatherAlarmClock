@@ -37,7 +37,6 @@ import com.kaku.weac.Listener.HttpCallbackListener;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.CityManageActivity;
 import com.kaku.weac.activities.LifeIndexDetailActivity;
-import com.kaku.weac.activities.MyDialogActivity;
 import com.kaku.weac.activities.WeatherAlarmActivity;
 import com.kaku.weac.bean.CityManage;
 import com.kaku.weac.bean.WeatherDaysForecast;
@@ -655,9 +654,9 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
 //            LogUtil.e(LOG_TAG, e.toString());
 //        }
 
+            isPrepared = true;
             // 不是自动定位
             if (!mCityWeatherCode.equals(getString(R.string.auto_location))) {
-                isPrepared = true;
                 lazyLoad();
             } else {
                 mIsFirstUse = false;
@@ -760,16 +759,13 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                         lazyLoad();
                     }
                 } else {
+                    stopRefresh();
                     ToastUtil.showShortToast(getActivity(), getString(R.string.can_not_find_current_location));
                 }
                 // 定位失败
             } else {
-                LogUtil.d(LOG_TAG, "error code: " + location.getLocType());
-                Intent intent = new Intent(getActivity(), MyDialogActivity.class);
-                intent.putExtra(WeacConstants.TITLE, getString(R.string.prompt));
-                intent.putExtra(WeacConstants.DETAIL, getString(R.string.location_fail));
-                intent.putExtra(WeacConstants.SURE_TEXT, getString(R.string.retry));
-                startActivityForResult(intent, REQUEST_MY_DIALOG);
+                stopRefresh();
+                ToastUtil.showShortToast(getActivity(), getString(R.string.auto_location_error_retry));
             }
 
         }
@@ -806,7 +802,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                 }
             }
         };
-        mHandler.postDelayed(mRun, 2000);
+        mHandler.postDelayed(mRun, 1000);
         mIsPostDelayed = true;
     }
 
@@ -1049,11 +1045,22 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                     @Override
                     public void onFinish(String response) {
 //                        try {
-                        WeatherInfo weatherInfo = WeatherUtil.handleWeatherResponse(
-                                new ByteArrayInputStream(response.getBytes()));
-                        // 保存天气信息
-                        WeatherUtil.saveWeatherInfo(weatherInfo, getActivity());
-                        getActivity().runOnUiThread(new SetWeatherInfoRunnable(weatherInfo));
+                        if (!response.contains("error")) {
+                            WeatherInfo weatherInfo = WeatherUtil.handleWeatherResponse(
+                                    new ByteArrayInputStream(response.getBytes()));
+                            // 保存天气信息
+                            WeatherUtil.saveWeatherInfo(weatherInfo, getActivity());
+                            getActivity().runOnUiThread(new SetWeatherInfoRunnable(weatherInfo));
+                            // 无法解析当前位置
+                        } else {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    stopRefresh();
+                                    ToastUtil.showLongToast(getActivity(), getString(R.string.can_not_find_current_location));
+                                }
+                            });
+                        }
 //                        } catch (Exception e) {
 //                            LogUtil.e(LOG_TAG, e.toString());
 //                        }

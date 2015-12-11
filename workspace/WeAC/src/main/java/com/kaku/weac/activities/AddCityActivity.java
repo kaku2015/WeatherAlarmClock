@@ -424,7 +424,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
                     setResult(Activity.RESULT_OK, intent);
                     AddCityActivity.this.finish();
                 } else {
-                    ToastUtil.showShortToast(AddCityActivity.this, getString(R.string.can_not_find_current_location));
+                    ToastUtil.showLongToast(AddCityActivity.this, getString(R.string.can_not_find_current_location));
                 }
                 // 定位失败
             } else {

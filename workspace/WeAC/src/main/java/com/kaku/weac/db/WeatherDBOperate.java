@@ -169,4 +169,13 @@ public class WeatherDBOperate {
     public int queryCity(String cityName) {
         return DataSupport.where("cityName = ?", cityName).count(CityManage.class);
     }
+
+    /**
+     * 查询城市管理列表城市个数
+     *
+     * @return 件数
+     */
+    public int queryCity() {
+        return DataSupport.count(CityManage.class);
+    }
 }

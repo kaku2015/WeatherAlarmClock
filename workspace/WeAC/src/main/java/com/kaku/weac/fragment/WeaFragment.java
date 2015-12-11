@@ -745,6 +745,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                         // 保存默认的天气代码
                         editor.putString(WeacConstants.DEFAULT_WEATHER_CODE, mCityWeatherCode);
                         editor.apply();
+                        mIsFirstUse = false;
                     }
 
                     // 立刻更新
@@ -836,13 +837,8 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                 // 设置速率
                 operatingAnim.setInterpolator(lin);
                 mRefreshBtn.startAnimation(operatingAnim);
+                locationOrRefresh();
 
-                // 自动定位
-                if (mCityWeatherCode.equals(getString(R.string.auto_location))) {
-                    locationPromptRefresh();
-                } else {
-                    refreshWeather();
-                }
                 ////////////////////////
 //                Intent intent = new Intent(getActivity(), AutoUpdateService.class);
 //                getActivity().startService(intent);
@@ -924,6 +920,21 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                 break;
         }
 
+    }
+
+    /**
+     * 定位或者直接刷新
+     */
+    private void locationOrRefresh() {
+        // 不是从自动定位返回
+        if (!mIsLocated && mCityWeatherCode.equals(getString(R.string.auto_location))) {
+            LogUtil.d(LOG_TAG, "  startLocation()");
+            locationPromptRefresh();
+        } else {
+            LogUtil.d(LOG_TAG, "  refreshWeather()");
+            mIsLocated = false;
+            refreshWeather();
+        }
     }
 
     /**
@@ -1618,21 +1629,19 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
             WeatherDBOperate.getInstance().updateCityManage(cityManage, cityName);
         }
 
-        // 首次进入天气界面
-        if (mIsFirstUse && mCityWeatherCode.equals(getString(R.string.auto_location))) {
-            int number = WeatherDBOperate.getInstance().queryCity(mCityWeatherCode);
-            if (number == 1) {
-                return;
-            }
+        int number = WeatherDBOperate.getInstance().queryCity(mCityWeatherCode);
+        // 城市管理表不存在定位
+        if (mCityWeatherCode.equals(getString(R.string.auto_location)) && number == 0) {
             cityManage.setCityName(mCityWeatherCode);
             cityManage.setWeatherCode(mCityWeatherCode);
             cityManage.setLocationCity(mCityName);
 
-            // 存储城市管理item信息
+            // 存储城市管理表
             boolean result = WeatherDBOperate.getInstance().saveCityManage(cityManage);
+            // 城市管理表城市个数
+            int total = WeatherDBOperate.getInstance().queryCity();
             // 存储成功
-            if (result) {
-                mIsFirstUse = false;
+            if (result && total <= 1) {
                 SharedPreferences share = getActivity().getSharedPreferences(
                         WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
                 SharedPreferences.Editor editor = share.edit();
@@ -2130,15 +2139,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                     public void onRefresh(
                             PullToRefreshBase<ScrollView> refreshView) {
                         LogUtil.d(LOG_TAG, "  setPullToRefresh()");
-                        // 不是从自动定位返回
-                        if (!mIsLocated && mCityWeatherCode.equals(getString(R.string.auto_location))) {
-                            LogUtil.d(LOG_TAG, "  startLocation()");
-                            locationPromptRefresh();
-                        } else {
-                            LogUtil.d(LOG_TAG, "  refreshWeather()");
-                            mIsLocated = false;
-                            refreshWeather();
-                        }
+                        locationOrRefresh();
 //                        new GetDataTask().execute();
                     }
                 });

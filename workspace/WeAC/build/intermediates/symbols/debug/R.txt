@@ -7,7 +7,8 @@ int anim slide_out_to_bottom 0x7f040005
 int anim slide_out_to_top 0x7f040006
 int anim zoomin 0x7f040007
 int anim zoomout 0x7f040008
-int array city 0x7f080000
+int array city_china 0x7f080000
+int array city_hot 0x7f080001
 int attr mySelectedColor 0x7f01000b
 int attr pstsDividerColor 0x7f010002
 int attr pstsDividerPadding 0x7f010005
@@ -303,6 +304,7 @@ int id alarm_clock_empty 0x7f0b0031
 int id alarm_list_delete_btn 0x7f0b00e5
 int id analogClock1 0x7f0b007b
 int id aqi 0x7f0b0085
+int id auto_complete_tv 0x7f0b0015
 int id background 0x7f0b00d9
 int id bg 0x7f0b00e3
 int id both 0x7f0b0003
@@ -402,7 +404,6 @@ int id rotate 0x7f0b000b
 int id save_path 0x7f0b0066
 int id scrollView1 0x7f0b0034
 int id scrollview 0x7f0b0001
-int id searchView 0x7f0b0015
 int id select_all_btn 0x7f0b005d
 int id select_none_btn 0x7f0b005e
 int id set_default 0x7f0b00e0

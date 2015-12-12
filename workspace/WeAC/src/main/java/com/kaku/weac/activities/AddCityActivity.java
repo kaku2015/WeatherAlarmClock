@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -158,6 +160,20 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void initViews() {
+        AutoCompleteTextView autoCompleteTv = (AutoCompleteTextView) findViewById(R.id.auto_complete_tv);
+//        autoCompleteTv.setThreshold(1);
+        final String[] COUNTRIES = getResources().getStringArray(R.array.city_china);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, COUNTRIES);
+        autoCompleteTv.setAdapter(arrayAdapter);
+        autoCompleteTv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String city = (String) parent.getItemAtPosition(position);
+                LogUtil.d(LOG_TAG, city);
+            }
+        });
+
         // 返回按钮
         ImageView returnBtn = (ImageView) findViewById(R.id.action_return);
         returnBtn.setOnClickListener(this);
@@ -479,7 +495,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
      */
     private void queryHotCities() {
         mAddCityList.clear();
-        String[] city = getResources().getStringArray(R.array.city);
+        String[] city = getResources().getStringArray(R.array.city_hot);
         Collections.addAll(mAddCityList, city);
         mAddCityAdapter.notifyDataSetChanged();
         mGvTitle.setText(R.string.hot_city);

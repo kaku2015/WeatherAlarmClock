@@ -20,7 +20,8 @@ public final class R {
         public static final int zoomout=0x7f040008;
     }
     public static final class array {
-        public static final int city=0x7f080000;
+        public static final int city_china=0x7f080000;
+        public static final int city_hot=0x7f080001;
     }
     public static final class attr {
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
@@ -511,6 +512,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int alarm_list_delete_btn=0x7f0b00e5;
         public static final int analogClock1=0x7f0b007b;
         public static final int aqi=0x7f0b0085;
+        public static final int auto_complete_tv=0x7f0b0015;
         public static final int background=0x7f0b00d9;
         public static final int bg=0x7f0b00e3;
         public static final int both=0x7f0b0003;
@@ -610,7 +612,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int save_path=0x7f0b0066;
         public static final int scrollView1=0x7f0b0034;
         public static final int scrollview=0x7f0b0001;
-        public static final int searchView=0x7f0b0015;
         public static final int select_all_btn=0x7f0b005d;
         public static final int select_none_btn=0x7f0b005e;
         public static final int set_default=0x7f0b00e0;

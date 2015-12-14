@@ -23,15 +23,14 @@
     </RelativeLayout>
 
     <AutoCompleteTextView
-        android:completionThreshold="1"
         android:id="@+id/auto_complete_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:layout_marginLeft="19dp"
-        android:layout_marginRight="19dp"
+        android:completionThreshold="1"
         android:hint="请输入城市名称"
         android:textColor="@color/white_trans90"
+        android:textColorHint="@color/white_trans90"
         android:textSize="16sp"
         />
 

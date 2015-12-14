@@ -686,12 +686,19 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
             mCityManageAdapter.notifyDataSetChanged();
 
             String countryCode = data.getStringExtra(WeacConstants.COUNTRY_CODE);
+            String weatherCode = data.getStringExtra(WeacConstants.WEATHER_CODE);
+            String cityName = data.getStringExtra(WeacConstants.CITY_NAME);
+
             if (countryCode != null) {
                 queryFormServer(getString(R.string.address_city, countryCode),
                         QUERY_COUNTRY, ADD_CITY, null);
+                // 模糊查询
+            } else if (weatherCode != null) {
+                mWeatherCode = weatherCode;
+                queryFormServer(getString(R.string.address_weather, weatherCode),
+                        QUERY_WEATHER, ADD_CITY, null);
                 // 添加定位
-            } else {
-                String cityName = data.getStringExtra(WeacConstants.CITY_NAME);
+            } else if (cityName != null) {
                 queryFormServer(null,
                         QUERY_WEATHER, ADD_LOCATION, cityName);
             }

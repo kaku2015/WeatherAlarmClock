@@ -922,6 +922,13 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
      * 定位或者直接刷新
      */
     private void locationOrRefresh() {
+        // 判断网络是否可用
+        if (!MyUtil.isNetworkAvailable(getActivity())) {
+            stopRefresh();
+            ToastUtil.showShortToast(getActivity(), getString(R.string.internet_error));
+            return;
+        }
+
         // 不是从自动定位返回
         if (!mIsLocated && mCityWeatherCode.equals(getString(R.string.auto_location))) {
             LogUtil.d(LOG_TAG, "  startLocation()");
@@ -1021,13 +1028,6 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
      * 刷新天气
      */
     private void refreshWeather() {
-        // 判断网络是否可用
-        if (!MyUtil.isNetworkAvailable(getActivity())) {
-            stopRefresh();
-            ToastUtil.showShortToast(getActivity(), getString(R.string.internet_error));
-            return;
-        }
-
         // FIXME：回调try catch
         String address;
         String cityName;

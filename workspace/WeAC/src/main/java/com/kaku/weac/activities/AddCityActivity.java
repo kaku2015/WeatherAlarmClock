@@ -160,17 +160,42 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void initViews() {
-        AutoCompleteTextView autoCompleteTv = (AutoCompleteTextView) findViewById(R.id.auto_complete_tv);
+        final AutoCompleteTextView autoCompleteTv = (AutoCompleteTextView) findViewById(R.id.auto_complete_tv);
 //        autoCompleteTv.setThreshold(1);
-        final String[] COUNTRIES = getResources().getStringArray(R.array.city_china);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, COUNTRIES);
+        // 全国城市
+        final String[] countries = getResources().getStringArray(R.array.city_china);
+        final String[] weatherCodes = getResources().getStringArray(R.array.city_china_weather_code);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, countries);
         autoCompleteTv.setAdapter(arrayAdapter);
         autoCompleteTv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                String city = (String) parent.getItemAtPosition(position);
-                LogUtil.d(LOG_TAG, city);
+                String item = (String) parent.getItemAtPosition(position);
+                String city = item.split("-")[0];
+                LogUtil.d(LOG_TAG, "city：" + city);
+
+                // 当尚未添加此城市
+                if (isCityNoAdd(city)) {
+                    String weatherCode = "不存在";
+                    int length = countries.length;
+                    LogUtil.d(LOG_TAG, "城市列表循环前： " + System.currentTimeMillis());
+                    for (int i = 0; i < length; i++) {
+                        if (countries[i].split("-")[0].equals(city)) {
+                            weatherCode = weatherCodes[i];
+                        }
+                    }
+                    LogUtil.d(LOG_TAG, "城市列表循环后： " + System.currentTimeMillis());
+
+                    Intent intent = getIntent();
+                    intent.putExtra(WeacConstants.WEATHER_CODE, weatherCode);
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                } else {
+                    autoCompleteTv.setText("");
+                    ToastUtil.showShortToast(AddCityActivity.this, getString(
+                            R.string.city_already_added, city));
+                }
             }
         });
 

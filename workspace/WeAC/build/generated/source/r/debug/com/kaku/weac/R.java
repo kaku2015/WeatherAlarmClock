@@ -21,7 +21,8 @@ public final class R {
     }
     public static final class array {
         public static final int city_china=0x7f080000;
-        public static final int city_hot=0x7f080001;
+        public static final int city_china_weather_code=0x7f080001;
+        public static final int city_hot=0x7f080002;
     }
     public static final class attr {
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",

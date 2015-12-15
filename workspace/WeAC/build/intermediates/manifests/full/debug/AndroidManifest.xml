@@ -105,7 +105,8 @@
             android:theme="@style/Transparent" />
         <activity
             android:name="com.kaku.weac.activities.AddCityActivity"
-            android:theme="@style/Transparent" />
+            android:theme="@style/Transparent"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
         <receiver
             android:name="com.kaku.weac.broadcast.AlarmClockBroadcast"

@@ -5180,6 +5180,7 @@
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/color.xml -->
     <eat-comment/>
     <color name="black">#000000</color>
+    <color name="black_text_normal_common">#4B4B4B</color>
     <color name="black_trans10">#1a000000</color>
     <color name="black_trans15">#26000000</color>
     <color name="black_trans20">#33000000</color>
@@ -5197,7 +5198,7 @@
     <color name="blue_tog_btn">#397cbf</color>
     <color name="dark_blue">#0080ff</color>
     <color name="dark_blue_button_pressed">#0066ff</color>
-    <color name="dark_blue_foucus">#400080ff</color>
+    <color name="dark_blue_focus">#400080ff</color>
     <color name="dark_blue_invalidate">#990080ff</color>
     <color name="dark_blue_line">#0090ff</color>
     <color name="dark_blue_trans40">#660080ff</color>
@@ -5208,7 +5209,6 @@
     <color name="gray_divider_line">#DDDDDD</color>
     <color name="gray_nap_edit">#808080</color>
     <color name="gray_record_operate_item">#D0D0D0</color>
-    <color name="gray_ring_select_title">#4B4B4B</color>
     <color name="gray_seekbar">#C0C0C0</color>
     <color name="gray_tab">#989898</color>
     <color name="red">#E6FF0000</color>
@@ -5306,6 +5306,7 @@
     <string name="friday">周五</string>
     <string name="hot_city">热门城市</string>
     <string name="humidity">湿度 %1$s</string>
+    <string name="input_city_name">请输入城市名称</string>
     <string name="input_empty">输入内容为空</string>
     <string name="internet_error">网络异常,请检查网络设置</string>
     <string name="internet_fail">连接失败，请重试</string>
@@ -5334,6 +5335,7 @@
     <string name="no_city_info">城市不存在</string>
     <string name="no_data">暂无数据</string>
     <string name="no_local_music_file">没有本地音乐文件</string>
+    <string name="no_matched_city">没有符合条件的城市</string>
     <string name="no_record_file">没有录音文件</string>
     <string name="no_ring">无铃声</string>
     <string name="no_system_ring_file">没有系统铃声文件</string>
@@ -5611,7 +5613,7 @@
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_marginLeft">19dp</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/gray_ring_select_title</item>
+        <item name="android:textColor">@color/black_text_normal_common</item>
     </style>
     <style name="new_alarm_clcok_nap_edit_options_llyt">
         <item name="android:layout_width">match_parent</item>
@@ -5687,7 +5689,7 @@
     <style name="record_detail_title">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/gray_ring_select_title</item>
+        <item name="android:textColor">@color/black_text_normal_common</item>
         <item name="android:textSize">12sp</item>
     </style>
     <style name="record_operate_item">
@@ -5705,7 +5707,7 @@
         <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/gray_ring_select_title</item>
+        <item name="android:textColor">@color/black_text_normal_common</item>
     </style>
     <style name="single_btn">
         <item name="android:layout_width">match_parent</item>

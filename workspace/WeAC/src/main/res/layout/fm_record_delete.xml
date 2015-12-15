@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/dialog_llyt" >
+<LinearLayout style="@style/dialog_llyt"
+              xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
         style="@style/dialog_title"
-        android:text="@string/delete" />
+        android:text="@string/delete"/>
 
-    <View style="@style/line_blue" />
+    <View style="@style/line_blue"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -14,9 +14,9 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:text="@string/sure_delete"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:textColor="@color/black_text_normal_common"
+        android:textSize="16sp"/>
 
-    <include layout="@layout/btn_dialog_sure_cancel" />
+    <include layout="@layout/btn_dialog_sure_cancel"/>
 
 </LinearLayout>

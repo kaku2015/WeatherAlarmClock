@@ -7,14 +7,20 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
@@ -113,11 +119,6 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
     private City mSelectedCity;
 
     /**
-     * 选中的县
-     */
-    private Country mSelectedCountry;
-
-    /**
      * 当前选中的级别
      */
     private int mCurrentLevel;
@@ -147,6 +148,51 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
      */
     private static final int REQUEST_MY_DIALOG = 1;
 
+    /**
+     * 显示热门城市组件LinearLayout
+     */
+    private LinearLayout mHotCityllyt;
+
+    /**
+     * 清除按钮
+     */
+    private ImageView mClearBtn;
+
+    /**
+     * 当没有匹配到检索的城市时显示的提示内容
+     */
+    private TextView mNoMatchedCityTv;
+
+    /**
+     * 检索城市匹配的列表
+     */
+    private ListView mSearchCityLv;
+
+    /**
+     * 检索城市匹配的列表城市
+     */
+    private List<SpannableString> mSearchCityList;
+
+    /**
+     * 检索城市匹配的列表适配器
+     */
+    private ArrayAdapter<SpannableString> mSearchCityAdapter;
+
+    /**
+     * 输入城市名编辑框
+     */
+    private EditText mSearchCityEtv;
+
+    /**
+     * 全国城市
+     */
+    private String[] mCountries;
+
+    /**
+     * 全国城市代号
+     */
+    private String[] mWeatherCodes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,45 +206,6 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void initViews() {
-        final AutoCompleteTextView autoCompleteTv = (AutoCompleteTextView) findViewById(R.id.auto_complete_tv);
-//        autoCompleteTv.setThreshold(1);
-        // 全国城市
-        final String[] countries = getResources().getStringArray(R.array.city_china);
-        final String[] weatherCodes = getResources().getStringArray(R.array.city_china_weather_code);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, countries);
-        autoCompleteTv.setAdapter(arrayAdapter);
-        autoCompleteTv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                String item = (String) parent.getItemAtPosition(position);
-                String city = item.split("-")[0];
-                LogUtil.d(LOG_TAG, "city：" + city);
-
-                // 当尚未添加此城市
-                if (isCityNoAdd(city)) {
-                    String weatherCode = "不存在";
-                    int length = countries.length;
-                    LogUtil.d(LOG_TAG, "城市列表循环前： " + System.currentTimeMillis());
-                    for (int i = 0; i < length; i++) {
-                        if (countries[i].split("-")[0].equals(city)) {
-                            weatherCode = weatherCodes[i];
-                        }
-                    }
-                    LogUtil.d(LOG_TAG, "城市列表循环后： " + System.currentTimeMillis());
-
-                    Intent intent = getIntent();
-                    intent.putExtra(WeacConstants.WEATHER_CODE, weatherCode);
-                    setResult(Activity.RESULT_OK, intent);
-                    finish();
-                } else {
-                    autoCompleteTv.setText("");
-                    ToastUtil.showShortToast(AddCityActivity.this, getString(
-                            R.string.city_already_added, city));
-                }
-            }
-        });
-
         // 返回按钮
         ImageView returnBtn = (ImageView) findViewById(R.id.action_return);
         returnBtn.setOnClickListener(this);
@@ -208,6 +215,11 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
         moreCityAndReturnBtn.setOnClickListener(this);
         mMoreCityAndReturnBtnTv = (TextView) findViewById(R.id.more_city_and_return_btn_tv);
 
+        // 编辑框
+        mSearchCityEtv = (EditText) findViewById(R.id.search_city_edit_tv);
+        mSearchCityEtv.addTextChangedListener(new TextWatcherImpl());
+
+        // 城市视图列表
         mAddCityList = new ArrayList<>();
         mAddCityAdapter = new CityAdapter(this, mAddCityList);
 
@@ -215,65 +227,191 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
         mGvTitle = (TextView) findViewById(R.id.gv_add_city_title);
         GridView addCityGridView = (GridView) findViewById(R.id.gv_add_city);
         addCityGridView.setAdapter(mAddCityAdapter);
-        addCityGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // 当前选择的城市等级
-                switch (mCurrentLevel) {
-                    case LEVEL_HOT_CITY:
-                        if (!MyUtil.isNetworkAvailable(AddCityActivity.this)) {
-                            ToastUtil.showShortToast(AddCityActivity.this, getString(R.string.internet_error));
-                            return;
-                        }
+        addCityGridView.setOnItemClickListener(new AddCityOnItemClickListener());
 
-                        String cityName = mAddCityAdapter.getItem(position);
-                        // 当尚未添加此城市
-                        if (isCityNoAdd(cityName)) {
-                            addCity(cityName);
-                        } else {
-                            ToastUtil.showShortToast(AddCityActivity.this, getString(
-                                    R.string.city_already_added, cityName));
-                        }
-                        break;
-                    // 省
-                    case LEVEL_PROVINCE:
-                        // 当前选中的省
-                        mSelectedProvince = mProvinceList.get(position);
-                        // 查询市
-                        queryCities();
-                        break;
-                    // 市
-                    case LEVEL_CITY:
-                        // 当前选中的市
-                        mSelectedCity = mCityList.get(position);
-                        // 查询县
-                        queryCounties();
-                        break;
-                    // 县
-                    case LEVEL_COUNTY:
-                        if (!MyUtil.isNetworkAvailable(AddCityActivity.this)) {
-                            ToastUtil.showShortToast(AddCityActivity.this, getString(R.string.internet_error));
-                            return;
-                        }
+        // 清除按钮
+        mClearBtn = (ImageView) findViewById(R.id.clear_btn);
+        mClearBtn.setOnClickListener(this);
 
-                        // 当前选中的县
-                        mSelectedCountry = mCountryList.get(position);
-                        // 当尚未添加此城市
-                        if (isCityNoAdd(mSelectedCountry.getCountryName())) {
-                            Intent intent = getIntent();
-                            intent.putExtra(WeacConstants.COUNTRY_CODE, mSelectedCountry.getCountryCode());
-                            setResult(Activity.RESULT_OK, intent);
-                            finish();
-                        } else {
-                            ToastUtil.showShortToast(AddCityActivity.this, getString(
-                                    R.string.city_already_added, mSelectedCountry.getCountryName()));
-                        }
-                        break;
-                }
-            }
-        });
+        mCountries = getResources().getStringArray(R.array.city_china);
+        mWeatherCodes = getResources().getStringArray(R.array.city_china_weather_code);
+
+        // 热门城市视图
+        mHotCityllyt = (LinearLayout) findViewById(R.id.city_contents);
+        // 无匹配提示
+        mNoMatchedCityTv = (TextView) findViewById(R.id.no_matched_city_tv);
+        // 查找城市
+        mSearchCityLv = (ListView) findViewById(R.id.lv_search_city);
+        mSearchCityList = new ArrayList<>();
+        mSearchCityAdapter = new ArrayAdapter<>(
+                this, R.layout.lv_search_city, mSearchCityList);
+        mSearchCityLv.setAdapter(mSearchCityAdapter);
+        mSearchCityLv.setOnItemClickListener(new SearchCityOnItemClickListener());
     }
 
+    class TextWatcherImpl implements TextWatcher {
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            // 输入的城市名
+            String cityName = s.toString();
+            // 输入内容不为空
+            if (!TextUtils.isEmpty(cityName)) {
+                // 隐藏热门城市视图
+                mHotCityllyt.setVisibility(View.GONE);
+                // 显示清除按钮
+                mClearBtn.setVisibility(View.VISIBLE);
+
+                mSearchCityList.clear();
+                for (String county : mCountries) {
+                    if (county.contains(cityName)) {
+                        SpannableString spanString = new SpannableString(county);
+                        // 构造一个改变字体颜色的Span
+                        ForegroundColorSpan span = new ForegroundColorSpan(getResources().
+                                getColor(R.color.white_trans90));
+                        //将这个Span应用于指定范围的字体
+                        spanString.setSpan(span,
+                                county.indexOf(cityName), county.indexOf(cityName) + cityName.length(),
+                                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                        mSearchCityList.add(spanString);
+                    }
+                }
+
+                // 匹配的城市不为空
+                if (mSearchCityList.size() != 0) {
+                    mSearchCityAdapter.notifyDataSetChanged();
+                    // 显示查找城市列表
+                    mSearchCityLv.setVisibility(View.VISIBLE);
+                    // 隐藏无匹配城市的提示
+                    mNoMatchedCityTv.setVisibility(View.GONE);
+                    // 无匹配的城市
+                } else {
+                    // 隐藏查找城市列表
+                    mSearchCityLv.setVisibility(View.GONE);
+                    // 显示无匹配城市的提示
+                    mNoMatchedCityTv.setVisibility(View.VISIBLE);
+                }
+                // 输入内容为空
+            } else {
+                // 清空
+//                mSearchCityList.clear();
+//                mSearchCityAdapter.notifyDataSetChanged();
+                // 显示城市视图
+                mHotCityllyt.setVisibility(View.VISIBLE);
+                // 隐藏清除按钮
+                mClearBtn.setVisibility(View.GONE);
+                // 隐藏查找城市列表
+                mSearchCityLv.setVisibility(View.GONE);
+                // 隐藏无匹配城市的提示
+                mNoMatchedCityTv.setVisibility(View.GONE);
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    }
+
+    class AddCityOnItemClickListener implements AdapterView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            // 当前选择的城市等级
+            switch (mCurrentLevel) {
+                case LEVEL_HOT_CITY:
+                    if (!MyUtil.isNetworkAvailable(AddCityActivity.this)) {
+                        ToastUtil.showShortToast(AddCityActivity.this, getString(R.string.internet_error));
+                        return;
+                    }
+
+                    String cityName = mAddCityAdapter.getItem(position);
+                    // 当尚未添加此城市
+                    if (isCityNoAdd(cityName)) {
+                        addCity(cityName);
+                    } else {
+                        ToastUtil.showShortToast(AddCityActivity.this, getString(
+                                R.string.city_already_added, cityName));
+                    }
+                    break;
+                // 省
+                case LEVEL_PROVINCE:
+                    // 当前选中的省
+                    mSelectedProvince = mProvinceList.get(position);
+                    // 查询市
+                    queryCities();
+                    break;
+                // 市
+                case LEVEL_CITY:
+                    // 当前选中的市
+                    mSelectedCity = mCityList.get(position);
+                    // 查询县
+                    queryCounties();
+                    break;
+                // 县
+                case LEVEL_COUNTY:
+                    if (!MyUtil.isNetworkAvailable(AddCityActivity.this)) {
+                        ToastUtil.showShortToast(AddCityActivity.this, getString(R.string.internet_error));
+                        return;
+                    }
+
+                    // 当前选中的县
+                    Country selectedCountry = mCountryList.get(position);
+                    // 当尚未添加此城市
+                    if (isCityNoAdd(selectedCountry.getCountryName())) {
+                        Intent intent = getIntent();
+                        intent.putExtra(WeacConstants.COUNTRY_CODE, selectedCountry.getCountryCode());
+                        setResult(Activity.RESULT_OK, intent);
+                        finish();
+                    } else {
+                        ToastUtil.showShortToast(AddCityActivity.this, getString(
+                                R.string.city_already_added, selectedCountry.getCountryName()));
+                    }
+                    break;
+            }
+        }
+    }
+
+    class SearchCityOnItemClickListener implements AdapterView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            if (!MyUtil.isNetworkAvailable(AddCityActivity.this)) {
+                ToastUtil.showShortToast(AddCityActivity.this, getString(R.string.internet_error));
+                return;
+            }
+
+            SpannableString item = mSearchCityAdapter.getItem(position);
+            String city = item.toString().split("-")[0];
+            LogUtil.d(LOG_TAG, "city：" + city);
+
+            // 当尚未添加此城市
+            if (isCityNoAdd(city)) {
+                String weatherCode = "";
+                int length = mCountries.length;
+                // 取得与城市对应的天气代号
+                for (int i = 0; i < length; i++) {
+                    if (mCountries[i].split("-")[0].equals(city)) {
+                        weatherCode = mWeatherCodes[i];
+                    }
+                }
+
+                Intent intent = getIntent();
+                intent.putExtra(WeacConstants.WEATHER_CODE, weatherCode);
+                setResult(Activity.RESULT_OK, intent);
+                finish();
+            } else {
+                ToastUtil.showShortToast(AddCityActivity.this, getString(
+                        R.string.city_already_added, city));
+            }
+        }
+    }
 
     /**
      * 初始化定位管理监听
@@ -537,7 +675,10 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
             // 更多城市和返回按钮
             case R.id.more_city_and_return_btn:
                 dispatchBackAction(0);
-
+                break;
+            // 清除按钮
+            case R.id.clear_btn:
+                mSearchCityEtv.setText("");
                 break;
         }
     }

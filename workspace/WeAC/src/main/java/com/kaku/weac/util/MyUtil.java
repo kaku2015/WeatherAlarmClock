@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
@@ -21,10 +20,6 @@ import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.style.CharacterStyle;
-import android.text.style.ForegroundColorSpan;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
@@ -35,8 +30,6 @@ import com.kaku.weac.common.WeacConstants;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * 工具类
@@ -805,13 +798,13 @@ public class MyUtil {
         return city;
     }
 
-    /**
+/*    *//**
      * 关键字高亮显示
      *
      * @param target 需要高亮的关键字
      * @param text   需要显示的文字
      * @return spannable 处理完后的结果，记得不要toString()，否则没有效果
-     */
+     *//*
     public static SpannableStringBuilder highlight(String text, String target) {
         SpannableStringBuilder spannable = new SpannableStringBuilder(text);
         CharacterStyle span;
@@ -829,4 +822,39 @@ public class MyUtil {
     // 调用
     // SpannableStringBuilder textString = TextUtilTools.highlight(item.getItemName(), KnowledgeActivity.searchKey);
     // vHolder.tv_itemName_search.setText(textString);
+
+    public static boolean isLetterDigitOrChinese(String str) {
+        String regex = "^[a-z0-9A-Z\u4e00-\u9fa5]$";
+        return str.matches(regex);
+    }
+
+    *//**
+     * 判断字符串是否含有数字
+     *//*
+
+    public static boolean isContainNumeric(String str) {
+        for (int i = str.length(); --i >= 0; ) {
+            if (Character.isDigit(str.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isNumeric(String str) {
+        Pattern pattern = Pattern.compile("[0-9]*");
+        return pattern.matcher(str).matches();
+    }
+
+    //
+    public static boolean is_number(String number) {
+        if (number == null) return false;
+        return number.matches("[+-]?[1-9]+[0-9]*(\\.[0-9]+)?");
+    }
+
+    public static boolean is_alpha(String alpha) {
+        if (alpha == null) return false;
+        return alpha.matches("[a-zA-Z]+");
+    }*/
+
 }

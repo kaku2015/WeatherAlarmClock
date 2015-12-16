@@ -193,6 +193,16 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
      */
     private String[] mWeatherCodes;
 
+    /**
+     * 全国城市汉语拼音
+     */
+    private String[] mCountriesPinyin;
+
+    /**
+     * 全国城市汉语拼音缩写
+     */
+    private String[] mCountriesEn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -233,8 +243,10 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
         mClearBtn = (ImageView) findViewById(R.id.clear_btn);
         mClearBtn.setOnClickListener(this);
 
-        mCountries = getResources().getStringArray(R.array.city_china);
         mWeatherCodes = getResources().getStringArray(R.array.city_china_weather_code);
+        mCountries = getResources().getStringArray(R.array.city_china);
+        mCountriesPinyin = getResources().getStringArray(R.array.city_china_pinyin);
+        mCountriesEn = getResources().getStringArray(R.array.city_china_en);
 
         // 热门城市视图
         mHotCityllyt = (LinearLayout) findViewById(R.id.city_contents);
@@ -258,6 +270,8 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
+            mSearchCityList.clear();
+
             // 输入的城市名
             String cityName = s.toString();
             // 输入内容不为空
@@ -267,17 +281,33 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
                 // 显示清除按钮
                 mClearBtn.setVisibility(View.VISIBLE);
 
-                mSearchCityList.clear();
-                for (String county : mCountries) {
-                    if (county.contains(cityName)) {
-                        SpannableString spanString = new SpannableString(county);
+                int length = mCountries.length;
+                for (int i = 0; i < length; i++) {
+                    // 中文、拼音或拼音简写任意匹配
+                    if (mCountries[i].contains(cityName) || mCountriesPinyin[i].contains(cityName) ||
+                            mCountriesEn[i].contains(cityName)) {
+                        SpannableString spanString = new SpannableString(mCountries[i]);
                         // 构造一个改变字体颜色的Span
                         ForegroundColorSpan span = new ForegroundColorSpan(getResources().
                                 getColor(R.color.white_trans90));
+
+                        // 高亮开始（包括）
+                        int start1;
+                        // 高亮结束（不包括）
+                        int end1;
+                        // 当"-"前面的文字包含
+                        if (mCountries[i].split("-")[0].contains(cityName) ||
+                                mCountriesPinyin[i].split("-")[0].contains(cityName) ||
+                                mCountriesEn[i].split("-")[0].contains(cityName)) {
+                            start1 = 0;
+                            end1 = mCountries[i].indexOf("-") - 1;
+                        } else {
+                            start1 = mCountries[i].indexOf("-") + 2;
+                            end1 = mCountries[i].length();
+                        }
+
                         //将这个Span应用于指定范围的字体
-                        spanString.setSpan(span,
-                                county.indexOf(cityName), county.indexOf(cityName) + cityName.length(),
-                                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        spanString.setSpan(span, start1, end1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
                         mSearchCityList.add(spanString);
                     }
@@ -299,9 +329,6 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
                 }
                 // 输入内容为空
             } else {
-                // 清空
-//                mSearchCityList.clear();
-//                mSearchCityAdapter.notifyDataSetChanged();
                 // 显示城市视图
                 mHotCityllyt.setVisibility(View.VISIBLE);
                 // 隐藏清除按钮

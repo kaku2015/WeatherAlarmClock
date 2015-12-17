@@ -128,26 +128,6 @@ public class WeacConstants {
     public static final String BASE64 = "base64";
 
     /**
-     * 省
-     */
-    public static final String PROVINCE = "province";
-
-    /**
-     * 市
-     */
-    public static final String CITY = "city";
-
-    /**
-     * 县
-     */
-    public static final String COUNTRY = "country";
-
-    /**
-     * 县级代号
-     */
-    public static final String COUNTRY_CODE = "country_code";
-
-    /**
      * 传递的城市名
      */
     public static final String CITY_NAME = "city_name";

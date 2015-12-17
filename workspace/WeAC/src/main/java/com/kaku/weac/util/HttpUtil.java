@@ -40,9 +40,9 @@ public class HttpUtil {
                         address1 = address;
                     }
                     OkHttpClient client = new OkHttpClient();
-                    client.setReadTimeout(6000, TimeUnit.MILLISECONDS);
-                    client.setConnectTimeout(6000, TimeUnit.MILLISECONDS);
-                    client.setWriteTimeout(6000, TimeUnit.MILLISECONDS);
+                    client.setReadTimeout(8000, TimeUnit.MILLISECONDS);
+                    client.setConnectTimeout(8000, TimeUnit.MILLISECONDS);
+                    client.setWriteTimeout(8000, TimeUnit.MILLISECONDS);
                     Request request = new Request.Builder().url(address1).build();
                     Response response = client.newCall(request).execute();
                     String result = response.body().string();

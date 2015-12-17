@@ -618,7 +618,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 queryFormServer(getString(R.string.address_weather, weatherCode),
                         ADD_CITY, null);
                 // 添加定位
-            } else if (cityName != null) {
+            } else {
                 queryFormServer(null,
                         ADD_LOCATION, cityName);
             }

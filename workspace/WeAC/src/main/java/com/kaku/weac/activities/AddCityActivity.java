@@ -259,12 +259,13 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            mSearchCityList.clear();
 
             // 输入的城市名
             String cityName = s.toString();
             // 输入内容不为空
             if (!TextUtils.isEmpty(cityName)) {
+                // 当list正在滑动中如果清除列表程序会崩溃，因为正在滑动中的项目索引不存在
+                mSearchCityList.clear();
                 // 隐藏热门城市视图
                 mHotCityLlyt.setVisibility(View.GONE);
                 // 显示清除按钮
@@ -273,8 +274,9 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
                 int length = mCountries.length;
                 for (int i = 0; i < length; i++) {
                     // 中文、拼音或拼音简写任意匹配
-                    if (mCountries[i].contains(cityName) || mCountriesPinyin[i].contains(cityName) ||
-                            mCountriesEn[i].contains(cityName)) {
+                    if (mCountries[i].contains(cityName) ||
+                            mCountriesPinyin[i].contains(cityName.toLowerCase()) ||
+                            mCountriesEn[i].contains(cityName.toLowerCase())) {
                         SpannableString spanString = new SpannableString(mCountries[i]);
                         // 构造一个改变字体颜色的Span
                         ForegroundColorSpan span = new ForegroundColorSpan(getResources().
@@ -306,6 +308,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
                 if (mSearchCityList.size() != 0) {
                     mSearchCityAdapter.notifyDataSetChanged();
                     // 显示查找城市列表
+                    mSearchCityLv.setSelection(0);
                     mSearchCityLv.setVisibility(View.VISIBLE);
                     // 隐藏无匹配城市的提示
                     mNoMatchedCityTv.setVisibility(View.GONE);
@@ -404,7 +407,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
             }
 
             SpannableString item = mSearchCityAdapter.getItem(position);
-            String city = item.toString().split("-")[0];
+            String city = item.toString().split("-")[0].trim();
             LogUtil.d(LOG_TAG, "city：" + city);
 
             // 当尚未添加此城市
@@ -413,7 +416,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
                 int length = mCountries.length;
                 // 取得与城市对应的天气代号
                 for (int i = 0; i < length; i++) {
-                    if (mCountries[i].split("-")[0].equals(city)) {
+                    if (mCountries[i].split("-")[0].trim().equals(city)) {
                         weatherCode = mWeatherCodes[i];
                     }
                 }
@@ -453,97 +456,97 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
                 startLocation();
                 break;
             case "北京":
-                finish("010101");
+                myFinish("101010100");
                 break;
             case "天津":
-                finish("030101");
+                myFinish("101030100");
                 break;
             case "上海":
-                finish("020101");
+                myFinish("101020100");
                 break;
             case "广州":
-                finish("280101");
+                myFinish("101280101");
                 break;
             case "深圳":
-                finish("280601");
+                myFinish("101280601");
                 break;
             case "重庆":
-                finish("040101");
+                myFinish("101040100");
                 break;
             case "福州":
-                finish("230101");
+                myFinish("101230101");
                 break;
             case "西安":
-                finish("110101");
+                myFinish("101110101");
                 break;
             case "南宁":
-                finish("300101");
+                myFinish("101300101");
                 break;
             case "昆明":
-                finish("290101");
+                myFinish("101290101");
                 break;
             case "济南":
-                finish("120101");
+                myFinish("101120101");
                 break;
             case "武汉":
-                finish("200101");
+                myFinish("101200101");
                 break;
             case "海口":
-                finish("310101");
+                myFinish("101310101");
                 break;
             case "三亚":
-                finish("310301");
+                myFinish("101310201");
                 break;
             case "长春":
-                finish("060101");
+                myFinish("101060101");
                 break;
             case "合肥":
-                finish("220101");
+                myFinish("101220101");
                 break;
             case "郑州":
-                finish("180101");
+                myFinish("101180101");
                 break;
             case "太原":
-                finish("100101");
+                myFinish("101100101");
                 break;
             case "南昌":
-                finish("240101");
+                myFinish("101240101");
                 break;
             case "拉萨":
-                finish("140101");
+                myFinish("101140101");
                 break;
             case "西宁":
-                finish("150101");
+                myFinish("101150101");
                 break;
             case "石家庄":
-                finish("090101");
+                myFinish("101090101");
                 break;
             case "哈尔滨":
-                finish("050101");
+                myFinish("101050101");
                 break;
             case "青岛":
-                finish("120201");
+                myFinish("101120201");
                 break;
             case "无锡":
-                finish("190201");
+                myFinish("101190201");
                 break;
             case "厦门":
-                finish("230201");
+                myFinish("101230201");
                 break;
             case "长沙":
-                finish("250101");
+                myFinish("101250101");
                 break;
             case "杭州":
-                finish("210101");
+                myFinish("101210101");
                 break;
             case "香港":
-                finish("320101");
+                myFinish("101320101");
                 break;
             case "澳门":
-                finish("330101");
+                myFinish("101330101");
                 break;
             case "台北":
-                finish("340101");
+                myFinish("101340101");
                 break;
         }
     }
@@ -660,11 +663,11 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
     /**
      * 结束activity，返回结果到添加城市activity
      *
-     * @param cityCode 城市代码
+     * @param weatherCode 天气代号
      */
-    private void finish(String cityCode) {
+    private void myFinish(String weatherCode) {
         Intent intent = getIntent();
-        intent.putExtra(WeacConstants.COUNTRY_CODE, cityCode);
+        intent.putExtra(WeacConstants.WEATHER_CODE, weatherCode);
         setResult(Activity.RESULT_OK, intent);
         finish();
     }

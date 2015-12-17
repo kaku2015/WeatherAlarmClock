@@ -1631,12 +1631,12 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                 (weather2.getTypeDay(), weather2.getTypeNight()));
 
         // CityManage表中存在此城市时
-        if (1 == WeatherDBOperate.getInstance().queryCity(cityName)) {
+        if (1 == WeatherDBOperate.getInstance().queryCityManage(cityName)) {
             // 修改城市管理item信息
             WeatherDBOperate.getInstance().updateCityManage(cityManage, cityName);
         }
 
-        int number = WeatherDBOperate.getInstance().queryCity(mCityWeatherCode);
+        int number = WeatherDBOperate.getInstance().queryCityManage(mCityWeatherCode);
         // 城市管理表不存在定位
         if (mCityWeatherCode.equals(getString(R.string.auto_location)) && number == 0) {
             cityManage.setCityName(mCityWeatherCode);
@@ -1646,7 +1646,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
             // 存储城市管理表
             boolean result = WeatherDBOperate.getInstance().saveCityManage(cityManage);
             // 城市管理表城市个数
-            int total = WeatherDBOperate.getInstance().queryCity();
+            int total = WeatherDBOperate.getInstance().queryCityManage();
             // 存储成功
             if (result && total <= 1) {
                 SharedPreferences share = getActivity().getSharedPreferences(

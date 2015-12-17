@@ -27,19 +27,16 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.kaku.weac.Listener.HttpCallbackListener;
 import com.kaku.weac.R;
 import com.kaku.weac.adapter.CityAdapter;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.db.WeatherDBOperate;
-import com.kaku.weac.model.City;
-import com.kaku.weac.model.Country;
-import com.kaku.weac.model.Province;
-import com.kaku.weac.util.CityUtil;
-import com.kaku.weac.util.HttpUtil;
+import com.kaku.weac.bean.County;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.ToastUtil;
+
+import org.xmlpull.v1.XmlPullParser;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -94,29 +91,19 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
     private CityAdapter mAddCityAdapter;
 
     /**
-     * 省列表
-     */
-    private List<Province> mProvinceList;
-
-    /**
-     * 市列表
-     */
-    private List<City> mCityList;
-
-    /**
      * 县列表
      */
-    private List<Country> mCountryList;
+    private List<County> mCountyList;
 
     /**
      * 选中的省份
      */
-    private Province mSelectedProvince;
+    private String mSelectedProvince;
 
     /**
      * 选中的市
      */
-    private City mSelectedCity;
+    private String mSelectedCity;
 
     /**
      * 当前选中的级别
@@ -151,7 +138,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
     /**
      * 显示热门城市组件LinearLayout
      */
-    private LinearLayout mHotCityllyt;
+    private LinearLayout mHotCityLlyt;
 
     /**
      * 清除按钮
@@ -233,6 +220,8 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
         mAddCityList = new ArrayList<>();
         mAddCityAdapter = new CityAdapter(this, mAddCityList);
 
+        mCountyList = new ArrayList<>();
+
         // 城市列表GridView
         mGvTitle = (TextView) findViewById(R.id.gv_add_city_title);
         GridView addCityGridView = (GridView) findViewById(R.id.gv_add_city);
@@ -249,7 +238,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
         mCountriesEn = getResources().getStringArray(R.array.city_china_en);
 
         // 热门城市视图
-        mHotCityllyt = (LinearLayout) findViewById(R.id.city_contents);
+        mHotCityLlyt = (LinearLayout) findViewById(R.id.city_contents);
         // 无匹配提示
         mNoMatchedCityTv = (TextView) findViewById(R.id.no_matched_city_tv);
         // 查找城市
@@ -277,7 +266,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
             // 输入内容不为空
             if (!TextUtils.isEmpty(cityName)) {
                 // 隐藏热门城市视图
-                mHotCityllyt.setVisibility(View.GONE);
+                mHotCityLlyt.setVisibility(View.GONE);
                 // 显示清除按钮
                 mClearBtn.setVisibility(View.VISIBLE);
 
@@ -330,7 +319,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
                 // 输入内容为空
             } else {
                 // 显示城市视图
-                mHotCityllyt.setVisibility(View.VISIBLE);
+                mHotCityLlyt.setVisibility(View.VISIBLE);
                 // 隐藏清除按钮
                 mClearBtn.setVisibility(View.GONE);
                 // 隐藏查找城市列表
@@ -370,14 +359,14 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
                 // 省
                 case LEVEL_PROVINCE:
                     // 当前选中的省
-                    mSelectedProvince = mProvinceList.get(position);
+                    mSelectedProvince = mAddCityList.get(position);
                     // 查询市
                     queryCities();
                     break;
                 // 市
                 case LEVEL_CITY:
                     // 当前选中的市
-                    mSelectedCity = mCityList.get(position);
+                    mSelectedCity = mAddCityList.get(position);
                     // 查询县
                     queryCounties();
                     break;
@@ -389,16 +378,16 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
                     }
 
                     // 当前选中的县
-                    Country selectedCountry = mCountryList.get(position);
+                    County selectedCounty = mCountyList.get(position);
                     // 当尚未添加此城市
-                    if (isCityNoAdd(selectedCountry.getCountryName())) {
+                    if (isCityNoAdd(selectedCounty.getCountyName())) {
                         Intent intent = getIntent();
-                        intent.putExtra(WeacConstants.COUNTRY_CODE, selectedCountry.getCountryCode());
+                        intent.putExtra(WeacConstants.WEATHER_CODE, selectedCounty.getWeatherCode());
                         setResult(Activity.RESULT_OK, intent);
                         finish();
                     } else {
                         ToastUtil.showShortToast(AddCityActivity.this, getString(
-                                R.string.city_already_added, selectedCountry.getCountryName()));
+                                R.string.city_already_added, selectedCounty.getCountyName()));
                     }
                     break;
             }
@@ -568,7 +557,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
             return;
         }
 
-        int number = WeatherDBOperate.getInstance().queryCity(getString(R.string.auto_location));
+        int number = WeatherDBOperate.getInstance().queryCityManage(getString(R.string.auto_location));
         // 当已添加自动定位
         if (number == 1) {
             ToastUtil.showShortToast(AddCityActivity.this, getString(R.string.location_already_added));
@@ -664,7 +653,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
      * @return 是否没有添加过
      */
     private boolean isCityNoAdd(String cityName) {
-        int number = WeatherDBOperate.getInstance().queryCity(cityName);
+        int number = WeatherDBOperate.getInstance().queryCityManage(cityName);
         return number == 0;
     }
 
@@ -753,146 +742,97 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
     }
 
     /**
-     * 查询全国所有的省，优先从数据库查询，如果没有查询到再去服务器上查询
+     * 查询全国所有的省
      */
     private void queryProvinces() {
-        mProvinceList = WeatherDBOperate.getInstance().loadProvinces();
-        if (mProvinceList.size() > 0) {
-            mAddCityList.clear();
-            for (Province province : mProvinceList) {
-                mAddCityList.add(province.getProvinceName());
+        mAddCityList.clear();
+        XmlPullParser parser = getResources().getXml(R.xml.city_china);
+        try {
+            int eventType = parser.getEventType();
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                if (eventType == XmlPullParser.START_TAG) {
+                    if ("province".equals(parser.getName())) {
+                        mAddCityList.add(parser.getAttributeValue(0));
+                    }
+                }
+                eventType = parser.next();
             }
             mAddCityAdapter.notifyDataSetChanged();
             mGvTitle.setText(R.string.china);
             mCurrentLevel = LEVEL_PROVINCE;
-        } else {
-            queryFromServer(null, WeacConstants.PROVINCE);
+        } catch (Exception e) {
+            LogUtil.d(LOG_TAG, "queryProvinces(): " + e.toString());
         }
     }
 
     /**
-     * 查询全国所有的市，优先从数据库查询，如果没有查询到再去服务器上查询
+     * 查询全国所有的市
      */
     private void queryCities() {
-        mCityList = WeatherDBOperate.getInstance().loadCities(mSelectedProvince.getId());
-        if (mCityList.size() > 0) {
-            mAddCityList.clear();
-            for (City city : mCityList) {
-                mAddCityList.add(city.getCityName());
+        mAddCityList.clear();
+        XmlPullParser parser = getResources().getXml(R.xml.city_china);
+        try {
+            int eventType = parser.getEventType();
+            String province = null;
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                if (eventType == XmlPullParser.START_TAG) {
+                    switch (parser.getName()) {
+                        case "province":
+                            province = parser.getAttributeValue(0);
+                            break;
+                        case "city":
+                            if (mSelectedProvince.equals(province)) {
+                                mAddCityList.add(parser.getAttributeValue(0));
+                            }
+                            break;
+                    }
+                }
+                eventType = parser.next();
             }
             mAddCityAdapter.notifyDataSetChanged();
-            mGvTitle.setText(mSelectedProvince.getProvinceName());
+            mGvTitle.setText(mSelectedProvince);
             mCurrentLevel = LEVEL_CITY;
-        } else {
-            queryFromServer(mSelectedProvince.getProvinceCode(), WeacConstants.CITY);
+        } catch (Exception e) {
+            LogUtil.d(LOG_TAG, "queryCities(): " + e.toString());
         }
     }
 
     /**
-     * 查询全国所有的县，优先从数据库查询，如果没有查询到再去服务器上查询
+     * 查询全国所有的县
      */
     private void queryCounties() {
-        mCountryList = WeatherDBOperate.getInstance().loadCounties(mSelectedCity.getId());
-        if (mCountryList.size() > 0) {
-            mAddCityList.clear();
-            for (Country country : mCountryList) {
-                mAddCityList.add(country.getCountryName());
+        mAddCityList.clear();
+        mCountyList.clear();
+        XmlPullParser parser = getResources().getXml(R.xml.city_china);
+        try {
+            int eventType = parser.getEventType();
+            String city = null;
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                if (eventType == XmlPullParser.START_TAG) {
+                    switch (parser.getName()) {
+                        case "city":
+                            city = parser.getAttributeValue(0);
+                            break;
+                        case "county":
+                            if (mSelectedCity.equals(city)) {
+                                mAddCityList.add(parser.getAttributeValue(0));
+
+                                County county = new County();
+                                county.setCountyName(parser.getAttributeValue(0));
+                                county.setWeatherCode(parser.getAttributeValue(2));
+                                mCountyList.add(county);
+                            }
+                            break;
+                    }
+                }
+                eventType = parser.next();
             }
             mAddCityAdapter.notifyDataSetChanged();
-            mGvTitle.setText(mSelectedCity.getCityName());
+            mGvTitle.setText(mSelectedCity);
             mCurrentLevel = LEVEL_COUNTY;
-        } else {
-            queryFromServer(mSelectedCity.getCityCode(), WeacConstants.COUNTRY);
+        } catch (Exception e) {
+            LogUtil.d(LOG_TAG, "queryCounties(): " + e.toString());
         }
-    }
-
-    /**
-     * 根据传入的代号和类型从服务器上查询省市县数据
-     *
-     * @param code 城市代号
-     * @param type 城市类型
-     */
-    private void queryFromServer(final String code, final String type) {
-        if (!MyUtil.isNetworkAvailable(this)) {
-            ToastUtil.showShortToast(this, getString(R.string.internet_error));
-            return;
-        }
-
-        // 查询地址
-        String address;
-        if (!TextUtils.isEmpty(code)) {
-            address = getString(R.string.address_city, code);
-        } else {
-            address = getString(R.string.address_city, "");
-        }
-        // 显示查询进度对话框
-        showProgressDialog(getString(R.string.now_loading));
-        // FIXME：回调try catch
-        HttpUtil.sendHttpRequest(address, null, new HttpCallbackListener() {
-            @Override
-            public void onFinish(String response) {
-                boolean result = false;
-                // 城市类型
-                switch (type) {
-                    // 省
-                    case WeacConstants.PROVINCE:
-                        // 解析并存储省级数据
-                        result = CityUtil.handleProvincesResponse(
-                                WeatherDBOperate.getInstance(), response);
-                        break;
-                    // 市
-                    case WeacConstants.CITY:
-                        // 解析并存储市级数据
-                        result = CityUtil.handleCitiesResponse(
-                                WeatherDBOperate.getInstance(), response, mSelectedProvince.getId());
-                        break;
-                    // 县
-                    case WeacConstants.COUNTRY:
-                        // 解析并存储县级数据
-                        result = CityUtil.handleCountriesResponse(
-                                WeatherDBOperate.getInstance(), response, mSelectedCity.getId());
-                        break;
-                }
-                // 解析并存储成功
-                if (result) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            closeProgressDialog();
-                            switch (type) {
-                                case WeacConstants.PROVINCE:
-                                    queryProvinces();
-                                    break;
-                                case WeacConstants.CITY:
-                                    queryCities();
-                                    break;
-                                case WeacConstants.COUNTRY:
-                                    queryCounties();
-                                    break;
-                            }
-                        }
-                    });
-                } else {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            closeProgressDialog();
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onError(Exception e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        closeProgressDialog();
-                        ToastUtil.showShortToast(AddCityActivity.this, getString(R.string.internet_fail));
-                    }
-                });
-            }
-        });
     }
 
     /**

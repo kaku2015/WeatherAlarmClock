@@ -721,7 +721,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 modifyCity();
             } else {
                 String cityName = getIntent().getStringExtra(WeacConstants.CITY_NAME);
-                int number = WeatherDBOperate.getInstance().queryCity(cityName);
+                int number = WeatherDBOperate.getInstance().queryCityManage(cityName);
                 // 当前城市没有被删除
                 if (number == 1) {
                     finish();

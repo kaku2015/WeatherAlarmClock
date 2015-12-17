@@ -856,7 +856,6 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
-
     @Override
     public void onBackPressed() {
         dispatchBackAction(1);

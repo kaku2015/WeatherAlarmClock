@@ -52,16 +52,6 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
     private static final int REQUEST_CITY_MANAGE = 1;
 
     /**
-     * 查询天气
-     */
-    private static final int QUERY_WEATHER = 1;
-
-    /**
-     * 查询县
-     */
-    private static final int QUERY_COUNTRY = 2;
-
-    /**
      * 添加城市
      */
     private static final int ADD_CITY = -1;
@@ -229,55 +219,14 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 CityManage cityManage = mCityManageAdapter.getItem(position);
                 // 不是自动定位
                 if (cityManage.getLocationCity() == null) {
-//                    saveDefaultCityInfoAndReturn(position, null, false);\
                     myFinish(cityManage.getCityName(), cityManage.getWeatherCode());
                 } else {
                     myFinish(cityManage.getLocationCity(), cityManage.getWeatherCode());
-//                    saveDefaultCityInfoAndReturn(position, cityManage.getLocationCity(), false);
                 }
             }
         }
     }
 
-    /*
-        /**
-         * 设置默认城市信息并返回
-         *
-         * @param position     保存默认城市的位置
-         * @param locationCity 定位城市名
-         * @param isNew        是否为新添加的城市
-         *//*
-    private void saveDefaultCityInfoAndReturn(int position, String locationCity, boolean isNew) {
-        SharedPreferences share = getSharedPreferences(
-                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = share.edit();
-        CityManage cityManage = mCityManageAdapter.getItem(position);
-
-        String weatherCode;
-        String cityName;
-        // 不是自定定位
-        if (locationCity == null) {
-            // 保存默认的城市名
-            cityName = cityManage.getCityName();
-            weatherCode = cityManage.getWeatherCode();
-            // 定位城市
-        } else {
-            cityName = locationCity;
-            weatherCode = getString(R.string.auto_location);
-        }
-
-        // 保存默认的城市名
-        editor.putString(WeacConstants.DEFAULT_CITY_NAME, cityName);
-        // 保存默认的天气代码
-        editor.putString(WeacConstants.DEFAULT_WEATHER_CODE, weatherCode);
-        editor.apply();
-
-        myFinish();
-//        // 新添加
-//        if (isNew) {
-//            overridePendingTransition(0, 0);
-//        }
-    }*/
     private void myFinish(String cityName, String weatherCode) {
         if (cityName != null) {
             Intent intent = getIntent();
@@ -373,7 +322,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                     address = null;
                 }
 
-                queryFormServer(address, QUERY_WEATHER, 0, cityName);
+                queryFormServer(address, 0, cityName);
                 break;
             // 取消更新
             case R.id.action_refresh_cancel:
@@ -397,50 +346,32 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
      * 根据传入的代号和类型从服务器上查询天气代号、天气数据
      *
      * @param address  查询地址
-     * @param type     查询类型:1,查询天气;2,查询县
      * @param position 更新位置:-1,添加城市; -2,添加定位; 其他，更新城市的位置
      * @param cityName 刷新城市名
      */
-    private void queryFormServer(final String address, final int type, final int position, final String cityName) {
+    private void queryFormServer(final String address, final int position, final String cityName) {
 
         HttpUtil.sendHttpRequest(address, cityName, new HttpCallbackListener() {
                     @Override
                     public void onFinish(String response) {
                         try {
-                            switch (type) {
-                                // 查询天气
-                                case 1:
-                                    if (!response.contains("error")) {
-                                        WeatherInfo weatherInfo = WeatherUtil.handleWeatherResponse(
-                                                new ByteArrayInputStream(response.getBytes()));
-                                        // 保存天气信息
-                                        WeatherUtil.saveWeatherInfo(weatherInfo, CityManageActivity.this);
-                                        runOnUiThread(new SetCityInfoRunnable(weatherInfo, position));
-                                    } else {
-                                        switch (position) {
-                                            case -1:
-                                                runOnUi(getString(R.string.no_city_info), position);
-                                                break;
-                                            case -2:
-                                                runOnUi(getString(R.string.can_not_find_current_location), position);
-                                                break;
-                                        }
-                                    }
-
-                                    break;
-                                // 查询县
-                                case 2:
-                                    String[] array = response.split("\\|");
-                                    if (array.length == 2) {
-                                        mWeatherCode = array[1];
-                                        // 查询天气代号
-                                        queryFormServer(getString(R.string.address_weather, mWeatherCode),
-                                                QUERY_WEATHER, -1, null);
-                                    } else {
+                            if (!response.contains("error")) {
+                                WeatherInfo weatherInfo = WeatherUtil.handleWeatherResponse(
+                                        new ByteArrayInputStream(response.getBytes()));
+                                // 保存天气信息
+                                WeatherUtil.saveWeatherInfo(weatherInfo, CityManageActivity.this);
+                                runOnUiThread(new SetCityInfoRunnable(weatherInfo, position));
+                            } else {
+                                switch (position) {
+                                    case -1:
                                         runOnUi(getString(R.string.no_city_info), position);
-                                    }
-                                    break;
+                                        break;
+                                    case -2:
+                                        runOnUi(getString(R.string.can_not_find_current_location), position);
+                                        break;
+                                }
                             }
+
                         } catch (Exception e) {
                             LogUtil.e(LOG_TAG, "onFinish: " + e.toString());
                         }
@@ -563,7 +494,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 }
 
                 // 更新查询下一项
-                queryFormServer(address, QUERY_WEATHER, mPosition + 1, cityName);
+                queryFormServer(address, mPosition + 1, cityName);
             }
 
         }
@@ -603,13 +534,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 mIsDefaultCityChanged = true;
 
             }
-//            // 设置默认城市并且退出返回
-//            if (weatherCode != null) {
-//                saveDefaultCityInfoAndReturn(mCityManageList.size() - 2, null, true);
-//                // 添加定位
-//            } else {
-//                saveDefaultCityInfoAndReturn(mCityManageList.size() - 2, mWeatherInfo.getCity(), true);
-//            }
+
         }
 
     }
@@ -685,22 +610,17 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
             mCityManageAdapter.displayProgressBar(mCityManageList.size() - 2);
             mCityManageAdapter.notifyDataSetChanged();
 
-            String countryCode = data.getStringExtra(WeacConstants.COUNTRY_CODE);
             String weatherCode = data.getStringExtra(WeacConstants.WEATHER_CODE);
             String cityName = data.getStringExtra(WeacConstants.CITY_NAME);
 
-            if (countryCode != null) {
-                queryFormServer(getString(R.string.address_city, countryCode),
-                        QUERY_COUNTRY, ADD_CITY, null);
-                // 模糊查询
-            } else if (weatherCode != null) {
+            if (weatherCode != null) {
                 mWeatherCode = weatherCode;
                 queryFormServer(getString(R.string.address_weather, weatherCode),
-                        QUERY_WEATHER, ADD_CITY, null);
+                        ADD_CITY, null);
                 // 添加定位
             } else if (cityName != null) {
                 queryFormServer(null,
-                        QUERY_WEATHER, ADD_LOCATION, cityName);
+                        ADD_LOCATION, cityName);
             }
         }
     }

@@ -564,20 +564,6 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
             cityManage.setTempHigh(weather.getHigh().substring(3));
             cityManage.setTempLow(weather.getLow().substring(3));
 
-            // 天气类型图片id
-            int weatherId;
-            // 当前为凌晨
-            if (hour >= 0 && hour < 6) {
-                weatherId = MyUtil.getWeatherTypeImageID(weather.getTypeDay(), false);
-                // 当前为白天时
-            } else if (hour >= 6 && hour < 18) {
-                weatherId = MyUtil.getWeatherTypeImageID(weather.getTypeDay(), true);
-                // 当前为夜间
-            } else {
-                weatherId = MyUtil.getWeatherTypeImageID(weather.getTypeNight(), false);
-            }
-            cityManage.setImageId(weatherId);
-
             // 白天和夜间类型相同
             if (weather.getTypeDay().equals(weather.getTypeNight())) {
                 cityManage.setWeatherType(weather.getTypeDay());
@@ -585,11 +571,14 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 cityManage.setWeatherType(String.format(getString(R.string.turn),
                         weather.getTypeDay(), weather.getTypeNight()));
             }
+            cityManage.setWeatherTypeDay(weather.getTypeDay());
+            cityManage.setWeatherTypeNight(weather.getTypeNight());
         } else {
             cityManage.setTempHigh(getString(R.string.dash));
             cityManage.setTempLow(getString(R.string.dash));
-            cityManage.setImageId(R.drawable.ic_weather_no);
             cityManage.setWeatherType(getString(R.string.no));
+            cityManage.setWeatherTypeDay(getString(R.string.no));
+            cityManage.setWeatherTypeNight(getString(R.string.no));
         }
     }
 

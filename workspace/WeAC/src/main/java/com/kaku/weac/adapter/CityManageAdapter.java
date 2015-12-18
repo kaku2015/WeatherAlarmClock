@@ -21,7 +21,9 @@ import com.kaku.weac.R;
 import com.kaku.weac.bean.CityManage;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.db.WeatherDBOperate;
+import com.kaku.weac.util.MyUtil;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -232,11 +234,32 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
         } else {
             viewHolder.addCityIv.setVisibility(View.GONE);
             viewHolder.cityWeather.setVisibility(View.VISIBLE);
-            viewHolder.cityName.setText(cityManage.getCityName());
-            viewHolder.weatherTypeIv.setImageResource(cityManage.getImageId());
-            viewHolder.tempHigh.setText(cityManage.getTempHigh());
-            viewHolder.tempLow.setText(cityManage.getTempLow());
-            viewHolder.weatherTypeTv.setText(cityManage.getWeatherType());
+
+            // 新加城市临时加载为空
+            if (cityManage.getCityName() != null) {
+                viewHolder.cityName.setText(cityManage.getCityName());
+
+                // 天气类型图片id
+                int weatherId;
+                Calendar calendar = Calendar.getInstance();
+                // 现在小时
+                int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+                // 当前为凌晨
+                if (currentHour >= 0 && currentHour < 6) {
+                    weatherId = MyUtil.getWeatherTypeImageID(cityManage.getWeatherTypeDay(), false);
+                    // 当前为白天时
+                } else if (currentHour >= 6 && currentHour < 18) {
+                    weatherId = MyUtil.getWeatherTypeImageID(cityManage.getWeatherTypeDay(), true);
+                    // 当前为夜间
+                } else {
+                    weatherId = MyUtil.getWeatherTypeImageID(cityManage.getWeatherTypeNight(), false);
+                }
+                viewHolder.weatherTypeIv.setImageResource(weatherId);
+
+                viewHolder.tempHigh.setText(cityManage.getTempHigh());
+                viewHolder.tempLow.setText(cityManage.getTempLow());
+                viewHolder.weatherTypeTv.setText(cityManage.getWeatherType());
+            }
         }
 
         // 当列表为空（仅有添加按钮）

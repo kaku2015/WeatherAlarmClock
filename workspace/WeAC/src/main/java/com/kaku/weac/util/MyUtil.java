@@ -632,6 +632,9 @@ public class MyUtil {
      * @return 天气类型图片id
      */
     public static int getWeatherTypeImageID(String type, boolean isDay) {
+        if (type == null) {
+            return R.drawable.ic_weather_no;
+        }
         int weatherId;
         switch (type) {
             case "晴":

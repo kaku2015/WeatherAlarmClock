@@ -1624,11 +1624,12 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         }
 
         CityManage cityManage = new CityManage();
-        cityManage.setImageId(weatherId);
         cityManage.setTempHigh(weather2.getHigh().substring(3));
         cityManage.setTempLow(weather2.getLow().substring(3));
         cityManage.setWeatherType(getWeatherType
                 (weather2.getTypeDay(), weather2.getTypeNight()));
+        cityManage.setWeatherTypeDay(weather2.getTypeDay());
+        cityManage.setWeatherTypeNight(weather2.getTypeNight());
 
         // CityManage表中存在此城市时
         if (1 == WeatherDBOperate.getInstance().queryCityManage(cityName)) {

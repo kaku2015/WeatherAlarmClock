@@ -14,22 +14,6 @@ import org.litepal.crud.DataSupport;
 public class CityManage extends DataSupport {
     private int id;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getLocationCity() {
-        return locationCity;
-    }
-
-    public void setLocationCity(String locationCity) {
-        this.locationCity = locationCity;
-    }
-
     private String locationCity;
 
     /**
@@ -48,19 +32,41 @@ public class CityManage extends DataSupport {
     private String tempLow;
 
     /**
-     * 天气类型图片
-     */
-    private int imageId;
-
-    /**
      * 天气类型
      */
     private String weatherType;
 
     /**
+     * 天气类型白天
+     */
+    private String weatherTypeDay;
+
+    /**
+     * 天气类型夜间
+     */
+    private String weatherTypeNight;
+
+    /**
      * 天气代码
      */
     private String weatherCode;
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getLocationCity() {
+        return locationCity;
+    }
+
+    public void setLocationCity(String locationCity) {
+        this.locationCity = locationCity;
+    }
 
     public String getWeatherCode() {
         return weatherCode;
@@ -76,14 +82,6 @@ public class CityManage extends DataSupport {
 
     public void setCityName(String cityName) {
         this.cityName = cityName;
-    }
-
-    public int getImageId() {
-        return imageId;
-    }
-
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
     }
 
     public String getTempHigh() {
@@ -108,5 +106,21 @@ public class CityManage extends DataSupport {
 
     public void setWeatherType(String weatherType) {
         this.weatherType = weatherType;
+    }
+
+    public String getWeatherTypeDay() {
+        return weatherTypeDay;
+    }
+
+    public void setWeatherTypeDay(String weatherTypeDay) {
+        this.weatherTypeDay = weatherTypeDay;
+    }
+
+    public String getWeatherTypeNight() {
+        return weatherTypeNight;
+    }
+
+    public void setWeatherTypeNight(String weatherTypeNight) {
+        this.weatherTypeNight = weatherTypeNight;
     }
 }

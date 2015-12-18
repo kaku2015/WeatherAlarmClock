@@ -28,6 +28,7 @@ import com.kaku.weac.bean.AlarmClock;
 import com.kaku.weac.broadcast.AlarmClockBroadcast;
 import com.kaku.weac.common.WeacConstants;
 
+import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 
@@ -40,18 +41,38 @@ import java.util.Calendar;
 public class MyUtil {
 
     /**
+     * Log tag ：MyUtil
+     */
+    private static final String LOG_TAG = "MyUtil";
+
+    /**
      * 取得壁纸资源ID
      *
      * @param context context
-     * @return 壁纸资源ID
+     * @return 壁纸id
      */
     public static int getWallPaper(Context context) {
         // 取得主题背景配置信息
         SharedPreferences share = context.getSharedPreferences(WeacConstants.EXTRA_WEAC_SHARE,
                 Activity.MODE_PRIVATE);
-        // 设置页面背景
-        return share.getInt(WeacConstants.WALLPAPER_ID,
-                R.drawable.wallpaper_1);
+        String wallpaperName = share.getString(WeacConstants.WALLPAPER_NAME,
+                context.getString(R.string.default_wallpaper_name));
+
+//        int resId = context.getApplicationContext().getResources().getIdentifier(
+//                wallpaperName, "drawable", context.getPackageName());
+//        return resId;
+
+        Class drawable = R.drawable.class;
+        int resId;
+        try {
+            Field field = drawable.getField(wallpaperName);
+            resId = field.getInt(field.getName());
+        } catch (Exception e) {
+            resId = R.drawable.wallpaper_0;
+            LogUtil.e(LOG_TAG, "getWallPaper(Context context): " + e.toString());
+        }
+        return resId;
+
     }
 
     /**

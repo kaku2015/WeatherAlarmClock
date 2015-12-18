@@ -342,7 +342,7 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
                             result = f.delete();
                         }
                         if (!result) {
-                            ToastUtil.showShortToast(getActivity(), getString(R.string.error_delete_fail));
+                            LogUtil.d(LOG_TAG, getString(R.string.error_delete_fail));
                         }
                         break;
                     }

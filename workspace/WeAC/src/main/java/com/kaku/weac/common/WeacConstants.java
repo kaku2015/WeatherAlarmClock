@@ -17,14 +17,9 @@ public class WeacConstants {
     public static final String EXTRA_WEAC_SHARE = "extra_weac_shared_preferences_file";
 
     /**
-     * 保存的壁纸ID
+     * 保存的壁纸名称
      */
-    public static final String WALLPAPER_ID = "wallpaper_id";
-
-    /**
-     * 保存的壁纸位置
-     */
-    public static final String WALLPAPER_POSITION = "wallpaper_position";
+    public static final String WALLPAPER_NAME = "wallpaper_name";
 
     /**
      * 保存的闹钟铃声音量

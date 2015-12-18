@@ -5,7 +5,6 @@ package com.kaku.weac.fragment;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -20,6 +19,7 @@ import android.widget.GridView;
 
 import com.kaku.weac.R;
 import com.kaku.weac.adapter.ThemeAdapter;
+import com.kaku.weac.bean.Theme;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.LruMemoryCache;
@@ -42,14 +42,9 @@ public class ThemeFragment extends BaseFragment {
     private static final String LOG_TAG = "ThemeFragment";
 
     /**
-     * 传递的主题壁纸名
+     * 壁纸资源的集合
      */
-    private static final String EXTRA_WALLPAPER = "extra_theme_wallpaper_name";
-
-    /**
-     * 保存主题壁纸资源id的集合
-     */
-    private List<Integer> mList;
+    private List<Theme> mList;
 
     /**
      * 保存主题壁纸的适配器
@@ -57,21 +52,21 @@ public class ThemeFragment extends BaseFragment {
     private ThemeAdapter mAdapter;
 
     /**
-     * 壁纸位置
+     * 壁纸名
      */
-    private int mWallpaperPosition;
+    private String mWallpaperName;
 
     /**
-     * 当前壁纸图片位置
+     * 当前壁纸图片名称
      */
-    private int mCurrentPosition;
+    private String mCurrentWallpaper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 初始化主题壁纸适配器
         initAdapter();
-        mCurrentPosition = mWallpaperPosition;
+        mCurrentWallpaper = mWallpaperName;
 
     }
 
@@ -87,30 +82,28 @@ public class ThemeFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                if (mCurrentPosition == position) {
+                Theme theme = mList.get(position);
+                String resName = theme.getResName();
+
+                if (mCurrentWallpaper.equals(resName)) {
                     return;
                 }
-                mCurrentPosition = position;
+                mCurrentWallpaper = resName;
+                // 更新当前选中壁纸的名称
+                mAdapter.updateSelection(resName);
+                // 更新适配器刷新GridView显示
+                mAdapter.notifyDataSetChanged();
+
                 // 与壁纸相关的存取信息
                 SharedPreferences share = getActivity().getSharedPreferences(
                         WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
                 SharedPreferences.Editor edit = share.edit();
-                // 更新当前选中壁纸的位置
-                mAdapter.updateSelection(position);
-                // 更新适配器刷新GridView显示
-                mAdapter.notifyDataSetChanged();
-                // 取得选中的壁纸ID
-                int imgId = mList.get(position);
-                // 保存当前壁纸ID
-                edit.putInt(WeacConstants.WALLPAPER_ID, imgId);
-                // 保存当前壁纸位置
-                edit.putInt(WeacConstants.WALLPAPER_POSITION, position);
+                // 保存当前壁纸名称
+                edit.putString(WeacConstants.WALLPAPER_NAME, resName);
                 edit.apply();
-                Intent i = new Intent();
-                // 设置壁纸信息
-                i.putExtra(EXTRA_WALLPAPER, imgId);
-                // 返回结果信息到MoreFragment并进行壁纸更新
-                getActivity().setResult(Activity.RESULT_OK, i);
+
+                // 返回并进行壁纸更新
+                getActivity().setResult(Activity.RESULT_OK, getActivity().getIntent());
             }
 
         });
@@ -125,19 +118,23 @@ public class ThemeFragment extends BaseFragment {
         SharedPreferences share = getActivity().getSharedPreferences(
                 WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
         // 取得使用中壁纸的位置
-        mWallpaperPosition = share.getInt(WeacConstants.WALLPAPER_POSITION, 0);
+        mWallpaperName = share.getString(WeacConstants.WALLPAPER_NAME,
+                getString(R.string.default_wallpaper_name));
         mList = new ArrayList<>();
         // 资源文件集合
         Field[] fields = R.drawable.class.getDeclaredFields();
         // 遍历资源文件
         for (Field field : fields) {
-            // 取得文件名以"bg_"开始的图片
-            if (field.getName().startsWith("wallpaper_")) {
+            String name = field.getName();
+            // 取得文件名以"wallpaper_"开始的图片
+            if (name.startsWith("wallpaper_")) {
                 try {
-                    // 添加图片到列表
-                    this.mList.add(field.getInt(R.drawable.class));
+                    Theme theme = new Theme();
+                    theme.setResName(name);
+                    theme.setResId(field.getInt(R.drawable.class));
+                    this.mList.add(theme);
                 } catch (IllegalAccessException | IllegalArgumentException e) {
-                    e.printStackTrace();
+                    LogUtil.e(LOG_TAG, "initAdapter(): " + e.toString());
                 }
             }
         }
@@ -162,6 +159,6 @@ public class ThemeFragment extends BaseFragment {
 
         // 创建主题壁纸适配器
         this.mAdapter = new ThemeAdapter(getActivity(), mList,
-                mWallpaperPosition, memoryCache, reqWidth, reqHeight);
+                mWallpaperName, memoryCache, reqWidth, reqHeight);
     }
 }

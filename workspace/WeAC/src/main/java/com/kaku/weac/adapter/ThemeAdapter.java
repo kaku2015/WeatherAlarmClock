@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
 import com.kaku.weac.R;
+import com.kaku.weac.bean.Theme;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.LruMemoryCache;
 
@@ -26,7 +27,7 @@ import java.util.List;
  * @author 咖枯
  * @version 1.0 2015
  */
-public class ThemeAdapter extends ArrayAdapter<Integer> {
+public class ThemeAdapter extends ArrayAdapter<Theme> {
 
     /**
      * Log tag ：ThemeAdapter
@@ -39,14 +40,14 @@ public class ThemeAdapter extends ArrayAdapter<Integer> {
     private final Context mContext;
 
     /**
-     * 资源id列表
+     * 资源名称，id列表
      */
-    private final List<Integer> mList;
+    private final List<Theme> mList;
 
     /**
-     * 主题壁纸位置
+     * 主题壁纸名称
      */
-    private int mWallpaperPosition;
+    private String mWallpaperName;
 
     /**
      * 管理图片的缓存
@@ -66,20 +67,20 @@ public class ThemeAdapter extends ArrayAdapter<Integer> {
     /**
      * 主题壁纸适配器
      *
-     * @param context           activity上下文
-     * @param list              壁纸资源id列表
-     * @param wallpaperPosition 选中的主题壁纸位置
-     * @param memoryCache       管理图片的缓存类
-     * @param reqWidth          图片显示的宽度
-     * @param reqHeight         图片显示的高度
+     * @param context       activity上下文
+     * @param list          壁纸资源名称，id列表
+     * @param wallpaperName 选中的主题壁纸名称
+     * @param memoryCache   管理图片的缓存类
+     * @param reqWidth      图片显示的宽度
+     * @param reqHeight     图片显示的高度
      */
-    public ThemeAdapter(Context context, List<Integer> list,
-                        int wallpaperPosition, LruMemoryCache memoryCache, int reqWidth,
+    public ThemeAdapter(Context context, List<Theme> list,
+                        String wallpaperName, LruMemoryCache memoryCache, int reqWidth,
                         int reqHeight) {
         super(context, 0, list);
         this.mContext = context;
         this.mList = list;
-        this.mWallpaperPosition = wallpaperPosition;
+        this.mWallpaperName = wallpaperName;
         this.mMemoryCache = memoryCache;
         this.reqWidth = reqWidth;
         this.reqHeight = reqHeight;
@@ -89,10 +90,10 @@ public class ThemeAdapter extends ArrayAdapter<Integer> {
     /**
      * 更新选中的主题壁纸位置
      *
-     * @param position 选中的壁纸位置
+     * @param wallpaperName 选中的壁纸名称
      */
-    public void updateSelection(int position) {
-        mWallpaperPosition = position;
+    public void updateSelection(String wallpaperName) {
+        mWallpaperName = wallpaperName;
     }
 
     @Override
@@ -113,10 +114,11 @@ public class ThemeAdapter extends ArrayAdapter<Integer> {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+        Theme theme = mList.get(position);
         // 设置壁纸图片
-        LoadBitmap(mList.get(position), viewHolder.imageView);
-        // 当选中的主题位置为当前位置时
-        if (mWallpaperPosition == position) {
+        LoadBitmap(theme.getResId(), viewHolder.imageView);
+        // 当选中的主题名称与当前相同
+        if (mWallpaperName.equals(theme.getResName())) {
             // 设置标记图标
             viewHolder.markIcon.setImageResource(R.drawable.ic_wallpaper_mark);
         } else {

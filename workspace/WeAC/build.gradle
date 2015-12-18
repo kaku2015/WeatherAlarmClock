@@ -30,4 +30,5 @@ dependencies {
     compile files('libs/BaiduLBS_Android.jar')
     compile files('libs/locSDK_4.0.jar')
     compile files('libs/locSDK_6.13.jar')
+    compile project(':timepicker')
 }

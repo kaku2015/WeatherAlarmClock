@@ -35,6 +35,32 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
+        public static final int clock_color=0x7f010021;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int dial_color=0x7f01001f;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int disable_touch=0x7f010022;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
         public static final int mySelectedColor=0x7f01000b;
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
@@ -243,6 +269,15 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int ptrSubHeaderTextAppearance=0x7f010017;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int text_color=0x7f010020;
     }
     public static final class color {
         public static final int background_tab_pressed=0x7f0a0000;
@@ -464,30 +499,30 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int toggle_btn_alarm_on_off_trans=0x7f0200a6;
         public static final int toggle_btn_delete_batch=0x7f0200a7;
         public static final int toggle_btn_repeat_week=0x7f0200a8;
-        public static final int wallpaper_1=0x7f0200a9;
-        public static final int wallpaper_10=0x7f0200aa;
-        public static final int wallpaper_11=0x7f0200ab;
-        public static final int wallpaper_12=0x7f0200ac;
-        public static final int wallpaper_13=0x7f0200ad;
-        public static final int wallpaper_14=0x7f0200ae;
-        public static final int wallpaper_16=0x7f0200af;
-        public static final int wallpaper_2=0x7f0200b0;
-        public static final int wallpaper_20=0x7f0200b1;
-        public static final int wallpaper_21=0x7f0200b2;
-        public static final int wallpaper_22=0x7f0200b3;
-        public static final int wallpaper_23=0x7f0200b4;
-        public static final int wallpaper_24=0x7f0200b5;
-        public static final int wallpaper_25=0x7f0200b6;
-        public static final int wallpaper_26=0x7f0200b7;
-        public static final int wallpaper_27=0x7f0200b8;
-        public static final int wallpaper_28=0x7f0200b9;
-        public static final int wallpaper_29=0x7f0200ba;
-        public static final int wallpaper_3=0x7f0200bb;
-        public static final int wallpaper_30=0x7f0200bc;
-        public static final int wallpaper_31=0x7f0200bd;
-        public static final int wallpaper_32=0x7f0200be;
-        public static final int wallpaper_33=0x7f0200bf;
-        public static final int wallpaper_34=0x7f0200c0;
+        public static final int wallpaper_0=0x7f0200a9;
+        public static final int wallpaper_1=0x7f0200aa;
+        public static final int wallpaper_10=0x7f0200ab;
+        public static final int wallpaper_11=0x7f0200ac;
+        public static final int wallpaper_12=0x7f0200ad;
+        public static final int wallpaper_13=0x7f0200ae;
+        public static final int wallpaper_14=0x7f0200af;
+        public static final int wallpaper_16=0x7f0200b0;
+        public static final int wallpaper_2=0x7f0200b1;
+        public static final int wallpaper_20=0x7f0200b2;
+        public static final int wallpaper_21=0x7f0200b3;
+        public static final int wallpaper_22=0x7f0200b4;
+        public static final int wallpaper_23=0x7f0200b5;
+        public static final int wallpaper_24=0x7f0200b6;
+        public static final int wallpaper_25=0x7f0200b7;
+        public static final int wallpaper_26=0x7f0200b8;
+        public static final int wallpaper_27=0x7f0200b9;
+        public static final int wallpaper_28=0x7f0200ba;
+        public static final int wallpaper_29=0x7f0200bb;
+        public static final int wallpaper_3=0x7f0200bc;
+        public static final int wallpaper_30=0x7f0200bd;
+        public static final int wallpaper_31=0x7f0200be;
+        public static final int wallpaper_32=0x7f0200bf;
+        public static final int wallpaper_33=0x7f0200c0;
         public static final int wallpaper_4=0x7f0200c1;
         public static final int wallpaper_5=0x7f0200c2;
         public static final int wallpaper_7=0x7f0200c3;
@@ -515,7 +550,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int alarm=0x7f0c0083;
         public static final int alarm_clock_empty=0x7f0c0035;
         public static final int alarm_list_delete_btn=0x7f0c00e9;
-        public static final int analogClock1=0x7f0c007f;
         public static final int aqi=0x7f0c0089;
         public static final int background=0x7f0c00dd;
         public static final int bg=0x7f0c00e7;
@@ -643,6 +677,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int temperature2=0x7f0c0086;
         public static final int temperature3=0x7f0c0087;
         public static final int time=0x7f0c00db;
+        public static final int timePicker=0x7f0c007f;
         public static final int time_picker=0x7f0c003a;
         public static final int time_picker_tv=0x7f0c0039;
         public static final int title=0x7f0c00d9;
@@ -841,141 +876,142 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int day=0x7f070033;
         public static final int days_forecast=0x7f070034;
         public static final int default_ring=0x7f070035;
-        public static final int delete=0x7f070036;
-        public static final int delete_batch=0x7f070037;
-        public static final int delete_success=0x7f070038;
-        public static final int detail=0x7f070039;
-        public static final int dress=0x7f07003a;
-        public static final int dress_detail=0x7f07003b;
-        public static final int edit_alarm_clock=0x7f07003c;
-        public static final int eight=0x7f07003d;
-        public static final int error_delete_fail=0x7f07003e;
-        public static final int error_sd_card=0x7f07003f;
-        public static final int every_day=0x7f070040;
-        public static final int file_format=0x7f070041;
-        public static final int file_name=0x7f070042;
-        public static final int file_name_exist=0x7f070043;
-        public static final int file_size=0x7f070044;
-        public static final int five=0x7f070045;
-        public static final int five_h=0x7f070046;
-        public static final int forbid_power=0x7f070047;
-        public static final int four_h=0x7f070048;
-        public static final int friday=0x7f070049;
-        public static final int hot_city=0x7f07004a;
-        public static final int humidity=0x7f07004b;
-        public static final int input_city_name=0x7f07004c;
-        public static final int input_empty=0x7f07004d;
-        public static final int internet_error=0x7f07004e;
-        public static final int internet_fail=0x7f07004f;
-        public static final int interval=0x7f070050;
-        public static final int interval_day=0x7f070051;
-        public static final int interval_hour=0x7f070052;
-        public static final int interval_just=0x7f070053;
-        public static final int interval_minute=0x7f070054;
-        public static final int leave_to_refresh=0x7f070055;
-        public static final int life_index=0x7f070056;
-        public static final int local_music=0x7f070057;
-        public static final int location_already_added=0x7f070058;
-        public static final int location_fail=0x7f070059;
-        public static final int monday=0x7f07005a;
-        public static final int more=0x7f07005b;
-        public static final int more_city=0x7f07005c;
-        public static final int morning_exercise=0x7f07005d;
-        public static final int morning_exercise_detail=0x7f07005e;
-        public static final int my_default=0x7f07005f;
-        public static final int nap=0x7f070060;
-        public static final int nap_set=0x7f070061;
-        public static final int nap_time=0x7f070062;
-        public static final int nap_to=0x7f070063;
-        public static final int new_alarm_clock=0x7f070064;
-        public static final int no=0x7f070065;
-        public static final int no_city_info=0x7f070066;
-        public static final int no_data=0x7f070067;
-        public static final int no_local_music_file=0x7f070068;
-        public static final int no_matched_city=0x7f070069;
-        public static final int no_record_file=0x7f07006a;
-        public static final int no_ring=0x7f07006b;
-        public static final int no_system_ring_file=0x7f07006c;
-        public static final int now_loading=0x7f07006d;
-        public static final int now_locating=0x7f07006e;
-        public static final int num=0x7f07006f;
-        public static final int one=0x7f070070;
-        public static final int one_h=0x7f070071;
-        public static final int play_duration=0x7f070072;
-        public static final int play_fail=0x7f070073;
-        public static final int press_right_top=0x7f070074;
-        public static final int prompt=0x7f070075;
-        public static final int pull_to_refresh=0x7f070076;
+        public static final int default_wallpaper_name=0x7f070036;
+        public static final int delete=0x7f070037;
+        public static final int delete_batch=0x7f070038;
+        public static final int delete_success=0x7f070039;
+        public static final int detail=0x7f07003a;
+        public static final int dress=0x7f07003b;
+        public static final int dress_detail=0x7f07003c;
+        public static final int edit_alarm_clock=0x7f07003d;
+        public static final int eight=0x7f07003e;
+        public static final int error_delete_fail=0x7f07003f;
+        public static final int error_sd_card=0x7f070040;
+        public static final int every_day=0x7f070041;
+        public static final int file_format=0x7f070042;
+        public static final int file_name=0x7f070043;
+        public static final int file_name_exist=0x7f070044;
+        public static final int file_size=0x7f070045;
+        public static final int five=0x7f070046;
+        public static final int five_h=0x7f070047;
+        public static final int forbid_power=0x7f070048;
+        public static final int four_h=0x7f070049;
+        public static final int friday=0x7f07004a;
+        public static final int hot_city=0x7f07004b;
+        public static final int humidity=0x7f07004c;
+        public static final int input_city_name=0x7f07004d;
+        public static final int input_empty=0x7f07004e;
+        public static final int internet_error=0x7f07004f;
+        public static final int internet_fail=0x7f070050;
+        public static final int interval=0x7f070051;
+        public static final int interval_day=0x7f070052;
+        public static final int interval_hour=0x7f070053;
+        public static final int interval_just=0x7f070054;
+        public static final int interval_minute=0x7f070055;
+        public static final int leave_to_refresh=0x7f070056;
+        public static final int life_index=0x7f070057;
+        public static final int local_music=0x7f070058;
+        public static final int location_already_added=0x7f070059;
+        public static final int location_fail=0x7f07005a;
+        public static final int monday=0x7f07005b;
+        public static final int more=0x7f07005c;
+        public static final int more_city=0x7f07005d;
+        public static final int morning_exercise=0x7f07005e;
+        public static final int morning_exercise_detail=0x7f07005f;
+        public static final int my_default=0x7f070060;
+        public static final int nap=0x7f070061;
+        public static final int nap_set=0x7f070062;
+        public static final int nap_time=0x7f070063;
+        public static final int nap_to=0x7f070064;
+        public static final int new_alarm_clock=0x7f070065;
+        public static final int no=0x7f070066;
+        public static final int no_city_info=0x7f070067;
+        public static final int no_data=0x7f070068;
+        public static final int no_local_music_file=0x7f070069;
+        public static final int no_matched_city=0x7f07006a;
+        public static final int no_record_file=0x7f07006b;
+        public static final int no_ring=0x7f07006c;
+        public static final int no_system_ring_file=0x7f07006d;
+        public static final int now_loading=0x7f07006e;
+        public static final int now_locating=0x7f07006f;
+        public static final int num=0x7f070070;
+        public static final int one=0x7f070071;
+        public static final int one_h=0x7f070072;
+        public static final int play_duration=0x7f070073;
+        public static final int play_fail=0x7f070074;
+        public static final int press_right_top=0x7f070075;
+        public static final int prompt=0x7f070076;
+        public static final int pull_to_refresh=0x7f070077;
         public static final int pull_to_refresh_from_bottom_pull_label=0x7f070003;
         public static final int pull_to_refresh_from_bottom_refreshing_label=0x7f070004;
         public static final int pull_to_refresh_from_bottom_release_label=0x7f070005;
         public static final int pull_to_refresh_pull_label=0x7f070000;
         public static final int pull_to_refresh_refreshing_label=0x7f070001;
         public static final int pull_to_refresh_release_label=0x7f070002;
-        public static final int record=0x7f070077;
-        public static final int record_fail=0x7f070078;
-        public static final int record_fail_confirm=0x7f070079;
-        public static final int record_file_name=0x7f07007a;
-        public static final int refresh_fail=0x7f07007b;
-        public static final int refreshing=0x7f07007c;
-        public static final int release_time=0x7f07007d;
-        public static final int rename=0x7f07007e;
-        public static final int rename_success=0x7f07007f;
-        public static final int repeat=0x7f070080;
-        public static final int repeat_once=0x7f070081;
-        public static final int retry=0x7f070082;
-        public static final int ring=0x7f070083;
-        public static final int ring_select=0x7f070084;
-        public static final int roger=0x7f070085;
-        public static final int saturday=0x7f070086;
-        public static final int save=0x7f070087;
-        public static final int save_path=0x7f070088;
-        public static final int select_all=0x7f070089;
-        public static final int select_all_cancel=0x7f07008a;
-        public static final int selected_xx_item=0x7f07008b;
-        public static final int set_default=0x7f07008c;
-        public static final int six_h=0x7f07008d;
-        public static final int sport=0x7f07008e;
-        public static final int sport_detail=0x7f07008f;
-        public static final int sunday=0x7f070090;
-        public static final int sure=0x7f070091;
-        public static final int sure_delete=0x7f070092;
-        public static final int system_ring=0x7f070093;
-        public static final int tag=0x7f070094;
-        public static final int ten=0x7f070095;
-        public static final int the_day_of_tomorrow=0x7f070096;
-        public static final int theme_wallpaper=0x7f070097;
-        public static final int thirty=0x7f070098;
-        public static final int three=0x7f070099;
-        public static final int three_h=0x7f07009a;
-        public static final int thursday=0x7f07009b;
-        public static final int time=0x7f07009c;
-        public static final int times=0x7f07009d;
-        public static final int today=0x7f07009e;
-        public static final int tomorrow=0x7f07009f;
-        public static final int touch_here_nap=0x7f0700a0;
-        public static final int tuesday=0x7f0700a1;
-        public static final int turn=0x7f0700a2;
-        public static final int twenty=0x7f0700a3;
-        public static final int two_h=0x7f0700a4;
-        public static final int ultraviolet_Rays_detail=0x7f0700a5;
-        public static final int ultraviolet_rays=0x7f0700a6;
-        public static final int umbrella=0x7f0700a7;
-        public static final int umbrella_detail=0x7f0700a8;
-        public static final int unknown=0x7f0700a9;
-        public static final int update_time=0x7f0700aa;
-        public static final int update_time2=0x7f0700ab;
-        public static final int vibrate=0x7f0700ac;
-        public static final int volume=0x7f0700ad;
-        public static final int wea=0x7f0700ae;
-        public static final int wea_prompt=0x7f0700af;
-        public static final int wednesday=0x7f0700b0;
-        public static final int week=0x7f0700b1;
-        public static final int week_day=0x7f0700b2;
-        public static final int week_end=0x7f0700b3;
-        public static final int xx_naping=0x7f0700b4;
-        public static final int yesterday=0x7f0700b5;
-        public static final int zero_zero=0x7f0700b6;
+        public static final int record=0x7f070078;
+        public static final int record_fail=0x7f070079;
+        public static final int record_fail_confirm=0x7f07007a;
+        public static final int record_file_name=0x7f07007b;
+        public static final int refresh_fail=0x7f07007c;
+        public static final int refreshing=0x7f07007d;
+        public static final int release_time=0x7f07007e;
+        public static final int rename=0x7f07007f;
+        public static final int rename_success=0x7f070080;
+        public static final int repeat=0x7f070081;
+        public static final int repeat_once=0x7f070082;
+        public static final int retry=0x7f070083;
+        public static final int ring=0x7f070084;
+        public static final int ring_select=0x7f070085;
+        public static final int roger=0x7f070086;
+        public static final int saturday=0x7f070087;
+        public static final int save=0x7f070088;
+        public static final int save_path=0x7f070089;
+        public static final int select_all=0x7f07008a;
+        public static final int select_all_cancel=0x7f07008b;
+        public static final int selected_xx_item=0x7f07008c;
+        public static final int set_default=0x7f07008d;
+        public static final int six_h=0x7f07008e;
+        public static final int sport=0x7f07008f;
+        public static final int sport_detail=0x7f070090;
+        public static final int sunday=0x7f070091;
+        public static final int sure=0x7f070092;
+        public static final int sure_delete=0x7f070093;
+        public static final int system_ring=0x7f070094;
+        public static final int tag=0x7f070095;
+        public static final int ten=0x7f070096;
+        public static final int the_day_of_tomorrow=0x7f070097;
+        public static final int theme_wallpaper=0x7f070098;
+        public static final int thirty=0x7f070099;
+        public static final int three=0x7f07009a;
+        public static final int three_h=0x7f07009b;
+        public static final int thursday=0x7f07009c;
+        public static final int time=0x7f07009d;
+        public static final int times=0x7f07009e;
+        public static final int today=0x7f07009f;
+        public static final int tomorrow=0x7f0700a0;
+        public static final int touch_here_nap=0x7f0700a1;
+        public static final int tuesday=0x7f0700a2;
+        public static final int turn=0x7f0700a3;
+        public static final int twenty=0x7f0700a4;
+        public static final int two_h=0x7f0700a5;
+        public static final int ultraviolet_Rays_detail=0x7f0700a6;
+        public static final int ultraviolet_rays=0x7f0700a7;
+        public static final int umbrella=0x7f0700a8;
+        public static final int umbrella_detail=0x7f0700a9;
+        public static final int unknown=0x7f0700aa;
+        public static final int update_time=0x7f0700ab;
+        public static final int update_time2=0x7f0700ac;
+        public static final int vibrate=0x7f0700ad;
+        public static final int volume=0x7f0700ae;
+        public static final int wea=0x7f0700af;
+        public static final int wea_prompt=0x7f0700b0;
+        public static final int wednesday=0x7f0700b1;
+        public static final int week=0x7f0700b2;
+        public static final int week_day=0x7f0700b3;
+        public static final int week_end=0x7f0700b4;
+        public static final int xx_naping=0x7f0700b5;
+        public static final int yesterday=0x7f0700b6;
+        public static final int zero_zero=0x7f0700b7;
     }
     public static final class style {
         /**  设置dialog的背景 
@@ -1554,5 +1590,83 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr name com.kaku.weac:ptrSubHeaderTextAppearance
         */
         public static final int PullToRefresh_ptrSubHeaderTextAppearance = 11;
+        /** Attributes that can be used with a TimePicker.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #TimePicker_clock_color com.kaku.weac:clock_color}</code></td><td></td></tr>
+           <tr><td><code>{@link #TimePicker_dial_color com.kaku.weac:dial_color}</code></td><td></td></tr>
+           <tr><td><code>{@link #TimePicker_disable_touch com.kaku.weac:disable_touch}</code></td><td></td></tr>
+           <tr><td><code>{@link #TimePicker_text_color com.kaku.weac:text_color}</code></td><td></td></tr>
+           </table>
+           @see #TimePicker_clock_color
+           @see #TimePicker_dial_color
+           @see #TimePicker_disable_touch
+           @see #TimePicker_text_color
+         */
+        public static final int[] TimePicker = {
+            0x7f01001f, 0x7f010020, 0x7f010021, 0x7f010022
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#clock_color}
+          attribute's value can be found in the {@link #TimePicker} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kaku.weac:clock_color
+        */
+        public static final int TimePicker_clock_color = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#dial_color}
+          attribute's value can be found in the {@link #TimePicker} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kaku.weac:dial_color
+        */
+        public static final int TimePicker_dial_color = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#disable_touch}
+          attribute's value can be found in the {@link #TimePicker} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kaku.weac:disable_touch
+        */
+        public static final int TimePicker_disable_touch = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#text_color}
+          attribute's value can be found in the {@link #TimePicker} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kaku.weac:text_color
+        */
+        public static final int TimePicker_text_color = 1;
     };
 }

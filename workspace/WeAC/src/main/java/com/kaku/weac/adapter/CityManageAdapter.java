@@ -22,6 +22,7 @@ import com.kaku.weac.bean.CityManage;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.db.WeatherDBOperate;
 import com.kaku.weac.util.MyUtil;
+import com.kaku.weac.util.ToastUtil;
 
 import java.util.Calendar;
 import java.util.List;
@@ -144,6 +145,11 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
         viewHolder.setDefaultTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (cityManage.getWeatherType().equals(mContext.getString(R.string.no))) {
+                    ToastUtil.showShortToast(mContext, mContext.getString(R.string.no_city_weather_info));
+                    return;
+                }
+
                 SharedPreferences share = mContext.getSharedPreferences(
                         WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
                 // 重复设置默认城市

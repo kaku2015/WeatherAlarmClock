@@ -217,6 +217,12 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 startActivityForResult(intent, REQUEST_CITY_MANAGE);
             } else {
                 CityManage cityManage = mCityManageAdapter.getItem(position);
+
+                if (cityManage.getWeatherType().equals(getString(R.string.no))) {
+                    ToastUtil.showShortToast(CityManageActivity.this, getString(R.string.no_city_weather_info));
+                    return;
+                }
+
                 // 不是自动定位
                 if (cityManage.getLocationCity() == null) {
                     myFinish(cityManage.getCityName(), cityManage.getWeatherCode());
@@ -267,6 +273,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
         switch (v.getId()) {
             // 返回按钮
             case R.id.action_return:
+                mIsRefreshing = false;
                 onBack();
                 break;
             // 编辑按钮
@@ -616,31 +623,30 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onBackPressed() {
-        onBack();
+        if (mIsRefreshing) {
+            mIsRefreshing = false;
+        } else {
+            onBack();
+        }
     }
 
     /**
      * 当按下返回/后退键
      */
     private void onBack() {
-        // 没有正在刷新
-        if (!mIsRefreshing) {
-            // 当修改了默认城市
-            if (mIsDefaultCityChanged) {
-                modifyCity();
-            } else {
-                String cityName = getIntent().getStringExtra(WeacConstants.CITY_NAME);
-                int number = WeatherDBOperate.getInstance().queryCityManage(cityName);
-                // 当前城市没有被删除
-                if (number == 1) {
-                    finish();
-                } else {
-                    // 返回加载默认城市
-                    modifyCity();
-                }
-            }
+        // 当修改了默认城市
+        if (mIsDefaultCityChanged) {
+            modifyCity();
         } else {
-            mIsRefreshing = false;
+            String cityName = getIntent().getStringExtra(WeacConstants.CITY_NAME);
+            int number = WeatherDBOperate.getInstance().queryCityManage(cityName);
+            // 当前城市没有被删除
+            if (number == 1) {
+                finish();
+            } else {
+                // 返回加载默认城市
+                modifyCity();
+            }
         }
     }
 }

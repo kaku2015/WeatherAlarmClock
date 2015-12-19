@@ -1130,6 +1130,10 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         }
         // 多天预报信息
         List<WeatherDaysForecast> weatherDaysForecasts = weatherInfo.getWeatherDaysForecast();
+        if (weatherDaysForecasts.size() < 6) {
+            ToastUtil.showShortToast(getActivity(), getString(R.string.no_city_weather_info));
+            return;
+        }
 
         // 昨天天气信息（23：45开始到05：20以前的数据的日期和周）
         WeatherDaysForecast weather;
@@ -1152,50 +1156,29 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         //更新时间从23：45开始到05：20以前的数据，后移一天填充
         if ((hour1 == 23 && minute1 >= 45) || (hour1 < 5) ||
                 ((hour1 == 5) && (minute1 < 20))) {
-            if (weatherDaysForecasts.size() == 6) {
-                weather = weatherDaysForecasts.get(0);
-                weather1 = weatherDaysForecasts.get(1);
-                weather2 = weatherDaysForecasts.get(2);
-                weather3 = weatherDaysForecasts.get(3);
-                weather4 = weatherDaysForecasts.get(4);
-                weather5 = weatherDaysForecasts.get(5);
-                weather6 = weatherDaysForecasts.get(5);
-            } else {
-                weather = null;
-                weather1 = weatherDaysForecasts.get(0);
-                weather2 = weatherDaysForecasts.get(1);
-                weather3 = weatherDaysForecasts.get(2);
-                weather4 = weatherDaysForecasts.get(3);
-                weather5 = weatherDaysForecasts.get(4);
-                weather6 = weatherDaysForecasts.get(4);
-
-            }
+            weather = weatherDaysForecasts.get(0);
+            weather1 = weatherDaysForecasts.get(1);
+            weather2 = weatherDaysForecasts.get(2);
+            weather3 = weatherDaysForecasts.get(3);
+            weather4 = weatherDaysForecasts.get(4);
+            weather5 = weatherDaysForecasts.get(5);
+            weather6 = weatherDaysForecasts.get(5);
         } else {
-            if (weatherDaysForecasts.size() == 6) {
-                weather = weatherDaysForecasts.get(0);
-                weather1 = weatherDaysForecasts.get(0);
-                weather2 = weatherDaysForecasts.get(1);
-                weather3 = weatherDaysForecasts.get(2);
-                weather4 = weatherDaysForecasts.get(3);
-                weather5 = weatherDaysForecasts.get(4);
-                weather6 = weatherDaysForecasts.get(5);
-            } else {
-                weather = null;
-                weather1 = null;
-                weather2 = weatherDaysForecasts.get(0);
-                weather3 = weatherDaysForecasts.get(1);
-                weather4 = weatherDaysForecasts.get(2);
-                weather5 = weatherDaysForecasts.get(3);
-                weather6 = weatherDaysForecasts.get(4);
-            }
+            weather = weatherDaysForecasts.get(0);
+            weather1 = weatherDaysForecasts.get(0);
+            weather2 = weatherDaysForecasts.get(1);
+            weather3 = weatherDaysForecasts.get(2);
+            weather4 = weatherDaysForecasts.get(3);
+            weather5 = weatherDaysForecasts.get(4);
+            weather6 = weatherDaysForecasts.get(5);
         }
 
         Calendar calendar = Calendar.getInstance();
         // 现在小时
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
 
+        // 设置城市名
         if (weatherInfo.getCity() != null) {
-            // 设置城市名
             mCityNameTv.setText(weatherInfo.getCity());
             // 不是自动定位
             if (!getString(R.string.auto_location).equals(mCityWeatherCode)) {
@@ -1413,25 +1396,14 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         String[] day5;
         String[] day6;
         if ((hour1 == 23 && minute1 >= 45) || (hour1 < 5) || ((hour1 == 5) && (minute1 < 20))) {
-            if (weather != null) {
-                day1 = getDay(weather.getDate());
-            } else {
-                day1 = null;
-            }
-
-            assert weather1 != null;
+            day1 = getDay(weather.getDate());
             day2 = getDay(weather1.getDate());
             day3 = getDay(weather2.getDate());
             day4 = getDay(weather3.getDate());
             day5 = getDay(weather4.getDate());
             day6 = getDay(weather5.getDate());
         } else {
-            if (weather1 != null) {
-                day1 = getDay(weather1.getDate());
-            } else {
-                day1 = null;
-            }
-
+            day1 = getDay(weather1.getDate());
             day2 = getDay(weather2.getDate());
             day3 = getDay(weather3.getDate());
             day4 = getDay(weather4.getDate());
@@ -1462,13 +1434,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         String month6 = MyUtil.addZero(calendar.get(Calendar.MONTH) + 1);
 
         // 日
-        String day01;
-        if (day1 != null) {
-            day01 = day1[0].split("日")[0];
-        } else {
-            day01 = null;
-        }
-
+        String day01 = day1[0].split("日")[0];
         String day02 = day2[0].split("日")[0];
         String day03 = day3[0].split("日")[0];
         String day04 = day4[0].split("日")[0];
@@ -1478,12 +1444,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         // 斜杠
         String date = getString(R.string.date);
         // 设置日期
-        if (day01 != null) {
-            mDaysForecastTvDay1.setText(String.format(date, month1, day01));
-        } else {
-            mDaysForecastTvDay1.setText(R.string.dash);
-        }
-
+        mDaysForecastTvDay1.setText(String.format(date, month1, day01));
         mDaysForecastTvDay2.setText(String.format(date, month2, day02));
         mDaysForecastTvDay3.setText(String.format(date, month3, day03));
         mDaysForecastTvDay4.setText(String.format(date, month4, day04));
@@ -1491,13 +1452,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         mDaysForecastTvDay6.setText(String.format(date, month6, day06));
 
         // 取得白天天气类型图片id
-        int weatherDayId1;
-        if (weather != null) {
-            assert weather1 != null;
-            weatherDayId1 = MyUtil.getWeatherTypeImageID(weather1.getTypeDay(), true);
-        } else {
-            weatherDayId1 = R.drawable.ic_weather_no;
-        }
+        int weatherDayId1 = MyUtil.getWeatherTypeImageID(weather1.getTypeDay(), true);
         int weatherDayId2 = MyUtil.getWeatherTypeImageID(weather2.getTypeDay(), true);
         int weatherDayId3 = MyUtil.getWeatherTypeImageID(weather3.getTypeDay(), true);
         int weatherDayId4 = MyUtil.getWeatherTypeImageID(weather4.getTypeDay(), true);
@@ -1513,11 +1468,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         mDaysForecastWeaTypeDayIv6.setImageResource(weatherDayId6);
 
         // 设置白天天气类型文字
-        if (weather != null) {
-            mDaysForecastWeaTypeDayTv1.setText(weather1.getTypeDay());
-        } else {
-            mDaysForecastWeaTypeDayTv1.setText(R.string.dash);
-        }
+        mDaysForecastWeaTypeDayTv1.setText(weather1.getTypeDay());
         mDaysForecastWeaTypeDayTv2.setText(weather2.getTypeDay());
         mDaysForecastWeaTypeDayTv3.setText(weather3.getTypeDay());
         mDaysForecastWeaTypeDayTv4.setText(weather4.getTypeDay());
@@ -1525,37 +1476,19 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         mDaysForecastWeaTypeDayTv6.setText(weather6.getTypeDay());
 
         // 设置白天温度曲线
-        if (weather != null) {
-            mCharView.setTempDay(new int[]{getTemp(weather1.getHigh()),
-                    getTemp(weather2.getHigh()), getTemp(weather3.getHigh()),
-                    getTemp(weather4.getHigh()), getTemp(weather5.getHigh()),
-                    getTemp(weather6.getHigh())});
-        } else {
-            mCharView.setTempDay(new int[]{-1000,
-                    getTemp(weather2.getHigh()), getTemp(weather3.getHigh()),
-                    getTemp(weather4.getHigh()), getTemp(weather5.getHigh()),
-                    getTemp(weather6.getHigh())});
-        }
+        mCharView.setTempDay(new int[]{getTemp(weather1.getHigh()),
+                getTemp(weather2.getHigh()), getTemp(weather3.getHigh()),
+                getTemp(weather4.getHigh()), getTemp(weather5.getHigh()),
+                getTemp(weather6.getHigh())});
         // 设置夜间温度曲线
-        if (weather != null) {
-            mCharView.setTempNight(new int[]{getTemp(weather1.getLow()),
-                    getTemp(weather2.getLow()), getTemp(weather3.getLow()),
-                    getTemp(weather4.getLow()), getTemp(weather5.getLow()),
-                    getTemp(weather6.getLow())});
-        } else {
-            mCharView.setTempNight(new int[]{-1000,
-                    getTemp(weather2.getLow()), getTemp(weather3.getLow()),
-                    getTemp(weather4.getLow()), getTemp(weather5.getLow()),
-                    getTemp(weather6.getLow())});
-        }
+        mCharView.setTempNight(new int[]{getTemp(weather1.getLow()),
+                getTemp(weather2.getLow()), getTemp(weather3.getLow()),
+                getTemp(weather4.getLow()), getTemp(weather5.getLow()),
+                getTemp(weather6.getLow())});
         mCharView.invalidate();
 
         // 设置夜间天气类型文字
-        if (weather != null) {
-            mDaysForecastWeaTypeNightTv1.setText(weather1.getTypeNight());
-        } else {
-            mDaysForecastWeaTypeNightTv1.setText(R.string.dash);
-        }
+        mDaysForecastWeaTypeNightTv1.setText(weather1.getTypeNight());
         mDaysForecastWeaTypeNightTv2.setText(weather2.getTypeNight());
         mDaysForecastWeaTypeNightTv3.setText(weather3.getTypeNight());
         mDaysForecastWeaTypeNightTv4.setText(weather4.getTypeNight());
@@ -1563,12 +1496,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         mDaysForecastWeaTypeNightTv6.setText(weather6.getTypeNight());
 
         // 取得夜间天气类型图片id
-        int weatherNightId1;
-        if (weather != null) {
-            weatherNightId1 = MyUtil.getWeatherTypeImageID(weather1.getTypeNight(), false);
-        } else {
-            weatherNightId1 = R.drawable.ic_weather_no;
-        }
+        int weatherNightId1 = MyUtil.getWeatherTypeImageID(weather1.getTypeNight(), false);
         int weatherNightId2 = MyUtil.getWeatherTypeImageID(weather2.getTypeNight(), false);
         int weatherNightId3 = MyUtil.getWeatherTypeImageID(weather3.getTypeNight(), false);
         int weatherNightId4 = MyUtil.getWeatherTypeImageID(weather4.getTypeNight(), false);
@@ -1584,11 +1512,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         mDaysForecastWeaTypeNightIv6.setImageResource(weatherNightId6);
 
         // 设置风向
-        if (weather != null) {
-            mDaysForecastWindDirectionTv1.setText(weather1.getWindDirectionDay());
-        } else {
-            mDaysForecastWindDirectionTv1.setText(R.string.dash);
-        }
+        mDaysForecastWindDirectionTv1.setText(weather1.getWindDirectionDay());
         mDaysForecastWindDirectionTv2.setText(weather2.getWindDirectionDay());
         mDaysForecastWindDirectionTv3.setText(weather3.getWindDirectionDay());
         mDaysForecastWindDirectionTv4.setText(weather4.getWindDirectionDay());
@@ -1596,11 +1520,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         mDaysForecastWindDirectionTv6.setText(weather6.getWindDirectionDay());
 
         // 设置风力
-        if (weather != null) {
-            mDaysForecastWindPowerTv1.setText(weather1.getWindPowerDay());
-        } else {
-            mDaysForecastWindPowerTv1.setText(R.string.dash);
-        }
+        mDaysForecastWindPowerTv1.setText(weather1.getWindPowerDay());
         mDaysForecastWindPowerTv2.setText(weather2.getWindPowerDay());
         mDaysForecastWindPowerTv3.setText(weather3.getWindPowerDay());
         mDaysForecastWindPowerTv4.setText(weather4.getWindPowerDay());

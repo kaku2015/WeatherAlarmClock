@@ -1238,11 +1238,19 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
             // 更新时间
             String updateTime;
             if (minuteD < 24) {
-                updateTime = String.format(getString(R.string.update_time),
-                        weatherInfo.getUpdateTime());
+                updateTime = String.format(getString(R.string.update_time), weatherInfo.getUpdateTime());
             } else if (minuteD >= 24 && minuteD < 48) {
-                updateTime = String.format(getString(R.string.update_time2),
-                        weatherInfo.getUpdateTime());
+                updateTime = String.format(getString(R.string.update_time2), weatherInfo.getUpdateTime());
+            } else if (minuteD >= 48 && minuteD < 72) {
+                updateTime = String.format(getString(R.string.update_time3), weatherInfo.getUpdateTime());
+            } else if (minuteD >= 72 && minuteD < 96) {
+                updateTime = String.format(getString(R.string.update_time4), 3);
+            } else if (minuteD >= 96 && minuteD < 120) {
+                updateTime = String.format(getString(R.string.update_time4), 4);
+            } else if (minuteD >= 120 && minuteD < 144) {
+                updateTime = String.format(getString(R.string.update_time4), 5);
+            } else if (minuteD >= 144 && minuteD < 168) {
+                updateTime = String.format(getString(R.string.update_time4), 6);
             } else {
                 updateTime = getString(R.string.data_void);
             }

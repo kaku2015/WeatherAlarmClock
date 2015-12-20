@@ -312,24 +312,8 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 mRefreshBtn.setVisibility(View.INVISIBLE);
                 mCancelRefreshBtn.setVisibility(View.VISIBLE);
 
-                // 显示第一项的进度条
-                mCityManageAdapter.displayProgressBar(0);
-                mCityManageAdapter.notifyDataSetChanged();
                 mIsRefreshing = true;
-
-                String cityName;
-                String address;
-                CityManage cityManage = mCityManageList.get(0);
-                // 不是自动定位
-                if (cityManage.getLocationCity() == null) {
-                    cityName = cityManage.getCityName();
-                    address = getString(R.string.address_weather, cityManage.getWeatherCode());
-                } else {
-                    cityName = cityManage.getLocationCity();
-                    address = null;
-                }
-
-                queryFormServer(address, 0, cityName);
+                refresh(0);
                 break;
             // 取消更新
             case R.id.action_refresh_cancel:
@@ -429,8 +413,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                     // GridView设置点击事件
                     mGridView.setOnItemClickListener(mOnItemClickListener);
                 } else {
-                    // 隐藏进度条显示刷新按钮
-                    hideProgressBarDisplayRefresh();
+                    continueRefreshOrStop(position);
                 }
                 ToastUtil.showShortToast(CityManageActivity.this, info);
             }
@@ -480,30 +463,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 // 修改城市管理item信息
                 WeatherDBOperate.getInstance().updateCityManage(cityManage);
 
-                // 当为列表最后一项或者不是正在刷新状态
-                if (mPosition >= (mCityManageList.size() - 2) || !mIsRefreshing) {
-                    // 隐藏进度条显示刷新按钮
-                    hideProgressBarDisplayRefresh();
-                    return;
-                }
-                // 下一项显示进度条
-                mCityManageAdapter.displayProgressBar(mPosition + 1);
-                mCityManageAdapter.notifyDataSetChanged();
-
-                String cityName;
-                String address;
-                CityManage cityManage1 = mCityManageList.get(mPosition + 1);
-                // 不是自动定位
-                if (cityManage1.getLocationCity() == null) {
-                    cityName = cityManage1.getCityName();
-                    address = getString(R.string.address_weather, cityManage1.getWeatherCode());
-                } else {
-                    cityName = cityManage1.getLocationCity();
-                    address = null;
-                }
-
-                // 更新查询下一项
-                queryFormServer(address, mPosition + 1, cityName);
+                continueRefreshOrStop(mPosition);
             }
 
         }
@@ -546,6 +506,48 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
 
         }
 
+    }
+
+
+    /**
+     * 继续刷新/停止刷新
+     *
+     * @param position 当前城市位置
+     */
+    private void continueRefreshOrStop(int position) {
+        // 当为列表最后一项或者不是正在刷新状态
+        if (position >= (mCityManageList.size() - 2) || !mIsRefreshing) {
+            // 隐藏进度条显示刷新按钮
+            hideProgressBarDisplayRefresh();
+        } else {
+            refresh(position + 1);
+        }
+    }
+
+    /**
+     * 刷新
+     *
+     * @param position 当前城市位置
+     */
+    private void refresh(int position) {
+        // 下一项显示进度条
+        mCityManageAdapter.displayProgressBar(position);
+        mCityManageAdapter.notifyDataSetChanged();
+
+        String cityName;
+        String address;
+        CityManage cityManage1 = mCityManageList.get(position);
+        // 不是自动定位
+        if (cityManage1.getLocationCity() == null) {
+            cityName = cityManage1.getCityName();
+            address = getString(R.string.address_weather, cityManage1.getWeatherCode());
+        } else {
+            cityName = cityManage1.getLocationCity();
+            address = null;
+        }
+
+        // 更新查询下一项
+        queryFormServer(address, position, cityName);
     }
 
     /**

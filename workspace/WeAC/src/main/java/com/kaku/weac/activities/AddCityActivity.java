@@ -28,7 +28,7 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.kaku.weac.R;
-import com.kaku.weac.adapter.CityAdapter;
+import com.kaku.weac.adapter.AddCityAdapter;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.db.WeatherDBOperate;
 import com.kaku.weac.bean.County;
@@ -88,7 +88,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
     /**
      * 添加城市列表适配器
      */
-    private CityAdapter mAddCityAdapter;
+    private AddCityAdapter mAddAddCityAdapter;
 
     /**
      * 县列表
@@ -218,14 +218,14 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
 
         // 城市视图列表
         mAddCityList = new ArrayList<>();
-        mAddCityAdapter = new CityAdapter(this, mAddCityList);
+        mAddAddCityAdapter = new AddCityAdapter(this, mAddCityList);
 
         mCountyList = new ArrayList<>();
 
         // 城市列表GridView
         mGvTitle = (TextView) findViewById(R.id.gv_add_city_title);
         GridView addCityGridView = (GridView) findViewById(R.id.gv_add_city);
-        addCityGridView.setAdapter(mAddCityAdapter);
+        addCityGridView.setAdapter(mAddAddCityAdapter);
         addCityGridView.setOnItemClickListener(new AddCityOnItemClickListener());
 
         // 清除按钮
@@ -350,7 +350,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
                         return;
                     }
 
-                    String cityName = mAddCityAdapter.getItem(position);
+                    String cityName = mAddAddCityAdapter.getItem(position);
                     // 当尚未添加此城市
                     if (isCityNoAdd(cityName)) {
                         addCity(cityName);
@@ -679,7 +679,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
         mAddCityList.clear();
         String[] city = getResources().getStringArray(R.array.city_hot);
         Collections.addAll(mAddCityList, city);
-        mAddCityAdapter.notifyDataSetChanged();
+        mAddAddCityAdapter.notifyDataSetChanged();
         mGvTitle.setText(R.string.hot_city);
         mCurrentLevel = LEVEL_HOT_CITY;
     }
@@ -760,7 +760,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
                 }
                 eventType = parser.next();
             }
-            mAddCityAdapter.notifyDataSetChanged();
+            mAddAddCityAdapter.notifyDataSetChanged();
             mGvTitle.setText(R.string.china);
             mCurrentLevel = LEVEL_PROVINCE;
         } catch (Exception e) {
@@ -792,7 +792,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
                 }
                 eventType = parser.next();
             }
-            mAddCityAdapter.notifyDataSetChanged();
+            mAddAddCityAdapter.notifyDataSetChanged();
             mGvTitle.setText(mSelectedProvince);
             mCurrentLevel = LEVEL_CITY;
         } catch (Exception e) {
@@ -830,7 +830,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
                 }
                 eventType = parser.next();
             }
-            mAddCityAdapter.notifyDataSetChanged();
+            mAddAddCityAdapter.notifyDataSetChanged();
             mGvTitle.setText(mSelectedCity);
             mCurrentLevel = LEVEL_COUNTY;
         } catch (Exception e) {

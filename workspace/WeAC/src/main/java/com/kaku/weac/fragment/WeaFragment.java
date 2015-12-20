@@ -8,7 +8,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -614,11 +613,6 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
     private ProgressDialog mProgressDialog;
 
     /**
-     * 请求MyDialogActivity
-     */
-    private static final int REQUEST_MY_DIALOG = 1;
-
-    /**
      * 首次打开天气界面
      */
     private boolean mIsFirstUse = false;
@@ -648,11 +642,11 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         if (mCityName != null) {
             // 初始化天气
             // FIXME: 2015/10/29
-//        try {
-            initWeather(WeatherUtil.readWeatherInfo(getActivity(), mCityName));
-//        } catch (Exception e) {
-//            LogUtil.e(LOG_TAG, e.toString());
-//        }
+            try {
+                initWeather(WeatherUtil.readWeatherInfo(getActivity(), mCityName));
+            } catch (Exception e) {
+                LogUtil.e(LOG_TAG, e.toString());
+            }
 
             isPrepared = true;
             // 不是自动定位
@@ -1040,46 +1034,47 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
             address = getString(R.string.address_weather, mCityWeatherCode);
         }
         HttpUtil.sendHttpRequest(address, cityName,
-//        HttpUtil.sendHttpRequest("http://wthrcdn.etouch.cn/WeatherApi?city=天津",
                 new HttpCallbackListener() {
                     @Override
                     public void onFinish(String response) {
-//                        try {
-                        if (!response.contains("error")) {
-                            WeatherInfo weatherInfo = WeatherUtil.handleWeatherResponse(
-                                    new ByteArrayInputStream(response.getBytes()));
-                            // 保存天气信息
-                            WeatherUtil.saveWeatherInfo(weatherInfo, getActivity());
-                            getActivity().runOnUiThread(new SetWeatherInfoRunnable(weatherInfo));
-                            // 无法解析当前位置
-                        } else {
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    stopRefresh();
-                                    ToastUtil.showLongToast(getActivity(), getString(R.string.can_not_find_current_location));
-                                }
-                            });
+                        try {
+                            if (!response.contains("error")) {
+                                WeatherInfo weatherInfo = WeatherUtil.handleWeatherResponse(
+                                        new ByteArrayInputStream(response.getBytes()));
+                                // 保存天气信息
+                                WeatherUtil.saveWeatherInfo(weatherInfo, getActivity());
+                                getActivity().runOnUiThread(new SetWeatherInfoRunnable(weatherInfo));
+                                // 无法解析当前位置
+                            } else {
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        stopRefresh();
+                                        ToastUtil.showLongToast(getActivity(), getString(R.string.can_not_find_current_location));
+                                    }
+                                });
+                            }
+                        } catch (Exception e) {
+                            stopRefresh();
+                            LogUtil.e(LOG_TAG, e.toString());
                         }
-//                        } catch (Exception e) {
-//                            LogUtil.e(LOG_TAG, e.toString());
-//                        }
                     }
 
                     @Override
                     public void onError(final Exception e) {
-//                        try {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                stopRefresh();
-                                ToastUtil.showShortToast(getActivity(),
-                                        getString(R.string.internet_fail));
-                            }
-                        });
-//                        } catch (Exception e1) {
-//                            LogUtil.e(LOG_TAG, e1.toString());
-//                        }
+                        try {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    stopRefresh();
+                                    ToastUtil.showShortToast(getActivity(),
+                                            getString(R.string.internet_fail));
+                                }
+                            });
+                        } catch (Exception e1) {
+                            stopRefresh();
+                            LogUtil.e(LOG_TAG, e1.toString());
+                        }
                     }
                 }
         );
@@ -2068,26 +2063,9 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                             PullToRefreshBase<ScrollView> refreshView) {
                         LogUtil.d(LOG_TAG, "  setPullToRefresh()");
                         locationOrRefresh();
-//                        new GetDataTask().execute();
                     }
                 });
 
-    }
-
-    private class GetDataTask extends AsyncTask<Void, Void, String[]> {
-
-        @Override
-        protected String[] doInBackground(Void... params) {
-//            if (!hasActiveUpdated) {
-//                refreshWeather();
-//            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String[] result) {
-            super.onPostExecute(result);
-        }
     }
 
     @Override
@@ -2096,28 +2074,6 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         mAlpha = 0;
         if (mHandler != null) {
             mHandler.removeCallbacks(mRun);
-        }
-    }
-
-
-    /**
-     * 显示进度对话框
-     */
-    private void showProgressDialog(String message) {
-        if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(getActivity());
-            mProgressDialog.setMessage(message);
-            mProgressDialog.setCancelable(false);
-        }
-        mProgressDialog.show();
-    }
-
-    /**
-     * 关闭进度对话框
-     */
-    private void closeProgressDialog() {
-        if (mProgressDialog != null) {
-            mProgressDialog.dismiss();
         }
     }
 }

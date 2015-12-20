@@ -106,7 +106,9 @@ public class LineChartViewDouble extends View {
     public LineChartViewDouble(Context context, AttributeSet attrs) {
         super(context, attrs);
         mDensity = getResources().getDisplayMetrics().density;
-        mTextSize = 14 * mDensity;
+        // 屏幕文字密度
+        float densityText = getResources().getDisplayMetrics().scaledDensity;
+        mTextSize = 14 * densityText;
         mRadius = 3 * mDensity;
         mRadiusToday = 5 * mDensity;
         mSpace = 3 * mDensity;

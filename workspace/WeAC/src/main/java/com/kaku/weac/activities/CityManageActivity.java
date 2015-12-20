@@ -380,6 +380,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                             }
 
                         } catch (Exception e) {
+                            runOnUi(getString(R.string.unknown_error), position);
                             LogUtil.e(LOG_TAG, "onFinish: " + e.toString());
                         }
                     }
@@ -401,6 +402,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                                 }
                             }
                         } catch (Exception e1) {
+                            runOnUi(getString(R.string.unknown_error), position);
                             LogUtil.e(LOG_TAG, "(Exception e1): " + e1.toString());
                         }
                     }

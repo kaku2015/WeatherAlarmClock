@@ -21,7 +21,7 @@ import java.util.List;
  * @author 咖枯
  * @version 1.0 2015/11/08
  */
-public class CityAdapter extends ArrayAdapter<String> {
+public class AddCityAdapter extends ArrayAdapter<String> {
 
     private final Context mContext;
 
@@ -31,7 +31,7 @@ public class CityAdapter extends ArrayAdapter<String> {
      * @param context context
      * @param list    城市列表
      */
-    public CityAdapter(Context context, List<String> list) {
+    public AddCityAdapter(Context context, List<String> list) {
         super(context, 0, list);
         mContext = context;
     }

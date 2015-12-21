@@ -1,16 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layerType="software"
+              android:orientation="vertical">
 
-    <com.erz.timepicker_library.TimePicker
-        android:id="@+id/timePicker"
-        xmlns:timepicker="http://schemas.android.com/apk/res-auto"
+    <com.kaku.weac.view.MyTimer
+        android:id="@+id/timer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        timepicker:clock_color="@color/white_trans60"
-        timepicker:dial_color="@color/white_trans60"
-        timepicker:text_color="@color/white_trans60"/>
+        android:layout_height="wrap_content"
+        android:layerType="software"/>
 
-</RelativeLayout><!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/layout/fm_time.xml -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_start"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="启动"/>
+
+        <Button
+            android:id="@+id/btn_stop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="停止"/>
+
+        <Button
+            android:id="@+id/btn_reset"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="reset"/>
+    </LinearLayout>
+
+</LinearLayout>
+<!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/layout/fm_time.xml -->

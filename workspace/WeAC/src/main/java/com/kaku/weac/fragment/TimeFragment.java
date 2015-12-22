@@ -38,9 +38,9 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
 
         timer = (MyTimer) view.findViewById(R.id.timer);
         timer.setOnTimeChangeListener(this);
-        timer.setMinChangListener(this);
+        timer.setTimeChangListener(this);
         timer.setModel(Model.Timer);
-        timer.setStartTime(0, 30, 0);
+        timer.setStartTime(0, 0, 0);
         btn_start = (Button) view.findViewById(R.id.btn_start);
         btn_stop = (Button) view.findViewById(R.id.btn_stop);
         btn_reset = (Button) view.findViewById(R.id.btn_reset);

@@ -22,144 +22,160 @@ import java.util.TimerTask;
 
 
 /**
- * Created by pheynix on 7/12/15.
- * Sorry for my English...
- * <p/>
- * Disable hardware accelerate if you need the glow effect,See: http://developer.android.com/guide/topics/graphics/hardware-accel.html
- * Disable hardware accelerate if you need the glow effect,See: http://developer.android.com/guide/topics/graphics/hardware-accel.html
- * Disable hardware accelerate if you need the glow effect,See: http://developer.android.com/guide/topics/graphics/hardware-accel.html
- * 如果需要辉光效果，请务必关闭硬件加速，参考： http://blog.chenming.info/blog/2012/09/18/android-hardware-accel/
- * 如果需要辉光效果，请务必关闭硬件加速，参考： http://blog.chenming.info/blog/2012/09/18/android-hardware-accel/
- * 如果需要辉光效果，请务必关闭硬件加速，参考： http://blog.chenming.info/blog/2012/09/18/android-hardware-accel/
+ * 计时器
+ *
+ * @author 咖枯
+ * @version 1.0 2015/12/22
  */
 public class MyTimer extends View {
-    //flags
-    private boolean isInitialized = false;
-    private boolean isStarted = false;// =true if countdown begin //倒计时开始的时候为true
-    private boolean isInDragButton;
-    private int whichDragButton;//1==hour 2==minute 3==second
 
-    //store time,calculate result when countdown pause/stop
-    //保存时间，倒计时结束时计算时间差
-    private Calendar timeStart;
-    private Calendar timeRemain;
+    /**
+     * Log tag ：MyTimer
+     */
+    private static final String LOG_TAG = "MyTimer";
 
-    //dimension and coordinate
-    //尺寸和坐标
-    private float viewWidth;
-    private float viewHeight;
-    private float circleRadiusMinute;
-    private float circleRadiusDragButton;
-    private float currentDegreeMinute;
-    private float centerXMinute;
-    private float centerYMinute;
-    private float strokeWidth;
-    private String displayNumberMinute;
+    /**
+     * 受否已经初始化
+     */
+    private boolean mIsInitialized = false;
 
-    private float[] dragButtonMinutePosition;
+    /**
+     * 受否倒计时已经开始
+     */
+    private boolean mIsStarted = false;
 
-    private float[] defaultDragButtonMinutePosition;
+    /**
+     * 是否拖动按钮获取事件
+     */
+    private boolean mIsInDragButton;
 
-    //paint
-    private Paint paintCircleBackground;
-    private Paint paintDragButton;
-    private Paint paintMinute;
-    private Paint paintNumber;
-    private Paint paintGlowEffect;
+    /**
+     * 设置的倒计时时间
+     */
+    private Calendar mTimeStart;
 
-    //color
-    private int colorDefault;
-    private int colorMinute;
+    /**
+     * 倒计时剩余时间
+     */
+    private Calendar mTimeRemain;
 
+    /**
+     * 控件宽
+     */
+    private float mViewWidth;
+
+    /**
+     * 控件高
+     */
+    private float mViewHeight;
+
+    /**
+     * 表盘半径
+     */
+    private float mCircleRadiusWatcher;
+
+    /**
+     * 拖动按钮触摸半径
+     */
+    private float mCircleRadiusDragButtonTouch;
+
+    /**
+     * 当前角度
+     */
+    private float mCurrentDegree;
+
+    /**
+     * 表盘中心x坐标
+     */
+    private float mCenterX;
+
+    /**
+     * 表盘中心y坐标
+     */
+    private float mCenterY;
+
+    /**
+     * 表盘外圈宽度
+     */
+    private float mStrokeWidth;
+
+    /**
+     * 显示的剩余时间
+     */
+    private String mDisplayRemainTime;
+
+    /**
+     * 拖动按钮位置
+     */
+    private float[] mDragButtonPosition;
+
+    /**
+     * 表盘背景画笔
+     */
+    private Paint mPaintCircleBackground;
+
+    /**
+     * 拖动按钮画笔
+     */
+    private Paint mPaintDragButton;
+
+    /**
+     * 弧形画笔
+     */
+    private Paint mPaintArc;
+
+    /**
+     * 显示剩余时间画笔
+     */
+    private Paint mPaintRemainTime;
+
+    /**
+     * 辉光效果画笔
+     */
+    private Paint mPaintGlowEffect;
+
+    /**
+     * 剩余时间画笔
+     */
+    private int mColorRemainTime;
+
+    /**
+     * 控件默认宽度
+     */
     private static final int DEFAULT_VIEW_WIDTH = 720;
 
-    private OnTimeChangeListener timeChangeListener;
-    private OnMinChangListener minChangListener;
-    private OnInitialFinishListener initialFinishListener;
-    //add model by Swifty default timer
-    private Model model = Model.Timer;
-    private boolean maxTime;
+    /**
+     * 剩余时间变化回调
+     */
+    private OnTimeChangeListener mRemainTimeChangeListener;
+
+    /**
+     * 选择时间变化回调
+     */
+    private OnMinChangListener mTimeChangListener;
 
 
-    private float mDensity;
+    /**
+     * 初始化完成回调
+     */
+    private OnInitialFinishListener mInitialFinishListener;
 
+    /**
+     * 功能模式：默认为计时
+     */
+    private Model mModel = Model.Timer;
+
+    /**
+     * 矩形范围
+     */
     private Rect mRect;
 
-    //initialize every thing
-    //初始化
-    private void initialize(Canvas canvas) {
-        colorDefault = getResources().getColor(R.color.white_trans10);
-        colorMinute = Color.WHITE;
-
-        timeRemain = Calendar.getInstance();
-        timeStart = Calendar.getInstance();
-        timeStart.clear();
-        timeRemain.clear();
-
-        viewWidth = canvas.getWidth();
-        viewHeight = canvas.getHeight();
-
-        mDensity = getResources().getDisplayMetrics().density;
-        //use different dimension in high resolution device
-        //保证高分辨率屏幕有比较好的显示效果
-        strokeWidth = 15 * mDensity;
-        circleRadiusDragButton = 30 * mDensity;
-
-        circleRadiusMinute = viewWidth / 3;
-        currentDegreeMinute = 0;
-        displayNumberMinute = "0";
-        centerXMinute = viewWidth / 2;
-        centerYMinute = viewHeight / 2;
-
-        defaultDragButtonMinutePosition = new float[]{centerXMinute, centerYMinute - circleRadiusMinute};
-        dragButtonMinutePosition = defaultDragButtonMinutePosition;
-
-        paintCircleBackground = new Paint();
-        paintDragButton = new Paint();
-        paintMinute = new Paint();
-        paintNumber = new Paint();
-        paintGlowEffect = new Paint();
-
-        paintCircleBackground.setColor(colorDefault);
-        paintCircleBackground.setStrokeWidth(strokeWidth);
-        paintCircleBackground.setStyle(Paint.Style.STROKE);
-        paintCircleBackground.setAntiAlias(true);
-        paintDragButton.setStrokeWidth(5);
-        paintDragButton.setStyle(Paint.Style.FILL);
-        paintDragButton.setAntiAlias(true);
-        paintMinute.setColor(colorMinute);
-        paintMinute.setStrokeWidth(strokeWidth);
-        paintMinute.setStyle(Paint.Style.STROKE);
-        paintMinute.setAntiAlias(true);
-
-        paintNumber.setStrokeWidth(2);
-        paintNumber.setStyle(Paint.Style.FILL);
-        paintNumber.setAntiAlias(true);
-        mRect = new Rect();
-        paintNumber.setTextSize(60 * mDensity);
-        paintNumber.setColor(colorMinute);
-        paintNumber.getTextBounds("00:00", 0, "00:00".length(), mRect);
-
-
-        //draw glow effect on the end of arc,glow-effect == dragButton
-        //用于绘制圆弧尽头的辉光效果,辉光区域就是dragButton的区域
-        paintGlowEffect.setMaskFilter(new BlurMaskFilter(2 * strokeWidth / 3, BlurMaskFilter.Blur.NORMAL));
-        paintGlowEffect.setStrokeWidth(strokeWidth);
-        paintGlowEffect.setAntiAlias(true);
-        paintGlowEffect.setStyle(Paint.Style.FILL);
-
-        //完成初始化回调
-        if (initialFinishListener != null) {
-            initialFinishListener.onInitialFinishListener();
-        }
-    }
+    private int mRemainMinute = 0;
 
     public MyTimer(Context context) {
         super(context);
     }
 
-    //use this view in .xml file will invoke this constructor
-    //在.xml中使用此控件时调用此构造函数
     public MyTimer(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -168,58 +184,122 @@ public class MyTimer extends View {
         super(context, attrs, defStyleAttr);
     }
 
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        //initialize dimension and coordinate just for once
-        //初始化尺寸，只会调用一次
-        if (!isInitialized) {
+        //初始化
+        if (!mIsInitialized) {
             initialize(canvas);
-            isInitialized = true;
+            mIsInitialized = true;
         }
 
-        //arc and number depending on degree,update before drawing
         //角度决定圆弧长度和数字，每次重绘前先更新角度
-        if (isStarted) {
+        if (mIsStarted) {
             updateDegree();
         }
 
 
         //draw background circle
         //画背景的圆圈
-        canvas.drawCircle(centerXMinute, centerYMinute, circleRadiusMinute, paintCircleBackground);
+        canvas.drawCircle(mCenterX, mCenterY, mCircleRadiusWatcher, mPaintCircleBackground);
 
         //draw arc
         //画弧形
-        RectF rectFMinute = new RectF(centerXMinute - circleRadiusMinute, centerYMinute - circleRadiusMinute
-                , centerXMinute + circleRadiusMinute, centerYMinute + circleRadiusMinute);
+        RectF rectFMinute = new RectF(mCenterX - mCircleRadiusWatcher, mCenterY - mCircleRadiusWatcher
+                , mCenterX + mCircleRadiusWatcher, mCenterY + mCircleRadiusWatcher);
 
-        canvas.drawArc(rectFMinute, -90, currentDegreeMinute, false, paintMinute);
+        canvas.drawArc(rectFMinute, -90, mCurrentDegree, false, mPaintArc);
 
 
         //draw glow effect
         //画辉光效果
-        paintDragButton.setColor(colorMinute);
-        canvas.drawCircle(dragButtonMinutePosition[0], dragButtonMinutePosition[1], strokeWidth / 2, paintDragButton);
-        paintGlowEffect.setColor(colorMinute);
-        canvas.drawCircle(dragButtonMinutePosition[0], dragButtonMinutePosition[1], strokeWidth, paintGlowEffect);
+        mPaintDragButton.setColor(mColorRemainTime);
+        canvas.drawCircle(mDragButtonPosition[0], mDragButtonPosition[1], mStrokeWidth / 2, mPaintDragButton);
+        mPaintGlowEffect.setColor(mColorRemainTime);
+        canvas.drawCircle(mDragButtonPosition[0], mDragButtonPosition[1], mStrokeWidth, mPaintGlowEffect);
 
         //draw letter "H""M""S",point(0,0) of text area is on the bottom-left of this area！
         //画"H""M""S"这三个字母，文字区域的(0,0)在左下角！
 //        getDisplayNumber();
 //        Rect rect = new Rect();
 //
-//        paintNumber.setTextSize(60 * mDensity);
-//        paintNumber.setColor(colorMinute);
-        String minute = MyUtil.addZero(timeRemain.get(Calendar.MINUTE));
-        String second = MyUtil.addZero(timeRemain.get(Calendar.SECOND));
-        String remainTime = minute + ":" + second;
-//        paintNumber.getTextBounds(remainTime, 0, remainTime.length(), rect);
-        canvas.drawText(remainTime, centerXMinute - mRect.width() / 2, centerYMinute + mRect.height() / 2, paintNumber);
-//        paintNumber.setTextSize(12 * mDensity);
-//        canvas.drawText("M", centerXMinute + 16 * mDensity, centerYMinute + 8 * mDensity, paintNumber);
+//        mPaintRemainTime.setTextSize(60 * mDensity);
+//        mPaintRemainTime.setColor(mColorRemainTime);
+        getDisplayNumber();
+//        mPaintRemainTime.getTextBounds(remainTime, 0, remainTime.length(), rect);
+        canvas.drawText(mDisplayRemainTime, mCenterX - mRect.width() / 2,
+                mCenterY + mRect.height() / 2, mPaintRemainTime);
+//        mPaintRemainTime.setTextSize(12 * mDensity);
+//        canvas.drawText("M", mCenterX + 16 * mDensity, mCenterY + 8 * mDensity, mPaintRemainTime);
+    }
+
+
+    /**
+     * 初始化
+     *
+     * @param canvas canvas
+     */
+    private void initialize(Canvas canvas) {
+        mColorRemainTime = Color.WHITE;
+
+        mTimeRemain = Calendar.getInstance();
+        mTimeStart = Calendar.getInstance();
+        mTimeStart.clear();
+        mTimeRemain.clear();
+
+        mViewWidth = canvas.getWidth();
+        mViewHeight = canvas.getHeight();
+
+        float density = getResources().getDisplayMetrics().density;
+        mStrokeWidth = 12 * density;
+        mCircleRadiusDragButtonTouch = 30 * density;
+
+        mCircleRadiusWatcher = mViewWidth / 3;
+        mCurrentDegree = 0;
+        mCenterX = mViewWidth / 2;
+        mCenterY = mViewHeight / 2;
+
+        // 默认拖动按钮位置
+        mDragButtonPosition = new float[]{mCenterX, mCenterY - mCircleRadiusWatcher};
+
+        mPaintCircleBackground = new Paint();
+        mPaintDragButton = new Paint();
+        mPaintArc = new Paint();
+        mPaintRemainTime = new Paint();
+        mPaintGlowEffect = new Paint();
+
+        // 表盘外圈颜色
+        int colorWatcher = getResources().getColor(R.color.white_trans10);
+        mPaintCircleBackground.setColor(colorWatcher);
+        mPaintCircleBackground.setStrokeWidth(mStrokeWidth);
+        mPaintCircleBackground.setStyle(Paint.Style.STROKE);
+        mPaintCircleBackground.setAntiAlias(true);
+        mPaintDragButton.setStyle(Paint.Style.FILL);
+        mPaintDragButton.setAntiAlias(true);
+        mPaintArc.setColor(mColorRemainTime);
+        mPaintArc.setStrokeWidth(mStrokeWidth);
+        mPaintArc.setStyle(Paint.Style.STROKE);
+        mPaintArc.setAntiAlias(true);
+
+        mPaintRemainTime.setStyle(Paint.Style.FILL);
+        mPaintRemainTime.setAntiAlias(true);
+        mRect = new Rect();
+        float densityText = getResources().getDisplayMetrics().scaledDensity;
+        mPaintRemainTime.setTextSize(60 * densityText);
+        mPaintRemainTime.setColor(mColorRemainTime);
+        mPaintRemainTime.setAntiAlias(true);
+        mPaintRemainTime.getTextBounds("00:00", 0, "00:00".length(), mRect);
+
+        //用于绘制圆弧尽头的辉光效果,辉光区域就是dragButton的区域
+        mPaintGlowEffect.setMaskFilter(new BlurMaskFilter(2 * mStrokeWidth / 3, BlurMaskFilter.Blur.NORMAL));
+        mPaintGlowEffect.setAntiAlias(true);
+        mPaintGlowEffect.setStyle(Paint.Style.FILL);
+
+        //完成初始化回调
+        if (mInitialFinishListener != null) {
+            mInitialFinishListener.onInitialFinishListener();
+        }
     }
 
 
@@ -235,15 +315,13 @@ public class MyTimer extends View {
             //whether touch in the drag button or not
             //判断点击是否在dragButton内
             case MotionEvent.ACTION_DOWN:
-                if (circleRadiusDragButton > Math.sqrt(Math.pow(event.getX() - dragButtonMinutePosition[0], 2)
-                        + Math.pow(event.getY() - dragButtonMinutePosition[1], 2))) {
+                if (mCircleRadiusDragButtonTouch > Math.sqrt(Math.pow(event.getX() - mDragButtonPosition[0], 2)
+                        + Math.pow(event.getY() - mDragButtonPosition[1], 2))) {
                     //在dragButtonMinute中
-                    isInDragButton = true;
-                    whichDragButton = 2;
+                    mIsInDragButton = true;
                 } else {
                     //不在
-                    isInDragButton = false;
-                    whichDragButton = 0;
+                    mIsInDragButton = false;
                     getParent().requestDisallowInterceptTouchEvent(false);
                     return false;
 
@@ -253,16 +331,20 @@ public class MyTimer extends View {
             //update coordination of dragButton
             //更新dragButton的位置
             case MotionEvent.ACTION_MOVE:
-                if (!isStarted) {
-                    if (isInDragButton) {
-                        switch (whichDragButton) {
-                            case 2:
-                                currentDegreeMinute = getDegree(event.getX(), event.getY(), centerXMinute, centerYMinute);
-                                updateTime(2);
-                                updateDragButtonPosition(2);
-                                invalidate();
-                                break;
+                if (!mIsStarted) {
+                    if (mIsInDragButton) {
+                        mCurrentDegree = getDegree(event.getX(), event.getY(), mCenterX, mCenterY);
+                        updateTime(2);
+                        updateDragButtonPosition();
+                        invalidate();
+
+                        if (mRemainMinute != mTimeRemain.get(Calendar.MINUTE)) {
+                            mRemainMinute = mTimeRemain.get(Calendar.MINUTE);
+                            if (mTimeChangListener != null) {
+                                mTimeChangListener.onMinChange(mRemainMinute);
+                            }
                         }
+                        break;
                     } else {
                         getParent().requestDisallowInterceptTouchEvent(false);
                         return false;
@@ -272,7 +354,7 @@ public class MyTimer extends View {
                 break;
 
             case MotionEvent.ACTION_UP:
-                isInDragButton = false;
+                mIsInDragButton = false;
                 break;
         }
 
@@ -287,8 +369,8 @@ public class MyTimer extends View {
         int width = getDimension(DEFAULT_VIEW_WIDTH, widthMeasureSpec);
         int height = getDimension(width, heightMeasureSpec);
 
-        viewWidth = width;
-        viewHeight = height;
+        mViewWidth = width;
+        mViewHeight = height;
 
         setMeasuredDimension(width, height);
     }
@@ -312,86 +394,81 @@ public class MyTimer extends View {
         return result;
     }
 
-
-    //update degree,depend on the path user dragging on the screen
-    //根据用户在屏幕划过的轨迹更新角度
+    /**
+     * 根据用户在屏幕划过的轨迹更新角度
+     *
+     * @param eventX  eventX
+     * @param eventY  eventY
+     * @param centerX centerX
+     * @param centerY centerY
+     * @return 角度
+     */
     private float getDegree(float eventX, float eventY, float centerX, float centerY) {
 
         //    http://stackoverflow.com/questions/7926816/calculate-angle-of-touched-point-and-rotate-it-in-android
-        //    Math has defeated me once again.So sad...
-        //    卧槽...
+        // x轴边
         double tx = eventX - centerX;
+        // y轴边
         double ty = eventY - centerY;
+        // 开正平方根,求出滑动点到圆心的距离（斜边）
         double t_length = Math.sqrt(tx * tx + ty * ty);
-        double a = Math.acos(ty / t_length);
-        float degree = 180 - (float) Math.toDegrees(a);
+        // 根据反余弦求出弧度
+        double radians = Math.acos(ty / t_length);
+        // y的坐标轴是反的所以需要用 180-角度
+        float degree = 180 - (float) Math.toDegrees(radians);
 
+        // 当转到负坐标轴一侧
         if (centerX > eventX) {
-            degree = 180 + (float) Math.toDegrees(a);
+            degree = 180 + (float) Math.toDegrees(radians);
         }
 
         return degree;
     }
 
     private void getDisplayNumber() {
-        if (Integer.valueOf(displayNumberMinute) != timeRemain.get(Calendar.MINUTE)) {
-            displayNumberMinute = timeRemain.get(Calendar.MINUTE) + "";
-            if (minChangListener != null) {
-                minChangListener.onMinChange(timeRemain.get(Calendar.MINUTE));
-            }
-        }
-
+        mDisplayRemainTime = MyUtil.addZero(mTimeRemain.get(Calendar.MINUTE)) + ":" +
+                MyUtil.addZero(mTimeRemain.get(Calendar.SECOND));
     }
 
-    //degree depending on timeRemain
-    //角度由剩余时间决定
+    /**
+     * 更新角度，角度由剩余时间决定
+     */
     private void updateDegree() {
-
-        currentDegreeMinute = (float) ((timeRemain.get(Calendar.MINUTE) * 60 + timeRemain.get(Calendar.SECOND)) / (60.0 * 60)) * 360;
-
-        updateDragButtonPosition(0);
-
-    }
-
-    //update drag button position(glow effect area)
-    //更新拖动按钮中心点（辉光效果区域）
-    private void updateDragButtonPosition(int flag) {
-
-        switch (flag) {
-            case 0:
-
-                dragButtonMinutePosition[0] = (float) (centerXMinute + circleRadiusMinute * Math.sin(Math.toRadians(currentDegreeMinute)));
-                dragButtonMinutePosition[1] = (float) (centerYMinute - circleRadiusMinute * Math.cos(Math.toRadians(currentDegreeMinute)));
-
-                break;
-            case 2:
-                dragButtonMinutePosition[0] = (float) (centerXMinute + circleRadiusMinute * Math.sin(Math.toRadians(currentDegreeMinute)));
-                dragButtonMinutePosition[1] = (float) (centerYMinute - circleRadiusMinute * Math.cos(Math.toRadians(currentDegreeMinute)));
-                break;
-        }
+        mCurrentDegree = (float) ((mTimeRemain.get(Calendar.MINUTE) * 60 +
+                mTimeRemain.get(Calendar.SECOND)) / (60.0 * 60)) * 360;
+        updateDragButtonPosition();
 
     }
 
+    /**
+     * 更新拖动按钮中心点
+     */
+    private void updateDragButtonPosition() {
+        // 根据勾股定理已知斜边、正弦余弦，求对应的边
+        mDragButtonPosition[0] = (float) (mCenterX + mCircleRadiusWatcher * Math.sin(Math.toRadians(mCurrentDegree)));
+        mDragButtonPosition[1] = (float) (mCenterY - mCircleRadiusWatcher * Math.cos(Math.toRadians(mCurrentDegree)));
+    }
 
-    //get the time from currentDegree and store it in timeStart and timeRemain
+
+    //get the time from currentDegree and store it in mTimeStart and mTimeRemain
     //从当前的角度获取时间，保存到timeStart和timeRemain
     private void updateTime(int flag) {
 
         switch (flag) {
             case 0:
 
-                timeStart.set(Calendar.MINUTE, (int) Math.floor(60 * currentDegreeMinute / 360));
-                timeRemain.set(Calendar.MINUTE, (int) Math.floor(60 * currentDegreeMinute / 360));
+                mTimeStart.set(Calendar.MINUTE, (int) Math.floor(60 * mCurrentDegree / 360));
+                mTimeRemain.set(Calendar.MINUTE, (int) Math.floor(60 * mCurrentDegree / 360));
 
-                timeStart.set(Calendar.SECOND, 0);
-                timeRemain.set(Calendar.SECOND, 0);
+                mTimeStart.set(Calendar.SECOND, 0);
+                mTimeRemain.set(Calendar.SECOND, 0);
                 break;
             case 2:
-                timeStart.set(Calendar.MINUTE, (int) Math.floor(60 * currentDegreeMinute / 360));
-                timeRemain.set(Calendar.MINUTE, (int) Math.floor(60 * currentDegreeMinute / 360));
+                mTimeStart.set(Calendar.MINUTE, (int) Math.floor(60 * mCurrentDegree / 360));
+                mTimeRemain.set(Calendar.MINUTE, (int) Math.floor(60 * mCurrentDegree / 360));
 
-                timeStart.set(Calendar.SECOND, 0);
-                timeRemain.set(Calendar.SECOND, 0);
+                mTimeStart.set(Calendar.SECOND, 0);
+                mTimeRemain.set(Calendar.SECOND, 0);
                 break;
         }
 
@@ -410,10 +487,10 @@ public class MyTimer extends View {
                 //可以倒计时
                 case 1:
 
-                    timeRemain.add(Calendar.MILLISECOND, -1000);
+                    mTimeRemain.add(Calendar.MILLISECOND, -1000);
 
-                    if (timeChangeListener != null) {
-                        timeChangeListener.onTimeChange(timeStart.getTimeInMillis(), timeRemain.getTimeInMillis());
+                    if (mRemainTimeChangeListener != null) {
+                        mRemainTimeChangeListener.onTimeChange(mTimeStart.getTimeInMillis(), mTimeRemain.getTimeInMillis());
                     }
 
                     invalidate();
@@ -422,22 +499,22 @@ public class MyTimer extends View {
                 //countdown stop
                 //时间为空，停止倒计时，提示用户
                 case 2:
-                    isStarted = false;
+                    mIsStarted = false;
                     timerTask.cancel();
                     break;
 
                 //StopWatch running
                 case 11:
-                    timeRemain.add(Calendar.MILLISECOND, 1000);
-                    if (timeChangeListener != null) {
-                        timeChangeListener.onTimeChange(timeStart.getTimeInMillis(), timeRemain.getTimeInMillis());
+                    mTimeRemain.add(Calendar.MILLISECOND, 1000);
+                    if (mRemainTimeChangeListener != null) {
+                        mRemainTimeChangeListener.onTimeChange(mTimeStart.getTimeInMillis(), mTimeRemain.getTimeInMillis());
                     }
                     invalidate();
                     break;
                 //StopWatch stop
                 //到达MAX TIME
                 case 12:
-                    isStarted = false;
+                    mIsStarted = false;
                     timerTask.cancel();
                     break;
             }
@@ -449,8 +526,8 @@ public class MyTimer extends View {
 
 
     public boolean start() {
-        if (model == Model.Timer) {
-            if (!isTimeEmpty() && !isStarted) {
+        if (mModel == Model.Timer) {
+            if (!isTimeEmpty() && !mIsStarted) {
 
                 timerTask = new TimerTask() {
                     @Override
@@ -469,14 +546,14 @@ public class MyTimer extends View {
                 };
 
                 timer.schedule(timerTask, 1000, 1000);
-                isStarted = true;
+                mIsStarted = true;
 
-                if (timeChangeListener != null) {
-                    timeChangeListener.onTimerStart(timeStart.getTimeInMillis());
+                if (mRemainTimeChangeListener != null) {
+                    mRemainTimeChangeListener.onTimerStart(mTimeStart.getTimeInMillis());
                 }
             }
-        } else if (model == Model.StopWatch) {
-            if (!isMaxTime() && !isStarted) {
+        } /*else if (mModel == Model.StopWatch) {
+            if (!isMaxTime() && !mIsStarted) {
                 timerTask = new TimerTask() {
                     @Override
                     public void run() {
@@ -493,21 +570,21 @@ public class MyTimer extends View {
                 };
 
                 timer.schedule(timerTask, 1000, 1000);
-                isStarted = true;
+                mIsStarted = true;
 
-                if (timeChangeListener != null) {
-                    timeChangeListener.onTimerStart(timeStart.getTimeInMillis());
+                if (mRemainTimeChangeListener != null) {
+                    mRemainTimeChangeListener.onTimerStart(mTimeStart.getTimeInMillis());
                 }
             }
-        }
-        return isStarted;
+        }*/
+        return mIsStarted;
     }
 
     private boolean isTimeEmpty() {
-        if (timeRemain.get(Calendar.HOUR_OF_DAY) != 0
-                || timeRemain.get(Calendar.MINUTE) != 0
-                || timeRemain.get(Calendar.SECOND) != 0
-                || timeRemain.get(Calendar.MILLISECOND) != 0) {
+        if (mTimeRemain.get(Calendar.HOUR_OF_DAY) != 0
+                || mTimeRemain.get(Calendar.MINUTE) != 0
+                || mTimeRemain.get(Calendar.SECOND) != 0
+                || mTimeRemain.get(Calendar.MILLISECOND) != 0) {
             return false;
         } else {
             return true;
@@ -517,53 +594,53 @@ public class MyTimer extends View {
 
     public long stop() {
         timerTask.cancel();
-        isStarted = false;
+        mIsStarted = false;
 
-        if (timeChangeListener != null) {
-            timeChangeListener.onTimeStop(timeStart.getTimeInMillis(), timeRemain.getTimeInMillis());
+        if (mRemainTimeChangeListener != null) {
+            mRemainTimeChangeListener.onTimeStop(mTimeStart.getTimeInMillis(), mTimeRemain.getTimeInMillis());
         }
 
-        return timeStart.getTimeInMillis() - timeRemain.getTimeInMillis();
+        return mTimeStart.getTimeInMillis() - mTimeRemain.getTimeInMillis();
     }
 
 
     public Calendar getTimeStart() {
-        return timeStart;
+        return mTimeStart;
     }
 
 
     public Calendar getTimeRemaid() {
-        return timeRemain;
+        return mTimeRemain;
     }
 
 
     public long getTimePass() {
-        return timeStart.getTimeInMillis() - timeRemain.getTimeInMillis();
+        return mTimeStart.getTimeInMillis() - mTimeRemain.getTimeInMillis();
     }
 
 
     public void setOnTimeChangeListener(OnTimeChangeListener listener) {
         if (listener != null) {
-            timeChangeListener = listener;
+            mRemainTimeChangeListener = listener;
         }
     }
 
-    public void setMinChangListener(OnMinChangListener minChangListener) {
-        this.minChangListener = minChangListener;
+    public void setTimeChangListener(OnMinChangListener timeChangListener) {
+        this.mTimeChangListener = timeChangListener;
     }
 
     public void reset() {
         //先停止计时
         stop();
         //初始化calendar
-        isInitialized = false;
+        mIsInitialized = false;
         invalidate();
     }
 
     public boolean isMaxTime() {
-        if (timeRemain.get(Calendar.HOUR_OF_DAY) == 5
-                && timeRemain.get(Calendar.MINUTE) == 59
-                && timeRemain.get(Calendar.SECOND) == 59) {
+        if (mTimeRemain.get(Calendar.HOUR_OF_DAY) == 5
+                && mTimeRemain.get(Calendar.MINUTE) == 59
+                && mTimeRemain.get(Calendar.SECOND) == 59) {
             return true;
         } else {
             return false;
@@ -585,11 +662,11 @@ public class MyTimer extends View {
     }
 
     public interface OnInitialFinishListener {
-        public void onInitialFinishListener();
+        void onInitialFinishListener();
     }
 
     public void setModel(Model model) {
-        this.model = model;
+        this.mModel = model;
     }
 
     /**
@@ -600,18 +677,18 @@ public class MyTimer extends View {
      * @param s max 59
      */
     public void setStartTime(final int h, final int m, final int s) throws NumberFormatException {
-        initialFinishListener = new OnInitialFinishListener() {
+        mInitialFinishListener = new OnInitialFinishListener() {
             @Override
             public void onInitialFinishListener() {
                 if (h > 5 || m > 59 || s > 69 || h < 0 || m < 0 | s < 0) {
                     throw new NumberFormatException("hour must in [0-5], minute and second must in [0-59]");
                 }
-                timeRemain.set(Calendar.HOUR_OF_DAY, h);
-                timeRemain.set(Calendar.MINUTE, m);
-                timeRemain.set(Calendar.SECOND, s);
-                timeStart.set(Calendar.HOUR_OF_DAY, h);
-                timeStart.set(Calendar.MINUTE, m);
-                timeStart.set(Calendar.SECOND, s);
+                mTimeRemain.set(Calendar.HOUR_OF_DAY, h);
+                mTimeRemain.set(Calendar.MINUTE, m);
+                mTimeRemain.set(Calendar.SECOND, s);
+                mTimeStart.set(Calendar.HOUR_OF_DAY, h);
+                mTimeStart.set(Calendar.MINUTE, m);
+                mTimeStart.set(Calendar.SECOND, s);
                 updateDegree();
                 invalidate();
             }

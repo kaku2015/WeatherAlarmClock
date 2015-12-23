@@ -502,7 +502,7 @@ public class MyTimer extends View {
     /**
      * 计时Task
      */
-    TimerTask mTimerTask;
+    private TimerTask mTimerTask;
 
     /**
      * 开始计时

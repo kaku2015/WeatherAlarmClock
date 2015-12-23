@@ -127,7 +127,7 @@ public class AlarmClockAdapter extends ArrayAdapter<AlarmClock> {
         }
 
         // 取得格式化后的时间
-        String time = MyUtil.FormatTime(alarmClock.getHour(),
+        String time = MyUtil.formatTime(alarmClock.getHour(),
                 alarmClock.getMinute());
         // 设定闹钟时间的显示
         viewHolder.time.setText(time);

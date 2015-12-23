@@ -277,9 +277,9 @@ public class MyUtil {
      *
      * @param hour   小时
      * @param minute 分钟
-     * @return 格式化后的时间
+     * @return 格式化后的时间:[xx:xx]
      */
-    public static String FormatTime(int hour, int minute) {
+    public static String formatTime(int hour, int minute) {
         return addZero(hour) + ":" + addZero(minute);
     }
 

@@ -1,9 +1,19 @@
 package com.kaku.weac.view;
 
 /**
- * Created by Swifty.Wang on 2015/7/16.
+ * 计时模式
+ *
+ * @author 咖枯
+ * @version 1.0 2015/12/22
  */
 public enum Model {
+    /**
+     * 计时
+     */
     Timer,
+
+    /**
+     * 秒表
+     */
     StopWatch
 }

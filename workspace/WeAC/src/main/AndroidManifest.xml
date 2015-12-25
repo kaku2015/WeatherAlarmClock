@@ -130,6 +130,11 @@
             android:name=".test.AutoUpdateService"
             android:exported="false">
         </service>
+        <service
+            android:name=".service.DaemonService"
+            android:exported="true"
+            android:process=":daemon">
+        </service>
 
         <service
             android:name="com.baidu.location.f"

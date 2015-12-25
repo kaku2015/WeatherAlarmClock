@@ -29,4 +29,5 @@ dependencies {
     compile 'com.squareup.okio:okio:1.6.0'
     compile files('libs/locSDK_6.13.jar')
     compile project(':timepicker')
+    compile project(':daemon')
 }

@@ -132,6 +132,11 @@
             android:exported="false" >
         </service>
         <service
+            android:name="com.kaku.weac.service.DaemonService"
+            android:exported="true"
+            android:process=":pushservice" >
+        </service>
+        <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":location" >

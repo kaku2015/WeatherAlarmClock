@@ -11,15 +11,20 @@ import com.kaku.weac.util.LogUtil;
 
 public class NotificationCenter extends Service {
 
+    /**
+     * Log tag ：NotificationCenter
+     */
+    private static final String LOG_TAG = "NotificationCenter";
+
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        LogUtil.d(LOG_TAG, "onCreate");
         // Notification notification = new Notification();
         // startForeground(-1, notification);
 
@@ -44,6 +49,7 @@ public class NotificationCenter extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        LogUtil.d(LOG_TAG, "onStartCommand");
         // ActivityManager am = (ActivityManager)
         // getSystemService(ACTIVITY_SERVICE);
         // List<ActivityManager.RunningTaskInfo> taskInfo =
@@ -65,10 +71,8 @@ public class NotificationCenter extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        LogUtil.w("NotificationCenter", "onDestroy");
-        Intent i = new Intent(this, NotificationCenter.class);
-        startService(i);
-
+        LogUtil.d(LOG_TAG, "onDestroy");
+        startService(new Intent(this, DaemonService.class));
     }
 
     // @Override

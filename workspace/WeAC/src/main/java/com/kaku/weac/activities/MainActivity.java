@@ -24,7 +24,7 @@ import com.kaku.weac.fragment.AlarmClockFragment;
 import com.kaku.weac.fragment.MoreFragment;
 import com.kaku.weac.fragment.TimeFragment;
 import com.kaku.weac.fragment.WeaFragment;
-import com.kaku.weac.service.NotificationCenter;
+import com.kaku.weac.service.DaemonService;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
 import com.squareup.leakcanary.RefWatcher;
@@ -201,8 +201,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = new Intent(this, NotificationCenter.class);
-        startService(intent);
+        startService(new Intent(this, DaemonService.class));
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);

@@ -153,15 +153,6 @@ int main(int argc, char *argv[]) {
 
         while (sig_running) {
             LOGD(LOG_TAG, "check the service once, interval: %d", interval);
-////             判断程序是否已被卸载，如果已经被卸载，则退出supervisor
-//            if (access(package_name, 0) == -1) {
-////                printf("file not exist. file:%s\n", argv[3]);
-//                exit(-1);
-//            }
-            // 判断android进程是否在运行，如果不在运行，则运行之
-//            if (!isProcessExist(argv[3], argv[1])) {
-//                runProcess(argv[1], argv[2]);
-//            }
 
             /* to check if the app has uninstalled, indeed */
             FILE *lib_dir_file = fopen(lib_dir, "r");
@@ -176,8 +167,7 @@ int main(int argc, char *argv[]) {
             }
 
 //            interval = interval < SLEEP_INTERVAL ? SLEEP_INTERVAL : interval;
-//			select_sleep(interval, 0);
-
+            select_sleep(interval, 0);
 
             /* start service */
             start_service(package_name, service_name);

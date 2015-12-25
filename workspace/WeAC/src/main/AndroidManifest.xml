@@ -133,7 +133,7 @@
         <service
             android:name=".service.DaemonService"
             android:exported="true"
-            android:process=":daemon">
+            android:process=":pushservice">
         </service>
 
         <service

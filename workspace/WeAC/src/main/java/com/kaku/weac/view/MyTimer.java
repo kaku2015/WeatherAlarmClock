@@ -1,6 +1,8 @@
 package com.kaku.weac.view;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -14,10 +16,12 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.kaku.weac.R;
+import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
 
 import java.util.Calendar;
+import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -224,6 +228,10 @@ public class MyTimer extends View {
         mTimeStart = Calendar.getInstance();
         mTimeStart.clear();
         mTimeRemain.clear();
+        // GMT（格林尼治标准时间）一般指世界时.中国时间（GST）与之相差-8小时
+        TimeZone tz = TimeZone.getTimeZone("GMT");
+        mTimeStart.setTimeZone(tz);
+        mTimeRemain.setTimeZone(tz);
 
         float density = getResources().getDisplayMetrics().density;
         mViewWidth = canvas.getWidth();
@@ -464,8 +472,8 @@ public class MyTimer extends View {
             super.handleMessage(msg);
 
             switch (msg.what) {
-                //可以倒计时
-                case 1:
+                // 正在倒计时
+                case STARTING:
                     mTimeRemain.add(Calendar.MILLISECOND, -1000);
 
                     if (mRemainTimeChangeListener != null) {
@@ -475,10 +483,11 @@ public class MyTimer extends View {
                     invalidate();
 
                     break;
-                //时间为空，停止倒计时，提示用户
-                case 2:
+                // 停止倒计时
+                case STOP:
                     mIsStarted = false;
                     mTimerTask.cancel();
+                    saveRemainTime(0, false);
                     break;
 
 /*                //StopWatch running
@@ -505,6 +514,16 @@ public class MyTimer extends View {
     private TimerTask mTimerTask;
 
     /**
+     * 正在计时
+     */
+    private static final int STARTING = 1;
+
+    /**
+     * 停止计时
+     */
+    private static final int STOP = 2;
+
+    /**
      * 开始计时
      *
      * @return 是否开启成功
@@ -513,17 +532,19 @@ public class MyTimer extends View {
         // 倒计时
         if (mModel == Model.Timer) {
             if (!isTimeEmpty() && !mIsStarted) {
-
+                setRemainTime(false);
                 mTimerTask = new TimerTask() {
                     @Override
                     public void run() {
+                        // 时间不为0，继续倒计时
                         if (!isTimeEmpty()) {
                             Message message = new Message();
-                            message.what = 1;
+                            message.what = STARTING;
                             mTimeHandler.sendMessage(message);
+                            // 停止倒计时
                         } else {
                             Message message = new Message();
-                            message.what = 2;
+                            message.what = STOP;
                             mTimeHandler.sendMessage(message);
                         }
 
@@ -566,6 +587,39 @@ public class MyTimer extends View {
     }
 
     /**
+     * 计算计时剩余时间
+     *
+     * @param isStop 是否为暂停状态
+     */
+    private void setRemainTime(boolean isStop) {
+        long remainTime = mTimeRemain.getTimeInMillis();
+        long countdownTime;
+        // 暂停状态
+        if (isStop) {
+            countdownTime = remainTime;
+        } else {
+            long now = System.currentTimeMillis();
+            countdownTime = now + remainTime;
+        }
+        saveRemainTime(countdownTime, isStop);
+    }
+
+    /**
+     * 保存计时时间
+     *
+     * @param countdownTime 计时时间
+     * @param isStop        是否为暂停状态
+     */
+    private void saveRemainTime(long countdownTime, boolean isStop) {
+        SharedPreferences preferences = getContext().getSharedPreferences(
+                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putLong(WeacConstants.COUNTDOWN_TIME, countdownTime);
+        editor.putBoolean(WeacConstants.IS_STOP, isStop);
+        editor.apply();
+    }
+
+    /**
      * 计时时间是否为0
      *
      * @return 计时时间是否为0
@@ -582,10 +636,8 @@ public class MyTimer extends View {
      * 停止计时
      */
     public void stop() {
-        if (mTimerTask != null) {
-            mTimerTask.cancel();
-        }
-        mIsStarted = false;
+        cancelTimer();
+        setRemainTime(true);
     }
 
 
@@ -603,8 +655,13 @@ public class MyTimer extends View {
      * 重置
      */
     public void reset() {
-        stop();
-        mIsInitialized = false;
+        cancelTimer();
+        saveRemainTime(0, false);
+        mTimeStart.clear();
+        mTimeRemain.clear();
+        // 重置拖动按钮
+        mDragButtonPosition[0] = mCenterX;
+        mDragButtonPosition[1] = mCenterY - mCircleRadiusWatcher;
         invalidate();
     }
 
@@ -637,11 +694,12 @@ public class MyTimer extends View {
     /**
      * 设置默认开始时间
      *
-     * @param h 小时
-     * @param m 分钟
-     * @param s 秒
+     * @param h      小时
+     * @param m      分钟
+     * @param s      秒
+     * @param isStop 是否为暂停状态
      */
-    public void setStartTime(final int h, final int m, final int s) {
+    public void setStartTime(final int h, final int m, final int s, final boolean isStop) {
         mInitialFinishListener = new OnInitialFinishListener() {
             @Override
             public void onInitialFinishListener() {
@@ -653,8 +711,22 @@ public class MyTimer extends View {
                 mTimeStart.set(Calendar.SECOND, s);
                 updateDegree();
                 invalidate();
+                // 计时状态
+                if (!isStop) {
+                    // 开启计时
+                    start();
+                }
             }
         };
     }
 
+    /**
+     * 取消定时
+     */
+    public void cancelTimer() {
+        if (mTimerTask != null) {
+            mTimerTask.cancel();
+        }
+        mIsStarted = false;
+    }
 }

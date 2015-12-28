@@ -146,4 +146,14 @@ public class WeacConstants {
      * 保存城市管理的默认城市
      */
     public static final String DEFAULT_CITY = "default_city";
+
+    /**
+     * 倒计时时间
+     */
+    public static final String COUNTDOWN_TIME = "countdown_time";
+
+    /**
+     * 倒计时是否为停止状态
+     */
+    public static final String IS_STOP = "is_stop";
 }

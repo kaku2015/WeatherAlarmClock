@@ -12,9 +12,6 @@ int array city_china_en 0x7f090001
 int array city_china_pinyin 0x7f090002
 int array city_china_weather_code 0x7f090003
 int array city_hot 0x7f090004
-int attr clock_color 0x7f010021
-int attr dial_color 0x7f01001f
-int attr disable_touch 0x7f010022
 int attr mySelectedColor 0x7f01000b
 int attr pstsDividerColor 0x7f010002
 int attr pstsDividerPadding 0x7f010005
@@ -46,7 +43,6 @@ int attr ptrRotateDrawableWhilePulling 0x7f01001b
 int attr ptrScrollingWhileRefreshingEnabled 0x7f010019
 int attr ptrShowIndicator 0x7f010011
 int attr ptrSubHeaderTextAppearance 0x7f010017
-int attr text_color 0x7f010020
 int color background_tab_pressed 0x7f0a0000
 int color black 0x7f0a0001
 int color black_text_normal_common 0x7f0a0002
@@ -870,9 +866,4 @@ int styleable PullToRefresh_ptrRotateDrawableWhilePulling 15
 int styleable PullToRefresh_ptrScrollingWhileRefreshingEnabled 13
 int styleable PullToRefresh_ptrShowIndicator 5
 int styleable PullToRefresh_ptrSubHeaderTextAppearance 11
-int[] styleable TimePicker { 0x7f01001f, 0x7f010020, 0x7f010021, 0x7f010022 }
-int styleable TimePicker_clock_color 2
-int styleable TimePicker_dial_color 0
-int styleable TimePicker_disable_touch 3
-int styleable TimePicker_text_color 1
 int xml city_china 0x7f050000

@@ -22,7 +22,7 @@ public class DaemonService extends Service {
     public void onCreate() {
         super.onCreate();
         LogUtil.d(LOG_TAG, "onCreate");
-        Daemon.run(this, DaemonService.class, 0);
+        Daemon.run(this, DaemonService.class, Daemon.INTERVAL_ONE_MINUTE);
 
         startService(new Intent(this, NotificationCenter.class));
 
@@ -89,8 +89,7 @@ public class DaemonService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        LogUtil.d(LOG_TAG, "onStartCommand");
-        /* do something here */
+//        LogUtil.d(LOG_TAG, "onStartCommand");
         flags = START_STICKY;
         return super.onStartCommand(intent, flags, startId);
     }

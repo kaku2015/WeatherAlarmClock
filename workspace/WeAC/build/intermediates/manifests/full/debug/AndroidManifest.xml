@@ -150,6 +150,8 @@
             android:name="com.kaku.weac.test.AutoUpdateReceiver"
             android:process=":test" />
 
+        <service android:name="com.kaku.weac.service.TimerService" >
+        </service>
         <service
             android:name="com.squareup.leakcanary.internal.HeapAnalyzerService"
             android:enabled="false"

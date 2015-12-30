@@ -1,7 +1,10 @@
 package com.kaku.weac.view;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
@@ -11,12 +14,14 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.kaku.weac.R;
 import com.kaku.weac.common.WeacConstants;
+import com.kaku.weac.service.TimerService;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
 
@@ -551,6 +556,7 @@ public class MyTimer extends View {
                     }
                 };
 
+                MyUtil.startAlarmClockTimer(getContext(), mTimeRemain.getTimeInMillis());
                 new Timer(true).schedule(mTimerTask, 1000, 1000);
                 mIsStarted = true;
 
@@ -587,6 +593,18 @@ public class MyTimer extends View {
     }
 
     /**
+     * 停止倒计时广播
+     */
+    private void stopAlarmClockTimer() {
+        Intent intent = new Intent(getContext(), TimerService.class);
+        PendingIntent pi = PendingIntent.getService(getContext(),
+                1000, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getContext()
+                .getSystemService(Context.ALARM_SERVICE);
+        alarmManager.cancel(pi);
+    }
+
+    /**
      * 计算计时剩余时间
      *
      * @param isStop 是否为暂停状态
@@ -598,7 +616,7 @@ public class MyTimer extends View {
         if (isStop) {
             countdownTime = remainTime;
         } else {
-            long now = System.currentTimeMillis();
+            long now = SystemClock.elapsedRealtime();
             countdownTime = now + remainTime;
         }
         saveRemainTime(countdownTime, isStop);
@@ -636,6 +654,7 @@ public class MyTimer extends View {
      * 停止计时
      */
     public void stop() {
+        stopAlarmClockTimer();
         cancelTimer();
         setRemainTime(true);
     }

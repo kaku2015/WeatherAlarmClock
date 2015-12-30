@@ -10,20 +10,19 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.INTERNET"/>
 
-    <!-- 以下为百度定位需要权限-->
-    <!-- 这个权限用于进行网络定位-->
+    <!-- 以下为百度定位需要权限 -->
+    <!-- 这个权限用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <!-- 这个权限用于访问GPS定位-->
+    <!-- 这个权限用于访问GPS定位 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位-->
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口-->
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <!-- 用于读取手机当前的状态-->
+    <!-- 用于读取手机当前的状态 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-
 
     <!-- 操作SD卡 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -31,7 +30,7 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
 
     <application
-        android:name="LeakCanaryApplication"
+        android:name=".LeakCanaryApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name">
@@ -125,7 +124,6 @@
             android:exported="false"
             android:process=":pushservice">
         </service>
-
         <service
             android:name=".test.AutoUpdateService"
             android:exported="false">
@@ -135,7 +133,6 @@
             android:exported="true"
             android:process=":pushservice">
         </service>
-
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
@@ -149,6 +146,9 @@
         <receiver
             android:name=".test.AutoUpdateReceiver"
             android:process=":test"/>
+
+        <service android:name=".service.TimerService">
+        </service>
     </application>
 
 </manifest>

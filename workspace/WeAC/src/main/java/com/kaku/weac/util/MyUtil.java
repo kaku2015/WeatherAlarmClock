@@ -27,6 +27,7 @@ import com.kaku.weac.R;
 import com.kaku.weac.bean.AlarmClock;
 import com.kaku.weac.broadcast.AlarmClockBroadcast;
 import com.kaku.weac.common.WeacConstants;
+import com.kaku.weac.service.TimerService;
 
 import java.lang.reflect.Field;
 import java.text.DecimalFormat;
@@ -167,6 +168,26 @@ public class MyUtil {
         AlarmManager am = (AlarmManager) context
                 .getSystemService(Activity.ALARM_SERVICE);
         am.cancel(pi);
+    }
+
+    /**
+     * 开启倒计时
+     *
+     * @param context    context
+     * @param timeRemain 剩余时间
+     */
+    public static void startAlarmClockTimer(Context context, long timeRemain) {
+        Intent intent = new Intent(context, TimerService.class);
+        PendingIntent pi = PendingIntent.getService(context,
+                1000, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) context
+                .getSystemService(Context.ALARM_SERVICE);
+        long countdownTime = timeRemain + SystemClock.elapsedRealtime();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            alarmManager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, countdownTime, pi);
+        } else {
+            alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, countdownTime, pi);
+        }
     }
 
     /**

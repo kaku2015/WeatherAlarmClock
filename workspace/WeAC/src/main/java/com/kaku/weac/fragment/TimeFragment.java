@@ -6,6 +6,7 @@ package com.kaku.weac.fragment;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,8 +62,20 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
         timer.setOnTimeChangeListener(this);
         timer.setTimeChangListener(this);
         timer.setModel(Model.Timer);
-        timer.setStartTime(0, 0, 0, false);
+        timer.setStartTime(0, 0, 0, true);
+        setTimer();
 
+        mStartBtn = (Button) view.findViewById(R.id.btn_start);
+        mStopBtn = (Button) view.findViewById(R.id.btn_stop);
+        mResetBtn = (Button) view.findViewById(R.id.btn_reset);
+        mStartBtn.setOnClickListener(this);
+        mStopBtn.setOnClickListener(this);
+        mResetBtn.setOnClickListener(this);
+
+        return view;
+    }
+
+    private void setTimer() {
         SharedPreferences preferences = getContext().getSharedPreferences(
                 WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
         // 倒计时时间
@@ -76,11 +89,11 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
                 remainTime = countdown;
                 // 正在计时状态
             } else {
-                long now = System.currentTimeMillis();
+                long now = SystemClock.elapsedRealtime();
                 remainTime = countdown - now;
             }
             // 当剩余时间大于0
-            if (remainTime > 0) {
+            if (remainTime > 0 && (remainTime / 1000 / 60) < 60) {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(remainTime);
                 int minute = calendar.get(Calendar.MINUTE);
@@ -93,15 +106,6 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
                 // TODO: 响铃？
             }
         }
-
-        mStartBtn = (Button) view.findViewById(R.id.btn_start);
-        mStopBtn = (Button) view.findViewById(R.id.btn_stop);
-        mResetBtn = (Button) view.findViewById(R.id.btn_reset);
-        mStartBtn.setOnClickListener(this);
-        mStopBtn.setOnClickListener(this);
-        mResetBtn.setOnClickListener(this);
-
-        return view;
     }
 
     @Override

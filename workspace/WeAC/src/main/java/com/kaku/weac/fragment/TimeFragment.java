@@ -10,7 +10,7 @@ import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 
 import com.kaku.weac.R;
 import com.kaku.weac.common.WeacConstants;
@@ -41,22 +41,64 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
     /**
      * 开始按钮
      */
-    Button mStartBtn;
+    ImageView mStartBtn;
+
+    /**
+     * 开始按钮2
+     */
+    ImageView mStartBtn2;
 
     /**
      * 停止按钮
      */
-    Button mStopBtn;
+    ImageView mStopBtn;
 
     /**
      * 重置按钮
      */
-    Button mResetBtn;
+    ImageView mResetBtn;
+
+    /**
+     * 快捷按钮
+     */
+    ImageView mQuickBtn;
+
+    /**
+     * 铃声按钮
+     */
+    ImageView mRingBtn;
+
+    /**
+     * 初始计时按钮布局
+     */
+    ViewGroup mStartLLyt;
+
+    /**
+     * 开启计时后按钮的布局
+     */
+    ViewGroup mStartLLyt2;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fm_time, container, false);
+
+        mStartLLyt = (ViewGroup) view.findViewById(R.id.btn_start_llyt);
+        mStartLLyt2 = (ViewGroup) view.findViewById(R.id.btn_start_llyt2);
+
+        mStartBtn = (ImageView) view.findViewById(R.id.btn_start);
+        mStartBtn2 = (ImageView) view.findViewById(R.id.btn_start2);
+        mStopBtn = (ImageView) view.findViewById(R.id.btn_stop);
+        mResetBtn = (ImageView) view.findViewById(R.id.btn_reset);
+        mQuickBtn = (ImageView) view.findViewById(R.id.btn_quick);
+        mRingBtn = (ImageView) view.findViewById(R.id.btn_ring);
+
+        mStartBtn2.setOnClickListener(this);
+        mStopBtn.setOnClickListener(this);
+        mResetBtn.setOnClickListener(this);
+        mQuickBtn.setOnClickListener(this);
+        mRingBtn.setOnClickListener(this);
 
         timer = (MyTimer) view.findViewById(R.id.timer);
         timer.setOnTimeChangeListener(this);
@@ -64,13 +106,6 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
         timer.setModel(Model.Timer);
         timer.setStartTime(0, 0, 0, true);
         setTimer();
-
-        mStartBtn = (Button) view.findViewById(R.id.btn_start);
-        mStopBtn = (Button) view.findViewById(R.id.btn_stop);
-        mResetBtn = (Button) view.findViewById(R.id.btn_reset);
-        mStartBtn.setOnClickListener(this);
-        mStopBtn.setOnClickListener(this);
-        mResetBtn.setOnClickListener(this);
 
         return view;
     }
@@ -87,6 +122,7 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
             // 暂停状态
             if (isStop) {
                 remainTime = countdown;
+                setStart2Visible();
                 // 正在计时状态
             } else {
                 long now = SystemClock.elapsedRealtime();
@@ -99,12 +135,16 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
                 int minute = calendar.get(Calendar.MINUTE);
                 int second = calendar.get(Calendar.SECOND);
                 timer.setStartTime(0, minute, second, isStop);
+                setStratLlyt2Visible();
             } else {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putLong(WeacConstants.COUNTDOWN_TIME, 0);
                 editor.apply();
+                setStartBtnNoClickable();
                 // TODO: 响铃？
             }
+        } else {
+            setStartBtnNoClickable();
         }
     }
 
@@ -113,14 +153,74 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
         switch (v.getId()) {
             case R.id.btn_start:
                 timer.start();
+                setStratLlyt2Visible();
+                setStopVisible();
+                break;
+            case R.id.btn_start2:
+                timer.start();
+                setStopVisible();
                 break;
             case R.id.btn_stop:
                 timer.stop();
+                setStart2Visible();
                 break;
             case R.id.btn_reset:
                 timer.reset();
+                setStratLlytVisible();
                 break;
         }
+    }
+
+    /**
+     * 设置计时前开始按钮可以点击
+     */
+    private void setStartBtnClickable() {
+        mStartBtn.setImageAlpha(255);
+        //noinspection deprecation
+        mStartBtn.setBackground(getResources().getDrawable(R.drawable.bg_timer_button));
+        mStartBtn.setOnClickListener(this);
+    }
+
+    /**
+     * 设置计时前开始按钮不可点击
+     */
+    private void setStartBtnNoClickable() {
+        mStartBtn.setImageAlpha(50);
+        mStartBtn.setBackground(null);
+        mStartBtn.setOnClickListener(null);
+    }
+
+    /**
+     * 显示开始计时后的开始按钮
+     */
+    private void setStart2Visible() {
+        mStartBtn2.setVisibility(View.VISIBLE);
+        mStopBtn.setVisibility(View.GONE);
+    }
+
+    /**
+     * 显示开始计时后的暂停按钮
+     */
+    private void setStopVisible() {
+        mStartBtn2.setVisibility(View.GONE);
+        mStopBtn.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 显示开始计时前的布局
+     */
+    private void setStratLlytVisible() {
+        setStartBtnNoClickable();
+        mStartLLyt.setVisibility(View.VISIBLE);
+        mStartLLyt2.setVisibility(View.GONE);
+    }
+
+    /**
+     * 显示开始计时后的布局
+     */
+    private void setStratLlyt2Visible() {
+        mStartLLyt.setVisibility(View.GONE);
+        mStartLLyt2.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -142,11 +242,20 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
     public void onTimeStop(long timeStart, long timeRemain) {
         LogUtil.d(LOG_TAG, "onTimeStop timeRemain " + timeStart);
         LogUtil.d(LOG_TAG, "onTimeStop timeRemain " + timeRemain);
+        setStratLlytVisible();
     }
 
     @Override
     public void onMinChange(int minute) {
         LogUtil.d(LOG_TAG, "minute change to " + minute);
+
+        if (minute == 0) {
+            setStartBtnNoClickable();
+        } else {
+            if (mStartBtn.getImageAlpha() == 50) {
+                setStartBtnClickable();
+            }
+        }
     }
 
     @Override

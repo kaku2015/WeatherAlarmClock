@@ -176,7 +176,7 @@ public class MyUtil {
      * @param context    context
      * @param timeRemain 剩余时间
      */
-    public static void startAlarmClockTimer(Context context, long timeRemain) {
+    public static void startAlarmTimer(Context context, long timeRemain) {
         Intent intent = new Intent(context, TimerService.class);
         PendingIntent pi = PendingIntent.getService(context,
                 1000, intent, PendingIntent.FLAG_UPDATE_CURRENT);

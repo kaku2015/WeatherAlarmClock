@@ -482,7 +482,8 @@ public class MyTimer extends View {
                     mTimeRemain.add(Calendar.MILLISECOND, -1000);
 
                     if (mRemainTimeChangeListener != null) {
-                        mRemainTimeChangeListener.onTimeChange(mTimeStart.getTimeInMillis(), mTimeRemain.getTimeInMillis());
+                        mRemainTimeChangeListener.onTimeChange(mTimeStart.getTimeInMillis(),
+                                mTimeRemain.getTimeInMillis());
                     }
 
                     invalidate();
@@ -493,6 +494,11 @@ public class MyTimer extends View {
                     mIsStarted = false;
                     mTimerTask.cancel();
                     saveRemainTime(0, false);
+
+                    if (mRemainTimeChangeListener != null) {
+                        mRemainTimeChangeListener.onTimeStop(mTimeStart.getTimeInMillis(),
+                                mTimeRemain.getTimeInMillis());
+                    }
                     break;
 
 /*                //StopWatch running
@@ -556,7 +562,7 @@ public class MyTimer extends View {
                     }
                 };
 
-                MyUtil.startAlarmClockTimer(getContext(), mTimeRemain.getTimeInMillis());
+                MyUtil.startAlarmTimer(getContext(), mTimeRemain.getTimeInMillis());
                 new Timer(true).schedule(mTimerTask, 1000, 1000);
                 mIsStarted = true;
 
@@ -674,13 +680,11 @@ public class MyTimer extends View {
      * 重置
      */
     public void reset() {
+        stopAlarmClockTimer();
         cancelTimer();
         saveRemainTime(0, false);
-        mTimeStart.clear();
-        mTimeRemain.clear();
-        // 重置拖动按钮
-        mDragButtonPosition[0] = mCenterX;
-        mDragButtonPosition[1] = mCenterY - mCircleRadiusWatcher;
+        mTimeStart.setTimeInMillis(0);
+        mTimeRemain.setTimeInMillis(0);
         invalidate();
     }
 

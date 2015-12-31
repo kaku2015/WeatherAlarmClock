@@ -91,7 +91,7 @@ public class DaemonService extends Service {
                     long now = SystemClock.elapsedRealtime();
                     long remainTime = countdown - now;
                     if (remainTime > 0 && (remainTime / 1000 / 60) < 60) {
-                        MyUtil.startAlarmClockTimer(DaemonService.this, remainTime);
+                        MyUtil.startAlarmTimer(DaemonService.this, remainTime);
                     }
                 }
             }

@@ -9,31 +9,75 @@
         android:layout_height="wrap_content"
         android:layerType="software"/>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/btn_start"
-            android:layout_width="0dp"
+        <RelativeLayout
+            android:id="@+id/btn_start_llyt"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="启动"/>
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
 
-        <Button
-            android:id="@+id/btn_stop"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="停止"/>
+            <ImageView
+                android:id="@+id/btn_start"
+                style="@style/timer_btn"
+                android:layout_alignParentLeft="true"
+                android:contentDescription="@null"
+                android:src="@drawable/btn_timer_start"/>
 
-        <Button
-            android:id="@+id/btn_reset"
-            android:layout_width="0dp"
+            <ImageView
+                android:id="@+id/btn_quick"
+                style="@style/timer_btn"
+                android:layout_centerInParent="true"
+                android:contentDescription="@null"
+                android:src="@drawable/btn_timer_quick"/>
+
+            <ImageView
+                android:id="@+id/btn_ring"
+                style="@style/timer_btn"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right"
+                android:contentDescription="@null"
+                android:src="@drawable/btn_timer_ring"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_start_llyt2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="reset"/>
-    </LinearLayout>
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="60dp">
+
+                <ImageView
+                    android:id="@+id/btn_stop"
+                    style="@style/timer_btn"
+                    android:contentDescription="@null"
+                    android:src="@drawable/btn_timer_pause"/>
+
+                <ImageView
+                    android:id="@+id/btn_start2"
+                    style="@style/timer_btn"
+                    android:contentDescription="@null"
+                    android:src="@drawable/btn_timer_start"
+                    android:visibility="gone"/>
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/btn_reset"
+                style="@style/timer_btn"
+                android:contentDescription="@null"
+                android:src="@drawable/btn_timer_reset"/>
+
+        </LinearLayout>
+    </FrameLayout>
+
 
 </LinearLayout>

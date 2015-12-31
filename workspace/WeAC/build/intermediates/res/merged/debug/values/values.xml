@@ -10886,6 +10886,14 @@
         <item name="android:gravity">center</item>
         <item name="android:textSize">12sp</item>
     </style>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles_timer.xml -->
+    <eat-comment/>
+    <style name="timer_btn">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_timer_button</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/stytles_wea.xml -->
     <eat-comment/>
     <style name="wea_area_llyt">

@@ -238,7 +238,9 @@ public class AlarmClockNewFragment extends BaseFragment implements OnClickListen
         // 闹钟时间选择器
         TimePicker timePicker = (TimePicker) view.findViewById(R.id.time_picker);
         timePicker.setIs24HourView(true);
+        //noinspection deprecation
         int currentHour = timePicker.getCurrentHour();
+        //noinspection deprecation
         int currentMinute = timePicker.getCurrentMinute();
         // 初始化闹钟实例的小时
         mAlarmClock.setHour(currentHour);
@@ -417,6 +419,7 @@ public class AlarmClockNewFragment extends BaseFragment implements OnClickListen
                 }
                 // 铃声选择界面
                 Intent i = new Intent(getActivity(), RingSelectActivity.class);
+                i.putExtra(WeacConstants.RING_REQUEST_TYPE, 0);
                 startActivityForResult(i, REQUEST_RING_SELECT);
                 break;
             // 当点击小睡

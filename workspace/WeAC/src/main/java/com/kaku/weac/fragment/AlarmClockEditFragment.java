@@ -235,8 +235,10 @@ public class AlarmClockEditFragment extends BaseFragment implements
         TimePicker timePicker = (TimePicker) view.findViewById(R.id.time_picker);
         timePicker.setIs24HourView(true);
         // 初始化时间选择器的小时
+        //noinspection deprecation
         timePicker.setCurrentHour(mAlarmClock.getHour());
         // 初始化时间选择器的分钟
+        //noinspection deprecation
         timePicker.setCurrentMinute(mAlarmClock.getMinute());
 
         timePicker.setOnTimeChangedListener(new OnTimeChangedListener() {
@@ -423,6 +425,7 @@ public class AlarmClockEditFragment extends BaseFragment implements
                 i.putExtra(WeacConstants.RING_NAME, mAlarmClock.getRingName());
                 i.putExtra(WeacConstants.RING_URL, mAlarmClock.getRingUrl());
                 i.putExtra(WeacConstants.RING_PAGER, mAlarmClock.getRingPager());
+                i.putExtra(WeacConstants.RING_REQUEST_TYPE, 0);
                 startActivityForResult(i, REQUEST_RING_SELECT);
                 break;
             // 当点击小睡

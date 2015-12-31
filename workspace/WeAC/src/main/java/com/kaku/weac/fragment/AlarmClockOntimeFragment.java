@@ -320,7 +320,7 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
 
         // 复原手机媒体音量
         mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
-                mCurrentVolume, 0);
+                mCurrentVolume, AudioManager.ADJUST_SAME);
     }
 
     @Override
@@ -460,7 +460,7 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
                 .getStreamVolume(AudioManager.STREAM_MUSIC);
         // 设置铃声音量
         mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
-                mAlarmClock.getVolume(), 0);
+                mAlarmClock.getVolume(), AudioManager.ADJUST_SAME);
 
         // 默认铃声
         if (mAlarmClock.getRingUrl().equals(WeacConstants.DEFAULT_RING_URL)

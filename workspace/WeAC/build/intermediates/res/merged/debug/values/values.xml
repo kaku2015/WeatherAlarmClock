@@ -10334,11 +10334,13 @@
     <color name="blue_ice">#72abf8</color>
     <color name="blue_tab">#00A0F3</color>
     <color name="blue_tog_btn">#397cbf</color>
-    <color name="dark_blue">#0080ff</color>
-    <color name="dark_blue_button_pressed">#0066ff</color>
-    <color name="dark_blue_focus">#400080ff</color>
-    <color name="dark_blue_invalidate">#990080ff</color>
-    <color name="dark_blue_line">#0090ff</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#009688</color>
+    <color name="colorPrimaryDark">#00796B</color>
+    <color name="dark_blue">#3F51B5</color>
+    <color name="dark_blue_button_pressed">#303F9F</color>
+    <color name="dark_blue_focus">#403F51B5</color>
+    <color name="dark_blue_invalidate">#993F51B5</color>
     <color name="dark_blue_trans40">#660080ff</color>
     <color name="dark_gray">#989898</color>
     <color name="dark_gray_button_pressed">#808080</color>
@@ -10537,6 +10539,7 @@
     <string name="three_h">三</string>
     <string name="thursday">周四</string>
     <string name="time">计时</string>
+    <string name="timer_on_time">计时器时间到了！</string>
     <string name="times">次数</string>
     <string name="today">今天</string>
     <string name="tomorrow">明天</string>
@@ -10859,7 +10862,7 @@
         <item name="android:layout_margin">20dp</item>
         <item name="android:textSize">18sp</item>
         <item name="android:text">@string/roger</item>
-        <item name="android:textColor">@color/gray_background_color</item>
+        <item name="android:textColor">@color/white_trans90</item>
         <item name="android:background">@drawable/bg_btn_sure</item>
     </style>
     <style name="sure_cancel_btn">

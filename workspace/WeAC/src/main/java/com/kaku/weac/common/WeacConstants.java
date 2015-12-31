@@ -47,6 +47,26 @@ public class WeacConstants {
     public static final String RING_PAGER = "ring_pager_position";
 
     /**
+     * 请求的铃声选择类型：0，闹钟；1，计时器
+     */
+    public static final String RING_REQUEST_TYPE = "ring_request_type";
+
+    /**
+     * 保存计时器的铃声名
+     */
+    public static final String RING_NAME_TIMER = "ring_name_timer";
+
+    /**
+     * 保存计时器的铃声地址
+     */
+    public static final String RING_URL_TIMER = "ring_url_timer";
+
+    /**
+     * 保存计时器的铃声选择界面位置
+     */
+    public static final String RING_PAGER_TIMER = "ring_pager_position_timer";
+
+    /**
      * 默认铃声Url标记
      */
     public static final String DEFAULT_RING_URL = "default_ring_url";

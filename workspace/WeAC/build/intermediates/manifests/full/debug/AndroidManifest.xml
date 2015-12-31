@@ -98,6 +98,9 @@
             android:launchMode="singleTop"
             android:theme="@style/Theme.MyDialog" />
         <activity
+            android:name="com.kaku.weac.activities.TimerOnTimeActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
             android:name="com.kaku.weac.activities.RecordDeleteBatchActivity"
             android:theme="@style/Transparent" />
         <activity

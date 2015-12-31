@@ -160,6 +160,7 @@ public class LocalMusicFragment extends BaseListFragment implements
                             // 当列表中存在与保存的铃声名一致时，设置该列表的显示位置
                             if (ringName.equals(ringName1)) {
                                 mPosition = list.size() - 1;
+                                RingSelectItem.getInstance().setRingPager(1);
                             }
                         }
                     }

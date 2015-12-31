@@ -4,6 +4,7 @@
 package com.kaku.weac.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -13,8 +14,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.kaku.weac.R;
+import com.kaku.weac.activities.RingSelectActivity;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.LogUtil;
+import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.view.Model;
 import com.kaku.weac.view.MyTimer;
 
@@ -32,6 +35,11 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
      * Log tag ：TimeFragment
      */
     private static final String LOG_TAG = "TimeFragment";
+
+    /**
+     * 铃声选择按钮的requestCode
+     */
+    private static final int REQUEST_RING_SELECT = 1;
 
     /**
      * 计时器
@@ -167,6 +175,43 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
             case R.id.btn_reset:
                 timer.reset();
                 setStratLlytVisible();
+                break;
+            case R.id.btn_ring:
+                if (MyUtil.isFastDoubleClick()) {
+                    return;
+                }
+
+                SharedPreferences shares = getActivity().getSharedPreferences(
+                        WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+                int ringPager = shares.getInt(WeacConstants.RING_PAGER_TIMER, 0);
+                String ringUrl = shares.getString(WeacConstants.RING_URL_TIMER, WeacConstants.DEFAULT_RING_URL);
+                String ringName = shares.getString(WeacConstants.RING_NAME_TIMER, getString(R.string.default_ring));
+
+                Intent i = new Intent(getActivity(), RingSelectActivity.class);
+                i.putExtra(WeacConstants.RING_NAME, ringName);
+                i.putExtra(WeacConstants.RING_URL, ringUrl);
+                i.putExtra(WeacConstants.RING_PAGER, ringPager);
+                i.putExtra(WeacConstants.RING_REQUEST_TYPE, 1);
+                startActivityForResult(i, REQUEST_RING_SELECT);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        switch (requestCode) {
+            // 铃声选择界面返回
+            case REQUEST_RING_SELECT:
+                // 铃声名
+                String name = data.getStringExtra(WeacConstants.RING_NAME);
+                // 铃声地址
+                String url = data.getStringExtra(WeacConstants.RING_URL);
+                // 铃声界面
+                int ringPager = data.getIntExtra(WeacConstants.RING_PAGER, 0);
                 break;
         }
     }

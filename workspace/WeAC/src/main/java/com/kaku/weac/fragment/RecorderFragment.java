@@ -511,6 +511,7 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
             String ringName = map.get(WeacConstants.RING_NAME);
             if (ringName.equals(mRingName)) {
                 mPosition = i;
+                RingSelectItem.getInstance().setRingPager(2);
             }
         }
     }

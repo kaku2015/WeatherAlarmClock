@@ -57,6 +57,11 @@ public class RingSelectFragment extends BaseFragment implements OnClickListener 
      */
     public static int sRingPager;
 
+    /**
+     * 铃声请求类型
+     */
+    public static int sRingRequestType;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +70,7 @@ public class RingSelectFragment extends BaseFragment implements OnClickListener 
         sRingName = intent.getStringExtra(WeacConstants.RING_NAME);
         sRingUrl = intent.getStringExtra(WeacConstants.RING_URL);
         sRingPager = intent.getIntExtra(WeacConstants.RING_PAGER, -1);
+        sRingRequestType = intent.getIntExtra(WeacConstants.RING_REQUEST_TYPE, 0);
     }
 
     @Override
@@ -120,9 +126,18 @@ public class RingSelectFragment extends BaseFragment implements OnClickListener 
                 SharedPreferences share = getActivity().getSharedPreferences(
                         WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
                 SharedPreferences.Editor edit = share.edit();
-                edit.putString(WeacConstants.RING_NAME, ringName);
-                edit.putString(WeacConstants.RING_URL, ringUrl);
-                edit.putInt(WeacConstants.RING_PAGER, ringPager);
+
+                // 来自闹钟请求
+                if (sRingRequestType == 0) {
+                    edit.putString(WeacConstants.RING_NAME, ringName);
+                    edit.putString(WeacConstants.RING_URL, ringUrl);
+                    edit.putInt(WeacConstants.RING_PAGER, ringPager);
+                    // 计时器请求
+                } else {
+                    edit.putString(WeacConstants.RING_NAME_TIMER, ringName);
+                    edit.putString(WeacConstants.RING_URL_TIMER, ringUrl);
+                    edit.putInt(WeacConstants.RING_PAGER_TIMER, ringPager);
+                }
                 edit.apply();
 
                 // 传递选中的铃声信息
@@ -166,6 +181,7 @@ public class RingSelectFragment extends BaseFragment implements OnClickListener 
                 .findViewById(R.id.fragment_ring_select_sort);
         viewPager.setAdapter(new MyFragmentPagerAdapter(getActivity()
                 .getSupportFragmentManager()));
+        viewPager.setOffscreenPageLimit(2);
 
         // 铃声界面位置
         int currentIndex;
@@ -214,7 +230,7 @@ public class RingSelectFragment extends BaseFragment implements OnClickListener 
         }
 
         @Override
-        public android.support.v4.app.Fragment getItem(int position) {
+        public Fragment getItem(int position) {
             return mFragmentList.get(position);
         }
 

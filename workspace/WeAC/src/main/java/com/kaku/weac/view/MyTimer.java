@@ -661,6 +661,7 @@ public class MyTimer extends View {
         this.mTimeChangListener = timeChangListener;
     }
 
+
     /**
      * 重置
      */

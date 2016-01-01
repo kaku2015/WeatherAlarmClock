@@ -20,6 +20,7 @@ import com.kaku.weac.R;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.MyUtil;
 
+import java.lang.ref.WeakReference;
 import java.util.Calendar;
 import java.util.TimeZone;
 import java.util.Timer;
@@ -33,11 +34,6 @@ import java.util.TimerTask;
  * @version 1.0 2015/12/22
  */
 public class MyTimer extends View {
-
-    /**
-     * Log tag ：MyTimer
-     */
-    private static final String LOG_TAG = "MyTimer";
 
     /**
      * 是否已经初始化
@@ -334,7 +330,6 @@ public class MyTimer extends View {
                         updateDragButtonPosition();
                         invalidate();
 
-                        //FiXME: 不需要删除回调接口
                         // 当分钟数改变
                         if (mRemainMinute != mTimeRemain.get(Calendar.MINUTE)) {
                             mRemainMinute = mTimeRemain.get(Calendar.MINUTE);
@@ -450,7 +445,6 @@ public class MyTimer extends View {
         mDragButtonPosition[1] = (float) (mCenterY - mCircleRadiusWatcher * Math.cos(Math.toRadians(mCurrentDegree)));
     }
 
-
     /**
      * 从当前的角度获取时间，保存到timeStart和timeRemain
      * 度数 = 分钟数 * 60分 / 3600 * 360度，分钟数 = 度数 * 3600 / 360 * 60 = 度数 / 6
@@ -462,37 +456,43 @@ public class MyTimer extends View {
         mTimeRemain.set(Calendar.SECOND, 0);
     }
 
-
     /**
      * 计时Handler
      */
-    private Handler mTimeHandler = new Handler() {
+    static class TimerHandler extends Handler {
+        private WeakReference<View> mWeakReference;
+
+        public TimerHandler(View view) {
+            mWeakReference = new WeakReference<>(view);
+        }
+
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            MyTimer myTimer = (MyTimer) mWeakReference.get();
 
             switch (msg.what) {
                 // 正在倒计时
                 case STARTING:
-                    mTimeRemain.add(Calendar.MILLISECOND, -1000);
+                    myTimer.mTimeRemain.add(Calendar.MILLISECOND, -1000);
 
-                    if (mRemainTimeChangeListener != null) {
-                        mRemainTimeChangeListener.onTimeChange(mTimeStart.getTimeInMillis(),
-                                mTimeRemain.getTimeInMillis());
-                    }
+//                    if (myTimer.mRemainTimeChangeListener != null) {
+//                        myTimer.mRemainTimeChangeListener.onTimeChange(myTimer.mTimeStart.getTimeInMillis(),
+//                                myTimer.mTimeRemain.getTimeInMillis());
+//                    }
 
-                    invalidate();
+                    myTimer.invalidate();
 
                     break;
                 // 停止倒计时
                 case STOP:
-                    mIsStarted = false;
-                    mTimerTask.cancel();
-                    saveRemainTime(0, false);
+                    myTimer.mIsStarted = false;
+                    myTimer.mTimerTask.cancel();
+                    myTimer.saveRemainTime(0, false);
 
-                    if (mRemainTimeChangeListener != null) {
-                        mRemainTimeChangeListener.onTimeStop(mTimeStart.getTimeInMillis(),
-                                mTimeRemain.getTimeInMillis());
+                    if (myTimer.mRemainTimeChangeListener != null) {
+                        myTimer.mRemainTimeChangeListener.onTimeStop(myTimer.mTimeStart.getTimeInMillis(),
+                                myTimer.mTimeRemain.getTimeInMillis());
                     }
                     break;
 
@@ -512,7 +512,7 @@ public class MyTimer extends View {
                     break;*/
             }
         }
-    };
+    }
 
     /**
      * 计时Task
@@ -533,6 +533,8 @@ public class MyTimer extends View {
         mIsStarted = isStarted;
     }
 
+    private Handler mTimeHandler;
+
     /**
      * 开始计时
      *
@@ -542,6 +544,9 @@ public class MyTimer extends View {
         // 倒计时
         if (mModel == Model.Timer) {
             if (!isTimeEmpty()) {
+                if (mTimeHandler == null) {
+                    mTimeHandler = new TimerHandler(MyTimer.this);
+                }
                 setRemainTime(false);
                 mTimerTask = new TimerTask() {
                     @Override
@@ -641,16 +646,6 @@ public class MyTimer extends View {
                 || mTimeRemain.get(Calendar.MILLISECOND) != 0);
     }
 
-
-    /**
-     * 停止计时
-     */
-    public void stop() {
-        cancelTimer();
-        setRemainTime(true);
-    }
-
-
     public void setOnTimeChangeListener(OnTimeChangeListener listener) {
         if (listener != null) {
             mRemainTimeChangeListener = listener;
@@ -661,6 +656,13 @@ public class MyTimer extends View {
         this.mTimeChangListener = timeChangListener;
     }
 
+    /**
+     * 停止计时
+     */
+    public void stop() {
+        cancelTimer();
+        setRemainTime(true);
+    }
 
     /**
      * 重置
@@ -678,9 +680,6 @@ public class MyTimer extends View {
     //listener
     public interface OnTimeChangeListener {
         void onTimerStart(long timeStart);
-
-        void onTimeChange(long timeStart, long timeRemain);
-
         void onTimeStop(long timeStart, long timeRemain);
     }
 
@@ -704,30 +703,39 @@ public class MyTimer extends View {
     /**
      * 设置默认开始时间
      *
-     * @param h      小时
-     * @param m      分钟
-     * @param s      秒
-     * @param isStop 是否为暂停状态
+     * @param h             小时
+     * @param m             分钟
+     * @param s             秒
+     * @param isStop        是否为暂停状态
+     * @param isInitialized 是否已经初始化
      */
-    public void setStartTime(final int h, final int m, final int s, final boolean isStop) {
-        mInitialFinishListener = new OnInitialFinishListener() {
-            @Override
-            public void onInitialFinishListener() {
-                mTimeRemain.set(Calendar.HOUR_OF_DAY, h);
-                mTimeRemain.set(Calendar.MINUTE, m);
-                mTimeRemain.set(Calendar.SECOND, s);
-                mTimeStart.set(Calendar.HOUR_OF_DAY, h);
-                mTimeStart.set(Calendar.MINUTE, m);
-                mTimeStart.set(Calendar.SECOND, s);
-                updateDegree();
-                invalidate();
-                // 计时状态
-                if (!isStop) {
-                    // 开启计时
-                    start();
+    public void setStartTime(final int h, final int m, final int s, final boolean isStop, boolean isInitialized) {
+        if (!isInitialized) {
+            mInitialFinishListener = new OnInitialFinishListener() {
+                @Override
+                public void onInitialFinishListener() {
+                    process(h, m, s, isStop);
                 }
-            }
-        };
+            };
+        } else {
+            process(h, m, s, isStop);
+        }
+    }
+
+    private void process(int h, int m, int s, boolean isStop) {
+        mTimeRemain.set(Calendar.HOUR_OF_DAY, h);
+        mTimeRemain.set(Calendar.MINUTE, m);
+        mTimeRemain.set(Calendar.SECOND, s);
+        mTimeStart.set(Calendar.HOUR_OF_DAY, h);
+        mTimeStart.set(Calendar.MINUTE, m);
+        mTimeStart.set(Calendar.SECOND, s);
+        updateDegree();
+        invalidate();
+        // 计时状态
+        if (!isStop) {
+            // 开启计时
+            start();
+        }
     }
 
     /**

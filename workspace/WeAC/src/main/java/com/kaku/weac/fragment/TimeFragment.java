@@ -3,18 +3,22 @@
  */
 package com.kaku.weac.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.kaku.weac.R;
 import com.kaku.weac.activities.RingSelectActivity;
@@ -41,55 +45,49 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
     private static final String LOG_TAG = "TimeFragment";
 
     /**
-     * 铃声选择按钮的requestCode
-     */
-    private static final int REQUEST_RING_SELECT = 1;
-
-    /**
      * 计时器
      */
-    MyTimer timer;
+    private MyTimer timer;
 
     /**
      * 开始按钮
      */
-    ImageView mStartBtn;
+    private ImageView mStartBtn;
 
     /**
      * 开始按钮2
      */
-    ImageView mStartBtn2;
+    private ImageView mStartBtn2;
 
     /**
      * 停止按钮
      */
-    ImageView mStopBtn;
-
-    /**
-     * 重置按钮
-     */
-    ImageView mResetBtn;
+    private ImageView mStopBtn;
 
     /**
      * 快捷按钮
      */
-    ImageView mQuickBtn;
-
-    /**
-     * 铃声按钮
-     */
-    ImageView mRingBtn;
+    private ImageView mQuickBtn;
 
     /**
      * 初始计时按钮布局
      */
-    ViewGroup mStartLLyt;
+    private ViewGroup mStartLLyt;
 
     /**
      * 开启计时后按钮的布局
      */
-    ViewGroup mStartLLyt2;
+    private ViewGroup mStartLLyt2;
 
+    /**
+     * 快捷便签PopupWindow
+     */
+    private PopupWindow mPopupWindow;
+
+    /**
+     * 是否已经初始化快捷便签选项布局
+     */
+    private boolean isQuickTimerOptionsInitialized;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -102,21 +100,23 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
         mStartBtn = (ImageView) view.findViewById(R.id.btn_start);
         mStartBtn2 = (ImageView) view.findViewById(R.id.btn_start2);
         mStopBtn = (ImageView) view.findViewById(R.id.btn_stop);
-        mResetBtn = (ImageView) view.findViewById(R.id.btn_reset);
+        // 重置按钮
+        ImageView resetBtn = (ImageView) view.findViewById(R.id.btn_reset);
         mQuickBtn = (ImageView) view.findViewById(R.id.btn_quick);
-        mRingBtn = (ImageView) view.findViewById(R.id.btn_ring);
+        // 铃声按钮
+        ImageView ringBtn = (ImageView) view.findViewById(R.id.btn_ring);
 
         mStartBtn2.setOnClickListener(this);
         mStopBtn.setOnClickListener(this);
-        mResetBtn.setOnClickListener(this);
+        resetBtn.setOnClickListener(this);
         mQuickBtn.setOnClickListener(this);
-        mRingBtn.setOnClickListener(this);
+        ringBtn.setOnClickListener(this);
 
         timer = (MyTimer) view.findViewById(R.id.timer);
         timer.setOnTimeChangeListener(this);
         timer.setTimeChangListener(this);
         timer.setModel(Model.Timer);
-        timer.setStartTime(0, 0, 0, true);
+        timer.setStartTime(0, 0, 0, true, false);
         setTimer();
 
         return view;
@@ -147,7 +147,7 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
                 calendar.setTimeInMillis(remainTime);
                 int minute = calendar.get(Calendar.MINUTE);
                 int second = calendar.get(Calendar.SECOND);
-                timer.setStartTime(0, minute, second, isStop);
+                timer.setStartTime(0, minute, second, isStop, false);
                 setStratLlyt2Visible();
             } else {
                 SharedPreferences.Editor editor = preferences.edit();
@@ -164,43 +164,118 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            // 开始
             case R.id.btn_start:
                 timer.start();
                 setStratLlyt2Visible();
                 setStopVisible();
                 break;
+            // 快捷便签
+            case R.id.btn_quick:
+                displayQuickOptions();
+                break;
+            // 开始2
             case R.id.btn_start2:
                 timer.start();
                 setStopVisible();
                 break;
+            // 暂停
             case R.id.btn_stop:
                 stopAlarmClockTimer();
                 timer.stop();
                 setStart2Visible();
                 break;
+            // 重置
             case R.id.btn_reset:
                 stopAlarmClockTimer();
                 timer.reset();
                 setStratLlytVisible();
                 break;
+            // 铃声选择
             case R.id.btn_ring:
-                if (MyUtil.isFastDoubleClick()) {
-                    return;
-                }
-
-                SharedPreferences shares = getActivity().getSharedPreferences(
-                        WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
-                int ringPager = shares.getInt(WeacConstants.RING_PAGER_TIMER, 0);
-                String ringUrl = shares.getString(WeacConstants.RING_URL_TIMER, WeacConstants.DEFAULT_RING_URL);
-                String ringName = shares.getString(WeacConstants.RING_NAME_TIMER, getString(R.string.default_ring));
-
-                Intent i = new Intent(getActivity(), RingSelectActivity.class);
-                i.putExtra(WeacConstants.RING_NAME, ringName);
-                i.putExtra(WeacConstants.RING_URL, ringUrl);
-                i.putExtra(WeacConstants.RING_PAGER, ringPager);
-                i.putExtra(WeacConstants.RING_REQUEST_TYPE, 1);
-                startActivityForResult(i, REQUEST_RING_SELECT);
+                processRingSelect();
                 break;
+            // 午睡
+            case R.id.btn_siesta:
+                processQuickTimer(0, 30, 0);
+                break;
+            // 面膜
+            case R.id.btn_facial_mask:
+                processQuickTimer(0, 15, 0);
+                break;
+            // 泡面
+            case R.id.btn_instant_noodles:
+                processQuickTimer(0, 3, 0);
+                break;
+            // 跑步
+            case R.id.btn_run:
+                processQuickTimer(0, 30, 0);
+                break;
+        }
+    }
+
+    private void processQuickTimer(int h, int m, int s) {
+        timer.setStartTime(h, m, s, false, true);
+        mPopupWindow.dismiss();
+        setStratLlyt2Visible();
+        setStopVisible();
+    }
+
+    private void processRingSelect() {
+        if (MyUtil.isFastDoubleClick()) {
+            return;
+        }
+
+        SharedPreferences shares = getActivity().getSharedPreferences(
+                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+        int ringPager = shares.getInt(WeacConstants.RING_PAGER_TIMER, 0);
+        String ringUrl = shares.getString(WeacConstants.RING_URL_TIMER, WeacConstants.DEFAULT_RING_URL);
+        String ringName = shares.getString(WeacConstants.RING_NAME_TIMER, getString(R.string.default_ring));
+
+        Intent i = new Intent(getActivity(), RingSelectActivity.class);
+        i.putExtra(WeacConstants.RING_NAME, ringName);
+        i.putExtra(WeacConstants.RING_URL, ringUrl);
+        i.putExtra(WeacConstants.RING_PAGER, ringPager);
+        i.putExtra(WeacConstants.RING_REQUEST_TYPE, 1);
+        startActivity(i);
+    }
+
+    private void displayQuickOptions() {
+        if (!isQuickTimerOptionsInitialized) {
+            @SuppressLint("InflateParams")
+            // There are of course instances where you can truly justify a null parent during inflation,
+                    // but they are few. One such instance occurs when you are inflating a custom layout to be attached to an AlertDialog.
+                    View popupWindowView = LayoutInflater.from(getActivity()).inflate(R.layout.ppv_timer, null);
+
+            mPopupWindow = new PopupWindow(popupWindowView, ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            mPopupWindow.setOutsideTouchable(true);
+            // 不设置,说明PopUpWindow不能获得焦点，点击back键不会消失
+            mPopupWindow.setFocusable(true);
+            // 需要顺利让PopUpWindow dismiss（即点击PopUpWindow之外的地方此或者back键PopUpWindow会消失）；
+            // PopUpWindow的背景不能为空。必须在PopUpWindow.showAsDropDown(v)；
+            // 或者其它的显示PopUpWindow方法之前设置它的背景不为空
+            //noinspection deprecation
+            mPopupWindow.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.black_trans50)));
+            // 相对某个控件的位置（正左下方）；showAtLocation(View parent, int gravity, int x, int y)：相对于父控件的位置
+            mPopupWindow.showAsDropDown(mQuickBtn, 0, -Math.round(200 * getResources().getDisplayMetrics().density));
+
+            // 午睡
+            TextView siestaBtn = (TextView) popupWindowView.findViewById(R.id.btn_siesta);
+            // 面膜
+            TextView facialMask = (TextView) popupWindowView.findViewById(R.id.btn_facial_mask);
+            // 泡面
+            TextView instantNoodles = (TextView) popupWindowView.findViewById(R.id.btn_instant_noodles);
+            // 跑步
+            TextView run = (TextView) popupWindowView.findViewById(R.id.btn_run);
+
+            siestaBtn.setOnClickListener(this);
+            facialMask.setOnClickListener(this);
+            instantNoodles.setOnClickListener(this);
+            run.setOnClickListener(this);
+            isQuickTimerOptionsInitialized = true;
+        } else {
+            mPopupWindow.showAsDropDown(mQuickBtn, 0, -Math.round(200 * getResources().getDisplayMetrics().density));
         }
     }
 
@@ -214,25 +289,6 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
         AlarmManager alarmManager = (AlarmManager) getContext()
                 .getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(pi);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != Activity.RESULT_OK) {
-            return;
-        }
-        switch (requestCode) {
-            // 铃声选择界面返回
-            case REQUEST_RING_SELECT:
-                // 铃声名
-                String name = data.getStringExtra(WeacConstants.RING_NAME);
-                // 铃声地址
-                String url = data.getStringExtra(WeacConstants.RING_URL);
-                // 铃声界面
-                int ringPager = data.getIntExtra(WeacConstants.RING_PAGER, 0);
-                break;
-        }
     }
 
     /**
@@ -289,24 +345,12 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
 
     @Override
     public void onTimerStart(long timeRemain) {
-        LogUtil.d(LOG_TAG, "onTimerStart " + timeRemain);
+        LogUtil.d(LOG_TAG, "onTimerStart 距离计时结束：" + timeRemain);
         MyUtil.startAlarmTimer(getContext(), timeRemain);
     }
 
     @Override
-    public void onTimeChange(long timeStart, long timeRemain) {
-//        Calendar c = Calendar.getInstance();
-//        c.setTimeInMillis(timeRemain);
-//        int minute = c.get(Calendar.MINUTE);
-//        int second = c.get(Calendar.SECOND);
-//        LogUtil.d(LOG_TAG, "onTimeChange timeStart " + timeStart);
-//        LogUtil.d(LOG_TAG, "onTimeChange timeRemain " + timeRemain + "\\\n剩余" + minute + " 分" + second + " 秒");
-    }
-
-    @Override
     public void onTimeStop(long timeStart, long timeRemain) {
-//        LogUtil.d(LOG_TAG, "onTimeStop timeRemain " + timeStart);
-//        LogUtil.d(LOG_TAG, "onTimeStop timeRemain " + timeRemain);
         setStratLlytVisible();
     }
 
@@ -317,6 +361,7 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
         if (minute == 0) {
             setStartBtnNoClickable();
         } else {
+            // 开始按钮为不可用状态
             if (mStartBtn.getImageAlpha() == 50) {
                 setStartBtnClickable();
             }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+
+    <LinearLayout
+        style="@style/timer_btn_quick_llyt">
+
+        <TextView
+            android:id="@+id/btn_siesta"
+            style="@style/timer_btn_quick_tv"
+            android:drawableTop="@drawable/btn_siesta_normal"
+            android:text="@string/siesta"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/timer_btn_quick_llyt">
+
+        <TextView
+            android:id="@+id/btn_facial_mask"
+            style="@style/timer_btn_quick_tv"
+            android:drawableTop="@drawable/btn_facial_mask_normal"
+            android:text="@string/facial_mask"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/timer_btn_quick_llyt">
+
+        <TextView
+            android:id="@+id/btn_instant_noodles"
+            style="@style/timer_btn_quick_tv"
+            android:drawableTop="@drawable/btn_instant_noodles_normal"
+            android:text="@string/instant_noodles"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/timer_btn_quick_llyt">
+
+        <TextView
+            android:id="@+id/btn_run"
+            style="@style/timer_btn_quick_tv"
+            android:drawableTop="@drawable/btn_run_normal"
+            android:text="@string/run"/>
+    </LinearLayout>
+
+</LinearLayout>

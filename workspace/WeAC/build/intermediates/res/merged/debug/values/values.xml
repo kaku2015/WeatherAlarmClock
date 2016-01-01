@@ -10436,6 +10436,7 @@
     <string name="error_delete_fail">删除失败</string>
     <string name="error_sd_card">错误，SD卡不存在</string>
     <string name="every_day">每天</string>
+    <string name="facial_mask">面膜</string>
     <string name="file_format">文件格式：</string>
     <string name="file_name">文件名称：</string>
     <string name="file_name_exist">文件名已存在</string>
@@ -10449,6 +10450,7 @@
     <string name="humidity">湿度 %1$s</string>
     <string name="input_city_name">请输入城市名称或拼音</string>
     <string name="input_empty">输入内容为空</string>
+    <string name="instant_noodles">泡面</string>
     <string name="internet_error">网络异常,请检查网络设置</string>
     <string name="internet_fail">连接失败，请重试</string>
     <string name="interval">间隔 (分钟)</string>
@@ -10516,6 +10518,7 @@
     <string name="ring">铃声</string>
     <string name="ring_select">铃声选择</string>
     <string name="roger">知道了</string>
+    <string name="run">跑步</string>
     <string name="saturday">周六</string>
     <string name="save">保存</string>
     <string name="save_path">保存路径：</string>
@@ -10523,6 +10526,7 @@
     <string name="select_all_cancel">取消全选</string>
     <string name="selected_xx_item">已选择%1$d项</string>
     <string name="set_default">设为默认</string>
+    <string name="siesta">午睡</string>
     <string name="six_h">六</string>
     <string name="sport">运动</string>
     <string name="sport_detail">运动指数详情</string>
@@ -10896,6 +10900,25 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/bg_timer_button</item>
         <item name="android:layout_gravity">center</item>
+    </style>
+    <style name="timer_btn_quick_llyt">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <style name="timer_btn_quick_tv">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white_trans90</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:drawablePadding">2dp</item>
     </style>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/stytles_wea.xml -->
     <eat-comment/>

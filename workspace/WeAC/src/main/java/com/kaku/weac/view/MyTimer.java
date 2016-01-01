@@ -1,10 +1,7 @@
 package com.kaku.weac.view;
 
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
@@ -21,8 +18,6 @@ import android.view.View;
 
 import com.kaku.weac.R;
 import com.kaku.weac.common.WeacConstants;
-import com.kaku.weac.service.TimerService;
-import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
 
 import java.util.Calendar;
@@ -219,7 +214,7 @@ public class MyTimer extends View {
         canvas.drawText(mDisplayRemainTime, mCenterX - mRect.width() / 2,
                 mCenterY + mRect.height() / 2, mPaintRemainTime);
 
-        LogUtil.d(LOG_TAG, "绘制中");
+//        LogUtil.d(LOG_TAG, "绘制中");
     }
 
     /**
@@ -534,6 +529,10 @@ public class MyTimer extends View {
      */
     private static final int STOP = 2;
 
+    public void setIsStarted(boolean isStarted) {
+        mIsStarted = isStarted;
+    }
+
     /**
      * 开始计时
      *
@@ -542,7 +541,7 @@ public class MyTimer extends View {
     public boolean start() {
         // 倒计时
         if (mModel == Model.Timer) {
-            if (!isTimeEmpty() && !mIsStarted) {
+            if (!isTimeEmpty()) {
                 setRemainTime(false);
                 mTimerTask = new TimerTask() {
                     @Override
@@ -562,12 +561,11 @@ public class MyTimer extends View {
                     }
                 };
 
-                MyUtil.startAlarmTimer(getContext(), mTimeRemain.getTimeInMillis());
                 new Timer(true).schedule(mTimerTask, 1000, 1000);
                 mIsStarted = true;
 
                 if (mRemainTimeChangeListener != null) {
-                    mRemainTimeChangeListener.onTimerStart(mTimeStart.getTimeInMillis());
+                    mRemainTimeChangeListener.onTimerStart(mTimeRemain.getTimeInMillis());
                 }
             }
         } /*else if (mModel == Model.StopWatch) {
@@ -596,18 +594,6 @@ public class MyTimer extends View {
             }
         }*/
         return mIsStarted;
-    }
-
-    /**
-     * 停止倒计时广播
-     */
-    private void stopAlarmClockTimer() {
-        Intent intent = new Intent(getContext(), TimerService.class);
-        PendingIntent pi = PendingIntent.getService(getContext(),
-                1000, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) getContext()
-                .getSystemService(Context.ALARM_SERVICE);
-        alarmManager.cancel(pi);
     }
 
     /**
@@ -660,7 +646,6 @@ public class MyTimer extends View {
      * 停止计时
      */
     public void stop() {
-        stopAlarmClockTimer();
         cancelTimer();
         setRemainTime(true);
     }
@@ -680,11 +665,12 @@ public class MyTimer extends View {
      * 重置
      */
     public void reset() {
-        stopAlarmClockTimer();
         cancelTimer();
+        mIsStarted = false;
         saveRemainTime(0, false);
         mTimeStart.setTimeInMillis(0);
         mTimeRemain.setTimeInMillis(0);
+        mRemainMinute = 0;
         invalidate();
     }
 
@@ -750,6 +736,5 @@ public class MyTimer extends View {
         if (mTimerTask != null) {
             mTimerTask.cancel();
         }
-        mIsStarted = false;
     }
 }

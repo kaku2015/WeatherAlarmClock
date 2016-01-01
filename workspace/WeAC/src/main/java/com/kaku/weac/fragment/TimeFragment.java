@@ -4,6 +4,9 @@
 package com.kaku.weac.fragment;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,6 +18,7 @@ import android.widget.ImageView;
 
 import com.kaku.weac.R;
 import com.kaku.weac.activities.RingSelectActivity;
+import com.kaku.weac.activities.TimerOnTimeActivity;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
@@ -131,6 +135,7 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
             if (isStop) {
                 remainTime = countdown;
                 setStart2Visible();
+                timer.setIsStarted(true);
                 // 正在计时状态
             } else {
                 long now = SystemClock.elapsedRealtime();
@@ -169,10 +174,12 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
                 setStopVisible();
                 break;
             case R.id.btn_stop:
+                stopAlarmClockTimer();
                 timer.stop();
                 setStart2Visible();
                 break;
             case R.id.btn_reset:
+                stopAlarmClockTimer();
                 timer.reset();
                 setStratLlytVisible();
                 break;
@@ -195,6 +202,18 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
                 startActivityForResult(i, REQUEST_RING_SELECT);
                 break;
         }
+    }
+
+    /**
+     * 停止倒计时广播
+     */
+    private void stopAlarmClockTimer() {
+        Intent intent = new Intent(getContext(), TimerOnTimeActivity.class);
+        PendingIntent pi = PendingIntent.getActivity(getContext(),
+                1000, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getContext()
+                .getSystemService(Context.ALARM_SERVICE);
+        alarmManager.cancel(pi);
     }
 
     @Override
@@ -269,24 +288,25 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
     }
 
     @Override
-    public void onTimerStart(long timeStart) {
-        LogUtil.d(LOG_TAG, "onTimerStart " + timeStart);
+    public void onTimerStart(long timeRemain) {
+        LogUtil.d(LOG_TAG, "onTimerStart " + timeRemain);
+        MyUtil.startAlarmTimer(getContext(), timeRemain);
     }
 
     @Override
     public void onTimeChange(long timeStart, long timeRemain) {
-        Calendar c = Calendar.getInstance();
-        c.setTimeInMillis(timeRemain);
-        int minute = c.get(Calendar.MINUTE);
-        int second = c.get(Calendar.SECOND);
-        LogUtil.d(LOG_TAG, "onTimeChange timeStart " + timeStart);
-        LogUtil.d(LOG_TAG, "onTimeChange timeRemain " + timeRemain + "\\\n剩余" + minute + " 分" + second + " 秒");
+//        Calendar c = Calendar.getInstance();
+//        c.setTimeInMillis(timeRemain);
+//        int minute = c.get(Calendar.MINUTE);
+//        int second = c.get(Calendar.SECOND);
+//        LogUtil.d(LOG_TAG, "onTimeChange timeStart " + timeStart);
+//        LogUtil.d(LOG_TAG, "onTimeChange timeRemain " + timeRemain + "\\\n剩余" + minute + " 分" + second + " 秒");
     }
 
     @Override
     public void onTimeStop(long timeStart, long timeRemain) {
-        LogUtil.d(LOG_TAG, "onTimeStop timeRemain " + timeStart);
-        LogUtil.d(LOG_TAG, "onTimeStop timeRemain " + timeRemain);
+//        LogUtil.d(LOG_TAG, "onTimeStop timeRemain " + timeStart);
+//        LogUtil.d(LOG_TAG, "onTimeStop timeRemain " + timeRemain);
         setStratLlytVisible();
     }
 

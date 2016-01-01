@@ -51,7 +51,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.kaku.weac.activities.ThemeActivity" />
+        <activity
+            android:name="com.kaku.weac.activities.ThemeActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.kaku.weac.activities.AlarmClockNewActivity"
             android:screenOrientation="portrait"
@@ -153,8 +155,6 @@
             android:name="com.kaku.weac.test.AutoUpdateReceiver"
             android:process=":test" />
 
-        <service android:name="com.kaku.weac.service.TimerService" >
-        </service>
         <service
             android:name="com.squareup.leakcanary.internal.HeapAnalyzerService"
             android:enabled="false"

@@ -48,7 +48,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ThemeActivity"/>
+        <activity
+            android:name=".activities.ThemeActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".activities.AlarmClockNewActivity"
             android:screenOrientation="portrait"
@@ -150,8 +153,6 @@
             android:name=".test.AutoUpdateReceiver"
             android:process=":test"/>
 
-        <service android:name=".service.TimerService">
-        </service>
     </application>
 
 </manifest>

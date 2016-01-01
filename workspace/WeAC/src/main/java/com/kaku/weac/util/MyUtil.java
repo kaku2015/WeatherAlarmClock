@@ -24,10 +24,10 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.kaku.weac.R;
+import com.kaku.weac.activities.TimerOnTimeActivity;
 import com.kaku.weac.bean.AlarmClock;
 import com.kaku.weac.broadcast.AlarmClockBroadcast;
 import com.kaku.weac.common.WeacConstants;
-import com.kaku.weac.service.TimerService;
 
 import java.lang.reflect.Field;
 import java.text.DecimalFormat;
@@ -177,8 +177,8 @@ public class MyUtil {
      * @param timeRemain 剩余时间
      */
     public static void startAlarmTimer(Context context, long timeRemain) {
-        Intent intent = new Intent(context, TimerService.class);
-        PendingIntent pi = PendingIntent.getService(context,
+        Intent intent = new Intent(context, TimerOnTimeActivity.class);
+        PendingIntent pi = PendingIntent.getActivity(context,
                 1000, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) context
                 .getSystemService(Context.ALARM_SERVICE);

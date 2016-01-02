@@ -20,27 +20,27 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp">
 
-            <ImageView
+            <TextView
                 android:id="@+id/btn_start"
                 style="@style/timer_btn"
                 android:layout_alignParentLeft="true"
-                android:contentDescription="@null"
-                android:src="@drawable/btn_timer_start"/>
+                android:drawableTop="@drawable/btn_timer_start"
+                android:text="@string/start"/>
 
-            <ImageView
+            <TextView
                 android:id="@+id/btn_quick"
                 style="@style/timer_btn"
                 android:layout_centerInParent="true"
-                android:contentDescription="@null"
-                android:src="@drawable/btn_timer_quick"/>
+                android:drawableTop="@drawable/btn_timer_quick"
+                android:text="@string/quick_timer"/>
 
-            <ImageView
+            <TextView
                 android:id="@+id/btn_ring"
                 style="@style/timer_btn"
                 android:layout_alignParentRight="true"
                 android:layout_gravity="right"
-                android:contentDescription="@null"
-                android:src="@drawable/btn_timer_ring"/>
+                android:drawableTop="@drawable/btn_timer_ring"
+                android:text="@string/ring"/>
         </RelativeLayout>
 
         <LinearLayout
@@ -56,25 +56,25 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="60dp">
 
-                <ImageView
+                <TextView
                     android:id="@+id/btn_stop"
                     style="@style/timer_btn"
-                    android:contentDescription="@null"
-                    android:src="@drawable/btn_timer_pause"/>
+                    android:drawableTop="@drawable/btn_timer_pause"
+                    android:text="@string/stop"/>
 
-                <ImageView
+                <TextView
                     android:id="@+id/btn_start2"
                     style="@style/timer_btn"
-                    android:contentDescription="@null"
-                    android:src="@drawable/btn_timer_start"
+                    android:drawableTop="@drawable/btn_timer_start"
+                    android:text="@string/start"
                     android:visibility="gone"/>
             </FrameLayout>
 
-            <ImageView
+            <TextView
                 android:id="@+id/btn_reset"
                 style="@style/timer_btn"
-                android:contentDescription="@null"
-                android:src="@drawable/btn_timer_reset"/>
+                android:drawableTop="@drawable/btn_timer_reset"
+                android:text="@string/reset"/>
 
         </LinearLayout>
     </FrameLayout>

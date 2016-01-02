@@ -16,7 +16,6 @@ import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -47,27 +46,27 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
     /**
      * 计时器
      */
-    private MyTimer timer;
+    private MyTimer mTimer;
 
     /**
      * 开始按钮
      */
-    private ImageView mStartBtn;
+    private TextView mStartBtn;
 
     /**
      * 开始按钮2
      */
-    private ImageView mStartBtn2;
+    private TextView mStartBtn2;
 
     /**
      * 停止按钮
      */
-    private ImageView mStopBtn;
+    private TextView mStopBtn;
 
     /**
      * 快捷按钮
      */
-    private ImageView mQuickBtn;
+    private TextView mQuickBtn;
 
     /**
      * 初始计时按钮布局
@@ -97,14 +96,14 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
         mStartLLyt = (ViewGroup) view.findViewById(R.id.btn_start_llyt);
         mStartLLyt2 = (ViewGroup) view.findViewById(R.id.btn_start_llyt2);
 
-        mStartBtn = (ImageView) view.findViewById(R.id.btn_start);
-        mStartBtn2 = (ImageView) view.findViewById(R.id.btn_start2);
-        mStopBtn = (ImageView) view.findViewById(R.id.btn_stop);
+        mStartBtn = (TextView) view.findViewById(R.id.btn_start);
+        mStartBtn2 = (TextView) view.findViewById(R.id.btn_start2);
+        mStopBtn = (TextView) view.findViewById(R.id.btn_stop);
         // 重置按钮
-        ImageView resetBtn = (ImageView) view.findViewById(R.id.btn_reset);
-        mQuickBtn = (ImageView) view.findViewById(R.id.btn_quick);
+        TextView resetBtn = (TextView) view.findViewById(R.id.btn_reset);
+        mQuickBtn = (TextView) view.findViewById(R.id.btn_quick);
         // 铃声按钮
-        ImageView ringBtn = (ImageView) view.findViewById(R.id.btn_ring);
+        TextView ringBtn = (TextView) view.findViewById(R.id.btn_ring);
 
         mStartBtn2.setOnClickListener(this);
         mStopBtn.setOnClickListener(this);
@@ -112,11 +111,11 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
         mQuickBtn.setOnClickListener(this);
         ringBtn.setOnClickListener(this);
 
-        timer = (MyTimer) view.findViewById(R.id.timer);
-        timer.setOnTimeChangeListener(this);
-        timer.setTimeChangListener(this);
-        timer.setModel(Model.Timer);
-        timer.setStartTime(0, 0, 0, true, false);
+        mTimer = (MyTimer) view.findViewById(R.id.timer);
+        mTimer.setOnTimeChangeListener(this);
+        mTimer.setTimeChangListener(this);
+        mTimer.setModel(Model.Timer);
+        mTimer.setStartTime(0, 0, 0, true, false);
         setTimer();
 
         return view;
@@ -135,7 +134,7 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
             if (isStop) {
                 remainTime = countdown;
                 setStart2Visible();
-                timer.setIsStarted(true);
+                mTimer.setIsStarted(true);
                 // 正在计时状态
             } else {
                 long now = SystemClock.elapsedRealtime();
@@ -147,7 +146,7 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
                 calendar.setTimeInMillis(remainTime);
                 int minute = calendar.get(Calendar.MINUTE);
                 int second = calendar.get(Calendar.SECOND);
-                timer.setStartTime(0, minute, second, isStop, false);
+                mTimer.setStartTime(0, minute, second, isStop, false);
                 setStratLlyt2Visible();
             } else {
                 SharedPreferences.Editor editor = preferences.edit();
@@ -166,7 +165,7 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
         switch (v.getId()) {
             // 开始
             case R.id.btn_start:
-                timer.start();
+                mTimer.start();
                 setStratLlyt2Visible();
                 setStopVisible();
                 break;
@@ -176,19 +175,19 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
                 break;
             // 开始2
             case R.id.btn_start2:
-                timer.start();
+                mTimer.start();
                 setStopVisible();
                 break;
             // 暂停
             case R.id.btn_stop:
                 stopAlarmClockTimer();
-                timer.stop();
+                mTimer.stop();
                 setStart2Visible();
                 break;
             // 重置
             case R.id.btn_reset:
                 stopAlarmClockTimer();
-                timer.reset();
+                mTimer.reset();
                 setStratLlytVisible();
                 break;
             // 铃声选择
@@ -215,7 +214,7 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
     }
 
     private void processQuickTimer(int h, int m, int s) {
-        timer.setStartTime(h, m, s, false, true);
+        mTimer.setStartTime(h, m, s, false, true);
         mPopupWindow.dismiss();
         setStratLlyt2Visible();
         setStopVisible();
@@ -242,12 +241,12 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
 
     private void displayQuickOptions() {
         if (!isQuickTimerOptionsInitialized) {
-            @SuppressLint("InflateParams")
             // There are of course instances where you can truly justify a null parent during inflation,
-                    // but they are few. One such instance occurs when you are inflating a custom layout to be attached to an AlertDialog.
-                    View popupWindowView = LayoutInflater.from(getActivity()).inflate(R.layout.ppv_timer, null);
+            // but they are few. One such instance occurs when you are inflating a custom layout to be attached to an AlertDialog.
+            @SuppressLint("InflateParams")
+            View convertView = LayoutInflater.from(getActivity()).inflate(R.layout.ppv_timer, null);
 
-            mPopupWindow = new PopupWindow(popupWindowView, ViewGroup.LayoutParams.MATCH_PARENT,
+            mPopupWindow = new PopupWindow(convertView, ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT);
             mPopupWindow.setOutsideTouchable(true);
             // 不设置,说明PopUpWindow不能获得焦点，点击back键不会消失
@@ -258,16 +257,16 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
             //noinspection deprecation
             mPopupWindow.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.black_trans50)));
             // 相对某个控件的位置（正左下方）；showAtLocation(View parent, int gravity, int x, int y)：相对于父控件的位置
-            mPopupWindow.showAsDropDown(mQuickBtn, 0, -Math.round(200 * getResources().getDisplayMetrics().density));
+            mPopupWindow.showAsDropDown(mQuickBtn, 0, -Math.round(220 * getResources().getDisplayMetrics().density));
 
             // 午睡
-            TextView siestaBtn = (TextView) popupWindowView.findViewById(R.id.btn_siesta);
+            TextView siestaBtn = (TextView) convertView.findViewById(R.id.btn_siesta);
             // 面膜
-            TextView facialMask = (TextView) popupWindowView.findViewById(R.id.btn_facial_mask);
+            TextView facialMask = (TextView) convertView.findViewById(R.id.btn_facial_mask);
             // 泡面
-            TextView instantNoodles = (TextView) popupWindowView.findViewById(R.id.btn_instant_noodles);
+            TextView instantNoodles = (TextView) convertView.findViewById(R.id.btn_instant_noodles);
             // 跑步
-            TextView run = (TextView) popupWindowView.findViewById(R.id.btn_run);
+            TextView run = (TextView) convertView.findViewById(R.id.btn_run);
 
             siestaBtn.setOnClickListener(this);
             facialMask.setOnClickListener(this);
@@ -275,7 +274,7 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
             run.setOnClickListener(this);
             isQuickTimerOptionsInitialized = true;
         } else {
-            mPopupWindow.showAsDropDown(mQuickBtn, 0, -Math.round(200 * getResources().getDisplayMetrics().density));
+            mPopupWindow.showAsDropDown(mQuickBtn, 0, -Math.round(220 * getResources().getDisplayMetrics().density));
         }
     }
 
@@ -295,7 +294,7 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
      * 设置计时前开始按钮可以点击
      */
     private void setStartBtnClickable() {
-        mStartBtn.setImageAlpha(255);
+        mStartBtn.setAlpha(1);
         //noinspection deprecation
         mStartBtn.setBackground(getResources().getDrawable(R.drawable.bg_timer_button));
         mStartBtn.setOnClickListener(this);
@@ -305,7 +304,7 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
      * 设置计时前开始按钮不可点击
      */
     private void setStartBtnNoClickable() {
-        mStartBtn.setImageAlpha(50);
+        mStartBtn.setAlpha(0.2f);
         mStartBtn.setBackground(null);
         mStartBtn.setOnClickListener(null);
     }
@@ -362,7 +361,7 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
             setStartBtnNoClickable();
         } else {
             // 开始按钮为不可用状态
-            if (mStartBtn.getImageAlpha() == 50) {
+            if (mStartBtn.getAlpha() == 0.2f) {
                 setStartBtnClickable();
             }
         }
@@ -371,6 +370,6 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
     @Override
     public void onDestroy() {
         super.onDestroy();
-        timer.cancelTimer();
+        mTimer.cancelTimer();
     }
 }

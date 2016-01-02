@@ -1119,7 +1119,8 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
      *
      * @param weatherInfo 天气信息类
      */
-    private void initWeather(final WeatherInfo weatherInfo) {
+    @SuppressWarnings("deprecation")
+    private  void initWeather(final WeatherInfo weatherInfo) {
         if (weatherInfo == null) {
             return;
         }
@@ -1424,17 +1425,17 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
 
         // 月份
         calendar.add(Calendar.DATE, -1);
-        String month1 = MyUtil.addZero(calendar.get(Calendar.MONTH) + 1);
+        String month1 = String.valueOf(calendar.get(Calendar.MONTH) + 1);
         calendar.add(Calendar.DATE, 1);
-        String month2 = MyUtil.addZero(calendar.get(Calendar.MONTH) + 1);
+        String month2 = String.valueOf(calendar.get(Calendar.MONTH) + 1);
         calendar.add(Calendar.DATE, 1);
-        String month3 = MyUtil.addZero(calendar.get(Calendar.MONTH) + 1);
+        String month3 = String.valueOf(calendar.get(Calendar.MONTH) + 1);
         calendar.add(Calendar.DATE, 1);
-        String month4 = MyUtil.addZero(calendar.get(Calendar.MONTH) + 1);
+        String month4 = String.valueOf(calendar.get(Calendar.MONTH) + 1);
         calendar.add(Calendar.DATE, 1);
-        String month5 = MyUtil.addZero(calendar.get(Calendar.MONTH) + 1);
+        String month5 = String.valueOf(calendar.get(Calendar.MONTH) + 1);
         calendar.add(Calendar.DATE, 1);
-        String month6 = MyUtil.addZero(calendar.get(Calendar.MONTH) + 1);
+        String month6 = String.valueOf(calendar.get(Calendar.MONTH) + 1);
 
         // 日
         String day01 = day1[0].split("日")[0];
@@ -1666,7 +1667,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
      * @param imageId 图片id
      */
     private void setImage(TextView tv, int imageId) {
-        Drawable drawable = getResources().getDrawable(imageId);
+        @SuppressWarnings("deprecation") Drawable drawable = getResources().getDrawable(imageId);
         if (drawable != null) {
             drawable.setBounds(0, 0, drawable.getMinimumWidth(),
                     drawable.getMinimumHeight());

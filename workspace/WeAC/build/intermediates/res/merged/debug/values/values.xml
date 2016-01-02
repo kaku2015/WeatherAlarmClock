@@ -10503,6 +10503,7 @@
     <string name="pull_to_refresh_release_label">Release to refresh…</string>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="quick_timer">快捷计时</string>
     <string name="record">录音</string>
     <string name="record_fail">录音失败</string>
     <string name="record_fail_confirm">录音失败，请检查录音权限是否开启或录音已被其他应用占用。</string>
@@ -10514,6 +10515,7 @@
     <string name="rename_success">重命名成功</string>
     <string name="repeat">重复</string>
     <string name="repeat_once">只响一次</string>
+    <string name="reset">重置</string>
     <string name="retry">重试</string>
     <string name="ring">铃声</string>
     <string name="ring_select">铃声选择</string>
@@ -10530,6 +10532,8 @@
     <string name="six_h">六</string>
     <string name="sport">运动</string>
     <string name="sport_detail">运动指数详情</string>
+    <string name="start">开始</string>
+    <string name="stop">暂停</string>
     <string name="sunday">周日</string>
     <string name="sure">确定</string>
     <string name="sure_delete">确定要删除吗？</string>
@@ -10899,7 +10903,10 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/bg_timer_button</item>
-        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:drawablePadding">5dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white_trans90</item>
     </style>
     <style name="timer_btn_quick_llyt">
         <item name="android:layout_width">0dp</item>
@@ -10916,7 +10923,7 @@
         <item name="android:textColor">@color/white_trans90</item>
         <item name="android:paddingTop">10dp</item>
         <item name="android:paddingBottom">10dp</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:gravity">center</item>
         <item name="android:drawablePadding">2dp</item>
     </style>

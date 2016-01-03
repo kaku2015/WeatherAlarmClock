@@ -219,7 +219,6 @@ public class MyTimer extends View {
      * @param canvas canvas
      */
     private void initialize(Canvas canvas) {
-
         mTimeRemain = Calendar.getInstance();
         mTimeStart = Calendar.getInstance();
         mTimeStart.clear();
@@ -665,15 +664,20 @@ public class MyTimer extends View {
     }
 
     /**
+     * 是否为重置
+     */
+    private boolean mIsReset;
+
+    /**
      * 重置
      */
     public void reset() {
         cancelTimer();
         mIsStarted = false;
         saveRemainTime(0, false);
-        mTimeStart.setTimeInMillis(0);
-        mTimeRemain.setTimeInMillis(0);
         mRemainMinute = 0;
+        mIsInitialized = false;
+        mIsReset = true;
         invalidate();
     }
 
@@ -714,7 +718,12 @@ public class MyTimer extends View {
             mInitialFinishListener = new OnInitialFinishListener() {
                 @Override
                 public void onInitialFinishListener() {
-                    process(h, m, s, isStop);
+                    if (!mIsReset) {
+                        process(h, m, s, isStop);
+                    } else {
+                        process(0, 0, 0, true);
+                        mIsReset = false;
+                    }
                 }
             };
         } else {

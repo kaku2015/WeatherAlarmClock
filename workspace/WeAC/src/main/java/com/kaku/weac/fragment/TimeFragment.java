@@ -115,7 +115,7 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
         mTimer.setOnTimeChangeListener(this);
         mTimer.setTimeChangListener(this);
         mTimer.setModel(Model.Timer);
-        mTimer.setStartTime(0, 0, 0, true, false);
+//        mTimer.setStartTime(0, 0, 0, true, false);
         setTimer();
 
         return view;

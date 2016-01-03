@@ -30,7 +30,7 @@ public class DaemonService extends Service {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Daemon.run(DaemonService.this, DaemonService.class, 1);
+                Daemon.run(DaemonService.this, DaemonService.class, Daemon.INTERVAL_ONE_MINUTE);
 
                 startService(new Intent(DaemonService.this, NotificationCenter.class));
 

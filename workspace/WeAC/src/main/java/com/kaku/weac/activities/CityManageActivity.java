@@ -364,7 +364,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                             }
 
                         } catch (Exception e) {
-                            runOnUi(getString(R.string.unknown_error), position);
+//                            runOnUi(getString(R.string.unknown_error), position);
                             LogUtil.e(LOG_TAG, "onFinish: " + e.toString());
                         }
                     }
@@ -386,7 +386,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                                 }
                             }
                         } catch (Exception e1) {
-                            runOnUi(getString(R.string.unknown_error), position);
+//                            runOnUi(getString(R.string.unknown_error), position);
                             LogUtil.e(LOG_TAG, "(Exception e1): " + e1.toString());
                         }
                     }
@@ -575,13 +575,9 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
             cityManage.setTempHigh(weather.getHigh().substring(3));
             cityManage.setTempLow(weather.getLow().substring(3));
 
-            // 白天和夜间类型相同
-            if (weather.getTypeDay().equals(weather.getTypeNight())) {
-                cityManage.setWeatherType(weather.getTypeDay());
-            } else {
-                cityManage.setWeatherType(String.format(getString(R.string.turn),
-                        weather.getTypeDay(), weather.getTypeNight()));
-            }
+            cityManage.setWeatherType(MyUtil.getWeatherType
+                    (this, weather.getTypeDay(), weather.getTypeNight()));
+
             cityManage.setWeatherTypeDay(weather.getTypeDay());
             cityManage.setWeatherTypeNight(weather.getTypeNight());
         } else {

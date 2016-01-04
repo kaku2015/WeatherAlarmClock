@@ -752,6 +752,22 @@ public class MyUtil {
     }
 
     /**
+     * 取得天气类型描述
+     *
+     * @param type1 白天天气类型
+     * @param type2 夜间天气类型
+     * @return 天气类型
+     */
+    public static String getWeatherType(Context context,String type1, String type2) {
+        // 白天和夜间类型相同
+        if (type1.equals(type2)) {
+            return type1;
+        } else {
+            return String.format(context.getString(R.string.turn), type1, type2);
+        }
+    }
+
+    /**
      * 将地址信息转换为城市
      *
      * @param address 地址

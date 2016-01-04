@@ -10539,6 +10539,7 @@
     <string name="sure_delete">确定要删除吗？</string>
     <string name="system_ring">系统铃声</string>
     <string name="tag">标签</string>
+    <string name="temperature">%1$s℃</string>
     <string name="ten">10</string>
     <string name="the_day_of_tomorrow">后天</string>
     <string name="theme_wallpaper">主题壁纸</string>
@@ -10570,6 +10571,7 @@
     <string name="volume">音量</string>
     <string name="wea">天气</string>
     <string name="wea_prompt">天气提示</string>
+    <string name="weather_type">%1$s   %2$s~%3$s℃</string>
     <string name="wednesday">周三</string>
     <string name="week">周</string>
     <string name="week_day">平日</string>
@@ -10641,6 +10643,16 @@
         <item name="android:layout_marginBottom">3dp</item>
         <item name="android:paddingLeft">12dp</item>
         <item name="android:paddingRight">12dp</item>
+    </style>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles_alarm_clock_on_time.xml -->
+    <eat-comment/>
+    <style name="alarm_clock_on_time_weather_tv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:drawablePadding">5dp</item>
+        <item name="android:textColor">@color/white_trans90</item>
+        <item name="android:textSize">18sp</item>
     </style>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles_new_alarm_clock.xml -->
     <eat-comment/>

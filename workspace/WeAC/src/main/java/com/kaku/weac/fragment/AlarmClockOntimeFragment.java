@@ -11,7 +11,9 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,20 +26,31 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.kaku.weac.Listener.HttpCallbackListener;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.AlarmClockNapNotificationActivity;
 import com.kaku.weac.bean.AlarmClock;
+import com.kaku.weac.bean.WeatherDaysForecast;
+import com.kaku.weac.bean.WeatherInfo;
+import com.kaku.weac.bean.WeatherLifeIndex;
 import com.kaku.weac.broadcast.AlarmClockBroadcast;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.common.WeacStatus;
 import com.kaku.weac.util.AudioPlayer;
+import com.kaku.weac.util.HttpUtil;
 import com.kaku.weac.util.LogUtil;
+import com.kaku.weac.util.MyUtil;
+import com.kaku.weac.util.WeatherUtil;
 
+import java.io.ByteArrayInputStream;
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -113,6 +126,12 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
      * 显示当前时间Handler
      */
     private ShowTimeHandler mShowTimeHandler;
+
+    private ViewGroup mWeatherInfoGroup;
+    private ProgressBar mWeatherPbar;
+    private TextView mWeatherTypeTv;
+    private TextView mTemperatureTv;
+    private TextView mUmbrellaTv;
 
     /**
      * 显示当前时间
@@ -221,7 +240,160 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
 
         LogUtil.i(LOG_TAG, "小睡次数：" + mNapTimes);
 
+        // 天气提示
+        if (mAlarmClock.isWeaPrompt()) {
+            mWeatherInfoGroup = (ViewGroup) view.findViewById(R.id.weather_info_group);
+            mWeatherPbar = (ProgressBar) view.findViewById(R.id.progress_bar);
+            mWeatherTypeTv = (TextView) view.findViewById(R.id.weather_type_tv);
+            mTemperatureTv = (TextView) view.findViewById(R.id.temperature_tv);
+            mUmbrellaTv = (TextView) view.findViewById(R.id.umbrella_tv);
+            // 初始化天气预报
+            initWeather();
+        }
         return view;
+    }
+
+    private void initWeather() {
+        // 判断网络是否可用
+        if (!MyUtil.isNetworkAvailable(getActivity())) {
+            return;
+        }
+
+        SharedPreferences share = getActivity().getSharedPreferences(
+                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+        String weatherCode = share.getString(WeacConstants.DEFAULT_WEATHER_CODE, null);
+        if (weatherCode == null) {
+            return;
+        }
+
+        String cityName;
+        String address;
+        // 自动定位
+        if (weatherCode.equals(getString(R.string.auto_location))) {
+            cityName = share.getString(WeacConstants.DEFAULT_CITY_NAME, null);
+            address = null;
+        } else {
+            cityName = null;
+            address = getString(R.string.address_weather, weatherCode);
+        }
+        mWeatherPbar.setVisibility(View.VISIBLE);
+        HttpUtil.sendHttpRequest(address, cityName,
+                new HttpCallbackListener() {
+                    @Override
+                    public void onFinish(String response) {
+                        try {
+                            if (!response.contains("error")) {
+                                WeatherInfo weatherInfo = WeatherUtil.handleWeatherResponse(
+                                        new ByteArrayInputStream(response.getBytes()));
+                                getActivity().runOnUiThread(new SetWeatherInfoRunnable(weatherInfo));
+                                // 无法解析当前位置
+                            } else {
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mWeatherPbar.setVisibility(View.GONE);
+                                    }
+                                });
+                            }
+                        } catch (Exception e) {
+                            LogUtil.e(LOG_TAG, "initWeather(): " + e.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onError(final Exception e) {
+                        try {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mWeatherPbar.setVisibility(View.GONE);
+                                }
+                            });
+                        } catch (Exception e1) {
+                            LogUtil.e(LOG_TAG, e1.toString());
+                        }
+                    }
+                });
+    }
+
+
+    private class SetWeatherInfoRunnable implements Runnable {
+        private WeatherInfo mWeatherInfo;
+
+        public SetWeatherInfoRunnable(WeatherInfo weatherInfo) {
+            mWeatherInfo = weatherInfo;
+        }
+
+        @Override
+        public void run() {
+            if (mWeatherInfo == null) {
+                mWeatherPbar.setVisibility(View.GONE);
+                return;
+            }
+
+            // 多天预报信息
+            List<WeatherDaysForecast> weatherDaysForecasts = mWeatherInfo.getWeatherDaysForecast();
+            if (weatherDaysForecasts.size() < 6) {
+                mWeatherPbar.setVisibility(View.GONE);
+                return;
+            }
+            // 今天天气信息
+            WeatherDaysForecast weather;
+            String time[] = mWeatherInfo.getUpdateTime().split(":");
+            int hour1 = Integer.parseInt(time[0]);
+            int minute1 = Integer.parseInt(time[1]);
+            //更新时间从23：45开始到05：20以前的数据，后移一天填充
+            if ((hour1 == 23 && minute1 >= 45) || (hour1 < 5) ||
+                    ((hour1 == 5) && (minute1 < 20))) {
+                weather = weatherDaysForecasts.get(2);
+            } else {
+                weather = weatherDaysForecasts.get(1);
+            }
+
+            Calendar calendar = Calendar.getInstance();
+            // 现在小时
+            int hour = calendar.get(Calendar.HOUR_OF_DAY);
+            // 天气类型图片id
+            int weatherId;
+            // 设置今天天气信息
+            // 当前为凌晨
+            if (hour >= 0 && hour < 6) {
+                weatherId = MyUtil.getWeatherTypeImageID(weather.getTypeDay(), false);
+                // 当前为白天时
+            } else if (hour >= 6 && hour < 18) {
+                weatherId = MyUtil.getWeatherTypeImageID(weather.getTypeDay(), true);
+                // 当前为夜间
+            } else {
+                weatherId = MyUtil.getWeatherTypeImageID(weather.getTypeNight(), false);
+            }
+
+            @SuppressWarnings("deprecation") Drawable drawable = getResources().getDrawable(weatherId);
+            if (drawable != null) {
+                drawable.setBounds(0, 0, drawable.getMinimumWidth(),
+                        drawable.getMinimumHeight());
+                // 设置图标
+                mWeatherTypeTv.setCompoundDrawables(drawable, null, null, null);
+            }
+
+            String type = MyUtil.getWeatherType
+                    (getActivity(), weather.getTypeDay(), weather.getTypeNight());
+            String tempHigh = weather.getHigh().replace("℃", "").substring(3);
+            String tempLow = weather.getLow().replace("℃", "").substring(3);
+            mWeatherTypeTv.setText(String.format(getString(R.string.weather_type), type, tempHigh, tempLow));
+
+            mTemperatureTv.setText(String.format(getString(R.string.temperature), mWeatherInfo.getTemperature()));
+
+            // 生活指数信息
+            List<WeatherLifeIndex> weatherLifeIndexes = mWeatherInfo.getWeatherLifeIndex();
+            for (WeatherLifeIndex index : weatherLifeIndexes) {
+                if (index.getIndexName().equals("雨伞指数")) {
+                    mUmbrellaTv.setText(index.getIndexValue());
+                }
+            }
+
+            mWeatherPbar.setVisibility(View.GONE);
+            mWeatherInfoGroup.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -552,4 +724,5 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
 
         }
     }
+
 }

@@ -1055,8 +1055,8 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                                 });
                             }
                         } catch (Exception e) {
-                            stopRefresh();
-                            LogUtil.e(LOG_TAG, e.toString());
+//                            stopRefresh();
+                            LogUtil.e(LOG_TAG, "refreshWeather: " + e.toString());
                         }
                     }
 
@@ -1072,8 +1072,8 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                                 }
                             });
                         } catch (Exception e1) {
-                            stopRefresh();
-                            LogUtil.e(LOG_TAG, e1.toString());
+//                            stopRefresh();
+                            LogUtil.e(LOG_TAG, "refreshWeather: " + e1.toString());
                         }
                     }
                 }
@@ -1120,7 +1120,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
      * @param weatherInfo 天气信息类
      */
     @SuppressWarnings("deprecation")
-    private  void initWeather(final WeatherInfo weatherInfo) {
+    private void initWeather(final WeatherInfo weatherInfo) {
         if (weatherInfo == null) {
             return;
         }
@@ -1371,24 +1371,24 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         mWeatherTypeIvToday.setImageResource(weatherId);
         mTempHighTvToday.setText(weather2.getHigh().substring(3));
         mTempLowTvToday.setText(weather2.getLow().substring(3));
-        mWeatherTypeTvToday.setText(getWeatherType
-                (weather2.getTypeDay(), weather2.getTypeNight()));
+        mWeatherTypeTvToday.setText(MyUtil.getWeatherType
+                (getActivity(), weather2.getTypeDay(), weather2.getTypeNight()));
 
         // 设置明天天气信息
         weatherId = MyUtil.getWeatherTypeImageID(weather3.getTypeDay(), true);
         mWeatherTypeIvTomorrow.setImageResource(weatherId);
         mTempHighTvTomorrow.setText(weather3.getHigh().substring(3));
         mTempLowTvTomorrow.setText(weather3.getLow().substring(3));
-        mWeatherTypeTvTomorrow.setText(getWeatherType
-                (weather3.getTypeDay(), weather3.getTypeNight()));
+        mWeatherTypeTvTomorrow.setText(MyUtil.getWeatherType
+                (getActivity(), weather3.getTypeDay(), weather3.getTypeNight()));
 
         // 设置后天天气信息
         weatherId = MyUtil.getWeatherTypeImageID(weather4.getTypeDay(), true);
         mWeatherTypeIvDayAfterTomorrow.setImageResource(weatherId);
         mTempHighTvDayAfterTomorrow.setText(weather4.getHigh().substring(3));
         mTempLowTvDayAfterTomorrow.setText(weather4.getLow().substring(3));
-        mWeatherTypeTvDayAfterTomorrow.setText(getWeatherType
-                (weather4.getTypeDay(), weather4.getTypeNight()));
+        mWeatherTypeTvDayAfterTomorrow.setText(MyUtil.getWeatherType
+                (getActivity(), weather4.getTypeDay(), weather4.getTypeNight()));
 
         // 设置多天天气预报
 
@@ -1550,8 +1550,8 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         CityManage cityManage = new CityManage();
         cityManage.setTempHigh(weather2.getHigh().substring(3));
         cityManage.setTempLow(weather2.getLow().substring(3));
-        cityManage.setWeatherType(getWeatherType
-                (weather2.getTypeDay(), weather2.getTypeNight()));
+        cityManage.setWeatherType(MyUtil.getWeatherType
+                (getActivity(), weather2.getTypeDay(), weather2.getTypeNight()));
         cityManage.setWeatherTypeDay(weather2.getTypeDay());
         cityManage.setWeatherTypeNight(weather2.getTypeNight());
 
@@ -1832,22 +1832,6 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                 break;
         }
         return week1;
-    }
-
-    /**
-     * 取得天气类型描述
-     *
-     * @param type1 白天天气类型
-     * @param type2 夜间天气类型
-     * @return 天气类型
-     */
-    private String getWeatherType(String type1, String type2) {
-        // 白天和夜间类型相同
-        if (type1.equals(type2)) {
-            return type1;
-        } else {
-            return String.format(getString(R.string.turn), type1, type2);
-        }
     }
 
     /**

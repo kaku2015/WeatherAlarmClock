@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
+ */
 package com.kaku.weac.view;
 
 import android.content.Context;
@@ -131,6 +134,7 @@ public class LineChartViewDouble extends View {
      */
     private float mSpace;
 
+    @SuppressWarnings("deprecation")
     public LineChartViewDouble(Context context, AttributeSet attrs) {
         super(context, attrs);
         mDensity = getResources().getDisplayMetrics().density;

@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.os.Build;
@@ -26,6 +27,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -44,6 +46,7 @@ import com.kaku.weac.util.HttpUtil;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.WeatherUtil;
+import com.kaku.weac.view.MySlidingView;
 
 import java.io.ByteArrayInputStream;
 import java.lang.ref.WeakReference;
@@ -234,11 +237,22 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
             napTv.setVisibility(View.GONE);
         }
 
-        // 关闭按钮
-        TextView closeTv = (TextView) view.findViewById(R.id.ontime_close);
-        closeTv.setOnClickListener(this);
-
         LogUtil.i(LOG_TAG, "小睡次数：" + mNapTimes);
+
+        // 滑动提示
+        ImageView slidingTipIv = (ImageView) view.findViewById(R.id.sliding_tip_iv);
+        slidingTipIv.setImageResource(R.drawable.sliding_tip_anim);
+        AnimationDrawable animationDrawable = (AnimationDrawable) slidingTipIv.getDrawable();
+        animationDrawable.start();
+
+        MySlidingView mySlidingView = (MySlidingView) view.findViewById(R.id.my_sliding_view);
+        mySlidingView.setSlidingTipListener(new MySlidingView.SlidingTipListener() {
+            @Override
+            public void onScrollFinish() {
+                // 执行关闭操作
+                finishActivity();
+            }
+        });
 
         // 天气提示
         if (mAlarmClock.isWeaPrompt()) {
@@ -367,7 +381,8 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
                 weatherId = MyUtil.getWeatherTypeImageID(weather.getTypeNight(), false);
             }
 
-            @SuppressWarnings("deprecation") Drawable drawable = getResources().getDrawable(weatherId);
+            @SuppressWarnings("deprecation")
+            Drawable drawable = getResources().getDrawable(weatherId);
             if (drawable != null) {
                 drawable.setBounds(0, 0, drawable.getMinimumWidth(),
                         drawable.getMinimumHeight());
@@ -509,12 +524,6 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
                 // 执行小睡操作
                 onClickNapButton();
                 break;
-            // 点击关闭
-            case R.id.ontime_close:
-                // 执行关闭操作
-                finishActivity();
-                break;
-
         }
     }
 

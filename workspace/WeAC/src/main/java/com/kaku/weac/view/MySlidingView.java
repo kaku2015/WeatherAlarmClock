@@ -7,6 +7,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.ViewConfiguration;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
@@ -20,8 +21,21 @@ import android.widget.Scroller;
  */
 public class MySlidingView extends RelativeLayout {
 
+    private static final String LOG_TAG = "MySlidingView";
+
+    /**
+     * smooth scroll time
+     */
+    private static final int DURATION = 600;
+
+    private static final int MIN_FLING_VELOCITY = 400;
     private Context mContext;
     private Scroller mScroller;
+
+    /**
+     * 滑动解锁最小速率
+     */
+    private int mMinimumVelocity;
 
     /**
      * 屏幕宽度
@@ -29,20 +43,29 @@ public class MySlidingView extends RelativeLayout {
     private int mScreenWidth = 0;
 
     /**
-     * 按下时X轴的位置
+     * 最后一次移动X轴的位置
      */
-    private int mLastDownX = 0;
+    private int mLastX = 0;
 
     /**
      * 按下时X轴的位置
      */
-    private float mTouchDownX = 0;
+    private int mLastDownX = 0;
 
     /**
      * 标识是否解锁
      */
     private boolean mCloseFlag = false;
 
+    /**
+     * 速率跟踪
+     */
+    private VelocityTracker mVelocityTracker;
+
+
+    /**
+     * 滑动解锁成功Listener
+     */
     private SlidingTipListener mSlidingTipListener;
 
     public void setSlidingTipListener(SlidingTipListener slidingTipListener) {
@@ -69,6 +92,7 @@ public class MySlidingView extends RelativeLayout {
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         mScreenWidth = displayMetrics.widthPixels;
         mScroller = new Scroller(mContext);
+        mMinimumVelocity = (int) (MIN_FLING_VELOCITY * getResources().getDisplayMetrics().density);
     }
 
     @Override
@@ -77,10 +101,13 @@ public class MySlidingView extends RelativeLayout {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 intercepted = false;
-                mTouchDownX = event.getX();
+                mLastDownX = (int) event.getX();
+//                LogUtil.d(LOG_TAG, "mLastDownX= " + mLastDownX);
                 break;
             case MotionEvent.ACTION_MOVE:
-                intercepted = Math.abs(event.getX() - mTouchDownX) >= ViewConfiguration.get(
+                // <!-- Base "touch slop" value used by ViewConfiguration as a
+                // <dimen name="config_viewConfigurationTouchSlop">8dp</dimen>
+                intercepted = Math.abs(event.getX() - mLastDownX) >= ViewConfiguration.get(
                         getContext()).getScaledTouchSlop();
                 break;
             case MotionEvent.ACTION_UP:
@@ -92,51 +119,89 @@ public class MySlidingView extends RelativeLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-//        int x = (int) event.getX();
-        switch (event.getAction()) {
+        acquireVelocityTracker(event);
+        int x = (int) event.getX();
+//        LogUtil.d(LOG_TAG, "x= " + x);
+        switch (event.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
-                mLastDownX = (int) event.getX();
+                if (!mScroller.isFinished()) {
+                    mScroller.abortAnimation();
+                }
+                mLastX = (int) event.getX();
+//                LogUtil.d(LOG_TAG, "mLastX(ACTION_DOWN)= " + mLastX);
                 return true;
             case MotionEvent.ACTION_MOVE:
-                // 当前移动的x轴位置
-                int currX = (int) event.getX();
-                int deltaX = currX - mLastDownX;
-//                int deltaX = x - mLastDownX;
+                // 每次滑动的距离
+                int scrollX = x - mLastX;
+                // 总共滑动的距离
+                int deltaX = x - mLastDownX;
                 // 右滑有效
                 if (deltaX > 0) {
-                    scrollTo(-deltaX, 0);
+                    scrollBy(-scrollX, 0);
                 }
+                mLastX = x;
+//                LogUtil.d(LOG_TAG, "mLastX= " + mLastX);
                 break;
             case MotionEvent.ACTION_UP:
-                currX = (int) event.getX();
-                deltaX = currX - mLastDownX;
+                mVelocityTracker.computeCurrentVelocity(1000);
+                float xVelocity = mVelocityTracker.getXVelocity();
+//                LogUtil.d(LOG_TAG, "xVelocity= " + xVelocity);
+                releaseVelocityTracker();
+                // 总共滑动的距离
+                deltaX = x - mLastDownX;
+                // 当总共滑动距离超过半屏时/超过最低解锁速率时解锁
                 if (deltaX > 0) {
-                    // 当滑动距离超过半屏时解锁
-                    if (Math.abs(deltaX) > mScreenWidth / 2) {
-                        smoothScrollTo(getScrollX(), -mScreenWidth, 500);
+                    if ((Math.abs(deltaX) > mScreenWidth / 2) ||
+                            (Math.abs(xVelocity) > mMinimumVelocity)) {
+                        smoothScrollTo(getScrollX(), -mScreenWidth, DURATION);
                         mCloseFlag = true;
 
                     } else { // 向右滑动未超过半个屏幕宽的时候 开启向左弹动动画
-                        smoothScrollTo(getScrollX(), -getScrollX(), 500);
+                        smoothScrollTo(getScrollX(), -getScrollX(), DURATION);
                     }
                 } else {// 回滚到原位置
-                    smoothScrollTo(getScrollX(), -getScrollX(), 500);
+                    smoothScrollTo(getScrollX(), -getScrollX(), DURATION);
                 }
                 break;
         }
-//        mLastDownX = x;
-        return super.onTouchEvent(event);
+        return true;
+    }
+
+    /**
+     * @param event 向VelocityTracker添加MotionEvent
+     * @see android.view.VelocityTracker#obtain()
+     * @see android.view.VelocityTracker#addMovement(MotionEvent)
+     */
+    private void acquireVelocityTracker(MotionEvent event) {
+        if (null == mVelocityTracker) {
+            mVelocityTracker = VelocityTracker.obtain();
+        }
+        mVelocityTracker.addMovement(event);
+    }
+
+    /**
+     * 释放VelocityTracker
+     *
+     * @see android.view.VelocityTracker#clear()
+     * @see android.view.VelocityTracker#recycle()
+     */
+    private void releaseVelocityTracker() {
+        if (null != mVelocityTracker) {
+            mVelocityTracker.clear();
+            mVelocityTracker.recycle();
+            mVelocityTracker = null;
+        }
     }
 
     /**
      * 滚动解锁
      *
      * @param startX   起始位置的X坐标点
-     * @param delX     结束时的X坐标点
+     * @param deltaX   结束时的X坐标点
      * @param duration 动画时长
      */
-    private void smoothScrollTo(int startX, int delX, int duration) {
-        mScroller.startScroll(startX, 0, delX, 0, duration);
+    private void smoothScrollTo(int startX, int deltaX, int duration) {
+        mScroller.startScroll(startX, 0, deltaX, 0, duration);
         invalidate();
     }
 
@@ -147,7 +212,7 @@ public class MySlidingView extends RelativeLayout {
             // 更新界面
             postInvalidate();
         } else if (mCloseFlag) {
-            mSlidingTipListener.onScrollFinish();
+            mSlidingTipListener.onSlidFinish();
         }
     }
 
@@ -155,6 +220,6 @@ public class MySlidingView extends RelativeLayout {
      * 滑动解锁Listener
      */
     public interface SlidingTipListener {
-        void onScrollFinish();
+        void onSlidFinish();
     }
 }

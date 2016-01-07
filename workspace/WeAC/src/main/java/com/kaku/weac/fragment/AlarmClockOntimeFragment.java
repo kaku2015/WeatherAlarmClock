@@ -27,7 +27,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -135,6 +134,7 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
     private TextView mWeatherTypeTv;
     private TextView mTemperatureTv;
     private TextView mUmbrellaTv;
+    private String mCurrentTimeDisplay = "";
 
     /**
      * 显示当前时间
@@ -154,6 +154,8 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
             switch (msg.what) {
                 case UPDATE_TIME:
                     alarmClockOntimeFragment.mTimeTv.setText(msg.obj.toString());
+                    alarmClockOntimeFragment.mCurrentTimeDisplay =
+                            alarmClockOntimeFragment.mTimeTv.getText().toString();
                     break;
             }
         }
@@ -213,6 +215,7 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
         // 显示现在时间
         mTimeTv.setText(new SimpleDateFormat("HH:mm", Locale.getDefault())
                 .format(new Date()));
+        mCurrentTimeDisplay = mTimeTv.getText().toString();
         // 启动更新时间线程
         new Thread(new TimeUpdateThread()).start();
 
@@ -240,15 +243,14 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
         LogUtil.i(LOG_TAG, "小睡次数：" + mNapTimes);
 
         // 滑动提示
-        ImageView slidingTipIv = (ImageView) view.findViewById(R.id.sliding_tip_iv);
-        slidingTipIv.setImageResource(R.drawable.sliding_tip_anim);
-        AnimationDrawable animationDrawable = (AnimationDrawable) slidingTipIv.getDrawable();
+        TextView slidingTipIv = (TextView) view.findViewById(R.id.sliding_tip_tv);
+        AnimationDrawable animationDrawable = (AnimationDrawable) slidingTipIv.getCompoundDrawables()[0];
         animationDrawable.start();
 
         MySlidingView mySlidingView = (MySlidingView) view.findViewById(R.id.my_sliding_view);
         mySlidingView.setSlidingTipListener(new MySlidingView.SlidingTipListener() {
             @Override
-            public void onScrollFinish() {
+            public void onSlidFinish() {
                 // 执行关闭操作
                 finishActivity();
             }
@@ -715,15 +717,18 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
                             finishActivity();
                         }
                     }
+                    Thread.sleep(1000);
                     startedTime++;
                     // 界面显示的时间
                     CharSequence currentTime = new SimpleDateFormat("HH:mm",
                             Locale.getDefault()).format(System
                             .currentTimeMillis());
+                    if (mCurrentTimeDisplay.equals(currentTime)) {
+                        continue;
+                    }
+
                     Message msg = mShowTimeHandler.obtainMessage(UPDATE_TIME,
                             currentTime);
-                    // 延迟一秒发送
-                    Thread.sleep(1000);
                     // 发送消息
                     mShowTimeHandler.sendMessage(msg);
                 } catch (InterruptedException | NullPointerException e) {

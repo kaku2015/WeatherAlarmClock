@@ -62,6 +62,7 @@ public class MySlidingView extends RelativeLayout {
      */
     private VelocityTracker mVelocityTracker;
 
+    private boolean mIsBeingDragged;
 
     /**
      * 滑动解锁成功Listener
@@ -122,7 +123,7 @@ public class MySlidingView extends RelativeLayout {
         acquireVelocityTracker(event);
         int x = (int) event.getX();
 //        LogUtil.d(LOG_TAG, "x= " + x);
-        switch (event.getAction() & MotionEvent.ACTION_MASK) {
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 if (!mScroller.isFinished()) {
                     mScroller.abortAnimation();
@@ -143,8 +144,9 @@ public class MySlidingView extends RelativeLayout {
 //                LogUtil.d(LOG_TAG, "mLastX= " + mLastX);
                 break;
             case MotionEvent.ACTION_UP:
-                mVelocityTracker.computeCurrentVelocity(1000);
-                float xVelocity = mVelocityTracker.getXVelocity();
+                final VelocityTracker velocityTracker = mVelocityTracker;
+                velocityTracker.computeCurrentVelocity(1000);
+                int xVelocity = (int) mVelocityTracker.getXVelocity();
 //                LogUtil.d(LOG_TAG, "xVelocity= " + xVelocity);
                 releaseVelocityTracker();
                 // 总共滑动的距离

@@ -1,5 +1,7 @@
 package com.kaku.weac.view;
 
+import android.animation.FloatEvaluator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -145,11 +147,16 @@ public class MyTimer extends View {
      */
     private OnMinChangListener mTimeChangListener;
 
-
     /**
      * 初始化完成回调
      */
+
     private OnInitialFinishListener mInitialFinishListener;
+
+    /**
+     * 初始化完成回调2
+     */
+    private OnCanStartAnimationListener mOnCanStartAnimationListener;
 
     /**
      * 功能模式：默认为计时
@@ -171,6 +178,11 @@ public class MyTimer extends View {
      */
     private RectF mRectF;
 
+    /**
+     * 演示动画
+     */
+    private boolean isShowingAnimation;
+
     public MyTimer(Context context) {
         super(context);
     }
@@ -191,8 +203,8 @@ public class MyTimer extends View {
             initialize(canvas);
             mIsInitialized = true;
         }
-        // 当不是拖动按钮改变时间
-        if (!mIsInDragButton) {
+        // 当不是拖动按钮改变时间，正在演示动画
+        if (!mIsInDragButton && !isShowingAnimation) {
             // 根据当前剩余时间更新精确角度、拖动按钮位置
             updateDegree();
         }
@@ -232,7 +244,7 @@ public class MyTimer extends View {
         mViewWidth = canvas.getWidth();
         mViewHeight = canvas.getHeight();
 
-        mStrokeWidth = 12 * density;
+        mStrokeWidth = 10 * density;
         mCircleRadiusDragButtonTouch = 30 * density;
 
         mCircleRadiusWatcher = mViewWidth / 3;
@@ -288,7 +300,10 @@ public class MyTimer extends View {
 
         //完成初始化回调
         if (mInitialFinishListener != null) {
-            mInitialFinishListener.onInitialFinishListener();
+            mInitialFinishListener.onInitialFinish();
+        }
+        if (mOnCanStartAnimationListener != null) {
+            mOnCanStartAnimationListener.OnCanStartAnimation();
         }
     }
 
@@ -669,6 +684,11 @@ public class MyTimer extends View {
     private boolean mIsReset;
 
     /**
+     * 是否为重置
+     */
+    private boolean mIsReset2;
+
+    /**
      * 重置
      */
     public void reset() {
@@ -678,12 +698,14 @@ public class MyTimer extends View {
         mRemainMinute = 0;
         mIsInitialized = false;
         mIsReset = true;
+        mIsReset2 = true;
         invalidate();
     }
 
     //listener
     public interface OnTimeChangeListener {
         void onTimerStart(long timeStart);
+
         void onTimeStop(long timeStart, long timeRemain);
     }
 
@@ -692,7 +714,11 @@ public class MyTimer extends View {
     }
 
     public interface OnInitialFinishListener {
-        void onInitialFinishListener();
+        void onInitialFinish();
+    }
+
+    public interface OnCanStartAnimationListener {
+        void OnCanStartAnimation();
     }
 
     /**
@@ -717,7 +743,7 @@ public class MyTimer extends View {
         if (!isInitialized) {
             mInitialFinishListener = new OnInitialFinishListener() {
                 @Override
-                public void onInitialFinishListener() {
+                public void onInitialFinish() {
                     if (!mIsReset) {
                         process(h, m, s, isStop);
                     } else {
@@ -753,6 +779,51 @@ public class MyTimer extends View {
     public void cancelTimer() {
         if (mTimerTask != null) {
             mTimerTask.cancel();
+        }
+    }
+
+    public void showAnimation() {
+        if (!mIsInitialized) {
+            mOnCanStartAnimationListener = new OnCanStartAnimationListener() {
+                @Override
+                public void OnCanStartAnimation() {
+                    startAnimation();
+                }
+            };
+        } else {
+            startAnimation();
+        }
+    }
+
+    private void startAnimation() {
+        // 不是重置
+        if (!mIsReset2) {
+            SharedPreferences preferences = getContext().getSharedPreferences(
+                    WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+            boolean isStop = preferences.getBoolean(WeacConstants.IS_STOP, false);
+            // 不是正在计时/不是停止状态/当前角度是0
+            if (!mIsStarted && !isStop && (mCurrentDegree == 0)) {
+                isShowingAnimation = true;
+                ValueAnimator animator = ValueAnimator.ofObject(new FloatEvaluator(), 0.0f, 360.0f);
+                animator.setDuration(800);
+                animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        Float value = (Float) animation.getAnimatedValue();
+                        if (value == 360.0f) {
+                            isShowingAnimation = false;
+                            mCurrentDegree = 0;
+                        } else {
+                            mCurrentDegree = value;
+                        }
+                        updateDragButtonPosition();
+                        invalidate();
+                    }
+                });
+                animator.start();
+            }
+        } else {
+            mIsReset2 = false;
         }
     }
 }

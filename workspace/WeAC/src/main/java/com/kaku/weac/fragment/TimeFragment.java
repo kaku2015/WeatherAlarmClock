@@ -121,6 +121,14 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
         return view;
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (getUserVisibleHint()) {
+            mTimer.showAnimation();
+        }
+    }
+
     private void setTimer() {
         SharedPreferences preferences = getContext().getSharedPreferences(
                 WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);

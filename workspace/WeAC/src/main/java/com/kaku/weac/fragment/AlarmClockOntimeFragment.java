@@ -163,12 +163,6 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        LogUtil.d(LOG_TAG, getActivity().toString() + "：onAttach");
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LogUtil.d(LOG_TAG, getActivity().toString() + "：onCreate");
@@ -414,47 +408,16 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        LogUtil.d(LOG_TAG, getActivity().toString() + "：onViewCreated");
-        super.onViewCreated(view, savedInstanceState);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        LogUtil.d(LOG_TAG, getActivity().toString() + ": onActivityCreated");
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
-    public void onStart() {
-        LogUtil.d(LOG_TAG, getActivity().toString() + "：onStart");
-        super.onStart();
-    }
-
-    @Override
-    public void onResume() {
-        LogUtil.d(LOG_TAG, getActivity().toString() + "：onResume");
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        LogUtil.d(LOG_TAG, getActivity().toString() + "：onPause");
-
-    }
-
-    @Override
     public void onStop() {
         super.onStop();
-        LogUtil.d(LOG_TAG, getActivity().toString() + "：onStop");
+//        LogUtil.d(LOG_TAG, getActivity().toString() + "：onStop");
         // 当第二个闹钟响起时第一个闹钟需要进入小睡或关闭闹钟（启动此Activity时加上
         // 【Intent.FLAG_ACTIVITY_CLEAR_TOP】flag 会自动关闭当前Activity，只有
         // 【Intent.FLAG_ACTIVITY_NEW_TASK】 flag的话，
         // 只是暂停，当第二个Activity结束后后会重新恢复显示）
 
-        LogUtil.d(LOG_TAG, getActivity().toString() + "：activityNumber: "
-                + WeacStatus.sActivityNumber);
+//        LogUtil.d(LOG_TAG, getActivity().toString() + "：activityNumber: "
+//                + WeacStatus.sActivityNumber);
 
         // 当点击关闭或者小睡按钮或者画面关闭状态时或点击电源键闹钟响起会执行一次onStop()
         // 当点击按钮
@@ -472,12 +435,6 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
         // // nap();
         //
         // }
-    }
-
-    @Override
-    public void onDestroyView() {
-        LogUtil.d(LOG_TAG, getActivity().toString() + "：onDestroyView");
-        super.onDestroyView();
     }
 
     @Override
@@ -510,12 +467,6 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
         // 复原手机媒体音量
         mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
                 mCurrentVolume, AudioManager.ADJUST_SAME);
-    }
-
-    @Override
-    public void onDetach() {
-        LogUtil.d(LOG_TAG, getActivity().toString() + "：onDetach");
-        super.onDetach();
     }
 
     @Override

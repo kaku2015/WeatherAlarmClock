@@ -62,8 +62,6 @@ public class MySlidingView extends RelativeLayout {
      */
     private VelocityTracker mVelocityTracker;
 
-    private boolean mIsBeingDragged;
-
     /**
      * 滑动解锁成功Listener
      */
@@ -128,9 +126,9 @@ public class MySlidingView extends RelativeLayout {
                 if (!mScroller.isFinished()) {
                     mScroller.abortAnimation();
                 }
-                mLastX = (int) event.getX();
+//                mLastX = x;
 //                LogUtil.d(LOG_TAG, "mLastX(ACTION_DOWN)= " + mLastX);
-                return true;
+                break;
             case MotionEvent.ACTION_MOVE:
                 // 每次滑动的距离
                 int scrollX = x - mLastX;
@@ -140,8 +138,6 @@ public class MySlidingView extends RelativeLayout {
                 if (deltaX > 0) {
                     scrollBy(-scrollX, 0);
                 }
-                mLastX = x;
-//                LogUtil.d(LOG_TAG, "mLastX= " + mLastX);
                 break;
             case MotionEvent.ACTION_UP:
                 final VelocityTracker velocityTracker = mVelocityTracker;
@@ -153,8 +149,7 @@ public class MySlidingView extends RelativeLayout {
                 deltaX = x - mLastDownX;
                 // 当总共滑动距离超过半屏时/超过最低解锁速率时解锁
                 if (deltaX > 0) {
-                    if ((Math.abs(deltaX) > mScreenWidth / 2) ||
-                            (Math.abs(xVelocity) > mMinimumVelocity)) {
+                    if ((Math.abs(deltaX) > mScreenWidth / 2) || xVelocity > mMinimumVelocity) {
                         smoothScrollTo(getScrollX(), -mScreenWidth, DURATION);
                         mCloseFlag = true;
 
@@ -166,6 +161,8 @@ public class MySlidingView extends RelativeLayout {
                 }
                 break;
         }
+        mLastX = x;
+//        LogUtil.d(LOG_TAG, "mLastX= " + mLastX);
         return true;
     }
 

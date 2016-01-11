@@ -1,12 +1,244 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-    <Button
-        android:id="@+id/button"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/theme_wallpaper" />
+        android:layout_height="54dp"
+        android:gravity="center"
+        android:text="@string/more"
+        android:textColor="@color/white_trans90"
+        android:textSize="20sp"/>
 
-</RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/more_item_area">
+
+                <LinearLayout
+                    android:id="@+id/theme"
+                    style="@style/more_item_group">
+
+                    <ImageView
+                        style="@style/more_item_iv"
+                        android:src="@drawable/ic_more_theme_wallpaper"/>
+
+                    <TextView
+                        style="@style/more_item_title_tv"
+                        android:text="@string/theme"/>
+
+                    <ImageView style="@style/more_item_arrow_iv"/>
+                </LinearLayout>
+
+                <View style="@style/more_item_divider"/>
+
+                <LinearLayout
+                    android:id="@+id/discover_app"
+                    style="@style/more_item_group">
+
+                    <ImageView
+                        style="@style/more_item_iv"
+                        android:src="@drawable/ic_more_discover_app"/>
+
+                    <TextView
+                        style="@style/more_item_title_tv"
+                        android:text="@string/discover_app"/>
+
+                    <ImageView style="@style/more_item_arrow_iv"/>
+                </LinearLayout>
+
+                <View style="@style/more_item_divider"/>
+
+                <LinearLayout
+                    android:id="@+id/scan_two_dimension_code"
+                    style="@style/more_item_group">
+
+                    <ImageView
+                        style="@style/more_item_iv"
+                        android:src="@drawable/ic_more_scan_two_dimension_code"/>
+
+                    <TextView
+                        style="@style/more_item_title_tv"
+                        android:text="@string/scan_two_dimension_code"/>
+
+                    <ImageView style="@style/more_item_arrow_iv"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View style="@style/more_item_area_divider"/>
+
+            <LinearLayout
+                style="@style/more_item_area"
+                >
+
+                <LinearLayout
+                    android:id="@+id/clear_memory"
+                    style="@style/more_item_group">
+
+                    <ImageView
+                        style="@style/more_item_iv"
+                        android:src="@drawable/ic_more_clear_memory"/>
+
+                    <TextView
+                        style="@style/more_item_title_tv"
+                        android:text="@string/clear_memory"/>
+
+                    <ImageView style="@style/more_item_arrow_iv"/>
+                </LinearLayout>
+
+                <View style="@style/more_item_divider"/>
+
+                <LinearLayout
+                    android:id="@+id/clean_up"
+                    style="@style/more_item_group">
+
+                    <ImageView
+                        style="@style/more_item_iv"
+                        android:src="@drawable/ic_more_clean_up"/>
+
+                    <TextView
+                        style="@style/more_item_title_tv"
+                        android:text="@string/clean_up"/>
+
+                    <ImageView style="@style/more_item_arrow_iv"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View style="@style/more_item_area_divider"/>
+
+            <LinearLayout
+                style="@style/more_item_area"
+                >
+
+                <LinearLayout
+                    android:id="@+id/friend_share"
+                    style="@style/more_item_group">
+
+                    <ImageView
+                        style="@style/more_item_iv"
+                        android:src="@drawable/ic_more_friend_share"/>
+
+                    <TextView
+                        style="@style/more_item_title_tv"
+                        android:text="@string/friend_share"/>
+
+                    <ImageView style="@style/more_item_arrow_iv"/>
+                </LinearLayout>
+
+                <View style="@style/more_item_divider"/>
+
+                <LinearLayout
+                    android:id="@+id/software_update"
+                    style="@style/more_item_group">
+
+                    <ImageView
+                        style="@style/more_item_iv"
+                        android:src="@drawable/ic_more_software_update"/>
+
+                    <TextView
+                        style="@style/more_item_title_tv"
+                        android:text="@string/software_update"/>
+
+                    <ImageView style="@style/more_item_arrow_iv"/>
+                </LinearLayout>
+
+                <View style="@style/more_item_divider"/>
+
+                <LinearLayout
+                    android:id="@+id/faq"
+                    style="@style/more_item_group">
+
+                    <ImageView
+                        style="@style/more_item_iv"
+                        android:src="@drawable/ic_more_faq"/>
+
+                    <TextView
+                        style="@style/more_item_title_tv"
+                        android:text="@string/faq"/>
+
+                    <ImageView style="@style/more_item_arrow_iv"/>
+                </LinearLayout>
+
+                <View style="@style/more_item_divider"/>
+
+                <LinearLayout
+                    android:id="@+id/suggestion_feedback"
+                    style="@style/more_item_group">
+
+                    <ImageView
+                        style="@style/more_item_iv"
+                        android:src="@drawable/ic_more_suggestion_feedback"/>
+
+                    <TextView
+                        style="@style/more_item_title_tv"
+                        android:text="@string/suggestion_feedback"/>
+
+                    <ImageView style="@style/more_item_arrow_iv"/>
+                </LinearLayout>
+
+                <View style="@style/more_item_divider"/>
+
+                <LinearLayout
+                    android:id="@+id/give_good_reputation"
+                    style="@style/more_item_group">
+
+                    <ImageView
+                        style="@style/more_item_iv"
+                        android:src="@drawable/ic_more_give_good_reputation"/>
+
+                    <TextView
+                        style="@style/more_item_title_tv"
+                        android:text="@string/give_good_reputation"/>
+
+                    <ImageView style="@style/more_item_arrow_iv"/>
+                </LinearLayout>
+
+                <View style="@style/more_item_divider"/>
+
+                <LinearLayout
+                    android:id="@+id/abort_us"
+                    style="@style/more_item_group">
+
+                    <ImageView
+                        style="@style/more_item_iv"
+                        android:src="@drawable/ic_more_about_us"/>
+
+                    <TextView
+                        style="@style/more_item_title_tv"
+                        android:text="@string/abort_us"/>
+
+                    <ImageView style="@style/more_item_arrow_iv"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View style="@style/more_item_area_divider"/>
+
+            <LinearLayout
+                android:id="@+id/quit"
+                style="@style/more_item_group"
+                android:background="@color/black_trans20">
+
+                <ImageView
+                    style="@style/more_item_iv"
+                    android:src="@drawable/ic_more_quit"/>
+
+                <TextView
+                    style="@style/more_item_title_tv"
+                    android:text="@string/quit"/>
+
+                <ImageView style="@style/more_item_arrow_iv"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

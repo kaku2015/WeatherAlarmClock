@@ -10324,6 +10324,7 @@
     <color name="black_trans20">#33000000</color>
     <color name="black_trans25">#40000000</color>
     <color name="black_trans30">#4d000000</color>
+    <color name="black_trans40">#66000000</color>
     <color name="black_trans50">#80000000</color>
     <color name="black_trans70">#b3000000</color>
     <color name="black_trans80">#CC000000</color>
@@ -10383,6 +10384,7 @@
     <string name="__leak_canary_share_with">Share with…</string>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="abort_us">关于天气闹钟</string>
     <string name="add_alarm_clock">  添加闹钟  </string>
     <string name="add_city">添加城市</string>
     <string name="add_city_fail">添加城市失败，请重新尝试</string>
@@ -10409,6 +10411,8 @@
     <string name="city_already_added">城市（%1$s）已添加</string>
     <string name="city_manage">城市管理</string>
     <string name="city_weather_update_time">%1$s更新时间</string>
+    <string name="clean_up">一键清理</string>
+    <string name="clear_memory">清除缓存</string>
     <string name="click_record">点击录音</string>
     <string name="click_stop">点击结束</string>
     <string name="close_alarm_clock">右滑关闭闹钟</string>
@@ -10429,6 +10433,7 @@
     <string name="delete_batch">批量删除</string>
     <string name="delete_success">删除成功</string>
     <string name="detail">详情</string>
+    <string name="discover_app">发现APP</string>
     <string name="dress">穿衣</string>
     <string name="dress_detail">穿衣指数详情</string>
     <string name="edit_alarm_clock">编辑闹钟</string>
@@ -10437,6 +10442,7 @@
     <string name="error_sd_card">错误，SD卡不存在</string>
     <string name="every_day">每天</string>
     <string name="facial_mask">面膜</string>
+    <string name="faq">常见问题</string>
     <string name="file_format">文件格式：</string>
     <string name="file_name">文件名称：</string>
     <string name="file_name_exist">文件名已存在</string>
@@ -10446,6 +10452,8 @@
     <string name="forbid_power">未开启读取位置权限</string>
     <string name="four_h">四</string>
     <string name="friday">周五</string>
+    <string name="friend_share">好友分享</string>
+    <string name="give_good_reputation">赏个好评</string>
     <string name="hot_city">热门城市</string>
     <string name="humidity">湿度 %1$s</string>
     <string name="input_city_name">请输入城市名称或拼音</string>
@@ -10504,6 +10512,7 @@
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="quick_timer">快捷计时</string>
+    <string name="quit">退出应用</string>
     <string name="record">录音</string>
     <string name="record_fail">录音失败</string>
     <string name="record_fail_confirm">录音失败，请检查录音权限是否开启或录音已被其他应用占用。</string>
@@ -10524,16 +10533,19 @@
     <string name="saturday">周六</string>
     <string name="save">保存</string>
     <string name="save_path">保存路径：</string>
+    <string name="scan_two_dimension_code">扫描二维码</string>
     <string name="select_all">全选</string>
     <string name="select_all_cancel">取消全选</string>
     <string name="selected_xx_item">已选择%1$d项</string>
     <string name="set_default">设为默认</string>
     <string name="siesta">午睡</string>
     <string name="six_h">六</string>
+    <string name="software_update">软件更新</string>
     <string name="sport">运动</string>
     <string name="sport_detail">运动指数详情</string>
     <string name="start">开始</string>
     <string name="stop">暂停</string>
+    <string name="suggestion_feedback">意见反馈</string>
     <string name="sunday">周日</string>
     <string name="sure">确定</string>
     <string name="sure_delete">确定要删除吗？</string>
@@ -10542,6 +10554,7 @@
     <string name="temperature">%1$s℃</string>
     <string name="ten">10</string>
     <string name="the_day_of_tomorrow">后天</string>
+    <string name="theme">主题、壁纸</string>
     <string name="theme_wallpaper">主题壁纸</string>
     <string name="thirty">30</string>
     <string name="three">3</string>
@@ -10742,6 +10755,53 @@
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:background">@color/dark_blue</item>
     </style>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles_more.xml -->
+    <eat-comment/>
+    <style name="more_item_area">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/black_trans20</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <style name="more_item_area_divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">10dp</item>
+        <item name="android:background">@color/white_trans10</item>
+    </style>
+    <style name="more_item_arrow_iv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/ic_more_arrow</item>
+    </style>
+    <style name="more_item_divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:background">@color/white_trans20</item>
+        <item name="android:layout_marginLeft">19dp</item>
+    </style>
+    <style name="more_item_group">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingLeft">19dp</item>
+        <item name="android:paddingRight">19dp</item>
+        <item name="android:background">@drawable/bg_more_item</item>
+    </style>
+    <style name="more_item_iv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="more_item_title_tv">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/white_trans90</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles_new_alarm_clock.xml -->
+    <eat-comment/>
     <style name="new_alarm_clcok_item">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">54dp</item>

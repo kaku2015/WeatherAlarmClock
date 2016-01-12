@@ -9,18 +9,17 @@
     <RelativeLayout style="@style/action_llyt">
 
         <ImageView
-            android:id="@+id/action_cancel"
+            android:id="@+id/back_btn"
             style="@style/action_icon"
             android:layout_alignParentLeft="true"
             android:src="@drawable/ic_action_previous_item"/>
 
         <TextView
-            android:id="@+id/action_title"
             style="@style/action_title"
             android:text="@string/theme"/>
 
         <TextView
-            android:id="@+id/ring_select_save"
+            android:id="@+id/custom_define_btn"
             style="@style/action_tv"
             android:layout_alignParentRight="true"
             android:text="@string/custom_define"/>

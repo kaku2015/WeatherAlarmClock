@@ -16,6 +16,8 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.kaku.weac.R;
 import com.kaku.weac.adapter.ThemeAdapter;
@@ -35,7 +37,7 @@ import java.util.List;
  * @author 咖枯
  * @version 1.0 2015
  */
-public class ThemeFragment extends BaseFragment {
+public class ThemeFragment extends BaseFragment implements View.OnClickListener {
 
     /**
      * Log tag ：ThemeFragment
@@ -75,8 +77,13 @@ public class ThemeFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fm_theme, container, false);
-        ViewGroup background = (ViewGroup) view.findViewById(R.id.background);
+        final ViewGroup background = (ViewGroup) view.findViewById(R.id.background);
         MyUtil.setBackgroundBlur(background, getActivity());
+
+        ImageView backBtn = (ImageView) view.findViewById(R.id.back_btn);
+        TextView customDefineBtn = (TextView) view.findViewById(R.id.custom_define_btn);
+        backBtn.setOnClickListener(this);
+        customDefineBtn.setOnClickListener(this);
 
         // 显示主题壁纸的GridView
         GridView gridView = (GridView) view.findViewById(R.id.gv_change_theme);
@@ -105,6 +112,8 @@ public class ThemeFragment extends BaseFragment {
                 // 保存当前壁纸名称
                 edit.putString(WeacConstants.WALLPAPER_NAME, resName);
                 edit.apply();
+
+                MyUtil.setBackgroundBlur(background, getActivity());
 
                 // 返回并进行壁纸更新
                 getActivity().setResult(Activity.RESULT_OK, getActivity().getIntent());
@@ -164,5 +173,16 @@ public class ThemeFragment extends BaseFragment {
         // 创建主题壁纸适配器
         this.mAdapter = new ThemeAdapter(getActivity(), mList,
                 mWallpaperName, memoryCache, reqWidth, reqHeight);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.back_btn:
+                getActivity().finish();
+                break;
+            case R.id.custom_define_btn:
+                break;
+        }
     }
 }

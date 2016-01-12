@@ -10421,6 +10421,7 @@
     <string name="countdown_day_hour_minute">距闹钟响起还有%1$d天%2$d小时%3$d分</string>
     <string name="countdown_hour_minute">距闹钟响起还有%1$d小时%2$d分</string>
     <string name="countdown_minute">距闹钟响起还有%1$d分钟</string>
+    <string name="custom_define">自定义</string>
     <string name="dash">--</string>
     <string name="dash_degree">--℃</string>
     <string name="data_void">数据过期</string>
@@ -10640,7 +10641,6 @@
         <item name="android:paddingRight">19dp</item>
         <item name="android:layout_centerInParent">true</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:text">@string/dash</item>
         <item name="android:alpha">0.9</item>
         <item name="android:textSize">20sp</item>
     </style>

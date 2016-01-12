@@ -23,6 +23,7 @@ import com.kaku.weac.bean.Theme;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.LruMemoryCache;
+import com.kaku.weac.util.MyUtil;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -74,6 +75,9 @@ public class ThemeFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fm_theme, container, false);
+        ViewGroup background = (ViewGroup) view.findViewById(R.id.background);
+        MyUtil.setBackgroundBlur(background, getActivity());
+
         // 显示主题壁纸的GridView
         GridView gridView = (GridView) view.findViewById(R.id.gv_change_theme);
         gridView.setAdapter(this.mAdapter);
@@ -155,7 +159,7 @@ public class ThemeFragment extends BaseFragment {
         // 图片显示的宽度
         int reqWidth = size.x / 3;
         // 图片显示的高度
-        int reqHeight = size.y / 3;
+        int reqHeight = size.y / 4;
 
         // 创建主题壁纸适配器
         this.mAdapter = new ThemeAdapter(getActivity(), mList,

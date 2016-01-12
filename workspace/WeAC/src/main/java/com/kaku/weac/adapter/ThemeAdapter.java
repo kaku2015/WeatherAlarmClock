@@ -154,7 +154,7 @@ public class ThemeAdapter extends ArrayAdapter<Theme> {
             imageView.setImageBitmap(bitmap);
         } else {
             // 设置壁纸图片暂为缓存图片
-            imageView.setImageResource(R.drawable.ic_pic_loading);
+//            imageView.setImageResource(R.drawable.ic_pic_loading);
             // 创建异步线程类
             BitmapWorkerTask task = new BitmapWorkerTask(imageView);
             // 开启线程更新图片显示

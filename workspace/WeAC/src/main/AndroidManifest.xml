@@ -51,7 +51,7 @@
         <activity
             android:name=".activities.ThemeActivity"
             android:screenOrientation="portrait"
-            />
+            android:theme="@style/Transparent"/>
         <activity
             android:name=".activities.AlarmClockNewActivity"
             android:screenOrientation="portrait"

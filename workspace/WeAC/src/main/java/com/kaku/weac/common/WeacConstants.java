@@ -176,4 +176,16 @@ public class WeacConstants {
      * 倒计时是否为停止状态
      */
     public static final String IS_STOP = "is_stop";
+
+    /**
+     * 录音文件存放地址
+     */
+    public static final String RECORD_SAVE_PATH = "/WeaAlarmClock/audio/record";
+
+    /**
+     * 图片缓存地址
+     */
+    public static final String IMAGE_LOADER_CACHE_PATH = "/WeaAlarmClock/Images/";
+
+
 }

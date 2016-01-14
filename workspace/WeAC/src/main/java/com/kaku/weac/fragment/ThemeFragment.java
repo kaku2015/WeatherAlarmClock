@@ -5,6 +5,7 @@ package com.kaku.weac.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kaku.weac.R;
+import com.kaku.weac.activities.LocalAlbumActivity;
 import com.kaku.weac.adapter.ThemeAdapter;
 import com.kaku.weac.bean.Theme;
 import com.kaku.weac.common.WeacConstants;
@@ -182,6 +184,12 @@ public class ThemeFragment extends BaseFragment implements View.OnClickListener 
                 getActivity().finish();
                 break;
             case R.id.custom_define_btn:
+                if (MyUtil.isFastDoubleClick()) {
+                    return;
+                }
+                Intent intent = new Intent(getActivity(), LocalAlbumActivity.class);
+                getActivity().startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.zoomin, 0);
                 break;
         }
     }

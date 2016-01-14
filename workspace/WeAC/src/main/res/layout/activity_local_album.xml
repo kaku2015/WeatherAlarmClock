@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout style="@style/action_llyt">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            style="@style/action_icon"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/ic_action_previous_item"/>
+
+        <TextView
+            style="@style/action_title"
+            android:text="@string/local_album"/>
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/local_album_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/list_view_margin"
+        android:layout_marginRight="@dimen/list_view_margin"
+        android:divider="@color/white_trans10"
+        android:dividerHeight="@dimen/divider_line_thin">
+
+    </ListView>
+
+    <LinearLayout
+        android:id="@+id/local_album_lv_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ProgressBar
+            android:id="@+id/loading_progress"
+            style="@android:style/Widget.ProgressBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/loading_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="@string/scanning"
+            android:textColor="@color/white_trans90"
+            android:textSize="@dimen/big_small"/>
+    </LinearLayout>
+</LinearLayout>

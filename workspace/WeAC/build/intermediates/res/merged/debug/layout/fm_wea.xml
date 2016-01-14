@@ -31,6 +31,7 @@
     </RelativeLayout>
 
     <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        android:overScrollMode="never"
         android:id="@+id/pull_refresh_scrollview"
         xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"

@@ -578,7 +578,7 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
         String fileName = Environment.getExternalStorageDirectory()
                 .getAbsolutePath();
         // 录音文件路径
-        fileName += "/WeaAlarmClock/audio/record";
+        fileName += WeacConstants.RECORD_SAVE_PATH;
         return fileName;
     }
 

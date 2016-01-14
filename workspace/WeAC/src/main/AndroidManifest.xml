@@ -50,19 +50,19 @@
         </activity>
         <activity
             android:name=".activities.ThemeActivity"
-            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
             android:theme="@style/Transparent"/>
         <activity
             android:name=".activities.AlarmClockNewActivity"
-            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
             android:theme="@style/Transparent"/>
         <activity
             android:name=".activities.AlarmClockEditActivity"
-            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
             android:theme="@style/Transparent"/>
         <activity
             android:name=".activities.RingSelectActivity"
-            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
             android:theme="@style/Transparent"/>
         <activity
             android:name=".activities.AlarmClockOntimeActivity"
@@ -73,6 +73,7 @@
             android:theme="@android:style/Theme.NoDisplay"/>
         <activity
             android:name=".activities.NapEditActivity"
+            android:launchMode="singleTop"
             android:theme="@style/Theme.MyDialog"/>
         <activity
             android:name=".activities.RecordOperateActivity"
@@ -105,11 +106,17 @@
             android:theme="@style/Transparent"/>
         <activity
             android:name=".activities.CityManageActivity"
+            android:launchMode="singleTop"
             android:theme="@style/Transparent"/>
         <activity
             android:name=".activities.AddCityActivity"
+            android:launchMode="singleTop"
             android:theme="@style/Transparent"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+        <activity
+            android:name=".activities.LocalAlbumActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Transparent"/>
 
         <receiver
             android:name=".broadcast.AlarmClockBroadcast"

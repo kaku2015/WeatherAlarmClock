@@ -4,6 +4,7 @@
     <!-- Activity主题 -->
     <style name="Transparent" parent="@android:style/Theme.Holo.Light">
         <item name="android:windowIsTranslucent">true</item>
+        <item name="android:screenOrientation">portrait</item>
     </style>
 
     <style name="tab_llyt">

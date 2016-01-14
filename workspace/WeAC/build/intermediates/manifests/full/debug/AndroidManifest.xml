@@ -53,18 +53,22 @@
         </activity>
         <activity
             android:name="com.kaku.weac.activities.ThemeActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Transparent" />
         <activity
             android:name="com.kaku.weac.activities.AlarmClockNewActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Transparent" />
         <activity
             android:name="com.kaku.weac.activities.AlarmClockEditActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Transparent" />
         <activity
             android:name="com.kaku.weac.activities.RingSelectActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Transparent" />
         <activity
@@ -76,6 +80,7 @@
             android:theme="@android:style/Theme.NoDisplay" />
         <activity
             android:name="com.kaku.weac.activities.NapEditActivity"
+            android:launchMode="singleTop"
             android:theme="@style/Theme.MyDialog" />
         <activity
             android:name="com.kaku.weac.activities.RecordOperateActivity"
@@ -108,11 +113,17 @@
             android:theme="@style/Transparent" />
         <activity
             android:name="com.kaku.weac.activities.CityManageActivity"
+            android:launchMode="singleTop"
             android:theme="@style/Transparent" />
         <activity
             android:name="com.kaku.weac.activities.AddCityActivity"
+            android:launchMode="singleTop"
             android:theme="@style/Transparent"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name="com.kaku.weac.activities.LocalAlbumActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Transparent" />
 
         <receiver
             android:name="com.kaku.weac.broadcast.AlarmClockBroadcast"

@@ -75,6 +75,9 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.theme:
+                if (MyUtil.isFastDoubleClick()) {
+                    return;
+                }
                 Intent intent = new Intent(getActivity(), ThemeActivity.class);
                 // 启动主题界面
                 startActivityForResult(intent, REQUEST_THEME_WALLPAPER);

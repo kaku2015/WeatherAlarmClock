@@ -10442,6 +10442,7 @@
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/color.xml -->
     <eat-comment/>
+    <color name="transparent">#00000000</color>
     <color name="white">#FFFFFF</color>
     <color name="white_trans10">#1affffff</color>
     <color name="white_trans20">#33ffffff</color>
@@ -12080,6 +12081,7 @@
     <eat-comment/>
     <style name="Transparent" parent="@android:style/Theme.Holo.Light">
         <item name="android:windowIsTranslucent">true</item>
+        <item name="android:screenOrientation">portrait</item>
     </style>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
     <eat-comment/>

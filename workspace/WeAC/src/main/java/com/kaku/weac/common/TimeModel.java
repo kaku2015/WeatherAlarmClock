@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
  */
-package com.kaku.weac.view;
+package com.kaku.weac.common;
 
 /**
  * 计时模式
@@ -9,7 +9,7 @@ package com.kaku.weac.view;
  * @author 咖枯
  * @version 1.0 2015/12/22
  */
-public enum Model {
+public enum TimeModel {
     /**
      * 计时
      */

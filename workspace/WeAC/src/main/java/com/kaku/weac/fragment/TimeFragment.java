@@ -22,10 +22,10 @@ import android.widget.TextView;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.RingSelectActivity;
 import com.kaku.weac.activities.TimerOnTimeActivity;
+import com.kaku.weac.common.TimeModel;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
-import com.kaku.weac.view.Model;
 import com.kaku.weac.view.MyTimer;
 
 import java.util.Calendar;
@@ -114,7 +114,7 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
         mTimer = (MyTimer) view.findViewById(R.id.timer);
         mTimer.setOnTimeChangeListener(this);
         mTimer.setTimeChangListener(this);
-        mTimer.setModel(Model.Timer);
+        mTimer.setModel(TimeModel.Timer);
 //        mTimer.setStartTime(0, 0, 0, true, false);
         setTimer();
 

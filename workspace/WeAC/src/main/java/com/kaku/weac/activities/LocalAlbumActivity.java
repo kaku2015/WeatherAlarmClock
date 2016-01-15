@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import com.kaku.weac.R;
 import com.kaku.weac.adapter.LocalAlbumAdapter;
 import com.kaku.weac.bean.ImageBucket;
+import com.kaku.weac.common.TransitionModel;
 import com.kaku.weac.db.LocalAlbumImagePickerHelper;
 import com.kaku.weac.util.MyUtil;
 
@@ -28,7 +30,11 @@ import java.util.List;
  * @version 1.0 2016/1/13
  */
 public class LocalAlbumActivity extends BaseActivity implements View.OnClickListener {
-    private ListView mLocalAlbumListView;
+
+    private static final int REQUEST_LOCAL_ALBUM_DETAIL = 1;
+
+    public static final String ALBUM_PATH = "album_path";
+    public static final String ALBUM_NAME = "album_name";
     private LocalAlbumAdapter mLocalAlbumAdapter;
     private List<ImageBucket> mLocalAlbumList;
     private AsyncTask<Void, Void, List<ImageBucket>> mBucketLoadTask;
@@ -57,7 +63,8 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
 
             @Override
             protected List<ImageBucket> doInBackground(Void... params) {
-                return LocalAlbumImagePickerHelper.getInstance(LocalAlbumActivity.this).getImagesBucketList();
+                return LocalAlbumImagePickerHelper.getInstance(LocalAlbumActivity.this)
+                        .getImagesBucketList();
             }
 
             @Override
@@ -74,13 +81,24 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
 
     private void assignViews() {
         ImageView mBackBtn;
-        mBackBtn = (ImageView) findViewById(R.id.back_btn);
+        mBackBtn = (ImageView) findViewById(R.id.action_back);
         mBackBtn.setOnClickListener(this);
 
-        mLocalAlbumListView = (ListView) findViewById(R.id.local_album_lv);
-        mLocalAlbumListView.setAdapter(mLocalAlbumAdapter);
+        ListView localAlbumListView = (ListView) findViewById(R.id.local_album_lv);
+        localAlbumListView.setAdapter(mLocalAlbumAdapter);
         LinearLayout emptyView = (LinearLayout) findViewById(R.id.local_album_lv_empty);
-        mLocalAlbumListView.setEmptyView(emptyView);
+        localAlbumListView.setEmptyView(emptyView);
+        localAlbumListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bundle extras = new Bundle();
+                extras.putParcelableArrayList(ALBUM_PATH, mLocalAlbumAdapter.getItem(position)
+                        .bucketList);
+                extras.putString(ALBUM_NAME, mLocalAlbumAdapter.getItem(position).bucketName);
+                readyGoForResult(LocalAlbumDetailActivity.class,
+                        REQUEST_LOCAL_ALBUM_DETAIL, extras, TransitionModel.NONE);
+            }
+        });
     }
 
     @Override

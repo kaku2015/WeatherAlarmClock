@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
+ */
 package com.kaku.weac.view;
 
 import android.animation.FloatEvaluator;
@@ -18,6 +21,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.kaku.weac.common.TimeModel;
 import com.kaku.weac.R;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.MyUtil;
@@ -161,7 +165,7 @@ public class MyTimer extends View {
     /**
      * 功能模式：默认为计时
      */
-    private Model mModel = Model.Timer;
+    private TimeModel mModel = TimeModel.Timer;
 
     /**
      * 矩形范围
@@ -556,7 +560,7 @@ public class MyTimer extends View {
      */
     public boolean start() {
         // 倒计时
-        if (mModel == Model.Timer) {
+        if (mModel == TimeModel.Timer) {
             if (!isTimeEmpty()) {
                 if (mTimeHandler == null) {
                     mTimeHandler = new TimerHandler(MyTimer.this);
@@ -587,7 +591,7 @@ public class MyTimer extends View {
                     mRemainTimeChangeListener.onTimerStart(mTimeRemain.getTimeInMillis());
                 }
             }
-        } /*else if (mModel == Model.StopWatch) {
+        } /*else if (mModel == TimeModel.StopWatch) {
             if (!isMaxTime() && !mIsStarted) {
                 mTimerTask = new TimerTask() {
                     @Override
@@ -724,9 +728,9 @@ public class MyTimer extends View {
     /**
      * 设置计时模式
      *
-     * @param model Model.Timer：计时；Model.StopWatcher：秒表
+     * @param model TimeModel.Timer：计时；TimeModel.StopWatcher：秒表
      */
-    public void setModel(Model model) {
+    public void setModel(TimeModel model) {
         this.mModel = model;
     }
 

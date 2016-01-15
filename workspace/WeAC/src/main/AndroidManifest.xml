@@ -117,6 +117,10 @@
             android:name=".activities.LocalAlbumActivity"
             android:launchMode="singleTop"
             android:theme="@style/Transparent"/>
+        <activity
+            android:name=".activities.LocalAlbumDetailActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Transparent"/>
 
         <receiver
             android:name=".broadcast.AlarmClockBroadcast"

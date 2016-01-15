@@ -10,7 +10,7 @@
     <RelativeLayout style="@style/action_llyt">
 
         <ImageView
-            android:id="@+id/back_btn"
+            android:id="@+id/action_back"
             style="@style/action_icon"
             android:layout_alignParentLeft="true"
             android:src="@drawable/ic_action_previous_item"/>
@@ -28,7 +28,8 @@
         android:layout_marginLeft="@dimen/list_view_margin"
         android:layout_marginRight="@dimen/list_view_margin"
         android:divider="@color/white_trans10"
-        android:dividerHeight="@dimen/divider_line_thin">
+        android:dividerHeight="@dimen/divider_line_thin"
+        android:overScrollMode="never">
 
     </ListView>
 

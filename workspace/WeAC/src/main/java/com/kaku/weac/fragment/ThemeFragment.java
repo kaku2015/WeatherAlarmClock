@@ -82,7 +82,7 @@ public class ThemeFragment extends BaseFragment implements View.OnClickListener 
         final ViewGroup background = (ViewGroup) view.findViewById(R.id.background);
         MyUtil.setBackgroundBlur(background, getActivity());
 
-        ImageView backBtn = (ImageView) view.findViewById(R.id.back_btn);
+        ImageView backBtn = (ImageView) view.findViewById(R.id.action_back);
         TextView customDefineBtn = (TextView) view.findViewById(R.id.custom_define_btn);
         backBtn.setOnClickListener(this);
         customDefineBtn.setOnClickListener(this);
@@ -180,7 +180,7 @@ public class ThemeFragment extends BaseFragment implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.back_btn:
+            case R.id.action_back:
                 getActivity().finish();
                 break;
             case R.id.custom_define_btn:

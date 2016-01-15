@@ -9,7 +9,7 @@
     <RelativeLayout style="@style/action_llyt">
 
         <ImageView
-            android:id="@+id/back_btn"
+            android:id="@+id/action_back"
             style="@style/action_icon"
             android:layout_alignParentLeft="true"
             android:src="@drawable/ic_action_previous_item"/>

@@ -37,12 +37,12 @@ public class BaseActivity extends Activity {
     /**
      * startActivityForResult with bundle
      *
-     * @param c           class
+     * @param c           target class name
      * @param requestCode requestCode
      * @param bundle      bundle
      */
-    protected void readyGoForResult(Class<?> c, int requestCode, Bundle bundle, TransitionModel
-            transitionModel) {
+    protected void myStartActivityForResult(Class<?> c, int requestCode, Bundle bundle,
+                                            TransitionModel transitionModel) {
         Intent intent = new Intent(this, c);
         if (null != bundle) {
             intent.putExtras(bundle);
@@ -59,7 +59,7 @@ public class BaseActivity extends Activity {
             case BOTTOM:
                 overridePendingTransition(R.anim.move_in_bottom, 0);
                 break;
-            case NONE:
+            case DEFAULT:
             default:
                 break;
 /*            case LEFT:

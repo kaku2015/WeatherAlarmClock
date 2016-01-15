@@ -10,5 +10,5 @@ package com.kaku.weac.common;
  * @version 1.0 2016/1/14
  */
 public enum TransitionModel {
-    LEFT, RIGHT, TOP, BOTTOM, SCALE, FADE, SCALE_FADE, NONE
+    LEFT, RIGHT, TOP, BOTTOM, SCALE, FADE, SCALE_FADE, DEFAULT
 }

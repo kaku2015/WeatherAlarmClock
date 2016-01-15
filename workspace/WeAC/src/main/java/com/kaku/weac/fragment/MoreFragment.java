@@ -3,7 +3,6 @@
  */
 package com.kaku.weac.fragment;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -15,8 +14,11 @@ import android.view.ViewGroup;
 
 import com.kaku.weac.R;
 import com.kaku.weac.activities.ThemeActivity;
+import com.kaku.weac.bean.Event.WallpaperEvent;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
+import com.kaku.weac.util.OttoAppConfig;
+import com.squareup.otto.Subscribe;
 
 /**
  * 更多fragment
@@ -30,10 +32,11 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
      */
     private static final String LOG_TAG = "MoreFragment";
 
-    /**
-     * 主题壁纸的requestCode
-     */
-    private static final int REQUEST_THEME_WALLPAPER = 1;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        OttoAppConfig.getInstance().register(this);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,27 +50,25 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
         return view;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != Activity.RESULT_OK) {
-            return;
-        }
-        if (requestCode == REQUEST_THEME_WALLPAPER) {
-            ViewGroup vg = (ViewGroup) getActivity().findViewById(
-                    R.id.llyt_activity_main);
-            // 更新壁纸
-            vg.setBackgroundResource(MyUtil.getWallPaper(getActivity()));
+    @Subscribe
+    public void onWallpaperUpdate(WallpaperEvent wallpaperEvent) {
+        initWallpaper();
+    }
 
-            ViewPager pager = (ViewPager) getActivity().findViewById(R.id.fragment_container);
-            PagerAdapter f = pager.getAdapter();
-            WeaFragment weaFragment = (WeaFragment) f.instantiateItem(pager, 1);
-            // 更新天气高斯模糊背景
-            if (weaFragment.mBlurDrawable != null && weaFragment.mBackGround != null) {
-                weaFragment.mBlurDrawable = MyUtil.getWallPaperDrawable(getActivity());
-                weaFragment.mBlurDrawable.setAlpha(weaFragment.mAlpha);
-                weaFragment.mBackGround.setBackground(weaFragment.mBlurDrawable);
-            }
+    private void initWallpaper() {
+        ViewGroup vg = (ViewGroup) getActivity().findViewById(
+                R.id.llyt_activity_main);
+        // 更新壁纸
+        vg.setBackgroundResource(MyUtil.getWallPaper(getActivity()));
+
+        ViewPager pager = (ViewPager) getActivity().findViewById(R.id.fragment_container);
+        PagerAdapter f = pager.getAdapter();
+        WeaFragment weaFragment = (WeaFragment) f.instantiateItem(pager, 1);
+        // 更新天气高斯模糊背景
+        if (weaFragment.mBlurDrawable != null && weaFragment.mBackGround != null) {
+            weaFragment.mBlurDrawable = MyUtil.getWallPaperDrawable(getActivity());
+            weaFragment.mBlurDrawable.setAlpha(weaFragment.mAlpha);
+            weaFragment.mBackGround.setBackground(weaFragment.mBlurDrawable);
         }
     }
 
@@ -80,9 +81,14 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
                 }
                 Intent intent = new Intent(getActivity(), ThemeActivity.class);
                 // 启动主题界面
-                startActivityForResult(intent, REQUEST_THEME_WALLPAPER);
+                startActivity(intent);
                 break;
-
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        OttoAppConfig.getInstance().unregister(this);
     }
 }

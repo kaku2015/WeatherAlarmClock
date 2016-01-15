@@ -23,11 +23,14 @@ import android.widget.TextView;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.LocalAlbumActivity;
 import com.kaku.weac.adapter.ThemeAdapter;
+import com.kaku.weac.bean.Event.WallpaperEvent;
 import com.kaku.weac.bean.Theme;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.LruMemoryCache;
 import com.kaku.weac.util.MyUtil;
+import com.kaku.weac.util.OttoAppConfig;
+import com.squareup.otto.Produce;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -69,6 +72,7 @@ public class ThemeFragment extends BaseFragment implements View.OnClickListener 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        OttoAppConfig.getInstance().register(this);
         // 初始化主题壁纸适配器
         initAdapter();
         mCurrentWallpaper = mWallpaperName;
@@ -116,13 +120,17 @@ public class ThemeFragment extends BaseFragment implements View.OnClickListener 
                 edit.apply();
 
                 MyUtil.setBackgroundBlur(background, getActivity());
+                OttoAppConfig.getInstance().post(publishWallPaper());
 
-                // 返回并进行壁纸更新
-                getActivity().setResult(Activity.RESULT_OK, getActivity().getIntent());
             }
 
         });
         return view;
+    }
+
+    @Produce
+    public WallpaperEvent publishWallPaper() {
+        return new WallpaperEvent();
     }
 
     /**
@@ -192,5 +200,11 @@ public class ThemeFragment extends BaseFragment implements View.OnClickListener 
                 getActivity().overridePendingTransition(R.anim.zoomin, 0);
                 break;
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+//        OttoAppConfig.getInstance().unregister(this);
     }
 }

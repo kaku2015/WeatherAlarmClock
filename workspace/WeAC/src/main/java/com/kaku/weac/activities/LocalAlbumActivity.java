@@ -95,8 +95,8 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
                 extras.putParcelableArrayList(ALBUM_PATH, mLocalAlbumAdapter.getItem(position)
                         .bucketList);
                 extras.putString(ALBUM_NAME, mLocalAlbumAdapter.getItem(position).bucketName);
-                readyGoForResult(LocalAlbumDetailActivity.class,
-                        REQUEST_LOCAL_ALBUM_DETAIL, extras, TransitionModel.NONE);
+                myStartActivityForResult(LocalAlbumDetailActivity.class,
+                        REQUEST_LOCAL_ALBUM_DETAIL, extras, TransitionModel.DEFAULT);
             }
         });
     }

@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0 2015/8/29
  */
 public class HttpUtil {
+    private static OkHttpClient sOkHttpClient;
 
     /**
      * 发送http请求
@@ -26,7 +27,8 @@ public class HttpUtil {
      * @param cityName 城市名
      * @param listener 响应监听
      */
-    public static void sendHttpRequest(final String address, final String cityName, final HttpCallbackListener listener) {
+    public static void sendHttpRequest(final String address, final String cityName, final
+    HttpCallbackListener listener) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -35,16 +37,19 @@ public class HttpUtil {
                 try {
                     String address1;
                     if (address == null) {
-                        address1 = "http://wthrcdn.etouch.cn/WeatherApi?city=" + URLEncoder.encode(cityName, "UTF-8");
+                        address1 = "http://wthrcdn.etouch.cn/WeatherApi?city=" + URLEncoder
+                                .encode(cityName, "UTF-8");
                     } else {
                         address1 = address;
                     }
-                    OkHttpClient client = new OkHttpClient();
-                    client.setReadTimeout(6000, TimeUnit.MILLISECONDS);
-                    client.setConnectTimeout(6000, TimeUnit.MILLISECONDS);
-                    client.setWriteTimeout(6000, TimeUnit.MILLISECONDS);
+                    if (sOkHttpClient == null) {
+                        sOkHttpClient = new OkHttpClient();
+                    }
+                    sOkHttpClient.setReadTimeout(6000, TimeUnit.MILLISECONDS);
+                    sOkHttpClient.setConnectTimeout(6000, TimeUnit.MILLISECONDS);
+                    sOkHttpClient.setWriteTimeout(6000, TimeUnit.MILLISECONDS);
                     Request request = new Request.Builder().url(address1).build();
-                    Response response = client.newCall(request).execute();
+                    Response response = sOkHttpClient.newCall(request).execute();
                     String result = response.body().string();
                     // 访问：【http://www.weather.com.cn/data/list3/cityXXX.xml】的时候，
                     // 如果城市代码错误会继续访问一些无关的东西
@@ -92,7 +97,8 @@ public class HttpUtil {
 /*
                     File file = new File(Environment.getExternalStorageDirectory()
                             .getAbsolutePath() + "/WeaAlarmClock/test/" +
-                            new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date())
+                            new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+                            .format(new Date())
                             + ".txt");
                     if (!file.exists()){
                         file.createNewFile();

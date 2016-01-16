@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.kaku.weac.R;
 import com.kaku.weac.bean.ImageBucket;
-import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.ImageLoaderHelper;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -34,7 +33,7 @@ public class LocalAlbumAdapter extends ArrayAdapter<ImageBucket> {
         super(context, 0, localAlbumList);
         mContext = context;
         ImageLoader.getInstance().init(ImageLoaderHelper.getInstance(mContext)
-                .getImageLoaderConfiguration(WeacConstants.IMAGE_LOADER_CACHE_PATH));
+                .getImageLoaderConfiguration());
 
     }
 

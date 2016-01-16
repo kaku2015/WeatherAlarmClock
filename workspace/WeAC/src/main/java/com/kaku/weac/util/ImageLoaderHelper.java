@@ -5,7 +5,6 @@ package com.kaku.weac.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.text.TextUtils;
 
 import com.kaku.weac.R;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
@@ -105,13 +104,13 @@ public class ImageLoaderHelper {
                 .build();
     }*/
 
-    public ImageLoaderConfiguration getImageLoaderConfiguration(String filePath) {
+    public ImageLoaderConfiguration getImageLoaderConfiguration() {
         File cacheDir;
-        if (!TextUtils.isEmpty(filePath)) {
-            cacheDir = StorageUtils.getOwnCacheDirectory(mContext, filePath);
-        } else {
-            cacheDir = StorageUtils.getCacheDirectory(mContext);
-        }
+//        if (!TextUtils.isEmpty(filePath)) {
+//            cacheDir = StorageUtils.getOwnCacheDirectory(mContext, filePath);
+//        } else {
+        cacheDir = StorageUtils.getCacheDirectory(mContext);
+//        }
 
         ImageLoaderConfiguration.Builder builder = new ImageLoaderConfiguration.Builder(mContext);
         builder.denyCacheImageMultipleSizesInMemory();

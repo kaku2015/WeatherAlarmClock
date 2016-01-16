@@ -32,6 +32,7 @@ import java.util.List;
 public class LocalAlbumActivity extends BaseActivity implements View.OnClickListener {
 
     private static final int REQUEST_LOCAL_ALBUM_DETAIL = 1;
+    private static final int REQUEST_IMAGE_CAPTURE = 2;
 
     public static final String ALBUM_PATH = "album_path";
     public static final String ALBUM_NAME = "album_name";

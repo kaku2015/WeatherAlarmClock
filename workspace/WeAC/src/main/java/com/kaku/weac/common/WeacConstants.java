@@ -185,7 +185,12 @@ public class WeacConstants {
     /**
      * 图片缓存地址
      */
-    public static final String IMAGE_LOADER_CACHE_PATH = "/WeaAlarmClock/Images/";
+    public static final String IMAGE_LOADER_CACHE_PATH = "/WeaAlarmClock/Images";
+
+    /**
+     * 自定义壁纸保存文件夹
+     */
+    public static final String DIY_WALLPAPER_PATH = "/WeaAlarmClock/wallpaper";
 
 
 }

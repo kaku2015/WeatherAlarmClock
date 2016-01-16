@@ -14,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.os.Environment;
 import android.os.SystemClock;
 import android.os.Vibrator;
 import android.renderscript.Allocation;
@@ -29,6 +30,7 @@ import com.kaku.weac.bean.AlarmClock;
 import com.kaku.weac.broadcast.AlarmClockBroadcast;
 import com.kaku.weac.common.WeacConstants;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 import java.util.Calendar;
@@ -86,7 +88,8 @@ public class MyUtil {
         vg.setBackgroundResource(getWallPaper(activity));
         // 如果版本在4.4以上
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            int resourceId = activity.getResources().getIdentifier("status_bar_height", "dimen", "android");
+            int resourceId = activity.getResources().getIdentifier("status_bar_height", "dimen",
+                    "android");
             if (resourceId <= 0) {
                 return;
             }
@@ -111,7 +114,8 @@ public class MyUtil {
         vg.setBackground(getWallPaperDrawable(activity));
         // 如果版本在4.4以上
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            int resourceId = activity.getResources().getIdentifier("status_bar_height", "dimen", "android");
+            int resourceId = activity.getResources().getIdentifier("status_bar_height", "dimen",
+                    "android");
             if (resourceId <= 0) {
                 return;
             }
@@ -531,7 +535,8 @@ public class MyUtil {
                 stackpointer = radius;
                 for (y = 0; y < h; y++) {
                     // Preserve alpha channel: ( 0xff000000 & pix[yi] )
-                    pix[yi] = (0xff000000 & pix[yi]) | (dv[rsum] << 16) | (dv[gsum] << 8) | dv[bsum];
+                    pix[yi] = (0xff000000 & pix[yi]) | (dv[rsum] << 16) | (dv[gsum] << 8) |
+                            dv[bsum];
 
                     rsum -= routsum;
                     gsum -= goutsum;
@@ -593,7 +598,8 @@ public class MyUtil {
     public static Bitmap blurBitmap(Context context, Bitmap sentBitmap, int radius) {
         Bitmap bitmap = sentBitmap.copy(sentBitmap.getConfig(), true);
         final RenderScript rs = RenderScript.create(context);
-        final Allocation input = Allocation.createFromBitmap(rs, sentBitmap, Allocation.MipmapControl.MIPMAP_NONE,
+        final Allocation input = Allocation.createFromBitmap(rs, sentBitmap, Allocation
+                        .MipmapControl.MIPMAP_NONE,
                 Allocation.USAGE_SCRIPT);
         final Allocation output = Allocation.createTyped(rs, input.getType());
         final ScriptIntrinsicBlur script = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
@@ -611,7 +617,8 @@ public class MyUtil {
      * @return 是否连接到网络
      */
     public static boolean isNetworkAvailable(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getApplicationContext()
+        ConnectivityManager connectivityManager = (ConnectivityManager) context
+                .getApplicationContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
 
         if (connectivityManager != null) {
@@ -758,7 +765,7 @@ public class MyUtil {
      * @param type2 夜间天气类型
      * @return 天气类型
      */
-    public static String getWeatherType(Context context,String type1, String type2) {
+    public static String getWeatherType(Context context, String type1, String type2) {
         // 白天和夜间类型相同
         if (type1.equals(type2)) {
             return type1;
@@ -881,7 +888,8 @@ public class MyUtil {
     }
 
     // 调用
-    // SpannableStringBuilder textString = TextUtilTools.highlight(item.getItemName(), KnowledgeActivity.searchKey);
+    // SpannableStringBuilder textString = TextUtilTools.highlight(item.getItemName(),
+    KnowledgeActivity.searchKey);
     // vHolder.tv_itemName_search.setText(textString);
 
     public static boolean isLetterDigitOrChinese(String str) {
@@ -918,4 +926,41 @@ public class MyUtil {
         return alpha.matches("[a-zA-Z]+");
     }*/
 
+    /**
+     * Returns specified directory. directory will be created on SD card by defined path if card
+     * is mounted. Else - Android defines files directory on device's
+     * files（/data/data/<application package>/files） system.
+     *
+     * @param context context
+     * @param path    file path (e.g.: "/AppDir/a.mp3", "/AppDir/files/images/a.jp")
+     * @return File {@link File directory}
+     */
+    public static File getFileDirectory(Context context, String path) {
+        File file = null;
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+            file = new File(Environment.getExternalStorageDirectory(), path);
+            if (!file.getParentFile().exists()) {
+                if (!file.getParentFile().mkdirs()) {
+                    file = null;
+                }
+            }
+        }
+        if (file == null) {
+            // 使用内部缓存[MediaStore.EXTRA_OUTPUT ("output")]是无法正确写入裁切后的图片的。
+            // 系统是用全局的ContentResolver来做这个过程的文件io操作，app内部的存储被忽略。（猜测）
+            file = new File(context.getFilesDir(), path);
+        }
+        return file;
+    }
+
+    /**
+     * Returns directory absolutePath.
+     *
+     * @param context context
+     * @param path    file path (e.g.: "/AppDir/a.mp3", "/AppDir/files/images/a.jpg")
+     * @return absolutePath.
+     */
+    public static String getFilePath(Context context, String path) {
+        return getFileDirectory(context, path).getAbsolutePath();
+    }
 }

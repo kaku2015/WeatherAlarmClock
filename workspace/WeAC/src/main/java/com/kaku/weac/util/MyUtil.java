@@ -13,10 +13,12 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.SystemClock;
 import android.os.Vibrator;
+import android.provider.MediaStore;
 import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
@@ -31,6 +33,8 @@ import com.kaku.weac.broadcast.AlarmClockBroadcast;
 import com.kaku.weac.common.WeacConstants;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 import java.util.Calendar;
@@ -49,33 +53,26 @@ public class MyUtil {
     private static final String LOG_TAG = "MyUtil";
 
     /**
-     * 取得壁纸资源ID
+     * 保存壁纸信息
      *
-     * @param context context
-     * @return 壁纸id
+     * @param context  context
+     * @param saveType 保存类型：WeacConstants.WALLPAPER_NAME;WeacConstants.WALLPAPER_PATH
+     * @param value    value
      */
-    public static int getWallPaper(Context context) {
-        // 取得主题背景配置信息
-        SharedPreferences share = context.getSharedPreferences(WeacConstants.EXTRA_WEAC_SHARE,
-                Activity.MODE_PRIVATE);
-        String wallpaperName = share.getString(WeacConstants.WALLPAPER_NAME,
-                context.getString(R.string.default_wallpaper_name));
-
-//        int resId = context.getApplicationContext().getResources().getIdentifier(
-//                wallpaperName, "drawable", context.getPackageName());
-//        return resId;
-
-        Class drawable = R.drawable.class;
-        int resId;
-        try {
-            Field field = drawable.getField(wallpaperName);
-            resId = field.getInt(field.getName());
-        } catch (Exception e) {
-            resId = R.drawable.wallpaper_0;
-            LogUtil.e(LOG_TAG, "getWallPaper(Context context): " + e.toString());
+    public static void saveWallpaper(Context context, String saveType, String value) {
+        SharedPreferences share = context.getSharedPreferences(
+                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor edit = share.edit();
+        switch (saveType) {
+            case WeacConstants.WALLPAPER_NAME:
+                edit.putString(WeacConstants.WALLPAPER_PATH, null);
+                break;
+            case WeacConstants.WALLPAPER_PATH:
+                edit.putString(WeacConstants.WALLPAPER_NAME, null);
+                break;
         }
-        return resId;
-
+        edit.putString(saveType, value);
+        edit.apply();
     }
 
     /**
@@ -85,7 +82,25 @@ public class MyUtil {
      * @param activity activity
      */
     public static void setBackground(ViewGroup vg, Activity activity) {
-        vg.setBackgroundResource(getWallPaper(activity));
+        // 取得主题背景配置信息
+        SharedPreferences share = activity.getSharedPreferences(WeacConstants.EXTRA_WEAC_SHARE,
+                Activity.MODE_PRIVATE);
+        String value = share.getString(WeacConstants.WALLPAPER_PATH, null);
+        // 默认壁纸为自定义
+        if (value != null) {
+            // 自定义壁纸
+            Drawable drawable1 = Drawable.createFromPath(value);
+            // 文件没有被删除
+            if (drawable1 != null) {
+                vg.setBackground(drawable1);
+            } else {
+                setWallpaper(vg, activity, share);
+            }
+        } else {
+            setWallpaper(vg, activity, share);
+
+        }
+
         // 如果版本在4.4以上
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             int resourceId = activity.getResources().getIdentifier("status_bar_height", "dimen",
@@ -104,6 +119,29 @@ public class MyUtil {
         }
     }
 
+    private static void setWallpaper(ViewGroup vg, Activity activity, SharedPreferences share) {
+        int resId = getResId(activity, share);
+        vg.setBackgroundResource(resId);
+    }
+
+    private static int getResId(Context context, SharedPreferences share) {
+        String value = share.getString(WeacConstants.WALLPAPER_NAME, context.getString(R
+                .string.default_wallpaper_name));
+//        int resId = context.getApplicationContext().getResources().getIdentifier(
+//                value, "drawable", context.getPackageName());
+
+        Class drawable = R.drawable.class;
+        int resId;
+        try {
+            Field field = drawable.getField(value);
+            resId = field.getInt(field.getName());
+        } catch (Exception e) {
+            resId = R.drawable.wallpaper_0;
+            LogUtil.e(LOG_TAG, "setWallPaper(Context context): " + e.toString());
+        }
+        return resId;
+    }
+
     /**
      * 设置模糊壁纸
      *
@@ -111,7 +149,7 @@ public class MyUtil {
      * @param activity activity
      */
     public static void setBackgroundBlur(ViewGroup vg, Activity activity) {
-        vg.setBackground(getWallPaperDrawable(activity));
+        vg.setBackground(getWallPaperBlurDrawable(activity));
         // 如果版本在4.4以上
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             int resourceId = activity.getResources().getIdentifier("status_bar_height", "dimen",
@@ -129,259 +167,70 @@ public class MyUtil {
     }
 
     /**
-     * 开启闹钟
-     *
-     * @param context    context
-     * @param alarmClock 闹钟实例
-     */
-    @TargetApi(19)
-    public static void startAlarmClock(Context context, AlarmClock alarmClock) {
-        Intent intent = new Intent(context, AlarmClockBroadcast.class);
-        intent.putExtra(WeacConstants.ALARM_CLOCK, alarmClock);
-        // FLAG_UPDATE_CURRENT：如果PendingIntent已经存在，保留它并且只替换它的extra数据。
-        // FLAG_CANCEL_CURRENT：如果PendingIntent已经存在，那么当前的PendingIntent会取消掉，然后产生一个新的PendingIntent。
-        PendingIntent pi = PendingIntent.getBroadcast(context,
-                alarmClock.getAlarmClockCode(), intent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) context
-                .getSystemService(Context.ALARM_SERVICE);
-
-        // 取得下次响铃时间
-        long nextTime = calculateNextTime(alarmClock.getHour(),
-                alarmClock.getMinute(), alarmClock.getWeeks());
-        // 设置闹钟
-        // 当前版本为19（4.4）或以上使用精准闹钟
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, nextTime, pi);
-        } else {
-            alarmManager.set(AlarmManager.RTC_WAKEUP, nextTime, pi);
-        }
-
-    }
-
-    /**
-     * 取消闹钟
-     *
-     * @param context        context
-     * @param alarmClockCode 闹钟启动code
-     */
-    public static void cancelAlarmClock(Context context, int alarmClockCode) {
-        Intent intent = new Intent(context, AlarmClockBroadcast.class);
-        PendingIntent pi = PendingIntent.getBroadcast(context, alarmClockCode,
-                intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager am = (AlarmManager) context
-                .getSystemService(Activity.ALARM_SERVICE);
-        am.cancel(pi);
-    }
-
-    /**
-     * 开启倒计时
-     *
-     * @param context    context
-     * @param timeRemain 剩余时间
-     */
-    public static void startAlarmTimer(Context context, long timeRemain) {
-        Intent intent = new Intent(context, TimerOnTimeActivity.class);
-        PendingIntent pi = PendingIntent.getActivity(context,
-                1000, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) context
-                .getSystemService(Context.ALARM_SERVICE);
-        long countdownTime = timeRemain + SystemClock.elapsedRealtime();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            alarmManager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, countdownTime, pi);
-        } else {
-            alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, countdownTime, pi);
-        }
-    }
-
-    /**
-     * 取得下次响铃时间
-     *
-     * @param hour   小时
-     * @param minute 分钟
-     * @param weeks  周
-     * @return 下次响铃时间
-     */
-    public static long calculateNextTime(int hour, int minute, String weeks) {
-        // 当前系统时间
-        long now = System.currentTimeMillis();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(now);
-        calendar.set(Calendar.HOUR_OF_DAY, hour);
-        calendar.set(Calendar.MINUTE, minute);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        // 下次响铃时间
-        long nextTime = calendar.getTimeInMillis();
-        // 当单次响铃时
-        if (weeks == null) {
-            // 当设置时间大于系统时间时
-            if (nextTime > now) {
-                return nextTime;
-            } else {
-                // 设置的时间加一天
-                calendar.add(Calendar.DAY_OF_MONTH, 1);
-                nextTime = calendar.getTimeInMillis();
-                return nextTime;
-            }
-        } else {
-            nextTime = 0;
-            // 临时比较用响铃时间
-            long tempTime;
-            // 取得响铃重复周期
-            final String[] weeksValue = weeks.split(",");
-            for (String aWeeksValue : weeksValue) {
-                int week = Integer.parseInt(aWeeksValue);
-                // 设置重复的周
-                calendar.set(Calendar.DAY_OF_WEEK, week);
-                tempTime = calendar.getTimeInMillis();
-                // 当设置时间小于等于当前系统时间时
-                if (tempTime <= now) {
-                    // 设置时间加7天
-                    tempTime += AlarmManager.INTERVAL_DAY * 7;
-                }
-
-                if (nextTime == 0) {
-                    nextTime = tempTime;
-                } else {
-                    // 比较取得最小时间为下次响铃时间
-                    nextTime = Math.min(tempTime, nextTime);
-                }
-
-            }
-
-            return nextTime;
-        }
-    }
-
-    /**
-     * 转换文件大小
-     *
-     * @param fileLength file
-     * @return 格式化后的大小
-     */
-    public static String FormatFileSize(long fileLength) {
-        DecimalFormat df = new DecimalFormat("#.00");
-        String fileSizeString;
-        if (fileLength < 1024) {
-            fileSizeString = df.format((double) fileLength) + "B";
-        } else if (fileLength < 1048576) {
-            fileSizeString = df.format((double) fileLength / 1024) + "KB";
-        } else if (fileLength < 1073741824) {
-            fileSizeString = df.format((double) fileLength / 1048576) + "MB";
-        } else {
-            fileSizeString = df.format((double) fileLength / 1073741824) + "G";
-        }
-        return fileSizeString;
-    }
-
-    /***
-     * 转换文件时长
-     *
-     * @param ms 毫秒数
-     * @return mm:ss
-     */
-    public static String FormatFileDuration(int ms) {
-        // 单位秒
-        int ss = 1000;
-        // 单位分
-        int mm = ss * 60;
-
-        // 剩余分钟
-        int remainMinute = ms / mm;
-        // 剩余秒
-        int remainSecond = (ms - remainMinute * mm) / ss;
-
-        return addZero(remainMinute) + ":"
-                + addZero(remainSecond);
-
-    }
-
-    /**
-     * 格式化时间
-     *
-     * @param hour   小时
-     * @param minute 分钟
-     * @return 格式化后的时间:[xx:xx]
-     */
-    public static String formatTime(int hour, int minute) {
-        return addZero(hour) + ":" + addZero(minute);
-    }
-
-    /**
-     * 时间补零
-     *
-     * @param time 需要补零的时间
-     * @return 补零后的时间
-     */
-    public static String addZero(int time) {
-        if (String.valueOf(time).length() == 1) {
-            return "0" + time;
-        }
-
-        return String.valueOf(time);
-    }
-
-    /**
-     * 振动单次100毫秒
-     *
-     * @param context context
-     */
-    public static void vibrate(Context context) {
-        Vibrator vibrator = (Vibrator) context
-                .getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(100);
-    }
-
-    /**
-     * 去掉文件扩展名
-     *
-     * @param fileName 文件名
-     * @return 没有扩展名的文件名
-     */
-    public static String removeEx(String fileName) {
-        if ((fileName != null) && (fileName.length() > 0)) {
-            int dot = fileName.lastIndexOf('.');
-            if ((dot > -1) && (dot < fileName.length())) {
-                return fileName.substring(0, dot);
-            }
-        }
-        return fileName;
-    }
-
-
-    /**
      * 取得模糊处理后的壁纸资源Drawable
      *
      * @param context context
      * @return 壁纸资源 Drawable
      */
-    public static Drawable getWallPaperDrawable(Context context) {
+    public static Drawable getWallPaperBlurDrawable(Context context) {
+        Bitmap bitmap;
+
         // 第一次解析将inJustDecodeBounds设置为true，来获取图片大小
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
-        int resId = MyUtil.getWallPaper(context);
-        // 取得源图片的参数options
+
+        // 取得主题背景配置信息
+        SharedPreferences share = context.getSharedPreferences(WeacConstants.EXTRA_WEAC_SHARE,
+                Activity.MODE_PRIVATE);
+        String value = share.getString(WeacConstants.WALLPAPER_PATH, null);
+        // 默认壁纸为自定义
+        if (value != null) {
+            try {
+                BitmapFactory.decodeStream(new FileInputStream(new File(value)), null, options);
+                // 设置图片模糊度为20
+                options.inSampleSize = 20;
+                options.inJustDecodeBounds = false;
+                // 使用设置的inSampleSize值再次解析图片
+                bitmap = BitmapFactory.decodeStream(new FileInputStream(new File(value)),
+                        null, options);
+                bitmap = fastBlur(context, 0, value, bitmap, 20);
+            } catch (FileNotFoundException e) {
+                LogUtil.e(LOG_TAG, "getWallPaperBlurDrawable(Context context): " + e.toString());
+                bitmap = setWallpaperBlur(context, options, share);
+            }
+        } else {
+            bitmap = setWallpaperBlur(context, options, share);
+        }
+
+        // 返回经过毛玻璃模糊度20处理后的Bitmap
+        return new BitmapDrawable(context.getResources(), bitmap);
+    }
+
+    private static Bitmap setWallpaperBlur(Context context, BitmapFactory.Options options, SharedPreferences share) {
+        int resId = getResId(context, share);
         BitmapFactory.decodeResource(context.getResources(), resId, options);
         // 设置图片模糊度为20
         options.inSampleSize = 20;
         options.inJustDecodeBounds = false;
         // 使用设置的inSampleSize值再次解析图片
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resId, options);
-        // 返回经过毛玻璃模糊度20处理后的Bitmap
-        return new BitmapDrawable(context.getResources(), fastBlur(context, resId, bitmap, 20));
+        bitmap = fastBlur(context, resId, null, bitmap, 20);
+        return bitmap;
     }
 
     /**
      * 毛玻璃效果
      *
+     * @param context    context
+     * @param resId      图片资源id
+     * @param filePath   自定义壁纸path
      * @param sentBitmap bitmap
      * @param radius     模糊半径：指每个像素点周围模糊的半径，半径越大，
      *                   模糊程度约高，模糊效果越明显，同时，模糊计算耗费时间越长。
-     * @param resId      图片资源id
      * @return 模糊处理后的bitmap
      */
-    public static Bitmap fastBlur(Context context, int resId, Bitmap sentBitmap, int radius) {
+    private static Bitmap fastBlur(Context context, int resId, String filePath, Bitmap sentBitmap,
+                                   int radius) {
         try {
             Bitmap bitmap = sentBitmap.copy(sentBitmap.getConfig(), true);
 
@@ -589,13 +438,18 @@ public class MyUtil {
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
                 return blurBitmap(context, sentBitmap, radius);
             } else {
-                return BitmapFactory.decodeResource(context.getResources(), resId);
+                // TODO : 天气模糊背景返回透明色
+                if (filePath == null) {
+                    return BitmapFactory.decodeResource(context.getResources(), resId);
+                } else {
+                    return BitmapFactory.decodeFile(filePath);
+                }
             }
         }
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public static Bitmap blurBitmap(Context context, Bitmap sentBitmap, int radius) {
+    private static Bitmap blurBitmap(Context context, Bitmap sentBitmap, int radius) {
         Bitmap bitmap = sentBitmap.copy(sentBitmap.getConfig(), true);
         final RenderScript rs = RenderScript.create(context);
         final Allocation input = Allocation.createFromBitmap(rs, sentBitmap, Allocation
@@ -608,6 +462,228 @@ public class MyUtil {
         script.forEach(output);
         output.copyTo(bitmap);
         return bitmap;
+    }
+
+    /**
+     * 开启闹钟
+     *
+     * @param context    context
+     * @param alarmClock 闹钟实例
+     */
+    @TargetApi(19)
+    public static void startAlarmClock(Context context, AlarmClock alarmClock) {
+        Intent intent = new Intent(context, AlarmClockBroadcast.class);
+        intent.putExtra(WeacConstants.ALARM_CLOCK, alarmClock);
+        // FLAG_UPDATE_CURRENT：如果PendingIntent已经存在，保留它并且只替换它的extra数据。
+        // FLAG_CANCEL_CURRENT：如果PendingIntent已经存在，那么当前的PendingIntent会取消掉，然后产生一个新的PendingIntent。
+        PendingIntent pi = PendingIntent.getBroadcast(context,
+                alarmClock.getAlarmClockCode(), intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) context
+                .getSystemService(Context.ALARM_SERVICE);
+
+        // 取得下次响铃时间
+        long nextTime = calculateNextTime(alarmClock.getHour(),
+                alarmClock.getMinute(), alarmClock.getWeeks());
+        // 设置闹钟
+        // 当前版本为19（4.4）或以上使用精准闹钟
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, nextTime, pi);
+        } else {
+            alarmManager.set(AlarmManager.RTC_WAKEUP, nextTime, pi);
+        }
+
+    }
+
+    /**
+     * 取消闹钟
+     *
+     * @param context        context
+     * @param alarmClockCode 闹钟启动code
+     */
+    public static void cancelAlarmClock(Context context, int alarmClockCode) {
+        Intent intent = new Intent(context, AlarmClockBroadcast.class);
+        PendingIntent pi = PendingIntent.getBroadcast(context, alarmClockCode,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager am = (AlarmManager) context
+                .getSystemService(Activity.ALARM_SERVICE);
+        am.cancel(pi);
+    }
+
+    /**
+     * 开启倒计时
+     *
+     * @param context    context
+     * @param timeRemain 剩余时间
+     */
+    public static void startAlarmTimer(Context context, long timeRemain) {
+        Intent intent = new Intent(context, TimerOnTimeActivity.class);
+        PendingIntent pi = PendingIntent.getActivity(context,
+                1000, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) context
+                .getSystemService(Context.ALARM_SERVICE);
+        long countdownTime = timeRemain + SystemClock.elapsedRealtime();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            alarmManager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, countdownTime, pi);
+        } else {
+            alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, countdownTime, pi);
+        }
+    }
+
+    /**
+     * 取得下次响铃时间
+     *
+     * @param hour   小时
+     * @param minute 分钟
+     * @param weeks  周
+     * @return 下次响铃时间
+     */
+    public static long calculateNextTime(int hour, int minute, String weeks) {
+        // 当前系统时间
+        long now = System.currentTimeMillis();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(now);
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        // 下次响铃时间
+        long nextTime = calendar.getTimeInMillis();
+        // 当单次响铃时
+        if (weeks == null) {
+            // 当设置时间大于系统时间时
+            if (nextTime > now) {
+                return nextTime;
+            } else {
+                // 设置的时间加一天
+                calendar.add(Calendar.DAY_OF_MONTH, 1);
+                nextTime = calendar.getTimeInMillis();
+                return nextTime;
+            }
+        } else {
+            nextTime = 0;
+            // 临时比较用响铃时间
+            long tempTime;
+            // 取得响铃重复周期
+            final String[] weeksValue = weeks.split(",");
+            for (String aWeeksValue : weeksValue) {
+                int week = Integer.parseInt(aWeeksValue);
+                // 设置重复的周
+                calendar.set(Calendar.DAY_OF_WEEK, week);
+                tempTime = calendar.getTimeInMillis();
+                // 当设置时间小于等于当前系统时间时
+                if (tempTime <= now) {
+                    // 设置时间加7天
+                    tempTime += AlarmManager.INTERVAL_DAY * 7;
+                }
+
+                if (nextTime == 0) {
+                    nextTime = tempTime;
+                } else {
+                    // 比较取得最小时间为下次响铃时间
+                    nextTime = Math.min(tempTime, nextTime);
+                }
+
+            }
+
+            return nextTime;
+        }
+    }
+
+    /**
+     * 转换文件大小
+     *
+     * @param fileLength file
+     * @return 格式化后的大小
+     */
+    public static String FormatFileSize(long fileLength) {
+        DecimalFormat df = new DecimalFormat("#.00");
+        String fileSizeString;
+        if (fileLength < 1024) {
+            fileSizeString = df.format((double) fileLength) + "B";
+        } else if (fileLength < 1048576) {
+            fileSizeString = df.format((double) fileLength / 1024) + "KB";
+        } else if (fileLength < 1073741824) {
+            fileSizeString = df.format((double) fileLength / 1048576) + "MB";
+        } else {
+            fileSizeString = df.format((double) fileLength / 1073741824) + "G";
+        }
+        return fileSizeString;
+    }
+
+    /***
+     * 转换文件时长
+     *
+     * @param ms 毫秒数
+     * @return mm:ss
+     */
+    public static String FormatFileDuration(int ms) {
+        // 单位秒
+        int ss = 1000;
+        // 单位分
+        int mm = ss * 60;
+
+        // 剩余分钟
+        int remainMinute = ms / mm;
+        // 剩余秒
+        int remainSecond = (ms - remainMinute * mm) / ss;
+
+        return addZero(remainMinute) + ":"
+                + addZero(remainSecond);
+
+    }
+
+    /**
+     * 格式化时间
+     *
+     * @param hour   小时
+     * @param minute 分钟
+     * @return 格式化后的时间:[xx:xx]
+     */
+    public static String formatTime(int hour, int minute) {
+        return addZero(hour) + ":" + addZero(minute);
+    }
+
+    /**
+     * 时间补零
+     *
+     * @param time 需要补零的时间
+     * @return 补零后的时间
+     */
+    public static String addZero(int time) {
+        if (String.valueOf(time).length() == 1) {
+            return "0" + time;
+        }
+
+        return String.valueOf(time);
+    }
+
+    /**
+     * 振动单次100毫秒
+     *
+     * @param context context
+     */
+    public static void vibrate(Context context) {
+        Vibrator vibrator = (Vibrator) context
+                .getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(100);
+    }
+
+
+    /**
+     * 去掉文件扩展名
+     *
+     * @param fileName 文件名
+     * @return 没有扩展名的文件名
+     */
+    public static String removeEx(String fileName) {
+        if ((fileName != null) && (fileName.length() > 0)) {
+            int dot = fileName.lastIndexOf('.');
+            if ((dot > -1) && (dot < fileName.length())) {
+                return fileName.substring(0, dot);
+            }
+        }
+        return fileName;
     }
 
     /**
@@ -962,5 +1038,40 @@ public class MyUtil {
      */
     public static String getFilePath(Context context, String path) {
         return getFileDirectory(context, path).getAbsolutePath();
+    }
+
+    /**
+     * set intent options
+     *
+     * @param context  context
+     * @param uri      image path uri
+     * @param filePath file path (e.g.: "/AppDir/a.mp3", "/AppDir/files/images/a.jpg")
+     * @return Intent
+     */
+    public static Intent getCropImageOptions(Context context, Uri uri, String filePath) {
+        int width = context.getResources().getDisplayMetrics().widthPixels;
+        int height = context.getResources().getDisplayMetrics().heightPixels;
+
+        Intent intent = new Intent();
+        intent.setAction("com.android.camera.action.CROP");
+        intent.setDataAndType(uri, "image/*");
+        intent.putExtra("crop", "true");
+        // 裁剪框比例
+        intent.putExtra("aspectX", width);
+        intent.putExtra("aspectY", height);
+        // 保存路径
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getFileDirectory
+                (context, filePath)));
+        // 是否去除面部检测
+        intent.putExtra("noFaceDetection", true);
+        // 是否保留比例
+        intent.putExtra("scale", true);
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+        // 裁剪区的宽高
+        intent.putExtra("outputX", width);
+        intent.putExtra("outputY", height);
+        // 是否将数据保留在Bitmap中返回
+        intent.putExtra("return-data", false);
+        return intent;
     }
 }

@@ -5,8 +5,6 @@ package com.kaku.weac.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -52,25 +50,28 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
 
     @Subscribe
     public void onWallpaperUpdate(WallpaperEvent wallpaperEvent) {
-        initWallpaper();
-    }
-
-    private void initWallpaper() {
         ViewGroup vg = (ViewGroup) getActivity().findViewById(
                 R.id.llyt_activity_main);
         // 更新壁纸
-        vg.setBackgroundResource(MyUtil.getWallPaper(getActivity()));
+        MyUtil.setBackground(vg, getActivity());
+    }
+
+/*    private void initWallpaper() {
+        ViewGroup vg = (ViewGroup) getActivity().findViewById(
+                R.id.llyt_activity_main);
+        // 更新壁纸
+        MyUtil.setBackground(vg, getActivity());
 
         ViewPager pager = (ViewPager) getActivity().findViewById(R.id.fragment_container);
         PagerAdapter f = pager.getAdapter();
         WeaFragment weaFragment = (WeaFragment) f.instantiateItem(pager, 1);
         // 更新天气高斯模糊背景
         if (weaFragment.mBlurDrawable != null && weaFragment.mBackGround != null) {
-            weaFragment.mBlurDrawable = MyUtil.getWallPaperDrawable(getActivity());
+            weaFragment.mBlurDrawable = MyUtil.getWallPaperBlurDrawable(getActivity());
             weaFragment.mBlurDrawable.setAlpha(weaFragment.mAlpha);
             weaFragment.mBackGround.setBackground(weaFragment.mBlurDrawable);
         }
-    }
+    }*/
 
     @Override
     public void onClick(View v) {

@@ -31,6 +31,7 @@ import com.kaku.weac.util.LruMemoryCache;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.OttoAppConfig;
 import com.squareup.otto.Produce;
+import com.squareup.otto.Subscribe;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -69,10 +70,12 @@ public class ThemeFragment extends BaseFragment implements View.OnClickListener 
      */
     private String mCurrentWallpaper;
 
+    private ViewGroup mBackground;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        OttoAppConfig.getInstance().register(this);
+        OttoAppConfig.getInstance().register(this);
         // 初始化主题壁纸适配器
         initAdapter();
         mCurrentWallpaper = mWallpaperName;
@@ -83,8 +86,8 @@ public class ThemeFragment extends BaseFragment implements View.OnClickListener 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fm_theme, container, false);
-        final ViewGroup background = (ViewGroup) view.findViewById(R.id.background);
-        MyUtil.setBackgroundBlur(background, getActivity());
+        mBackground = (ViewGroup) view.findViewById(R.id.background);
+        MyUtil.setBackgroundBlur(mBackground, getActivity());
 
         ImageView backBtn = (ImageView) view.findViewById(R.id.action_back);
         TextView customDefineBtn = (TextView) view.findViewById(R.id.custom_define_btn);
@@ -111,21 +114,21 @@ public class ThemeFragment extends BaseFragment implements View.OnClickListener 
                 // 更新适配器刷新GridView显示
                 mAdapter.notifyDataSetChanged();
 
-                // 与壁纸相关的存取信息
-                SharedPreferences share = getActivity().getSharedPreferences(
-                        WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
-                SharedPreferences.Editor edit = share.edit();
-                // 保存当前壁纸名称
-                edit.putString(WeacConstants.WALLPAPER_NAME, resName);
-                edit.apply();
+                MyUtil.saveWallpaper(getActivity(), WeacConstants.WALLPAPER_NAME, resName);
 
-                MyUtil.setBackgroundBlur(background, getActivity());
                 OttoAppConfig.getInstance().post(publishWallPaper());
 
             }
 
         });
         return view;
+    }
+
+    @Subscribe
+    public void onWallpaperUpdate(WallpaperEvent wallpaperEvent) {
+        if (mBackground != null) {
+            MyUtil.setBackgroundBlur(mBackground, getActivity());
+        }
     }
 
     @Produce
@@ -205,6 +208,6 @@ public class ThemeFragment extends BaseFragment implements View.OnClickListener 
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        OttoAppConfig.getInstance().unregister(this);
+        OttoAppConfig.getInstance().unregister(this);
     }
 }

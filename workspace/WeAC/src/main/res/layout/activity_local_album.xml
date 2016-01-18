@@ -19,6 +19,12 @@
             style="@style/action_title"
             android:text="@string/local_album"/>
 
+        <TextView
+            android:id="@+id/action_capture"
+            style="@style/action_tv"
+            android:layout_alignParentRight="true"
+            android:text="@string/capture"/>
+
     </RelativeLayout>
 
     <ListView

@@ -22,6 +22,11 @@ public class WeacConstants {
     public static final String WALLPAPER_NAME = "wallpaper_name";
 
     /**
+     * 保存的壁纸地址
+     */
+    public static final String WALLPAPER_PATH = "wallpaper_path";
+
+    /**
      * 保存的闹钟铃声音量
      */
     public static final String AlARM_VOLUME = "alarm_volume";
@@ -183,14 +188,9 @@ public class WeacConstants {
     public static final String RECORD_SAVE_PATH = "/WeaAlarmClock/audio/record";
 
     /**
-     * 图片缓存地址
-     */
-    public static final String IMAGE_LOADER_CACHE_PATH = "/WeaAlarmClock/Images";
-
-    /**
      * 自定义壁纸保存文件夹
      */
-    public static final String DIY_WALLPAPER_PATH = "/WeaAlarmClock/wallpaper";
+    public static final String DIY_WALLPAPER_PATH = "/WeaAlarmClock/wallpaper/default.jpg";
 
 
 }

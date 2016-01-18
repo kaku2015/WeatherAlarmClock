@@ -38,6 +38,7 @@ import com.kaku.weac.activities.CityManageActivity;
 import com.kaku.weac.activities.LifeIndexDetailActivity;
 import com.kaku.weac.activities.WeatherAlarmActivity;
 import com.kaku.weac.bean.CityManage;
+import com.kaku.weac.bean.Event.WallpaperEvent;
 import com.kaku.weac.bean.WeatherDaysForecast;
 import com.kaku.weac.bean.WeatherInfo;
 import com.kaku.weac.bean.WeatherLifeIndex;
@@ -46,9 +47,11 @@ import com.kaku.weac.db.WeatherDBOperate;
 import com.kaku.weac.util.HttpUtil;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
+import com.kaku.weac.util.OttoAppConfig;
 import com.kaku.weac.util.ToastUtil;
 import com.kaku.weac.util.WeatherUtil;
 import com.kaku.weac.view.LineChartViewDouble;
+import com.squareup.otto.Subscribe;
 
 import java.io.ByteArrayInputStream;
 import java.text.ParseException;
@@ -626,6 +629,19 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
      * 是否自动定位过
      */
     private boolean mIsLocated = false;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        OttoAppConfig.getInstance().register(this);
+    }
+
+    @Subscribe
+    public void onWallpaperUpdate(WallpaperEvent wallpaperEvent) {
+        mBlurDrawable = MyUtil.getWallPaperBlurDrawable(getActivity());
+        mBlurDrawable.setAlpha(mAlpha);
+        mBackGround.setBackground(mBlurDrawable);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -2013,7 +2029,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         lifeIndexAirCureRlyt.setOnClickListener(this);
 
         mDensity = getResources().getDisplayMetrics().density;
-        mBlurDrawable = MyUtil.getWallPaperDrawable(getActivity());
+        mBlurDrawable = MyUtil.getWallPaperBlurDrawable(getActivity());
         mBackGround = (LinearLayout) view.findViewById(R.id.wea_background);
 
         mPullRefreshScrollView = (PullToRefreshScrollView) view
@@ -2064,6 +2080,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
     @Override
     public void onDestroy() {
         super.onDestroy();
+        OttoAppConfig.getInstance().unregister(this);
         mAlpha = 0;
         if (mHandler != null) {
             mHandler.removeCallbacks(mRun);

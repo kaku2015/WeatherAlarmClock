@@ -638,9 +638,11 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
 
     @Subscribe
     public void onWallpaperUpdate(WallpaperEvent wallpaperEvent) {
-        mBlurDrawable = MyUtil.getWallPaperBlurDrawable(getActivity());
-        mBlurDrawable.setAlpha(mAlpha);
-        mBackGround.setBackground(mBlurDrawable);
+        if (mBackGround != null) {
+            mBlurDrawable = MyUtil.getWallPaperBlurDrawable(getActivity());
+            mBlurDrawable.setAlpha(mAlpha);
+            mBackGround.setBackground(mBlurDrawable);
+        }
     }
 
     @Override

@@ -162,6 +162,7 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
     @Subscribe
     public void finishMeEvent(FinishLocalAlbumActivityEvent event) {
         finish();
+        overridePendingTransition(0, 0);
     }
 
     @Override

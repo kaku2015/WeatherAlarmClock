@@ -94,6 +94,8 @@ public class MyUtil {
             if (drawable1 != null) {
                 vg.setBackground(drawable1);
             } else {
+                saveWallpaper(activity, WeacConstants.WALLPAPER_NAME, activity.getString(R
+                        .string.default_wallpaper_name));
                 setWallpaper(vg, activity, share);
             }
         } else {

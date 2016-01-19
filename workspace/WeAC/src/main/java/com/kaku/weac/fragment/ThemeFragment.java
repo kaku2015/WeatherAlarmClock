@@ -30,7 +30,6 @@ import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.LruMemoryCache;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.OttoAppConfig;
-import com.squareup.otto.Produce;
 import com.squareup.otto.Subscribe;
 
 import java.lang.reflect.Field;
@@ -114,9 +113,11 @@ public class ThemeFragment extends BaseFragment implements View.OnClickListener 
                 // 更新适配器刷新GridView显示
                 mAdapter.notifyDataSetChanged();
 
+                // 保存壁纸信息
                 MyUtil.saveWallpaper(getActivity(), WeacConstants.WALLPAPER_NAME, resName);
 
-                OttoAppConfig.getInstance().post(publishWallPaper());
+                // 发送更新应用自带壁纸事件
+                OttoAppConfig.getInstance().post(new WallpaperEvent(true));
 
             }
 
@@ -128,12 +129,12 @@ public class ThemeFragment extends BaseFragment implements View.OnClickListener 
     public void onWallpaperUpdate(WallpaperEvent wallpaperEvent) {
         if (mBackground != null) {
             MyUtil.setBackgroundBlur(mBackground, getActivity());
+            // 不是app自带壁纸
+            if (mAdapter != null && !wallpaperEvent.isAppWallpaper()) {
+                mAdapter.updateSelection("");
+                mAdapter.notifyDataSetChanged();
+            }
         }
-    }
-
-    @Produce
-    public WallpaperEvent publishWallPaper() {
-        return new WallpaperEvent();
     }
 
     /**
@@ -143,9 +144,15 @@ public class ThemeFragment extends BaseFragment implements View.OnClickListener 
         // 与主题壁纸相关的存取信息
         SharedPreferences share = getActivity().getSharedPreferences(
                 WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
-        // 取得使用中壁纸的位置
-        mWallpaperName = share.getString(WeacConstants.WALLPAPER_NAME,
-                getString(R.string.default_wallpaper_name));
+        String wallpaperPath = share.getString(WeacConstants.WALLPAPER_PATH, null);
+        // 当为自定义主题壁纸，不显示壁纸标记
+        if (wallpaperPath != null) {
+            mWallpaperName = "";
+        } else {
+            // 取得使用中壁纸的位置
+            mWallpaperName = share.getString(WeacConstants.WALLPAPER_NAME,
+                    getString(R.string.default_wallpaper_name));
+        }
         mList = new ArrayList<>();
         // 资源文件集合
         Field[] fields = R.drawable.class.getDeclaredFields();

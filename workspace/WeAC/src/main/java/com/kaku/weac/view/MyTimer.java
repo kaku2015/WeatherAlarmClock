@@ -795,6 +795,7 @@ public class MyTimer extends View {
                 }
             };
         } else {
+            mIsReset2 = false;
             startAnimation();
         }
     }

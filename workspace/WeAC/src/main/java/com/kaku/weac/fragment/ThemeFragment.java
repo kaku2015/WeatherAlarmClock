@@ -117,6 +117,7 @@ public class ThemeFragment extends BaseFragment implements View.OnClickListener 
                 MyUtil.saveWallpaper(getActivity(), WeacConstants.WALLPAPER_NAME, resName);
 
                 // 发送更新应用自带壁纸事件
+                // use @Subscribe then post when activity initialize
                 OttoAppConfig.getInstance().post(new WallpaperEvent(true));
 
             }

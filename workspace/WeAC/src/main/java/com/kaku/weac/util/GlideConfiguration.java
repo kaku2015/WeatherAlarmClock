@@ -1,7 +1,7 @@
-package com.kaku.weac.util;
 /*
  * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
  */
+package com.kaku.weac.util;
 
 import android.content.Context;
 

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.kaku.weac.R;
 import com.kaku.weac.bean.Theme;
 import com.kaku.weac.util.LogUtil;
@@ -116,7 +117,10 @@ public class ThemeAdapter extends ArrayAdapter<Theme> {
         }
         Theme theme = mList.get(position);
         // 设置壁纸图片
-        LoadBitmap(theme.getResId(), viewHolder.imageView);
+//        LoadBitmap(theme.getResId(), viewHolder.imageView);
+        Glide.with(mContext).load(theme.getResId()).centerCrop().
+                placeholder(R.color.default_image_background)
+                .into(viewHolder.imageView);
         // 当选中的主题名称与当前相同
         if (mWallpaperName.equals(theme.getResName())) {
             // 设置标记图标

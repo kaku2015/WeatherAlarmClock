@@ -2041,7 +2041,7 @@ containing a value of this type.
         public static final int indicator_bg_bottom=0x7f0200e2;
         public static final int indicator_bg_top=0x7f0200e3;
         public static final int minus=0x7f0200e4;
-        public static final int notification_template_icon_bg=0x7f020116;
+        public static final int notification_template_icon_bg=0x7f020120;
         public static final int number_0=0x7f0200e5;
         public static final int number_1=0x7f0200e6;
         public static final int number_2=0x7f0200e7;
@@ -2088,9 +2088,19 @@ containing a value of this type.
         public static final int wallpaper_0=0x7f020110;
         public static final int wallpaper_11=0x7f020111;
         public static final int wallpaper_2=0x7f020112;
-        public static final int wallpaper_28=0x7f020113;
-        public static final int wallpaper_29=0x7f020114;
-        public static final int wallpaper_30=0x7f020115;
+        public static final int wallpaper_20=0x7f020113;
+        public static final int wallpaper_21=0x7f020114;
+        public static final int wallpaper_22=0x7f020115;
+        public static final int wallpaper_23=0x7f020116;
+        public static final int wallpaper_24=0x7f020117;
+        public static final int wallpaper_25=0x7f020118;
+        public static final int wallpaper_26=0x7f020119;
+        public static final int wallpaper_28=0x7f02011a;
+        public static final int wallpaper_29=0x7f02011b;
+        public static final int wallpaper_30=0x7f02011c;
+        public static final int wallpaper_31=0x7f02011d;
+        public static final int wallpaper_32=0x7f02011e;
+        public static final int wallpaper_33=0x7f02011f;
     }
     public static final class id {
         public static final int __leak_canary_action=0x7f0e002e;

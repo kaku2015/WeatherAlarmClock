@@ -12,10 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.kaku.weac.R;
 import com.kaku.weac.bean.ImageBucket;
-import com.kaku.weac.util.ImageLoaderHelper;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -32,9 +31,6 @@ public class LocalAlbumAdapter extends ArrayAdapter<ImageBucket> {
     public LocalAlbumAdapter(Context context, List<ImageBucket> localAlbumList) {
         super(context, 0, localAlbumList);
         mContext = context;
-        ImageLoader.getInstance().init(ImageLoaderHelper.getInstance(mContext)
-                .getImageLoaderConfiguration());
-
     }
 
     @Override
@@ -54,9 +50,8 @@ public class LocalAlbumAdapter extends ArrayAdapter<ImageBucket> {
             // 图片path
             String imagePath = imageBucket.bucketList.get(0).getImagePath();
             if (!TextUtils.isEmpty(imagePath)) {
-                ImageLoader.getInstance().displayImage("file://" + imagePath, viewHolder
-                        .mAlbumThumbnailIv, ImageLoaderHelper.getInstance(mContext)
-                        .getDisplayOptions());
+                Glide.with(mContext).load("file://" + imagePath).
+                        placeholder(R.color.default_image_background).into(viewHolder.mAlbumThumbnailIv);
             }
 
             int count = imageBucket.count;

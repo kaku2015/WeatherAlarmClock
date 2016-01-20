@@ -162,6 +162,9 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="ObExIXC7RqG2ZXf0Ys2q0ttv" />
+        <meta-data
+            android:name="com.kaku.weac.util.GlideConfiguration"
+            android:value="GlideModule" />
 
         <receiver
             android:name="com.kaku.weac.test.AutoUpdateReceiver"

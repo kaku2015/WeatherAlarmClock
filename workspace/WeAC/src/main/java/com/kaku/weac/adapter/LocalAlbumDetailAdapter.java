@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.kaku.weac.R;
 import com.kaku.weac.bean.ImageItem;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -48,8 +48,8 @@ public class LocalAlbumDetailAdapter extends ArrayAdapter<ImageItem> {
         if (null != imageItem) {
             String imagePath = imageItem.getImagePath();
             if (!TextUtils.isEmpty(imagePath)) {
-                ImageLoader.getInstance().displayImage("file://" + imagePath,
-                        viewHolder.mPictureIv);
+                Glide.with(mContext).load("file://" + imagePath).
+                        placeholder(R.color.default_image_background).into(viewHolder.mPictureIv);
             }
         }
         return convertView;

@@ -159,8 +159,10 @@ public class LineChartViewDouble extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        // 设置控件高度，x轴集合
-        setHeightAndXAxis();
+        if (mHeight == 0) {
+            // 设置控件高度，x轴集合
+            setHeightAndXAxis();
+        }
         // 计算y轴集合数值
         computeYAxisValues();
         // 画白天折线图

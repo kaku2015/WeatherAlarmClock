@@ -3,8 +3,11 @@
  */
 package com.kaku.weac.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +20,7 @@ import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.OttoAppConfig;
 import com.squareup.otto.Subscribe;
+import com.xys.libzxing.zxing.activity.CaptureActivity;
 
 /**
  * 更多fragment
@@ -44,7 +48,9 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
         View view = inflater.inflate(R.layout.fm_more, container, false);
         // 变更主题
         ViewGroup themeBtn = (ViewGroup) view.findViewById(R.id.theme);
+        ViewGroup scanQRCodeBtn = (ViewGroup) view.findViewById(R.id.qr_code_scan);
         themeBtn.setOnClickListener(this);
+        scanQRCodeBtn.setOnClickListener(this);
         return view;
     }
 
@@ -84,6 +90,30 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
                 // 启动主题界面
                 startActivity(intent);
                 break;
+            case R.id.qr_code_scan:
+                if (MyUtil.isFastDoubleClick()) {
+                    return;
+                }
+                // 打开扫描界面扫描条形码或二维码
+                Intent openCameraIntent = new Intent(getActivity(), CaptureActivity.class);
+                startActivityForResult(openCameraIntent, 0);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            String scanResult = bundle.getString("result");
+            Log.d(LOG_TAG, "二维码扫描结果：" + scanResult);
+            Intent intent = new Intent("android.intent.action.VIEW");
+            intent.addCategory(Intent.CATEGORY_BROWSABLE);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Uri uri = Uri.parse(scanResult);
+            intent.setData(uri);
+            startActivity(intent);
         }
     }
 

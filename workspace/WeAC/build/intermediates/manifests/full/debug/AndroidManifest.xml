@@ -31,6 +31,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name="com.kaku.weac.LeakCanaryApplication"
@@ -124,6 +125,9 @@
             android:name="com.kaku.weac.activities.LocalAlbumDetailActivity"
             android:launchMode="singleTop"
             android:theme="@style/Transparent" />
+        <activity
+            android:name="com.kaku.weac.activities.QRcodeScanActivity"
+            android:launchMode="singleTop" />
 
         <receiver
             android:name="com.kaku.weac.broadcast.AlarmClockBroadcast"
@@ -169,6 +173,8 @@
         <receiver
             android:name="com.kaku.weac.test.AutoUpdateReceiver"
             android:process=":test" />
+
+        <activity android:name="com.xys.libzxing.zxing.activity.CaptureActivity" />
 
         <service
             android:name="com.squareup.leakcanary.internal.HeapAnalyzerService"

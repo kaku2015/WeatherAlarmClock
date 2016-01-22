@@ -10601,7 +10601,7 @@
     <item name="action_bar_spinner" type="id"/>
     <item name="action_menu_divider" type="id"/>
     <item name="action_menu_presenter" type="id"/>
-    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/workspace/zxing/unspecified/res/values/values.xml -->
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/ids.xml -->
     <eat-comment/>
     <item name="decode" type="id"/>
     <item name="decode_failed" type="id"/>
@@ -10614,7 +10614,7 @@
     <item name="home" type="id"/>
     <item name="progress_circular" type="id"/>
     <item name="progress_horizontal" type="id"/>
-    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/workspace/zxing/unspecified/res/values/values.xml -->
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/ids.xml -->
     <eat-comment/>
     <item name="quit" type="id"/>
     <item name="restart_preview" type="id"/>
@@ -10682,6 +10682,7 @@
     <string name="alarm">%1$s预警</string>
     <string name="alarm_clock">闹钟</string>
     <string name="alarm_title">%1$s%2$s预警</string>
+    <string name="album">相册</string>
     <string name="alter_time">修改时间：</string>
     <string name="amr">amr</string>
     <string name="app_name">天气闹钟</string>
@@ -10824,6 +10825,7 @@
     <string name="saturday">周六</string>
     <string name="save">保存</string>
     <string name="save_path">保存路径：</string>
+    <string name="scan_scan">扫一扫</string>
     <string name="scan_two_dimension_code">扫描二维码</string>
     <string name="scanning">正在扫描…</string>
     <string name="select_all">全选</string>
@@ -10895,12 +10897,12 @@
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
     <style name="Animation.AppCompat.Dialog" parent="Base.Animation.AppCompat.Dialog"/>
     <style name="Animation.AppCompat.DropDownUp" parent="Base.Animation.AppCompat.DropDownUp"/>
-    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/workspace/zxing/unspecified/res/values/values.xml -->
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles_scan_qr_code.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="@android:style/Theme.Black.NoTitleBar">
         <!--
             Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
+            res/values-vXX/styles_scan_qr_code.xml, while customizations related to
             backward-compatibility can go here.
 
         -->
@@ -12256,6 +12258,20 @@
         <item name="android:drawablePadding">5dp</item>
         <item name="android:textColor">@color/white_trans90</item>
         <item name="android:textSize">18sp</item>
+    </style>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles_scan_qr_code.xml -->
+    <eat-comment/>
+    <style name="capture_padding_iv_horizontal">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/black_trans30</item>
+    </style>
+    <style name="capture_padding_iv_vertical">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:background">@color/black_trans30</item>
     </style>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles_new_alarm_clock.xml -->
     <eat-comment/>

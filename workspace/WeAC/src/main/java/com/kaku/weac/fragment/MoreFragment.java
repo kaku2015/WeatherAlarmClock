@@ -19,8 +19,8 @@ import com.kaku.weac.bean.Event.WallpaperEvent;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.OttoAppConfig;
+import com.kaku.weac.zxing.activity.CaptureActivity;
 import com.squareup.otto.Subscribe;
-import com.xys.libzxing.zxing.activity.CaptureActivity;
 
 /**
  * 更多fragment

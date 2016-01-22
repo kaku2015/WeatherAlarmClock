@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/transparent"
+             android:orientation="vertical">
+
+    <SurfaceView
+        android:id="@+id/capture_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            style="@style/action_llyt"
+            android:background="@color/black_trans70"
+            >
+
+            <ImageView
+                android:id="@+id/action_back"
+                style="@style/action_icon"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/ic_action_previous_item"/>
+
+            <TextView
+                style="@style/action_title"
+                android:text="@string/scan_scan"/>
+
+            <TextView
+                android:id="@+id/action_capture"
+                style="@style/action_tv"
+                android:layout_alignParentRight="true"
+                android:text="@string/album"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/capture_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/capture_mask_top"
+                style="@style/capture_padding_iv_vertical"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/capture_mask_left"
+                    style="@style/capture_padding_iv_horizontal"/>
+
+                <LinearLayout
+                    android:id="@+id/capture_crop_view"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/qr_code_bg">
+
+                    <ImageView
+                        android:id="@+id/capture_scan_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/scan_line"/>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/capture_mask_right"
+                    style="@style/capture_padding_iv_horizontal"/>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/capture_mask_bottom"
+                style="@style/capture_padding_iv_vertical"/>
+
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>

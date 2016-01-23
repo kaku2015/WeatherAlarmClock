@@ -5,9 +5,7 @@ package com.kaku.weac.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,7 +14,6 @@ import android.view.ViewGroup;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.ThemeActivity;
 import com.kaku.weac.bean.Event.WallpaperEvent;
-import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.OttoAppConfig;
 import com.kaku.weac.zxing.activity.CaptureActivity;
@@ -43,14 +40,13 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        LogUtil.i(LOG_TAG, "MoreFragmet:  onCreateView");
-
         View view = inflater.inflate(R.layout.fm_more, container, false);
         // 变更主题
         ViewGroup themeBtn = (ViewGroup) view.findViewById(R.id.theme);
-        ViewGroup scanQRCodeBtn = (ViewGroup) view.findViewById(R.id.qr_code_scan);
+        ViewGroup scanQRcodeBtn = (ViewGroup) view.findViewById(R.id.scan_scan);
+
         themeBtn.setOnClickListener(this);
-        scanQRCodeBtn.setOnClickListener(this);
+        scanQRcodeBtn.setOnClickListener(this);
         return view;
     }
 
@@ -81,22 +77,19 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
 
     @Override
     public void onClick(View v) {
+        if (MyUtil.isFastDoubleClick()) {
+            return;
+        }
         switch (v.getId()) {
             case R.id.theme:
-                if (MyUtil.isFastDoubleClick()) {
-                    return;
-                }
                 Intent intent = new Intent(getActivity(), ThemeActivity.class);
                 // 启动主题界面
                 startActivity(intent);
                 break;
-            case R.id.qr_code_scan:
-                if (MyUtil.isFastDoubleClick()) {
-                    return;
-                }
+            case R.id.scan_scan:
                 // 打开扫描界面扫描条形码或二维码
                 Intent openCameraIntent = new Intent(getActivity(), CaptureActivity.class);
-                startActivityForResult(openCameraIntent, 0);
+                startActivity(openCameraIntent);
                 break;
         }
     }
@@ -104,16 +97,40 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            Bundle bundle = data.getExtras();
-            String scanResult = bundle.getString("result");
-            Log.d(LOG_TAG, "二维码扫描结果：" + scanResult);
-            Intent intent = new Intent("android.intent.action.VIEW");
-            intent.addCategory(Intent.CATEGORY_BROWSABLE);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            Uri uri = Uri.parse(scanResult);
-            intent.setData(uri);
-            startActivity(intent);
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        switch (requestCode) {
+            /*case REQUEST_SCAN_SCAN:
+                Bundle bundle = data.getExtras();
+                String scanResult = bundle.getString("result");
+                Log.d(LOG_TAG, "二维码扫描结果：" + scanResult);
+
+                boolean isUrl = MyUtil.checkWebSite(scanResult);
+                // 不是标准网址
+                if (!isUrl) {
+                    // 如果是没有添加协议的网址
+                    if (MyUtil.checkWebSitePath(scanResult)) {
+                        scanResult = "http://" + scanResult;
+                        isUrl = true;
+                    }
+                }
+
+                // 扫描结果为网址
+                if (isUrl) {
+                    Intent intent = new Intent("android.intent.action.VIEW");
+                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    Uri uri = Uri.parse(scanResult);
+                    intent.setData(uri);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getActivity(), DisplayScanResultActivity.class);
+                    intent.putExtra(SCAN_RESULT, scanResult);
+                    startActivity(intent);
+                    getActivity().overridePendingTransition(0, 0);
+                }
+                break;*/
         }
     }
 

@@ -58,7 +58,7 @@
                 <View style="@style/more_item_divider"/>
 
                 <LinearLayout
-                    android:id="@+id/qr_code_scan"
+                    android:id="@+id/scan_scan"
                     style="@style/more_item_group">
 
                     <ImageView
@@ -67,7 +67,7 @@
 
                     <TextView
                         style="@style/more_item_title_tv"
-                        android:text="@string/scan_two_dimension_code"/>
+                        android:text="@string/scan_scan"/>
 
                     <ImageView style="@style/more_item_arrow_iv"/>
                 </LinearLayout>

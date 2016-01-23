@@ -20,20 +20,26 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.zxing.Result;
 import com.kaku.weac.R;
+import com.kaku.weac.activities.DisplayScanResultActivity;
+import com.kaku.weac.util.LogUtil;
+import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.zxing.camera.CameraManager;
 import com.kaku.weac.zxing.decode.DecodeThread;
 import com.kaku.weac.zxing.utils.BeepManager;
@@ -52,10 +58,11 @@ import java.lang.reflect.Field;
  * @author dswitkin@google.com (Daniel Switkin)
  * @author Sean Owen
  */
-public final class CaptureActivity extends Activity implements SurfaceHolder.Callback {
+public final class CaptureActivity extends Activity implements SurfaceHolder.Callback,
+        View.OnClickListener {
 
     private static final String TAG = CaptureActivity.class.getSimpleName();
-
+    public static final String SCAN_RESULT = "scan_result";
     private CameraManager cameraManager;
     private CaptureActivityHandler handler;
     private InactivityTimer inactivityTimer;
@@ -64,7 +71,6 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     private SurfaceView scanPreview = null;
     private LinearLayout scanContainer;
     private LinearLayout scanCropView;
-    private ImageView scanLine;
 
     private Rect mCropRect = null;
     private boolean isHasSurface = false;
@@ -89,7 +95,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         scanPreview = (SurfaceView) findViewById(R.id.capture_preview);
         scanContainer = (LinearLayout) findViewById(R.id.capture_container);
         scanCropView = (LinearLayout) findViewById(R.id.capture_crop_view);
-        scanLine = (ImageView) findViewById(R.id.capture_scan_line);
+        ImageView scanLine = (ImageView) findViewById(R.id.capture_scan_line);
 
         inactivityTimer = new InactivityTimer(this);
         beepManager = new BeepManager(this);
@@ -102,6 +108,15 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         animation.setRepeatMode(Animation.RESTART);
         scanLine.startAnimation(animation);
 
+        initButton();
+    }
+
+    private void initButton() {
+        ImageView backBtn = (ImageView) findViewById(R.id.action_back);
+        TextView albumBtn = (TextView) findViewById(R.id.action_album);
+
+        backBtn.setOnClickListener(this);
+        albumBtn.setOnClickListener(this);
     }
 
     @Override
@@ -186,13 +201,55 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         inactivityTimer.onActivity();
         beepManager.playBeepSoundAndVibrate();
 
-        Intent resultIntent = new Intent();
+/*        Intent resultIntent = new Intent();
         bundle.putInt("width", mCropRect.width());
         bundle.putInt("height", mCropRect.height());
         bundle.putString("result", rawResult.getText());
         resultIntent.putExtras(bundle);
         this.setResult(RESULT_OK, resultIntent);
-        CaptureActivity.this.finish();
+        CaptureActivity.this.finish();*/
+
+        String scanResult = rawResult.getText();
+
+        boolean isUrl = MyUtil.checkWebSite(scanResult);
+        // 不是标准网址
+        if (!isUrl) {
+            // 如果是没有添加协议的网址
+            if (MyUtil.checkWebSitePath(scanResult)) {
+                scanResult = "http://" + scanResult;
+                isUrl = true;
+            }
+        }
+
+        // 扫描结果为网址
+        if (isUrl) {
+            try {
+                Intent intent = new Intent("android.intent.action.VIEW");
+//                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Uri uri = Uri.parse(scanResult);
+                intent.setData(uri);
+                myFinish(intent);
+            } catch (Exception e) {
+                LogUtil.e(TAG, "handleDecode: " + e.toString());
+                displayResult(scanResult);
+            }
+        } else {
+            displayResult(scanResult);
+        }
+    }
+
+    private void displayResult(String scanResult) {
+        Intent intent = new Intent(this, DisplayScanResultActivity.class);
+        intent.putExtra(SCAN_RESULT, scanResult);
+        myFinish(intent);
+    }
+
+    private void myFinish(Intent intent) {
+        startActivity(intent);
+        overridePendingTransition(R.anim.zoomin, 0);
+        finish();
+        overridePendingTransition(0, 0);
     }
 
     private void initCamera(SurfaceHolder surfaceHolder) {
@@ -302,5 +359,15 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
             e.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            // 返回按钮
+            case R.id.action_back:
+                finish();
+                break;
+        }
     }
 }

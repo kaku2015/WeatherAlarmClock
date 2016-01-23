@@ -128,7 +128,12 @@
             android:theme="@style/Transparent" />
         <activity
             android:name="com.kaku.weac.zxing.activity.CaptureActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Transparent" />
+        <activity
+            android:name="com.kaku.weac.activities.DisplayScanResultActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Transparent" />
 
         <receiver
             android:name="com.kaku.weac.broadcast.AlarmClockBroadcast"

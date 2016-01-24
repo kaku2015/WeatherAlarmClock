@@ -111,12 +111,18 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         initButton();
     }
 
+    private ImageView mLightBtn;
+
     private void initButton() {
         ImageView backBtn = (ImageView) findViewById(R.id.action_back);
         TextView albumBtn = (TextView) findViewById(R.id.action_album);
+        mLightBtn = (ImageView) findViewById(R.id.action_light);
+        TextView QRcodeGenerateBtn = (TextView) findViewById(R.id.action_qr_code_generate);
 
         backBtn.setOnClickListener(this);
         albumBtn.setOnClickListener(this);
+        mLightBtn.setOnClickListener(this);
+        QRcodeGenerateBtn.setOnClickListener(this);
     }
 
     @Override
@@ -361,6 +367,8 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         return 0;
     }
 
+    private boolean mIsLightOpen;
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -368,6 +376,17 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
             case R.id.action_back:
                 finish();
                 break;
+            // 开关灯按钮
+            case R.id.action_light:
+                if (!mIsLightOpen) {
+                    cameraManager.openLight();
+                    mIsLightOpen = true;
+                    mLightBtn.setImageResource(R.drawable.light_pressed);
+                } else {
+                    cameraManager.offLight();
+                    mIsLightOpen = false;
+                    mLightBtn.setImageResource(R.drawable.light_normal);
+                }
         }
     }
 }

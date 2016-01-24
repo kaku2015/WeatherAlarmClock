@@ -14,49 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
-            style="@style/action_llyt"
-            android:background="@color/black_trans70"
-            >
-
-            <ImageView
-                android:id="@+id/action_back"
-                style="@style/action_icon"
-                android:layout_alignParentLeft="true"
-                android:src="@drawable/ic_action_previous_item"/>
-
-            <TextView
-                style="@style/action_title"
-                android:text="@string/scan_scan"/>
-
-            <TextView
-                android:id="@+id/action_album"
-                style="@style/action_tv"
-                android:layout_alignParentRight="true"
-                android:text="@string/album"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            style="@style/action_llyt"
-            android:layout_gravity="bottom"
-            android:background="@color/black_trans70"
-            >
-
-            <ImageView
-                android:id="@+id/action_light"
-                style="@style/action_icon"
-                android:layout_alignParentLeft="true"
-                android:src="@drawable/bg_btn_light"/>
-
-            <TextView
-                android:id="@+id/action_make_qr_code"
-                style="@style/action_tv"
-                android:layout_alignParentRight="true"
-                android:text="@string/qr_code_generate"/>
-
-        </RelativeLayout>
-
         <LinearLayout
             android:id="@+id/capture_container"
             android:layout_width="match_parent"
@@ -103,5 +60,48 @@
                 style="@style/capture_padding_iv_vertical"/>
 
         </LinearLayout>
+
+        <RelativeLayout
+            style="@style/action_llyt"
+            android:background="@color/black_trans70"
+            >
+
+            <ImageView
+                android:id="@+id/action_back"
+                style="@style/action_icon"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/ic_action_previous_item"/>
+
+            <TextView
+                style="@style/action_title"
+                android:text="@string/scan_scan"/>
+
+            <TextView
+                android:id="@+id/action_album"
+                style="@style/action_tv"
+                android:layout_alignParentRight="true"
+                android:text="@string/album"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/action_llyt"
+            android:layout_gravity="bottom"
+            android:background="@color/black_trans70"
+            >
+
+            <ImageView
+                android:id="@+id/action_light"
+                style="@style/action_icon"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/bg_btn_light"/>
+
+            <TextView
+                android:id="@+id/action_qr_code_generate"
+                style="@style/action_tv"
+                android:layout_alignParentRight="true"
+                android:text="@string/qr_code_generate"/>
+
+        </RelativeLayout>
     </FrameLayout>
 </FrameLayout>

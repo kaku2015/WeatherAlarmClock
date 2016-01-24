@@ -200,4 +200,20 @@ public class CameraManager {
         }
         return null;
     }
+
+    public void openLight() {
+        if (camera != null) {
+            Camera.Parameters parameters = camera.getParameters();
+            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+            camera.setParameters(parameters);
+        }
+    }
+
+    public void offLight() {
+        if (camera != null) {
+            Camera.Parameters parameters = camera.getParameters();
+            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+            camera.setParameters(parameters);
+        }
+    }
 }

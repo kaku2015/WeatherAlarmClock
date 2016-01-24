@@ -10711,6 +10711,7 @@
     <string name="close_alarm_clock">右滑关闭闹钟</string>
     <string name="cold">感冒</string>
     <string name="cold_detail">感冒指数详情</string>
+    <string name="copy">复制</string>
     <string name="countdown_day_hour_minute">距闹钟响起还有%1$d天%2$d小时%3$d分</string>
     <string name="countdown_hour_minute">距闹钟响起还有%1$d小时%2$d分</string>
     <string name="countdown_minute">距闹钟响起还有%1$d分钟</string>
@@ -10833,6 +10834,7 @@
     <string name="scan_result">扫描结果</string>
     <string name="scan_scan">扫一扫</string>
     <string name="scanning">正在扫描…</string>
+    <string name="search">搜索</string>
     <string name="select_all">全选</string>
     <string name="select_all_cancel">取消全选</string>
     <string name="selected_xx_item">已选择%1$d项</string>
@@ -10857,6 +10859,7 @@
     <string name="tag">标签</string>
     <string name="temperature">%1$s℃</string>
     <string name="ten">10</string>
+    <string name="text_already_copied">文本已复制到剪贴板</string>
     <string name="the_day_of_tomorrow">后天</string>
     <string name="theme">主题、壁纸</string>
     <string name="theme_wallpaper">主题壁纸</string>
@@ -12547,11 +12550,13 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/black_text_normal_common</item>
     </style>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles.xml -->
+    <eat-comment/>
     <style name="single_btn">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">40dp</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:layout_margin">20dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_gravity">bottom|center</item>
+        <item name="android:layout_margin">19dp</item>
         <item name="android:textSize">18sp</item>
         <item name="android:text">@string/roger</item>
         <item name="android:textColor">@color/white_trans90</item>
@@ -12564,8 +12569,6 @@
         <item name="android:textColor">@color/gray_background_color</item>
         <item name="android:textSize">18sp</item>
     </style>
-    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles.xml -->
-    <eat-comment/>
     <style name="tab_llyt">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>

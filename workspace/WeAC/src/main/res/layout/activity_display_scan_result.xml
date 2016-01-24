@@ -24,24 +24,34 @@
 
     </RelativeLayout>
 
-    <FrameLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray_divider_line">
+        android:background="@color/gray_background_color">
 
-        <TextView
-            android:id="@+id/scan_result_content_tv"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="19dp"
-            android:layout_marginRight="19dp"
-            android:layout_marginTop="30dp"
-            android:text="我是二维码"
-            android:textColor="@color/black_text_normal_common"
-            android:textIsSelectable="true"
-            android:textSize="18sp"/>
+            android:orientation="vertical">
 
-    </FrameLayout>
+            <TextView
+                android:id="@+id/scan_result_content_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="19dp"
+                android:layout_marginRight="19dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/shape_qr_code_result"
+                android:padding="20dp"
+                android:textColor="@color/black_text_normal_common"
+                android:textIsSelectable="true"
+                android:textSize="18sp"/>
 
+            <Button
+                android:id="@+id/copy_btn"
+                style="@style/single_btn"
+                android:text="@string/copy"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

@@ -103,4 +103,24 @@
         <item name="android:maxWidth">22dp</item>
         <item name="android:maxHeight">22dp</item>
     </style>
+
+
+    <style name="sure_cancel_btn">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/gray_background_color</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="single_btn">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_gravity">bottom|center</item>
+        <item name="android:layout_margin">19dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:text">@string/roger</item>
+        <item name="android:textColor">@color/white_trans90</item>
+        <item name="android:background">@drawable/bg_btn_sure</item>
+    </style>
 </resources>

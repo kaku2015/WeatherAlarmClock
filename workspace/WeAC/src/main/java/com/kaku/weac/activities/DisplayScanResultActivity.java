@@ -3,14 +3,19 @@
  */
 package com.kaku.weac.activities;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.kaku.weac.R;
 import com.kaku.weac.util.MyUtil;
+import com.kaku.weac.util.ToastUtil;
 import com.kaku.weac.zxing.activity.CaptureActivity;
 
 /**
@@ -19,7 +24,9 @@ import com.kaku.weac.zxing.activity.CaptureActivity;
  * @author 咖枯
  * @version 1.0 2016/1/24
  */
-public class DisplayScanResultActivity extends BaseActivity {
+public class DisplayScanResultActivity extends BaseActivity implements View.OnClickListener {
+    private TextView mScanResultContentTv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,16 +38,30 @@ public class DisplayScanResultActivity extends BaseActivity {
 
     private void assignViews() {
         ImageView actionBack = (ImageView) findViewById(R.id.action_back);
-        actionBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        actionBack.setOnClickListener(this);
 
-        // 显示扫描内容TextView
-        TextView scanResultContentTv = (TextView) findViewById(R.id.scan_result_content_tv);
+        mScanResultContentTv = (TextView) findViewById(R.id.scan_result_content_tv);
         String scanResult = getIntent().getStringExtra(CaptureActivity.SCAN_RESULT);
-        scanResultContentTv.setText(scanResult);
+        mScanResultContentTv.setText(scanResult);
+
+        Button copyBtn = (Button) findViewById(R.id.copy_btn);
+        copyBtn.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.action_back:
+                finish();
+                break;
+            case R.id.copy_btn:
+                ClipboardManager clipboardManager = (ClipboardManager) getSystemService(
+                        Context.CLIPBOARD_SERVICE);
+                // 将文本复制到剪贴板
+                clipboardManager.setPrimaryClip(ClipData.newPlainText("data",
+                        mScanResultContentTv.getText().toString()));
+                ToastUtil.showShortToast(this, getString(R.string.text_already_copied));
+                break;
+        }
     }
 }

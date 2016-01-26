@@ -192,5 +192,10 @@ public class WeacConstants {
      */
     public static final String DIY_WALLPAPER_PATH = "/WeaAlarmClock/wallpaper/default.jpg";
 
+    /**
+     * 图片地址
+     */
+    public static final String IMAGE_URL = "image_url";
+
 
 }

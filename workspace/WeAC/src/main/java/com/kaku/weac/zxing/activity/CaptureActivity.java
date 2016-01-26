@@ -19,10 +19,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -38,13 +40,23 @@ import android.widget.TextView;
 import com.google.zxing.Result;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.DisplayScanResultActivity;
+import com.kaku.weac.activities.LocalAlbumActivity;
+import com.kaku.weac.bean.Event.ScanCodeEvent;
+import com.kaku.weac.util.ImageLoaderHelper;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
+import com.kaku.weac.util.OttoAppConfig;
+import com.kaku.weac.util.ToastUtil;
 import com.kaku.weac.zxing.camera.CameraManager;
 import com.kaku.weac.zxing.decode.DecodeThread;
+import com.kaku.weac.zxing.decode.DecodeUtils;
 import com.kaku.weac.zxing.utils.BeepManager;
 import com.kaku.weac.zxing.utils.CaptureActivityHandler;
 import com.kaku.weac.zxing.utils.InactivityTimer;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.squareup.otto.Subscribe;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -61,8 +73,8 @@ import java.lang.reflect.Field;
 public final class CaptureActivity extends Activity implements SurfaceHolder.Callback,
         View.OnClickListener {
 
-    private static final String TAG = CaptureActivity.class.getSimpleName();
-    public static final String SCAN_RESULT = "scan_result";
+    private static final String LOG_TAG = CaptureActivity.class.getSimpleName();
+
     private CameraManager cameraManager;
     private CaptureActivityHandler handler;
     private InactivityTimer inactivityTimer;
@@ -86,6 +98,8 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+
+        OttoAppConfig.getInstance().register(this);
 
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -173,12 +187,13 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     protected void onDestroy() {
         inactivityTimer.shutdown();
         super.onDestroy();
+        OttoAppConfig.getInstance().unregister(this);
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         if (holder == null) {
-            Log.e(TAG, "*** WARNING *** surfaceCreated() gave us a null surface!");
+            Log.e(LOG_TAG, "*** WARNING *** surfaceCreated() gave us a null surface!");
         }
         if (!isHasSurface) {
             isHasSurface = true;
@@ -206,48 +221,64 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     public void handleDecode(Result rawResult, Bundle bundle) {
         inactivityTimer.onActivity();
         beepManager.playBeepSoundAndVibrate();
+        operateResult(rawResult);
+    }
 
-/*        Intent resultIntent = new Intent();
-        bundle.putInt("width", mCropRect.width());
-        bundle.putInt("height", mCropRect.height());
-        bundle.putString("result", rawResult.getText());
-        resultIntent.putExtras(bundle);
-        this.setResult(RESULT_OK, resultIntent);
-        CaptureActivity.this.finish();*/
-
-        String scanResult = rawResult.getText();
-
-        boolean isUrl = MyUtil.checkWebSite(scanResult);
-        // 不是标准网址
-        if (!isUrl) {
-            // 如果是没有添加协议的网址
-            if (MyUtil.checkWebSitePath(scanResult)) {
-                scanResult = "http://" + scanResult;
-                isUrl = true;
-            }
+    private void operateResult(Result rawResult) {
+        if (rawResult == null) {
+            ToastUtil.showLongToast(CaptureActivity.this, getString(R.string.decode_null));
+            return;
         }
-
-        // 扫描结果为网址
-        if (isUrl) {
-            try {
-                Intent intent = new Intent("android.intent.action.VIEW");
-//                intent.addCategory(Intent.CATEGORY_BROWSABLE);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                Uri uri = Uri.parse(scanResult);
-                intent.setData(uri);
-                myFinish(intent);
-            } catch (Exception e) {
-                LogUtil.e(TAG, "handleDecode: " + e.toString());
-                displayResult(scanResult);
+        String codeType = rawResult.getBarcodeFormat().toString();
+        String scanResult = rawResult.getText();
+        // 二维码
+        if ("QR_CODE".equals(codeType) || "DATA_MATRIX".equals(codeType)) {
+            boolean isUrl = MyUtil.checkWebSite(scanResult);
+            // 不是标准网址
+            if (!isUrl) {
+                // 如果是没有添加协议的网址
+                if (MyUtil.checkWebSitePath(scanResult)) {
+                    scanResult = "http://" + scanResult;
+                    isUrl = true;
+                }
             }
+
+            // 扫描结果为网址
+            if (isUrl) {
+                try {
+                    Intent intent = new Intent("android.intent.action.VIEW");
+//                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                    Uri uri = Uri.parse(scanResult);
+                    intent.setData(uri);
+                    myFinish(intent);
+                } catch (Exception e) {
+                    LogUtil.e(LOG_TAG, "handleDecode: " + e.toString());
+                    displayResult(scanResult, 0);
+                }
+            } else {
+                displayResult(scanResult, 0);
+            }
+            // 条形码
+        } else if ("EAN_13".equals(codeType)) {
+            displayResult(scanResult, 1);
         } else {
-            displayResult(scanResult);
+            ToastUtil.showLongToast(CaptureActivity.this, getString(R.string.decode_null));
         }
     }
 
-    private void displayResult(String scanResult) {
+    public static final String SCAN_RESULT = "scan_result";
+    public static final String SCAN_TYPE = "scan_type";
+
+    /**
+     * 显示扫描结果
+     *
+     * @param scanResult 扫描内容
+     * @param type       扫描类型：0，二维码；1，条形码
+     */
+    private void displayResult(String scanResult, int type) {
         Intent intent = new Intent(this, DisplayScanResultActivity.class);
         intent.putExtra(SCAN_RESULT, scanResult);
+        intent.putExtra(SCAN_TYPE, type);
         myFinish(intent);
     }
 
@@ -263,7 +294,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
             throw new IllegalStateException("No SurfaceHolder provided");
         }
         if (cameraManager.isOpen()) {
-            Log.w(TAG, "initCamera() while already open -- late SurfaceView callback?");
+            Log.w(LOG_TAG, "initCamera() while already open -- late SurfaceView callback?");
             return;
         }
         try {
@@ -276,18 +307,19 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
             initCrop();
         } catch (IOException ioe) {
-            Log.w(TAG, ioe);
+            Log.w(LOG_TAG, ioe);
             displayFrameworkBugMessageAndExit();
         } catch (RuntimeException e) {
             // Barcode Scanner has seen crashes in the wild of this variety:
             // java.?lang.?RuntimeException: Fail to connect to camera service
-            Log.w(TAG, "Unexpected error initializing camera", e);
+            Log.w(LOG_TAG, "Unexpected error initializing camera", e);
             displayFrameworkBugMessageAndExit();
         }
     }
 
     private void displayFrameworkBugMessageAndExit() {
         // camera error
+        // TODO:自定义错误弹出框样式
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.app_name));
         builder.setMessage("Camera error");
@@ -323,6 +355,9 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
      * 初始化截取的矩形区域
      */
     private void initCrop() {
+        // http://skillcollege.github.io/2015/02/05/-打造极致二维码扫描系列-基于ZBar的Android平台解码/
+
+        // 预览图的高度，也即camera的分辨率宽高
         int cameraWidth = cameraManager.getCameraResolution().y;
         int cameraHeight = cameraManager.getCameraResolution().x;
 
@@ -330,9 +365,11 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         int[] location = new int[2];
         scanCropView.getLocationInWindow(location);
 
+        // 布局文件中扫描框的左上角定点坐标
         int cropLeft = location[0];
         int cropTop = location[1] - getStatusBarHeight();
 
+        // 布局文件中扫描框的宽高
         int cropWidth = scanCropView.getWidth();
         int cropHeight = scanCropView.getHeight();
 
@@ -368,6 +405,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     }
 
     private boolean mIsLightOpen;
+    public static final String SCAN_CODE = "scan_code";
 
     @Override
     public void onClick(View v) {
@@ -387,6 +425,52 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
                     mIsLightOpen = false;
                     mLightBtn.setImageResource(R.drawable.light_normal);
                 }
+                break;
+            // 相册按钮
+            case R.id.action_album:
+                if (MyUtil.isFastDoubleClick()) {
+                    return;
+                }
+                Intent intent = new Intent(this, LocalAlbumActivity.class);
+                intent.putExtra(SCAN_CODE, true);
+                startActivity(intent);
+                overridePendingTransition(R.anim.zoomin, 0);
+                break;
+        }
+    }
+
+
+    @Subscribe
+    public void scanQRcodeEvent(ScanCodeEvent event) {
+        ImageLoader.getInstance().init(ImageLoaderHelper.getInstance(this)
+                .getImageLoaderConfiguration());
+
+        String imagePath = event.getImageUrl();
+        if (!TextUtils.isEmpty(imagePath)) {
+            ImageLoader.getInstance().loadImage("file://" + imagePath, new ImageLoadingListener() {
+
+                @Override
+                public void onLoadingStarted(String s, View view) {
+
+                }
+
+                @Override
+                public void onLoadingFailed(String s, View view, FailReason failReason) {
+
+                }
+
+                @Override
+                public void onLoadingComplete(String s, View view, Bitmap loadedImage) {
+                    Result resultZxing = new DecodeUtils(DecodeUtils.DECODE_DATA_MODE_ALL)
+                            .decodeWithZxing(loadedImage);
+                    handleDecode(resultZxing, null);
+                }
+
+                @Override
+                public void onLoadingCancelled(String s, View view) {
+
+                }
+            });
         }
     }
 }

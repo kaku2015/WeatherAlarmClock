@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.0"
+    buildToolsVersion "23.0.1"
 
     defaultConfig {
         applicationId "com.kaku.weac"
@@ -16,6 +16,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
 }
 
 dependencies {
@@ -32,5 +39,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.squareup:otto:1.3.8'
     compile 'com.github.bumptech.glide:glide:3.6.1'
-    compile files('libs/zxing.jar')
+    compile files('libs/zxing-4.7.3.jar')
+    compile files('libs/universal-image-loader-1.9.5.jar')
+    compile files('libs/ZBarDecoder.jar')
 }

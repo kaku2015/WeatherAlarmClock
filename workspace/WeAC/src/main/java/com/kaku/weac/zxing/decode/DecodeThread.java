@@ -41,6 +41,7 @@ public class DecodeThread extends Thread {
 
     public static final int BARCODE_MODE = 0X100;
     public static final int QRCODE_MODE = 0X200;
+    public static final String DECODE_MODE = "DECODE_MODE";
     public static final int ALL_MODE = 0X300;
 
     private final CaptureActivity activity;

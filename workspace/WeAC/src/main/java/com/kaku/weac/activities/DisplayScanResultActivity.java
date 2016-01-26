@@ -6,6 +6,8 @@ package com.kaku.weac.activities;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,7 +27,7 @@ import com.kaku.weac.zxing.activity.CaptureActivity;
  * @version 1.0 2016/1/24
  */
 public class DisplayScanResultActivity extends BaseActivity implements View.OnClickListener {
-    private TextView mScanResultContentTv;
+    private String mScanResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +42,20 @@ public class DisplayScanResultActivity extends BaseActivity implements View.OnCl
         ImageView actionBack = (ImageView) findViewById(R.id.action_back);
         actionBack.setOnClickListener(this);
 
-        mScanResultContentTv = (TextView) findViewById(R.id.scan_result_content_tv);
-        String scanResult = getIntent().getStringExtra(CaptureActivity.SCAN_RESULT);
-        mScanResultContentTv.setText(scanResult);
+        TextView scanResultContentTv = (TextView) findViewById(R.id.scan_result_content_tv);
+        mScanResult = getIntent().getStringExtra(CaptureActivity.SCAN_RESULT);
+        int type = getIntent().getIntExtra(CaptureActivity.SCAN_TYPE, 0);
+        // 二维码
+        if (type == 0) {
+            scanResultContentTv.setText(mScanResult);
+        } else { // 条形码
+            scanResultContentTv.setText(getString(R.string.bar_code, mScanResult));
+        }
 
         Button copyBtn = (Button) findViewById(R.id.copy_btn);
         copyBtn.setOnClickListener(this);
+        Button searchBtn = (Button) findViewById(R.id.search_btn);
+        searchBtn.setOnClickListener(this);
     }
 
     @Override
@@ -58,9 +68,17 @@ public class DisplayScanResultActivity extends BaseActivity implements View.OnCl
                 ClipboardManager clipboardManager = (ClipboardManager) getSystemService(
                         Context.CLIPBOARD_SERVICE);
                 // 将文本复制到剪贴板
-                clipboardManager.setPrimaryClip(ClipData.newPlainText("data",
-                        mScanResultContentTv.getText().toString()));
+                clipboardManager.setPrimaryClip(ClipData.newPlainText("data", mScanResult));
                 ToastUtil.showShortToast(this, getString(R.string.text_already_copied));
+                break;
+            case R.id.search_btn:
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri uri = Uri.parse("http://www.baidu.com/s?wd=" + mScanResult);
+                intent.setData(uri);
+                startActivity(intent);
+                finish();
+                overridePendingTransition(0, 0);
                 break;
         }
     }

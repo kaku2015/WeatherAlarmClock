@@ -3,6 +3,7 @@
  */
 package com.kaku.weac.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import com.kaku.weac.bean.ImageItem;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.OttoAppConfig;
+import com.kaku.weac.zxing.activity.CaptureActivity;
 
 import java.io.File;
 import java.util.List;
@@ -36,6 +38,7 @@ public class LocalAlbumDetailActivity extends BaseActivity implements View.OnCli
     private static final int REQUEST_IMAGE_CROP = 1;
 
     private LocalAlbumDetailAdapter mLocalAlbumDetailAdapter;
+    private boolean mIsScanQRcode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class LocalAlbumDetailActivity extends BaseActivity implements View.OnCli
         setContentView(R.layout.activity_local_album_detail);
         ViewGroup backGround = (ViewGroup) findViewById(R.id.background);
         MyUtil.setBackgroundBlur(backGround, this);
+        mIsScanQRcode = getIntent().getBooleanExtra(CaptureActivity.SCAN_CODE, false);
         intiViews();
     }
 
@@ -65,11 +69,20 @@ public class LocalAlbumDetailActivity extends BaseActivity implements View.OnCli
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String path = mLocalAlbumDetailAdapter.getItem(position).getImagePath();
-                Uri uri = Uri.fromFile(new File(path));
-                Intent intent = MyUtil.getCropImageOptions(LocalAlbumDetailActivity.this, uri,
-                        WeacConstants.DIY_WALLPAPER_PATH);
-                startActivityForResult(intent, REQUEST_IMAGE_CROP);
-                overridePendingTransition(0, 0);
+                // 主题
+                if (!mIsScanQRcode) {
+                    Uri uri = Uri.fromFile(new File(path));
+                    Intent intent = MyUtil.getCropImageOptions(LocalAlbumDetailActivity.this, uri,
+                            WeacConstants.DIY_WALLPAPER_PATH);
+                    startActivityForResult(intent, REQUEST_IMAGE_CROP);
+                    overridePendingTransition(0, 0);
+                } else { // 扫描二维码
+                    Intent intent = new Intent();
+                    intent.putExtra(WeacConstants.IMAGE_URL, path);
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                    overridePendingTransition(0, R.anim.zoomout);
+                }
             }
         });
     }

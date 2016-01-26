@@ -68,8 +68,13 @@ public class DecodeHandler extends Handler {
             decode((byte[]) message.obj, message.arg1, message.arg2);
 
         } else if (message.what == R.id.quit) {
-            running = false;
-            Looper.myLooper().quit();
+            try {
+                running = false;
+                // FIXME :NullPointerException
+                Looper.myLooper().quit();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         }
     }

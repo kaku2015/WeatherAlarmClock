@@ -104,7 +104,10 @@ public class MyUtil {
             setWallpaper(vg, activity, share);
 
         }
+        setStatusBarTranslucent(vg, activity);
+    }
 
+    public static void setStatusBarTranslucent(ViewGroup vg, Activity activity) {
         // 如果版本在4.4以上
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             int resourceId = activity.getResources().getIdentifier("status_bar_height", "dimen",
@@ -154,20 +157,7 @@ public class MyUtil {
      */
     public static void setBackgroundBlur(ViewGroup vg, Activity activity) {
         vg.setBackground(getWallPaperBlurDrawable(activity));
-        // 如果版本在4.4以上
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            int resourceId = activity.getResources().getIdentifier("status_bar_height", "dimen",
-                    "android");
-            if (resourceId <= 0) {
-                return;
-            }
-            // 状态栏高度
-            int height = activity.getResources().getDimensionPixelSize(resourceId);
-            // 设置距离顶部状态栏垂直距离
-            vg.setPadding(0, height, 0, 0);
-            // 状态栏透明
-            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
+        setStatusBarTranslucent(vg, activity);
     }
 
     /**
@@ -1049,7 +1039,7 @@ public class MyUtil {
      *
      * @param context  context
      * @param uri      image path uri
-     * @param filePath file path (e.g.: "/AppDir/a.mp3", "/AppDir/files/images/a.jpg")
+     * @param filePath save path (e.g.: "/AppDir/a.mp3", "/AppDir/files/images/a.jpg")
      * @return Intent
      */
     public static Intent getCropImageOptions(Context context, Uri uri, String filePath) {

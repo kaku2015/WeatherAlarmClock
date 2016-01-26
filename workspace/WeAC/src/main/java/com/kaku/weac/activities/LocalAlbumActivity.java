@@ -19,12 +19,14 @@ import android.widget.TextView;
 import com.kaku.weac.R;
 import com.kaku.weac.adapter.LocalAlbumAdapter;
 import com.kaku.weac.bean.Event.FinishLocalAlbumActivityEvent;
+import com.kaku.weac.bean.Event.ScanCodeEvent;
 import com.kaku.weac.bean.Event.WallpaperEvent;
 import com.kaku.weac.bean.ImageBucket;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.db.LocalAlbumImagePickerHelper;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.OttoAppConfig;
+import com.kaku.weac.zxing.activity.CaptureActivity;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
@@ -41,6 +43,7 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_IMAGE_CROP = 2;
+    private static final int REQUEST_ALBUM_DETAIL = 3;
 
     public static final String ALBUM_PATH = "album_path";
     public static final String ALBUM_NAME = "album_name";
@@ -94,7 +97,15 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
         TextView captureBtn = (TextView) findViewById(R.id.action_capture);
 
         backBtn.setOnClickListener(this);
-        captureBtn.setOnClickListener(this);
+
+        // 是否为扫码
+        final boolean isScanQRcode = getIntent().getBooleanExtra(CaptureActivity.SCAN_CODE, false);
+        // 主题
+        if (!isScanQRcode) {
+            captureBtn.setOnClickListener(this);
+        } else { // 扫码
+            captureBtn.setVisibility(View.GONE);
+        }
 
         ListView localAlbumListView = (ListView) findViewById(R.id.local_album_lv);
         localAlbumListView.setAdapter(mLocalAlbumAdapter);
@@ -107,7 +118,8 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
                 intent.putParcelableArrayListExtra(ALBUM_PATH,
                         mLocalAlbumAdapter.getItem(position).bucketList);
                 intent.putExtra(ALBUM_NAME, mLocalAlbumAdapter.getItem(position).bucketName);
-                startActivity(intent);
+                intent.putExtra(CaptureActivity.SCAN_CODE, isScanQRcode);
+                startActivityForResult(intent, REQUEST_ALBUM_DETAIL);
             }
         });
     }
@@ -124,8 +136,8 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
             // 拍照
             case R.id.action_capture:
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                mImageUri = Uri.fromFile(MyUtil.getFileDirectory(this, WeacConstants
-                        .DIY_WALLPAPER_PATH));
+                mImageUri = Uri.fromFile(MyUtil.getFileDirectory(this, "/Android/data/" +
+                        getPackageName() + "/capture/temporary.jpg"));
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
                 startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
                 overridePendingTransition(0, 0);
@@ -156,13 +168,18 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
                 OttoAppConfig.getInstance().post(new WallpaperEvent());
                 myFinish();
                 break;
+            // 相册详细图片
+            case REQUEST_ALBUM_DETAIL:
+                String url = data.getStringExtra(WeacConstants.IMAGE_URL);
+                OttoAppConfig.getInstance().post(new ScanCodeEvent(url));
+                myFinish2();
+                break;
         }
     }
 
     @Subscribe
     public void finishMeEvent(FinishLocalAlbumActivityEvent event) {
-        finish();
-        overridePendingTransition(0, 0);
+        myFinish2();
     }
 
     @Override
@@ -173,6 +190,11 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
     private void myFinish() {
         finish();
         overridePendingTransition(0, R.anim.zoomout);
+    }
+
+    private void myFinish2() {
+        finish();
+        overridePendingTransition(0, 0);
     }
 
     @Override

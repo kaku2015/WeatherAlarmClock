@@ -48,10 +48,26 @@
                 android:textIsSelectable="true"
                 android:textSize="18sp"/>
 
-            <Button
-                android:id="@+id/copy_btn"
-                style="@style/single_btn"
-                android:text="@string/copy"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="20dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/copy_btn"
+                    style="@style/sure_cancel_btn"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/bg_btn_sure"
+                    android:text="@string/copy"/>
+
+                <Button
+                    android:id="@+id/search_btn"
+                    style="@style/sure_cancel_btn"
+                    android:background="@drawable/bg_btn_sure"
+                    android:text="@string/search"/>
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

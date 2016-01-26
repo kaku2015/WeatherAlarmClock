@@ -207,7 +207,7 @@ public class ThemeFragment extends BaseFragment implements View.OnClickListener 
                     return;
                 }
                 Intent intent = new Intent(getActivity(), LocalAlbumActivity.class);
-                getActivity().startActivity(intent);
+                startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.zoomin, 0);
                 break;
         }

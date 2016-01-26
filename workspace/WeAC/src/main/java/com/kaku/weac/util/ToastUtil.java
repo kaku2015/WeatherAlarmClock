@@ -68,7 +68,7 @@ public class ToastUtil {
     /**
      * 显示toast
      *
-     * @param appContext     appContext
+     * @param appContext  appContext
      * @param msg         需要显示的信息
      * @param duration    显示时间
      * @param delayMillis 延迟关闭时间
@@ -86,7 +86,8 @@ public class ToastUtil {
         if (sToast == null) {
             sToast = new Toast(appContext);
             sToast.setDuration(duration);
-            sToast.setGravity(Gravity.CENTER, 0, 320);
+            int density = (int) appContext.getResources().getDisplayMetrics().density;
+            sToast.setGravity(Gravity.CENTER, 0, 115 * density);
             sToast.setView(view);
         } else {
             sToast.setView(view);

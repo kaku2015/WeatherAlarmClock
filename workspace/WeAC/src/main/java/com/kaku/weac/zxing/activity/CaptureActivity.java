@@ -131,12 +131,10 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         ImageView backBtn = (ImageView) findViewById(R.id.action_back);
         TextView albumBtn = (TextView) findViewById(R.id.action_album);
         mLightBtn = (ImageView) findViewById(R.id.action_light);
-        TextView QRcodeGenerateBtn = (TextView) findViewById(R.id.action_qr_code_generate);
 
         backBtn.setOnClickListener(this);
         albumBtn.setOnClickListener(this);
         mLightBtn.setOnClickListener(this);
-        QRcodeGenerateBtn.setOnClickListener(this);
     }
 
     @Override
@@ -187,6 +185,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     protected void onDestroy() {
         inactivityTimer.shutdown();
         super.onDestroy();
+        offLight();
         OttoAppConfig.getInstance().unregister(this);
     }
 
@@ -220,15 +219,19 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
      */
     public void handleDecode(Result rawResult, Bundle bundle) {
         inactivityTimer.onActivity();
-        beepManager.playBeepSoundAndVibrate();
-        operateResult(rawResult);
-    }
 
-    private void operateResult(Result rawResult) {
         if (rawResult == null) {
             ToastUtil.showLongToast(CaptureActivity.this, getString(R.string.decode_null));
             return;
         }
+
+        beepManager.playBeepSoundAndVibrate();
+//        AudioPlayer.getInstance(this).playRaw(R.raw.scan, false, false);
+
+        operateResult(rawResult);
+    }
+
+    private void operateResult(Result rawResult) {
         String codeType = rawResult.getBarcodeFormat().toString();
         String scanResult = rawResult.getText();
         // 二维码
@@ -416,21 +419,16 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
                 break;
             // 开关灯按钮
             case R.id.action_light:
-                if (!mIsLightOpen) {
-                    cameraManager.openLight();
-                    mIsLightOpen = true;
-                    mLightBtn.setImageResource(R.drawable.light_pressed);
-                } else {
-                    cameraManager.offLight();
-                    mIsLightOpen = false;
-                    mLightBtn.setImageResource(R.drawable.light_normal);
-                }
+                operateLight();
                 break;
             // 相册按钮
             case R.id.action_album:
                 if (MyUtil.isFastDoubleClick()) {
                     return;
                 }
+
+                offLight();
+
                 Intent intent = new Intent(this, LocalAlbumActivity.class);
                 intent.putExtra(SCAN_CODE, true);
                 startActivity(intent);
@@ -439,6 +437,31 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         }
     }
 
+    /**
+     * 开关灯
+     */
+    private void operateLight() {
+        if (!mIsLightOpen) {
+            cameraManager.openLight();
+            mIsLightOpen = true;
+            mLightBtn.setImageResource(R.drawable.light_pressed);
+        } else {
+            cameraManager.offLight();
+            mIsLightOpen = false;
+            mLightBtn.setImageResource(R.drawable.light_normal);
+        }
+    }
+
+    /**
+     * 关灯
+     */
+    private void offLight() {
+        if (mIsLightOpen) {
+            cameraManager.offLight();
+            mIsLightOpen = false;
+            mLightBtn.setImageResource(R.drawable.light_normal);
+        }
+    }
 
     @Subscribe
     public void scanQRcodeEvent(ScanCodeEvent event) {

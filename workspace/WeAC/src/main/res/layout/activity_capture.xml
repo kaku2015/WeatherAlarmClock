@@ -50,14 +50,24 @@
 
                 </LinearLayout>
 
+
                 <ImageView
                     android:id="@+id/capture_mask_right"
                     style="@style/capture_padding_iv_horizontal"/>
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/capture_mask_bottom"
-                style="@style/capture_padding_iv_vertical"/>
+            <FrameLayout
+                style="@style/capture_padding_iv_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="1dp"
+                    android:text="对准二维码/条形码"
+                    android:textColor="@color/white_trans60"
+                    android:textSize="14sp"/>
+            </FrameLayout>
 
         </LinearLayout>
 
@@ -74,13 +84,7 @@
 
             <TextView
                 style="@style/action_title"
-                android:text="@string/scan_scan"/>
-
-            <TextView
-                android:id="@+id/action_album"
-                style="@style/action_tv"
-                android:layout_alignParentRight="true"
-                android:text="@string/album"/>
+                android:text="@string/scan_code"/>
 
         </RelativeLayout>
 
@@ -97,10 +101,10 @@
                 android:src="@drawable/bg_btn_light"/>
 
             <TextView
-                android:id="@+id/action_qr_code_generate"
+                android:id="@+id/action_album"
                 style="@style/action_tv"
                 android:layout_alignParentRight="true"
-                android:text="@string/qr_code_generate"/>
+                android:text="@string/album"/>
 
         </RelativeLayout>
     </FrameLayout>

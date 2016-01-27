@@ -63,11 +63,28 @@
 
                     <ImageView
                         style="@style/more_item_iv"
-                        android:src="@drawable/ic_more_scan_two_dimension_code"/>
+                        android:src="@drawable/ic_more_scan_code"/>
 
                     <TextView
                         style="@style/more_item_title_tv"
-                        android:text="@string/scan_scan"/>
+                        android:text="@string/scan_code"/>
+
+                    <ImageView style="@style/more_item_arrow_iv"/>
+                </LinearLayout>
+
+                <View style="@style/more_item_divider"/>
+
+                <LinearLayout
+                    android:id="@+id/generate_code"
+                    style="@style/more_item_group">
+
+                    <ImageView
+                        style="@style/more_item_iv"
+                        android:src="@drawable/ic_more_generate_code"/>
+
+                    <TextView
+                        style="@style/more_item_title_tv"
+                        android:text="@string/generate_code"/>
 
                     <ImageView style="@style/more_item_arrow_iv"/>
                 </LinearLayout>

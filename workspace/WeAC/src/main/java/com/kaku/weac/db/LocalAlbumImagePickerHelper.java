@@ -9,10 +9,13 @@ import android.database.Cursor;
 import android.provider.MediaStore.Images.Media;
 import android.provider.MediaStore.Images.Thumbnails;
 
+import com.kaku.weac.R;
 import com.kaku.weac.bean.ImageBucket;
 import com.kaku.weac.bean.ImageItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -39,8 +42,11 @@ public class LocalAlbumImagePickerHelper {
 
     private static LocalAlbumImagePickerHelper sInstance;
 
+    private Context mContext;
+
     private LocalAlbumImagePickerHelper(Context appContext) {
         mContentResolver = appContext.getContentResolver();
+        mContext = appContext;
     }
 
     public static LocalAlbumImagePickerHelper getInstance(Context context) {
@@ -80,7 +86,10 @@ public class LocalAlbumImagePickerHelper {
         }
     }
 
-    boolean hasBuildImagesBucketList = false;
+    /**
+     * 添加最近相册
+     */
+    private ImageBucket mImageBucketRecent;
 
     /**
      * 取得相册图片列表
@@ -89,10 +98,16 @@ public class LocalAlbumImagePickerHelper {
         getThumbnail();
         mImageBucketList.clear();
 
+        // 最近相册图片数为50张
+        int count = 0;
+        mImageBucketRecent = new ImageBucket();
+        mImageBucketRecent.bucketList = new ArrayList<>();
+        mImageBucketRecent.bucketName = mContext.getString(R.string.recent);
+
         String columns[] = new String[]{Media._ID, Media.BUCKET_ID, Media.PICASA_ID, Media.DATA,
                 Media.DISPLAY_NAME, Media.TITLE, Media.SIZE, Media.BUCKET_DISPLAY_NAME};
         Cursor cursor = mContentResolver.query(Media.EXTERNAL_CONTENT_URI, columns, null, null,
-                null);
+                Media.DATE_MODIFIED + " desc");
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 int photoIDIndex = cursor.getColumnIndexOrThrow(Media._ID);
@@ -108,6 +123,7 @@ public class LocalAlbumImagePickerHelper {
                     String path = cursor.getString(photoPathIndex);
                     // 相册名
                     String bucketName = cursor.getString(bucketDisplayNameIndex);
+                    bucketName = changeLocalName(bucketName);
                     // 相册id
                     String bucketId = cursor.getString(bucketIdIndex);
 
@@ -126,11 +142,39 @@ public class LocalAlbumImagePickerHelper {
                     imageItem.setThumbnailPath(mThumbnailList.get(_id));
                     bucket.bucketList.add(imageItem);
 
+                    // 添加最近相册
+                    if (count < 50) {
+                        mImageBucketRecent.count++;
+                        ImageItem imageItem1 = new ImageItem();
+                        imageItem1.setImageId(_id);
+                        imageItem1.setImagePath(path);
+                        imageItem1.setThumbnailPath(mThumbnailList.get(_id));
+                        mImageBucketRecent.bucketList.add(imageItem1);
+                        count++;
+                    }
+                    /////////
+
                 } while (cursor.moveToNext());
             }
             cursor.close();
         }
-        hasBuildImagesBucketList = true;
+    }
+
+    private String changeLocalName(String name) {
+        if (name.equalsIgnoreCase("Camera")) {
+            name = mContext.getString(R.string.camera);
+        } else if (name.equalsIgnoreCase("Screenshots")) {
+            name = mContext.getString(R.string.screen_short);
+        } else if (name.equalsIgnoreCase("Weixin")) {
+            name = mContext.getString(R.string.we_chat);
+        } else if (name.equalsIgnoreCase("save")) {
+            name = mContext.getString(R.string.save);
+        } else if (name.equalsIgnoreCase("download")) {
+            name = mContext.getString(R.string.download);
+        } else if (name.equalsIgnoreCase("Pictures")) {
+            name = mContext.getString(R.string.picture);
+        }
+        return name;
     }
 
     /**
@@ -144,7 +188,17 @@ public class LocalAlbumImagePickerHelper {
         for (Entry<String, ImageBucket> entry : mImageBucketList.entrySet()) {
             imageBucketList.add(entry.getValue());
         }
+        Collections.sort(imageBucketList, new BucketComparator());
+        imageBucketList.add(0, mImageBucketRecent);
         return imageBucketList;
     }
 
+    class BucketComparator implements Comparator<ImageBucket> {
+        @Override
+        public int compare(ImageBucket o1, ImageBucket o2) {
+            String name1 = o1.bucketName;
+            String name2 = o2.bucketName;
+            return name2.compareToIgnoreCase(name1);
+        }
+    }
 }

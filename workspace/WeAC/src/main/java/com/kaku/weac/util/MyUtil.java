@@ -995,6 +995,15 @@ public class MyUtil {
         if (alpha == null) return false;
         return alpha.matches("[a-zA-Z]+");
     }*/
+/*    public static boolean isChineseChar(String str) {
+        boolean temp = false;
+        Pattern p = Pattern.compile("[\u4e00-\u9fa5]");
+        Matcher m = p.matcher(str);
+        if (m.find()) {
+            temp = true;
+        }
+        return temp;
+    }*/
 
     /**
      * Returns specified directory. directory will be created on SD card by defined path if card

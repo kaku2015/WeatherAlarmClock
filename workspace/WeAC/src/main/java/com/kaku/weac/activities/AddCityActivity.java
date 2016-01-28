@@ -279,6 +279,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
                             mCountriesEn[i].contains(cityName.toLowerCase())) {
                         SpannableString spanString = new SpannableString(mCountries[i]);
                         // 构造一个改变字体颜色的Span
+                        @SuppressWarnings("deprecation")
                         ForegroundColorSpan span = new ForegroundColorSpan(getResources().
                                 getColor(R.color.white_trans90));
 
@@ -582,8 +583,8 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
         LocationClientOption option = new LocationClientOption();
         option.setCoorType("bd09ll");//可选，默认gcj02，设置返回的定位结果坐标系
         option.setIsNeedAddress(true);//可选，设置是否需要地址信息，默认不需要
-//        option.setOpenGps(true);//可选，默认false,设置是否使用gps
-        option.disableCache(true);// 禁止启用缓存定位\
+        option.setOpenGps(true);//可选，默认false,设置是否使用gps
+        option.disableCache(true);// 禁止启用缓存定位
         mLocationClient.setLocOption(option);
 
 //        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy

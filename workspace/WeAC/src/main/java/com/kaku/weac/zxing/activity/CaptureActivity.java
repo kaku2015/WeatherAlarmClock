@@ -227,6 +227,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
         beepManager.playBeepSoundAndVibrate();
 //        AudioPlayer.getInstance(this).playRaw(R.raw.scan, false, false);
+//        MyUtil.vibrate(this);
 
         operateResult(rawResult);
     }
@@ -357,6 +358,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     /**
      * 初始化截取的矩形区域
      */
+    @SuppressWarnings("SuspiciousNameCombination")
     private void initCrop() {
         // http://skillcollege.github.io/2015/02/05/-打造极致二维码扫描系列-基于ZBar的Android平台解码/
 

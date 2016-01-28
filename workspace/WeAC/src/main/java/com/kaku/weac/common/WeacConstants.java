@@ -190,7 +190,7 @@ public class WeacConstants {
     /**
      * 自定义壁纸保存文件夹
      */
-    public static final String DIY_WALLPAPER_PATH = "/WeaAlarmClock/wallpaper/default.jpg";
+    public static final String DIY_WALLPAPER_PATH = "/wallpaper/theme.jpg";
 
     /**
      * 图片地址

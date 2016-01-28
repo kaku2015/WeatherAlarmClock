@@ -1006,7 +1006,8 @@ public class MyUtil {
     }*/
 
     /**
-     * Returns specified directory. directory will be created on SD card by defined path if card
+     * Returns specified directory(/mnt/sdcard/...).
+     * directory will be created on SD card by defined path if card
      * is mounted. Else - Android defines files directory on device's
      * files（/data/data/<application package>/files） system.
      *
@@ -1033,6 +1034,34 @@ public class MyUtil {
     }
 
     /**
+     * Returns specified directory(/mnt/sdcard/Android/data/<application package>/files/...).
+     * directory will be created on SD card by defined path if card
+     * is mounted. Else - Android defines files directory on device's
+     * files（/data/data/<application package>/files） system.
+     *
+     * @param context context
+     * @param path    file  path (e.g.: "/music/a.mp3", "/pictures/a.jpg")
+     * @return File {@link File directory}
+     */
+    public static File getExternalFileDirectory(Context context, String path) {
+        File file = null;
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+            file = new File(context.getExternalFilesDir(null), path);
+            if (!file.getParentFile().exists()) {
+                if (!file.getParentFile().mkdirs()) {
+                    file = null;
+                }
+            }
+        }
+        if (file == null) {
+            // 使用内部缓存[MediaStore.EXTRA_OUTPUT ("output")]是无法正确写入裁切后的图片的。
+            // 系统是用全局的ContentResolver来做这个过程的文件io操作，app内部的存储被忽略。（猜测）
+            file = new File(context.getFilesDir(), path);
+        }
+        return file;
+    }
+
+    /**
      * Returns directory absolutePath.
      *
      * @param context context
@@ -1040,7 +1069,7 @@ public class MyUtil {
      * @return absolutePath.
      */
     public static String getFilePath(Context context, String path) {
-        return getFileDirectory(context, path).getAbsolutePath();
+        return getExternalFileDirectory(context, path).getAbsolutePath();
     }
 
     /**
@@ -1063,7 +1092,7 @@ public class MyUtil {
         intent.putExtra("aspectX", width);
         intent.putExtra("aspectY", height);
         // 保存路径
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getFileDirectory
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getExternalFileDirectory
                 (context, filePath)));
         // 是否去除面部检测
         intent.putExtra("noFaceDetection", true);

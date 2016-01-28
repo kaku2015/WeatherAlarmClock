@@ -46,7 +46,7 @@ public class LocalAlbumAdapter extends ArrayAdapter<ImageBucket> {
         }
 
         ImageBucket imageBucket = getItem(position);
-        if (null != imageBucket) {
+        if (null != imageBucket && imageBucket.bucketList.size() > 0) {
             // 图片path
             String imagePath = imageBucket.bucketList.get(0).getImagePath();
             if (!TextUtils.isEmpty(imagePath)) {

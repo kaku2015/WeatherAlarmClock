@@ -16,8 +16,6 @@
 package com.kaku.weac.zxing.activity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
@@ -41,7 +39,10 @@ import com.google.zxing.Result;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.DisplayScanResultActivity;
 import com.kaku.weac.activities.LocalAlbumActivity;
+import com.kaku.weac.activities.MyDialogActivitySingle;
 import com.kaku.weac.bean.Event.ScanCodeEvent;
+import com.kaku.weac.common.WeacConstants;
+import com.kaku.weac.util.AudioPlayer;
 import com.kaku.weac.util.ImageLoaderHelper;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
@@ -225,9 +226,9 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
             return;
         }
 
-        beepManager.playBeepSoundAndVibrate();
-//        AudioPlayer.getInstance(this).playRaw(R.raw.scan, false, false);
-//        MyUtil.vibrate(this);
+//        beepManager.playBeepSoundAndVibrate();
+        AudioPlayer.getInstance(this).playRaw(R.raw.beep, false, false);
+        MyUtil.vibrate(this);
 
         operateResult(rawResult);
     }
@@ -321,9 +322,17 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         }
     }
 
+    private static final int REQUEST_MY_DIALOG = 1;
+
     private void displayFrameworkBugMessageAndExit() {
         // camera error
         // TODO:自定义错误弹出框样式
+        Intent intent = new Intent(this, MyDialogActivitySingle.class);
+        intent.putExtra(WeacConstants.TITLE, getString(R.string.prompt));
+        intent.putExtra(WeacConstants.DETAIL, getString(R.string.camera_error));
+        startActivityForResult(intent, REQUEST_MY_DIALOG);
+
+/*
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.app_name));
         builder.setMessage("Camera error");
@@ -342,7 +351,19 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
                 finish();
             }
         });
-        builder.show();
+        builder.show();*/
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        if (requestCode == REQUEST_MY_DIALOG) {
+            finish();
+            overridePendingTransition(0, 0);
+        }
     }
 
     public void restartPreviewAfterDelay(long delayMS) {

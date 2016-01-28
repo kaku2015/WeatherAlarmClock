@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    style="@style/dialog_llyt"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        style="@style/dialog_title"/>
+
+    <View style="@style/line_blue"/>
+
+    <TextView
+        android:id="@+id/dialog_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"/>
+
+    <Button
+        android:id="@+id/dialog_sure_btn"
+        style="@style/single_btn"
+        android:layout_height="40dp"
+        android:text="@string/sure"/>
+
+</LinearLayout>

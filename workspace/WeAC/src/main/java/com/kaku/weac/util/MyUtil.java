@@ -110,13 +110,11 @@ public class MyUtil {
     public static void setStatusBarTranslucent(ViewGroup vg, Activity activity) {
         // 如果版本在4.4以上
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            int resourceId = activity.getResources().getIdentifier("status_bar_height", "dimen",
-                    "android");
-            if (resourceId <= 0) {
+            // 状态栏高度
+            int height = getStatusBarHeight(activity);
+            if (height <= 0) {
                 return;
             }
-            // 状态栏高度
-            int height = activity.getResources().getDimensionPixelSize(resourceId);
             // 设置距离顶部状态栏垂直距离
             vg.setPadding(0, height, 0, 0);
             // 状态栏透明
@@ -124,6 +122,16 @@ public class MyUtil {
             // 导航栏透明
 //            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
+    }
+
+    public static int getStatusBarHeight(Activity activity) {
+        int height = 0;
+        int resourceId = activity.getResources().getIdentifier("status_bar_height", "dimen",
+                "android");
+        if (resourceId > 0) {
+            height = activity.getResources().getDimensionPixelSize(resourceId);
+        }
+        return height;
     }
 
     private static void setWallpaper(ViewGroup vg, Activity activity, SharedPreferences share) {

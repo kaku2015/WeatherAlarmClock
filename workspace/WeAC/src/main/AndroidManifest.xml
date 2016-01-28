@@ -33,6 +33,7 @@
     <!--开启闪光灯-->
     <uses-feature android:name="android.hardware.camera"/>
     <uses-feature android:name="android.hardware.autofocus"/>
+
     <uses-permission android:name="android.permission.FLASHLIGHT"/>
 
     <application
@@ -95,6 +96,9 @@
             android:theme="@style/Theme.MyDialog"/>
         <activity
             android:name=".activities.MyDialogActivity"
+            android:theme="@style/Theme.MyDialog"/>
+        <activity
+            android:name=".activities.MyDialogActivitySingle"
             android:theme="@style/Theme.MyDialog"/>
         <activity
             android:name=".activities.LifeIndexDetailActivity"

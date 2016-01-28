@@ -188,8 +188,10 @@ public class LocalAlbumImagePickerHelper {
         for (Entry<String, ImageBucket> entry : mImageBucketList.entrySet()) {
             imageBucketList.add(entry.getValue());
         }
-        Collections.sort(imageBucketList, new BucketComparator());
-        imageBucketList.add(0, mImageBucketRecent);
+        if (imageBucketList.size() > 0) {
+            Collections.sort(imageBucketList, new BucketComparator());
+            imageBucketList.add(0, mImageBucketRecent);
+        }
         return imageBucketList;
     }
 

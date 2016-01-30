@@ -171,23 +171,17 @@
     <bookmark url="file://$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml" line="220" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dd13465a-1f53-468b-aa88-adc0628e1005" name="Default" comment="更改默认壁纸位置为getExternalFilesDir(null) = /mnt/sdcard/Android/data/com.my.app/files/...">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/MyDialogActivitySingle.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WeAC/src/main/res/layout/activity_my_dialog_single.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PagerSlidingTabStrip/build/outputs/aar/PagerSlidingTabStrip-release.aar" afterPath="$PROJECT_DIR$/PagerSlidingTabStrip/build/outputs/aar/PagerSlidingTabStrip-release.aar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PagerSlidingTabStrip/build/intermediates/bundles/release/classes.jar" afterPath="$PROJECT_DIR$/PagerSlidingTabStrip/build/intermediates/bundles/release/classes.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/exploded-aar/workspace/PagerSlidingTabStrip/unspecified/jars/classes.jar" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/exploded-aar/workspace/PagerSlidingTabStrip/unspecified/jars/classes.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/res/resources-debug-androidTest.ap_" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/res/resources-debug-androidTest.ap_" />
+    <list default="true" id="dd13465a-1f53-468b-aa88-adc0628e1005" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/res/resources-debug.ap_" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/res/resources-debug.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/manifests/full/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/WeAC/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/zxing/activity/CaptureActivity.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/zxing/activity/CaptureActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/adapter/LocalAlbumAdapter.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/adapter/LocalAlbumAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/LocalAlbumImagePickerHelper.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/LocalAlbumImagePickerHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/MyUtil.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/MyUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumActivity.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/generated/source/r/debug/com/astuetz/pagerslidingtabstrip/R.java" afterPath="$PROJECT_DIR$/WeAC/build/generated/source/r/debug/com/astuetz/pagerslidingtabstrip/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/generated/source/r/debug/com/kaku/weac/R.java" afterPath="$PROJECT_DIR$/WeAC/build/generated/source/r/debug/com/kaku/weac/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/symbols/debug/R.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/WeAC.iml" afterPath="$PROJECT_DIR$/WeAC/WeAC.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/res/layout/activity_local_album.xml" afterPath="$PROJECT_DIR$/WeAC/src/main/res/layout/activity_local_album.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build.gradle" afterPath="$PROJECT_DIR$/WeAC/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/res/values/color.xml" afterPath="$PROJECT_DIR$/WeAC/src/main/res/values/color.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/outputs/logs/manifest-merger-debug-report.txt" afterPath="$PROJECT_DIR$/WeAC/build/outputs/logs/manifest-merger-debug-report.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/incremental/mergeResourcesdebug/merger.xml" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/incremental/mergeResourcesdebug/merger.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml" />
@@ -222,88 +216,315 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MyDialogActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/MyDialogActivity.java">
+      <file leaf-file-name="fm_wea.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/fm_wea.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CaptureActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CaptureActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/zxing/activity/CaptureActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.30136988">
-              <caret line="239" column="73" selection-start-line="239" selection-start-column="73" selection-end-line="239" selection-end-column="73" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="324" column="44" selection-start-line="324" selection-start-column="44" selection-end-line="324" selection-end-column="44" />
               <folding>
-                <element signature="e#11460#11492#0" expanded="true" />
+                <element signature="e#0#17189#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#3343#3344#0" expanded="false" />
+                <element signature="e#3373#3374#0" expanded="false" />
+                <element signature="e#3420#3421#0" expanded="false" />
+                <element signature="e#3456#3457#0" expanded="false" />
+                <element signature="e#7046#7047#0" expanded="false" />
+                <element signature="e#7082#7083#0" expanded="false" />
+                <element signature="e#12778#12779#0" expanded="false" />
+                <element signature="e#12810#12811#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CameraManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/zxing/camera/CameraManager.java">
+      <file leaf-file-name="LocalAlbumDetailActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumDetailActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.533334">
-              <caret line="210" column="45" selection-start-line="210" selection-start-column="45" selection-end-line="210" selection-end-column="45" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MyDialogActivitySingle.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/MyDialogActivitySingle.java">
+      <file leaf-file-name="activity_local_album.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_local_album.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="19" column="2" selection-start-line="19" selection-start-column="2" selection-end-line="19" selection-end-column="2" />
+            <state vertical-scroll-proportion="-8.4">
+              <caret line="57" column="44" selection-start-line="57" selection-start-column="44" selection-end-line="57" selection-end-column="44" />
               <folding>
-                <element signature="e#1114#1303#0" expanded="true" />
-                <element signature="e#1302#1303#0" expanded="true" />
+                <element signature="e#1102#1127#0" expanded="true" />
+                <element signature="e#1163#1188#0" expanded="true" />
+                <element signature="e#1266#1292#0" expanded="true" />
+                <element signature="e#1555#1579#0" expanded="true" />
+                <element signature="e#1654#1672#0" expanded="true" />
+                <element signature="e#2608#2626#0" expanded="true" />
+                <element signature="e#2709#2727#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RecordDetailFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/RecordDetailFragment.java">
+      <file leaf-file-name="color.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/values/color.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+              <caret line="89" column="50" selection-start-line="89" selection-start-column="50" selection-end-line="89" selection-end-column="50" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AddCityActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/AddCityActivity.java">
+      <file leaf-file-name="LocalAlbumActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="646" column="0" selection-start-line="646" selection-start-column="0" selection-end-line="646" selection-end-column="0" />
+            <state vertical-scroll-proportion="2.2516556">
+              <caret line="160" column="17" selection-start-line="160" selection-start-column="17" selection-end-line="160" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MyUtil.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/MyUtil.java">
+      <file leaf-file-name="TextView.java" pinned="false" current-in-tab="false">
+        <entry file="file://D:/AppData/Local/Android/sdk/sources/android-23/android/widget/TextView.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="114" column="22" selection-start-line="114" selection-start-column="22" selection-end-line="114" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="100" column="60" selection-start-line="100" selection-start-column="60" selection-end-line="100" selection-end-column="60" />
+              <caret line="2878" column="46" selection-start-line="2878" selection-start-column="31" selection-end-line="2878" selection-end-column="46" />
               <folding>
-                <element signature="e#2006#2024#0" expanded="true" />
+                <element signature="e#0#380970#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#26586#26587#0" expanded="false" />
+                <element signature="e#26621#26622#0" expanded="false" />
+                <element signature="e#63358#63359#0" expanded="false" />
+                <element signature="e#63386#63387#0" expanded="false" />
+                <element signature="e#63531#63532#0" expanded="false" />
+                <element signature="e#63558#63559#0" expanded="false" />
+                <element signature="e#64096#64097#0" expanded="false" />
+                <element signature="e#64124#64125#0" expanded="false" />
+                <element signature="e#64246#64247#0" expanded="false" />
+                <element signature="e#64283#64284#0" expanded="false" />
+                <element signature="e#65170#65171#0" expanded="false" />
+                <element signature="e#65200#65201#0" expanded="false" />
+                <element signature="e#65358#65359#0" expanded="false" />
+                <element signature="e#65392#65393#0" expanded="false" />
+                <element signature="e#70320#70321#0" expanded="false" />
+                <element signature="e#70352#70353#0" expanded="false" />
+                <element signature="e#72139#72140#0" expanded="false" />
+                <element signature="e#72177#72178#0" expanded="false" />
+                <element signature="e#78447#78448#0" expanded="false" />
+                <element signature="e#78494#78495#0" expanded="false" />
+                <element signature="e#78647#78648#0" expanded="false" />
+                <element signature="e#78695#78696#0" expanded="false" />
+                <element signature="e#78848#78849#0" expanded="false" />
+                <element signature="e#78896#78897#0" expanded="false" />
+                <element signature="e#79043#79044#0" expanded="false" />
+                <element signature="e#79089#79090#0" expanded="false" />
+                <element signature="e#79345#79346#0" expanded="false" />
+                <element signature="e#79417#79418#0" expanded="false" />
+                <element signature="e#104215#104216#0" expanded="false" />
+                <element signature="e#104251#104252#0" expanded="false" />
+                <element signature="e#104886#104887#0" expanded="false" />
+                <element signature="e#104936#104937#0" expanded="false" />
+                <element signature="e#108087#108088#0" expanded="false" />
+                <element signature="e#108136#108137#0" expanded="false" />
+                <element signature="e#109075#109076#0" expanded="false" />
+                <element signature="e#109122#109123#0" expanded="false" />
+                <element signature="e#109329#109330#0" expanded="false" />
+                <element signature="e#109397#109398#0" expanded="false" />
+                <element signature="e#110354#110355#0" expanded="false" />
+                <element signature="e#110415#110416#0" expanded="false" />
+                <element signature="e#111520#111521#0" expanded="false" />
+                <element signature="e#111569#111570#0" expanded="false" />
+                <element signature="e#113255#113256#0" expanded="false" />
+                <element signature="e#113302#113303#0" expanded="false" />
+                <element signature="e#113747#113748#0" expanded="false" />
+                <element signature="e#113803#113804#0" expanded="false" />
+                <element signature="e#114043#114044#0" expanded="false" />
+                <element signature="e#114095#114096#0" expanded="false" />
+                <element signature="e#115025#115026#0" expanded="false" />
+                <element signature="e#115083#115084#0" expanded="false" />
+                <element signature="e#115974#115975#0" expanded="false" />
+                <element signature="e#116011#116012#0" expanded="false" />
+                <element signature="e#116859#116860#0" expanded="false" />
+                <element signature="e#116903#116904#0" expanded="false" />
+                <element signature="e#118986#118987#0" expanded="false" />
+                <element signature="e#119019#119020#0" expanded="false" />
+                <element signature="e#119214#119215#0" expanded="false" />
+                <element signature="e#119250#119251#0" expanded="false" />
+                <element signature="e#119864#119865#0" expanded="false" />
+                <element signature="e#119902#119903#0" expanded="false" />
+                <element signature="e#121940#121941#0" expanded="false" />
+                <element signature="e#121976#121977#0" expanded="false" />
+                <element signature="e#122206#122207#0" expanded="false" />
+                <element signature="e#122238#122239#0" expanded="false" />
+                <element signature="e#122466#122467#0" expanded="false" />
+                <element signature="e#122498#122499#0" expanded="false" />
+                <element signature="e#122734#122735#0" expanded="false" />
+                <element signature="e#122769#122770#0" expanded="false" />
+                <element signature="e#122956#122957#0" expanded="false" />
+                <element signature="e#122989#122990#0" expanded="false" />
+                <element signature="e#123299#123300#0" expanded="false" />
+                <element signature="e#123335#123336#0" expanded="false" />
+                <element signature="e#123751#123752#0" expanded="false" />
+                <element signature="e#123792#123793#0" expanded="false" />
+                <element signature="e#124161#124162#0" expanded="false" />
+                <element signature="e#124199#124200#0" expanded="false" />
+                <element signature="e#126083#126084#0" expanded="false" />
+                <element signature="e#126120#126121#0" expanded="false" />
+                <element signature="e#127584#127585#0" expanded="false" />
+                <element signature="e#127621#127622#0" expanded="false" />
+                <element signature="e#129184#129185#0" expanded="false" />
+                <element signature="e#129215#129216#0" expanded="false" />
+                <element signature="e#129362#129363#0" expanded="false" />
+                <element signature="e#129406#129407#0" expanded="false" />
+                <element signature="e#130744#130745#0" expanded="false" />
+                <element signature="e#130789#130790#0" expanded="false" />
+                <element signature="e#131617#131618#0" expanded="false" />
+                <element signature="e#131673#131674#0" expanded="false" />
+                <element signature="e#132437#132438#0" expanded="false" />
+                <element signature="e#132494#132495#0" expanded="false" />
+                <element signature="e#133231#133232#0" expanded="false" />
+                <element signature="e#133287#133288#0" expanded="false" />
+                <element signature="e#134135#134136#0" expanded="false" />
+                <element signature="e#134192#134193#0" expanded="false" />
+                <element signature="e#135932#135933#0" expanded="false" />
+                <element signature="e#135992#135993#0" expanded="false" />
+                <element signature="e#136676#136677#0" expanded="false" />
+                <element signature="e#136739#136740#0" expanded="false" />
+                <element signature="e#137412#137413#0" expanded="false" />
+                <element signature="e#137472#137473#0" expanded="false" />
+                <element signature="e#138155#138156#0" expanded="false" />
+                <element signature="e#138218#138219#0" expanded="false" />
+                <element signature="e#140237#140238#0" expanded="false" />
+                <element signature="e#140272#140273#0" expanded="false" />
+                <element signature="e#140628#140629#0" expanded="false" />
+                <element signature="e#140662#140663#0" expanded="false" />
+                <element signature="e#140898#140899#0" expanded="false" />
+                <element signature="e#140944#140945#0" expanded="false" />
+                <element signature="e#146870#147089#0" expanded="false" />
+                <element signature="e#147088#147089#0" expanded="false" />
+                <element signature="e#148002#148003#0" expanded="false" />
+                <element signature="e#148044#148045#0" expanded="false" />
+                <element signature="e#148310#148311#0" expanded="false" />
+                <element signature="e#148345#148346#0" expanded="false" />
+                <element signature="e#149532#149533#0" expanded="false" />
+                <element signature="e#149574#149575#0" expanded="false" />
+                <element signature="e#149918#149919#0" expanded="false" />
+                <element signature="e#149969#149970#0" expanded="false" />
+                <element signature="e#159810#159811#0" expanded="false" />
+                <element signature="e#159838#159839#0" expanded="false" />
+                <element signature="e#159868#159869#0" expanded="false" />
+                <element signature="e#159902#159903#0" expanded="false" />
+                <element signature="e#177694#177695#0" expanded="false" />
+                <element signature="e#177756#177757#0" expanded="false" />
+                <element signature="e#181597#181598#0" expanded="false" />
+                <element signature="e#181628#181629#0" expanded="false" />
+                <element signature="e#192381#192382#0" expanded="false" />
+                <element signature="e#192444#192445#0" expanded="false" />
+                <element signature="e#192684#192685#0" expanded="false" />
+                <element signature="e#192751#192752#0" expanded="false" />
+                <element signature="e#192811#192812#0" expanded="false" />
+                <element signature="e#192878#192879#0" expanded="false" />
+                <element signature="e#203618#203619#0" expanded="false" />
+                <element signature="e#203642#203643#0" expanded="false" />
+                <element signature="e#213193#213194#0" expanded="false" />
+                <element signature="e#213260#213261#0" expanded="false" />
+                <element signature="e#239470#239471#0" expanded="false" />
+                <element signature="e#239531#239532#0" expanded="false" />
+                <element signature="e#239565#239566#0" expanded="false" />
+                <element signature="e#239624#239625#0" expanded="false" />
+                <element signature="e#240604#240605#0" expanded="false" />
+                <element signature="e#240632#240633#0" expanded="false" />
+                <element signature="e#254163#254300#0" expanded="false" />
+                <element signature="e#254299#254300#0" expanded="false" />
+                <element signature="e#255890#255891#0" expanded="false" />
+                <element signature="e#255924#255925#0" expanded="false" />
+                <element signature="e#280789#280790#0" expanded="false" />
+                <element signature="e#280847#280848#0" expanded="false" />
+                <element signature="e#281924#281925#0" expanded="false" />
+                <element signature="e#281985#281986#0" expanded="false" />
+                <element signature="e#282146#282147#0" expanded="false" />
+                <element signature="e#282205#282206#0" expanded="false" />
+                <element signature="e#283079#283080#0" expanded="false" />
+                <element signature="e#283114#283115#0" expanded="false" />
+                <element signature="e#287254#287255#0" expanded="false" />
+                <element signature="e#287304#287305#0" expanded="false" />
+                <element signature="e#287733#287734#0" expanded="false" />
+                <element signature="e#287775#287776#0" expanded="false" />
+                <element signature="e#287981#287982#0" expanded="false" />
+                <element signature="e#288014#288015#0" expanded="false" />
+                <element signature="e#311201#311202#0" expanded="false" />
+                <element signature="e#311270#311271#0" expanded="false" />
+                <element signature="e#311807#311808#0" expanded="false" />
+                <element signature="e#311836#311837#0" expanded="false" />
+                <element signature="e#323535#323536#0" expanded="false" />
+                <element signature="e#323563#323564#0" expanded="false" />
+                <element signature="e#324452#324596#0" expanded="false" />
+                <element signature="e#324595#324596#0" expanded="false" />
+                <element signature="e#326644#326645#0" expanded="false" />
+                <element signature="e#326691#326692#0" expanded="false" />
+                <element signature="e#352080#352081#0" expanded="false" />
+                <element signature="e#352139#352140#0" expanded="false" />
+                <element signature="e#352164#352165#0" expanded="false" />
+                <element signature="e#352223#352224#0" expanded="false" />
+                <element signature="e#352817#352818#0" expanded="false" />
+                <element signature="e#352849#352850#0" expanded="false" />
+                <element signature="e#363777#363778#0" expanded="false" />
+                <element signature="e#363805#363806#0" expanded="false" />
+                <element signature="e#365330#365331#0" expanded="false" />
+                <element signature="e#365372#365373#0" expanded="false" />
+                <element signature="e#365460#365461#0" expanded="false" />
+                <element signature="e#365487#365488#0" expanded="false" />
+                <element signature="e#365579#365580#0" expanded="false" />
+                <element signature="e#365619#365620#0" expanded="false" />
+                <element signature="e#367778#367779#0" expanded="false" />
+                <element signature="e#367819#367820#0" expanded="false" />
+                <element signature="e#369104#369105#0" expanded="false" />
+                <element signature="e#369161#369162#0" expanded="false" />
+                <element signature="e#369215#369216#0" expanded="false" />
+                <element signature="e#369274#369275#0" expanded="false" />
+                <element signature="e#370331#370332#0" expanded="false" />
+                <element signature="e#370369#370370#0" expanded="false" />
+                <element signature="e#370408#370409#0" expanded="false" />
+                <element signature="e#370459#370460#0" expanded="false" />
+                <element signature="e#370513#370514#0" expanded="false" />
+                <element signature="e#370579#370580#0" expanded="false" />
+                <element signature="e#374233#374393#0" expanded="false" />
+                <element signature="e#374392#374393#0" expanded="false" />
+                <element signature="e#374457#374726#0" expanded="false" />
+                <element signature="e#374725#374726#0" expanded="false" />
+                <element signature="e#374792#375144#0" expanded="false" />
+                <element signature="e#375143#375144#0" expanded="false" />
+                <element signature="e#377663#377664#0" expanded="false" />
+                <element signature="e#377706#377707#0" expanded="false" />
+                <element signature="e#377735#377736#0" expanded="false" />
+                <element signature="e#377773#377774#0" expanded="false" />
+                <element signature="e#377809#377810#0" expanded="false" />
+                <element signature="e#377854#377855#0" expanded="false" />
+                <element signature="e#377894#377895#0" expanded="false" />
+                <element signature="e#377945#377946#0" expanded="false" />
+                <element signature="e#377982#377983#0" expanded="false" />
+                <element signature="e#378064#378065#0" expanded="false" />
+                <element signature="e#378095#378096#0" expanded="false" />
+                <element signature="e#378152#378153#0" expanded="false" />
+                <element signature="e#378183#378184#0" expanded="false" />
+                <element signature="e#378240#378241#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -313,22 +534,22 @@
         <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/LocalAlbumImagePickerHelper.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="189" column="9" selection-start-line="189" selection-start-column="9" selection-end-line="189" selection-end-column="9" />
-              <folding />
+              <caret line="138" column="50" selection-start-line="138" selection-start-column="50" selection-end-line="138" selection-end-column="50" />
+              <folding>
+                <element signature="e#0#7099#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_my_dialog.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_my_dialog.xml">
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.0">
-              <caret line="20" column="41" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
+            <state vertical-scroll-proportion="-4.214286">
+              <caret line="242" column="32" selection-start-line="242" selection-start-column="32" selection-end-line="242" selection-end-column="32" />
               <folding />
             </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
           </provider>
         </entry>
       </file>
@@ -1004,6 +1225,11 @@
                 <option name="description" value="Prepare com.android.support:support-v4:23.1.1" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="prepareComAndroidSupportSupportV42311Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.github.castorflex.smoothprogressbar:library-circular:1.2.0" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComGithubCastorflexSmoothprogressbarLibraryCircular120Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Prepare com.squareup.leakcanary:leakcanary-android:1.3" />
@@ -2541,6 +2767,11 @@
                 <option name="name" value="prepareComAndroidSupportSupportV42311Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.github.castorflex.smoothprogressbar:library-circular:1.2.0" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/WeAC" />
+                <option name="name" value="prepareComGithubCastorflexSmoothprogressbarLibraryCircular120Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="description" value="Prepare com.squareup.leakcanary:leakcanary-android:1.3" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/WeAC" />
                 <option name="name" value="prepareComSquareupLeakcanaryLeakcanaryAndroid13Library" />
@@ -3243,7 +3474,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="D:\AndroidStudioProjects\workspace" value="8692424586588" />
+        <entry key="D:\AndroidStudioProjects\workspace" value="8692519804216" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -3690,12 +3921,12 @@
                             <option value="D:/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/appcompat-v7/23.1.1/appcompat-v7-23.1.1.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/otto/1.3.8/cf615176cd1177edf71d3c9605f8dc148fede6be/otto-1.3.8.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.6.1/86b122e640af09b0723e1fa44083c354ba6d9089/glide-3.6.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.castorflex.smoothprogressbar/library-circular/1.2.0/471bf9c18987f4d0239a469cf1a83daf50ea735c/library-circular-1.2.0.aar" />
                             <option value="D:/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar" />
                             <option value="$MODULE_DIR$/libs/litepal-1.3.0.jar" />
                             <option value="$MODULE_DIR$/libs/locSDK_6.13.jar" />
                             <option value="$MODULE_DIR$/libs/zxing-4.7.3.jar" />
                             <option value="$MODULE_DIR$/libs/universal-image-loader-1.9.5.jar" />
-                            <option value="$MODULE_DIR$/libs/ZBarDecoder.jar" />
                           </list>
                         </option>
                         <option name="path" value="$PROJECT_DIR$/WeAC" />
@@ -4124,9 +4355,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/WeAC/src/main/res/values/styles_scan_qr_code.xml" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/view/zxing/activity/CaptureActivity.java" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/view/zxing/utils/CaptureActivityHandler.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/view/zxing/utils/BeepManager.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/view/zxing/decode/DecodeHandler.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/zxing/encoding/EncodingUtils.java" />
@@ -4162,19 +4390,22 @@
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/WeaFragment.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/common/WeacConstants.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/AddCityActivity.java" />
-        <option value="$PROJECT_DIR$/WeAC/build.gradle" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/MyUtil.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/res/layout/activity_capture.xml" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/adapter/LocalAlbumAdapter.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/LocalAlbumImagePickerHelper.java" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumActivity.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/res/layout/btn_dialog_sure_cancel.xml" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/WeAC/src/main/res/layout/activity_my_dialog_single.xml" />
         <option value="$PROJECT_DIR$/WeAC/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/zxing/camera/CameraManager.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/MyDialogActivitySingle.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/zxing/activity/CaptureActivity.java" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/MyUtil.java" />
+        <option value="$PROJECT_DIR$/WeAC/build.gradle" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/res/values/color.xml" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/res/layout/pro_bar_smooth_circle.xml" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/res/layout/activity_local_album.xml" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumActivity.java" />
       </list>
     </option>
   </component>
@@ -4245,8 +4476,9 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -4257,20 +4489,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="External Libraries" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="workspace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="&lt; Android API 23 Platform &gt;" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -4432,6 +4650,66 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WeAC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WeAC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="anim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -4781,11 +5059,10 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="fileTemplates" />
+    <property name="settings.editor.selected.configurable" value="File.Encoding" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="192.168.1.101:5555" />
@@ -4840,15 +5117,15 @@
       <recent name="layout" />
       <recent name="com.kaku.weac.service" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\AndroidStudioProjects\workspace\WeAC\src\main\res\drawable-xhdpi" />
-      <recent name="D:\AndroidStudioProjects\workspace\WeAC\src\main\res\drawable" />
+    <key name="android.template.parentActivityClass">
+      <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.kaku.weac" />
     </key>
-    <key name="android.template.parentActivityClass">
-      <recent name="" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\AndroidStudioProjects\workspace\WeAC\src\main\res\drawable-xhdpi" />
+      <recent name="D:\AndroidStudioProjects\workspace\WeAC\src\main\res\drawable" />
     </key>
   </component>
   <component name="RunManager" selected="Android Application.WeAC">
@@ -5208,7 +5485,13 @@
       <option name="project" value="LOCAL" />
       <updated>1453984500568</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="my single button dialog">
+      <created>1454002147950</created>
+      <option name="number" value="00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1454002147950</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TodoView">
@@ -5225,35 +5508,35 @@
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23692992" sideWeight="0.48880598" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4560623" sideWeight="0.5090618" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32249466" sideWeight="0.51608187" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46162403" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22547974" sideWeight="0.48391813" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3259177" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23720682" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23248054" sideWeight="0.49093816" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31556502" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33481646" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2958843" sideWeight="0.48773986" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="CodotaView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18131258" sideWeight="0.4914712" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5053619" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26140156" sideWeight="0.51226014" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46162403" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32249466" sideWeight="0.51608187" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.13793103" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22547974" sideWeight="0.48391813" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2269188" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" x="92" y="92" width="1736" height="856" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33481646" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39933258" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -5270,7 +5553,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="timer release" />
     <MESSAGE value="weather alarm clock function" />
     <MESSAGE value="my sliding view" />
     <MESSAGE value="my sliding view2" />
@@ -5295,7 +5577,8 @@
     <MESSAGE value="scan code release2" />
     <MESSAGE value="本地相册添加最近文件夹并汉字优先排序" />
     <MESSAGE value="更改默认壁纸位置为getExternalFilesDir(null) = /mnt/sdcard/Android/data/com.my.app/files/..." />
-    <option name="LAST_COMMIT_MESSAGE" value="更改默认壁纸位置为getExternalFilesDir(null) = /mnt/sdcard/Android/data/com.my.app/files/..." />
+    <MESSAGE value="my single button dialog" />
+    <option name="LAST_COMMIT_MESSAGE" value="my single button dialog" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -5349,22 +5632,22 @@
           <option name="timeStamp" value="235" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/LocalAlbumImagePickerHelper.java</url>
-          <line>132</line>
-          <properties />
-          <option name="timeStamp" value="261" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/LocalAlbumImagePickerHelper.java</url>
-          <line>138</line>
-          <properties />
-          <option name="timeStamp" value="263" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/zxing/activity/CaptureActivity.java</url>
           <line>359</line>
           <properties />
           <option name="timeStamp" value="266" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumActivity.java</url>
+          <line>148</line>
+          <properties />
+          <option name="timeStamp" value="269" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumActivity.java</url>
+          <line>168</line>
+          <properties />
+          <option name="timeStamp" value="270" />
         </line-breakpoint>
         <line-breakpoint suspend="ALL" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/LocalAlbumImagePickerHelper.java</url>
@@ -5375,75 +5658,20 @@
           <line>68</line>
           <option name="timeStamp" value="236" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/WeAC/src/main/res/layout/fm_wea.xml</url>
+          <line>5</line>
+          <option name="timeStamp" value="271" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="268" />
+      <option name="time" value="273" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/adapter/LocalAlbumDetailAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="59" selection-start-line="43" selection-start-column="59" selection-end-line="43" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/AppData/Local/Android/sdk/sources/android-23/android/os/Looper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33233082">
-          <caret line="172" column="35" selection-start-line="172" selection-start-column="35" selection-end-line="172" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/zxing/decode/DecodeHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="72" column="46" selection-start-line="72" selection-start-column="46" selection-end-line="72" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/zxing/decode/DecodeThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="58" column="64" selection-start-line="58" selection-start-column="64" selection-end-line="58" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/zxing/encoding/EncodingUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/zxing/utils/CaptureActivityHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="33" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_display_scan_result.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.766666">
-          <caret line="64" column="48" selection-start-line="64" selection-start-column="48" selection-end-line="64" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/WeAC/libs/zxing-4.7.3.jar!/com/google/zxing/RGBLuminanceSource.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.599686">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/zxing/decode/DecodeUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -5459,14 +5687,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/fm_more.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="63" column="30" selection-start-line="63" selection-start-column="30" selection-end-line="63" selection-end-column="30" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/zxing/utils/InactivityTimer.java">
@@ -5501,12 +5729,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#5718#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#1460#1461#0" expanded="false" />
-            <element signature="e#1497#1498#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -5528,7 +5750,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2992565">
           <caret line="490" column="46" selection-start-line="490" selection-start-column="46" selection-end-line="490" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5536,7 +5757,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33271375">
           <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5571,54 +5791,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="45" column="13" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#19869#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#3135#3136#0" expanded="false" />
-            <element signature="e#3183#3184#0" expanded="false" />
-            <element signature="e#3280#3281#0" expanded="false" />
-            <element signature="e#3315#3316#0" expanded="false" />
-            <element signature="e#3387#3388#0" expanded="false" />
-            <element signature="e#3426#3427#0" expanded="false" />
-            <element signature="e#10151#10152#0" expanded="false" />
-            <element signature="e#10213#10214#0" expanded="false" />
-            <element signature="e#15432#15433#0" expanded="false" />
-            <element signature="e#15474#15475#0" expanded="false" />
-            <element signature="e#15660#15661#0" expanded="false" />
-            <element signature="e#15698#15699#0" expanded="false" />
-            <element signature="e#16013#16014#0" expanded="false" />
-            <element signature="e#16050#16051#0" expanded="false" />
-            <element signature="e#16351#16352#0" expanded="false" />
-            <element signature="e#16386#16387#0" expanded="false" />
-            <element signature="e#16564#16565#0" expanded="false" />
-            <element signature="e#16602#16603#0" expanded="false" />
-            <element signature="e#16775#16776#0" expanded="false" />
-            <element signature="e#16812#16813#0" expanded="false" />
-            <element signature="e#16975#16976#0" expanded="false" />
-            <element signature="e#17010#17011#0" expanded="false" />
-            <element signature="e#17180#17181#0" expanded="false" />
-            <element signature="e#17215#17216#0" expanded="false" />
-            <element signature="e#17253#17254#0" expanded="false" />
-            <element signature="e#17287#17288#0" expanded="false" />
-            <element signature="e#17338#17339#0" expanded="false" />
-            <element signature="e#17384#17385#0" expanded="false" />
-            <element signature="e#17535#17536#0" expanded="false" />
-            <element signature="e#17569#17570#0" expanded="false" />
-            <element signature="e#17865#17866#0" expanded="false" />
-            <element signature="e#17900#17901#0" expanded="false" />
-            <element signature="e#18117#18118#0" expanded="false" />
-            <element signature="e#18164#18165#0" expanded="false" />
-            <element signature="e#18201#18202#0" expanded="false" />
-            <element signature="e#18242#18243#0" expanded="false" />
-            <element signature="e#18412#18413#0" expanded="false" />
-            <element signature="e#18445#18446#0" expanded="false" />
-            <element signature="e#19126#19127#0" expanded="false" />
-            <element signature="e#19167#19168#0" expanded="false" />
-            <element signature="e#19655#19656#0" expanded="false" />
-            <element signature="e#19712#19713#0" expanded="false" />
-            <element signature="e#19788#19789#0" expanded="false" />
-            <element signature="e#19847#19848#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -5645,7 +5817,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="116" column="33" selection-start-line="116" selection-start-column="33" selection-end-line="116" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5653,15 +5824,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="191" column="7" selection-start-line="191" selection-start-column="7" selection-end-line="191" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumDetailActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5673,15 +5835,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-23.642857">
-          <caret line="43" column="41" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_capture.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.2">
           <caret line="2" column="48" selection-start-line="2" selection-start-column="48" selection-end-line="2" selection-end-column="48" />
@@ -5692,46 +5849,18 @@
           </folding>
         </state>
       </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_local_album.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.533334">
-          <caret line="55" column="41" selection-start-line="55" selection-start-column="41" selection-end-line="55" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="84" column="49" selection-start-line="84" selection-start-column="49" selection-end-line="84" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/adapter/LocalAlbumAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="57" column="50" selection-start-line="57" selection-start-column="50" selection-end-line="57" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.214286">
-          <caret line="261" column="0" selection-start-line="261" selection-start-column="0" selection-end-line="261" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/btn_dialog_sure_cancel.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.2">
           <caret line="17" column="38" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
@@ -5740,48 +5869,44 @@
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/fm_record_detail.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/fm_record_detail.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.933333">
           <caret line="80" column="38" selection-start-line="77" selection-start-column="4" selection-end-line="80" selection-end-column="38" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_my_dialog_single.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_my_dialog_single.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.2">
           <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_my_dialog.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_my_dialog.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="20" column="41" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/RecordRenameFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5789,7 +5914,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="646" column="0" selection-start-line="646" selection-start-column="0" selection-end-line="646" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5797,7 +5921,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="5443" column="80" selection-start-line="5443" selection-start-column="80" selection-end-line="5443" selection-end-column="80" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5805,15 +5928,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/zxing/camera/CameraManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.533334">
+        <state vertical-scroll-proportion="0.42465752">
           <caret line="210" column="45" selection-start-line="210" selection-start-column="45" selection-end-line="210" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5821,7 +5942,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5829,24 +5949,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="100" column="60" selection-start-line="100" selection-start-column="60" selection-end-line="100" selection-end-column="60" />
-          <folding>
-            <element signature="e#2006#2024#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/LocalAlbumImagePickerHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="189" column="9" selection-start-line="189" selection-start-column="9" selection-end-line="189" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/MyUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="114" column="22" selection-start-line="114" selection-start-column="22" selection-end-line="114" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -5855,20 +5957,372 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="2" selection-start-line="19" selection-start-column="2" selection-end-line="19" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/fm_weather_alarm.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.1">
+          <caret line="26" column="40" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/MyUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1156" column="5" selection-start-line="1156" selection-start-column="5" selection-end-line="1156" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="51" selection-start-line="35" selection-start-column="51" selection-end-line="35" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/fm_wea.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/LocalAlbumImagePickerHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="138" column="50" selection-start-line="138" selection-start-column="50" selection-end-line="138" selection-end-column="50" />
           <folding>
-            <element signature="e#1114#1303#0" expanded="true" />
-            <element signature="e#1302#1303#0" expanded="true" />
+            <element signature="e#0#7099#0" expanded="false" />
+            <element signature="imports" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/WeAC/build/intermediates/exploded-aar/com.github.castorflex.smoothprogressbar/library-circular/1.2.0/jars/classes.jar!/fr/castorflex/android/circularprogressbar/CircularProgressBar.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.5394737">
+          <caret line="33" column="40" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/zxing/activity/CaptureActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30136988">
-          <caret line="239" column="73" selection-start-line="239" selection-start-column="73" selection-end-line="239" selection-end-column="73" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="324" column="44" selection-start-line="324" selection-start-column="44" selection-end-line="324" selection-end-column="44" />
           <folding>
-            <element signature="e#11460#11492#0" expanded="true" />
+            <element signature="e#0#17189#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#3343#3344#0" expanded="false" />
+            <element signature="e#3373#3374#0" expanded="false" />
+            <element signature="e#3420#3421#0" expanded="false" />
+            <element signature="e#3456#3457#0" expanded="false" />
+            <element signature="e#7046#7047#0" expanded="false" />
+            <element signature="e#7082#7083#0" expanded="false" />
+            <element signature="e#12778#12779#0" expanded="false" />
+            <element signature="e#12810#12811#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/AppData/Local/Android/sdk/sources/android-23/android/widget/TextView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2878" column="46" selection-start-line="2878" selection-start-column="31" selection-end-line="2878" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#380970#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#26586#26587#0" expanded="false" />
+            <element signature="e#26621#26622#0" expanded="false" />
+            <element signature="e#63358#63359#0" expanded="false" />
+            <element signature="e#63386#63387#0" expanded="false" />
+            <element signature="e#63531#63532#0" expanded="false" />
+            <element signature="e#63558#63559#0" expanded="false" />
+            <element signature="e#64096#64097#0" expanded="false" />
+            <element signature="e#64124#64125#0" expanded="false" />
+            <element signature="e#64246#64247#0" expanded="false" />
+            <element signature="e#64283#64284#0" expanded="false" />
+            <element signature="e#65170#65171#0" expanded="false" />
+            <element signature="e#65200#65201#0" expanded="false" />
+            <element signature="e#65358#65359#0" expanded="false" />
+            <element signature="e#65392#65393#0" expanded="false" />
+            <element signature="e#70320#70321#0" expanded="false" />
+            <element signature="e#70352#70353#0" expanded="false" />
+            <element signature="e#72139#72140#0" expanded="false" />
+            <element signature="e#72177#72178#0" expanded="false" />
+            <element signature="e#78447#78448#0" expanded="false" />
+            <element signature="e#78494#78495#0" expanded="false" />
+            <element signature="e#78647#78648#0" expanded="false" />
+            <element signature="e#78695#78696#0" expanded="false" />
+            <element signature="e#78848#78849#0" expanded="false" />
+            <element signature="e#78896#78897#0" expanded="false" />
+            <element signature="e#79043#79044#0" expanded="false" />
+            <element signature="e#79089#79090#0" expanded="false" />
+            <element signature="e#79345#79346#0" expanded="false" />
+            <element signature="e#79417#79418#0" expanded="false" />
+            <element signature="e#104215#104216#0" expanded="false" />
+            <element signature="e#104251#104252#0" expanded="false" />
+            <element signature="e#104886#104887#0" expanded="false" />
+            <element signature="e#104936#104937#0" expanded="false" />
+            <element signature="e#108087#108088#0" expanded="false" />
+            <element signature="e#108136#108137#0" expanded="false" />
+            <element signature="e#109075#109076#0" expanded="false" />
+            <element signature="e#109122#109123#0" expanded="false" />
+            <element signature="e#109329#109330#0" expanded="false" />
+            <element signature="e#109397#109398#0" expanded="false" />
+            <element signature="e#110354#110355#0" expanded="false" />
+            <element signature="e#110415#110416#0" expanded="false" />
+            <element signature="e#111520#111521#0" expanded="false" />
+            <element signature="e#111569#111570#0" expanded="false" />
+            <element signature="e#113255#113256#0" expanded="false" />
+            <element signature="e#113302#113303#0" expanded="false" />
+            <element signature="e#113747#113748#0" expanded="false" />
+            <element signature="e#113803#113804#0" expanded="false" />
+            <element signature="e#114043#114044#0" expanded="false" />
+            <element signature="e#114095#114096#0" expanded="false" />
+            <element signature="e#115025#115026#0" expanded="false" />
+            <element signature="e#115083#115084#0" expanded="false" />
+            <element signature="e#115974#115975#0" expanded="false" />
+            <element signature="e#116011#116012#0" expanded="false" />
+            <element signature="e#116859#116860#0" expanded="false" />
+            <element signature="e#116903#116904#0" expanded="false" />
+            <element signature="e#118986#118987#0" expanded="false" />
+            <element signature="e#119019#119020#0" expanded="false" />
+            <element signature="e#119214#119215#0" expanded="false" />
+            <element signature="e#119250#119251#0" expanded="false" />
+            <element signature="e#119864#119865#0" expanded="false" />
+            <element signature="e#119902#119903#0" expanded="false" />
+            <element signature="e#121940#121941#0" expanded="false" />
+            <element signature="e#121976#121977#0" expanded="false" />
+            <element signature="e#122206#122207#0" expanded="false" />
+            <element signature="e#122238#122239#0" expanded="false" />
+            <element signature="e#122466#122467#0" expanded="false" />
+            <element signature="e#122498#122499#0" expanded="false" />
+            <element signature="e#122734#122735#0" expanded="false" />
+            <element signature="e#122769#122770#0" expanded="false" />
+            <element signature="e#122956#122957#0" expanded="false" />
+            <element signature="e#122989#122990#0" expanded="false" />
+            <element signature="e#123299#123300#0" expanded="false" />
+            <element signature="e#123335#123336#0" expanded="false" />
+            <element signature="e#123751#123752#0" expanded="false" />
+            <element signature="e#123792#123793#0" expanded="false" />
+            <element signature="e#124161#124162#0" expanded="false" />
+            <element signature="e#124199#124200#0" expanded="false" />
+            <element signature="e#126083#126084#0" expanded="false" />
+            <element signature="e#126120#126121#0" expanded="false" />
+            <element signature="e#127584#127585#0" expanded="false" />
+            <element signature="e#127621#127622#0" expanded="false" />
+            <element signature="e#129184#129185#0" expanded="false" />
+            <element signature="e#129215#129216#0" expanded="false" />
+            <element signature="e#129362#129363#0" expanded="false" />
+            <element signature="e#129406#129407#0" expanded="false" />
+            <element signature="e#130744#130745#0" expanded="false" />
+            <element signature="e#130789#130790#0" expanded="false" />
+            <element signature="e#131617#131618#0" expanded="false" />
+            <element signature="e#131673#131674#0" expanded="false" />
+            <element signature="e#132437#132438#0" expanded="false" />
+            <element signature="e#132494#132495#0" expanded="false" />
+            <element signature="e#133231#133232#0" expanded="false" />
+            <element signature="e#133287#133288#0" expanded="false" />
+            <element signature="e#134135#134136#0" expanded="false" />
+            <element signature="e#134192#134193#0" expanded="false" />
+            <element signature="e#135932#135933#0" expanded="false" />
+            <element signature="e#135992#135993#0" expanded="false" />
+            <element signature="e#136676#136677#0" expanded="false" />
+            <element signature="e#136739#136740#0" expanded="false" />
+            <element signature="e#137412#137413#0" expanded="false" />
+            <element signature="e#137472#137473#0" expanded="false" />
+            <element signature="e#138155#138156#0" expanded="false" />
+            <element signature="e#138218#138219#0" expanded="false" />
+            <element signature="e#140237#140238#0" expanded="false" />
+            <element signature="e#140272#140273#0" expanded="false" />
+            <element signature="e#140628#140629#0" expanded="false" />
+            <element signature="e#140662#140663#0" expanded="false" />
+            <element signature="e#140898#140899#0" expanded="false" />
+            <element signature="e#140944#140945#0" expanded="false" />
+            <element signature="e#146870#147089#0" expanded="false" />
+            <element signature="e#147088#147089#0" expanded="false" />
+            <element signature="e#148002#148003#0" expanded="false" />
+            <element signature="e#148044#148045#0" expanded="false" />
+            <element signature="e#148310#148311#0" expanded="false" />
+            <element signature="e#148345#148346#0" expanded="false" />
+            <element signature="e#149532#149533#0" expanded="false" />
+            <element signature="e#149574#149575#0" expanded="false" />
+            <element signature="e#149918#149919#0" expanded="false" />
+            <element signature="e#149969#149970#0" expanded="false" />
+            <element signature="e#159810#159811#0" expanded="false" />
+            <element signature="e#159838#159839#0" expanded="false" />
+            <element signature="e#159868#159869#0" expanded="false" />
+            <element signature="e#159902#159903#0" expanded="false" />
+            <element signature="e#177694#177695#0" expanded="false" />
+            <element signature="e#177756#177757#0" expanded="false" />
+            <element signature="e#181597#181598#0" expanded="false" />
+            <element signature="e#181628#181629#0" expanded="false" />
+            <element signature="e#192381#192382#0" expanded="false" />
+            <element signature="e#192444#192445#0" expanded="false" />
+            <element signature="e#192684#192685#0" expanded="false" />
+            <element signature="e#192751#192752#0" expanded="false" />
+            <element signature="e#192811#192812#0" expanded="false" />
+            <element signature="e#192878#192879#0" expanded="false" />
+            <element signature="e#203618#203619#0" expanded="false" />
+            <element signature="e#203642#203643#0" expanded="false" />
+            <element signature="e#213193#213194#0" expanded="false" />
+            <element signature="e#213260#213261#0" expanded="false" />
+            <element signature="e#239470#239471#0" expanded="false" />
+            <element signature="e#239531#239532#0" expanded="false" />
+            <element signature="e#239565#239566#0" expanded="false" />
+            <element signature="e#239624#239625#0" expanded="false" />
+            <element signature="e#240604#240605#0" expanded="false" />
+            <element signature="e#240632#240633#0" expanded="false" />
+            <element signature="e#254163#254300#0" expanded="false" />
+            <element signature="e#254299#254300#0" expanded="false" />
+            <element signature="e#255890#255891#0" expanded="false" />
+            <element signature="e#255924#255925#0" expanded="false" />
+            <element signature="e#280789#280790#0" expanded="false" />
+            <element signature="e#280847#280848#0" expanded="false" />
+            <element signature="e#281924#281925#0" expanded="false" />
+            <element signature="e#281985#281986#0" expanded="false" />
+            <element signature="e#282146#282147#0" expanded="false" />
+            <element signature="e#282205#282206#0" expanded="false" />
+            <element signature="e#283079#283080#0" expanded="false" />
+            <element signature="e#283114#283115#0" expanded="false" />
+            <element signature="e#287254#287255#0" expanded="false" />
+            <element signature="e#287304#287305#0" expanded="false" />
+            <element signature="e#287733#287734#0" expanded="false" />
+            <element signature="e#287775#287776#0" expanded="false" />
+            <element signature="e#287981#287982#0" expanded="false" />
+            <element signature="e#288014#288015#0" expanded="false" />
+            <element signature="e#311201#311202#0" expanded="false" />
+            <element signature="e#311270#311271#0" expanded="false" />
+            <element signature="e#311807#311808#0" expanded="false" />
+            <element signature="e#311836#311837#0" expanded="false" />
+            <element signature="e#323535#323536#0" expanded="false" />
+            <element signature="e#323563#323564#0" expanded="false" />
+            <element signature="e#324452#324596#0" expanded="false" />
+            <element signature="e#324595#324596#0" expanded="false" />
+            <element signature="e#326644#326645#0" expanded="false" />
+            <element signature="e#326691#326692#0" expanded="false" />
+            <element signature="e#352080#352081#0" expanded="false" />
+            <element signature="e#352139#352140#0" expanded="false" />
+            <element signature="e#352164#352165#0" expanded="false" />
+            <element signature="e#352223#352224#0" expanded="false" />
+            <element signature="e#352817#352818#0" expanded="false" />
+            <element signature="e#352849#352850#0" expanded="false" />
+            <element signature="e#363777#363778#0" expanded="false" />
+            <element signature="e#363805#363806#0" expanded="false" />
+            <element signature="e#365330#365331#0" expanded="false" />
+            <element signature="e#365372#365373#0" expanded="false" />
+            <element signature="e#365460#365461#0" expanded="false" />
+            <element signature="e#365487#365488#0" expanded="false" />
+            <element signature="e#365579#365580#0" expanded="false" />
+            <element signature="e#365619#365620#0" expanded="false" />
+            <element signature="e#367778#367779#0" expanded="false" />
+            <element signature="e#367819#367820#0" expanded="false" />
+            <element signature="e#369104#369105#0" expanded="false" />
+            <element signature="e#369161#369162#0" expanded="false" />
+            <element signature="e#369215#369216#0" expanded="false" />
+            <element signature="e#369274#369275#0" expanded="false" />
+            <element signature="e#370331#370332#0" expanded="false" />
+            <element signature="e#370369#370370#0" expanded="false" />
+            <element signature="e#370408#370409#0" expanded="false" />
+            <element signature="e#370459#370460#0" expanded="false" />
+            <element signature="e#370513#370514#0" expanded="false" />
+            <element signature="e#370579#370580#0" expanded="false" />
+            <element signature="e#374233#374393#0" expanded="false" />
+            <element signature="e#374392#374393#0" expanded="false" />
+            <element signature="e#374457#374726#0" expanded="false" />
+            <element signature="e#374725#374726#0" expanded="false" />
+            <element signature="e#374792#375144#0" expanded="false" />
+            <element signature="e#375143#375144#0" expanded="false" />
+            <element signature="e#377663#377664#0" expanded="false" />
+            <element signature="e#377706#377707#0" expanded="false" />
+            <element signature="e#377735#377736#0" expanded="false" />
+            <element signature="e#377773#377774#0" expanded="false" />
+            <element signature="e#377809#377810#0" expanded="false" />
+            <element signature="e#377854#377855#0" expanded="false" />
+            <element signature="e#377894#377895#0" expanded="false" />
+            <element signature="e#377945#377946#0" expanded="false" />
+            <element signature="e#377982#377983#0" expanded="false" />
+            <element signature="e#378064#378065#0" expanded="false" />
+            <element signature="e#378095#378096#0" expanded="false" />
+            <element signature="e#378152#378153#0" expanded="false" />
+            <element signature="e#378183#378184#0" expanded="false" />
+            <element signature="e#378240#378241#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumDetailActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/AppData/Local/Android/sdk/platforms/android-23/data/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38020834">
+          <caret line="414" column="73" selection-start-line="414" selection-start-column="53" selection-end-line="414" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_local_album.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.4">
+          <caret line="57" column="44" selection-start-line="57" selection-start-column="44" selection-end-line="57" selection-end-column="44" />
+          <folding>
+            <element signature="e#1102#1127#0" expanded="true" />
+            <element signature="e#1163#1188#0" expanded="true" />
+            <element signature="e#1266#1292#0" expanded="true" />
+            <element signature="e#1555#1579#0" expanded="true" />
+            <element signature="e#1654#1672#0" expanded="true" />
+            <element signature="e#2608#2626#0" expanded="true" />
+            <element signature="e#2709#2727#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.214286">
+          <caret line="242" column="32" selection-start-line="242" selection-start-column="32" selection-end-line="242" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/values/color.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="89" column="50" selection-start-line="89" selection-start-column="50" selection-end-line="89" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.2516556">
+          <caret line="160" column="17" selection-start-line="160" selection-start-column="17" selection-end-line="160" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>

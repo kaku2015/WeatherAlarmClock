@@ -10312,6 +10312,14 @@
         <item>澳门</item>
         <item>台北</item>
     </string-array>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/color.xml -->
+    <eat-comment/>
+    <integer-array name="gplus_colors">
+        <item>@color/gplus_color_1</item>
+        <item>@color/gplus_color_2</item>
+        <item>@color/gplus_color_3</item>
+        <item>@color/gplus_color_4</item>
+    </integer-array>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="drawerArrowStyle"/>
@@ -10374,6 +10382,11 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorPrimary">#009688</color>
     <color name="colorPrimaryDark">#00796B</color>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.github.castorflex.smoothprogressbar/library-circular/1.2.0/res/values/values.xml -->
+    <eat-comment/>
+    <color name="cpb_default_color">#33b5e5</color>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/color.xml -->
+    <eat-comment/>
     <color name="dark_blue">#3F51B5</color>
     <color name="dark_blue_button_pressed">#303F9F</color>
     <color name="dark_blue_focus">#403F51B5</color>
@@ -10393,6 +10406,10 @@
     <color name="foreground_material_light">@android:color/black</color>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/color.xml -->
     <eat-comment/>
+    <color name="gplus_color_1">#3e802f</color>
+    <color name="gplus_color_2">#f4b400</color>
+    <color name="gplus_color_3">#427fed</color>
+    <color name="gplus_color_4">#b23424</color>
     <color name="gray_background_color">#F4F4F4</color>
     <color name="gray_divider_line">#DDDDDD</color>
     <color name="gray_nap_edit">#808080</color>
@@ -10459,6 +10476,7 @@
     <declare-styleable name="AlertDialog"><attr name="android:layout"/><attr format="reference" name="buttonPanelSideLayout"/><attr format="reference" name="listLayout"/><attr format="reference" name="multiChoiceItemLayout"/><attr format="reference" name="singleChoiceItemLayout"/><attr format="reference" name="listItemLayout"/></declare-styleable>
     <declare-styleable name="AppCompatTextView"><attr format="reference|boolean" name="textAllCaps"/><attr name="android:textAppearance"/></declare-styleable>
     <declare-styleable name="ButtonBarLayout"><attr format="boolean" name="allowStacking"/></declare-styleable>
+    <declare-styleable name="CircularProgressBar"><attr format="reference" name="cpbStyle"/><attr format="color" name="cpb_color"/><attr format="reference" name="cpb_colors"/><attr format="dimension" name="cpb_stroke_width"/><attr format="integer" name="cpb_min_sweep_angle"/><attr format="integer" name="cpb_max_sweep_angle"/><attr format="float" name="cpb_sweep_speed"/><attr format="float" name="cpb_rotation_speed"/></declare-styleable>
     <declare-styleable name="CompoundButton"><attr name="android:button"/><attr format="color" name="buttonTint"/><attr name="buttonTintMode"><enum name="src_over" value="3"/><enum name="src_in" value="5"/><enum name="src_atop" value="9"/><enum name="multiply" value="14"/><enum name="screen" value="15"/></attr></declare-styleable>
     <declare-styleable name="DrawerArrowToggle"><attr format="color" name="color"/><attr format="boolean" name="spinBars"/><attr format="dimension" name="drawableSize"/><attr format="dimension" name="gapBetweenBars"/><attr format="dimension" name="arrowHeadLength"/><attr format="dimension" name="arrowShaftLength"/><attr format="dimension" name="barLength"/><attr format="dimension" name="thickness"/></declare-styleable>
     <declare-styleable name="LinearLayoutCompat"><attr name="android:orientation"/><attr name="android:gravity"/><attr name="android:baselineAligned"/><attr name="android:baselineAlignedChildIndex"/><attr name="android:weightSum"/><attr format="boolean" name="measureWithLargestChild"/><attr name="divider"/><attr name="showDividers"><flag name="none" value="0"/><flag name="beginning" value="1"/><flag name="middle" value="2"/><flag name="end" value="4"/></attr><attr format="dimension" name="dividerPadding"/></declare-styleable>
@@ -10558,6 +10576,9 @@
     <dimen name="big_large">24sp</dimen>
     <dimen name="big_medium">20sp</dimen>
     <dimen name="big_small">16sp</dimen>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.github.castorflex.smoothprogressbar/library-circular/1.2.0/res/values/values.xml -->
+    <eat-comment/>
+    <dimen name="cpb_default_stroke_width">4dp</dimen>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
     <eat-comment/>
     <item format="float" name="disabled_alpha_material_dark" type="dimen">0.30</item>
@@ -10642,6 +10663,12 @@
     <integer name="abc_config_activityShortDur">150</integer>
     <integer name="abc_max_action_buttons">2</integer>
     <integer name="cancel_button_image_alpha">127</integer>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.github.castorflex.smoothprogressbar/library-circular/1.2.0/res/values/values.xml -->
+    <eat-comment/>
+    <integer name="cpb_default_max_sweep_angle">300</integer>
+    <integer name="cpb_default_min_sweep_angle">20</integer>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <eat-comment/>
     <integer name="status_bar_notification_info_maxnum">999</integer>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/strings.xml -->
     <eat-comment/>
@@ -10721,6 +10748,12 @@
     <string name="countdown_day_hour_minute">距闹钟响起还有%1$d天%2$d小时%3$d分</string>
     <string name="countdown_hour_minute">距闹钟响起还有%1$d小时%2$d分</string>
     <string name="countdown_minute">距闹钟响起还有%1$d分钟</string>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.github.castorflex.smoothprogressbar/library-circular/1.2.0/res/values/values.xml -->
+    <eat-comment/>
+    <item format="float" name="cpb_default_rotation_speed" type="string">1</item>
+    <item format="float" name="cpb_default_sweep_speed" type="string">1</item>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/strings.xml -->
+    <eat-comment/>
     <string name="custom_define">自定义</string>
     <string name="dash">--</string>
     <string name="dash_degree">--℃</string>
@@ -10791,6 +10824,7 @@
     <string name="no_city_info">城市不存在</string>
     <string name="no_city_weather_info">暂无天气预报信息</string>
     <string name="no_data">暂无数据</string>
+    <string name="no_local_album">没有本地图片</string>
     <string name="no_local_music_file">没有本地音乐文件</string>
     <string name="no_matched_city">没有符合条件的城市</string>
     <string name="no_record_file">没有录音文件</string>
@@ -11868,6 +11902,20 @@
         <item name="android:minWidth">56dp</item>
         <item name="android:scaleType">center</item>
     </style>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.github.castorflex.smoothprogressbar/library-circular/1.2.0/res/values/values.xml -->
+    <eat-comment/>
+    <style name="CPB" parent="android:Widget.Holo.ProgressBar">
+    </style>
+    <style name="CircularProgressBar" parent="CPB">
+        <item name="cpb_color">@color/cpb_default_color</item>
+        <item name="cpb_stroke_width">@dimen/cpb_default_stroke_width</item>
+        <item name="cpb_min_sweep_angle">@integer/cpb_default_min_sweep_angle</item>
+        <item name="cpb_max_sweep_angle">@integer/cpb_default_max_sweep_angle</item>
+        <item name="cpb_sweep_speed">@string/cpb_default_sweep_speed</item>
+        <item name="cpb_rotation_speed">@string/cpb_default_rotation_speed</item>
+    </style>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <eat-comment/>
     <style name="Platform.AppCompat" parent="android:Theme">
         <item name="android:windowNoTitle">true</item>
 
@@ -12118,6 +12166,11 @@
         <!-- 设置全屏 -->
         <!-- <item name="android:windowIsFloating">true</item> -->
         <!-- 是否浮现在activity之上 -->
+    </style>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.github.castorflex.smoothprogressbar/library-circular/1.2.0/res/values/values.xml -->
+    <eat-comment/>
+    <style name="Theme.SmoothProgressBarDefaults" parent="android:Theme.Holo">
+        <item name="cpbStyle">@style/CircularProgressBar</item>
     </style>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
     <eat-comment/>

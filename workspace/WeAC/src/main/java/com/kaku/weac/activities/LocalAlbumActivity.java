@@ -4,6 +4,7 @@
 package com.kaku.weac.activities;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -50,6 +50,7 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
     private LocalAlbumAdapter mLocalAlbumAdapter;
     private List<ImageBucket> mLocalAlbumList;
     private AsyncTask<Void, Void, List<ImageBucket>> mBucketLoadTask;
+    ListView mLocalAlbumListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +72,7 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-//                toggleShowLoading(true, null);
+//                showLoading();
             }
 
             @Override
@@ -82,7 +83,10 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
 
             @Override
             protected void onPostExecute(List<ImageBucket> list) {
-//                toggleShowLoading(false, null);
+                dismissLoadingDialog();
+
+                TextView emptyView = (TextView) findViewById(R.id.local_album_lv_empty);
+                mLocalAlbumListView.setEmptyView(emptyView);
 
                 mLocalAlbumList.addAll(list);
                 mLocalAlbumAdapter.notifyDataSetChanged();
@@ -90,6 +94,11 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
         };
 
         mBucketLoadTask.execute();
+    }
+
+    private void dismissLoadingDialog() {
+        ViewGroup progressBarLlyt = (ViewGroup) findViewById(R.id.progress_bar_llyt);
+        progressBarLlyt.setVisibility(View.GONE);
     }
 
     private void assignViews() {
@@ -107,11 +116,10 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
             captureBtn.setVisibility(View.GONE);
         }
 
-        ListView localAlbumListView = (ListView) findViewById(R.id.local_album_lv);
-        localAlbumListView.setAdapter(mLocalAlbumAdapter);
-        LinearLayout emptyView = (LinearLayout) findViewById(R.id.local_album_lv_empty);
-        localAlbumListView.setEmptyView(emptyView);
-        localAlbumListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mLocalAlbumListView = (ListView) findViewById(R.id.local_album_lv);
+        mLocalAlbumListView.setAdapter(mLocalAlbumAdapter);
+
+        mLocalAlbumListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(LocalAlbumActivity.this, LocalAlbumDetailActivity.class);
@@ -135,12 +143,22 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
                 break;
             // 拍照
             case R.id.action_capture:
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                mImageUri = Uri.fromFile(MyUtil.getFileDirectory(this, "/Android/data/" +
-                        getPackageName() + "/capture/temporary.jpg"));
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
-                startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
-                overridePendingTransition(0, 0);
+                PackageManager pm = getPackageManager();
+                // FEATURE_CAMERA - 后置相机
+                // FEATURE_CAMERA_FRONT - 前置相机
+                if (pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    mImageUri = Uri.fromFile(MyUtil.getFileDirectory(this, "/Android/data/" +
+                            getPackageName() + "/capture/temporary.jpg"));
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
+                    startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                    overridePendingTransition(0, R.anim.zoomin);
+                } else { // 没有可用相机
+                    Intent intent = new Intent(this, MyDialogActivitySingle.class);
+                    intent.putExtra(WeacConstants.TITLE, getString(R.string.prompt));
+                    intent.putExtra(WeacConstants.DETAIL, getString(R.string.camera_error));
+                    startActivity(intent);
+                }
                 break;
         }
     }
@@ -149,6 +167,7 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != RESULT_OK) {
+            overridePendingTransition(0, R.anim.zoomout);
             return;
         }
         switch (requestCode) {

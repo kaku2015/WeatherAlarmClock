@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     android:id="@+id/background"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <RelativeLayout style="@style/action_llyt">
+    <RelativeLayout
+        android:id="@+id/action_bar"
+        style="@style/action_llyt"
+        >
 
         <ImageView
             android:id="@+id/action_back"
@@ -31,6 +32,7 @@
         android:id="@+id/local_album_lv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/action_bar"
         android:layout_marginLeft="@dimen/list_view_margin"
         android:layout_marginRight="@dimen/list_view_margin"
         android:divider="@color/white_trans10"
@@ -39,18 +41,32 @@
 
     </ListView>
 
-    <LinearLayout
+    <TextView
         android:id="@+id/local_album_lv_empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:text="@string/no_local_album"
+        android:textColor="@color/white_trans90"
+        android:textSize="@dimen/big_small"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/progress_bar_llyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center"
         android:orientation="horizontal">
 
-        <ProgressBar
+        <fr.castorflex.android.circularprogressbar.CircularProgressBar
             android:id="@+id/loading_progress"
-            style="@android:style/Widget.ProgressBar.Small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            app:cpb_colors="@array/gplus_colors"/>
 
         <TextView
             android:id="@+id/loading_msg"
@@ -61,4 +77,4 @@
             android:textColor="@color/white_trans90"
             android:textSize="@dimen/big_small"/>
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

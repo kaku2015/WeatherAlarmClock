@@ -41,5 +41,5 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.6.1'
     compile files('libs/zxing-4.7.3.jar')
     compile files('libs/universal-image-loader-1.9.5.jar')
-    compile files('libs/ZBarDecoder.jar')
+    compile 'com.github.castorflex.smoothprogressbar:library-circular:1.2.0'
 }

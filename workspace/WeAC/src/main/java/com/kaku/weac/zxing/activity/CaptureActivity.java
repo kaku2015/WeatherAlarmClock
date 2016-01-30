@@ -27,6 +27,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -326,7 +327,6 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
     private void displayFrameworkBugMessageAndExit() {
         // camera error
-        // TODO:自定义错误弹出框样式
         Intent intent = new Intent(this, MyDialogActivitySingle.class);
         intent.putExtra(WeacConstants.TITLE, getString(R.string.prompt));
         intent.putExtra(WeacConstants.DETAIL, getString(R.string.camera_error));
@@ -486,8 +486,12 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         }
     }
 
+    private ViewGroup progressBarLlyt;
     @Subscribe
     public void scanQRcodeEvent(ScanCodeEvent event) {
+        progressBarLlyt = (ViewGroup) findViewById(R.id.progress_bar_llyt);
+        progressBarLlyt.setVisibility(View.VISIBLE);
+
         ImageLoader.getInstance().init(ImageLoaderHelper.getInstance(this)
                 .getImageLoaderConfiguration());
 
@@ -507,6 +511,8 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
                 @Override
                 public void onLoadingComplete(String s, View view, Bitmap loadedImage) {
+                    progressBarLlyt.setVisibility(View.GONE);
+
                     Result resultZxing = new DecodeUtils(DecodeUtils.DECODE_DATA_MODE_ALL)
                             .decodeWithZxing(loadedImage);
                     handleDecode(resultZxing, null);

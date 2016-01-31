@@ -22,6 +22,8 @@ import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -128,12 +130,12 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         initButton();
     }
 
-    private ImageView mLightBtn;
+    private FloatingActionButton mLightBtn;
 
     private void initButton() {
         ImageView backBtn = (ImageView) findViewById(R.id.action_back);
         TextView albumBtn = (TextView) findViewById(R.id.action_album);
-        mLightBtn = (ImageView) findViewById(R.id.action_light);
+        mLightBtn = (FloatingActionButton) findViewById(R.id.action_light);
 
         backBtn.setOnClickListener(this);
         albumBtn.setOnClickListener(this);

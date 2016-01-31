@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="@color/transparent"
-             android:orientation="vertical">
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent">
 
     <SurfaceView
         android:id="@+id/capture_preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <FrameLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -86,21 +88,6 @@
                 style="@style/action_title"
                 android:text="@string/scan_code"/>
 
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/action_llyt_bottom"
-            style="@style/action_llyt"
-            android:layout_gravity="bottom"
-            android:background="@color/black_trans70"
-            >
-
-            <ImageView
-                android:id="@+id/action_light"
-                style="@style/action_icon"
-                android:layout_alignParentLeft="true"
-                android:src="@drawable/bg_btn_light"/>
-
             <TextView
                 android:id="@+id/action_album"
                 style="@style/action_tv"
@@ -108,6 +95,19 @@
                 android:text="@string/album"/>
 
         </RelativeLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/action_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/bg_btn_light"
+            app:backgroundTint="@color/black_trans70"
+            app:borderWidth="0dp"
+            app:elevation="0dp"
+            app:pressedTranslationZ="0dp"
+            app:rippleColor="@color/black_trans30"/>
 
         <LinearLayout
             android:id="@+id/progress_bar_llyt"
@@ -136,5 +136,5 @@
                 android:textColor="@color/white_trans90"
                 android:textSize="@dimen/big_small"/>
         </LinearLayout>
-    </FrameLayout>
+    </android.support.design.widget.CoordinatorLayout>
 </FrameLayout>

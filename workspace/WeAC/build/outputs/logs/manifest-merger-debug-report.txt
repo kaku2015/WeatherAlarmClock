@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:2:1-189:12
+ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:2:1-187:12
 	xmlns:android
 		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:4:5-63
 	package
@@ -82,7 +82,7 @@ ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:
 	android:name
 		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:37:22-66
 application
-ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:39:5-187:19
+ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:39:5-185:19
 MERGED from [com.android.support:support-v4:23.1.1] D:\AndroidStudioProjects\workspace\WeAC\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\AndroidManifest.xml:22:5-20
 MERGED from [workspace:PullToRefresh:unspecified] D:\AndroidStudioProjects\workspace\WeAC\build\intermediates\exploded-aar\workspace\PullToRefresh\unspecified\AndroidManifest.xml:11:5-20
 MERGED from [workspace:daemon:unspecified] D:\AndroidStudioProjects\workspace\WeAC\build\intermediates\exploded-aar\workspace\daemon\unspecified\AndroidManifest.xml:10:5-11:19
@@ -283,93 +283,89 @@ ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:
 	android:launchMode
 		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:132:13-43
 activity#com.kaku.weac.zxing.activity.CaptureActivity
-ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:134:9-137:49
-	android:screenOrientation
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:136:13-49
+ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:134:9-136:71
 	android:theme
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:137:13-47
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:136:13-69
 	android:name
 		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:135:13-59
 activity#com.kaku.weac.activities.DisplayScanResultActivity
-ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:138:9-141:49
-	android:screenOrientation
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:140:13-49
+ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:137:9-139:49
 	android:theme
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:141:13-47
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:139:13-47
 	android:name
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:139:13-65
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:138:13-65
 receiver#com.kaku.weac.broadcast.AlarmClockBroadcast
-ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:143:9-145:40
+ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:141:9-143:40
 	android:process
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:145:13-38
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:143:13-38
 	android:name
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:144:13-58
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:142:13-58
 receiver#com.kaku.weac.broadcast.BootBroadcastReceiver
-ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:146:9-150:20
+ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:144:9-148:20
 	android:name
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:146:19-66
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:144:19-66
 intent-filter#android.intent.action.BOOT_COMPLETED
-ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:147:13-149:29
+ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:145:13-147:29
 action#android.intent.action.BOOT_COMPLETED
-ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:148:17-78
+ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:146:17-78
 	android:name
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:148:25-76
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:146:25-76
 provider#com.kaku.weac.db.AlarmClockProvider
-ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:152:9-155:39
+ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:150:9-153:39
 	android:exported
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:155:13-37
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:153:13-37
 	android:authorities
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:154:13-48
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:152:13-48
 	android:name
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:153:13-50
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:151:13-50
 service#com.kaku.weac.service.NotificationCenter
-ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:157:9-161:19
+ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:155:9-159:19
 	android:process
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:160:13-43
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:158:13-43
 	android:exported
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:159:13-37
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:157:13-37
 	android:name
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:158:13-55
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:156:13-55
 service#com.kaku.weac.test.AutoUpdateService
-ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:162:9-165:19
+ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:160:9-163:19
 	android:exported
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:164:13-37
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:162:13-37
 	android:name
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:163:13-51
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:161:13-51
 service#com.kaku.weac.service.DaemonService
-ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:166:9-170:19
+ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:164:9-168:19
 	android:process
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:169:13-43
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:167:13-43
 	android:exported
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:168:13-36
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:166:13-36
 	android:name
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:167:13-50
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:165:13-50
 service#com.baidu.location.f
-ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:171:9-175:19
+ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:169:9-173:19
 	android:process
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:174:13-40
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:172:13-40
 	android:enabled
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:173:13-35
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:171:13-35
 	android:name
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:172:13-48
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:170:13-48
 meta-data#com.baidu.lbsapi.API_KEY
-ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:177:9-179:55
+ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:175:9-177:55
 	android:name
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:178:13-52
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:176:13-52
 	android:value
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:179:13-53
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:177:13-53
 meta-data#com.kaku.weac.util.GlideConfiguration
-ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:180:9-182:42
+ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:178:9-180:42
 	android:name
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:181:13-65
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:179:13-65
 	android:value
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:182:13-40
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:180:13-40
 receiver#com.kaku.weac.test.AutoUpdateReceiver
-ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:184:9-186:38
+ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:182:9-184:38
 	android:process
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:186:13-36
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:184:13-36
 	android:name
-		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:185:13-52
+		ADDED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml:183:13-52
 uses-sdk
 INJECTED from D:\AndroidStudioProjects\workspace\WeAC\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [workspace:PagerSlidingTabStrip:unspecified] D:\AndroidStudioProjects\workspace\WeAC\build\intermediates\exploded-aar\workspace\PagerSlidingTabStrip\unspecified\AndroidManifest.xml:6:5-8:41

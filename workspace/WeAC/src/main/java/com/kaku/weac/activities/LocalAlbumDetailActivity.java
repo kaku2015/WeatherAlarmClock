@@ -91,6 +91,7 @@ public class LocalAlbumDetailActivity extends BaseActivity implements View.OnCli
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != RESULT_OK) {
+            overridePendingTransition(0, R.anim.zoomout);
             return;
         }
         switch (requestCode) {

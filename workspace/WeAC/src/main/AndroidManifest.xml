@@ -133,11 +133,9 @@
             android:theme="@style/Transparent"/>
         <activity
             android:name=".zxing.activity.CaptureActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Transparent"/>
+            android:theme="@style/Transparent.AppCompat.NoActionBar"/>
         <activity
             android:name=".activities.DisplayScanResultActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Transparent"/>
 
         <receiver

@@ -2,7 +2,11 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Activity主题 -->
-    <style name="Transparent" parent="@android:style/Theme.Holo.Light">
+    <style name="Transparent" parent="@android:style/Theme.Holo.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:screenOrientation">portrait</item>
+    </style>
+    <style name="Transparent.AppCompat.NoActionBar" parent="@style/Theme.AppCompat.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:screenOrientation">portrait</item>
     </style>

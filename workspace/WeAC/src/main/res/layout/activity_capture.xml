@@ -89,6 +89,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/action_llyt_bottom"
             style="@style/action_llyt"
             android:layout_gravity="bottom"
             android:background="@color/black_trans70"

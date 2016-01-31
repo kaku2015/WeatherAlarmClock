@@ -12300,7 +12300,11 @@
     <style name="ThemeOverlay.AppCompat.Light" parent="Base.ThemeOverlay.AppCompat.Light"/>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles.xml -->
     <eat-comment/>
-    <style name="Transparent" parent="@android:style/Theme.Holo.Light">
+    <style name="Transparent" parent="@android:style/Theme.Holo.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:screenOrientation">portrait</item>
+    </style>
+    <style name="Transparent.AppCompat.NoActionBar" parent="@style/Theme.AppCompat.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:screenOrientation">portrait</item>
     </style>

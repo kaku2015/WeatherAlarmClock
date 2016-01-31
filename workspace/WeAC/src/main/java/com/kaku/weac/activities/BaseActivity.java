@@ -5,7 +5,6 @@ package com.kaku.weac.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Window;
 
 import com.kaku.weac.LeakCanaryApplication;
 import com.kaku.weac.util.LogUtil;
@@ -27,7 +26,7 @@ public class BaseActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
         LogUtil.i(LOG_TAG, getClass().getSimpleName());
     }
 

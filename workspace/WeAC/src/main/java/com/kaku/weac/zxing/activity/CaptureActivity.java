@@ -22,6 +22,7 @@ import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -105,8 +106,8 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_capture);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         scanPreview = (SurfaceView) findViewById(R.id.capture_preview);
         scanContainer = (LinearLayout) findViewById(R.id.capture_container);
@@ -223,7 +224,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         inactivityTimer.onActivity();
 
         if (rawResult == null) {
-            ToastUtil.showLongToast(CaptureActivity.this, getString(R.string.decode_null));
+            Snackbar.make(scanContainer, getString(R.string.decode_null), Snackbar.LENGTH_SHORT).show();
             return;
         }
 
@@ -487,6 +488,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     }
 
     private ViewGroup progressBarLlyt;
+
     @Subscribe
     public void scanQRcodeEvent(ScanCodeEvent event) {
         progressBarLlyt = (ViewGroup) findViewById(R.id.progress_bar_llyt);

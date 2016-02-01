@@ -121,6 +121,11 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
      */
     private boolean mIsDefaultCityChanged = false;
 
+    /**
+     * 是否正在添加城市
+     */
+    private boolean mIsCityAdding = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -278,8 +283,8 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 break;
             // 编辑按钮
             case R.id.action_edit:
-                // 当列表内容为空时禁止响应编辑事件
-                if (mGridView.getChildCount() == 1) {
+                // 当正在添加城市或者列表内容为空时禁止响应编辑事件
+                if (mIsCityAdding || mGridView.getChildCount() == 1) {
                     return;
                 }
                 mIsRefreshing = false;
@@ -412,6 +417,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                     mCityManageAdapter.notifyDataSetChanged();
                     // GridView设置点击事件
                     mGridView.setOnItemClickListener(mOnItemClickListener);
+                    mIsCityAdding = false;
                 } else {
                     continueRefreshOrStop(position);
                 }
@@ -478,6 +484,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
             mCityManageAdapter.notifyDataSetChanged();
             // GridView设置点击事件
             mGridView.setOnItemClickListener(mOnItemClickListener);
+            mIsCityAdding = false;
             // 存储城市管理item信息
             WeatherDBOperate.getInstance().saveCityManage(mCityManage);
             // 首次添加城市
@@ -598,6 +605,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
         if (requestCode == REQUEST_CITY_MANAGE) {
             // GridView禁用点击事件
             mGridView.setOnItemClickListener(null);
+            mIsCityAdding = true;
 
             mCityManage = new CityManage();
             // 插在最后一项（添加按钮）之前

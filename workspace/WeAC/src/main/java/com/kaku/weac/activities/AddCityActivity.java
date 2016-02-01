@@ -4,7 +4,7 @@
 package com.kaku.weac.activities;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -29,9 +29,9 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.kaku.weac.R;
 import com.kaku.weac.adapter.AddCityAdapter;
+import com.kaku.weac.bean.County;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.db.WeatherDBOperate;
-import com.kaku.weac.bean.County;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.ToastUtil;
@@ -118,7 +118,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
     /**
      * 进度对话框
      */
-    private ProgressDialog mProgressDialog;
+    private Dialog mProgressDialog;
 
     /**
      * 百度定位服务
@@ -844,9 +844,18 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
      */
     private void showProgressDialog(String message) {
         if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setMessage(message);
+            mProgressDialog = new Dialog(this, R.style.Theme_MyDialog);
+            mProgressDialog.setContentView(R.layout.loading_dialog);
             mProgressDialog.setCancelable(false);
+            TextView msg = (TextView) mProgressDialog.findViewById(R.id.dialog_msg);
+            msg.setText(message);
+            mProgressDialog.show();
+
+            // 设置全屏
+//            WindowManager.LayoutParams lp = mProgressDialog.getWindow().getAttributes();
+//            lp.width = getResources().getDisplayMetrics().widthPixels;
+//            mProgressDialog.getWindow().setAttributes(lp);
+
         }
         mProgressDialog.show();
     }

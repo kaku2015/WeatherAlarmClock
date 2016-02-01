@@ -12287,6 +12287,10 @@
         <!-- 设置全屏 -->
         <!-- <item name="android:windowIsFloating">true</item> -->
         <!-- 是否浮现在activity之上 -->
+        <!--<item name="android:windowContentOverlay">@null</item>-->
+        <!--对话框是否有遮盖-->
+        <!--<item name="android:backgroundDimEnabled">false</item>-->
+        <!-- 是否允许背景灰暗 -->
     </style>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.github.castorflex.smoothprogressbar/library-circular/1.2.0/res/values/values.xml -->
     <eat-comment/>

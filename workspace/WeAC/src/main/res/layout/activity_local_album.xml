@@ -2,6 +2,7 @@
 <RelativeLayout
     android:id="@+id/background"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -61,9 +62,8 @@
 
         <fr.castorflex.android.circularprogressbar.CircularProgressBar
             android:id="@+id/loading_progress"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:indeterminate="true"
             app:cpb_colors="@array/gplus_colors"/>
 
@@ -71,7 +71,7 @@
             android:id="@+id/loading_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:text="@string/scanning"
             android:textColor="@color/white_trans90"
             android:textSize="@dimen/big_small"/>

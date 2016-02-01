@@ -22,7 +22,6 @@ import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
@@ -51,7 +50,6 @@ import com.kaku.weac.util.ImageLoaderHelper;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.OttoAppConfig;
-import com.kaku.weac.util.ToastUtil;
 import com.kaku.weac.zxing.camera.CameraManager;
 import com.kaku.weac.zxing.decode.DecodeThread;
 import com.kaku.weac.zxing.decode.DecodeUtils;
@@ -271,7 +269,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         } else if ("EAN_13".equals(codeType)) {
             displayResult(scanResult, 1);
         } else {
-            ToastUtil.showLongToast(CaptureActivity.this, getString(R.string.decode_null));
+            Snackbar.make(scanContainer, getString(R.string.decode_null), Snackbar.LENGTH_SHORT).show();
         }
     }
 

@@ -133,10 +133,16 @@
             android:theme="@style/Transparent"/>
         <activity
             android:name=".zxing.activity.CaptureActivity"
-            android:theme="@style/Transparent.AppCompat.NoActionBar"/>
+            android:theme="@style/Transparent"/>
         <activity
             android:name=".activities.DisplayScanResultActivity"
             android:theme="@style/Transparent"/>
+
+        <activity
+            android:name=".activities.GenerateCodeActivity"
+            android:theme="@style/Transparent"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden">
+        </activity>
 
         <receiver
             android:name=".broadcast.AlarmClockBroadcast"

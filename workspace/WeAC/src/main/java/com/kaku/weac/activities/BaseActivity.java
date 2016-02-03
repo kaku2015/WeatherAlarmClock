@@ -3,8 +3,8 @@
  */
 package com.kaku.weac.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.kaku.weac.LeakCanaryApplication;
 import com.kaku.weac.util.LogUtil;
@@ -16,7 +16,7 @@ import com.squareup.leakcanary.RefWatcher;
  * @author 咖枯
  * @version 1.0 2015
  */
-public class BaseActivity extends Activity {
+public class BaseActivity extends AppCompatActivity {
 
     /**
      * Log tag ：BaseActivity

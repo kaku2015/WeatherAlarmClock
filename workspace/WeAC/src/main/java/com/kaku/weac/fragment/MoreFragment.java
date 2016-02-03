@@ -3,7 +3,6 @@
  */
 package com.kaku.weac.fragment;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import com.kaku.weac.R;
+import com.kaku.weac.activities.GenerateCodeActivity;
 import com.kaku.weac.activities.ThemeActivity;
 import com.kaku.weac.bean.Event.WallpaperEvent;
 import com.kaku.weac.util.MyUtil;
@@ -41,13 +41,18 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fm_more, container, false);
-        // 变更主题
+        assignViews(view);
+        return view;
+    }
+
+    private void assignViews(View view) {
         ViewGroup themeBtn = (ViewGroup) view.findViewById(R.id.theme);
         ViewGroup scanQRcodeBtn = (ViewGroup) view.findViewById(R.id.scan_scan);
+        ViewGroup generateCodeBtn = (ViewGroup) view.findViewById(R.id.generate_code);
 
         themeBtn.setOnClickListener(this);
         scanQRcodeBtn.setOnClickListener(this);
-        return view;
+        generateCodeBtn.setOnClickListener(this);
     }
 
     @Subscribe
@@ -81,58 +86,36 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
             return;
         }
         switch (v.getId()) {
+            // 主题
             case R.id.theme:
                 Intent intent = new Intent(getActivity(), ThemeActivity.class);
                 // 启动主题界面
                 startActivity(intent);
                 break;
+            // 扫码
             case R.id.scan_scan:
-                // 打开扫描界面扫描条形码或二维码
                 Intent openCameraIntent = new Intent(getActivity(), CaptureActivity.class);
                 startActivity(openCameraIntent);
+                break;
+            // 造码
+            case R.id.generate_code:
+                // 打开扫描界面扫描条形码或二维码
+                Intent generateCodeIntent = new Intent(getActivity(), GenerateCodeActivity.class);
+                startActivity(generateCodeIntent);
                 break;
         }
     }
 
-    @Override
+/*    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) {
             return;
         }
         switch (requestCode) {
-            /*case REQUEST_SCAN_SCAN:
-                Bundle bundle = data.getExtras();
-                String scanResult = bundle.getString("result");
-                Log.d(LOG_TAG, "二维码扫描结果：" + scanResult);
 
-                boolean isUrl = MyUtil.checkWebSite(scanResult);
-                // 不是标准网址
-                if (!isUrl) {
-                    // 如果是没有添加协议的网址
-                    if (MyUtil.checkWebSitePath(scanResult)) {
-                        scanResult = "http://" + scanResult;
-                        isUrl = true;
-                    }
-                }
-
-                // 扫描结果为网址
-                if (isUrl) {
-                    Intent intent = new Intent("android.intent.action.VIEW");
-                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    Uri uri = Uri.parse(scanResult);
-                    intent.setData(uri);
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(getActivity(), DisplayScanResultActivity.class);
-                    intent.putExtra(SCAN_RESULT, scanResult);
-                    startActivity(intent);
-                    getActivity().overridePendingTransition(0, 0);
-                }
-                break;*/
         }
-    }
+    }*/
 
     @Override
     public void onDestroy() {

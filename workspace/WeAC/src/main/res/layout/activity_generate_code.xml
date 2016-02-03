@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.kaku.weac.activities.GenerateCodeActivity">
+
+    <RelativeLayout style="@style/action_llyt">
+
+        <ImageView
+            android:id="@+id/action_back"
+            style="@style/action_icon"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/ic_action_previous_item"/>
+
+        <TextView
+            style="@style/action_title"
+            android:text="@string/generate_code"/>
+
+
+        <ImageView
+            android:id="@+id/action_overflow"
+            style="@style/action_icon"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_action_overflow"/>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_background_color">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/qr_code_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="@dimen/border_margin"
+                android:layout_marginRight="@dimen/border_margin"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/shape_qr_code_result"
+                android:hint="@string/input_qr_code_content"
+                android:maxLength="180"
+                android:padding="20dp"
+                android:textColor="@color/black_text_normal_common"
+                android:textSize="@dimen/big_small"/>
+
+            <Button
+                android:id="@+id/generate_qr_code_btn"
+                style="@style/single_btn"
+                android:background="@drawable/shape_circle_btn_sure_invalidate"
+                android:text="@string/generate_qr_code"
+                />
+
+            <CheckBox
+                android:id="@+id/logo_cb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/border_margin"
+                android:text="@string/logo"
+                android:textColor="@color/black_text_normal_common"
+                android:textSize="@dimen/big_small"/>
+
+            <ImageView
+                android:id="@+id/qr_code_result_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/ic_launcher"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

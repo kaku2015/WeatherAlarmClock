@@ -10603,6 +10603,9 @@
     <dimen name="big_large">24sp</dimen>
     <dimen name="big_medium">20sp</dimen>
     <dimen name="big_small">16sp</dimen>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="border_margin">19dp</dimen>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.github.castorflex.smoothprogressbar/library-circular/1.2.0/res/values/values.xml -->
     <eat-comment/>
     <dimen name="cpb_default_stroke_width">4dp</dimen>
@@ -10872,12 +10875,14 @@
     <string name="friday">周五</string>
     <string name="friend_share">好友分享</string>
     <string name="generate_code">造码</string>
+    <string name="generate_qr_code">生成二维码</string>
     <string name="give_good_reputation">赏个好评</string>
     <string name="hot_city">热门城市</string>
     <string name="humidity">湿度 %1$s</string>
     <string name="identifying">正在识别…</string>
     <string name="input_city_name">请输入城市名称或拼音</string>
     <string name="input_empty">输入内容为空</string>
+    <string name="input_qr_code_content">输入二维码内容</string>
     <string name="instant_noodles">泡面</string>
     <string name="internet_error">网络异常,请检查网络设置</string>
     <string name="internet_fail">连接失败，请重试</string>
@@ -10892,6 +10897,7 @@
     <string name="local_music">本地音乐</string>
     <string name="location_already_added">自动定位已添加</string>
     <string name="location_fail">自动定位失败</string>
+    <string name="logo">Logo</string>
     <string name="monday">周一</string>
     <string name="more">更多</string>
     <string name="more_city">更多城市</string>
@@ -10959,6 +10965,7 @@
     <string name="saturday">周六</string>
     <string name="save">保存</string>
     <string name="save_path">保存路径：</string>
+    <string name="save_qr_code">保存二维码</string>
     <string name="scan_code">扫码</string>
     <string name="scan_result">扫描结果</string>
     <string name="scanning">正在扫描…</string>
@@ -10966,6 +10973,7 @@
     <string name="search">搜索</string>
     <string name="select_all">全选</string>
     <string name="select_all_cancel">取消全选</string>
+    <string name="select_logo">选择Logo</string>
     <string name="selected_xx_item">已选择%1$d项</string>
     <string name="set_default">设为默认</string>
     <string name="siesta">午睡</string>
@@ -12306,11 +12314,7 @@
     <style name="ThemeOverlay.AppCompat.Light" parent="Base.ThemeOverlay.AppCompat.Light"/>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles.xml -->
     <eat-comment/>
-    <style name="Transparent" parent="@android:style/Theme.Holo.Light.NoActionBar">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:screenOrientation">portrait</item>
-    </style>
-    <style name="Transparent.AppCompat.NoActionBar" parent="@style/Theme.AppCompat.NoActionBar">
+    <style name="Transparent" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:screenOrientation">portrait</item>
     </style>

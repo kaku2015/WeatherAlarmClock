@@ -136,10 +136,15 @@
             android:theme="@style/Transparent" />
         <activity
             android:name="com.kaku.weac.zxing.activity.CaptureActivity"
-            android:theme="@style/Transparent.AppCompat.NoActionBar" />
+            android:theme="@style/Transparent" />
         <activity
             android:name="com.kaku.weac.activities.DisplayScanResultActivity"
             android:theme="@style/Transparent" />
+        <activity
+            android:name="com.kaku.weac.activities.GenerateCodeActivity"
+            android:theme="@style/Transparent"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+        </activity>
 
         <receiver
             android:name="com.kaku.weac.broadcast.AlarmClockBroadcast"

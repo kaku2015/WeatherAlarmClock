@@ -123,6 +123,7 @@ public class RecordDeleteBatchFragment extends BaseFragment implements
         mTitleFormat = getString(R.string.selected_xx_item);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -134,7 +135,7 @@ public class RecordDeleteBatchFragment extends BaseFragment implements
         // 设置页面背景
         MyUtil.setBackground(viewGroup, getActivity());
 
-        mColorWhite = getResources().getColor(R.color.gray_background_color);
+        mColorWhite = getResources().getColor(R.color.white_trans90);
         mColorWhiteTrans = getResources().getColor(R.color.white_trans60);
 
         // 录音ListView

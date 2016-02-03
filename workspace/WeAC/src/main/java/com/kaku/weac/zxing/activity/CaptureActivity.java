@@ -40,6 +40,7 @@ import android.widget.TextView;
 
 import com.google.zxing.Result;
 import com.kaku.weac.R;
+import com.kaku.weac.activities.BaseActivity;
 import com.kaku.weac.activities.DisplayScanResultActivity;
 import com.kaku.weac.activities.LocalAlbumActivity;
 import com.kaku.weac.activities.MyDialogActivitySingle;
@@ -73,7 +74,7 @@ import java.lang.reflect.Field;
  * @author dswitkin@google.com (Daniel Switkin)
  * @author Sean Owen
  */
-public final class CaptureActivity extends Activity implements SurfaceHolder.Callback,
+public final class CaptureActivity extends BaseActivity implements SurfaceHolder.Callback,
         View.OnClickListener {
 
     private static final String LOG_TAG = CaptureActivity.class.getSimpleName();

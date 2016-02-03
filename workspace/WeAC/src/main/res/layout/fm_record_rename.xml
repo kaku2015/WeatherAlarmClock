@@ -22,7 +22,7 @@
         android:textColor="@color/black_text_normal_common"
         android:textColorHighlight="@color/dark_blue_focus"
         android:textCursorDrawable="@drawable/cursor_record_rename"
-        android:textSize="18sp"/>
+        android:textSize="@dimen/big_small"/>
 
     <TextView
         android:id="@+id/record_rename_error"

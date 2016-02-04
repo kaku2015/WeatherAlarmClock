@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.kaku.weac.R;
 import com.kaku.weac.adapter.LocalAlbumAdapter;
 import com.kaku.weac.bean.Event.FinishLocalAlbumActivityEvent;
+import com.kaku.weac.bean.Event.QRcodeLogoEvent;
 import com.kaku.weac.bean.Event.ScanCodeEvent;
 import com.kaku.weac.bean.Event.WallpaperEvent;
 import com.kaku.weac.bean.ImageBucket;
@@ -26,7 +27,6 @@ import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.db.LocalAlbumImagePickerHelper;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.OttoAppConfig;
-import com.kaku.weac.zxing.activity.CaptureActivity;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
@@ -41,8 +41,10 @@ import java.util.List;
  */
 public class LocalAlbumActivity extends BaseActivity implements View.OnClickListener {
 
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
-    private static final int REQUEST_IMAGE_CROP = 2;
+    private static final int REQUEST_IMAGE_CAPTURE_THEME = 1;
+    private static final int REQUEST_IMAGE_CAPTURE_QRCODE_LOGO = 4;
+    private static final int REQUEST_IMAGE_CROP_THEME = 2;
+    private static final int REQUEST_IMAGE_CROP_QRCODE_LOGO = 5;
     private static final int REQUEST_ALBUM_DETAIL = 3;
 
     public static final String ALBUM_PATH = "album_path";
@@ -50,7 +52,12 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
     private LocalAlbumAdapter mLocalAlbumAdapter;
     private List<ImageBucket> mLocalAlbumList;
     private AsyncTask<Void, Void, List<ImageBucket>> mBucketLoadTask;
-    ListView mLocalAlbumListView;
+    private ListView mLocalAlbumListView;
+
+    /**
+     * 访问本地相册类型:0，主题；1，扫码；2，造码
+     */
+    private int mRequestType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,13 +114,19 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
 
         backBtn.setOnClickListener(this);
 
-        // 是否为扫码
-        final boolean isScanQRcode = getIntent().getBooleanExtra(CaptureActivity.SCAN_CODE, false);
-        // 主题
-        if (!isScanQRcode) {
-            captureBtn.setOnClickListener(this);
-        } else { // 扫码
-            captureBtn.setVisibility(View.GONE);
+        mRequestType = getIntent().getIntExtra(WeacConstants.REQUEST_LOCAL_ALBUM_TYPE, 0);
+        switch (mRequestType) {
+            // 主题
+            case 0:
+                // 造码
+            case 2:
+                captureBtn.setOnClickListener(this);
+                break;
+            // 扫码
+            case 1:
+                // 隐藏拍照按钮
+                captureBtn.setVisibility(View.GONE);
+                break;
         }
 
         mLocalAlbumListView = (ListView) findViewById(R.id.local_album_lv);
@@ -126,7 +139,7 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
                 intent.putParcelableArrayListExtra(ALBUM_PATH,
                         mLocalAlbumAdapter.getItem(position).bucketList);
                 intent.putExtra(ALBUM_NAME, mLocalAlbumAdapter.getItem(position).bucketName);
-                intent.putExtra(CaptureActivity.SCAN_CODE, isScanQRcode);
+                intent.putExtra(WeacConstants.REQUEST_LOCAL_ALBUM_TYPE, mRequestType);
                 startActivityForResult(intent, REQUEST_ALBUM_DETAIL);
             }
         });
@@ -147,11 +160,20 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
                 // FEATURE_CAMERA - 后置相机
                 // FEATURE_CAMERA_FRONT - 前置相机
                 if (pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
+                    // 访问相机类型
+                    int requestType;
+                    // 截取主题壁纸
+                    if (mRequestType != 2) {
+                        requestType = REQUEST_IMAGE_CAPTURE_THEME;
+                    } else { // 截取二维码logo
+                        requestType = REQUEST_IMAGE_CAPTURE_QRCODE_LOGO;
+                    }
+
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     mImageUri = Uri.fromFile(MyUtil.getFileDirectory(this, "/Android/data/" +
                             getPackageName() + "/capture/temporary.jpg"));
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
-                    startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                    startActivityForResult(intent, requestType);
                     overridePendingTransition(0, R.anim.zoomin);
                 } else { // 没有可用相机
                     Intent intent = new Intent(this, MyDialogActivitySingle.class);
@@ -171,20 +193,30 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
             return;
         }
         switch (requestCode) {
-            // 拍照
-            case REQUEST_IMAGE_CAPTURE:
-                Intent intent = MyUtil.getCropImageOptions(this, mImageUri, WeacConstants
-                        .DIY_WALLPAPER_PATH);
-                startActivityForResult(intent, REQUEST_IMAGE_CROP);
-                overridePendingTransition(0, 0);
+            // 拍照（截取主题壁纸）
+            case REQUEST_IMAGE_CAPTURE_THEME:
+                cropImage(0, REQUEST_IMAGE_CROP_THEME, WeacConstants.DIY_WALLPAPER_PATH);
                 break;
-            // 截图
-            case REQUEST_IMAGE_CROP:
-                String filePath = mImageUri.getPath();
+            // 拍照（截取二维码logo）
+            case REQUEST_IMAGE_CAPTURE_QRCODE_LOGO:
+                cropImage(1, REQUEST_IMAGE_CROP_QRCODE_LOGO, WeacConstants.DIY_QRCODE_LOGO_PATH);
+                break;
+            // 截图（截取主题壁纸）
+            case REQUEST_IMAGE_CROP_THEME:
+                String filePath = MyUtil.getFilePath(this, WeacConstants.DIY_WALLPAPER_PATH);
                 // 更新壁纸信息
                 MyUtil.saveWallpaper(this, WeacConstants.WALLPAPER_PATH, filePath);
                 // 发送壁纸更新事件
                 OttoAppConfig.getInstance().post(new WallpaperEvent());
+                myFinish();
+                break;
+            // 截图（截取二维码logo）
+            case REQUEST_IMAGE_CROP_QRCODE_LOGO:
+                String logoPath = MyUtil.getFilePath(this, WeacConstants.DIY_QRCODE_LOGO_PATH);
+                // 保存自定义二维码logo地址
+                MyUtil.saveQRcodeLogoPath(this, logoPath);
+                // 发送自定义二维码logo截取地址事件
+                OttoAppConfig.getInstance().post(new QRcodeLogoEvent(logoPath));
                 myFinish();
                 break;
             // 相册详细图片
@@ -194,6 +226,12 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
                 myFinish2();
                 break;
         }
+    }
+
+    private void cropImage(int type, int requestType, String path) {
+        Intent intent = MyUtil.getCropImageOptions(this, mImageUri, path, type);
+        startActivityForResult(intent, requestType);
+        overridePendingTransition(0, 0);
     }
 
     @Subscribe
@@ -208,7 +246,11 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
 
     private void myFinish() {
         finish();
-        overridePendingTransition(0, R.anim.zoomout);
+        if (mRequestType != 2) {
+            overridePendingTransition(0, R.anim.zoomout);
+        } else {
+            overridePendingTransition(0, R.anim.move_out_bottom);
+        }
     }
 
     private void myFinish2() {

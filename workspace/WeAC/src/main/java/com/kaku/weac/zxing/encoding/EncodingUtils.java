@@ -30,7 +30,7 @@ public class EncodingUtils {
      * @param content   content
      * @param widthPix  widthPix
      * @param heightPix heightPix
-     * @param logoBm    logoBm
+     * @param logoBm    logoBitmap
      * @return 二维码
      */
     public static Bitmap createQRCode(String content, int widthPix, int heightPix, Bitmap logoBm) {

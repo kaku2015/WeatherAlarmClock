@@ -22,7 +22,7 @@ import android.widget.TextView;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.RingSelectActivity;
 import com.kaku.weac.activities.TimerOnTimeActivity;
-import com.kaku.weac.common.TimeModel;
+import com.kaku.weac.bean.model.TimeModel;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;

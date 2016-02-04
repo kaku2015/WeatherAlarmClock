@@ -188,14 +188,28 @@ public class WeacConstants {
     public static final String RECORD_SAVE_PATH = "/WeaAlarmClock/audio/record";
 
     /**
-     * 自定义壁纸保存文件夹
+     * 自定义壁纸存放地址
      */
     public static final String DIY_WALLPAPER_PATH = "/wallpaper/theme.jpg";
+
+    /**
+     * 自定义二维码logo存放地址
+     */
+    public static final String DIY_QRCODE_LOGO_PATH = "/qrcode/logo.jpg";
 
     /**
      * 图片地址
      */
     public static final String IMAGE_URL = "image_url";
 
+    /**
+     * 访问本地相册类型:0，默认；1，扫码；2，造码
+     */
+    public static final String REQUEST_LOCAL_ALBUM_TYPE = "request_local_album_type";
+
+    /**
+     * 保存的自定义二维码的logo path
+     */
+    public static final String QRCODE_LOGO_PATH = "qrcode_logo_path";
 
 }

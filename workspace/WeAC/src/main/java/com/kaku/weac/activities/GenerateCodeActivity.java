@@ -3,6 +3,9 @@
  */
 package com.kaku.weac.activities;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -18,8 +21,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.kaku.weac.R;
+import com.kaku.weac.bean.Event.QRcodeLogoEvent;
+import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.MyUtil;
+import com.kaku.weac.util.OttoAppConfig;
 import com.kaku.weac.zxing.encoding.EncodingUtils;
+import com.squareup.otto.Subscribe;
 
 
 /**
@@ -35,14 +42,28 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
     private EditText mQrCodeEt;
     private CheckBox mLogoCb;
     private ImageView mQrCodeResultIv;
+    private static final int REQUEST_LOCAL_ALBUM = 1;
+    private String mLogoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        OttoAppConfig.getInstance().register(this);
         setContentView(R.layout.activity_generate_code);
         ViewGroup background = (ViewGroup) findViewById(R.id.background);
         MyUtil.setBackground(background, this);
+        getQRcodeLogoPath();
         assignViews();
+    }
+
+    /**
+     * 获取保存的自定义二维码logo地址
+     */
+    private void getQRcodeLogoPath() {
+        SharedPreferences share = getSharedPreferences(
+                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+        mLogoPath = share.getString(WeacConstants.QRCODE_LOGO_PATH, null);
+
     }
 
     private void assignViews() {
@@ -97,24 +118,37 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
             case R.id.generate_qr_code_btn:
                 String contentString = mQrCodeEt.getText().toString();
                 if (!contentString.equals("")) {
+                    Bitmap logoBitmap = null;
+                    if (mLogoCb.isChecked()) {
+                        if (mLogoPath != null) {
+                            // 自定义logo图标
+                            logoBitmap = BitmapFactory.decodeFile(mLogoPath);
+                        } else { // 默认logo为应用图标
+                            logoBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+                        }
+                    }
                     //根据字符串生成二维码图片并显示在界面上，第2,3个参数为图片宽高
-                    Bitmap qrCodeBitmap = EncodingUtils.createQRCode(contentString, 600, 600,
-                            mLogoCb.isChecked() ?
-                                    BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher) :
-                                    null);
+                    Bitmap qrCodeBitmap = EncodingUtils.createQRCode(contentString, 600, 600, logoBitmap);
                     mQrCodeResultIv.setImageBitmap(qrCodeBitmap);
                 }
                 break;
             // 更多（溢出菜单按钮）
             case R.id.action_overflow:
+                if (MyUtil.isFastDoubleClick()) {
+                    return;
+                }
                 if (mPopupMenu == null) {
                     mPopupMenu = new PopupMenu(this, mActionOverflow);
                     mPopupMenu.getMenuInflater().inflate(R.menu.generate_qr_code_overflow, mPopupMenu.getMenu());
                     mPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
-                            switch (item.getItemId()){
+                            switch (item.getItemId()) {
                                 case R.id.select_logo:
+                                    Intent intent = new Intent(GenerateCodeActivity.this, LocalAlbumActivity.class);
+                                    intent.putExtra(WeacConstants.REQUEST_LOCAL_ALBUM_TYPE, 2);
+                                    startActivityForResult(intent, REQUEST_LOCAL_ALBUM);
+                                    overridePendingTransition(R.anim.move_in_bottom, 0);
                                     break;
                                 case R.id.save_qr_code:
                                     break;
@@ -128,5 +162,17 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
                 }
                 break;
         }
+    }
+
+    @Subscribe
+    public void onLogoUpdateEvent(QRcodeLogoEvent event) {
+        mLogoPath = event.getLogoPath();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        OttoAppConfig.getInstance().unregister(this);
     }
 }

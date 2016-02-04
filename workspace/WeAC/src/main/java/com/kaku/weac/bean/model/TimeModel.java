@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
  */
-package com.kaku.weac.common;
+package com.kaku.weac.bean.model;
 
 /**
  * 计时模式

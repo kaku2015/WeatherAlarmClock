@@ -1074,7 +1074,7 @@ public class MyUtil {
      *
      * @param context context
      * @param path    file path (e.g.: "/AppDir/a.mp3", "/AppDir/files/images/a.jpg")
-     * @return absolutePath.
+     * @return /mnt/sdcard/Android/data/<application package>/files/....
      */
     public static String getFilePath(Context context, String path) {
         return getExternalFileDirectory(context, path).getAbsolutePath();
@@ -1086,11 +1086,20 @@ public class MyUtil {
      * @param context  context
      * @param uri      image path uri
      * @param filePath save path (e.g.: "/AppDir/a.mp3", "/AppDir/files/images/a.jpg")
+     * @param type     0，截取壁纸/拍照；1，截取Logo
      * @return Intent
      */
-    public static Intent getCropImageOptions(Context context, Uri uri, String filePath) {
-        int width = context.getResources().getDisplayMetrics().widthPixels;
-        int height = context.getResources().getDisplayMetrics().heightPixels;
+    public static Intent getCropImageOptions(Context context, Uri uri, String filePath, int type) {
+        int width;
+        int height;
+        // 截取壁纸/拍照
+        if (type == 0) {
+            width = context.getResources().getDisplayMetrics().widthPixels;
+            height = context.getResources().getDisplayMetrics().heightPixels;
+        } else { // 截取logo
+            width = 96;
+            height = 96;
+        }
 
         Intent intent = new Intent();
         intent.setAction("com.android.camera.action.CROP");
@@ -1170,5 +1179,16 @@ public class MyUtil {
     public static int px2dip(Context context, float pxValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
+    }
+
+    /**
+     * 保存自定义二维码logo地址
+     */
+    public static void saveQRcodeLogoPath(Context context, String logoPath) {
+        SharedPreferences share = context.getSharedPreferences(
+                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor edit = share.edit();
+        edit.putString(WeacConstants.QRCODE_LOGO_PATH, logoPath);
+        edit.apply();
     }
 }

@@ -18,12 +18,12 @@ import android.widget.TextView;
 import com.kaku.weac.R;
 import com.kaku.weac.adapter.LocalAlbumDetailAdapter;
 import com.kaku.weac.bean.Event.FinishLocalAlbumActivityEvent;
+import com.kaku.weac.bean.Event.QRcodeLogoEvent;
 import com.kaku.weac.bean.Event.WallpaperEvent;
 import com.kaku.weac.bean.ImageItem;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.OttoAppConfig;
-import com.kaku.weac.zxing.activity.CaptureActivity;
 
 import java.io.File;
 import java.util.List;
@@ -35,10 +35,10 @@ import java.util.List;
  * @version 1.0 2016/1/14
  */
 public class LocalAlbumDetailActivity extends BaseActivity implements View.OnClickListener {
-    private static final int REQUEST_IMAGE_CROP = 1;
-
+    private static final int REQUEST_IMAGE_CROP_THEME = 1;
+    private static final int REQUEST_IMAGE_CROP_QRCODE_LOGO = 2;
     private LocalAlbumDetailAdapter mLocalAlbumDetailAdapter;
-    private boolean mIsScanQRcode;
+    private int mRequestType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +46,11 @@ public class LocalAlbumDetailActivity extends BaseActivity implements View.OnCli
         setContentView(R.layout.activity_local_album_detail);
         ViewGroup backGround = (ViewGroup) findViewById(R.id.background);
         MyUtil.setBackgroundBlur(backGround, this);
-        mIsScanQRcode = getIntent().getBooleanExtra(CaptureActivity.SCAN_CODE, false);
-        intiViews();
+        mRequestType = getIntent().getIntExtra(WeacConstants.REQUEST_LOCAL_ALBUM_TYPE, 0);
+        assignViews();
     }
 
-    private void intiViews() {
+    private void assignViews() {
         ImageView actionBack = (ImageView) findViewById(R.id.action_back);
         actionBack.setOnClickListener(this);
 
@@ -68,23 +68,34 @@ public class LocalAlbumDetailActivity extends BaseActivity implements View.OnCli
         albumPictureDetailGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String path = mLocalAlbumDetailAdapter.getItem(position).getImagePath();
-                // 主题
-                if (!mIsScanQRcode) {
-                    Uri uri = Uri.fromFile(new File(path));
-                    Intent intent = MyUtil.getCropImageOptions(LocalAlbumDetailActivity.this, uri,
-                            WeacConstants.DIY_WALLPAPER_PATH);
-                    startActivityForResult(intent, REQUEST_IMAGE_CROP);
-                    overridePendingTransition(0, 0);
-                } else { // 扫描二维码
-                    Intent intent = new Intent();
-                    intent.putExtra(WeacConstants.IMAGE_URL, path);
-                    setResult(Activity.RESULT_OK, intent);
-                    finish();
-                    overridePendingTransition(0, R.anim.zoomout);
+                String imagePath = mLocalAlbumDetailAdapter.getItem(position).getImagePath();
+                switch (mRequestType) {
+                    // 主题
+                    case 0:
+                        cropImage(0, REQUEST_IMAGE_CROP_THEME, imagePath, WeacConstants.DIY_WALLPAPER_PATH);
+                        break;
+                    // 扫码
+                    case 1:
+                        Intent intent = new Intent();
+                        intent.putExtra(WeacConstants.IMAGE_URL, imagePath);
+                        setResult(Activity.RESULT_OK, intent);
+                        finish();
+                        overridePendingTransition(0, R.anim.zoomout);
+                        break;
+                    // 造码
+                    case 2:
+                        cropImage(1, REQUEST_IMAGE_CROP_QRCODE_LOGO, imagePath, WeacConstants.DIY_QRCODE_LOGO_PATH);
+                        break;
                 }
             }
         });
+    }
+
+    private void cropImage(int type, int requestType, String sourcePath, String savePath) {
+        Uri imageUri = Uri.fromFile(new File(sourcePath));
+        Intent intent = MyUtil.getCropImageOptions(this, imageUri, savePath, type);
+        startActivityForResult(intent, requestType);
+        overridePendingTransition(0, 0);
     }
 
     @Override
@@ -95,8 +106,8 @@ public class LocalAlbumDetailActivity extends BaseActivity implements View.OnCli
             return;
         }
         switch (requestCode) {
-            // 截图
-            case REQUEST_IMAGE_CROP:
+            // 截图(选取主题)
+            case REQUEST_IMAGE_CROP_THEME:
                 String filePath = MyUtil.getFilePath(this, WeacConstants.DIY_WALLPAPER_PATH);
                 // 保存壁纸信息
                 MyUtil.saveWallpaper(this, WeacConstants.WALLPAPER_PATH, filePath);
@@ -106,6 +117,19 @@ public class LocalAlbumDetailActivity extends BaseActivity implements View.OnCli
                 OttoAppConfig.getInstance().post(new FinishLocalAlbumActivityEvent());
                 finish();
                 overridePendingTransition(0, R.anim.zoomout);
+                break;
+            // 截图(选取二维码图片)
+            case REQUEST_IMAGE_CROP_QRCODE_LOGO:
+                String logoPath = MyUtil.getFilePath(this, WeacConstants.DIY_QRCODE_LOGO_PATH);
+                // 保存自定义二维码logo地址
+                MyUtil.saveQRcodeLogoPath(this, logoPath);
+                // 发送自定义二维码logo截取地址事件
+                OttoAppConfig.getInstance().post(new QRcodeLogoEvent(logoPath));
+                // 发送关闭【本地相册activity】事件
+                OttoAppConfig.getInstance().post(new FinishLocalAlbumActivityEvent());
+
+                finish();
+                overridePendingTransition(0, R.anim.move_out_bottom);
                 break;
         }
     }

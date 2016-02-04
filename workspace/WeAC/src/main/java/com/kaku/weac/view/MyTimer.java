@@ -21,7 +21,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.kaku.weac.common.TimeModel;
+import com.kaku.weac.bean.model.TimeModel;
 import com.kaku.weac.R;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.MyUtil;

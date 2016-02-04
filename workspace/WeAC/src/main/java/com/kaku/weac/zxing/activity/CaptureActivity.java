@@ -433,7 +433,6 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
     }
 
     private boolean mIsLightOpen;
-    public static final String SCAN_CODE = "scan_code";
 
     @Override
     public void onClick(View v) {
@@ -455,7 +454,7 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
                 offLight();
 
                 Intent intent = new Intent(this, LocalAlbumActivity.class);
-                intent.putExtra(SCAN_CODE, true);
+                intent.putExtra(WeacConstants.REQUEST_LOCAL_ALBUM_TYPE, 1);
                 startActivity(intent);
                 overridePendingTransition(R.anim.zoomin, 0);
                 break;

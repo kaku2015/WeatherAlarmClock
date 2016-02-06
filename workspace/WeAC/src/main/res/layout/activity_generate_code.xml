@@ -55,22 +55,52 @@
                 android:textCursorDrawable="@drawable/cursor_record_rename"
                 android:textSize="@dimen/big_small"/>
 
-            <LinearLayout style="@style/new_alarm_clcok_item">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                >
 
-                <TextView
-                    style="@style/new_alarm_clcok_item_type"
-                    android:text="@string/logo"/>
+                <ImageView
+                    android:id="@+id/logo_iv"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="19dp"
+                    android:background="@drawable/ic_launcher"
+                    android:scaleType="centerCrop"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/logo"
+                        android:textColor="@color/black_text_normal_common"
+                        android:textSize="@dimen/big_small"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="3"
+                        android:text="@string/logo_open_status"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="@dimen/small"/>
+
+                </LinearLayout>
 
                 <ToggleButton
                     android:id="@+id/logo_btn"
                     style="@style/new_alarm_clcok_item_toggle_btn">
                 </ToggleButton>
             </LinearLayout>
-
-            <View
-                style="@style/divider_line"
-                android:layout_marginBottom="20dp"
-                />
 
             <Button
                 android:id="@+id/generate_qr_code_btn"
@@ -79,22 +109,12 @@
                 android:text="@string/generate_qr_code"
                 />
 
-            <CheckBox
-                android:id="@+id/logo_cb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/border_margin"
-                android:text="@string/logo"
-                android:textColor="@color/black_text_normal_common"
-                android:textSize="@dimen/big_small"/>
-
             <ImageView
                 android:id="@+id/qr_code_result_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/ic_launcher"/>
+                android:layout_marginTop="10dp"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

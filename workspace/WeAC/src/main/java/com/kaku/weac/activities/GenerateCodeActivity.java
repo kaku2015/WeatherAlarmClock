@@ -47,8 +47,9 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
     private ImageView mActionOverflow;
     private PopupMenu mPopupMenu;
     private EditText mQrCodeEt;
-    private ToggleButton mLogoCb;
+    private ToggleButton mLogoTogBtn;
     private ImageView mQrCodeResultIv;
+    private ImageView mLogoIv;
     private static final int REQUEST_LOCAL_ALBUM = 1;
     private String mLogoPath;
     private boolean mIsQRcodeGenerated;
@@ -79,11 +80,12 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
         final Button generateQRcodeBtn = (Button) findViewById(R.id.generate_qr_code_btn);
         mActionOverflow = (ImageView) findViewById(R.id.action_overflow);
         mQrCodeEt = (EditText) findViewById(R.id.qr_code_et);
-        mLogoCb = (ToggleButton) findViewById(R.id.logo_btn);
+        mLogoTogBtn = (ToggleButton) findViewById(R.id.logo_btn);
         mQrCodeResultIv = (ImageView) findViewById(R.id.qr_code_result_iv);
+        mLogoIv = (ImageView) findViewById(R.id.logo_iv);
 
         if (mLogoPath != null) {
-            mQrCodeResultIv.setImageBitmap(BitmapFactory.decodeFile(mLogoPath));
+            mLogoIv.setImageBitmap(BitmapFactory.decodeFile(mLogoPath));
         }
 
         actionBack.setOnClickListener(this);
@@ -132,66 +134,70 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
                 break;
             // 更多（溢出菜单按钮）
             case R.id.action_overflow:
-                if (MyUtil.isFastDoubleClick()) {
-                    return;
-                }
-                if (mPopupMenu == null) {
-                    mPopupMenu = new PopupMenu(this, mActionOverflow);
-                    mPopupMenu.getMenuInflater().inflate(R.menu.generate_qr_code_overflow, mPopupMenu.getMenu());
-                    mPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(MenuItem item) {
-                            switch (item.getItemId()) {
-                                case R.id.select_logo:
-                                    Intent intent = new Intent(GenerateCodeActivity.this, LocalAlbumActivity.class);
-                                    intent.putExtra(WeacConstants.REQUEST_LOCAL_ALBUM_TYPE, 2);
-                                    startActivityForResult(intent, REQUEST_LOCAL_ALBUM);
-                                    overridePendingTransition(R.anim.move_in_bottom, 0);
-                                    break;
-                                case R.id.save_qr_code:
-                                    // 已经生成了二维码
-                                    if (mIsQRcodeGenerated) {
-                                        Drawable drawable = mQrCodeResultIv.getDrawable();
-                                        BitmapDrawable bd = (BitmapDrawable) drawable;
-                                        Bitmap bitmap = bd.getBitmap();
-
-                                        String filePath = WeacConstants.QRCODE_PATH + "/qrcode" +
-                                                bitmap.hashCode() + ".jpg";
-                                        File file = MyUtil.getFileDirectory(GenerateCodeActivity.this, filePath);
-                                        String path = file.getAbsolutePath();
-                                        try {
-                                            if (file.exists()) {
-                                                //noinspection ResultOfMethodCallIgnored
-                                                file.delete();
-                                            }
-                                            if (!file.createNewFile()) {
-                                                ToastUtil.showShortToast(GenerateCodeActivity.this,
-                                                        getString(R.string.save_fail_retry));
-                                                return true;
-                                            }
-                                            FileOutputStream fis = new FileOutputStream(file);
-                                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fis);
-                                            ToastUtil.showLongToast(GenerateCodeActivity.this,
-                                                    getString(R.string.picture_already_save_to, path));
-                                        } catch (Exception e) {
-                                            ToastUtil.showShortToast(GenerateCodeActivity.this,
-                                                    getString(R.string.save_fail_retry));
-                                            LogUtil.e(LOG_TAG, e.toString());
-                                        }
-                                    } else {
-                                        ToastUtil.showShortToast(GenerateCodeActivity.this,
-                                                getString(R.string.generate_qrcode_please));
-                                    }
-                                    break;
-                            }
-                            return true;
-                        }
-                    });
-                    mPopupMenu.show();
-                } else {
-                    mPopupMenu.show();
-                }
+                operateOverflow();
                 break;
+        }
+    }
+
+    private void operateOverflow() {
+        if (MyUtil.isFastDoubleClick()) {
+            return;
+        }
+        if (mPopupMenu == null) {
+            mPopupMenu = new PopupMenu(this, mActionOverflow);
+            mPopupMenu.getMenuInflater().inflate(R.menu.generate_qr_code_overflow, mPopupMenu.getMenu());
+            mPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.select_logo:
+                            Intent intent = new Intent(GenerateCodeActivity.this, LocalAlbumActivity.class);
+                            intent.putExtra(WeacConstants.REQUEST_LOCAL_ALBUM_TYPE, 2);
+                            startActivityForResult(intent, REQUEST_LOCAL_ALBUM);
+                            overridePendingTransition(R.anim.move_in_bottom, 0);
+                            break;
+                        case R.id.save_qr_code:
+                            // 已经生成了二维码
+                            if (mIsQRcodeGenerated) {
+                                Drawable drawable = mQrCodeResultIv.getDrawable();
+                                BitmapDrawable bd = (BitmapDrawable) drawable;
+                                Bitmap bitmap = bd.getBitmap();
+
+                                String filePath = WeacConstants.QRCODE_PATH + "/qrcode" +
+                                        bitmap.hashCode() + ".jpg";
+                                File file = MyUtil.getFileDirectory(GenerateCodeActivity.this, filePath);
+                                String path = file.getAbsolutePath();
+                                try {
+                                    if (file.exists()) {
+                                        //noinspection ResultOfMethodCallIgnored
+                                        file.delete();
+                                    }
+                                    if (!file.createNewFile()) {
+                                        ToastUtil.showShortToast(GenerateCodeActivity.this,
+                                                getString(R.string.save_fail_retry));
+                                        return true;
+                                    }
+                                    FileOutputStream fis = new FileOutputStream(file);
+                                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fis);
+                                    ToastUtil.showLongToast(GenerateCodeActivity.this,
+                                            getString(R.string.picture_already_save_to, path));
+                                } catch (Exception e) {
+                                    ToastUtil.showShortToast(GenerateCodeActivity.this,
+                                            getString(R.string.save_fail_retry));
+                                    LogUtil.e(LOG_TAG, e.toString());
+                                }
+                            } else {
+                                ToastUtil.showShortToast(GenerateCodeActivity.this,
+                                        getString(R.string.generate_qrcode_please));
+                            }
+                            break;
+                    }
+                    return true;
+                }
+            });
+            mPopupMenu.show();
+        } else {
+            mPopupMenu.show();
         }
     }
 
@@ -199,11 +205,13 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
         String contentString = mQrCodeEt.getText().toString();
         if (!contentString.equals("")) {
             Bitmap logoBitmap = null;
-            if (mLogoCb.isChecked()) {
+            if (mLogoTogBtn.isChecked()) {
                 if (mLogoPath != null) {
                     // 自定义logo图标
                     logoBitmap = BitmapFactory.decodeFile(mLogoPath);
-                } else { // 默认logo为应用图标
+                }
+                if (logoBitmap == null) {
+                    // 默认logo为应用图标
                     logoBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
                 }
             }
@@ -218,12 +226,7 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
     @Subscribe
     public void onLogoUpdateEvent(QRcodeLogoEvent event) {
         mLogoPath = event.getLogoPath();
-        if (mIsQRcodeGenerated) {
-            generateQRcode();
-        } else {
-            mQrCodeResultIv.setImageBitmap(BitmapFactory.decodeFile(mLogoPath));
-        }
-
+        mLogoIv.setImageBitmap(BitmapFactory.decodeFile(mLogoPath));
     }
 
     @Override

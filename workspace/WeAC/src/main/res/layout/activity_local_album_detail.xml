@@ -18,6 +18,12 @@
             android:id="@+id/action_title"
             style="@style/action_title"/>
 
+        <TextView
+            android:id="@+id/action_cancel"
+            style="@style/action_tv"
+            android:layout_alignParentRight="true"
+            android:text="@string/cancel"/>
+
     </RelativeLayout>
 
     <GridView

@@ -52,7 +52,9 @@ public class LocalAlbumDetailActivity extends BaseActivity implements View.OnCli
 
     private void assignViews() {
         ImageView actionBack = (ImageView) findViewById(R.id.action_back);
+        TextView actionCancel = (TextView) findViewById(R.id.action_cancel);
         actionBack.setOnClickListener(this);
+        actionCancel.setOnClickListener(this);
 
         TextView actionTitle = (TextView) findViewById(R.id.action_title);
         String title = getIntent().getStringExtra(LocalAlbumActivity.ALBUM_NAME);
@@ -102,6 +104,7 @@ public class LocalAlbumDetailActivity extends BaseActivity implements View.OnCli
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != RESULT_OK) {
+            // 截图返回
             overridePendingTransition(0, R.anim.zoomout);
             return;
         }
@@ -134,8 +137,42 @@ public class LocalAlbumDetailActivity extends BaseActivity implements View.OnCli
         }
     }
 
+    public static final String FINISH_ACTIVITY = "finish_activity";
+
     @Override
     public void onClick(View v) {
-        finish();
+        switch (v.getId()) {
+            case R.id.action_back:
+                finish();
+                break;
+            case R.id.action_cancel:
+                switch (mRequestType) {
+                    // 主题
+                    case 0:
+                        OttoAppConfig.getInstance().post(new FinishLocalAlbumActivityEvent());
+
+                        finish();
+                        overridePendingTransition(0, R.anim.zoomout);
+                        break;
+                    // 扫码
+                    case 1:
+                        // 发送关闭【本地相册activity】事件有延迟，为什么？？
+                        Intent intent = new Intent();
+                        intent.putExtra(FINISH_ACTIVITY, true);
+                        setResult(Activity.RESULT_OK, intent);
+
+                        finish();
+                        overridePendingTransition(0, R.anim.zoomout);
+                        break;
+                    // 造码
+                    case 2:
+                        OttoAppConfig.getInstance().post(new FinishLocalAlbumActivityEvent());
+
+                        finish();
+                        overridePendingTransition(0, R.anim.move_out_bottom);
+                        break;
+                }
+                break;
+        }
     }
 }

@@ -189,9 +189,18 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != RESULT_OK) {
+            // 截图/相机返回
             overridePendingTransition(0, R.anim.zoomout);
             return;
         }
+
+        // 扫描二维码相册详细取消
+        boolean isFinishMe = data.getBooleanExtra(LocalAlbumDetailActivity.FINISH_ACTIVITY, false);
+        if (isFinishMe && !isFinishing()) {
+            myFinish2();
+            return;
+        }
+
         switch (requestCode) {
             // 拍照（截取主题壁纸）
             case REQUEST_IMAGE_CAPTURE_THEME:

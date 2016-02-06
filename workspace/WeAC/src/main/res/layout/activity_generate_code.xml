@@ -43,7 +43,7 @@
                 android:id="@+id/qr_code_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="@dimen/border_margin"
                 android:layout_marginRight="@dimen/border_margin"
                 android:layout_marginTop="30dp"
@@ -52,7 +52,25 @@
                 android:maxLength="180"
                 android:padding="20dp"
                 android:textColor="@color/black_text_normal_common"
+                android:textCursorDrawable="@drawable/cursor_record_rename"
                 android:textSize="@dimen/big_small"/>
+
+            <LinearLayout style="@style/new_alarm_clcok_item">
+
+                <TextView
+                    style="@style/new_alarm_clcok_item_type"
+                    android:text="@string/logo"/>
+
+                <ToggleButton
+                    android:id="@+id/logo_btn"
+                    style="@style/new_alarm_clcok_item_toggle_btn">
+                </ToggleButton>
+            </LinearLayout>
+
+            <View
+                style="@style/divider_line"
+                android:layout_marginBottom="20dp"
+                />
 
             <Button
                 android:id="@+id/generate_qr_code_btn"
@@ -75,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/ic_launcher"/>
         </LinearLayout>
     </ScrollView>

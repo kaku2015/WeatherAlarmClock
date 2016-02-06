@@ -198,14 +198,19 @@ public class WeacConstants {
     public static final String DIY_QRCODE_LOGO_PATH = "/qrcode/logo.jpg";
 
     /**
-     * 图片地址
+     * 自定义二维码图片存放地址
      */
-    public static final String IMAGE_URL = "image_url";
+    public static final String QRCODE_PATH = "/WeaAlarmClock/picture/qrcode";
 
     /**
      * 访问本地相册类型:0，默认；1，扫码；2，造码
      */
     public static final String REQUEST_LOCAL_ALBUM_TYPE = "request_local_album_type";
+
+    /**
+     * 图片地址
+     */
+    public static final String IMAGE_URL = "image_url";
 
     /**
      * 保存的自定义二维码的logo path

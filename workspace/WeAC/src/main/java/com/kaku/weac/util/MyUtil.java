@@ -1097,8 +1097,7 @@ public class MyUtil {
             width = context.getResources().getDisplayMetrics().widthPixels;
             height = context.getResources().getDisplayMetrics().heightPixels;
         } else { // 截取logo
-            width = 96;
-            height = 96;
+            width = height = dip2px(context, 30);
         }
 
         Intent intent = new Intent();

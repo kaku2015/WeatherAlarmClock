@@ -347,7 +347,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
      */
     private void queryFormServer(final String address, final int position, final String cityName) {
 
-        HttpUtil.sendHttpRequest(address, cityName, new HttpCallbackListener() {
+         HttpUtil.sendHttpRequest(address, cityName, new HttpCallbackListener() {
                     @Override
                     public void onFinish(String response) {
                         try {
@@ -381,6 +381,9 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                             // 添加城市
                             if (position == -1) {
                                 runOnUi(getString(R.string.add_city_fail), position);
+                                // 添加定位
+                            } else if (position == -2) {
+                                runOnUi(getString(R.string.add_location_fail), position);
                             } else {
                                 if (address != null) {
                                     runOnUi(String.format(getString(R.string.refresh_fail), cityName), position);

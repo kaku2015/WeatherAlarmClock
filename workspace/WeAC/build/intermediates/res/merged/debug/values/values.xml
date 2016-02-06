@@ -10784,6 +10784,7 @@
     <string name="add_alarm_clock">  添加闹钟  </string>
     <string name="add_city">添加城市</string>
     <string name="add_city_fail">添加城市失败，请重新尝试</string>
+    <string name="add_location_fail">添加自动定位失败，请重新尝试</string>
     <string name="address_city">http://www.weather.com.cn/data/list3/city%1$s.xml</string>
     <string name="address_weather">http://wthrcdn.etouch.cn/WeatherApi?citykey=%1$s</string>
     <string name="air_cure">晾晒</string>
@@ -10846,7 +10847,7 @@
     <string name="date">%1$s/%2$s</string>
     <string name="day">日</string>
     <string name="days_forecast">多天预报</string>
-    <string name="decode_null">未解析到任何数据</string>
+    <string name="decode_null">未发现二维码/条形码</string>
     <string name="default_ring">默认铃声</string>
     <string name="default_wallpaper_name">wallpaper_0</string>
     <string name="delete">删除</string>
@@ -10876,13 +10877,14 @@
     <string name="friend_share">好友分享</string>
     <string name="generate_code">造码</string>
     <string name="generate_qr_code">生成二维码</string>
+    <string name="generate_qrcode_please">您还没有生成二维码图片呢</string>
     <string name="give_good_reputation">赏个好评</string>
     <string name="hot_city">热门城市</string>
     <string name="humidity">湿度 %1$s</string>
     <string name="identifying">正在识别…</string>
     <string name="input_city_name">请输入城市名称或拼音</string>
     <string name="input_empty">输入内容为空</string>
-    <string name="input_qr_code_content">输入二维码内容</string>
+    <string name="input_qr_code_content">输入二维码中的信息</string>
     <string name="instant_noodles">泡面</string>
     <string name="internet_error">网络异常,请检查网络设置</string>
     <string name="internet_fail">连接失败，请重试</string>
@@ -10925,6 +10927,7 @@
     <string name="one">1</string>
     <string name="one_h">一</string>
     <string name="picture">图片</string>
+    <string name="picture_already_save_to">图片已保存至%1$s</string>
     <string name="picture_name_number">%1$s(%2$d张)</string>
     <string name="play_duration">播放时长：</string>
     <string name="play_fail">播放失败</string>
@@ -10964,16 +10967,17 @@
     <string name="run">跑步</string>
     <string name="saturday">周六</string>
     <string name="save">保存</string>
+    <string name="save_fail_retry">保存失败，请重试</string>
     <string name="save_path">保存路径：</string>
-    <string name="save_qr_code">保存二维码</string>
+    <string name="save_qr_code">保存二维码到手机</string>
     <string name="scan_code">扫码</string>
     <string name="scan_result">扫描结果</string>
-    <string name="scanning">正在扫描…</string>
+    <string name="scanning">正在准备相册…</string>
     <string name="screen_short">屏幕截图</string>
     <string name="search">搜索</string>
     <string name="select_all">全选</string>
     <string name="select_all_cancel">取消全选</string>
-    <string name="select_logo">选择Logo</string>
+    <string name="select_logo">从相册选取Logo</string>
     <string name="selected_xx_item">已选择%1$d项</string>
     <string name="set_default">设为默认</string>
     <string name="siesta">午睡</string>

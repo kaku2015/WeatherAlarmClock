@@ -178,7 +178,8 @@
     <!-- 城市管理，添加城市 -->
     <string name="set_default">设为默认</string>
     <string name="my_default">默认</string>
-    <string name="add_city_fail">添加城市失败，请重新尝试</string>
+    <string name="add_city_fail">添加城市失败，请重试</string>
+    <string name="add_location_fail">添加自动定位失败，请重试</string>
     <string name="refresh_fail">城市（%1$s）刷新失败</string>
     <string name="city_manage">城市管理</string>
     <string name="add_city">添加城市</string>
@@ -239,7 +240,7 @@
     <!--本地相册-->
     <string name="local_album">本地相册</string>
     <string name="picture_name_number">%1$s(%2$d张)</string>
-    <string name="scanning">正在扫描…</string>
+    <string name="scanning">正在准备相册…</string>
     <string name="identifying">正在识别…</string>
     <string name="no_local_album">没有本地图片</string>
     <string name="capture">拍照</string>
@@ -258,13 +259,16 @@
     <string name="search">搜索</string>
     <string name="text_already_copied">文本已复制到剪贴板</string>
     <string name="bar_code">条形码：%1$s</string>
-    <string name="decode_null">未解析到任何数据</string>
+    <string name="decode_null">未发现二维码/条形码</string>
     <string name="Alignment_code">对准二维码/条形码</string>
     <string name="camera_error">相机错误</string>
     <!--生成二维码-->
     <string name="generate_qr_code">生成二维码</string>
-    <string name="select_logo">选择Logo</string>
-    <string name="save_qr_code">保存二维码</string>
-    <string name="input_qr_code_content">输入二维码内容</string>
+    <string name="select_logo">从相册选取Logo</string>
+    <string name="save_qr_code">保存二维码到手机</string>
+    <string name="input_qr_code_content">输入二维码中的信息</string>
     <string name="logo">Logo</string>
+    <string name="generate_qrcode_please">您还没有生成二维码图片呢</string>
+    <string name="picture_already_save_to">图片已保存至%1$s</string>
+    <string name="save_fail_retry">保存失败，请重试</string>
 </resources>

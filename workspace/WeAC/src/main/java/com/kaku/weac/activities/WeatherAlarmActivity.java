@@ -15,7 +15,7 @@ import com.kaku.weac.fragment.WeatherAlarmFragment;
  * @author 咖枯
  * @version 1.0 2015/11/29
  */
-public class WeatherAlarmActivity extends SingleFragmentActivity {
+public class WeatherAlarmActivity extends NoSwipeBackFragmentActivity {
 
     @Override
     protected Fragment createFragment() {

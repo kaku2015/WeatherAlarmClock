@@ -7,11 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
-import com.kaku.weac.LeakCanaryApplication;
 import com.kaku.weac.R;
-import com.squareup.leakcanary.RefWatcher;
-
-import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
  * fragment activity的公共抽象类
@@ -19,7 +15,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
  * @author 咖枯
  * @version 1.0 2015
  */
-public abstract class SingleFragmentActivity extends SwipeBackActivity {
+public abstract class SingleFragmentActivity extends BaseActivity {
 
     /**
      * 抽象方法：创建Fragment
@@ -41,12 +37,5 @@ public abstract class SingleFragmentActivity extends SwipeBackActivity {
 
         }
 
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        RefWatcher refWatcher = LeakCanaryApplication.getRefWatcher(this);
-        refWatcher.watch(this);
     }
 }

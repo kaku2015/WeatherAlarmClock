@@ -13,7 +13,7 @@ import com.kaku.weac.fragment.RecordRenameFragment;
  * @author 咖枯
  * @version 1.0 2015/07
  */
-public class RecordRenameActivity extends SingleFragmentActivity {
+public class RecordRenameActivity extends NoSwipeBackFragmentActivity {
 
     @Override
     protected Fragment createFragment() {

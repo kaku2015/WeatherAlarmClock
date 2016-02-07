@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -15,10 +14,8 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.TextView;
 
-import com.kaku.weac.LeakCanaryApplication;
 import com.kaku.weac.R;
 import com.kaku.weac.fragment.AlarmClockFragment;
 import com.kaku.weac.fragment.MoreFragment;
@@ -27,7 +24,6 @@ import com.kaku.weac.fragment.WeaFragment;
 import com.kaku.weac.service.DaemonService;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
-import com.squareup.leakcanary.RefWatcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +34,7 @@ import java.util.List;
  * @author 咖枯
  * @version 1.0 2015/04/12
  */
-public class MainActivity extends FragmentActivity implements OnClickListener {
+public class MainActivity extends NoSwipeBackActivity implements OnClickListener {
 
     /**
      * Log tag ：MainActivity
@@ -198,12 +194,13 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
     // // return -1L;
     // // }
 
+    @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         startService(new Intent(this, DaemonService.class));
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         // 设置主题壁纸
         setThemeWallpaper();
@@ -445,7 +442,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
      * @param color    Tab文字颜色
      */
     private void setTextView(int iconId, TextView textView, int color) {
-        Drawable drawable = getResources().getDrawable(iconId);
+        @SuppressWarnings("deprecation") Drawable drawable = getResources().getDrawable(iconId);
         if (drawable != null) {
             drawable.setBounds(0, 0, drawable.getMinimumWidth(),
                     drawable.getMinimumHeight());
@@ -461,8 +458,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         LogUtil.d(LOG_TAG, "onDestroy()");
 //        Process.killProcess(Process.myPid());
         super.onDestroy();
-        RefWatcher refWatcher = LeakCanaryApplication.getRefWatcher(this);
-        refWatcher.watch(this);
+//        RefWatcher refWatcher = LeakCanaryApplication.getRefWatcher(this);
+//        refWatcher.watch(this);
     }
 
 }

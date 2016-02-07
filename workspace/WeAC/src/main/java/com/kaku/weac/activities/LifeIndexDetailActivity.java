@@ -15,7 +15,7 @@ import com.kaku.weac.fragment.LifeIndexDetailFragment;
  * @author 咖枯
  * @version 1.0 2015/10/10
  */
-public class LifeIndexDetailActivity extends SingleFragmentActivity {
+public class LifeIndexDetailActivity extends NoSwipeBackFragmentActivity {
 
     @Override
     protected Fragment createFragment() {

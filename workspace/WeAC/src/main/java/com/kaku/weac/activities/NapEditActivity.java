@@ -13,7 +13,7 @@ import com.kaku.weac.fragment.NapEditFragment;
  * @author 咖枯
  * @version 1.0 2015/07
  */
-public class NapEditActivity extends SingleFragmentActivity {
+public class NapEditActivity extends NoSwipeBackFragmentActivity {
 
     @Override
     protected Fragment createFragment() {

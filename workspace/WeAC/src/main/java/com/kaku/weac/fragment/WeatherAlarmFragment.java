@@ -64,7 +64,7 @@ public class WeatherAlarmFragment extends BaseFragment {
         // 天气预警详情TextView
         TextView detailTv = (TextView) view.findViewById(R.id.detail);
         if (mDetail == null) {
-            detailTv.setText("无");
+            detailTv.setText(getString(R.string.no_data));
         } else {
             detailTv.setText(mDetail);
         }

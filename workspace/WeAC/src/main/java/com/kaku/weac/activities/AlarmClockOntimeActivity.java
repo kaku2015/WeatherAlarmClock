@@ -13,7 +13,7 @@ import com.kaku.weac.fragment.AlarmClockOntimeFragment;
  * @author 咖枯
  * @version 1.0 2015/06
  */
-public class AlarmClockOntimeActivity extends SingleFragmentActivity {
+public class AlarmClockOntimeActivity extends NoSwipeBackFragmentActivity {
 
     @Override
     protected Fragment createFragment() {

@@ -23,7 +23,7 @@ import com.kaku.weac.util.AudioPlayer;
  * @author 咖枯
  * @version 1.0 2015/12/31
  */
-public class TimerOnTimeActivity extends BaseActivity implements View.OnClickListener {
+public class TimerOnTimeActivity extends NoSwipeBackActivity implements View.OnClickListener {
 
     private AudioManager mAudioManager;
     private int mCurrentVolume;
@@ -32,7 +32,6 @@ public class TimerOnTimeActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer_on_time);
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }

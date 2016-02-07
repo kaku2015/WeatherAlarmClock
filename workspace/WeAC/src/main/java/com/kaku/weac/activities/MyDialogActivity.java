@@ -21,7 +21,7 @@ import com.kaku.weac.common.WeacConstants;
  * @author 咖枯
  * @version 1.0 2015/12/5
  */
-public class MyDialogActivity extends BaseActivity implements View.OnClickListener {
+public class MyDialogActivity extends NoSwipeBackActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

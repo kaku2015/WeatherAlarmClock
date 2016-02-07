@@ -4,11 +4,12 @@
 package com.kaku.weac.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.kaku.weac.LeakCanaryApplication;
 import com.kaku.weac.util.LogUtil;
 import com.squareup.leakcanary.RefWatcher;
+
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
  * Activity管理类
@@ -16,7 +17,7 @@ import com.squareup.leakcanary.RefWatcher;
  * @author 咖枯
  * @version 1.0 2015
  */
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends SwipeBackActivity {
 
     /**
      * Log tag ：BaseActivity

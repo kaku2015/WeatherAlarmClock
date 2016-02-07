@@ -347,7 +347,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
      */
     private void queryFormServer(final String address, final int position, final String cityName) {
 
-         HttpUtil.sendHttpRequest(address, cityName, new HttpCallbackListener() {
+        HttpUtil.sendHttpRequest(address, cityName, new HttpCallbackListener() {
                     @Override
                     public void onFinish(String response) {
                         try {
@@ -360,10 +360,14 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                             } else {
                                 switch (position) {
                                     case -1:
-                                        runOnUi(getString(R.string.no_city_info), position);
+                                        runOnUi(getString(R.string.no_data), position);
+//                                        runOnUi(getString(R.string.no_city_info), position);
                                         break;
                                     case -2:
                                         runOnUi(getString(R.string.can_not_find_current_location), position);
+                                        break;
+                                    default:
+                                        runOnUi(getString(R.string.no_data), -1);
                                         break;
                                 }
                             }

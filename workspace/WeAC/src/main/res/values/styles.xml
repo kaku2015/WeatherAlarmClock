@@ -7,6 +7,28 @@
         <item name="android:screenOrientation">portrait</item>
     </style>
 
+    <style name="Theme.MyDialog" parent="@android:style/Theme.Holo.Dialog.NoActionBar">
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 设置dialog的背景 -->
+        <!-- <item name="android:windowNoTitle">true</item> -->
+        <!-- 设置title -->
+        <!-- <item name="android:windowFrame">@null</item> -->
+        <!-- 设置边框 -->
+        <!-- <item name="android:windowIsTranslucent">true</item> -->
+        <!-- 设置半透明 -->
+        <!-- <item name="android:backgroundDimEnabled">true</item> -->
+        <!-- 背景是否模糊显示 -->
+        <!-- <item name="android:windowFullscreen">true</item> -->
+        <!-- 设置全屏 -->
+        <!-- <item name="android:windowIsFloating">true</item> -->
+        <!-- 是否浮现在activity之上 -->
+        <!--<item name="android:windowContentOverlay">@null</item>-->
+        <!--对话框是否有遮盖-->
+        <!--<item name="android:backgroundDimEnabled">false</item>-->
+        <!-- 是否允许背景灰暗 -->
+    </style>
+
     <style name="tab_llyt">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
@@ -107,24 +129,4 @@
         <item name="android:background">@drawable/bg_btn_sure</item>
     </style>
 
-    <style name="Theme.MyDialog" parent="@android:style/Theme.Dialog">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <!-- 设置dialog的背景 -->
-        <!-- <item name="android:windowNoTitle">true</item> -->
-        <!-- 设置title -->
-        <!-- <item name="android:windowFrame">@null</item> -->
-        <!-- 设置边框 -->
-        <!-- <item name="android:windowIsTranslucent">true</item> -->
-        <!-- 设置半透明 -->
-        <!-- <item name="android:backgroundDimEnabled">true</item> -->
-        <!-- 背景是否模糊显示 -->
-        <!-- <item name="android:windowFullscreen">true</item> -->
-        <!-- 设置全屏 -->
-        <!-- <item name="android:windowIsFloating">true</item> -->
-        <!-- 是否浮现在activity之上 -->
-        <!--<item name="android:windowContentOverlay">@null</item>-->
-        <!--对话框是否有遮盖-->
-        <!--<item name="android:backgroundDimEnabled">false</item>-->
-        <!-- 是否允许背景灰暗 -->
-    </style>
 </resources>

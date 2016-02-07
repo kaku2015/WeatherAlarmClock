@@ -72,7 +72,8 @@
 
         <TextView
             android:id="@+id/save_path"
-            style="@style/record_detail_content"/>
+            style="@style/record_detail_content"
+            android:textIsSelectable="true"/>
     </LinearLayout>
 
     <Button

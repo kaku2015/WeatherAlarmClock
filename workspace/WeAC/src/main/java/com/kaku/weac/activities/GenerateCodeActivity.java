@@ -203,24 +203,22 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
 
     private void generateQRcode() {
         String contentString = mQrCodeEt.getText().toString();
-        if (!contentString.equals("")) {
-            Bitmap logoBitmap = null;
-            if (mLogoTogBtn.isChecked()) {
-                if (mLogoPath != null) {
-                    // 自定义logo图标
-                    logoBitmap = BitmapFactory.decodeFile(mLogoPath);
-                }
-                if (logoBitmap == null) {
-                    // 默认logo为应用图标
-                    logoBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
-                }
+        Bitmap logoBitmap = null;
+        if (mLogoTogBtn.isChecked()) {
+            if (mLogoPath != null) {
+                // 自定义logo图标
+                logoBitmap = BitmapFactory.decodeFile(mLogoPath);
             }
-            int size = MyUtil.dip2px(this, 200);
-            //根据字符串生成二维码图片并显示在界面上，第2,3个参数为图片宽高
-            Bitmap qrCodeBitmap = EncodingUtils.createQRCode(contentString, size, size, logoBitmap);
-            mQrCodeResultIv.setImageBitmap(qrCodeBitmap);
-            mIsQRcodeGenerated = true;
+            if (logoBitmap == null) {
+                // 默认logo为应用图标
+                logoBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+            }
         }
+        int size = MyUtil.dip2px(this, 200);
+        //根据字符串生成二维码图片并显示在界面上，第2,3个参数为图片宽高
+        Bitmap qrCodeBitmap = EncodingUtils.createQRCode(contentString, size, size, logoBitmap);
+        mQrCodeResultIv.setImageBitmap(qrCodeBitmap);
+        mIsQRcodeGenerated = true;
     }
 
     @Subscribe

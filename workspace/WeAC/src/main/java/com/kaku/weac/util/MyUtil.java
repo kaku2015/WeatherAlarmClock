@@ -598,8 +598,8 @@ public class MyUtil {
      * @param fileLength file
      * @return 格式化后的大小
      */
-    public static String FormatFileSize(long fileLength) {
-        DecimalFormat df = new DecimalFormat("#.00");
+    public static String formatFileSize(long fileLength) {
+        DecimalFormat df = new DecimalFormat("0.00");
         String fileSizeString;
         if (fileLength < 1024) {
             fileSizeString = df.format((double) fileLength) + "B";
@@ -619,7 +619,7 @@ public class MyUtil {
      * @param ms 毫秒数
      * @return mm:ss
      */
-    public static String FormatFileDuration(int ms) {
+    public static String formatFileDuration(int ms) {
         // 单位秒
         int ss = 1000;
         // 单位分

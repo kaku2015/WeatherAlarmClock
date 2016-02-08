@@ -9,11 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.kaku.weac.R;
 import com.kaku.weac.activities.GenerateCodeActivity;
 import com.kaku.weac.activities.ThemeActivity;
 import com.kaku.weac.bean.Event.WallpaperEvent;
+import com.kaku.weac.util.DataCleanManager;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.OttoAppConfig;
 import com.kaku.weac.zxing.activity.CaptureActivity;
@@ -30,6 +32,7 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
      * Log tag ：MoreFragment
      */
     private static final String LOG_TAG = "MoreFragment";
+    private TextView mUsedMemory;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,10 +52,13 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
         ViewGroup themeBtn = (ViewGroup) view.findViewById(R.id.theme);
         ViewGroup scanQRcodeBtn = (ViewGroup) view.findViewById(R.id.scan_scan);
         ViewGroup generateCodeBtn = (ViewGroup) view.findViewById(R.id.generate_code);
+        ViewGroup clearMemoryBtn = (ViewGroup) view.findViewById(R.id.clear_memory);
+        mUsedMemory = (TextView) view.findViewById(R.id.used_memory_tv);
 
         themeBtn.setOnClickListener(this);
         scanQRcodeBtn.setOnClickListener(this);
         generateCodeBtn.setOnClickListener(this);
+        clearMemoryBtn.setOnClickListener(this);
     }
 
     @Subscribe
@@ -103,6 +109,10 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
                 Intent generateCodeIntent = new Intent(getActivity(), GenerateCodeActivity.class);
                 startActivity(generateCodeIntent);
                 break;
+            case R.id.clear_memory:
+                DataCleanManager.clearAllCache(getActivity());
+                mUsedMemory.setText(DataCleanManager.getTotalCacheSize(getActivity()));
+                break;
         }
     }
 
@@ -116,6 +126,12 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
 
         }
     }*/
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mUsedMemory.setText(DataCleanManager.getTotalCacheSize(getActivity()));
+    }
 
     @Override
     public void onDestroy() {

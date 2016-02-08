@@ -108,7 +108,12 @@
                         style="@style/more_item_title_tv"
                         android:text="@string/clear_memory"/>
 
-                    <ImageView style="@style/more_item_arrow_iv"/>
+                    <TextView
+                        android:id="@+id/used_memory_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white_trans60"
+                        android:textSize="@dimen/small"/>
                 </LinearLayout>
 
                 <View style="@style/more_item_divider"/>

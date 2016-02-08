@@ -72,7 +72,7 @@ public class RecordDetailFragment extends BaseFragment {
                 WeacConstants.RING_URL);
         // 文件操作
         File file = new File(mSavePath);
-        mFileSize = MyUtil.FormatFileSize(file.length());
+        mFileSize = MyUtil.formatFileSize(file.length());
         long time = file.lastModified();
         mModifyTime = new SimpleDateFormat("yyyy-MM-dd HH:mm",
                 Locale.getDefault()).format(time);
@@ -81,7 +81,7 @@ public class RecordDetailFragment extends BaseFragment {
             player.setDataSource(mSavePath);
             player.prepare();
             int ms = player.getDuration();
-            mPlayDuration = MyUtil.FormatFileDuration(ms);
+            mPlayDuration = MyUtil.formatFileDuration(ms);
         } catch (IllegalArgumentException | SecurityException
                 | IllegalStateException | IOException e) {
             mPlayDuration = getString(R.string.unknown);

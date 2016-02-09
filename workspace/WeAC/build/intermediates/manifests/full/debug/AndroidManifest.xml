@@ -38,6 +38,7 @@
     <uses-feature android:name="android.hardware.autofocus" />
 
     <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
 
     <application
         android:name="com.kaku.weac.LeakCanaryApplication"
@@ -62,19 +63,19 @@
         <activity
             android:name="com.kaku.weac.activities.ThemeActivity"
             android:launchMode="singleTop"
-            android:theme="@style/Transparent" />
+            android:theme="@style/Transparent.Light" />
         <activity
             android:name="com.kaku.weac.activities.AlarmClockNewActivity"
             android:launchMode="singleTop"
-            android:theme="@style/Transparent" />
+            android:theme="@style/Transparent.Light" />
         <activity
             android:name="com.kaku.weac.activities.AlarmClockEditActivity"
             android:launchMode="singleTop"
-            android:theme="@style/Transparent" />
+            android:theme="@style/Transparent.Light" />
         <activity
             android:name="com.kaku.weac.activities.RingSelectActivity"
             android:launchMode="singleTop"
-            android:theme="@style/Transparent" />
+            android:theme="@style/Transparent.Light" />
         <activity
             android:name="com.kaku.weac.activities.AlarmClockOntimeActivity"
             android:screenOrientation="portrait"
@@ -117,33 +118,33 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.kaku.weac.activities.RecordDeleteBatchActivity"
-            android:theme="@style/Transparent" />
+            android:theme="@style/Transparent.Light" />
         <activity
             android:name="com.kaku.weac.activities.CityManageActivity"
             android:launchMode="singleTop"
-            android:theme="@style/Transparent" />
+            android:theme="@style/Transparent.Light" />
         <activity
             android:name="com.kaku.weac.activities.AddCityActivity"
             android:launchMode="singleTop"
-            android:theme="@style/Transparent"
+            android:theme="@style/Transparent.Light"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name="com.kaku.weac.activities.LocalAlbumActivity"
             android:launchMode="singleTop"
-            android:theme="@style/Transparent" />
+            android:theme="@style/Transparent.Light" />
         <activity
             android:name="com.kaku.weac.activities.LocalAlbumDetailActivity"
             android:launchMode="singleTop"
-            android:theme="@style/Transparent" />
+            android:theme="@style/Transparent.Light" />
         <activity
             android:name="com.kaku.weac.zxing.activity.CaptureActivity"
             android:theme="@style/Transparent" />
         <activity
             android:name="com.kaku.weac.activities.DisplayScanResultActivity"
-            android:theme="@style/Transparent" />
+            android:theme="@style/Transparent.Light" />
         <activity
             android:name="com.kaku.weac.activities.GenerateCodeActivity"
-            android:theme="@style/Transparent"
+            android:theme="@style/Transparent.Light"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
 

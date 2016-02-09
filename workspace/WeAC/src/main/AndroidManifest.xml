@@ -36,6 +36,8 @@
 
     <uses-permission android:name="android.permission.FLASHLIGHT"/>
 
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
+
     <application
         android:name=".LeakCanaryApplication"
         android:allowBackup="true"
@@ -59,19 +61,19 @@
         <activity
             android:name=".activities.ThemeActivity"
             android:launchMode="singleTop"
-            android:theme="@style/Transparent"/>
+            android:theme="@style/Transparent.Light"/>
         <activity
             android:name=".activities.AlarmClockNewActivity"
             android:launchMode="singleTop"
-            android:theme="@style/Transparent"/>
+            android:theme="@style/Transparent.Light"/>
         <activity
             android:name=".activities.AlarmClockEditActivity"
             android:launchMode="singleTop"
-            android:theme="@style/Transparent"/>
+            android:theme="@style/Transparent.Light"/>
         <activity
             android:name=".activities.RingSelectActivity"
             android:launchMode="singleTop"
-            android:theme="@style/Transparent"/>
+            android:theme="@style/Transparent.Light"/>
         <activity
             android:name=".activities.AlarmClockOntimeActivity"
             android:screenOrientation="portrait"
@@ -114,34 +116,34 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <activity
             android:name=".activities.RecordDeleteBatchActivity"
-            android:theme="@style/Transparent"/>
+            android:theme="@style/Transparent.Light"/>
         <activity
             android:name=".activities.CityManageActivity"
             android:launchMode="singleTop"
-            android:theme="@style/Transparent"/>
+            android:theme="@style/Transparent.Light"/>
         <activity
             android:name=".activities.AddCityActivity"
             android:launchMode="singleTop"
-            android:theme="@style/Transparent"
+            android:theme="@style/Transparent.Light"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
         <activity
             android:name=".activities.LocalAlbumActivity"
             android:launchMode="singleTop"
-            android:theme="@style/Transparent"/>
+            android:theme="@style/Transparent.Light"/>
         <activity
             android:name=".activities.LocalAlbumDetailActivity"
             android:launchMode="singleTop"
-            android:theme="@style/Transparent"/>
+            android:theme="@style/Transparent.Light"/>
         <activity
             android:name=".zxing.activity.CaptureActivity"
             android:theme="@style/Transparent"/>
         <activity
             android:name=".activities.DisplayScanResultActivity"
-            android:theme="@style/Transparent"/>
+            android:theme="@style/Transparent.Light"/>
 
         <activity
             android:name=".activities.GenerateCodeActivity"
-            android:theme="@style/Transparent"
+            android:theme="@style/Transparent.Light"
             android:windowSoftInputMode="adjustUnspecified|stateHidden">
         </activity>
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
@@ -122,15 +123,16 @@
                     android:id="@+id/clean_up"
                     style="@style/more_item_group">
 
-                    <ImageView
-                        style="@style/more_item_iv"
-                        android:src="@drawable/ic_more_clean_up"/>
+                    <com.kaku.weac.view.CircleProgress
+                        android:id="@+id/circle_progress"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        app:circle_text_color="@color/white_trans90"
+                        app:circle_text_size="14sp"/>
 
                     <TextView
                         style="@style/more_item_title_tv"
                         android:text="@string/clean_up"/>
-
-                    <ImageView style="@style/more_item_arrow_iv"/>
                 </LinearLayout>
             </LinearLayout>
 

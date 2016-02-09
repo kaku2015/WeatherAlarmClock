@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
+ */
 package com.kaku.weac.util;
 
 import android.annotation.TargetApi;
@@ -7,6 +10,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -599,10 +603,11 @@ public class MyUtil {
      * @return 格式化后的大小
      */
     public static String formatFileSize(long fileLength) {
-        DecimalFormat df = new DecimalFormat("0.00");
+        DecimalFormat df = new DecimalFormat("0.0");
         String fileSizeString;
         if (fileLength < 1024) {
-            fileSizeString = df.format((double) fileLength) + "B";
+//            fileSizeString = df.format((double) fileLength) + "B";
+            fileSizeString = "0KB";
         } else if (fileLength < 1048576) {
             fileSizeString = df.format((double) fileLength / 1024) + "KB";
         } else if (fileLength < 1073741824) {
@@ -1170,6 +1175,16 @@ public class MyUtil {
     public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
+    }
+
+    public static float dp2px(Resources resources, float dp) {
+        final float scale = resources.getDisplayMetrics().density;
+        return dp * scale + 0.5f;
+    }
+
+    public static float sp2px(Resources resources, float sp) {
+        final float scale = resources.getDisplayMetrics().scaledDensity;
+        return sp * scale;
     }
 
     /**

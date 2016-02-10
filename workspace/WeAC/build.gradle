@@ -42,7 +42,12 @@ dependencies {
     compile files('libs/zxing-4.7.3.jar')
     compile 'com.github.castorflex.smoothprogressbar:library-circular:1.2.0'
     compile 'com.android.support:design:23.1.1'
-    compile 'me.imid.swipebacklayout.lib:library:1.0.0'
     compile 'me.itangqi.waveloadingview:library:0.1.5'
-    compile project(':ColorPickerPreference')
+    compile('com.github.afollestad.material-dialogs:core:0.8.5.4@aar') {
+        transitive = true
+    }
+    compile('com.github.afollestad.material-dialogs:commons:0.8.5.4@aar') {
+        transitive = true
+    }
+    compile project(':SwipeBackLayout')
 }

@@ -4,6 +4,7 @@
 package com.kaku.weac.activities;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -11,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.PopupMenu;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,6 +24,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ToggleButton;
 
+import com.afollestad.materialdialogs.AlertDialogWrapper;
+import com.afollestad.materialdialogs.color.ColorChooserDialog;
 import com.kaku.weac.R;
 import com.kaku.weac.bean.Event.QRcodeLogoEvent;
 import com.kaku.weac.common.WeacConstants;
@@ -31,8 +35,6 @@ import com.kaku.weac.util.OttoAppConfig;
 import com.kaku.weac.util.ToastUtil;
 import com.kaku.weac.zxing.encoding.EncodingUtils;
 import com.squareup.otto.Subscribe;
-
-import net.margaritov.preference.colorpicker.ColorPickerDialog;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -44,7 +46,7 @@ import java.io.FileOutputStream;
  * @author 咖枯
  * @version 1.0 2016/2/2
  */
-public class GenerateCodeActivity extends BaseActivity implements View.OnClickListener {
+public class GenerateCodeActivity extends BaseActivity implements View.OnClickListener, ColorChooserDialog.ColorCallback {
     private static final String LOG_TAG = "GenerateCodeActivity";
     /**
      * 二维码前景色：默认黑色
@@ -64,6 +66,11 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
     private static final int REQUEST_LOCAL_ALBUM = 1;
     private String mLogoPath;
     private boolean mIsQRcodeGenerated;
+
+    /**
+     * 调色板使用状态：0，前景色；1，背景色
+     */
+    private int mPalette = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,58 +212,58 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
                             }
                             break;
                         case R.id.fore_color:
-                            ColorPickerDialog dialoFore = new ColorPickerDialog(GenerateCodeActivity.this, mForeColor);
-                            dialoFore.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
-                                @Override
-                                public void onColorChanged(int color) {
-                                    LogUtil.d(LOG_TAG, "onColorChanged: " + color);
-                                    mForeColor = color;
-                                    if (mIsQRcodeGenerated) {
-                                        generateQRcode();
-                                    }
-
-                                    saveColor(WeacConstants.FORE_COLOR, color);
-                                }
-                            });
-                            dialoFore.setAlphaSliderVisible(true);
-                            dialoFore.setHexValueEnabled(true);
-                            dialoFore.show();
+                            mPalette = 0;
+                            new ColorChooserDialog.Builder(GenerateCodeActivity.this, R.string.fore_color)
+                                    .titleSub(R.string.colors)
+                                    .doneButton(R.string.sure)
+                                    .cancelButton(R.string.cancel)
+                                    .backButton(R.string.back)
+                                    .customButton(R.string.custom_define)
+                                    .presetsButton(R.string.back)
+                                    .show();
                             break;
                         case R.id.back_color:
-                            ColorPickerDialog dialogBack = new ColorPickerDialog(GenerateCodeActivity.this, mBackColor);
-                            dialogBack.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
-                                @Override
-                                public void onColorChanged(int color) {
-                                    LogUtil.d(LOG_TAG, "onColorChanged: " + color);
-                                    mBackColor = color;
-                                    if (mIsQRcodeGenerated) {
-                                        generateQRcode();
-                                    }
-
-                                    saveColor(WeacConstants.BACK_COLOR, color);
-                                }
-                            });
-                            dialogBack.setAlphaSliderVisible(true);
-                            dialogBack.setHexValueEnabled(true);
-                            dialogBack.show();
+                            mPalette = 1;
+                            new ColorChooserDialog.Builder(GenerateCodeActivity.this, R.string.back_color)
+                                    .titleSub(R.string.colors)
+                                    .doneButton(R.string.sure)
+                                    .cancelButton(R.string.cancel)
+                                    .backButton(R.string.back)
+                                    .customButton(R.string.custom_define)
+                                    .presetsButton(R.string.back)
+                                    .show();
                             break;
                         case R.id.restore:
-                            mLogoPath = null;
-                            mForeColor = 0xff000000;
-                            mBackColor = 0xffffffff;
-                            mLogoIv.setImageResource(R.drawable.ic_launcher);
-                            if (mIsQRcodeGenerated) {
+                            new AlertDialogWrapper.Builder(GenerateCodeActivity.this)
+                                    .setTitle(R.string.restore)
+                                    .setMessage(R.string.reset_logo_color)
+                                    .setPositiveButton(R.string.sure, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            mLogoPath = null;
+                                            mForeColor = 0xff000000;
+                                            mBackColor = 0xffffffff;
+                                            mLogoIv.setImageResource(R.drawable.ic_launcher);
+                                            if (mIsQRcodeGenerated) {
+                                                generateQRcode();
+                                            }
 
-                                generateQRcode();
-                            }
-
-                            SharedPreferences share = getSharedPreferences(
-                                    WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
-                            SharedPreferences.Editor edit = share.edit();
-                            edit.putString(WeacConstants.QRCODE_LOGO_PATH, null);
-                            edit.putInt(WeacConstants.FORE_COLOR, 0xff000000);
-                            edit.putInt(WeacConstants.BACK_COLOR, 0xffffffff);
-                            edit.apply();
+                                            SharedPreferences share = getSharedPreferences(
+                                                    WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+                                            SharedPreferences.Editor edit = share.edit();
+                                            edit.putString(WeacConstants.QRCODE_LOGO_PATH, null);
+                                            edit.putInt(WeacConstants.FORE_COLOR, 0xff000000);
+                                            edit.putInt(WeacConstants.BACK_COLOR, 0xffffffff);
+                                            edit.apply();
+                                        }
+                                    })
+                                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    })
+                                    .show();
                             break;
                     }
                     return true;
@@ -266,17 +273,6 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
         } else {
             mPopupMenu.show();
         }
-    }
-
-    /**
-     * 保存自定义二维码前景色、背景色
-     */
-    private void saveColor(String key, int color) {
-        SharedPreferences share = getSharedPreferences(
-                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor edit = share.edit();
-        edit.putInt(key, color);
-        edit.apply();
     }
 
     private void generateQRcode() {
@@ -303,6 +299,10 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
     public void onLogoUpdateEvent(QRcodeLogoEvent event) {
         mLogoPath = event.getLogoPath();
         mLogoIv.setImageBitmap(BitmapFactory.decodeFile(mLogoPath));
+
+        if (mIsQRcodeGenerated) {
+            generateQRcode();
+        }
     }
 
     @Override
@@ -310,4 +310,35 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
         super.onDestroy();
         OttoAppConfig.getInstance().unregister(this);
     }
+
+    @Override
+    public void onColorSelection(@NonNull ColorChooserDialog dialog, int selectedColor) {
+        LogUtil.d(LOG_TAG, "onColorSelection: " + selectedColor);
+        switch (mPalette) {
+            // 前景色
+            case 0:
+                mForeColor = selectedColor;
+                operateColor(selectedColor, WeacConstants.FORE_COLOR);
+                break;
+            // 背景色
+            case 1:
+                mBackColor = selectedColor;
+                operateColor(selectedColor, WeacConstants.BACK_COLOR);
+                break;
+        }
+
+    }
+
+    private void operateColor(int selectedColor, String saveColorKey) {
+        if (mIsQRcodeGenerated) {
+            generateQRcode();
+        }
+
+        SharedPreferences share = getSharedPreferences(
+                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor edit = share.edit();
+        edit.putInt(saveColorKey, selectedColor);
+        edit.apply();
+    }
+
 }

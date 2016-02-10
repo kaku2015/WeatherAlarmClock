@@ -34,7 +34,7 @@ import java.util.List;
  * @author 咖枯
  * @version 1.0 2015/04/12
  */
-public class MainActivity extends NoSwipeBackActivity implements OnClickListener {
+public class MainActivity extends BaseActivity implements OnClickListener {
 
     /**
      * Log tag ：MainActivity
@@ -198,6 +198,7 @@ public class MainActivity extends NoSwipeBackActivity implements OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setSwipeBackEnable(false);
         startService(new Intent(this, DaemonService.class));
 
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);

@@ -13,7 +13,7 @@ import com.kaku.weac.fragment.RecordOperateFragment;
  * @author 咖枯
  * @version 1.0 2015/07
  */
-public class RecordOperateActivity extends NoSwipeBackFragmentActivity {
+public class RecordOperateActivity extends SingleFragmentDialogActivity {
 
     @Override
     protected Fragment createFragment() {

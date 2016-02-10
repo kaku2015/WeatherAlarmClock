@@ -13,7 +13,7 @@ import com.kaku.weac.fragment.RecordDeleteFragment;
  * @author 咖枯
  * @version 1.0 2015/08
  */
-public class RecordDeleteActivity extends NoSwipeBackFragmentActivity {
+public class RecordDeleteActivity extends SingleFragmentDialogActivity {
 
     @Override
     protected Fragment createFragment() {

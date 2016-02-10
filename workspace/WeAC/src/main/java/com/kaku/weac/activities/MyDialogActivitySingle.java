@@ -21,7 +21,7 @@ import com.kaku.weac.common.WeacConstants;
  * @author 咖枯
  * @version 1.0 2015/01/29
  */
-public class MyDialogActivitySingle extends NoSwipeBackActivity {
+public class MyDialogActivitySingle extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

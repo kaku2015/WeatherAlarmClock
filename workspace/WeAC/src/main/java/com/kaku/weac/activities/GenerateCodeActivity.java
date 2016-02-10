@@ -46,8 +46,15 @@ import java.io.FileOutputStream;
  */
 public class GenerateCodeActivity extends BaseActivity implements View.OnClickListener {
     private static final String LOG_TAG = "GenerateCodeActivity";
-    public int mForeColor = 0xff000000;
-    public int mBackColor = 0xffffffff;
+    /**
+     * 二维码前景色：默认黑色
+     */
+    public int mForeColor;
+
+    /**
+     * 二维码背景色：默认白色
+     */
+    public int mBackColor;
     private ImageView mActionOverflow;
     private PopupMenu mPopupMenu;
     private EditText mQrCodeEt;
@@ -65,17 +72,19 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
         setContentView(R.layout.activity_generate_code);
         ViewGroup background = (ViewGroup) findViewById(R.id.background);
         MyUtil.setBackground(background, this);
-        getQRcodeLogoPath();
+        assignValues();
         assignViews();
     }
 
     /**
-     * 获取保存的自定义二维码logo地址
+     * 获取保存的自定义二维码logo地址、前景色、背景色
      */
-    private void getQRcodeLogoPath() {
+    private void assignValues() {
         SharedPreferences share = getSharedPreferences(
                 WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
         mLogoPath = share.getString(WeacConstants.QRCODE_LOGO_PATH, null);
+        mForeColor = share.getInt(WeacConstants.FORE_COLOR, 0xff000000);
+        mBackColor = share.getInt(WeacConstants.BACK_COLOR, 0xffffffff);
 
     }
 
@@ -205,6 +214,8 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
                                     if (mIsQRcodeGenerated) {
                                         generateQRcode();
                                     }
+
+                                    saveColor(WeacConstants.FORE_COLOR, color);
                                 }
                             });
                             dialoFore.setAlphaSliderVisible(true);
@@ -221,11 +232,31 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
                                     if (mIsQRcodeGenerated) {
                                         generateQRcode();
                                     }
+
+                                    saveColor(WeacConstants.BACK_COLOR, color);
                                 }
                             });
                             dialogBack.setAlphaSliderVisible(true);
                             dialogBack.setHexValueEnabled(true);
                             dialogBack.show();
+                            break;
+                        case R.id.restore:
+                            mLogoPath = null;
+                            mForeColor = 0xff000000;
+                            mBackColor = 0xffffffff;
+                            mLogoIv.setImageResource(R.drawable.ic_launcher);
+                            if (mIsQRcodeGenerated) {
+
+                                generateQRcode();
+                            }
+
+                            SharedPreferences share = getSharedPreferences(
+                                    WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+                            SharedPreferences.Editor edit = share.edit();
+                            edit.putString(WeacConstants.QRCODE_LOGO_PATH, null);
+                            edit.putInt(WeacConstants.FORE_COLOR, 0xff000000);
+                            edit.putInt(WeacConstants.BACK_COLOR, 0xffffffff);
+                            edit.apply();
                             break;
                     }
                     return true;
@@ -235,6 +266,17 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
         } else {
             mPopupMenu.show();
         }
+    }
+
+    /**
+     * 保存自定义二维码前景色、背景色
+     */
+    private void saveColor(String key, int color) {
+        SharedPreferences share = getSharedPreferences(
+                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor edit = share.edit();
+        edit.putInt(key, color);
+        edit.apply();
     }
 
     private void generateQRcode() {

@@ -10,9 +10,12 @@
         android:title="@string/save_qr_code"/>
     <item
         android:id="@+id/fore_color"
-        android:title="二维码前景色"/>
+        android:title="@string/fore_color"/>
     <item
         android:id="@+id/back_color"
-        android:title="二维码背景色"/>
+        android:title="@string/back_color"/>
+    <item
+        android:id="@+id/restore"
+        android:title="@string/restore"/>
 
 </menu>

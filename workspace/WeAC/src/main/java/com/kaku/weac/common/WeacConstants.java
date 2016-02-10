@@ -217,4 +217,14 @@ public class WeacConstants {
      */
     public static final String QRCODE_LOGO_PATH = "qrcode_logo_path";
 
+    /**
+     * 保存的二维码前景色
+     */
+    public static final String FORE_COLOR = "foreground_color";
+
+    /**
+     * 保存的二维码背景色
+     */
+    public static final String BACK_COLOR = "background_color";
+
 }

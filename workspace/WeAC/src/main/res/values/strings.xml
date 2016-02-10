@@ -234,7 +234,10 @@
 
     <string name="quit">退出应用</string>
 
-    <!--更多-->
+    <string name="clean_up_result">清理进程%1$d个,释放内存%2$s</string>
+    <string name="clean_up_complete">清理完成</string>
+
+    <!--主题-->
     <string name="custom_define">自定义</string>
 
     <!--本地相册-->
@@ -273,6 +276,4 @@
     <string name="save_fail_retry">保存失败，请重试</string>
     <string name="logo_open_status">打开状态下，二维码图片中央区域显示Logo</string>
 
-    <!--一键清理-->
-    <string name="clean_up_result">清理进程%1$d个,释放内存%2$s</string>
 </resources>

@@ -10449,6 +10449,11 @@
     <color name="material_grey_800">#ff424242</color>
     <color name="material_grey_850">#ff303030</color>
     <color name="material_grey_900">#ff212121</color>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/color.xml -->
+    <eat-comment/>
+    <color name="memory">#ff5252</color>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <eat-comment/>
     <color name="primary_dark_material_dark">@android:color/black</color>
     <color name="primary_dark_material_light">@color/material_grey_600</color>
     <color name="primary_material_dark">@color/material_grey_900</color>
@@ -10482,6 +10487,7 @@
     <color name="white_trans10">#1affffff</color>
     <color name="white_trans20">#33ffffff</color>
     <color name="white_trans40">#66ffffff</color>
+    <color name="white_trans50">#80FFFFFF</color>
     <color name="white_trans60">#99FFFFFF</color>
     <color name="white_trans90">#e6ffffff</color>
     <color name="yellow_hot">#f9c000</color>
@@ -10533,6 +10539,7 @@
     <declare-styleable name="View"><attr format="dimension" name="paddingStart"/><attr format="dimension" name="paddingEnd"/><attr name="android:focusable"/><attr format="reference" name="theme"/><attr name="android:theme"/></declare-styleable>
     <declare-styleable name="ViewBackgroundHelper"><attr name="android:background"/><attr format="color" name="backgroundTint"/><attr name="backgroundTintMode"><enum name="src_over" value="3"/><enum name="src_in" value="5"/><enum name="src_atop" value="9"/><enum name="multiply" value="14"/><enum name="screen" value="15"/></attr></declare-styleable>
     <declare-styleable name="ViewStubCompat"><attr name="android:layout"/><attr name="android:inflatedId"/><attr name="android:id"/></declare-styleable>
+    <declare-styleable name="WaveLoadingView"><attr format="dimension" name="mlv_borderWidth"/><attr format="color" name="mlv_borderColor"/><attr format="integer" name="mlv_progressValue"/><attr format="enum" name="mlv_shapeType"><enum name="circle" value="0"/><enum name="square" value="1"/></attr><attr format="color" name="mlv_waveColor"/><attr format="float" name="mlv_waveAmplitude"/><attr format="dimension" name="mlv_titleTopSize"/><attr format="dimension" name="mlv_titleCenterSize"/><attr format="dimension" name="mlv_titleBottomSize"/><attr format="color" name="mlv_titleTopColor"/><attr format="color" name="mlv_titleCenterColor"/><attr format="color" name="mlv_titleBottomColor"/><attr format="string" name="mlv_titleTop"/><attr format="string" name="mlv_titleCenter"/><attr format="string" name="mlv_titleBottom"/></declare-styleable>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
     <eat-comment/>
     <dimen name="abc_action_bar_content_inset_material">16dp</dimen>
@@ -10832,6 +10839,7 @@
     <string name="city_manage">城市管理</string>
     <string name="city_weather_update_time">%1$s更新时间</string>
     <string name="clean_up">一键清理</string>
+    <string name="clean_up_complete">清理完成</string>
     <string name="clean_up_result">清理进程%1$d个,释放内存%2$s</string>
     <string name="clear_memory">清除缓存</string>
     <string name="click_record">点击录音</string>

@@ -72,7 +72,7 @@ public class RecordDetailFragment extends BaseFragment {
                 WeacConstants.RING_URL);
         // 文件操作
         File file = new File(mSavePath);
-        mFileSize = MyUtil.formatFileSize(file.length());
+        mFileSize = MyUtil.formatFileSize(file.length(), "0.00");
         long time = file.lastModified();
         mModifyTime = new SimpleDateFormat("yyyy-MM-dd HH:mm",
                 Locale.getDefault()).format(time);

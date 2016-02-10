@@ -101,9 +101,15 @@
                     android:id="@+id/clear_memory"
                     style="@style/more_item_group">
 
-                    <ImageView
-                        style="@style/more_item_iv"
-                        android:src="@drawable/ic_more_clear_memory"/>
+                    <me.itangqi.waveloadingview.WaveLoadingView
+                        android:id="@+id/wave_view"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        app:mlv_borderColor="@color/memory"
+                        app:mlv_borderWidth="0.5dp"
+                        app:mlv_shapeType="circle"
+                        app:mlv_waveAmplitude="50"
+                        app:mlv_waveColor="@color/memory"/>
 
                     <TextView
                         style="@style/more_item_title_tv"
@@ -128,7 +134,8 @@
                         android:layout_width="37dp"
                         android:layout_height="37dp"
                         app:circle_text_color="@color/white_trans90"
-                        app:circle_text_size="14sp"/>
+                        app:circle_text_size="14sp"
+                        app:circle_unfinished_color="@color/white_trans20"/>
 
                     <TextView
                         style="@style/more_item_title_tv"

@@ -35,6 +35,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
+import me.itangqi.waveloadingview.WaveLoadingView;
+
 /**
  * 更多fragment
  *
@@ -49,6 +51,7 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
     private TextView mUsedMemoryTv;
     private CircleProgress mCleanUpCP;
     private ActivityManager mActivityManager;
+    private WaveLoadingView mClearMemoryIv;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,7 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
         mUsedMemoryTv = (TextView) view.findViewById(R.id.used_memory_tv);
         ViewGroup clearUpBtn = (ViewGroup) view.findViewById(R.id.clean_up);
         mCleanUpCP = (CircleProgress) view.findViewById(R.id.circle_progress);
+        mClearMemoryIv = (WaveLoadingView) view.findViewById(R.id.wave_view);
 
         themeBtn.setOnClickListener(this);
         scanQRcodeBtn.setOnClickListener(this);
@@ -131,7 +135,7 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
                 break;
             case R.id.clear_memory:
                 DataCleanManager.clearAllCache(getActivity());
-                mUsedMemoryTv.setText(DataCleanManager.getTotalCacheSize(getActivity()));
+                setClearMemory();
                 break;
             case R.id.clean_up:
                 new CleanUpAsyncTask().execute();
@@ -196,7 +200,7 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
 
                 long afterMem = getAvailableMemory();
                 Log.d(LOG_TAG, "----------- after memory info : " + afterMem);
-                return MyUtil.formatFileSize(afterMem - beforeMem);
+                return MyUtil.formatFileSize((afterMem - beforeMem), "0");
             }
             return null;
         }
@@ -295,8 +299,56 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        mUsedMemoryTv.setText(DataCleanManager.getTotalCacheSize(getActivity()));
+        setClearMemory();
         setCleanUpProgress(getUsedPercentValue());
+    }
+
+    private void setClearMemory() {
+        String memory = DataCleanManager.getTotalCacheSize(getActivity());
+        mUsedMemoryTv.setText(memory);
+
+        int progress;
+        if (memory.contains("KB")) {
+            if (memory.equals("0KB")) {
+                progress = 100;
+            } else {
+                progress = 95;
+            }
+        } else if (memory.contains("MB")) {
+            float mem = Integer.parseInt(memory.split("M")[0]);
+            if (mem < 2) {
+                progress = 90;
+            } else if (mem < 3) {
+                progress = 85;
+            } else if (mem < 4) {
+                progress = 80;
+            } else if (mem < 6) {
+                progress = 75;
+            } else if (mem < 8) {
+                progress = 70;
+            } else if (mem < 10) {
+                progress = 65;
+            } else if (mem < 15) {
+                progress = 60;
+            } else if (mem < 20) {
+                progress = 55;
+            } else if (mem < 25) {
+                progress = 50;
+            } else if (mem < 30) {
+                progress = 40;
+            } else if (mem < 40) {
+                progress = 30;
+            } else if (mem < 50) {
+                progress = 20;
+            } else if (mem < 60) {
+                progress = 10;
+            } else {
+                progress = 5;
+            }
+        } else {
+            progress = 0;
+        }
+        mClearMemoryIv.setProgressValue(progress);
     }
 
     private void setCleanUpProgress(int percent) {

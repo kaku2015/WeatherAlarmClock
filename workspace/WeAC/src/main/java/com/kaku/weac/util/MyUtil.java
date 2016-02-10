@@ -1,6 +1,4 @@
-/*
- * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
- */
+
 package com.kaku.weac.util;
 
 import android.annotation.TargetApi;
@@ -600,10 +598,11 @@ public class MyUtil {
      * 转换文件大小
      *
      * @param fileLength file
+     * @param pattern    匹配模板 "#.00","0.0"...
      * @return 格式化后的大小
      */
-    public static String formatFileSize(long fileLength) {
-        DecimalFormat df = new DecimalFormat("0.0");
+    public static String formatFileSize(long fileLength, String pattern) {
+        DecimalFormat df = new DecimalFormat(pattern);
         String fileSizeString;
         if (fileLength < 1024) {
 //            fileSizeString = df.format((double) fileLength) + "B";

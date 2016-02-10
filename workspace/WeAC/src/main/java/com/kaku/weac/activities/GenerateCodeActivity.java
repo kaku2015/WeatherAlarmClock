@@ -32,6 +32,8 @@ import com.kaku.weac.util.ToastUtil;
 import com.kaku.weac.zxing.encoding.EncodingUtils;
 import com.squareup.otto.Subscribe;
 
+import net.margaritov.preference.colorpicker.ColorPickerDialog;
+
 import java.io.File;
 import java.io.FileOutputStream;
 
@@ -44,6 +46,8 @@ import java.io.FileOutputStream;
  */
 public class GenerateCodeActivity extends BaseActivity implements View.OnClickListener {
     private static final String LOG_TAG = "GenerateCodeActivity";
+    public int mForeColor = 0xff000000;
+    public int mBackColor = 0xffffffff;
     private ImageView mActionOverflow;
     private PopupMenu mPopupMenu;
     private EditText mQrCodeEt;
@@ -191,6 +195,38 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
                                         getString(R.string.generate_qrcode_please));
                             }
                             break;
+                        case R.id.fore_color:
+                            ColorPickerDialog dialoFore = new ColorPickerDialog(GenerateCodeActivity.this, mForeColor);
+                            dialoFore.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
+                                @Override
+                                public void onColorChanged(int color) {
+                                    LogUtil.d(LOG_TAG, "onColorChanged: " + color);
+                                    mForeColor = color;
+                                    if (mIsQRcodeGenerated) {
+                                        generateQRcode();
+                                    }
+                                }
+                            });
+                            dialoFore.setAlphaSliderVisible(true);
+                            dialoFore.setHexValueEnabled(true);
+                            dialoFore.show();
+                            break;
+                        case R.id.back_color:
+                            ColorPickerDialog dialogBack = new ColorPickerDialog(GenerateCodeActivity.this, mBackColor);
+                            dialogBack.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
+                                @Override
+                                public void onColorChanged(int color) {
+                                    LogUtil.d(LOG_TAG, "onColorChanged: " + color);
+                                    mBackColor = color;
+                                    if (mIsQRcodeGenerated) {
+                                        generateQRcode();
+                                    }
+                                }
+                            });
+                            dialogBack.setAlphaSliderVisible(true);
+                            dialogBack.setHexValueEnabled(true);
+                            dialogBack.show();
+                            break;
                     }
                     return true;
                 }
@@ -216,7 +252,7 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
         }
         int size = MyUtil.dip2px(this, 200);
         //根据字符串生成二维码图片并显示在界面上，第2,3个参数为图片宽高
-        Bitmap qrCodeBitmap = EncodingUtils.createQRCode(contentString, size, size, logoBitmap);
+        Bitmap qrCodeBitmap = EncodingUtils.createQRCode(contentString, size, size, logoBitmap, mForeColor, mBackColor);
         mQrCodeResultIv.setImageBitmap(qrCodeBitmap);
         mIsQRcodeGenerated = true;
     }

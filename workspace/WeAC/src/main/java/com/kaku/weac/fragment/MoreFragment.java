@@ -3,6 +3,8 @@
  */
 package com.kaku.weac.fragment;
 
+import android.animation.IntEvaluator;
+import android.animation.ValueAnimator;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
@@ -93,23 +95,6 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
         MyUtil.setBackground(vg, getActivity());
     }
 
-/*    private void initWallpaper() {
-        ViewGroup vg = (ViewGroup) getActivity().findViewById(
-                R.id.llyt_activity_main);
-        // 更新壁纸
-        MyUtil.setBackground(vg, getActivity());
-
-        ViewPager pager = (ViewPager) getActivity().findViewById(R.id.fragment_container);
-        PagerAdapter f = pager.getAdapter();
-        WeaFragment weaFragment = (WeaFragment) f.instantiateItem(pager, 1);
-        // 更新天气高斯模糊背景
-        if (weaFragment.mBlurDrawable != null && weaFragment.mBackGround != null) {
-            weaFragment.mBlurDrawable = MyUtil.getWallPaperBlurDrawable(getActivity());
-            weaFragment.mBlurDrawable.setAlpha(weaFragment.mAlpha);
-            weaFragment.mBackGround.setBackground(weaFragment.mBlurDrawable);
-        }
-    }*/
-
     @Override
     public void onClick(View v) {
         if (MyUtil.isFastDoubleClick()) {
@@ -134,13 +119,58 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
                 startActivity(generateCodeIntent);
                 break;
             case R.id.clear_memory:
-                DataCleanManager.clearAllCache(getActivity());
-                setClearMemory();
+                operateClearMemory();
                 break;
             case R.id.clean_up:
                 new CleanUpAsyncTask().execute();
                 break;
         }
+    }
+
+    private void operateClearMemory() {
+        // 清理前缓存
+        String beforeMemory = mUsedMemoryTv.getText().toString();
+        DataCleanManager.clearAllCache(getActivity());
+        // 清理后缓存
+        final String afterMemory = DataCleanManager.getTotalCacheSize(getActivity());
+
+        // 更新wave
+        setClearMemoryWave(afterMemory);
+
+        int startValue;
+        if (beforeMemory.contains("MB")) {
+            startValue = Integer.parseInt(beforeMemory.split("MB")[0]);
+        } else if (beforeMemory.contains("G")) {
+            startValue = Integer.parseInt(beforeMemory.split("G")[0]) * 1024;
+        } else {
+            mUsedMemoryTv.setText(afterMemory);
+            return;
+        }
+
+        final int endValue;
+        if (afterMemory.contains("KB")) {
+            endValue = 0;
+        } else if (afterMemory.contains("MB")) {
+            endValue = Integer.parseInt(beforeMemory.split("MB")[0]);
+        } else {
+            mUsedMemoryTv.setText(afterMemory);
+            return;
+        }
+
+        ValueAnimator animator = ValueAnimator.ofObject(new IntEvaluator(), startValue, endValue);
+        animator.setDuration(1000);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                int value = (int) animation.getAnimatedValue();
+                if (value != endValue) {
+                    mUsedMemoryTv.setText(String.valueOf(value + "MB"));
+                } else {
+                    mUsedMemoryTv.setText(afterMemory);
+                }
+            }
+        });
+        animator.start();
     }
 
     class CleanUpAsyncTask extends AsyncTask<Void, Integer, String> {
@@ -299,14 +329,30 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        setClearMemory();
+        LogUtil.d(LOG_TAG, "onResume");
+        updateUIStatus();
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        LogUtil.d(LOG_TAG, "setUserVisibleHint");
+        if (getUserVisibleHint()) {
+            LogUtil.d(LOG_TAG, "getUserVisibleHint = true");
+            updateUIStatus();
+        }
+    }
+
+    private void updateUIStatus() {
+        // 更新清除缓存
+        String memory = DataCleanManager.getTotalCacheSize(getActivity());
+        mUsedMemoryTv.setText(memory);
+        setClearMemoryWave(memory);
+        // 更新一键清理
         setCleanUpProgress(getUsedPercentValue());
     }
 
-    private void setClearMemory() {
-        String memory = DataCleanManager.getTotalCacheSize(getActivity());
-        mUsedMemoryTv.setText(memory);
-
+    private void setClearMemoryWave(String memory) {
         int progress;
         if (memory.contains("KB")) {
             if (memory.equals("0KB")) {

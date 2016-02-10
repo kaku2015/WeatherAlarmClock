@@ -4,16 +4,12 @@
 package com.kaku.weac.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Point;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
@@ -27,7 +23,6 @@ import com.kaku.weac.bean.Event.WallpaperEvent;
 import com.kaku.weac.bean.Theme;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.LogUtil;
-import com.kaku.weac.util.LruMemoryCache;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.OttoAppConfig;
 import com.squareup.otto.Subscribe;
@@ -172,28 +167,8 @@ public class ThemeFragment extends BaseFragment implements View.OnClickListener 
                 }
             }
         }
-        // 获取到可用内存的最大值，使用内存超出这个值会引起OutOfMemory异常
-        int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
-        LogUtil.i(LOG_TAG, "java虚拟机默认情况下能从系统挖到的最大内存: " + maxMemory + "KB");
-        // 使用最大可用内存值的1/8作为缓存的大小。
-        int cacheSize = maxMemory / 8;
-        // LruCache通过构造函数传入缓存值，以KB为单位
-        LruMemoryCache memoryCache = new LruMemoryCache(cacheSize);
-        LogUtil.i(LOG_TAG, "缓存空间大小: " + memoryCache.maxSize() / 1024 + "MB");
-
-        WindowManager manager = (WindowManager) getActivity().getSystemService(
-                Context.WINDOW_SERVICE);
-        Display display = manager.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        // 图片显示的宽度
-        int reqWidth = size.x / 3;
-        // 图片显示的高度
-        int reqHeight = size.y / 4;
-
         // 创建主题壁纸适配器
-        this.mAdapter = new ThemeAdapter(getActivity(), mList,
-                mWallpaperName, memoryCache, reqWidth, reqHeight);
+        this.mAdapter = new ThemeAdapter(getActivity(), mList, mWallpaperName);
     }
 
     @Override

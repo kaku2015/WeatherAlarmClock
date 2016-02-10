@@ -38,6 +38,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.google.zxing.Result;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.BaseActivity;
@@ -47,7 +50,6 @@ import com.kaku.weac.activities.MyDialogActivitySingle;
 import com.kaku.weac.bean.Event.ScanCodeEvent;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.AudioPlayer;
-import com.kaku.weac.util.ImageLoaderHelper;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.OttoAppConfig;
@@ -57,9 +59,6 @@ import com.kaku.weac.zxing.decode.DecodeUtils;
 import com.kaku.weac.zxing.utils.BeepManager;
 import com.kaku.weac.zxing.utils.CaptureActivityHandler;
 import com.kaku.weac.zxing.utils.InactivityTimer;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.squareup.otto.Subscribe;
 
 import java.io.IOException;
@@ -494,35 +493,19 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
         progressBarLlyt = (ViewGroup) findViewById(R.id.progress_bar_llyt);
         progressBarLlyt.setVisibility(View.VISIBLE);
 
-        ImageLoader.getInstance().init(ImageLoaderHelper.getInstance(this)
-                .getImageLoaderConfiguration());
-
         String imagePath = event.getImageUrl();
         if (!TextUtils.isEmpty(imagePath)) {
-            ImageLoader.getInstance().loadImage("file://" + imagePath, new ImageLoadingListener() {
+            int myWidth = getResources().getDisplayMetrics().widthPixels;
+            int myHeight = getResources().getDisplayMetrics().heightPixels;
 
+            Glide.with(getApplicationContext()).load("file://" + imagePath).asBitmap().into(new SimpleTarget<Bitmap>(myWidth, myHeight) {
                 @Override
-                public void onLoadingStarted(String s, View view) {
-
-                }
-
-                @Override
-                public void onLoadingFailed(String s, View view, FailReason failReason) {
-
-                }
-
-                @Override
-                public void onLoadingComplete(String s, View view, Bitmap loadedImage) {
+                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                     progressBarLlyt.setVisibility(View.GONE);
 
                     Result resultZxing = new DecodeUtils(DecodeUtils.DECODE_DATA_MODE_ALL)
-                            .decodeWithZxing(loadedImage);
+                            .decodeWithZxing(resource);
                     handleDecode(resultZxing, null);
-                }
-
-                @Override
-                public void onLoadingCancelled(String s, View view) {
-
                 }
             });
         }

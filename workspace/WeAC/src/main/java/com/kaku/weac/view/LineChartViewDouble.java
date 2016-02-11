@@ -105,11 +105,6 @@ public class LineChartViewDouble extends View {
     private float mTextSpace;
 
     /**
-     * 线的大小
-     */
-    private float mStokeWidth;
-
-    /**
      * 白天折线颜色
      */
     private int mColorDay;
@@ -118,11 +113,6 @@ public class LineChartViewDouble extends View {
      * 夜间折线颜色
      */
     private int mColorNight;
-
-    /**
-     * 字体颜色
-     */
-    private int mTextColor;
 
     /**
      * 屏幕密度
@@ -134,9 +124,28 @@ public class LineChartViewDouble extends View {
      */
     private float mSpace;
 
-    @SuppressWarnings("deprecation")
+    /**
+     * 线画笔
+     */
+    private Paint mLinePaint;
+
+    /**
+     * 点画笔
+     */
+    private Paint mPointPaint;
+
+    /**
+     * 字体画笔
+     */
+    private Paint mTextPaint;
+
     public LineChartViewDouble(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init();
+    }
+
+    @SuppressWarnings("deprecation")
+    private void init() {
         mDensity = getResources().getDisplayMetrics().density;
         // 屏幕文字密度
         float densityText = getResources().getDisplayMetrics().scaledDensity;
@@ -145,11 +154,34 @@ public class LineChartViewDouble extends View {
         mRadiusToday = 5 * mDensity;
         mSpace = 3 * mDensity;
         mTextSpace = 10 * mDensity;
-        mStokeWidth = 2 * mDensity;
+
+        // 线的大小
+        float stokeWidth = 2 * mDensity;
         mColorDay = getResources().getColor(R.color.yellow_hot);
         mColorNight = getResources().getColor(R.color.blue_ice);
-        mTextColor = getResources().getColor(R.color.white_trans90);
+        //  字体颜色
+        int textColor = getResources().getColor(R.color.white_trans90);
 
+        // 线画笔
+        mLinePaint = new Paint();
+        // 抗锯齿
+        mLinePaint.setAntiAlias(true);
+        // 线宽
+        mLinePaint.setStrokeWidth(stokeWidth);
+        // 空心
+        mLinePaint.setStyle(Paint.Style.STROKE);
+
+        // 点画笔
+        mPointPaint = new Paint();
+        mPointPaint.setAntiAlias(true);
+
+        // 字体画笔
+        mTextPaint = new Paint();
+        mTextPaint.setAntiAlias(true);
+        mTextPaint.setColor(textColor);
+        mTextPaint.setTextSize(mTextSize);
+        // 文字居中
+        mTextPaint.setTextAlign(Paint.Align.CENTER);
     }
 
     public LineChartViewDouble(Context context) {
@@ -238,28 +270,8 @@ public class LineChartViewDouble extends View {
      * @param type   折线种类：0，白天；1，夜间
      */
     private void drawChart(Canvas canvas, int color, int temp[], float[] yAxis, int type) {
-        // 线画笔
-        Paint linePaint = new Paint();
-        // 抗锯齿
-        linePaint.setAntiAlias(true);
-        // 线宽
-        linePaint.setStrokeWidth(mStokeWidth);
-        linePaint.setColor(color);
-        // 空心
-        linePaint.setStyle(Paint.Style.STROKE);
-
-        // 点画笔
-        Paint pointPaint = new Paint();
-        pointPaint.setAntiAlias(true);
-        pointPaint.setColor(color);
-
-        // 字体画笔
-        Paint textPaint = new Paint();
-        textPaint.setAntiAlias(true);
-        textPaint.setColor(mTextColor);
-        textPaint.setTextSize(mTextSize);
-        // 文字居中
-        textPaint.setTextAlign(Paint.Align.CENTER);
+        mLinePaint.setColor(color);
+        mPointPaint.setColor(color);
 
         int alpha1 = 102;
         int alpha2 = 255;
@@ -268,20 +280,20 @@ public class LineChartViewDouble extends View {
             if (i < LENGTH - 1) {
                 // 昨天
                 if (i == 0) {
-                    linePaint.setAlpha(alpha1);
+                    mLinePaint.setAlpha(alpha1);
                     // 设置虚线效果
-                    linePaint.setPathEffect(new DashPathEffect(new float[]{2 * mDensity, 2 * mDensity}, 0));
+                    mLinePaint.setPathEffect(new DashPathEffect(new float[]{2 * mDensity, 2 * mDensity}, 0));
                     // 路径
                     Path path = new Path();
                     // 路径起点
                     path.moveTo(mXAxis[i], yAxis[i]);
                     // 路径连接到
                     path.lineTo(mXAxis[i + 1], yAxis[i + 1]);
-                    canvas.drawPath(path, linePaint);
+                    canvas.drawPath(path, mLinePaint);
                 } else {
-                    linePaint.setAlpha(alpha2);
-                    linePaint.setPathEffect(null);
-                    canvas.drawLine(mXAxis[i], yAxis[i], mXAxis[i + 1], yAxis[i + 1], linePaint);
+                    mLinePaint.setAlpha(alpha2);
+                    mLinePaint.setPathEffect(null);
+                    canvas.drawLine(mXAxis[i], yAxis[i], mXAxis[i + 1], yAxis[i + 1], mLinePaint);
                 }
             }
 
@@ -289,26 +301,26 @@ public class LineChartViewDouble extends View {
             if (i != 1) {
                 // 昨天
                 if (i == 0) {
-                    pointPaint.setAlpha(alpha1);
-                    canvas.drawCircle(mXAxis[i], yAxis[i], mRadius, pointPaint);
+                    mPointPaint.setAlpha(alpha1);
+                    canvas.drawCircle(mXAxis[i], yAxis[i], mRadius, mPointPaint);
                 } else {
-                    pointPaint.setAlpha(alpha2);
-                    canvas.drawCircle(mXAxis[i], yAxis[i], mRadius, pointPaint);
+                    mPointPaint.setAlpha(alpha2);
+                    canvas.drawCircle(mXAxis[i], yAxis[i], mRadius, mPointPaint);
                 }
                 // 今天
             } else {
-                pointPaint.setAlpha(alpha2);
-                canvas.drawCircle(mXAxis[i], yAxis[i], mRadiusToday, pointPaint);
+                mPointPaint.setAlpha(alpha2);
+                canvas.drawCircle(mXAxis[i], yAxis[i], mRadiusToday, mPointPaint);
             }
 
             // 画字
             // 昨天
             if (i == 0) {
-                textPaint.setAlpha(alpha1);
-                drawText(canvas, textPaint, i, temp, yAxis, type);
+                mTextPaint.setAlpha(alpha1);
+                drawText(canvas, mTextPaint, i, temp, yAxis, type);
             } else {
-                textPaint.setAlpha(alpha2);
-                drawText(canvas, textPaint, i, temp, yAxis, type);
+                mTextPaint.setAlpha(alpha2);
+                drawText(canvas, mTextPaint, i, temp, yAxis, type);
             }
         }
     }

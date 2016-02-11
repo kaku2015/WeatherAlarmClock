@@ -295,8 +295,8 @@ public class RecordDeleteBatchFragment extends BaseFragment implements
      * 设置录音列表List
      */
     private void setRingList() {
-        if (!Environment.getExternalStorageState().equals(
-                Environment.MEDIA_MOUNTED)) {
+        if (!MyUtil.isHasSDCard()) {
+            ToastUtil.showShortToast(getActivity(), getString(R.string.no_sd_card));
             return;
         }
         // 录音文件路径

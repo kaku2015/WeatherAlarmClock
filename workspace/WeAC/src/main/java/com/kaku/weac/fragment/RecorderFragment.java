@@ -304,83 +304,81 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
             case R.id.ring_record_record:
                 // XXX：当没有外部存储时保存在内部
                 // 当存在外部存储介质时
-                if (Environment.getExternalStorageState().equals(
-                        Environment.MEDIA_MOUNTED)) {
-                    // 录音文件夹路径
-                    String fileName = getRecordDirectory();
-                    File file = new File(fileName);
-                    if (!file.exists()) {
-                        if (!file.mkdirs()) {
-                            return;
-                        }
-                    }
-                    // 当前系统时间
-                    String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",
-                            Locale.getDefault()).format(new Date());
-                    // 录音文件名
-                    fileName += String.format(getActivity().getResources()
-                            .getString(R.string.record_file_name), time);
-
-                    // 播放录音开始提示音
-                    AudioPlayer.getInstance(getActivity()).playRaw(
-                            R.raw.record_start, false, false);
-                    // 延迟200毫秒防止提示音被录入
-                    try {
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    // 开始录音
-                    AudioRecorder.getInstance(getActivity()).record(fileName);
-
-                    // 当录音失败
-                    if (!AudioRecorder.getInstance(getActivity()).mIsStarted) {
-                        // 删除录音文件
-                        File f = new File(fileName);
-                        boolean result = false;
-                        if (f.exists()) {
-                            result = f.delete();
-                        }
-                        if (!result) {
-                            LogUtil.d(LOG_TAG, getString(R.string.error_delete_fail));
-                        }
-                        break;
-                    }
-
-                    // 隐藏录音按钮
-                    mRecordBtn.setVisibility(View.GONE);
-                    // 显示停止录音按钮
-                    mStopBtn.setVisibility(View.VISIBLE);
-                    // 录音按钮描述信息
-                    mRecordButtonInfo.setText(getString(R.string.click_stop));
-                    // 显示麦克风状态组件
-                    mRecordMic.setVisibility(View.VISIBLE);
-                    // 后台更新麦克风状态
-                    mIsRecording = true;
-
-                    // 开启线程，后台更新麦克风状态
-                    new Thread(new UpdateMicStatus()).start();
-                    mRecordTime.setText(getResources()
-                            .getString(R.string.zero_zero));
-                    new Thread(new updateRecorderTime()).start();
-
-                    // Handler handler = new Handler();
-                    // Runnable stopRecordRun = new Runnable() {
-                    // @Override
-                    // public void run() {
-                    // // 停止录音
-                    // recordStop();
-                    // ToastUtil.showLongToast(getActivity(), "录音最大时长为10分钟");
-                    // }
-                    //
-                    // };
-                    // // 当录音达到10分钟自动执行结束录音操作
-                    // handler.postDelayed(stopRecordRun,
-                    // WeacConstants.MAX_RECORD_LENGTH);
-                } else {
-                    ToastUtil.showShortToast(getActivity(),
-                            getString(R.string.error_sd_card));
+                if (!MyUtil.isHasSDCard()) {
+                    ToastUtil.showShortToast(getActivity(), getString(R.string.no_sd_card));
+                    return;
                 }
+                // 录音文件夹路径
+                String fileName = getRecordDirectory();
+                File file = new File(fileName);
+                if (!file.exists()) {
+                    if (!file.mkdirs()) {
+                        return;
+                    }
+                }
+                // 当前系统时间
+                String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",
+                        Locale.getDefault()).format(new Date());
+                // 录音文件名
+                fileName += String.format(getActivity().getResources()
+                        .getString(R.string.record_file_name), time);
+
+                // 播放录音开始提示音
+                AudioPlayer.getInstance(getActivity()).playRaw(
+                        R.raw.record_start, false, false);
+                // 延迟200毫秒防止提示音被录入
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                // 开始录音
+                AudioRecorder.getInstance(getActivity()).record(fileName);
+
+                // 当录音失败
+                if (!AudioRecorder.getInstance(getActivity()).mIsStarted) {
+                    // 删除录音文件
+                    File f = new File(fileName);
+                    boolean result = false;
+                    if (f.exists()) {
+                        result = f.delete();
+                    }
+                    if (!result) {
+                        LogUtil.d(LOG_TAG, getString(R.string.error_delete_fail));
+                    }
+                    break;
+                }
+
+                // 隐藏录音按钮
+                mRecordBtn.setVisibility(View.GONE);
+                // 显示停止录音按钮
+                mStopBtn.setVisibility(View.VISIBLE);
+                // 录音按钮描述信息
+                mRecordButtonInfo.setText(getString(R.string.click_stop));
+                // 显示麦克风状态组件
+                mRecordMic.setVisibility(View.VISIBLE);
+                // 后台更新麦克风状态
+                mIsRecording = true;
+
+                // 开启线程，后台更新麦克风状态
+                new Thread(new UpdateMicStatus()).start();
+                mRecordTime.setText(getResources()
+                        .getString(R.string.zero_zero));
+                new Thread(new updateRecorderTime()).start();
+
+                // Handler handler = new Handler();
+                // Runnable stopRecordRun = new Runnable() {
+                // @Override
+                // public void run() {
+                // // 停止录音
+                // recordStop();
+                // ToastUtil.showLongToast(getActivity(), "录音最大时长为10分钟");
+                // }
+                //
+                // };
+                // // 当录音达到10分钟自动执行结束录音操作
+                // handler.postDelayed(stopRecordRun,
+                // WeacConstants.MAX_RECORD_LENGTH);
                 break;
             case R.id.ring_record_stop:
                 // 停止录音

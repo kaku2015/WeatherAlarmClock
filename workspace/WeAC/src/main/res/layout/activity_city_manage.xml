@@ -69,6 +69,7 @@
         android:layout_margin="10dp"
         android:listSelector="@android:color/transparent"
         android:numColumns="3"
+        android:scrollbars="none"
         android:verticalSpacing="5dp">
 
     </GridView>

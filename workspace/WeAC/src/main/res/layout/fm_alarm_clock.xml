@@ -49,7 +49,8 @@
         android:cacheColorHint="#00000000"
         android:divider="@android:color/transparent"
         android:dividerHeight="5dp"
-        android:listSelector="@drawable/bg_alarm_list_item_touch">
+        android:listSelector="@drawable/bg_alarm_list_item_touch"
+        android:scrollbars="none">
     </ListView>
     <!--android:cacheColorHint：自定义listview的时候，当不使用android:cacheColorHint=“#00000000”
     会出现选中一个空间黑色底色的情况，破坏整体美观度：当你不使用android:listSelector属性，

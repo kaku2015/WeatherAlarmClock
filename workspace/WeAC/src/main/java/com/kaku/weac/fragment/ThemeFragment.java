@@ -31,6 +31,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
+
 /**
  * 主题fragment
  *
@@ -118,6 +120,8 @@ public class ThemeFragment extends BaseFragment implements View.OnClickListener 
             }
 
         });
+
+        OverScrollDecoratorHelper.setUpOverScroll(gridView);
         return view;
     }
 

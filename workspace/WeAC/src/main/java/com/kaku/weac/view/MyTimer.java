@@ -688,9 +688,9 @@ public class MyTimer extends View {
     private boolean mIsReset;
 
     /**
-     * 是否为重置
+     * 是否已经演示过动画
      */
-    private boolean mIsReset2;
+    private boolean mIsShow;
 
     /**
      * 重置
@@ -702,7 +702,6 @@ public class MyTimer extends View {
         mRemainMinute = 0;
         mIsInitialized = false;
         mIsReset = true;
-        mIsReset2 = true;
         invalidate();
     }
 
@@ -795,14 +794,13 @@ public class MyTimer extends View {
                 }
             };
         } else {
-            mIsReset2 = false;
             startAnimation();
         }
     }
 
     private void startAnimation() {
-        // 不是重置
-        if (!mIsReset2) {
+        // 没有演示过动画
+        if (!mIsShow) {
             SharedPreferences preferences = getContext().getSharedPreferences(
                     WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
             boolean isStop = preferences.getBoolean(WeacConstants.IS_STOP, false);
@@ -827,8 +825,7 @@ public class MyTimer extends View {
                 });
                 animator.start();
             }
-        } else {
-            mIsReset2 = false;
+            mIsShow = true;
         }
     }
 }

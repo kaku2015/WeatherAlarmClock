@@ -28,6 +28,8 @@ import com.kaku.weac.util.OttoAppConfig;
 import java.io.File;
 import java.util.List;
 
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
+
 /**
  * 本地相册详细图片Activity
  *
@@ -91,6 +93,8 @@ public class LocalAlbumDetailActivity extends BaseActivity implements View.OnCli
                 }
             }
         });
+        
+        OverScrollDecoratorHelper.setUpOverScroll(albumPictureDetailGv);
     }
 
     private void cropImage(int type, int requestType, String sourcePath, String savePath) {

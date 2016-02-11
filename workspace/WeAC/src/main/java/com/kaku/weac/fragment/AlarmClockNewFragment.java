@@ -17,6 +17,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
@@ -33,6 +34,8 @@ import com.kaku.weac.util.MyUtil;
 
 import java.util.Collection;
 import java.util.TreeMap;
+
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 /**
  * 新建闹钟fragment
@@ -139,6 +142,7 @@ public class AlarmClockNewFragment extends BaseFragment implements OnClickListen
                 container, false);
         // 设置界面背景
         setBackground(view);
+        setBounce(view);
         // 初始化操作栏
         initActionBar(view);
         // 初始化时间选择
@@ -154,6 +158,11 @@ public class AlarmClockNewFragment extends BaseFragment implements OnClickListen
         // 初始化振动、小睡、天气提示
         initToggleButton(view);
         return view;
+    }
+
+    private void setBounce(View view) {
+        ScrollView scrollView = (ScrollView) view.findViewById(R.id.scrollView1);
+        OverScrollDecoratorHelper.setUpOverScroll(scrollView);
     }
 
     private void initVolume(View view) {

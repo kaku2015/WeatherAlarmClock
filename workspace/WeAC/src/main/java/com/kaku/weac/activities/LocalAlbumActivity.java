@@ -32,6 +32,8 @@ import com.squareup.otto.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
+
 
 /**
  * 本地相册Activity
@@ -131,7 +133,6 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
 
         mLocalAlbumListView = (ListView) findViewById(R.id.local_album_lv);
         mLocalAlbumListView.setAdapter(mLocalAlbumAdapter);
-
         mLocalAlbumListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -143,6 +144,8 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
                 startActivityForResult(intent, REQUEST_ALBUM_DETAIL);
             }
         });
+
+        OverScrollDecoratorHelper.setUpOverScroll(mLocalAlbumListView);
     }
 
     private Uri mImageUri;
@@ -195,10 +198,12 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
         }
 
         // 扫描二维码相册详细取消
-        boolean isFinishMe = data.getBooleanExtra(LocalAlbumDetailActivity.FINISH_ACTIVITY, false);
-        if (isFinishMe && !isFinishing()) {
-            myFinish2();
-            return;
+        if (data != null) {
+            boolean isFinishMe = data.getBooleanExtra(LocalAlbumDetailActivity.FINISH_ACTIVITY, false);
+            if (isFinishMe && !isFinishing()) {
+                myFinish2();
+                return;
+            }
         }
 
         switch (requestCode) {
@@ -230,6 +235,7 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
                 break;
             // 相册详细图片
             case REQUEST_ALBUM_DETAIL:
+                assert data != null;
                 String url = data.getStringExtra(WeacConstants.IMAGE_URL);
                 OttoAppConfig.getInstance().post(new ScanCodeEvent(url));
                 myFinish2();

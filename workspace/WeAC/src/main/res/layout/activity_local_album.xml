@@ -36,8 +36,10 @@
         android:layout_below="@id/action_bar"
         android:layout_marginLeft="@dimen/list_view_margin"
         android:layout_marginRight="@dimen/list_view_margin"
+        android:cacheColorHint="@color/transparent"
         android:divider="@color/white_trans10"
         android:dividerHeight="@dimen/divider_line_thin"
+        android:listSelector="@color/transparent"
         android:overScrollMode="never">
 
     </ListView>

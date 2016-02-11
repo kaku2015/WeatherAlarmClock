@@ -1029,7 +1029,7 @@ public class MyUtil {
      */
     public static File getFileDirectory(Context context, String path) {
         File file = null;
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+        if (isHasSDCard()) {
             file = new File(Environment.getExternalStorageDirectory(), path);
             if (!file.getParentFile().exists()) {
                 if (!file.getParentFile().mkdirs()) {
@@ -1057,7 +1057,7 @@ public class MyUtil {
      */
     public static File getExternalFileDirectory(Context context, String path) {
         File file = null;
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+        if (isHasSDCard()) {
             file = new File(context.getExternalFilesDir(null), path);
             if (!file.getParentFile().exists()) {
                 if (!file.getParentFile().mkdirs()) {
@@ -1071,6 +1071,10 @@ public class MyUtil {
             file = new File(context.getFilesDir(), path);
         }
         return file;
+    }
+
+    public static boolean isHasSDCard() {
+        return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
     }
 
     /**

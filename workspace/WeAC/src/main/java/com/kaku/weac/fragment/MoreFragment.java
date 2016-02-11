@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.kaku.weac.R;
@@ -37,6 +38,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 import me.itangqi.waveloadingview.WaveLoadingView;
 
 /**
@@ -85,6 +87,9 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
         generateCodeBtn.setOnClickListener(this);
         clearMemoryBtn.setOnClickListener(this);
         clearUpBtn.setOnClickListener(this);
+
+        ScrollView scrollView = (ScrollView) view.findViewById(R.id.scroll_view);
+        OverScrollDecoratorHelper.setUpOverScroll(scrollView);
     }
 
     @Subscribe

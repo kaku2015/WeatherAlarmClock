@@ -50,4 +50,5 @@ dependencies {
         transitive = true
     }
     compile project(':SwipeBackLayout')
+    compile project(':overscroll-decor')
 }

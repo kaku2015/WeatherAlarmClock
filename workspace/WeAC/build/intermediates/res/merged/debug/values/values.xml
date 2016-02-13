@@ -10609,6 +10609,13 @@
     <declare-styleable name="ViewBackgroundHelper"><attr name="android:background"/><attr format="color" name="backgroundTint"/><attr name="backgroundTintMode"><enum name="src_over" value="3"/><enum name="src_in" value="5"/><enum name="src_atop" value="9"/><enum name="multiply" value="14"/><enum name="screen" value="15"/></attr></declare-styleable>
     <declare-styleable name="ViewStubCompat"><attr name="android:layout"/><attr name="android:inflatedId"/><attr name="android:id"/></declare-styleable>
     <declare-styleable name="WaveLoadingView"><attr format="dimension" name="mlv_borderWidth"/><attr format="color" name="mlv_borderColor"/><attr format="integer" name="mlv_progressValue"/><attr format="enum" name="mlv_shapeType"><enum name="circle" value="0"/><enum name="square" value="1"/></attr><attr format="color" name="mlv_waveColor"/><attr format="float" name="mlv_waveAmplitude"/><attr format="dimension" name="mlv_titleTopSize"/><attr format="dimension" name="mlv_titleCenterSize"/><attr format="dimension" name="mlv_titleBottomSize"/><attr format="color" name="mlv_titleTopColor"/><attr format="color" name="mlv_titleCenterColor"/><attr format="color" name="mlv_titleBottomColor"/><attr format="string" name="mlv_titleTop"/><attr format="string" name="mlv_titleCenter"/><attr format="string" name="mlv_titleBottom"/></declare-styleable>
+    <declare-styleable name="twowayview_DividerItemDecoration"><attr name="android:divider" ns1:ignore="ResourceName"/><attr format="reference" name="twowayview_verticalDivider"/><attr format="reference" name="twowayview_horizontalDivider"/></declare-styleable>
+    <declare-styleable name="twowayview_GridLayoutManager"><attr format="integer" name="twowayview_numColumns"/><attr format="integer" name="twowayview_numRows"/></declare-styleable>
+    <declare-styleable name="twowayview_SpacingItemDecoration"><attr name="android:verticalSpacing" ns1:ignore="ResourceName"/><attr name="android:horizontalSpacing" ns1:ignore="ResourceName"/></declare-styleable>
+    <declare-styleable name="twowayview_SpannableGridViewChild"><attr format="integer" name="twowayview_colSpan"/><attr format="integer" name="twowayview_rowSpan"/></declare-styleable>
+    <declare-styleable name="twowayview_StaggeredGridViewChild"><attr format="integer" name="twowayview_span"/></declare-styleable>
+    <declare-styleable name="twowayview_TwoWayLayoutManager"><attr name="android:orientation" ns1:ignore="ResourceName"/></declare-styleable>
+    <declare-styleable name="twowayview_TwoWayView"><attr format="string" name="twowayview_layoutManager"/></declare-styleable>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
     <eat-comment/>
     <dimen name="abc_action_bar_content_inset_material">16dp</dimen>
@@ -10854,6 +10861,12 @@
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
     <eat-comment/>
     <item name="split_action_bar" type="id"/>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/org.lucasr.twowayview/core/1.0.0-SNAPSHOT/res/values/values.xml -->
+    <eat-comment/>
+    <item name="twowayview_item_click_support" type="id"/>
+    <item name="twowayview_item_selection_support" type="id"/>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
+    <eat-comment/>
     <item name="up" type="id"/>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.android.support/design/23.1.1/res/values/values.xml -->
     <eat-comment/>

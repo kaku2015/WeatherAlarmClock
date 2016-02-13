@@ -62,15 +62,11 @@
         </FrameLayout>
     </RelativeLayout>
 
-    <GridView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/gv_city_manage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:listSelector="@android:color/transparent"
-        android:numColumns="3"
-        android:scrollbars="none"
-        android:verticalSpacing="5dp">
+        android:layout_margin="10dp">
 
-    </GridView>
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>

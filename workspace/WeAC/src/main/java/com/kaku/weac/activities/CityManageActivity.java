@@ -7,15 +7,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.GridView;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.kaku.weac.Listener.DBObserverListener;
 import com.kaku.weac.Listener.HttpCallbackListener;
 import com.kaku.weac.Listener.NotifyListener;
+import com.kaku.weac.Listener.OnItemClickListener;
 import com.kaku.weac.R;
 import com.kaku.weac.adapter.CityManageAdapter;
 import com.kaku.weac.bean.CityManage;
@@ -32,6 +34,8 @@ import com.kaku.weac.util.WeatherUtil;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.wasabeef.recyclerview.animators.LandingAnimator;
 
 /**
  * 城市管理activity
@@ -77,9 +81,9 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
     private String mWeatherCode;
 
     /**
-     * 城市管理GridView
+     * 城市管理RecyclerView
      */
-    private GridView mGridView;
+    private RecyclerView mRecyclerView;
 
     /**
      * 操作栏编辑按钮
@@ -100,11 +104,6 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
      * 取消刷新按钮
      */
     private ImageView mCancelRefreshBtn;
-
-    /**
-     * 监听城市点击事件Listener
-     */
-    private AdapterView.OnItemClickListener mOnItemClickListener;
 
     /**
      * 城市管理实例
@@ -154,7 +153,8 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onDBDataChanged() {
                 // 允许列表item点击
-                mGridView.setOnItemClickListener(mOnItemClickListener);
+//                mRecyclerView.setOnItemClickListener(mOnItemClickListener);
+                mCityManageAdapter.setIsCanClick(true);
                 // 显示编辑按钮
                 mEditBtn.setVisibility(View.VISIBLE);
                 // 隐藏完成按钮
@@ -174,21 +174,21 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
      * 初始化布局元素
      */
     private void initViews() {
-        mOnItemClickListener = new OnItemClickListenerImpl();
-        mGridView = (GridView) findViewById(R.id.gv_city_manage);
-        mGridView.setAdapter(mCityManageAdapter);
-        mGridView.setOnItemClickListener(mOnItemClickListener);
-        mGridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position != (mCityManageList.size() - 1)) {
-                    mIsRefreshing = false;
-                    // 显示删除，完成按钮，隐藏修改按钮
-                    displayDeleteAccept();
-                }
-                return true;
-            }
+        mRecyclerView = (RecyclerView) findViewById(R.id.gv_city_manage);
+        //设置布局管理器
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        //设置Item增加、移除动画
+        mRecyclerView.setItemAnimator(new LandingAnimator(new OvershootInterpolator(1f)) {
         });
+        mRecyclerView.getItemAnimator().setAddDuration(200);
+        mRecyclerView.getItemAnimator().setRemoveDuration(200);
+        mRecyclerView.getItemAnimator().setMoveDuration(200);
+        mRecyclerView.getItemAnimator().setChangeDuration(200);
+        mRecyclerView.setAdapter(mCityManageAdapter);
+
+        //  监听城市点击事件Listener
+        OnItemClickListener onItemClickListener = new OnItemClickListenerImpl();
+        mCityManageAdapter.setOnItemClickListener(onItemClickListener);
 
         // 返回按钮
         ImageView returnBtn = (ImageView) findViewById(R.id.action_return);
@@ -207,10 +207,10 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
         mCancelRefreshBtn.setOnClickListener(this);
     }
 
-    class OnItemClickListenerImpl implements AdapterView.OnItemClickListener {
+    class OnItemClickListenerImpl implements OnItemClickListener {
 
         @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        public void onItemClick(View view, int position) {
             mIsRefreshing = false;
             // 当为列表最后一项（添加城市）
             if (position == (mCityManageList.size() - 1)) {
@@ -221,7 +221,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 Intent intent = new Intent(CityManageActivity.this, AddCityActivity.class);
                 startActivityForResult(intent, REQUEST_CITY_MANAGE);
             } else {
-                CityManage cityManage = mCityManageAdapter.getItem(position);
+                CityManage cityManage = mCityManageList.get(position);
 
                 if (cityManage.getWeatherType().equals(getString(R.string.no))) {
                     ToastUtil.showShortToast(CityManageActivity.this, getString(R.string.no_city_weather_info));
@@ -234,6 +234,16 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 } else {
                     myFinish(cityManage.getLocationCity(), cityManage.getWeatherCode());
                 }
+            }
+
+        }
+
+        @Override
+        public void onItemLongClick(View view, int position) {
+            if (position != (mCityManageList.size() - 1)) {
+                mIsRefreshing = false;
+                // 显示删除，完成按钮，隐藏修改按钮
+                displayDeleteAccept();
             }
         }
     }
@@ -253,7 +263,8 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
      */
     private void displayDeleteAccept() {
         // 禁止gridView点击事件
-        mGridView.setOnItemClickListener(null);
+//        mRecyclerView.setOnItemClickListener(null);
+        mCityManageAdapter.setIsCanClick(false);
         mCityManageAdapter.setCityDeleteButton(true);
         mCityManageAdapter.notifyDataSetChanged();
         mEditBtn.setVisibility(View.GONE);
@@ -265,9 +276,11 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
      * 隐藏删除，完成按钮,显示修改按钮
      */
     private void hideDeleteAccept() {
-        mGridView.setOnItemClickListener(mOnItemClickListener);
+//        mRecyclerView.setOnItemClickListener(mOnItemClickListener);
+        mCityManageAdapter.setIsCanClick(true);
         mCityManageAdapter.setCityDeleteButton(false);
         mCityManageAdapter.notifyDataSetChanged();
+//        mCityManageAdapter.notifyItemRangeChanged(0, mCityManageAdapter.getItemCount());
         mAcceptBtn.setVisibility(View.GONE);
         mEditBtn.setVisibility(View.VISIBLE);
 
@@ -284,7 +297,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
             // 编辑按钮
             case R.id.action_edit:
                 // 当正在添加城市或者列表内容为空时禁止响应编辑事件
-                if (mIsCityAdding || mGridView.getChildCount() == 1) {
+                if (mIsCityAdding || mRecyclerView.getChildCount() == 1) {
                     return;
                 }
                 mIsRefreshing = false;
@@ -423,7 +436,8 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                     mCityManageList.remove(mCityManageList.size() - 2);
                     mCityManageAdapter.notifyDataSetChanged();
                     // GridView设置点击事件
-                    mGridView.setOnItemClickListener(mOnItemClickListener);
+//                    mRecyclerView.setOnItemClickListener(mOnItemClickListener);
+                    mCityManageAdapter.setIsCanClick(true);
                     mIsCityAdding = false;
                 } else {
                     continueRefreshOrStop(position);
@@ -490,7 +504,8 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
             mCityManageAdapter.displayProgressBar(-1);
             mCityManageAdapter.notifyDataSetChanged();
             // GridView设置点击事件
-            mGridView.setOnItemClickListener(mOnItemClickListener);
+//            mRecyclerView.setOnItemClickListener(mOnItemClickListener);
+            mCityManageAdapter.setIsCanClick(true);
             mIsCityAdding = false;
             // 存储城市管理item信息
             WeatherDBOperate.getInstance().saveCityManage(mCityManage);
@@ -611,7 +626,8 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
         }
         if (requestCode == REQUEST_CITY_MANAGE) {
             // GridView禁用点击事件
-            mGridView.setOnItemClickListener(null);
+//            mRecyclerView.setOnItemClickListener(null);
+            mCityManageAdapter.setIsCanClick(false);
             mIsCityAdding = true;
 
             mCityManage = new CityManage();
@@ -619,7 +635,8 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
             mCityManageList.add(mCityManageList.size() - 1, mCityManage);
             // 显示progressBar
             mCityManageAdapter.displayProgressBar(mCityManageList.size() - 2);
-            mCityManageAdapter.notifyDataSetChanged();
+//            mCityManageAdapter.notifyDataSetChanged();
+            mCityManageAdapter.notifyItemInserted(mCityManageList.size() - 2);
 
             String weatherCode = data.getStringExtra(WeacConstants.WEATHER_CODE);
             String cityName = data.getStringExtra(WeacConstants.CITY_NAME);

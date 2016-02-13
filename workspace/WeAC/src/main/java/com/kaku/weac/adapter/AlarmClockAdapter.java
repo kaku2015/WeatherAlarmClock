@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.kaku.weac.Listener.OnItemClickListener;
 import com.kaku.weac.R;
 import com.kaku.weac.bean.AlarmClock;
 import com.kaku.weac.bean.Event.AlarmClockDeleteEvent;
@@ -79,12 +80,6 @@ public class AlarmClockAdapter extends RecyclerView.Adapter<AlarmClockAdapter.My
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new MyViewHolder(LayoutInflater.from(mContext).inflate(
                 R.layout.lv_alarm_clock, parent, false));
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(View view, int position);
-
-        void onItemLongClick(View view, int position);
     }
 
     private OnItemClickListener mOnItemClickListener;

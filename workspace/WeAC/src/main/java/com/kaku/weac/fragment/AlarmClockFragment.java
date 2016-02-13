@@ -16,6 +16,7 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.kaku.weac.Listener.OnItemClickListener;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.AlarmClockEditActivity;
 import com.kaku.weac.activities.AlarmClockNewActivity;
@@ -112,7 +113,7 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
         mRecyclerView.setAdapter(mAdapter);
 
         // 监听闹铃item点击事件Listener
-        AlarmClockAdapter.OnItemClickListener onItemClickListener = new OnItemClickListenerImpl();
+       OnItemClickListener onItemClickListener =  new OnItemClickListenerImpl();
         mAdapter.setOnItemClickListener(onItemClickListener);
 
         // 操作栏新建按钮
@@ -131,7 +132,7 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
         return view;
     }
 
-    class OnItemClickListenerImpl implements AlarmClockAdapter.OnItemClickListener {
+    class OnItemClickListenerImpl implements OnItemClickListener {
 
         @Override
         public void onItemClick(View view, int position) {

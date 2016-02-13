@@ -53,7 +53,7 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
     /**
      * 闹钟列表
      */
-    private RecyclerView mListView;
+    private RecyclerView mRecyclerView;
 
     /**
      * 保存闹钟信息的list
@@ -80,11 +80,6 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
      */
     private LinearLayout mEmptyView;
 
-    /**
-     * 监听闹铃item点击事件Listener
-     */
-    private AlarmClockAdapter.OnItemClickListener mOnItemClickListener;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,23 +94,24 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
     public View onCreateView(final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fm_alarm_clock, container, false);
-        mListView = (RecyclerView) view.findViewById(R.id.list_view);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.list_view);
         //设置布局管理器
-        mListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //设置Item增加、移除动画
-        mListView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         // 当List内容为空时显示的内容控件
         mEmptyView = (LinearLayout) view
                 .findViewById(R.id.alarm_clock_empty);
         // 设置录音List内容为空时的视图
-//        mListView.setEmptyView(mEmptyView);
+//        mRecyclerView.setEmptyView(mEmptyView);
         // 注册上下文菜单
-        registerForContextMenu(mListView);
-        mListView.setAdapter(mAdapter);
-        mOnItemClickListener = new OnItemClickListenerImpl();
-        mAdapter.setOnItemClickListener(mOnItemClickListener);
-//        mListView.setOnItemClickListener(mOnItemClickListener);
-//        mListView.setOnItemLongClickListener(new OnItemLongClickListener() {
+        registerForContextMenu(mRecyclerView);
+        mRecyclerView.setAdapter(mAdapter);
+        // 监听闹铃item点击事件Listener
+        AlarmClockAdapter.OnItemClickListener onItemClickListener = new OnItemClickListenerImpl();
+        mAdapter.setOnItemClickListener(onItemClickListener);
+//        mRecyclerView.setOnItemClickListener(mOnItemClickListener);
+//        mRecyclerView.setOnItemLongClickListener(new OnItemLongClickListener() {
 //
 //            @Override
 //            public boolean onItemLongClick(AdapterView<?> parent, View view,
@@ -327,10 +323,10 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
 
     private void checkIsEmpty(List<AlarmClock> list) {
         if (list.size() != 0) {
-            mListView.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.VISIBLE);
             mEmptyView.setVisibility(View.GONE);
         } else {
-            mListView.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.GONE);
             mEmptyView.setVisibility(View.VISIBLE);
         }
     }

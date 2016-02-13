@@ -235,47 +235,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd13465a-1f53-468b-aa88-adc0628e1005" name="Default" comment="闹钟数据库访问方式更改为litepal">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/overscroll-decor/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/overscroll-decor/src/main/java/me/everything/android/ui/overscroll/adapters/AbsListViewOverScrollDecorAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/AlarmClockOperate.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/broadcast/AlarmClockProcessReceiver.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/Event/AlarmClockUpdateEvent.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/overscroll-decor/src/main/AndroidManifest.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/overscroll-decor/src/main/java/me/everything/android/ui/overscroll/HorizontalOverScrollBounceEffectDecorator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/overscroll-decor/src/test/java/me/everything/android/ui/overscroll/HorizontalOverScrollBounceEffectDecoratorTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/overscroll-decor/src/main/java/me/everything/android/ui/overscroll/adapters/HorizontalScrollViewOverScrollDecorAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/overscroll-decor/src/main/java/me/everything/android/ui/overscroll/adapters/IOverScrollDecoratorAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/overscroll-decor/src/main/java/me/everything/android/ui/overscroll/OverScrollBounceEffectDecoratorBase.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/overscroll-decor/src/main/java/me/everything/android/ui/overscroll/OverScrollDecoratorHelper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/overscroll-decor/src/main/java/me/everything/android/ui/overscroll/adapters/RecyclerViewOverScrollDecorAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/overscroll-decor/src/main/java/me/everything/android/ui/overscroll/adapters/ScrollViewOverScrollDecorAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/overscroll-decor/src/main/java/me/everything/android/ui/overscroll/adapters/StaticOverScrollDecorAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/overscroll-decor/src/main/java/me/everything/android/ui/overscroll/VerticalOverScrollBounceEffectDecorator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/overscroll-decor/src/test/java/me/everything/android/ui/overscroll/VerticalOverScrollBounceEffectDecoratorTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/overscroll-decor/build.gradle" />
-      <change type="DELETED" beforePath="D:\AndroidStudioProjects\workspace\WeAC\src\main\java\com\kaku\weac\db\AlarmClockOpenHelper.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\AndroidStudioProjects\workspace\WeAC\src\main\java\com\kaku\weac\db\AlarmClockProvider.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\AndroidStudioProjects\workspace\WeAC\src\main\java\com\kaku\weac\db\TabAlarmClockOperate.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PagerSlidingTabStrip/build/outputs/aar/PagerSlidingTabStrip-release.aar" afterPath="$PROJECT_DIR$/PagerSlidingTabStrip/build/outputs/aar/PagerSlidingTabStrip-release.aar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PagerSlidingTabStrip/build/intermediates/bundles/release/classes.jar" afterPath="$PROJECT_DIR$/PagerSlidingTabStrip/build/intermediates/bundles/release/classes.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/exploded-aar/workspace/PagerSlidingTabStrip/unspecified/jars/classes.jar" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/exploded-aar/workspace/PagerSlidingTabStrip/unspecified/jars/classes.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/res/resources-debug-androidTest.ap_" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/res/resources-debug-androidTest.ap_" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/Event/AlarmClockDeleteEvent.java" />
+      <change type="DELETED" beforePath="D:\AndroidStudioProjects\workspace\WeAC\build\intermediates\res\merged\debug\drawable\bg_alarm_list_item_touch.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\AndroidStudioProjects\workspace\WeAC\build\intermediates\res\merged\debug\drawable\shape_circle_alarm_item_list.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\AndroidStudioProjects\workspace\WeAC\build\intermediates\res\merged\debug\drawable\shape_circle_alarm_list_item_touch.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/res/resources-debug.ap_" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/res/resources-debug.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/AlarmClock.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/AlarmClock.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/adapter/AlarmClockAdapter.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/adapter/AlarmClockAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/broadcast/AlarmClockBroadcast.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/broadcast/AlarmClockBroadcast.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockFragment.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/Event/AlarmClockUpdateEvent.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/Event/AlarmClockUpdateEvent.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/manifests/full/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/WeAC/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/service/DaemonService.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/service/DaemonService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/TimeFragment.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/TimeFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/assets/litepal.xml" afterPath="$PROJECT_DIR$/WeAC/src/main/assets/litepal.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/generated/source/r/debug/com/kaku/weac/R.java" afterPath="$PROJECT_DIR$/WeAC/build/generated/source/r/debug/com/kaku/weac/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/symbols/debug/R.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/res/merged/debug/layout/fm_alarm_clock.xml" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/res/merged/debug/layout/fm_alarm_clock.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/res/layout/fm_alarm_clock.xml" afterPath="$PROJECT_DIR$/WeAC/src/main/res/layout/fm_alarm_clock.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/res/merged/debug/layout/fm_alarm_clock_new_edit.xml" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/res/merged/debug/layout/fm_alarm_clock_new_edit.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/res/layout/fm_alarm_clock_new_edit.xml" afterPath="$PROJECT_DIR$/WeAC/src/main/res/layout/fm_alarm_clock_new_edit.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/res/merged/debug/layout/lv_alarm_clock.xml" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/res/merged/debug/layout/lv_alarm_clock.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/res/layout/lv_alarm_clock.xml" afterPath="$PROJECT_DIR$/WeAC/src/main/res/layout/lv_alarm_clock.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/outputs/logs/manifest-merger-debug-report.txt" afterPath="$PROJECT_DIR$/WeAC/build/outputs/logs/manifest-merger-debug-report.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/incremental/mergeAssets/debug/merger.xml" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/incremental/mergeAssets/debug/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/incremental/mergeResourcesdebug/merger.xml" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/incremental/mergeResourcesdebug/merger.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="D:\AndroidStudioProjects\workspace\WeAC\src\main\java\com\kaku\weac\db\WeacDBMetaData.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/WeacDBMetaDataLitePal.java" />
+      <change type="MOVED" beforePath="D:\AndroidStudioProjects\workspace\WeAC\src\main\res\drawable\bg_alarm_list_item_touch.xml" afterPath="$PROJECT_DIR$/WeAC/src/main/res/drawable/bg_alarm_list_item.xml" />
+      <change type="MOVED" beforePath="D:\AndroidStudioProjects\workspace\WeAC\src\main\res\drawable\shape_circle_alarm_item_list.xml" afterPath="$PROJECT_DIR$/WeAC/src/main/res/drawable/shape_circle_alarm_list_item_normal.xml" />
+      <change type="MOVED" beforePath="D:\AndroidStudioProjects\workspace\WeAC\src\main\res\drawable\shape_circle_alarm_list_item_touch.xml" afterPath="$PROJECT_DIR$/WeAC/src/main/res/drawable/shape_circle_alarm_list_item_pressed.xml" />
     </list>
     <ignored path="workspace.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -305,32 +288,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AlarmClockFragment.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AlarmClockFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="219" column="0" selection-start-line="219" selection-start-column="0" selection-end-line="219" selection-end-column="0" />
+            <state vertical-scroll-proportion="3.033727">
+              <caret line="211" column="5" selection-start-line="211" selection-start-column="5" selection-end-line="211" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TimeFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/TimeFragment.java">
+      <file leaf-file-name="AlarmClockAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/adapter/AlarmClockAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="149" column="13" selection-start-line="149" selection-start-column="13" selection-end-line="149" selection-end-column="13" />
-              <folding />
+              <caret line="111" column="34" selection-start-line="111" selection-start-column="34" selection-end-line="111" selection-end-column="34" />
+              <folding>
+                <element signature="e#0#9115#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#1444#1445#0" expanded="true" />
+                <element signature="e#1488#1489#0" expanded="true" />
+                <element signature="e#2751#3009#0" expanded="true" />
+                <element signature="e#3008#3009#0" expanded="true" />
+                <element signature="e#3067#3416#0" expanded="true" />
+                <element signature="e#3415#3416#0" expanded="true" />
+                <element signature="e#8016#8017#0" expanded="true" />
+                <element signature="e#8051#8052#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AlarmClockBroadcast.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/broadcast/AlarmClockBroadcast.java">
+      <file leaf-file-name="AlarmClockDeleteEvent.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/Event/AlarmClockDeleteEvent.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="40" column="62" selection-start-line="40" selection-start-column="62" selection-end-line="40" selection-end-column="62" />
-              <folding />
+              <caret line="0" column="2" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
+              <folding>
+                <element signature="e#405#406#0" expanded="true" />
+                <element signature="e#445#446#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -339,72 +336,76 @@
         <entry file="file://$PROJECT_DIR$/WeAC/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="48" column="48" selection-start-line="48" selection-start-column="48" selection-end-line="48" selection-end-column="48" />
-              <folding>
-                <element signature="e#2090#2108#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BootBroadcastReceiver.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/broadcast/BootBroadcastReceiver.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+              <caret line="142" column="0" selection-start-line="142" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AlarmClockProcessReceiver.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/broadcast/AlarmClockProcessReceiver.java">
+      <file leaf-file-name="AlarmClockUpdateEvent.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/Event/AlarmClockUpdateEvent.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="3" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AlarmClockOperate.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/AlarmClockOperate.java">
+      <file leaf-file-name="bg_alarm_list_item.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/drawable/bg_alarm_list_item.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-              <folding>
-                <element signature="e#461#462#0" expanded="true" />
-                <element signature="e#500#501#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AlarmClock.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/AlarmClock.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.5">
-              <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DaemonService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/service/DaemonService.java">
+      <file leaf-file-name="fm_alarm_clock.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/fm_alarm_clock.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="45" column="37" selection-start-line="45" selection-start-column="37" selection-end-line="45" selection-end-column="37" />
+            <state vertical-scroll-proportion="-3.6">
+              <caret line="42" column="35" selection-start-line="42" selection-start-column="35" selection-end-line="42" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WeacDBMetaDataLitePal.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/WeacDBMetaDataLitePal.java">
+      <file leaf-file-name="fm_alarm_clock_new_edit.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/fm_alarm_clock_new_edit.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="16" column="49" selection-start-line="16" selection-start-column="49" selection-end-line="16" selection-end-column="49" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lv_alarm_clock.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/lv_alarm_clock.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.6">
+              <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="city_china.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/xml/city_china.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -5797,12 +5798,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/WeAC/src/main/res/layout/fm_time.xml" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/view/MyTimer.java" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/LeakCanaryApplication.java" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/BaseActivity.java" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/Event/ViewUpdateEvent.java" />
-        <option value="$PROJECT_DIR$/overscroll-decor/build.gradle" />
         <option value="$PROJECT_DIR$/overscroll-decor/src/main/java/me/everything/android/ui/overscroll/OttoAppConfig.java" />
         <option value="$PROJECT_DIR$/overscroll-decor/src/main/java/me/everything/android/ui/overscroll/OverScrollEvent.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/view/BounceScrollView.java" />
@@ -5814,8 +5809,6 @@
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/MoreFragment.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumActivity.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/res/layout/activity_local_album.xml" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockNewFragment.java" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockEditFragment.java" />
         <option value="$PROJECT_DIR$/overscroll-decor/src/main/java/me/everything/android/ui/overscroll/OverScrollBounceEffectDecoratorBase.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/res/layout/fm_theme.xml" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/CityManageActivity.java" />
@@ -5827,27 +5820,35 @@
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/RecorderFragment.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/view/LineChartViewDouble.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/TimeFragment.java" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/res/layout/fm_alarm_clock_new_edit.xml" />
         <option value="$PROJECT_DIR$/WeAC/build.gradle" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/res/layout/fm_alarm_clock.xml" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/AlarmClockNapNotificationActivity.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/TabAlarmClockOperate.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockOntimeFragment.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/MyUtil.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/WeacDBMetaDataLitelPal.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/WeacDBMetaDataLitePal.java" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/Event/AlarmClockDeleteEvent.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/service/DaemonService.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/broadcast/MyReceiver.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/broadcast/AlarmClockBroadcast.java" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/broadcast/AlarmClockProcessReceiver.java" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/Event/AlarmClockUpdateEvent.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/assets/litepal.xml" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/adapter/AlarmClockAdapter.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/AlarmClock.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/AlarmClockOperate.java" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockFragment.java" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/model/DbModel.java" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/Event/AlarmClockDeleteEvent.java" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/Event/AlarmClockUpdateEvent.java" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/broadcast/AlarmClockProcessReceiver.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockNewFragment.java" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockEditFragment.java" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/SingleFragmentActivity.java" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/res/layout/fm_alarm_clock_new_edit.xml" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/res/drawable/shape_circle_alarm_list_item_touch.xml" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/res/drawable/bg_alarm_list_item_touch.xml" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/res/drawable/bg_alarm_list_item.xml" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/res/layout/lv_alarm_clock.xml" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/res/layout/fm_alarm_clock.xml" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/adapter/AlarmClockAdapter.java" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockFragment.java" />
       </list>
     </option>
   </component>
@@ -5889,7 +5890,7 @@
         </expanded-state>
         <selected-state>
           <State>
-            <id>Cloning issuesJava</id>
+            <id>AndroidLintRtlSymmetry</id>
           </State>
         </selected-state>
       </profile-state>
@@ -6001,6 +6002,36 @@
               <option name="myItemId" value="res" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xml" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WeAC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -6029,6 +6060,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WeAC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -6300,6 +6361,44 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WeAC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="weac" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bean" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Event" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -6335,6 +6434,40 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="adapter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WeAC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="weac" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="activities" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -6551,21 +6684,21 @@
     <property name="android.sdk.path" value="D:/AppData/Local/Android/sdk" />
     <property name="FullScreen" value="false" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="275" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="278" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="285" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="288" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="287" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="291" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="986" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="989" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="278" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="281" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="283" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="286" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="286" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="290" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="986" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="989" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="last_opened_file_path" value="D:/GitHub/SlidingView" />
     <property name="SearchEverywhereHistoryKey" value="okhttp&#9;PSI&#9;JAVA://com.squareup.okhttp.OkHttpClient" />
@@ -6574,11 +6707,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.kaku.weac.bean.Event" />
       <recent name="com.kaku.weac.db" />
       <recent name="com.kaku.weac.activities" />
       <recent name="com.kaku.weac.zxing.decode.utils" />
       <recent name="com.kaku.weac.util" />
-      <recent name="com.kaku.weac.zxing.decode" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\AndroidStudioProjects\workspace\overscroll-decor\src\main\java\me\everything\android\ui\overscroll" />
@@ -6592,15 +6725,15 @@
       <recent name="layout" />
       <recent name="com.kaku.weac.service" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\AndroidStudioProjects\workspace\WeAC\src\main\res\drawable-xhdpi" />
-      <recent name="D:\AndroidStudioProjects\workspace\WeAC\src\main\res\drawable" />
+    <key name="android.template.parentActivityClass">
+      <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.kaku.weac" />
     </key>
-    <key name="android.template.parentActivityClass">
-      <recent name="" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\AndroidStudioProjects\workspace\WeAC\src\main\res\drawable-xhdpi" />
+      <recent name="D:\AndroidStudioProjects\workspace\WeAC\src\main\res\drawable" />
     </key>
   </component>
   <component name="RunManager" selected="Android Application.WeAC">
@@ -7082,39 +7215,39 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Android WiFi ADB" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Android WiFi ADB" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30812013" sideWeight="0.48560768" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2502781" sideWeight="0.5143923" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32249466" sideWeight="0.51608187" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3303671" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.4841169" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22580644" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16017798" sideWeight="0.49093816" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2185501" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3403782" sideWeight="0.48560768" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16017798" sideWeight="0.49093816" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3147942" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="CodotaView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24805339" sideWeight="0.4914712" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44048944" sideWeight="0.4914712" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22547974" sideWeight="0.5158831" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2502781" sideWeight="0.5143923" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3303671" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32249466" sideWeight="0.51608187" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25472748" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.4841169" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22580644" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" x="92" y="92" width="1736" height="856" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21859904" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3147942" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Analyze Dataflow to" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24471635" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39933258" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -7248,12 +7381,6 @@
           <option name="timeStamp" value="371" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockFragment.java</url>
-          <line>141</line>
-          <properties />
-          <option name="timeStamp" value="372" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
           <url>jar://$PROJECT_DIR$/WeAC/libs/litepal-1.3.0.jar!/org/litepal/crud/UpdateHandler.class</url>
           <line>27</line>
           <properties />
@@ -7261,9 +7388,9 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockFragment.java</url>
-          <line>235</line>
+          <line>188</line>
           <properties />
-          <option name="timeStamp" value="376" />
+          <option name="timeStamp" value="380" />
         </line-breakpoint>
         <line-breakpoint suspend="ALL" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/LocalAlbumImagePickerHelper.java</url>
@@ -7283,170 +7410,16 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="377" />
+      <option name="time" value="383" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/Event/AlarmClockUpdateEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#185#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/service/DaemonService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/WeatherDBOperate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="49" column="41" selection-start-line="49" selection-start-column="41" selection-end-line="49" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#2285#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#416#417#0" expanded="false" />
-            <element signature="e#455#456#0" expanded="false" />
-            <element signature="e#2223#2224#0" expanded="false" />
-            <element signature="e#2281#2282#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_local_album.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.6">
-          <caret line="38" column="51" selection-start-line="38" selection-start-column="51" selection-end-line="38" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_local_album_detail.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.0">
-          <caret line="36" column="38" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/fm_more.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.0">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/fm_theme.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.0">
-          <caret line="33" column="33" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.428571">
-          <caret line="61" column="44" selection-start-line="61" selection-start-column="44" selection-end-line="61" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/RecordDeleteBatchFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="298" column="33" selection-start-line="298" selection-start-column="33" selection-end-line="298" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/DataCleanManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="57" selection-start-line="18" selection-start-column="57" selection-end-line="18" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/RecorderFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="479" column="9" selection-start-line="476" selection-start-column="8" selection-end-line="479" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#24954#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#18203#18578#0" expanded="false" />
-            <element signature="e#18577#18578#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/view/LineChartViewDouble.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="161" column="16" selection-start-line="161" selection-start-column="16" selection-end-line="161" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/view/MyTimer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#23557#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#3119#3120#0" expanded="false" />
-            <element signature="e#3149#3150#0" expanded="false" />
-            <element signature="e#3208#3209#0" expanded="false" />
-            <element signature="e#3245#3246#0" expanded="false" />
-            <element signature="e#13079#13080#0" expanded="false" />
-            <element signature="e#13145#13146#0" expanded="false" />
-            <element signature="e#15210#15211#0" expanded="false" />
-            <element signature="e#15248#15249#0" expanded="false" />
-            <element signature="e#20344#20345#0" expanded="false" />
-            <element signature="e#20379#20380#0" expanded="false" />
-            <element signature="e#22054#22055#0" expanded="false" />
-            <element signature="e#22110#22111#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/AppData/Local/Android/sdk/sources/android-23/android/widget/TimePicker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33238232">
-          <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/overscroll-decor/src/main/java/me/everything/android/ui/overscroll/OverScrollBounceEffectDecoratorBase.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="142" column="17" selection-start-line="142" selection-start-column="17" selection-end-line="142" selection-end-column="17" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/fm_alarm_clock_new_edit.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
         </state>
       </provider>
     </entry>
@@ -7480,16 +7453,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/fm_alarm_clock.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.9333334">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/AlarmClockNapNotificationActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -7498,25 +7461,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/AlarmClockEditActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/MyDialogActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="52" column="13" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockNewFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="149" column="16" selection-start-line="149" selection-start-column="16" selection-end-line="149" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -7557,25 +7505,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/BaseFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49815497">
-          <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/CityManage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="54" column="15" selection-start-line="54" selection-start-column="15" selection-end-line="54" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockEditFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="132" column="0" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -7624,27 +7557,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/adapter/AlarmClockAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="54" column="36" selection-start-line="54" selection-start-column="36" selection-end-line="54" selection-end-column="36" />
-          <folding>
-            <element signature="e#1151#1183#0" expanded="true" />
-            <element signature="e#1321#1353#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/Event/AlarmClockUpdateEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#185#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/MyUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -7653,26 +7565,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/broadcast/AlarmClockBroadcast.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="62" selection-start-line="40" selection-start-column="62" selection-end-line="40" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/broadcast/BootBroadcastReceiver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/broadcast/AlarmClockProcessReceiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="3" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
           <folding />
         </state>
       </provider>
@@ -7693,28 +7589,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/service/DaemonService.java">
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/AlarmClock.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="37" selection-start-line="45" selection-start-column="37" selection-end-line="45" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="48" column="48" selection-start-line="48" selection-start-column="48" selection-end-line="48" selection-end-column="48" />
-          <folding>
-            <element signature="e#2090#2108#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="219" column="0" selection-start-line="219" selection-start-column="0" selection-end-line="219" selection-end-column="0" />
+          <caret line="208" column="6" selection-start-line="208" selection-start-column="6" selection-end-line="208" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -7722,7 +7600,7 @@
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/AlarmClockOperate.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <caret line="34" column="19" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
           <folding>
             <element signature="e#461#462#0" expanded="true" />
             <element signature="e#500#501#0" expanded="true" />
@@ -7730,10 +7608,244 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/AlarmClock.java">
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/model/TimeModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.5">
-          <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="23" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/broadcast/AlarmClockBroadcast.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="62" selection-start-line="40" selection-start-column="62" selection-end-line="40" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/broadcast/AlarmClockProcessReceiver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="68" selection-start-line="21" selection-start-column="68" selection-end-line="21" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/OttoAppConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/LocalMusicFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4929078">
+          <caret line="161" column="41" selection-start-line="161" selection-start-column="32" selection-end-line="161" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/RecorderFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="510" column="25" selection-start-line="510" selection-start-column="16" selection-end-line="510" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/BaseFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/AlarmClockEditActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
+          <folding>
+            <element signature="e#404#405#0" expanded="false" />
+            <element signature="e#455#456#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/SingleFragmentDialogActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.785714">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockNewFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="143" column="28" selection-start-line="143" selection-start-column="28" selection-end-line="144" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockEditFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/SingleFragmentActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/drawable/shape_circle_alarm_list_item_pressed.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/drawable/shape_circle_alarm_list_item_normal.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/service/DaemonService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="35" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/Event/AlarmClockUpdateEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/AppData/Local/Android/sdk/sources/android-23/android/widget/AdapterView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3327645">
+          <caret line="50" column="22" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/Event/AlarmClockDeleteEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="2" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
+          <folding>
+            <element signature="e#405#406#0" expanded="true" />
+            <element signature="e#445#446#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/drawable/bg_alarm_list_item.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/fm_alarm_clock.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.6">
+          <caret line="42" column="35" selection-start-line="42" selection-start-column="35" selection-end-line="42" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/fm_alarm_clock_new_edit.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="49" selection-start-line="16" selection-start-column="49" selection-end-line="16" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/lv_alarm_clock.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.6">
+          <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/xml/city_china.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="142" column="0" selection-start-line="142" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/adapter/AlarmClockAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="111" column="34" selection-start-line="111" selection-start-column="34" selection-end-line="111" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#9115#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1444#1445#0" expanded="true" />
+            <element signature="e#1488#1489#0" expanded="true" />
+            <element signature="e#2751#3009#0" expanded="true" />
+            <element signature="e#3008#3009#0" expanded="true" />
+            <element signature="e#3067#3416#0" expanded="true" />
+            <element signature="e#3415#3416#0" expanded="true" />
+            <element signature="e#8016#8017#0" expanded="true" />
+            <element signature="e#8051#8052#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.033727">
+          <caret line="211" column="5" selection-start-line="211" selection-start-column="5" selection-end-line="211" selection-end-column="5" />
           <folding />
         </state>
       </provider>

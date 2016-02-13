@@ -6,21 +6,22 @@ package com.kaku.weac.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
 import com.kaku.weac.R;
 import com.kaku.weac.activities.AlarmClockEditActivity;
 import com.kaku.weac.activities.AlarmClockNewActivity;
 import com.kaku.weac.adapter.AlarmClockAdapter;
 import com.kaku.weac.bean.AlarmClock;
+import com.kaku.weac.bean.Event.AlarmClockDeleteEvent;
 import com.kaku.weac.bean.Event.AlarmClockUpdateEvent;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.db.AlarmClockOperate;
@@ -52,7 +53,7 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
     /**
      * 闹钟列表
      */
-    private ListView mListView;
+    private RecyclerView mListView;
 
     /**
      * 保存闹钟信息的list
@@ -75,9 +76,14 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
     private ImageView mAcceptAction;
 
     /**
+     * List内容为空时的视图
+     */
+    private LinearLayout mEmptyView;
+
+    /**
      * 监听闹铃item点击事件Listener
      */
-    private AdapterView.OnItemClickListener mOnItemClickListener;
+    private AlarmClockAdapter.OnItemClickListener mOnItemClickListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -93,27 +99,32 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
     public View onCreateView(final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fm_alarm_clock, container, false);
-        mListView = (ListView) view.findViewById(R.id.list_view);
-        // 当录音List内容为空时显示的内容控件
-        LinearLayout emptyView = (LinearLayout) view
+        mListView = (RecyclerView) view.findViewById(R.id.list_view);
+        //设置布局管理器
+        mListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //设置Item增加、移除动画
+        mListView.setItemAnimator(new DefaultItemAnimator());
+        // 当List内容为空时显示的内容控件
+        mEmptyView = (LinearLayout) view
                 .findViewById(R.id.alarm_clock_empty);
         // 设置录音List内容为空时的视图
-        mListView.setEmptyView(emptyView);
+//        mListView.setEmptyView(mEmptyView);
         // 注册上下文菜单
         registerForContextMenu(mListView);
         mListView.setAdapter(mAdapter);
         mOnItemClickListener = new OnItemClickListenerImpl();
-        mListView.setOnItemClickListener(mOnItemClickListener);
-        mListView.setOnItemLongClickListener(new OnItemLongClickListener() {
-
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view,
-                                           int position, long id) {
-                // 显示删除，完成按钮，隐藏修改按钮
-                displayDeleteAccept();
-                return true;
-            }
-        });
+        mAdapter.setOnItemClickListener(mOnItemClickListener);
+//        mListView.setOnItemClickListener(mOnItemClickListener);
+//        mListView.setOnItemLongClickListener(new OnItemLongClickListener() {
+//
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> parent, View view,
+//                                           int position, long id) {
+//                // 显示删除，完成按钮，隐藏修改按钮
+//                displayDeleteAccept();
+//                return true;
+//            }
+//        });
 
         // 新建闹钟
         // 操作栏新建按钮
@@ -132,14 +143,15 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
         return view;
     }
 
-    class OnItemClickListenerImpl implements AdapterView.OnItemClickListener {
+    class OnItemClickListenerImpl implements AlarmClockAdapter.OnItemClickListener {
+
         @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        public void onItemClick(View view, int position) {
             // 不响应重复点击
             if (MyUtil.isFastDoubleClick()) {
                 return;
             }
-            AlarmClock alarmClock = mAdapter.getItem(position);
+            AlarmClock alarmClock = mAlarmClockList.get(position);
             Intent intent = new Intent(getActivity(),
                     AlarmClockEditActivity.class);
             intent.putExtra(WeacConstants.ALARM_CLOCK, alarmClock);
@@ -148,6 +160,12 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
             // 启动移动进入效果动画
             getActivity().overridePendingTransition(R.anim.move_in_bottom,
                     0);
+        }
+
+        @Override
+        public void onItemLongClick(View view, int position) {
+            // 显示删除，完成按钮，隐藏修改按钮
+            displayDeleteAccept();
         }
     }
 
@@ -168,7 +186,7 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
                 break;
             case R.id.action_edit:
                 // 当列表内容为空时禁止响应编辑事件
-                if (mListView.getChildCount() == 0) {
+                if (mAlarmClockList.size() == 0) {
                     return;
                 }
                 // 显示删除，完成按钮，隐藏修改按钮
@@ -186,7 +204,7 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
      * 显示删除，完成按钮，隐藏修改按钮
      */
     private void displayDeleteAccept() {
-        mListView.setOnItemClickListener(null);
+        mAdapter.setIsCanClick(false);
         mAdapter.displayDeleteButton(true);
         mAdapter.notifyDataSetChanged();
         mEditAction.setVisibility(View.GONE);
@@ -197,7 +215,7 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
      * 隐藏删除，完成按钮,显示修改按钮
      */
     private void hideDeleteAccept() {
-        mListView.setOnItemClickListener(mOnItemClickListener);
+        mAdapter.setIsCanClick(true);
         mAdapter.displayDeleteButton(false);
         mAdapter.notifyDataSetChanged();
         mAcceptAction.setVisibility(View.GONE);
@@ -218,7 +236,7 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
                 // 插入新闹钟数据
 //                TabAlarmClockOperate.getInstance(getActivity()).insert(ac);
                 AlarmClockOperate.getInstance().saveAlarmClock(ac);
-                updateList();
+                addList(ac);
                 break;
             // 修改闹钟
             case REQUEST_ALARM_CLOCK_EDIT:
@@ -236,8 +254,61 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
         updateList();
     }
 
+    @Subscribe
+    public void OnAlarmClockDelete(AlarmClockDeleteEvent event) {
+        deleteList(event);
+    }
+
+    private void addList(AlarmClock ac) {
+        mAlarmClockList.clear();
+
+        int id = ac.getId();
+        int count = 0;
+        int position = 0;
+        List<AlarmClock> list = AlarmClockOperate.getInstance().loadAlarmClocks();
+        for (AlarmClock alarmClock : list) {
+            alarmClock.setAlarmClockCode(alarmClock.getId());
+            mAlarmClockList.add(alarmClock);
+
+            if (id == alarmClock.getId()) {
+                position = count;
+                if (alarmClock.isOnOff()) {
+                    MyUtil.startAlarmClock(getActivity(), alarmClock);
+                }
+            }
+            count++;
+        }
+
+        checkIsEmpty(list);
+
+        mAdapter.notifyItemInserted(position);
+    }
+
+    private void deleteList(AlarmClockDeleteEvent event) {
+        mAlarmClockList.clear();
+
+        int position = event.getPosition();
+        List<AlarmClock> list = AlarmClockOperate.getInstance().loadAlarmClocks();
+        for (AlarmClock alarmClock : list) {
+            alarmClock.setAlarmClockCode(alarmClock.getId());
+            mAlarmClockList.add(alarmClock);
+        }
+        // 列表为空时不显示删除，完成按钮
+        if (mAlarmClockList.size() == 0) {
+            mAcceptAction.setVisibility(View.GONE);
+            mEditAction.setVisibility(View.VISIBLE);
+            mAdapter.displayDeleteButton(false);
+        }
+
+        checkIsEmpty(list);
+
+        mAdapter.notifyItemRemoved(position);
+        mAdapter.notifyItemRangeChanged(position, list.size());
+    }
+
     private void updateList() {
         mAlarmClockList.clear();
+
         List<AlarmClock> list = AlarmClockOperate.getInstance().loadAlarmClocks();
         for (AlarmClock alarmClock : list) {
             alarmClock.setAlarmClockCode(alarmClock.getId());
@@ -248,14 +319,20 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
                 MyUtil.startAlarmClock(getActivity(), alarmClock);
             }
         }
-        // 列表为空时不显示删除，完成按钮
-        if (mAlarmClockList.size() == 0) {
-            mAcceptAction.setVisibility(View.GONE);
-            mEditAction.setVisibility(View.VISIBLE);
-            mAdapter.displayDeleteButton(false);
-        }
+
+        checkIsEmpty(list);
 
         mAdapter.notifyDataSetChanged();
+    }
+
+    private void checkIsEmpty(List<AlarmClock> list) {
+        if (list.size() != 0) {
+            mListView.setVisibility(View.VISIBLE);
+            mEmptyView.setVisibility(View.GONE);
+        } else {
+            mListView.setVisibility(View.GONE);
+            mEmptyView.setVisibility(View.VISIBLE);
+        }
     }
 
 /*    @Override

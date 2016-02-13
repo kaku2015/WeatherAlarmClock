@@ -156,14 +156,7 @@
             </intent-filter>
         </receiver>
 
-        <!--        <provider
-                    android:name=".db.AlarmClockProvider"
-                    android:authorities="com.kaku.weac"
-                    android:exported="false"/>-->
-
-        <receiver
-            android:name=".broadcast.AlarmClockProcessReceiver"
-            android:exported="false">
+        <receiver android:name=".broadcast.AlarmClockProcessReceiver">
             <intent-filter>
                 <action android:name="com.kaku.weac.AlarmClockOff"/>
             </intent-filter>

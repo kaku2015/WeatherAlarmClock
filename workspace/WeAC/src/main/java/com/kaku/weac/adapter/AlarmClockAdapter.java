@@ -6,11 +6,11 @@ package com.kaku.weac.adapter;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
@@ -19,6 +19,7 @@ import android.widget.ToggleButton;
 
 import com.kaku.weac.R;
 import com.kaku.weac.bean.AlarmClock;
+import com.kaku.weac.bean.Event.AlarmClockDeleteEvent;
 import com.kaku.weac.bean.Event.AlarmClockUpdateEvent;
 import com.kaku.weac.db.AlarmClockOperate;
 import com.kaku.weac.util.AudioPlayer;
@@ -33,7 +34,7 @@ import java.util.List;
  * @author 咖枯
  * @version 1.0 2015/05
  */
-public class AlarmClockAdapter extends ArrayAdapter<AlarmClock> {
+public class AlarmClockAdapter extends RecyclerView.Adapter<AlarmClockAdapter.MyViewHolder> {
 
     private final Context mContext;
 
@@ -45,15 +46,20 @@ public class AlarmClockAdapter extends ArrayAdapter<AlarmClock> {
     /**
      * 白色
      */
-    @SuppressWarnings("deprecation")
-    private final int mWhite = getContext().getResources().getColor(
-            android.R.color.white);
+    private int mWhite;
 
     /**
      * 淡灰色
      */
-    @SuppressWarnings("deprecation")
-    private final int mGray = getContext().getResources().getColor(R.color.gray_tab);
+    private int mGray;
+
+    private List<AlarmClock> mList;
+
+    private boolean isCanClick = true;
+
+    public void setIsCanClick(boolean isCanClick) {
+        this.isCanClick = isCanClick;
+    }
 
     /**
      * 保存闹钟信息的adapter
@@ -61,30 +67,55 @@ public class AlarmClockAdapter extends ArrayAdapter<AlarmClock> {
      * @param context Activity上下文
      * @param objects 闹钟信息List
      */
+    @SuppressWarnings("deprecation")
     public AlarmClockAdapter(Context context, List<AlarmClock> objects) {
-        super(context, 0, objects);
         mContext = context;
+        mList = objects;
+        mWhite = mContext.getResources().getColor(android.R.color.white);
+        mGray = mContext.getResources().getColor(R.color.gray_tab);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        final AlarmClock alarmClock = getItem(position);
-        ViewHolder viewHolder;
-        if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(
-                    R.layout.lv_alarm_clock, parent, false);
-            viewHolder = new ViewHolder();
-            viewHolder.time = (TextView) convertView.findViewById(R.id.tv_time);
-            viewHolder.repeat = (TextView) convertView
-                    .findViewById(R.id.tv_repeat);
-            viewHolder.tag = (TextView) convertView.findViewById(R.id.tv_tag);
-            viewHolder.toggleBtn = (ToggleButton) convertView
-                    .findViewById(R.id.toggle_btn);
-            viewHolder.deleteBtn = (ImageView) convertView
-                    .findViewById(R.id.alarm_list_delete_btn);
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new MyViewHolder(LayoutInflater.from(mContext).inflate(
+                R.layout.lv_alarm_clock, parent, false));
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+
+        void onItemLongClick(View view, int position);
+    }
+
+    private OnItemClickListener mOnItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener) {
+        this.mOnItemClickListener = mOnItemClickListener;
+    }
+
+    @Override
+    public void onBindViewHolder(MyViewHolder viewHolder, final int position) {
+        final AlarmClock alarmClock = mList.get(position);
+
+        if (mOnItemClickListener != null) {
+            viewHolder.itemGroup.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (isCanClick) {
+                        mOnItemClickListener.onItemClick(v, position);
+                    }
+                }
+            });
+            viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (isCanClick) {
+                        mOnItemClickListener.onItemLongClick(v, position);
+                        return false;
+                    }
+                    return true;
+                }
+            });
         }
 
         // 当闹钟为开启状态时
@@ -112,7 +143,7 @@ public class AlarmClockAdapter extends ArrayAdapter<AlarmClock> {
 //                    TabAlarmClockOperate.getInstance(mContext).delete(alarmClock
 //                            .getAlarmClockCode());
                     AlarmClockOperate.getInstance().deleteAlarmClock(alarmClock);
-                    OttoAppConfig.getInstance().post(new AlarmClockUpdateEvent());
+                    OttoAppConfig.getInstance().post(new AlarmClockDeleteEvent(position));
 
                     // 关闭闹钟
                     MyUtil.cancelAlarmClock(mContext,
@@ -166,8 +197,8 @@ public class AlarmClockAdapter extends ArrayAdapter<AlarmClock> {
                             MyUtil.cancelAlarmClock(mContext,
                                     -alarmClock.getAlarmClockCode());
 
-                            NotificationManager notificationManager = (NotificationManager) getContext()
-                                    .getSystemService(
+                            NotificationManager notificationManager = (NotificationManager) mContext.
+                                    getSystemService(
                                             Activity.NOTIFICATION_SERVICE);
                             // 取消下拉列表通知消息
                             notificationManager.cancel(alarmClock
@@ -187,6 +218,8 @@ public class AlarmClockAdapter extends ArrayAdapter<AlarmClock> {
                      */
                     private void updateTab(boolean onOff) {
                         // 更新闹钟数据
+//                        TabAlarmClockOperate.getInstance(mContext).update(onOff,
+//                                alarmClock.getAlarmClockCode());
                         AlarmClockOperate.getInstance().updateAlarmClock(onOff,
                                 alarmClock.getAlarmClockCode());
                         OttoAppConfig.getInstance().post(new AlarmClockUpdateEvent());
@@ -194,14 +227,18 @@ public class AlarmClockAdapter extends ArrayAdapter<AlarmClock> {
                 });
         // 设定闹钟开关
         viewHolder.toggleBtn.setChecked(alarmClock.isOnOff());
+    }
 
-        return convertView;
+    @Override
+    public int getItemCount() {
+        return mList.size();
     }
 
     /**
      * 保存控件实例
      */
-    private final class ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        ViewGroup itemGroup;
         // 时间
         TextView time;
         // 重复
@@ -212,6 +249,16 @@ public class AlarmClockAdapter extends ArrayAdapter<AlarmClock> {
         ToggleButton toggleBtn;
         // 删除
         ImageView deleteBtn;
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            itemGroup = (ViewGroup) itemView.findViewById(R.id.item_group);
+            time = (TextView) itemView.findViewById(R.id.tv_time);
+            repeat = (TextView) itemView.findViewById(R.id.tv_repeat);
+            tag = (TextView) itemView.findViewById(R.id.tv_tag);
+            toggleBtn = (ToggleButton) itemView.findViewById(R.id.toggle_btn);
+            deleteBtn = (ImageView) itemView.findViewById(R.id.alarm_list_delete_btn);
+        }
     }
 
     /**

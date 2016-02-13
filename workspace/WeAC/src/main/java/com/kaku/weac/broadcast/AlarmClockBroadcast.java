@@ -12,7 +12,7 @@ import com.kaku.weac.activities.AlarmClockOntimeActivity;
 import com.kaku.weac.bean.AlarmClock;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.common.WeacStatus;
-import com.kaku.weac.db.TabAlarmClockOperate;
+import com.kaku.weac.db.AlarmClockOperate;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
 
@@ -35,8 +35,11 @@ public class AlarmClockBroadcast extends BroadcastReceiver {
                 .getParcelableExtra(WeacConstants.ALARM_CLOCK);
         // 单次响铃
         if (alarmClock.getWeeks() == null) {
-            TabAlarmClockOperate.getInstance(context).update(0,
+            AlarmClockOperate.getInstance().updateAlarmClock(false,
                     alarmClock.getAlarmClockCode());
+
+            Intent i = new Intent("com.kaku.weac.AlarmClockOff");
+            context.sendBroadcast(i);
         } else {
             // 重复周期闹钟
             MyUtil.startAlarmClock(context, alarmClock);

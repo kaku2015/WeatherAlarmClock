@@ -19,9 +19,11 @@ import android.widget.ToggleButton;
 
 import com.kaku.weac.R;
 import com.kaku.weac.bean.AlarmClock;
-import com.kaku.weac.db.TabAlarmClockOperate;
+import com.kaku.weac.bean.Event.AlarmClockUpdateEvent;
+import com.kaku.weac.db.AlarmClockOperate;
 import com.kaku.weac.util.AudioPlayer;
 import com.kaku.weac.util.MyUtil;
+import com.kaku.weac.util.OttoAppConfig;
 
 import java.util.List;
 
@@ -43,12 +45,14 @@ public class AlarmClockAdapter extends ArrayAdapter<AlarmClock> {
     /**
      * 白色
      */
+    @SuppressWarnings("deprecation")
     private final int mWhite = getContext().getResources().getColor(
             android.R.color.white);
 
     /**
      * 淡灰色
      */
+    @SuppressWarnings("deprecation")
     private final int mGray = getContext().getResources().getColor(R.color.gray_tab);
 
     /**
@@ -105,8 +109,10 @@ public class AlarmClockAdapter extends ArrayAdapter<AlarmClock> {
                 @Override
                 public void onClick(View v) {
                     // 删除闹钟数据
-                    TabAlarmClockOperate.getInstance(mContext).delete(alarmClock
-                            .getAlarmClockCode());
+//                    TabAlarmClockOperate.getInstance(mContext).delete(alarmClock
+//                            .getAlarmClockCode());
+                    AlarmClockOperate.getInstance().deleteAlarmClock(alarmClock);
+                    OttoAppConfig.getInstance().post(new AlarmClockUpdateEvent());
 
                     // 关闭闹钟
                     MyUtil.cancelAlarmClock(mContext,
@@ -145,14 +151,14 @@ public class AlarmClockAdapter extends ArrayAdapter<AlarmClock> {
                         if (isChecked) {
                             // 闹钟状态为开的话不更新数据
                             if (!alarmClock.isOnOff()) {
-                                updateTab(1);
+                                updateTab(true);
                             }
                         } else {
                             // 闹钟状态为关的话不处理
                             if (!alarmClock.isOnOff()) {
                                 return;
                             }
-                            updateTab(0);
+                            updateTab(false);
                             // 取消闹钟
                             MyUtil.cancelAlarmClock(mContext,
                                     alarmClock.getAlarmClockCode());
@@ -179,10 +185,11 @@ public class AlarmClockAdapter extends ArrayAdapter<AlarmClock> {
                      * @param onOff
                      *            开关
                      */
-                    private void updateTab(int onOff) {
+                    private void updateTab(boolean onOff) {
                         // 更新闹钟数据
-                        TabAlarmClockOperate.getInstance(getContext()).update(onOff,
+                        AlarmClockOperate.getInstance().updateAlarmClock(onOff,
                                 alarmClock.getAlarmClockCode());
+                        OttoAppConfig.getInstance().post(new AlarmClockUpdateEvent());
                     }
                 });
         // 设定闹钟开关

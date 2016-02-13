@@ -3,35 +3,13 @@
  */
 package com.kaku.weac.db;
 
-import android.net.Uri;
-
 /**
- * 数据库weac的操作元数据信息
+ * 数据库weac的操作元数据信息(LitePal)
  *
  * @author 咖枯
- * @version 1.0 2015/06
+ * @version 1.0 2015/02/12
  */
-public class WeacDBMetaData {
-
-    /**
-     * 数据库名
-     */
-    public static final String DATA_BASE_NAME = "weac.db";
-
-    /**
-     * 数据库版本
-     */
-    public static final int DATA_BASE_VERSION = 1;
-
-    /**
-     * 表名
-     */
-    public static final String TABLE_NAME = "AlarmClock";
-
-    /**
-     * id
-     */
-    public static final String AC_ID = "id";
+public class WeacDBMetaDataLitePal {
 
     /**
      * 小时
@@ -91,12 +69,12 @@ public class WeacDBMetaData {
     /**
      * 小睡间隔
      */
-    public static final String AC_NAP_INTERVAL = "nap_interval";
+    public static final String AC_NAP_INTERVAL = "napInterval";
 
     /**
      * 小睡次数
      */
-    public static final String AC_NAP_TIMES = "nap_times";
+    public static final String AC_NAP_TIMES = "napTimes";
 
     /**
      * 天气提示
@@ -107,26 +85,4 @@ public class WeacDBMetaData {
      * 闹钟开关
      */
     public static final String AC_ON_OFF = "onOff";
-
-    /**
-     * 匹配查询AlarmClock表Uri的返回值
-     */
-    public static final int ALARM_CLOCK_DIR = 1;
-
-    /**
-     * 提供器权限，需要在AndroidManifest文件中指定
-     */
-    public static final String AUTHORITY = "com.kaku.weac";
-
-    /**
-     * 按小时，分钟排序
-     */
-    public static final String SORT_ORDER = "hour,minute asc";
-
-    /**
-     * 查询AlarmClock表的Uri
-     */
-    public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY
-            + "/AlarmClock");
-
 }

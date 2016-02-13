@@ -5,11 +5,7 @@ package com.kaku.weac.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,10 +21,12 @@ import com.kaku.weac.activities.AlarmClockEditActivity;
 import com.kaku.weac.activities.AlarmClockNewActivity;
 import com.kaku.weac.adapter.AlarmClockAdapter;
 import com.kaku.weac.bean.AlarmClock;
+import com.kaku.weac.bean.Event.AlarmClockUpdateEvent;
 import com.kaku.weac.common.WeacConstants;
-import com.kaku.weac.db.TabAlarmClockOperate;
-import com.kaku.weac.db.WeacDBMetaData;
+import com.kaku.weac.db.AlarmClockOperate;
 import com.kaku.weac.util.MyUtil;
+import com.kaku.weac.util.OttoAppConfig;
+import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +37,7 @@ import java.util.List;
  * @author 咖枯
  * @version 1.0 2015/05
  */
-public class AlarmClockFragment extends BaseFragment implements OnClickListener,
-        LoaderCallbacks<Cursor> {
+public class AlarmClockFragment extends BaseFragment implements OnClickListener {
 
     /**
      * 新建闹钟的requestCode
@@ -85,10 +82,11 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        OttoAppConfig.getInstance().register(this);
         mAlarmClockList = new ArrayList<>();
         mAdapter = new AlarmClockAdapter(getActivity(), mAlarmClockList);
         // 注册Loader
-        getLoaderManager().initLoader(1, null, this);
+//        getLoaderManager().initLoader(1, null, this);
     }
 
     @Override
@@ -129,6 +127,8 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener,
         // 完成按钮
         mAcceptAction = (ImageView) view.findViewById(R.id.action_accept);
         mAcceptAction.setOnClickListener(this);
+
+        updateList();
         return view;
     }
 
@@ -216,18 +216,49 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener,
             // 新建闹钟
             case REQUEST_ALARM_CLOCK_NEW:
                 // 插入新闹钟数据
-                TabAlarmClockOperate.getInstance(getActivity()).insert(ac);
+//                TabAlarmClockOperate.getInstance(getActivity()).insert(ac);
+                AlarmClockOperate.getInstance().saveAlarmClock(ac);
+                updateList();
                 break;
             // 修改闹钟
             case REQUEST_ALARM_CLOCK_EDIT:
                 // 更新闹钟数据
-                TabAlarmClockOperate.getInstance(getActivity()).update(ac);
+//                TabAlarmClockOperate.getInstance(getActivity()).update(ac);
+                AlarmClockOperate.getInstance().updateAlarmClock(ac);
+                updateList();
                 break;
 
         }
     }
 
-    @Override
+    @Subscribe
+    public void onAlarmClockUpdate(AlarmClockUpdateEvent event) {
+        updateList();
+    }
+
+    private void updateList() {
+        mAlarmClockList.clear();
+        List<AlarmClock> list = AlarmClockOperate.getInstance().loadAlarmClocks();
+        for (AlarmClock alarmClock : list) {
+            alarmClock.setAlarmClockCode(alarmClock.getId());
+            mAlarmClockList.add(alarmClock);
+
+            // 当闹钟为开时刷新开启闹钟
+            if (alarmClock.isOnOff()) {
+                MyUtil.startAlarmClock(getActivity(), alarmClock);
+            }
+        }
+        // 列表为空时不显示删除，完成按钮
+        if (mAlarmClockList.size() == 0) {
+            mAcceptAction.setVisibility(View.GONE);
+            mEditAction.setVisibility(View.VISIBLE);
+            mAdapter.displayDeleteButton(false);
+        }
+
+        mAdapter.notifyDataSetChanged();
+    }
+
+/*    @Override
     public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
         return new CursorLoader(getActivity(), WeacDBMetaData.CONTENT_URI,
                 null, null, null, WeacDBMetaData.SORT_ORDER);
@@ -293,12 +324,18 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener,
     @Override
     public void onLoaderReset(Loader<Cursor> arg0) {
 
-    }
+    }*/
 
     @Override
     public void onPause() {
         super.onPause();
         // 隐藏删除，完成按钮,显示修改按钮
         hideDeleteAccept();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        OttoAppConfig.getInstance().unregister(this);
     }
 }

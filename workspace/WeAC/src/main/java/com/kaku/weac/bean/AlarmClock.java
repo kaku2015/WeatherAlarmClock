@@ -6,93 +6,100 @@ package com.kaku.weac.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.litepal.crud.DataSupport;
+
 /**
  * 闹钟实例
  *
  * @author 咖枯
  * @version 1.0 2015/06
  */
-public class AlarmClock implements Parcelable {
+public class AlarmClock extends DataSupport implements Parcelable {
+
+    /**
+     * 闹钟id
+     */
+    private int id;
 
     /**
      * 闹钟启动code
      */
-    private int mAlarmClockCode;
+    private int alarmClockCode;
 
     /**
      * 小时
      */
-    private int mHour;
+    private int hour;
 
     /**
      * 分钟
      */
-    private int mMinute;
+    private int minute;
 
     /**
      * 重复
      */
-    private String mRepeat;
+    private String repeat;
 
     /**
      * 周期
      */
-    private String mWeeks;
+    private String weeks;
 
     /**
      * 标签
      */
-    private String mTag;
+    private String tag;
 
     /**
      * 铃声名
      */
-    private String mRingName;
+    private String ringName;
 
     /**
      * 铃声地址
      */
-    private String mRingUrl;
+    private String ringUrl;
 
     /**
      * 铃声选择标记界面
      */
-    private int mRingPager;
+    private int ringPager;
 
     /**
      * 音量
      */
-    private int mVolume;
+    private int volume;
 
     /**
      * 振动
      */
-    private boolean mVibrate;
+    private boolean vibrate;
 
     /**
      * 小睡
      */
-    private boolean mNap;
+    private boolean nap;
 
     /**
      * 小睡间隔
      */
-    private int mNapInterval;
+    private int napInterval;
 
     /**
      * 小睡次数
      */
-    private int mNapTimes;
+    private int napTimes;
 
     /**
      * 天气提示
      */
-    private boolean mWeaPrompt;
+    private boolean weaPrompt;
 
     /**
      * 开关
      */
-    private boolean mOnOff;
+    private boolean onOff;
 
     public AlarmClock() {
         super();
@@ -123,42 +130,43 @@ public class AlarmClock implements Parcelable {
                       int ringPager, int volume, boolean vibrate, boolean nap,
                       int napInterval, int napTimes, boolean weaPrompt, boolean onOff) {
         super();
-        mAlarmClockCode = alarmClockCode;
-        mHour = hour;
-        mMinute = minute;
-        mRepeat = repeat;
-        mWeeks = weeks;
-        mTag = tag;
-        mRingName = ringName;
-        mRingUrl = ringUrl;
-        mRingPager = ringPager;
-        mVolume = volume;
-        mVibrate = vibrate;
-        mNap = nap;
-        mNapInterval = napInterval;
-        mNapTimes = napTimes;
-        mWeaPrompt = weaPrompt;
-        mOnOff = onOff;
+        this.alarmClockCode = alarmClockCode;
+        this.hour = hour;
+        this.minute = minute;
+        this.repeat = repeat;
+        this.weeks = weeks;
+        this.tag = tag;
+        this.ringName = ringName;
+        this.ringUrl = ringUrl;
+        this.ringPager = ringPager;
+        this.volume = volume;
+        this.vibrate = vibrate;
+        this.nap = nap;
+        this.napInterval = napInterval;
+        this.napTimes = napTimes;
+        this.weaPrompt = weaPrompt;
+        this.onOff = onOff;
     }
 
     @Override
     public void writeToParcel(Parcel out, int flags) {
-        out.writeInt(mAlarmClockCode);
-        out.writeInt(mHour);
-        out.writeInt(mMinute);
-        out.writeString(mRepeat);
-        out.writeString(mWeeks);
-        out.writeString(mTag);
-        out.writeString(mRingName);
-        out.writeString(mRingUrl);
-        out.writeInt(mRingPager);
-        out.writeInt(mVolume);
-        out.writeByte((byte) (mVibrate ? 1 : 0));
-        out.writeByte((byte) (mNap ? 1 : 0));
-        out.writeInt(mNapInterval);
-        out.writeInt(mNapTimes);
-        out.writeByte((byte) (mWeaPrompt ? 1 : 0));
-        out.writeByte((byte) (mOnOff ? 1 : 0));
+        out.writeInt(id);
+        out.writeInt(alarmClockCode);
+        out.writeInt(hour);
+        out.writeInt(minute);
+        out.writeString(repeat);
+        out.writeString(weeks);
+        out.writeString(tag);
+        out.writeString(ringName);
+        out.writeString(ringUrl);
+        out.writeInt(ringPager);
+        out.writeInt(volume);
+        out.writeByte((byte) (vibrate ? 1 : 0));
+        out.writeByte((byte) (nap ? 1 : 0));
+        out.writeInt(napInterval);
+        out.writeInt(napTimes);
+        out.writeByte((byte) (weaPrompt ? 1 : 0));
+        out.writeByte((byte) (onOff ? 1 : 0));
     }
 
     @Override
@@ -167,22 +175,23 @@ public class AlarmClock implements Parcelable {
     }
 
     private AlarmClock(Parcel in) {
-        mAlarmClockCode = in.readInt();
-        mHour = in.readInt();
-        mMinute = in.readInt();
-        mRepeat = in.readString();
-        mWeeks = in.readString();
-        mTag = in.readString();
-        mRingName = in.readString();
-        mRingUrl = in.readString();
-        mRingPager = in.readInt();
-        mVolume = in.readInt();
-        mVibrate = in.readByte() != 0;
-        mNap = in.readByte() != 0;
-        mNapInterval = in.readInt();
-        mNapTimes = in.readInt();
-        mWeaPrompt = in.readByte() != 0;
-        mOnOff = in.readByte() != 0;
+        id = in.readInt();
+        alarmClockCode = in.readInt();
+        hour = in.readInt();
+        minute = in.readInt();
+        repeat = in.readString();
+        weeks = in.readString();
+        tag = in.readString();
+        ringName = in.readString();
+        ringUrl = in.readString();
+        ringPager = in.readInt();
+        volume = in.readInt();
+        vibrate = in.readByte() != 0;
+        nap = in.readByte() != 0;
+        napInterval = in.readInt();
+        napTimes = in.readInt();
+        weaPrompt = in.readByte() != 0;
+        onOff = in.readByte() != 0;
     }
 
     public static final Parcelable.Creator<AlarmClock> CREATOR = new Creator<AlarmClock>() {
@@ -199,128 +208,139 @@ public class AlarmClock implements Parcelable {
         }
     };
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getNapInterval() {
-        return mNapInterval;
+        return napInterval;
     }
 
     public void setNapInterval(int napInterval) {
-        mNapInterval = napInterval;
+        this.napInterval = napInterval;
     }
 
     public int getNapTimes() {
-        return mNapTimes;
+        return napTimes;
     }
 
     public void setNapTimes(int napTimes) {
-        mNapTimes = napTimes;
+        this.napTimes = napTimes;
     }
 
     public int getAlarmClockCode() {
-        return mAlarmClockCode;
+        return alarmClockCode;
+    }
+
+    public void setAlarmClockCode(int alarmClockCode) {
+        this.alarmClockCode = alarmClockCode;
     }
 
     public int getHour() {
-        return mHour;
+        return hour;
     }
 
     public void setHour(int hour) {
-        mHour = hour;
+        this.hour = hour;
     }
 
     public int getMinute() {
-        return mMinute;
+        return minute;
     }
 
     public void setMinute(int minute) {
-        mMinute = minute;
+        this.minute = minute;
     }
 
     public String getRepeat() {
-        return mRepeat;
+        return repeat;
     }
 
     public void setRepeat(String repeat) {
-        mRepeat = repeat;
+        this.repeat = repeat;
     }
 
     public String getWeeks() {
-        return mWeeks;
+        return weeks;
     }
 
     public void setWeeks(String weeks) {
-        mWeeks = weeks;
+        this.weeks = weeks;
     }
 
     public String getTag() {
-        return mTag;
+        return tag;
     }
 
     public void setTag(String tag) {
-        mTag = tag;
+        this.tag = tag;
     }
 
     public String getRingName() {
-        return mRingName;
+        return ringName;
     }
 
     public void setRingName(String ringName) {
-        mRingName = ringName;
+        this.ringName = ringName;
     }
 
     public String getRingUrl() {
-        return mRingUrl;
+        return ringUrl;
     }
 
     public int getRingPager() {
-        return mRingPager;
+        return ringPager;
     }
 
     public void setRingPager(int ringPager) {
-        mRingPager = ringPager;
+        this.ringPager = ringPager;
     }
 
     public void setRingUrl(String ringUrl) {
-        mRingUrl = ringUrl;
+        this.ringUrl = ringUrl;
     }
 
     public int getVolume() {
-        return mVolume;
+        return volume;
     }
 
     public void setVolume(int volume) {
-        mVolume = volume;
+        this.volume = volume;
     }
 
     public boolean isVibrate() {
-        return mVibrate;
+        return vibrate;
     }
 
     public void setVibrate(boolean vibrate) {
-        mVibrate = vibrate;
+        this.vibrate = vibrate;
     }
 
     public boolean isNap() {
-        return mNap;
+        return nap;
     }
 
     public void setNap(boolean nap) {
-        mNap = nap;
+        this.nap = nap;
     }
 
     public boolean isWeaPrompt() {
-        return mWeaPrompt;
+        return weaPrompt;
     }
 
     public void setWeaPrompt(boolean weaPrompt) {
-        mWeaPrompt = weaPrompt;
+        this.weaPrompt = weaPrompt;
     }
 
     public boolean isOnOff() {
-        return mOnOff;
+        return onOff;
     }
 
     public void setOnOff(boolean onOff) {
-        mOnOff = onOff;
+        this.onOff = onOff;
     }
-
 }

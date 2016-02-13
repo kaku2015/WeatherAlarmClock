@@ -161,7 +161,6 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
                 editor.putLong(WeacConstants.COUNTDOWN_TIME, 0);
                 editor.apply();
                 setStartBtnNoClickable();
-                // TODO: 响铃？
             }
         } else {
             setStartBtnNoClickable();

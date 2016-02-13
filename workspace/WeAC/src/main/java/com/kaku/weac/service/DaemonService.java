@@ -4,16 +4,17 @@ import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.IBinder;
 import android.os.SystemClock;
 
 import com.coolerfall.daemon.Daemon;
 import com.kaku.weac.bean.AlarmClock;
 import com.kaku.weac.common.WeacConstants;
-import com.kaku.weac.db.WeacDBMetaData;
+import com.kaku.weac.db.AlarmClockOperate;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
+
+import java.util.List;
 
 public class DaemonService extends Service {
 
@@ -34,7 +35,15 @@ public class DaemonService extends Service {
 
                 startService(new Intent(DaemonService.this, NotificationCenter.class));
 
-                // FIXME: 修改或改为共用代码
+                List<AlarmClock> list = AlarmClockOperate.getInstance().loadAlarmClocks();
+                for (AlarmClock alarmClock : list) {
+                    // 当闹钟为开时刷新开启闹钟
+                    if (alarmClock.isOnOff()) {
+                        MyUtil.startAlarmClock(DaemonService.this, alarmClock);
+                    }
+                }
+
+                /*// FIXME: 修改或改为共用代码
                 Cursor cursor = getContentResolver().query(WeacDBMetaData.CONTENT_URI,
                         null, null, null, WeacDBMetaData.SORT_ORDER);
                 if (cursor != null) {
@@ -80,7 +89,7 @@ public class DaemonService extends Service {
 
                     }
                     cursor.close();
-                }
+                }*/
 
                 SharedPreferences preferences = getSharedPreferences(
                         WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);

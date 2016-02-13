@@ -94,7 +94,7 @@ public class AlarmClockAdapter extends RecyclerView.Adapter<AlarmClockAdapter.My
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(final MyViewHolder viewHolder, final int position) {
         final AlarmClock alarmClock = mList.get(position);
 
         if (mOnItemClickListener != null) {
@@ -102,7 +102,7 @@ public class AlarmClockAdapter extends RecyclerView.Adapter<AlarmClockAdapter.My
                 @Override
                 public void onClick(View v) {
                     if (isCanClick) {
-                        mOnItemClickListener.onItemClick(v, position);
+                        mOnItemClickListener.onItemClick(viewHolder.itemView, viewHolder.getLayoutPosition());
                     }
                 }
             });
@@ -110,7 +110,7 @@ public class AlarmClockAdapter extends RecyclerView.Adapter<AlarmClockAdapter.My
                 @Override
                 public boolean onLongClick(View v) {
                     if (isCanClick) {
-                        mOnItemClickListener.onItemLongClick(v, position);
+                        mOnItemClickListener.onItemLongClick(viewHolder.itemView, viewHolder.getLayoutPosition());
                         return false;
                     }
                     return true;
@@ -143,7 +143,7 @@ public class AlarmClockAdapter extends RecyclerView.Adapter<AlarmClockAdapter.My
 //                    TabAlarmClockOperate.getInstance(mContext).delete(alarmClock
 //                            .getAlarmClockCode());
                     AlarmClockOperate.getInstance().deleteAlarmClock(alarmClock);
-                    OttoAppConfig.getInstance().post(new AlarmClockDeleteEvent(position));
+                    OttoAppConfig.getInstance().post(new AlarmClockDeleteEvent(viewHolder.getAdapterPosition()));
 
                     // 关闭闹钟
                     MyUtil.cancelAlarmClock(mContext,

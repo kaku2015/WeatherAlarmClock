@@ -6,13 +6,13 @@ package com.kaku.weac.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -31,6 +31,8 @@ import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.wasabeef.recyclerview.animators.ScaleInLeftAnimator;
 
 /**
  * 闹钟fragment
@@ -94,35 +96,25 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
     public View onCreateView(final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fm_alarm_clock, container, false);
+
+        mEmptyView = (LinearLayout) view
+                .findViewById(R.id.alarm_clock_empty);
+
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list_view);
         //设置布局管理器
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //设置Item增加、移除动画
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        // 当List内容为空时显示的内容控件
-        mEmptyView = (LinearLayout) view
-                .findViewById(R.id.alarm_clock_empty);
-        // 设置录音List内容为空时的视图
-//        mRecyclerView.setEmptyView(mEmptyView);
-        // 注册上下文菜单
-        registerForContextMenu(mRecyclerView);
+        mRecyclerView.setItemAnimator(new ScaleInLeftAnimator(new OvershootInterpolator(1f)));
+        mRecyclerView.getItemAnimator().setAddDuration(300);
+        mRecyclerView.getItemAnimator().setRemoveDuration(300);
+        mRecyclerView.getItemAnimator().setMoveDuration(300);
+        mRecyclerView.getItemAnimator().setChangeDuration(300);
         mRecyclerView.setAdapter(mAdapter);
+
         // 监听闹铃item点击事件Listener
         AlarmClockAdapter.OnItemClickListener onItemClickListener = new OnItemClickListenerImpl();
         mAdapter.setOnItemClickListener(onItemClickListener);
-//        mRecyclerView.setOnItemClickListener(mOnItemClickListener);
-//        mRecyclerView.setOnItemLongClickListener(new OnItemLongClickListener() {
-//
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> parent, View view,
-//                                           int position, long id) {
-//                // 显示删除，完成按钮，隐藏修改按钮
-//                displayDeleteAccept();
-//                return true;
-//            }
-//        });
 
-        // 新建闹钟
         // 操作栏新建按钮
         ImageView newAction = (ImageView) view.findViewById(R.id.action_new);
         newAction.setOnClickListener(this);
@@ -299,7 +291,7 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
         checkIsEmpty(list);
 
         mAdapter.notifyItemRemoved(position);
-        mAdapter.notifyItemRangeChanged(position, list.size());
+//        mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
     }
 
     private void updateList() {

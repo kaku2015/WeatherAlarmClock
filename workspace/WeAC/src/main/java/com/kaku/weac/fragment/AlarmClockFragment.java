@@ -28,6 +28,7 @@ import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.db.AlarmClockOperate;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.OttoAppConfig;
+import com.kaku.weac.view.ErrorCatchLinearLayoutManager;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
@@ -104,7 +105,9 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list_view);
         //设置布局管理器
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setLayoutManager(new ErrorCatchLinearLayoutManager(getActivity(),
+                LinearLayoutManager.VERTICAL, false));
         //设置Item增加、移除动画
         mRecyclerView.setItemAnimator(new ScaleInLeftAnimator(new OvershootInterpolator(1f)));
         mRecyclerView.getItemAnimator().setAddDuration(300);

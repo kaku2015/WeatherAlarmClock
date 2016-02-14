@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
  */
@@ -8,18 +7,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.balysv.materialripple.MaterialRippleLayout;
 import com.kaku.weac.Listener.DBObserverListener;
 import com.kaku.weac.Listener.NotifyListener;
-import com.kaku.weac.Listener.OnItemClickListener;
 import com.kaku.weac.R;
 import com.kaku.weac.bean.CityManage;
 import com.kaku.weac.common.WeacConstants;
@@ -36,20 +33,10 @@ import java.util.List;
  * @author 咖枯
  * @version 1.0 2015/10/22
  */
-public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.MyViewHolder> {
+public class CityManageAdapter extends ArrayAdapter<CityManage> {
 
     private final Context mContext;
     private List<CityManage> mList;
-    private boolean isCanClick = true;
-    private OnItemClickListener mOnItemClickListener;
-
-    public void setIsCanClick(boolean isCanClick) {
-        this.isCanClick = isCanClick;
-    }
-
-    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener) {
-        this.mOnItemClickListener = mOnItemClickListener;
-    }
 
     /**
      * 进度条显示位置
@@ -104,6 +91,7 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.My
      * @param list    城市管理列表
      */
     public CityManageAdapter(Context context, List<CityManage> list) {
+        super(context, 0, list);
         mContext = context;
         mList = list;
 
@@ -121,40 +109,38 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.My
         mIsVisible = isVisible;
     }
 
-    @Override
-    public CityManageAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(mContext).
-                inflate(R.layout.gv_city_manage, parent, false));
-    }
-
     @SuppressWarnings("deprecation")
     @Override
-    public void onBindViewHolder(final CityManageAdapter.MyViewHolder viewHolder, int position) {
-        final CityManage cityManage = mList.get(position);
-
-        if (mOnItemClickListener != null) {
-
-            viewHolder.rippleView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (isCanClick) {
-                        mOnItemClickListener.onItemClick(viewHolder.itemView, viewHolder.getLayoutPosition());
-                    }
-                }
-            });
-
-            viewHolder.rippleView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    if (isCanClick) {
-                        mOnItemClickListener.onItemLongClick(viewHolder.itemView, viewHolder.getLayoutPosition());
-                        return false;
-                    }
-                    return true;
-                }
-            });
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        final CityManage cityManage = getItem(position);
+        final ViewHolder viewHolder;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(mContext).inflate(
+                    R.layout.gv_city_manage, parent, false);
+            viewHolder = new ViewHolder();
+            viewHolder.background = (ViewGroup) convertView.findViewById(R.id.background);
+            viewHolder.cityWeather = (ViewGroup) convertView
+                    .findViewById(R.id.city_weather);
+            viewHolder.cityName = (TextView) convertView
+                    .findViewById(R.id.city_name);
+            viewHolder.weatherTypeIv = (ImageView) convertView
+                    .findViewById(R.id.weather_type_iv);
+            viewHolder.tempHigh = (TextView) convertView
+                    .findViewById(R.id.temp_high);
+            viewHolder.tempLow = (TextView) convertView
+                    .findViewById(R.id.temp_low);
+            viewHolder.weatherTypeTv = (TextView) convertView
+                    .findViewById(R.id.weather_type_tv);
+            viewHolder.setDefaultTv = (TextView) convertView
+                    .findViewById(R.id.set_default);
+            viewHolder.addCityIv = (ImageView) convertView
+                    .findViewById(R.id.add_city);
+            convertView.setTag(viewHolder);
+            viewHolder.deleteCityBtn = (ImageView) convertView.findViewById(R.id.city_delete_btn);
+            viewHolder.progressBar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
-
 
         // 设置默认按钮
         viewHolder.setDefaultTv.setOnClickListener(new View.OnClickListener() {
@@ -201,7 +187,6 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.My
                 mNotifyListener.onChanged();
             }
         });
-
         // 默认城市
         if (mDefaultCity.equals(cityManage.getCityName())) {
             viewHolder.setDefaultTv.setBackground(mContext.getResources().getDrawable(
@@ -226,26 +211,25 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.My
                     }
                     WeatherDBOperate.getInstance().deleteCityManage(cityManage);
                     mList.remove(cityManage);
-//                    notifyDataSetChanged();
-                    notifyItemRemoved(viewHolder.getAdapterPosition());
+                    notifyDataSetChanged();
                 }
             });
             // 不加这个编辑状态会错乱
-//            viewHolder.background.setVisibility(View.VISIBLE);
+            viewHolder.background.setVisibility(View.VISIBLE);
             // 当显示删除按钮并且是添加城市按钮
-        } /*else if (mIsVisible && (position == mList.size() - 1) && mList.size() != 1) {
+        } else if (mIsVisible && (position == mList.size() - 1) && mList.size() != 1) {
             // 隐藏添加城市按钮
-//            viewHolder.background.setVisibility(View.GONE);
+            viewHolder.background.setVisibility(View.GONE);
             // 当不显示删除按钮并且不是添加城市按钮
-        }*/ else if (!mIsVisible && (position != mList.size() - 1)) {
+        } else if (!mIsVisible && (position != mList.size() - 1)) {
             // 隐藏删除按钮
             viewHolder.deleteCityBtn.setVisibility(View.GONE);
             // 当不显示删除按钮并且是添加城市按钮
-        } /*else if (!mIsVisible && (position == mList.size() - 1)) {
+        } else if (!mIsVisible && (position == mList.size() - 1)) {
             // 显示添加城市按钮
-//            viewHolder.background.setVisibility(View.VISIBLE);
+            viewHolder.background.setVisibility(View.VISIBLE);
 
-        }*/
+        }
 
         // 当为最后一项（添加城市按钮）
         if (position == mList.size() - 1) {
@@ -313,20 +297,13 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.My
                 viewHolder.cityName.setCompoundDrawables(drawable, null, null, null);
             }
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        return mList.size();
+        return convertView;
     }
 
     /**
      * 保存控件实例
      */
-    class MyViewHolder extends RecyclerView.ViewHolder {
-        MaterialRippleLayout rippleView;
-        // 控件布局
-        ViewGroup background;
+    private final class ViewHolder {
         // 城市天气控件
         ViewGroup cityWeather;
         // 城市名
@@ -345,31 +322,9 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.My
         ImageView addCityIv;
         // 删除城市按钮
         ImageView deleteCityBtn;
+        // 控件布局
+        ViewGroup background;
         // 进度条
         ProgressBar progressBar;
-
-        public MyViewHolder(View convertView) {
-            super(convertView);
-            rippleView = (MaterialRippleLayout) convertView.findViewById(R.id.ripple_view);
-            background = (ViewGroup) convertView.findViewById(R.id.background);
-            cityWeather = (ViewGroup) convertView
-                    .findViewById(R.id.city_weather);
-            cityName = (TextView) convertView
-                    .findViewById(R.id.city_name);
-            weatherTypeIv = (ImageView) convertView
-                    .findViewById(R.id.weather_type_iv);
-            tempHigh = (TextView) convertView
-                    .findViewById(R.id.temp_high);
-            tempLow = (TextView) convertView
-                    .findViewById(R.id.temp_low);
-            weatherTypeTv = (TextView) convertView
-                    .findViewById(R.id.weather_type_tv);
-            setDefaultTv = (TextView) convertView
-                    .findViewById(R.id.set_default);
-            addCityIv = (ImageView) convertView
-                    .findViewById(R.id.add_city);
-            deleteCityBtn = (ImageView) convertView.findViewById(R.id.city_delete_btn);
-            progressBar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
-        }
     }
 }

@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.wasabeef.recyclerview.animators.LandingAnimator;
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 /**
  * 城市管理activity
@@ -185,6 +186,8 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
         mRecyclerView.getItemAnimator().setMoveDuration(200);
         mRecyclerView.getItemAnimator().setChangeDuration(200);
         mRecyclerView.setAdapter(mCityManageAdapter);
+
+        OverScrollDecoratorHelper.setUpOverScroll(mRecyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
 
         //  监听城市点击事件Listener
         OnItemClickListener onItemClickListener = new OnItemClickListenerImpl();

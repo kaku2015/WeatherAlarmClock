@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.balysv.materialripple.MaterialRippleLayout;
 import com.kaku.weac.Listener.DBObserverListener;
 import com.kaku.weac.Listener.NotifyListener;
 import com.kaku.weac.Listener.OnItemClickListener;
@@ -132,7 +133,8 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.My
         final CityManage cityManage = mList.get(position);
 
         if (mOnItemClickListener != null) {
-            viewHolder.background.setOnClickListener(new View.OnClickListener() {
+
+            viewHolder.rippleView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (isCanClick) {
@@ -140,7 +142,8 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.My
                     }
                 }
             });
-            viewHolder.background.setOnLongClickListener(new View.OnLongClickListener() {
+
+            viewHolder.rippleView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     if (isCanClick) {
@@ -321,6 +324,7 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.My
      * 保存控件实例
      */
     class MyViewHolder extends RecyclerView.ViewHolder {
+        MaterialRippleLayout rippleView;
         // 控件布局
         ViewGroup background;
         // 城市天气控件
@@ -346,6 +350,7 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.My
 
         public MyViewHolder(View convertView) {
             super(convertView);
+            rippleView = (MaterialRippleLayout) convertView.findViewById(R.id.ripple_view);
             background = (ViewGroup) convertView.findViewById(R.id.background);
             cityWeather = (ViewGroup) convertView
                     .findViewById(R.id.city_weather);

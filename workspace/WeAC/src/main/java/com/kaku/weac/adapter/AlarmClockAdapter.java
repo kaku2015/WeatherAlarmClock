@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.balysv.materialripple.MaterialRippleLayout;
 import com.kaku.weac.Listener.OnItemClickListener;
 import com.kaku.weac.R;
 import com.kaku.weac.bean.AlarmClock;
@@ -93,7 +94,7 @@ public class AlarmClockAdapter extends RecyclerView.Adapter<AlarmClockAdapter.My
         final AlarmClock alarmClock = mList.get(position);
 
         if (mOnItemClickListener != null) {
-            viewHolder.itemGroup.setOnClickListener(new OnClickListener() {
+            viewHolder.rippleView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (isCanClick) {
@@ -101,7 +102,8 @@ public class AlarmClockAdapter extends RecyclerView.Adapter<AlarmClockAdapter.My
                     }
                 }
             });
-            viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+
+            viewHolder.rippleView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     if (isCanClick) {
@@ -233,7 +235,7 @@ public class AlarmClockAdapter extends RecyclerView.Adapter<AlarmClockAdapter.My
      * 保存控件实例
      */
     class MyViewHolder extends RecyclerView.ViewHolder {
-        ViewGroup itemGroup;
+        MaterialRippleLayout rippleView;
         // 时间
         TextView time;
         // 重复
@@ -247,7 +249,7 @@ public class AlarmClockAdapter extends RecyclerView.Adapter<AlarmClockAdapter.My
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            itemGroup = (ViewGroup) itemView.findViewById(R.id.item_group);
+            rippleView = (MaterialRippleLayout) itemView.findViewById(R.id.ripple_view);
             time = (TextView) itemView.findViewById(R.id.tv_time);
             repeat = (TextView) itemView.findViewById(R.id.tv_repeat);
             tag = (TextView) itemView.findViewById(R.id.tv_tag);

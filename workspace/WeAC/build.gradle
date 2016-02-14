@@ -25,10 +25,6 @@ android {
 
 }
 
-repositories {
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-}
-
 dependencies {
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3'
@@ -56,7 +52,5 @@ dependencies {
     compile project(':SwipeBackLayout')
     compile project(':overscroll-decor')
     compile 'jp.wasabeef:recyclerview-animators:2.2.0'
-
-    compile 'org.lucasr.twowayview:core:1.0.0-SNAPSHOT@aar'
-    compile 'org.lucasr.twowayview:layouts:1.0.0-SNAPSHOT@aar'
+    compile 'com.balysv:material-ripple:1.0.2'
 }

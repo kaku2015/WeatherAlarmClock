@@ -3544,7 +3544,7 @@ containing a value of this type.
         public static final int action_title=0x7f0e0089;
         public static final int activity_chooser_view_content=0x7f0e005b;
         public static final int add=0x7f0e003d;
-        public static final int add_city=0x7f0e0199;
+        public static final int add_city=0x7f0e0198;
         public static final int alarm=0x7f0e0139;
         public static final int alarm_clock_empty=0x7f0e00cf;
         public static final int alarm_list_delete_btn=0x7f0e019e;
@@ -3558,7 +3558,7 @@ containing a value of this type.
         public static final int back_color=0x7f0e01df;
         public static final int background=0x7f0e00a6;
         public static final int beginning=0x7f0e0039;
-        public static final int bg=0x7f0e019b;
+        public static final int bg=0x7f0e019a;
         public static final int both=0x7f0e0043;
         public static final int bottom=0x7f0e0028;
         public static final int btn_facial_mask=0x7f0e01d2;
@@ -3595,10 +3595,10 @@ containing a value of this type.
         public static final int circle_progress=0x7f0e00f9;
         public static final int circular=0x7f0e003b;
         public static final int city_contents=0x7f0e008c;
-        public static final int city_delete_btn=0x7f0e0193;
+        public static final int city_delete_btn=0x7f0e0192;
         public static final int city_manage_background=0x7f0e0087;
         public static final int city_name=0x7f0e0191;
-        public static final int city_weather=0x7f0e0194;
+        public static final int city_weather=0x7f0e0193;
         public static final int clean_up=0x7f0e00f8;
         public static final int clear_btn=0x7f0e008b;
         public static final int clear_memory=0x7f0e00f5;
@@ -3642,10 +3642,10 @@ containing a value of this type.
         public static final int design_navigation_view=0x7f0e00c8;
         public static final int detail=0x7f0e018f;
         public static final int dialog_detail=0x7f0e00c0;
-        public static final int dialog_msg=0x7f0e019d;
+        public static final int dialog_msg=0x7f0e019c;
         public static final int dialog_sure_btn=0x7f0e00c1;
         public static final int dialog_title=0x7f0e00bf;
-        public static final int dialog_view=0x7f0e019c;
+        public static final int dialog_view=0x7f0e019b;
         public static final int disableHome=0x7f0e001a;
         public static final int disabled=0x7f0e0044;
         public static final int discover_app=0x7f0e00f2;
@@ -3745,7 +3745,7 @@ containing a value of this type.
         public static final int ontime_time=0x7f0e00e5;
         public static final int parallax=0x7f0e0026;
         public static final int parentPanel=0x7f0e0064;
-        public static final int picture_iv=0x7f0e019a;
+        public static final int picture_iv=0x7f0e0199;
         public static final int pin=0x7f0e0027;
         public static final int play_duration=0x7f0e0116;
         public static final int progress_bar=0x7f0e00ed;
@@ -3794,7 +3794,7 @@ containing a value of this type.
         public static final int ring_select_cancel=0x7f0e0127;
         public static final int ring_select_llyt=0x7f0e0126;
         public static final int ring_select_save=0x7f0e0128;
-        public static final int ripple_view=0x7f0e0192;
+        public static final int ripple_view=0x7f0e019d;
         public static final int roger_btn=0x7f0e00c2;
         public static final int root=0x7f0e01aa;
         public static final int rotate=0x7f0e004b;
@@ -3827,7 +3827,7 @@ containing a value of this type.
         public static final int select_dialog_listview=0x7f0e0086;
         public static final int select_logo=0x7f0e01dc;
         public static final int select_none_btn=0x7f0e010f;
-        public static final int set_default=0x7f0e0198;
+        public static final int set_default=0x7f0e0197;
         public static final int shortcut=0x7f0e0071;
         public static final int showCustom=0x7f0e001d;
         public static final int showHome=0x7f0e001e;
@@ -3856,11 +3856,11 @@ containing a value of this type.
         public static final int tab_wea=0x7f0e00b9;
         public static final int tabstrip=0x7f0e0129;
         public static final int tag_edit_text=0x7f0e00dc;
-        public static final int temp_high=0x7f0e0196;
+        public static final int temp_high=0x7f0e0195;
         public static final int temp_high_day_after_tomorrow=0x7f0e0149;
         public static final int temp_high_today=0x7f0e0143;
         public static final int temp_high_tomorrow=0x7f0e0146;
-        public static final int temp_low=0x7f0e0197;
+        public static final int temp_low=0x7f0e0196;
         public static final int temp_low_day_after_tomorrow=0x7f0e014a;
         public static final int temp_low_today=0x7f0e0144;
         public static final int temp_low_tomorrow=0x7f0e0147;
@@ -3974,7 +3974,7 @@ containing a value of this type.
         public static final int wea_prompt_btn=0x7f0e00e3;
         public static final int weather_info_group=0x7f0e00e9;
         public static final int weather_type=0x7f0e013e;
-        public static final int weather_type_iv=0x7f0e0195;
+        public static final int weather_type_iv=0x7f0e0194;
         public static final int weather_type_iv_day_after_tomorrow=0x7f0e0148;
         public static final int weather_type_iv_today=0x7f0e0142;
         public static final int weather_type_iv_tomorrow=0x7f0e0145;

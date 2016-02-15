@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.kaku.weac.R;
 import com.kaku.weac.bean.Theme;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
 
@@ -70,7 +71,7 @@ public class ThemeAdapter extends ArrayAdapter<Theme> {
                     R.layout.gv_theme, parent, false);
             viewHolder = new ViewHolder();
             // 显示壁纸图片的imageView
-            viewHolder.imageView = (ImageView) convertView
+            viewHolder.imageView = (RoundedImageView) convertView
                     .findViewById(R.id.bg);
             // 显示标记图标的imageView
             viewHolder.markIcon = (ImageView) convertView
@@ -82,9 +83,10 @@ public class ThemeAdapter extends ArrayAdapter<Theme> {
         }
         Theme theme = mList.get(position);
         // 设置壁纸图片
-        Glide.with(mContext).load(theme.getResId()).centerCrop().
-                placeholder(R.color.default_image_background)
+
+        Glide.with(mContext).load(theme.getResId())
                 .into(viewHolder.imageView);
+
         // 当选中的主题名称与当前相同
         if (mWallpaperName.equals(theme.getResName())) {
             // 设置标记图标
@@ -101,7 +103,7 @@ public class ThemeAdapter extends ArrayAdapter<Theme> {
      */
     private final class ViewHolder {
         // 显示壁纸图片
-        ImageView imageView;
+        RoundedImageView imageView;
         // 显示标记图标
         ImageView markIcon;
     }

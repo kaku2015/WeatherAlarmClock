@@ -16,36 +16,37 @@ import me.everything.android.ui.overscroll.adapters.RecyclerViewOverScrollDecorA
  * A standalone view decorator adding over-scroll with a smooth bounce-back effect to (potentially) any view -
  * provided that an appropriate {@link IOverScrollDecoratorAdapter} implementation exists / can be written
  * for that view type (e.g. {@link RecyclerViewOverScrollDecorAdapter}).
- * <p/>
+ *
  * <p>Design-wise, being a standalone class, this decorator powerfully provides the ability to add
  * the over-scroll effect over any view without adjusting the view's implementation. In essence, this
  * eliminates the need to repeatedly implement the effect per each view type (list-view,
  * recycler-view, image-view, etc.). Therefore, using it is highly recommended compared to other
  * more intrusive solutions.</p>
- * <p/>
+ *
  * <p>Note that this class is abstract, having {@link HorizontalOverScrollBounceEffectDecorator} and
  * {@link VerticalOverScrollBounceEffectDecorator} providing concrete implementation that is
  * view-orientation specific.</p>
- * `
+ *`
  * <hr width="97%"/>
  * <h2>Implementation Notes</h2>
- * <p/>
+ *
  * <p>At it's core, the class simply registers itself as a touch-listener over the decorated view and
  * intercepts touch events as needed.</p>
- * <p/>
+ *
  * <p>Internally, it delegates the over-scrolling calculations onto 3 state-based classes:
  * <ol>
- * <li><b>Idle state</b> - monitors view state and touch events to intercept over-scrolling initiation
- * (in which case it hands control over to the Over-scrolling state).</li>
- * <li><b>Over-scrolling state</b> - handles motion events to apply the over-scroll effect as users
- * interact with the view.</li>
- * <li><b>Bounce-back state</b> - runs the bounce-back animation, all-the-while blocking all
- * touch events till the animation completes (in which case it hands control back to the idle
- * state).</li>
+ *     <li><b>Idle state</b> - monitors view state and touch events to intercept over-scrolling initiation
+ *     (in which case it hands control over to the Over-scrolling state).</li>
+ *     <li><b>Over-scrolling state</b> - handles motion events to apply the over-scroll effect as users
+ *     interact with the view.</li>
+ *     <li><b>Bounce-back state</b> - runs the bounce-back animation, all-the-while blocking all
+ *     touch events till the animation completes (in which case it hands control back to the idle
+ *     state).</li>
  * </ol>
  * </p>
  *
  * @author amit
+ *
  * @see RecyclerViewOverScrollDecorAdapter
  * @see IOverScrollDecoratorAdapter
  */
@@ -150,7 +151,7 @@ public abstract class OverScrollBounceEffectDecoratorBase implements View.OnTouc
 
             // Has over-scrolling officially started?
             if ((mViewAdapter.isInAbsoluteStart() && mMoveAttr.mDir) ||
-                    (mViewAdapter.isInAbsoluteEnd() && !mMoveAttr.mDir)) {
+                (mViewAdapter.isInAbsoluteEnd() && !mMoveAttr.mDir)) {
 
                 /////////////////////////////
 //                view.setSelected(false);
@@ -183,7 +184,7 @@ public abstract class OverScrollBounceEffectDecoratorBase implements View.OnTouc
     /**
      * Handles the actual over-scrolling: thus translating the view according to configuration
      * and user interactions, dynamically.
-     * <p/>
+     *
      * <br/><br/>The state is exited - thus completing over-scroll handling, in one of two cases:
      * <br/>When user lets go of the view, it transitions control to the bounce-back state.
      * <br/>When user moves the view back onto a potential 'under-scroll' state, it abruptly
@@ -226,8 +227,8 @@ public abstract class OverScrollBounceEffectDecoratorBase implements View.OnTouc
             // If moved in counter direction onto a potential under-scroll state -- don't. Instead, abort
             // over-scrolling abruptly, thus returning control to which-ever touch handlers there
             // are waiting (e.g. regular scroller handlers).
-            if ((mStartAttr.mDir && !mMoveAttr.mDir && (newOffset <= mStartAttr.mAbsOffset)) ||
-                    (!mStartAttr.mDir && mMoveAttr.mDir && (newOffset >= mStartAttr.mAbsOffset))) {
+            if ( (mStartAttr.mDir && !mMoveAttr.mDir && (newOffset <= mStartAttr.mAbsOffset)) ||
+                 (!mStartAttr.mDir && mMoveAttr.mDir && (newOffset >= mStartAttr.mAbsOffset)) ) {
                 translateViewAndEvent(view, mStartAttr.mAbsOffset, event);
 
                 enterState(mIdleState);
@@ -305,17 +306,9 @@ public abstract class OverScrollBounceEffectDecoratorBase implements View.OnTouc
             enterState(mIdleState);
         }
 
-        @Override
-        public void onAnimationStart(Animator animation) {
-        }
-
-        @Override
-        public void onAnimationCancel(Animator animation) {
-        }
-
-        @Override
-        public void onAnimationRepeat(Animator animation) {
-        }
+        @Override public void onAnimationStart(Animator animation) {}
+        @Override public void onAnimationCancel(Animator animation) {}
+        @Override public void onAnimationRepeat(Animator animation) {}
 
         protected Animator createAnimator() {
 
@@ -398,10 +391,7 @@ public abstract class OverScrollBounceEffectDecoratorBase implements View.OnTouc
     }
 
     protected abstract MotionAttributes createMotionAttributes();
-
     protected abstract AnimationAttributes createAnimationAttributes();
-
     protected abstract void translateView(View view, float offset);
-
     protected abstract void translateViewAndEvent(View view, float offset, MotionEvent event);
 }

@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ToggleButton;
@@ -107,6 +108,15 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
         if (mLogoPath != null) {
             mLogoIv.setImageBitmap(BitmapFactory.decodeFile(mLogoPath));
         }
+
+        mLogoTogBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (mIsQRcodeGenerated) {
+                    generateQRcode();
+                }
+            }
+        });
 
         actionBack.setOnClickListener(this);
         mActionOverflow.setOnClickListener(this);

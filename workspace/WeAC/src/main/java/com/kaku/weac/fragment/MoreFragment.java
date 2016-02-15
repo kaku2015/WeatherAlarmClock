@@ -187,6 +187,7 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
             PackageManager packageManager = getActivity().getPackageManager();
             ApplicationInfo appInfo = null;
             ActivityManager.RunningAppProcessInfo appProcessInfo;
+            // 通过调用ActivityManager的getRunningAppProcesses()方法获得系统里所有正在运行的进程
             List<ActivityManager.RunningAppProcessInfo> infoList = mActivityManager.getRunningAppProcesses();
             if (infoList != null) {
 
@@ -222,13 +223,15 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
                     if ((appProcessInfo.importance > ActivityManager.RunningAppProcessInfo.
                             IMPORTANCE_VISIBLE) && (appInfo.flags & ApplicationInfo.FLAG_SYSTEM) <= 0) {
                         String[] pkgList = appProcessInfo.pkgList;
-                        for (String aPkgList : pkgList) {//pkgList 得到该进程下运行的包名
-                            Log.d(LOG_TAG, "It will be killed, package name : " + aPkgList);
-                            mActivityManager.killBackgroundProcesses(aPkgList);
-                            processCount++;
+                        if (pkgList.length > 0) {
+                            for (String aPkgList : pkgList) {//pkgList 获得运行在该进程里的所有应用程序包名
+                                Log.d(LOG_TAG, "It will be killed, package name : " + aPkgList);
+                                mActivityManager.killBackgroundProcesses(aPkgList);
 
-                            // 更新内存百分比
-                            publishProgress(getUsedPercentValue());
+                                // 更新内存百分比
+                                publishProgress(getUsedPercentValue());
+                            }
+                            processCount++;
                         }
                     }
                 }
@@ -269,18 +272,6 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
         }
         return null;
     }
-
-
-    /*    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != Activity.RESULT_OK) {
-            return;
-        }
-        switch (requestCode) {
-
-        }
-    }*/
 
     /**
      * 计算已使用内存的百分比

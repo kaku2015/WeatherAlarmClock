@@ -21,6 +21,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.kaku.weac.R;
+import com.kaku.weac.activities.AboutActivity;
 import com.kaku.weac.activities.FeedbackActivity;
 import com.kaku.weac.activities.GenerateCodeActivity;
 import com.kaku.weac.activities.ThemeActivity;
@@ -85,6 +86,7 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
         mCleanUpCP = (CircleProgress) view.findViewById(R.id.circle_progress);
         mClearMemoryIv = (WaveLoadingView) view.findViewById(R.id.wave_view);
         ViewGroup feedback = (ViewGroup) view.findViewById(R.id.feedback);
+        ViewGroup about = (ViewGroup) view.findViewById(R.id.abort_us);
 
         themeBtn.setOnClickListener(this);
         scanQRcodeBtn.setOnClickListener(this);
@@ -92,6 +94,7 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
         clearMemoryBtn.setOnClickListener(this);
         clearUpBtn.setOnClickListener(this);
         feedback.setOnClickListener(this);
+        about.setOnClickListener(this);
 
         ScrollView scrollView = (ScrollView) view.findViewById(R.id.scroll_view);
         OverScrollDecoratorHelper.setUpOverScroll(scrollView);
@@ -148,6 +151,11 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
                 intentFeedback.putExtra(FeedbackFragment.BUNDLE_KEY_CONVERSATION_ID,
                         mFeedbackAgent.getDefaultConversation().getId());
                 startActivity(intentFeedback);
+                break;
+            // 关于
+            case R.id.abort_us:
+                Intent intentAbout = new Intent(getActivity(), AboutActivity.class);
+                startActivity(intentAbout);
                 break;
         }
     }

@@ -25,9 +25,7 @@ public class FeedbackActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed_back);
-
-        ViewGroup background = (ViewGroup) findViewById(R.id.background);
-        MyUtil.setBackground(background, this);
+        assignViews();
 
         String conversationId = getIntent().getStringExtra(FeedbackFragment.BUNDLE_KEY_CONVERSATION_ID);
         mFeedbackFragment = FeedbackFragment.newInstance(conversationId);
@@ -36,10 +34,12 @@ public class FeedbackActivity extends BaseActivity {
                 .add(R.id.container, mFeedbackFragment)
                 .commit();
 
-        assignViews();
     }
 
     private void assignViews() {
+        ViewGroup background = (ViewGroup) findViewById(R.id.background);
+        MyUtil.setBackground(background, this);
+
         ImageView actionBack = (ImageView) findViewById(R.id.action_back);
         actionBack.setOnClickListener(new View.OnClickListener() {
             @Override

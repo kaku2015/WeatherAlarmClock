@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kaku.weac"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="@string/version" >
 
     <uses-sdk
         android:minSdkVersion="16"
@@ -146,10 +146,12 @@
         <activity
             android:name="com.kaku.weac.activities.GenerateCodeActivity"
             android:theme="@style/Transparent.Light"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name="com.kaku.weac.activities.FeedbackActivity"
+            android:theme="@style/Transparent.Light" />
+        <activity
+            android:name="com.kaku.weac.activities.AboutActivity"
             android:theme="@style/Transparent.Light" />
 
         <receiver

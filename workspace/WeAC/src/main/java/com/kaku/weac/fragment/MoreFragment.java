@@ -21,6 +21,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.kaku.weac.R;
+import com.kaku.weac.activities.FeedbackActivity;
 import com.kaku.weac.activities.GenerateCodeActivity;
 import com.kaku.weac.activities.ThemeActivity;
 import com.kaku.weac.bean.Event.WallpaperEvent;
@@ -32,6 +33,8 @@ import com.kaku.weac.util.ToastUtil;
 import com.kaku.weac.view.CircleProgress;
 import com.kaku.weac.zxing.activity.CaptureActivity;
 import com.squareup.otto.Subscribe;
+import com.umeng.fb.FeedbackAgent;
+import com.umeng.fb.fragment.FeedbackFragment;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -81,12 +84,14 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
         ViewGroup clearUpBtn = (ViewGroup) view.findViewById(R.id.clean_up);
         mCleanUpCP = (CircleProgress) view.findViewById(R.id.circle_progress);
         mClearMemoryIv = (WaveLoadingView) view.findViewById(R.id.wave_view);
+        ViewGroup feedback = (ViewGroup) view.findViewById(R.id.feedback);
 
         themeBtn.setOnClickListener(this);
         scanQRcodeBtn.setOnClickListener(this);
         generateCodeBtn.setOnClickListener(this);
         clearMemoryBtn.setOnClickListener(this);
         clearUpBtn.setOnClickListener(this);
+        feedback.setOnClickListener(this);
 
         ScrollView scrollView = (ScrollView) view.findViewById(R.id.scroll_view);
         OverScrollDecoratorHelper.setUpOverScroll(scrollView);
@@ -123,11 +128,26 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
                 Intent generateCodeIntent = new Intent(getActivity(), GenerateCodeActivity.class);
                 startActivity(generateCodeIntent);
                 break;
+            // 清除缓存
             case R.id.clear_memory:
                 operateClearMemory();
                 break;
+            // 一键清理
             case R.id.clean_up:
                 new CleanUpAsyncTask().execute();
+                break;
+            // 意见反馈
+            case R.id.feedback:
+                FeedbackAgent mFeedbackAgent = new FeedbackAgent(getActivity());
+                // 关闭反馈推送
+                mFeedbackAgent.closeFeedbackPush();
+                // 关闭语音反馈
+                mFeedbackAgent.closeAudioFeedback();
+                mFeedbackAgent.setWelcomeInfo("感谢您提出反馈意见,我会尽快回复");
+                Intent intentFeedback = new Intent(getActivity(), FeedbackActivity.class);
+                intentFeedback.putExtra(FeedbackFragment.BUNDLE_KEY_CONVERSATION_ID,
+                        mFeedbackAgent.getDefaultConversation().getId());
+                startActivity(intentFeedback);
                 break;
         }
     }

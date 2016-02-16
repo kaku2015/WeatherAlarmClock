@@ -202,7 +202,7 @@
                 <View style="@style/more_item_divider"/>
 
                 <LinearLayout
-                    android:id="@+id/suggestion_feedback"
+                    android:id="@+id/feedback"
                     style="@style/more_item_group">
 
                     <ImageView
@@ -211,7 +211,7 @@
 
                     <TextView
                         style="@style/more_item_title_tv"
-                        android:text="@string/suggestion_feedback"/>
+                        android:text="@string/feedback"/>
 
                     <ImageView style="@style/more_item_arrow_iv"/>
                 </LinearLayout>

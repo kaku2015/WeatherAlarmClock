@@ -24,6 +24,7 @@ import com.kaku.weac.fragment.WeaFragment;
 import com.kaku.weac.service.DaemonService;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
+import com.umeng.fb.FeedbackAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -205,6 +206,10 @@ public class MainActivity extends BaseActivity implements OnClickListener {
         setContentView(R.layout.activity_main);
         // 设置主题壁纸
         setThemeWallpaper();
+
+        // 当开发者回复用户反馈后，提醒用户
+        new FeedbackAgent(this).sync();
+
         mFm = getSupportFragmentManager();
         // Tab选中文字颜色
         mSelectColor = getResources().getColor(R.color.blue_tab);

@@ -148,6 +148,9 @@
             android:theme="@style/Transparent.Light"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
+        <activity
+            android:name="com.kaku.weac.activities.FeedbackActivity"
+            android:theme="@style/Transparent.Light" />
 
         <receiver
             android:name="com.kaku.weac.broadcast.AlarmClockBroadcast"
@@ -189,11 +192,27 @@
         <meta-data
             android:name="com.kaku.weac.util.GlideConfiguration"
             android:value="GlideModule" />
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="56c1ca2167e58ec5d600086f" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Umeng" />
+        <!--
+                    <meta-data
+                    android:name="UMENG_CHANNEL"
+                    android:value="${CHANNEL_VALUE}"/>
+        -->
 
         <receiver
             android:name="com.kaku.weac.test.AutoUpdateReceiver"
             android:process=":test" />
 
+        <!--
+        <activity
+        android:name="com.umeng.fb.ConversationActivity"
+        android:theme="@style/Transparent.Light"/>
+        -->
         <service
             android:name="com.squareup.leakcanary.internal.HeapAnalyzerService"
             android:enabled="false"

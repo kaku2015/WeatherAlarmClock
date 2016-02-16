@@ -8,6 +8,8 @@ android {
         applicationId "com.kaku.weac"
         minSdkVersion 16
         targetSdkVersion 23
+
+//        manifestPlaceholders = [ UMENG_CHANNEL_VALUE:"wandoujia" ]
     }
 
     buildTypes {
@@ -17,13 +19,26 @@ android {
         }
     }
 
+/*    productFlavors {
+        wandoujia {}
+        baidu {}
+        uc {}
+        _360 {}
+        yingyongbao {}
+        xiaomi {}
+        huawei {}
+        jifeng {}
+
+        productFlavors.all { flavor ->
+            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+        }
+    }*/
+}
 /*    sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
         }
     }*/
-
-}
 
 repositories {
     mavenCentral()
@@ -58,4 +73,5 @@ dependencies {
     compile 'com.balysv:material-ripple:1.0.2'
     compile 'com.makeramen:roundedimageview:2.2.1'
     compile project(':overscroll-decor')
+    compile 'com.umeng:fb:5.4.0'
 }

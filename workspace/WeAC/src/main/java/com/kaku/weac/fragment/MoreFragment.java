@@ -51,7 +51,7 @@ import me.itangqi.waveloadingview.WaveLoadingView;
  * @author 咖枯
  * @version 1.0 2015
  */
-public class MoreFragment extends BaseFragment implements OnClickListener {
+public class MoreFragment extends BaseFragment {
     /**
      * Log tag ：MoreFragment
      */
@@ -77,27 +77,82 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
     }
 
     private void assignViews(View view) {
-        ViewGroup themeBtn = (ViewGroup) view.findViewById(R.id.theme);
-        ViewGroup scanQRcodeBtn = (ViewGroup) view.findViewById(R.id.scan_scan);
-        ViewGroup generateCodeBtn = (ViewGroup) view.findViewById(R.id.generate_code);
-        ViewGroup clearMemoryBtn = (ViewGroup) view.findViewById(R.id.clear_memory);
-        mUsedMemoryTv = (TextView) view.findViewById(R.id.used_memory_tv);
-        ViewGroup clearUpBtn = (ViewGroup) view.findViewById(R.id.clean_up);
-        mCleanUpCP = (CircleProgress) view.findViewById(R.id.circle_progress);
-        mClearMemoryIv = (WaveLoadingView) view.findViewById(R.id.wave_view);
-        ViewGroup feedback = (ViewGroup) view.findViewById(R.id.feedback);
-        ViewGroup about = (ViewGroup) view.findViewById(R.id.abort_us);
-
-        themeBtn.setOnClickListener(this);
-        scanQRcodeBtn.setOnClickListener(this);
-        generateCodeBtn.setOnClickListener(this);
-        clearMemoryBtn.setOnClickListener(this);
-        clearUpBtn.setOnClickListener(this);
-        feedback.setOnClickListener(this);
-        about.setOnClickListener(this);
-
         ScrollView scrollView = (ScrollView) view.findViewById(R.id.scroll_view);
         OverScrollDecoratorHelper.setUpOverScroll(scrollView);
+
+        mUsedMemoryTv = (TextView) view.findViewById(R.id.used_memory_tv);
+        mCleanUpCP = (CircleProgress) view.findViewById(R.id.circle_progress);
+        mClearMemoryIv = (WaveLoadingView) view.findViewById(R.id.wave_view);
+
+        // 主题
+        view.findViewById(R.id.theme).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyUtil.startActivity(getActivity(), ThemeActivity.class);
+            }
+        });
+
+        // 扫码
+        view.findViewById(R.id.scan_scan).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyUtil.startActivity(getActivity(), CaptureActivity.class);
+            }
+        });
+
+        // 造码
+        view.findViewById(R.id.generate_code).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyUtil.startActivity(getActivity(), GenerateCodeActivity.class);
+            }
+        });
+
+        // 清除缓存
+        view.findViewById(R.id.clear_memory).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                operateClearMemory();
+            }
+        });
+
+        // 一键清理
+        view.findViewById(R.id.clean_up).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new CleanUpAsyncTask().execute();
+            }
+        });
+
+        // 意见反馈
+        view.findViewById(R.id.feedback).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                operateFeedback();
+            }
+        });
+
+        // 关于
+        view.findViewById(R.id.abort).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyUtil.startActivity(getActivity(), AboutActivity.class);
+            }
+        });
+
+    }
+
+    private void operateFeedback() {
+        FeedbackAgent mFeedbackAgent = new FeedbackAgent(getActivity());
+        // 关闭反馈推送
+        mFeedbackAgent.closeFeedbackPush();
+        // 关闭语音反馈
+        mFeedbackAgent.closeAudioFeedback();
+        mFeedbackAgent.setWelcomeInfo("感谢您提出反馈意见,我会尽快回复");
+        Intent intentFeedback = new Intent(getActivity(), FeedbackActivity.class);
+        intentFeedback.putExtra(FeedbackFragment.BUNDLE_KEY_CONVERSATION_ID,
+                mFeedbackAgent.getDefaultConversation().getId());
+        startActivity(intentFeedback);
     }
 
     @Subscribe
@@ -108,7 +163,7 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
         MyUtil.setBackground(vg, getActivity());
     }
 
-    @Override
+/*    @Override
     public void onClick(View v) {
         if (MyUtil.isFastDoubleClick()) {
             return;
@@ -153,12 +208,12 @@ public class MoreFragment extends BaseFragment implements OnClickListener {
                 startActivity(intentFeedback);
                 break;
             // 关于
-            case R.id.abort_us:
+            case R.id.abort:
                 Intent intentAbout = new Intent(getActivity(), AboutActivity.class);
                 startActivity(intentAbout);
                 break;
         }
-    }
+    }*/
 
     private void operateClearMemory() {
         // 清理前缓存

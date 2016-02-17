@@ -1208,4 +1208,9 @@ public class MyUtil {
         edit.putString(WeacConstants.QRCODE_LOGO_PATH, logoPath);
         edit.apply();
     }
+
+    public static void startActivity(Context context,Class<?> cls) {
+        Intent intent = new Intent(context, cls);
+        context.startActivity(intent);
+    }
 }

@@ -25,71 +25,74 @@
 
             <LinearLayout style="@style/more_item_area">
 
-                <LinearLayout
+                <com.balysv.materialripple.MaterialRippleLayout
                     android:id="@+id/theme"
-                    style="@style/more_item_group">
+                    style="@style/more_item_area_ripple"
+                    app:mrl_rippleColor="@color/white">
 
-                    <ImageView
-                        style="@style/more_item_iv"
-                        android:src="@drawable/ic_more_theme_wallpaper"/>
+                    <LinearLayout
+                        style="@style/more_item_group">
 
-                    <TextView
-                        style="@style/more_item_title_tv"
-                        android:text="@string/theme"/>
-
-                    <ImageView style="@style/more_item_arrow_iv"/>
-                </LinearLayout>
+                        <TextView
+                            style="@style/more_item_title_tv"
+                            android:drawableLeft="@drawable/ic_more_theme_wallpaper"
+                            android:text="@string/theme"/>
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
 
                 <View style="@style/more_item_divider"/>
 
-                <LinearLayout
+                <com.balysv.materialripple.MaterialRippleLayout
                     android:id="@+id/discover_app"
-                    style="@style/more_item_group">
+                    style="@style/more_item_area_ripple"
+                    app:mrl_rippleColor="@color/white">
 
-                    <ImageView
-                        style="@style/more_item_iv"
-                        android:src="@drawable/ic_more_discover_app"/>
+                    <LinearLayout
+                        style="@style/more_item_group">
 
-                    <TextView
-                        style="@style/more_item_title_tv"
-                        android:text="@string/discover_app"/>
+                        <TextView
+                            style="@style/more_item_title_tv"
+                            android:drawableLeft="@drawable/ic_more_discover_app"
+                            android:text="@string/discover_app"/>
 
-                    <ImageView style="@style/more_item_arrow_iv"/>
-                </LinearLayout>
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
 
                 <View style="@style/more_item_divider"/>
 
-                <LinearLayout
+                <com.balysv.materialripple.MaterialRippleLayout
                     android:id="@+id/scan_scan"
-                    style="@style/more_item_group">
+                    style="@style/more_item_area_ripple"
+                    app:mrl_rippleColor="@color/white">
 
-                    <ImageView
-                        style="@style/more_item_iv"
-                        android:src="@drawable/ic_more_scan_code"/>
+                    <LinearLayout
+                        style="@style/more_item_group">
 
-                    <TextView
-                        style="@style/more_item_title_tv"
-                        android:text="@string/scan_code"/>
+                        <TextView
+                            style="@style/more_item_title_tv"
+                            android:drawableLeft="@drawable/ic_more_scan_code"
+                            android:text="@string/scan_code"/>
 
-                    <ImageView style="@style/more_item_arrow_iv"/>
-                </LinearLayout>
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
 
                 <View style="@style/more_item_divider"/>
 
-                <LinearLayout
+                <com.balysv.materialripple.MaterialRippleLayout
                     android:id="@+id/generate_code"
-                    style="@style/more_item_group">
+                    style="@style/more_item_area_ripple"
+                    app:mrl_rippleColor="@color/white">
 
-                    <ImageView
-                        style="@style/more_item_iv"
-                        android:src="@drawable/ic_more_generate_code"/>
+                    <LinearLayout
+                        style="@style/more_item_group">
 
-                    <TextView
-                        style="@style/more_item_title_tv"
-                        android:text="@string/generate_code"/>
+                        <TextView
+                            style="@style/more_item_title_tv"
+                            android:drawableLeft="@drawable/ic_more_generate_code"
+                            android:text="@string/generate_code"/>
 
-                    <ImageView style="@style/more_item_arrow_iv"/>
-                </LinearLayout>
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
             </LinearLayout>
 
             <View style="@style/more_item_area_divider"/>
@@ -98,50 +101,64 @@
                 style="@style/more_item_area"
                 >
 
-                <LinearLayout
+                <com.balysv.materialripple.MaterialRippleLayout
                     android:id="@+id/clear_memory"
-                    style="@style/more_item_group">
+                    style="@style/more_item_area_ripple"
+                    app:mrl_rippleColor="@color/white">
 
-                    <me.itangqi.waveloadingview.WaveLoadingView
-                        android:id="@+id/wave_view"
-                        android:layout_width="37dp"
-                        android:layout_height="37dp"
-                        app:mlv_borderColor="@color/memory"
-                        app:mlv_borderWidth="0.5dp"
-                        app:mlv_shapeType="circle"
-                        app:mlv_waveAmplitude="50"
-                        app:mlv_waveColor="@color/memory"/>
+                    <LinearLayout
+                        style="@style/more_item_group">
 
-                    <TextView
-                        style="@style/more_item_title_tv"
-                        android:text="@string/clear_memory"/>
+                        <me.itangqi.waveloadingview.WaveLoadingView
+                            android:id="@+id/wave_view"
+                            android:layout_width="37dp"
+                            android:layout_height="37dp"
+                            app:mlv_borderColor="@color/memory"
+                            app:mlv_borderWidth="0.5dp"
+                            app:mlv_shapeType="circle"
+                            app:mlv_waveAmplitude="50"
+                            app:mlv_waveColor="@color/memory"/>
 
-                    <TextView
-                        android:id="@+id/used_memory_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white_trans60"
-                        android:textSize="@dimen/small"/>
-                </LinearLayout>
+                        <TextView
+                            style="@style/more_item_title_tv"
+                            android:drawableRight="@null"
+                            android:paddingLeft="15dp"
+                            android:text="@string/clear_memory"/>
+
+                        <TextView
+                            android:id="@+id/used_memory_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white_trans60"
+                            android:textSize="@dimen/small"/>
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
 
                 <View style="@style/more_item_divider"/>
 
-                <LinearLayout
+                <com.balysv.materialripple.MaterialRippleLayout
                     android:id="@+id/clean_up"
-                    style="@style/more_item_group">
+                    style="@style/more_item_area_ripple"
+                    app:mrl_rippleColor="@color/white">
 
-                    <com.kaku.weac.view.CircleProgress
-                        android:id="@+id/circle_progress"
-                        android:layout_width="37dp"
-                        android:layout_height="37dp"
-                        app:circle_text_color="@color/white_trans90"
-                        app:circle_text_size="14sp"
-                        app:circle_unfinished_color="@color/white_trans20"/>
+                    <LinearLayout
+                        style="@style/more_item_group">
 
-                    <TextView
-                        style="@style/more_item_title_tv"
-                        android:text="@string/clean_up"/>
-                </LinearLayout>
+                        <com.kaku.weac.view.CircleProgress
+                            android:id="@+id/circle_progress"
+                            android:layout_width="37dp"
+                            android:layout_height="37dp"
+                            app:circle_text_color="@color/white_trans90"
+                            app:circle_text_size="14sp"
+                            app:circle_unfinished_color="@color/white_trans20"/>
+
+                        <TextView
+                            style="@style/more_item_title_tv"
+                            android:drawableRight="@null"
+                            android:paddingLeft="15dp"
+                            android:text="@string/clean_up"/>
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
             </LinearLayout>
 
             <View style="@style/more_item_area_divider"/>
@@ -150,125 +167,131 @@
                 style="@style/more_item_area"
                 >
 
-                <LinearLayout
+                <com.balysv.materialripple.MaterialRippleLayout
                     android:id="@+id/friend_share"
-                    style="@style/more_item_group">
+                    style="@style/more_item_area_ripple"
+                    app:mrl_rippleColor="@color/white">
 
-                    <ImageView
-                        style="@style/more_item_iv"
-                        android:src="@drawable/ic_more_friend_share"/>
+                    <LinearLayout
+                        style="@style/more_item_group">
 
-                    <TextView
-                        style="@style/more_item_title_tv"
-                        android:text="@string/friend_share"/>
+                        <TextView
+                            style="@style/more_item_title_tv"
+                            android:drawableLeft="@drawable/ic_more_friend_share"
+                            android:text="@string/friend_share"/>
 
-                    <ImageView style="@style/more_item_arrow_iv"/>
-                </LinearLayout>
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
 
                 <View style="@style/more_item_divider"/>
 
-                <LinearLayout
+                <com.balysv.materialripple.MaterialRippleLayout
                     android:id="@+id/software_update"
-                    style="@style/more_item_group">
+                    style="@style/more_item_area_ripple"
+                    app:mrl_rippleColor="@color/white">
 
-                    <ImageView
-                        style="@style/more_item_iv"
-                        android:src="@drawable/ic_more_software_update"/>
+                    <LinearLayout
+                        style="@style/more_item_group">
 
-                    <TextView
-                        style="@style/more_item_title_tv"
-                        android:text="@string/software_update"/>
+                        <TextView
+                            style="@style/more_item_title_tv"
+                            android:drawableLeft="@drawable/ic_more_software_update"
+                            android:text="@string/software_update"/>
 
-                    <ImageView style="@style/more_item_arrow_iv"/>
-                </LinearLayout>
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
 
                 <View style="@style/more_item_divider"/>
 
-                <LinearLayout
+                <com.balysv.materialripple.MaterialRippleLayout
                     android:id="@+id/faq"
-                    style="@style/more_item_group">
+                    style="@style/more_item_area_ripple"
+                    app:mrl_rippleColor="@color/white">
 
-                    <ImageView
-                        style="@style/more_item_iv"
-                        android:src="@drawable/ic_more_faq"/>
+                    <LinearLayout
+                        style="@style/more_item_group">
 
-                    <TextView
-                        style="@style/more_item_title_tv"
-                        android:text="@string/faq"/>
+                        <TextView
+                            style="@style/more_item_title_tv"
+                            android:drawableLeft="@drawable/ic_more_faq"
+                            android:text="@string/faq"/>
 
-                    <ImageView style="@style/more_item_arrow_iv"/>
-                </LinearLayout>
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
 
                 <View style="@style/more_item_divider"/>
 
-                <LinearLayout
+                <com.balysv.materialripple.MaterialRippleLayout
                     android:id="@+id/feedback"
-                    style="@style/more_item_group">
+                    style="@style/more_item_area_ripple"
+                    app:mrl_rippleColor="@color/white">
 
-                    <ImageView
-                        style="@style/more_item_iv"
-                        android:src="@drawable/ic_more_suggestion_feedback"/>
+                    <LinearLayout
+                        style="@style/more_item_group">
 
-                    <TextView
-                        style="@style/more_item_title_tv"
-                        android:text="@string/feedback"/>
+                        <TextView
+                            style="@style/more_item_title_tv"
+                            android:drawableLeft="@drawable/ic_more_suggestion_feedback"
+                            android:text="@string/feedback"/>
 
-                    <ImageView style="@style/more_item_arrow_iv"/>
-                </LinearLayout>
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
 
                 <View style="@style/more_item_divider"/>
 
-                <LinearLayout
+                <com.balysv.materialripple.MaterialRippleLayout
                     android:id="@+id/give_good_reputation"
-                    style="@style/more_item_group">
+                    style="@style/more_item_area_ripple"
+                    app:mrl_rippleColor="@color/white">
 
-                    <ImageView
-                        style="@style/more_item_iv"
-                        android:src="@drawable/ic_more_give_good_reputation"/>
+                    <LinearLayout
+                        style="@style/more_item_group">
 
-                    <TextView
-                        style="@style/more_item_title_tv"
-                        android:text="@string/give_good_reputation"/>
+                        <TextView
+                            style="@style/more_item_title_tv"
+                            android:drawableLeft="@drawable/ic_more_give_good_reputation"
+                            android:text="@string/give_good_reputation"/>
 
-                    <ImageView style="@style/more_item_arrow_iv"/>
-                </LinearLayout>
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
 
                 <View style="@style/more_item_divider"/>
 
-                <LinearLayout
-                    android:id="@+id/abort_us"
-                    style="@style/more_item_group">
+                <com.balysv.materialripple.MaterialRippleLayout
+                    android:id="@+id/abort"
+                    style="@style/more_item_area_ripple"
+                    app:mrl_rippleColor="@color/white">
 
-                    <ImageView
-                        style="@style/more_item_iv"
-                        android:src="@drawable/ic_more_about_us"/>
+                    <LinearLayout
+                        style="@style/more_item_group">
 
-                    <TextView
-                        style="@style/more_item_title_tv"
-                        android:text="@string/abort"/>
+                        <TextView
+                            style="@style/more_item_title_tv"
+                            android:drawableLeft="@drawable/ic_more_about_us"
+                            android:text="@string/abort"/>
 
-                    <ImageView style="@style/more_item_arrow_iv"/>
-                </LinearLayout>
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
             </LinearLayout>
 
             <View style="@style/more_item_area_divider"/>
 
-            <LinearLayout
+            <com.balysv.materialripple.MaterialRippleLayout
                 android:id="@+id/quit"
-                style="@style/more_item_group"
-                android:background="@color/black_trans20">
+                style="@style/more_item_area_ripple"
+                app:mrl_rippleColor="@color/white">
 
-                <ImageView
-                    style="@style/more_item_iv"
-                    android:src="@drawable/ic_more_quit"/>
+                <LinearLayout
+                    style="@style/more_item_group"
+                    android:background="@color/black_trans20">
 
-                <TextView
-                    style="@style/more_item_title_tv"
-                    android:text="@string/quit"/>
+                    <TextView
+                        style="@style/more_item_title_tv"
+                        android:drawableLeft="@drawable/ic_more_quit"
+                        android:text="@string/quit"/>
 
-                <ImageView style="@style/more_item_arrow_iv"/>
-            </LinearLayout>
-
+                </LinearLayout>
+            </com.balysv.materialripple.MaterialRippleLayout>
         </LinearLayout>
     </ScrollView>
 

@@ -13022,10 +13022,9 @@
         <item name="android:layout_height">10dp</item>
         <item name="android:background">@color/white_trans10</item>
     </style>
-    <style name="more_item_arrow_iv">
-        <item name="android:layout_width">wrap_content</item>
+    <style name="more_item_area_ripple">
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:src">@drawable/ic_more_arrow</item>
     </style>
     <style name="more_item_divider">
         <item name="android:layout_width">match_parent</item>
@@ -13040,19 +13039,16 @@
         <item name="android:orientation">horizontal</item>
         <item name="android:paddingLeft">19dp</item>
         <item name="android:paddingRight">19dp</item>
-        <item name="android:background">@drawable/bg_more_item</item>
-    </style>
-    <style name="more_item_iv">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
     </style>
     <style name="more_item_title_tv">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">15dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textColor">@color/white_trans90</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:drawablePadding">15dp</item>
+        <item name="android:drawableRight">@drawable/ic_more_arrow</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles_new_alarm_clock.xml -->
     <eat-comment/>

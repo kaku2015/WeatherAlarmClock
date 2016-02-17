@@ -21,7 +21,7 @@ import com.kaku.weac.common.WeacConstants;
  * @author 咖枯
  * @version 1.0 2015/12/5
  */
-public class MyDialogActivity extends Activity implements View.OnClickListener {
+public class MyDialogActivity extends BaseActivitySimple implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

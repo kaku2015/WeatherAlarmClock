@@ -5,7 +5,6 @@ package com.kaku.weac.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
 import com.kaku.weac.R;
@@ -16,7 +15,7 @@ import com.kaku.weac.R;
  * @author 咖枯
  * @version 1.0 2016/02/10
  */
-public abstract class SingleFragmentDialogActivity extends FragmentActivity {
+public abstract class SingleFragmentDialogActivity extends BaseActivitySimple {
 
     /**
      * 抽象方法：创建Fragment

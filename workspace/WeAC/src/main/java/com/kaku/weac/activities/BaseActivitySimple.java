@@ -4,31 +4,25 @@
 package com.kaku.weac.activities;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 import com.kaku.weac.LeakCanaryApplication;
 import com.kaku.weac.util.LogUtil;
 import com.squareup.leakcanary.RefWatcher;
 import com.umeng.analytics.MobclickAgent;
 
-import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
-
 /**
- * Activity管理类
+ * Activity管理类(对话框，定时、闹钟响起等禁止滑动退出的activity)
  *
  * @author 咖枯
- * @version 1.0 2015
+ * @version 1.0 2016/2/17
  */
-public class BaseActivity extends SwipeBackActivity {
-
-    /**
-     * Log tag ：BaseActivity
-     */
-    private static final String LOG_TAG = "BaseActivity";
+public class BaseActivitySimple extends FragmentActivity {
+    private static final String LOG_TAG = "BaseActivitySimple";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
         LogUtil.i(LOG_TAG, getClass().getSimpleName());
     }
 

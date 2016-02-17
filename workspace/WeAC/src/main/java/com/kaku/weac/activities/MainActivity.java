@@ -24,6 +24,7 @@ import com.kaku.weac.fragment.WeaFragment;
 import com.kaku.weac.service.DaemonService;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
 
 import java.util.ArrayList;
@@ -199,6 +200,9 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 使用友盟集成测试模式
+        MobclickAgent.setDebugMode(true);
+        // 禁止滑动后退
         setSwipeBackEnable(false);
         startService(new Intent(this, DaemonService.class));
 
@@ -464,8 +468,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
         LogUtil.d(LOG_TAG, "onDestroy()");
 //        Process.killProcess(Process.myPid());
         super.onDestroy();
-//        RefWatcher refWatcher = LeakCanaryApplication.getRefWatcher(this);
-//        refWatcher.watch(this);
     }
 
 }

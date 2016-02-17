@@ -34,6 +34,7 @@ import com.kaku.weac.util.ToastUtil;
 import com.kaku.weac.view.CircleProgress;
 import com.kaku.weac.zxing.activity.CaptureActivity;
 import com.squareup.otto.Subscribe;
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.fb.fragment.FeedbackFragment;
 
@@ -309,6 +310,11 @@ public class MoreFragment extends BaseFragment {
                         if (pkgList.length > 0) {
                             for (String aPkgList : pkgList) {//pkgList 获得运行在该进程里的所有应用程序包名
                                 Log.d(LOG_TAG, "It will be killed, package name : " + aPkgList);
+                                if (aPkgList.equals("com.kaku.weac")) {
+                                    // 如果开发者调用Process.kill或者System.exit之类的方法杀死进程，
+                                    // 请务必在此之前调用MobclickAgent.onKillProcess(Context context)方法，用来保存统计数据。
+                                    MobclickAgent.onKillProcess(getActivity());
+                                }
                                 mActivityManager.killBackgroundProcesses(aPkgList);
 
                                 // 更新内存百分比

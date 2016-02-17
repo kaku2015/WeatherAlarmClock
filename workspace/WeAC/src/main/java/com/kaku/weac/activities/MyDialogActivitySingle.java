@@ -21,12 +21,13 @@ import com.kaku.weac.common.WeacConstants;
  * @author 咖枯
  * @version 1.0 2015/01/29
  */
-public class MyDialogActivitySingle extends Activity {
+public class MyDialogActivitySingle extends BaseActivitySimple {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_dialog_single);
+        // true 扫码禁止相机的话，会无限重新显示对话框
         setFinishOnTouchOutside(false);
         // 设置Dialog全屏显示
         getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,
@@ -64,6 +65,7 @@ public class MyDialogActivitySingle extends Activity {
 
     @Override
     public void onBackPressed() {
+        // 扫码禁止相机的话，会无限重新显示对话框
 //        super.onBackPressed();
     }
 }

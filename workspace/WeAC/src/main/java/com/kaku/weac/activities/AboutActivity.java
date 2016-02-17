@@ -5,6 +5,8 @@ package com.kaku.weac.activities;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,21 +57,20 @@ public class AboutActivity extends BaseActivity {
             LogUtil.e(LOG_TAG, "assignViews: " + e.toString());
             version = getString(R.string.version);
         }
-
         TextView versionTv = (TextView) findViewById(R.id.version_tv);
         versionTv.setText(getString(R.string.weac_version, version));
 
-        /*
-                     * 必须事先在assets底下创建一fonts文件夹 并放入要使用的字体文件(.ttf)
-                     * 并提供相对路径给creatFromAsset()来创建Typeface对象
-                     */
-/*        AssetManager mgr=getAssets();//得到AssetManager
-        Typeface fontFace = Typeface.createFromAsset(mgr,"fonts/ttf.ttf");
-        // 字体文件必须是true type font的格式(ttf)；
-        // 当使用外部字体却又发现字体没有变化的时候(以 Droid Sans代替)，通常是因为
-        // 这个字体android没有支持,而非你的程序发生了错误
+        try {
+            AssetManager mgr = getAssets();
+            Typeface fontFace = Typeface.createFromAsset(mgr, "fonts/lingzhiti_about.ttf");
+            // 字体文件必须是true type font的格式(ttf)；
+            // 当使用外部字体却又发现字体没有变化的时候(以 Droid Sans代替)，通常是因为
+            // 这个字体android没有支持,而非你的程序发生了错误
 
-        TextView text = (TextView) findViewById(R.id.words);
-        text.setTypeface(fontFace);*/
+            TextView text = (TextView) findViewById(R.id.words);
+            text.setTypeface(fontFace);
+        } catch (Exception e) {
+            LogUtil.e(LOG_TAG, "Typeface.createFromAsset: " + e.toString());
+        }
     }
 }

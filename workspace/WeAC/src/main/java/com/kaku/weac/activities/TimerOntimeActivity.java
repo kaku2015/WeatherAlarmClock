@@ -23,7 +23,7 @@ import com.kaku.weac.util.AudioPlayer;
  * @author 咖枯
  * @version 1.0 2015/12/31
  */
-public class TimerOnTimeActivity extends Activity implements View.OnClickListener {
+public class TimerOnTimeActivity extends BaseActivitySimple implements View.OnClickListener {
 
     private AudioManager mAudioManager;
     private int mCurrentVolume;

@@ -26,6 +26,7 @@ import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
+import com.umeng.update.UmengUpdateAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -202,6 +203,11 @@ public class MainActivity extends BaseActivity implements OnClickListener {
         super.onCreate(savedInstanceState);
         // 使用友盟集成测试模式
         MobclickAgent.setDebugMode(true);
+        // 因为以下这些设置是静态的参数，如果在应用中不止一次调用了检测更新的方法，而每次的设置都不一样，
+        // 请在每次检测更新的函数之前先恢复默认设置再设置参数，避免在其他地方设置的参数影响到这次更新。
+        UmengUpdateAgent.setDefault();
+        UmengUpdateAgent.update(this);
+
         // 禁止滑动后退
         setSwipeBackEnable(false);
         startService(new Intent(this, DaemonService.class));

@@ -10566,6 +10566,9 @@
     <color name="switch_thumb_disabled_material_light">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/tb_munion_strings.xml -->
+    <eat-comment/>
+    <color name="tb_munion_item_force">#e3e3e3</color>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/color.xml -->
     <eat-comment/>
     <color name="transparent">#00000000</color>
@@ -10926,6 +10929,22 @@
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="Alignment_code">对准二维码/条形码</string>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/umeng_update_string.xml -->
+    <eat-comment/>
+    <string name="UMAppUpdate">App updating</string>
+    <string name="UMBreak_Network">Please make sure you are connected to internet,update failed</string>
+    <string name="UMDialog_InstallAPK">The lastest version has been downloaded, install now ?</string>
+    <string name="UMGprsCondition">(Warning: Not WIFI Condition)</string>
+    <string name="UMIgnore">Ingore this</string>
+    <string name="UMNewVersion">Latest version: </string>
+    <string name="UMNotNow">Not now</string>
+    <string name="UMTargetSize">Target size: </string>
+    <string name="UMToast_IsUpdating">Updating....</string>
+    <string name="UMUpdateCheck">2.6.0.1.20150312</string>
+    <string name="UMUpdateContent">Update Content</string>
+    <string name="UMUpdateNow">Update now</string>
+    <string name="UMUpdateSize">Update size: </string>
+    <string name="UMUpdateTitle">New version found</string>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.squareup.leakcanary/leakcanary-android/1.3/res/values/values.xml -->
     <eat-comment/>
     <string name="__leak_canary_class_has_leaked">%s has leaked</string>
@@ -10994,6 +11013,7 @@
     <string name="capture">拍照</string>
     <string name="car_wash">洗车</string>
     <string name="car_wash_detail">洗车指数详情</string>
+    <string name="catching_version">正在获取最新版本信息…</string>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.android.support/design/23.1.1/res/values/values.xml -->
     <eat-comment/>
     <string name="character_counter_pattern" translatable="false">%1$d / %2$d</string>
@@ -11013,6 +11033,7 @@
     <string name="cold">感冒</string>
     <string name="cold_detail">感冒指数详情</string>
     <string name="colors">颜色</string>
+    <string name="connection_time_out">连接超时</string>
     <string name="copy">复制</string>
     <string name="copyright">Copyright © 2016 Kaku. \nAll Rights Reserved.</string>
     <string name="countdown_day_hour_minute">距闹钟响起还有%1$d天%2$d小时%3$d分</string>
@@ -11084,6 +11105,7 @@
     <string name="interval_hour">%1$d小时前更新</string>
     <string name="interval_just">刚刚更新</string>
     <string name="interval_minute">%1$d分钟前更新</string>
+    <string name="latest_version">当前已是最新版本</string>
     <string name="leave_to_refresh">松手可更新</string>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.makeramen/roundedimageview/2.2.1/res/values/values.xml -->
     <eat-comment/>
@@ -11219,6 +11241,11 @@
     <string name="sure_delete">确定要删除吗？</string>
     <string name="system_ring">系统铃声</string>
     <string name="tag">标签</string>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/tb_munion_strings.xml -->
+    <eat-comment/>
+    <string name="tb_munion_tip_download_prefix">正在下载:</string>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/strings.xml -->
+    <eat-comment/>
     <string name="temperature">%1$s℃</string>
     <string name="ten">10</string>
     <string name="text_already_copied">文本已复制到剪贴板</string>
@@ -11243,6 +11270,23 @@
     <string name="ultraviolet_rays">紫外线</string>
     <string name="umbrella">雨伞</string>
     <string name="umbrella_detail">雨伞指数详情</string>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/umeng_common_strings.xml -->
+    <eat-comment/>
+    <string name="umeng_common_action_cancel">Cancel</string>
+    <string name="umeng_common_action_continue">Continue</string>
+    <string name="umeng_common_action_info_exist">The app is already in downloading list.</string>
+    <string name="umeng_common_action_pause">Pause</string>
+    <string name="umeng_common_download_failed">Download Failed! </string>
+    <string name="umeng_common_download_finish">Download finished,click to install it.</string>
+    <string name="umeng_common_download_notification_prefix">Downloading: </string>
+    <string name="umeng_common_icon">icon</string>
+    <string name="umeng_common_info_interrupt">dowload interrupted.</string>
+    <string name="umeng_common_network_break_alert">Please make sure you are connected to internet, download failed</string>
+    <string name="umeng_common_patch_finish">Patch finished,click to install it.</string>
+    <string name="umeng_common_pause_notification_prefix">Pause: </string>
+    <string name="umeng_common_silent_download_finish">New version is ready,click to install it.</string>
+    <string name="umeng_common_start_download_notification">Download start.</string>
+    <string name="umeng_common_start_patch_notification">Patch start.</string>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.umeng/fb/5.4.0/res/values/values.xml -->
     <eat-comment/>
     <string name="umeng_fb_back">Back</string>

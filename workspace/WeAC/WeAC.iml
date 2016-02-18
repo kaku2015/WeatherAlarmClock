@@ -82,6 +82,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.umeng/fb/5.4.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.umeng/message/2.4.1/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/jp.wasabeef/recyclerview-animators/2.2.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/me.everything/overscroll-decor-android/1.0.1/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/me.itangqi.waveloadingview/library/0.1.5/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/me.zhanghai.android.materialprogressbar/library/1.1.4/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
@@ -100,13 +101,15 @@
     <orderEntry type="library" exported="" name="library-0.1.5" level="project" />
     <orderEntry type="library" exported="" name="design-23.1.1" level="project" />
     <orderEntry type="library" exported="" name="okhttp-2.6.0" level="project" />
+    <orderEntry type="library" exported="" name="overscroll-decor-android-1.0.1" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.1.1" level="project" />
     <orderEntry type="library" exported="" name="okio-1.6.0" level="project" />
     <orderEntry type="library" exported="" name="analytics-5.6.4" level="project" />
     <orderEntry type="library" exported="" name="leakcanary-analyzer-1.3" level="project" />
+    <orderEntry type="library" exported="" name="umeng-update-v2.6.0.1" level="project" />
     <orderEntry type="library" exported="" name="material-ripple-1.0.2" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-23.1.1" level="project" />
     <orderEntry type="library" exported="" name="roundedimageview-2.2.1" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-23.1.1" level="project" />
     <orderEntry type="library" exported="" name="library-circular-1.2.0" level="project" />
     <orderEntry type="library" exported="" name="leakcanary-android-1.3" level="project" />
     <orderEntry type="library" exported="" name="glide-3.6.1" level="project" />
@@ -125,7 +128,6 @@
     <orderEntry type="library" exported="" name="library-1.1.4" level="project" />
     <orderEntry type="module" module-name="daemon" exported="" />
     <orderEntry type="module" module-name="PagerSlidingTabStrip" exported="" />
-    <orderEntry type="module" module-name="overscroll-decor" exported="" />
     <orderEntry type="module" module-name="PullToRefresh" exported="" />
     <orderEntry type="module" module-name="SwipeBackLayout" exported="" />
   </component>

@@ -6,6 +6,7 @@ package com.kaku.weac.fragment;
 import android.animation.IntEvaluator;
 import android.animation.ValueAnimator;
 import android.app.ActivityManager;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -37,6 +38,10 @@ import com.squareup.otto.Subscribe;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.fb.fragment.FeedbackFragment;
+import com.umeng.update.UmengUpdateAgent;
+import com.umeng.update.UmengUpdateListener;
+import com.umeng.update.UpdateResponse;
+import com.umeng.update.UpdateStatus;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -141,6 +146,80 @@ public class MoreFragment extends BaseFragment {
             }
         });
 
+        // 软件更新
+        view.findViewById(R.id.software_update).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                operateUpdate();
+
+            }
+        });
+
+    }
+
+    private void operateUpdate() {
+        // UmengUpdateAgent.forceUpdate(getActivity());
+        UmengUpdateAgent.setUpdateAutoPopup(false);
+        // FIXME：提示没有wifi是否更新
+        UmengUpdateAgent.setUpdateOnlyWifi(false);
+        UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
+            @Override
+            public void onUpdateReturned(int updateStatus, UpdateResponse updateInfo) {
+                try {
+                    closeProgressDialog();
+                    switch (updateStatus) {
+                        case UpdateStatus.Yes: // has update
+                            UmengUpdateAgent.showUpdateDialog(getActivity(), updateInfo);
+                            break;
+                        case UpdateStatus.No: // has no update
+                            ToastUtil.showShortToast(getActivity(), getString(R.string.latest_version));
+                            break;
+    /*                    case UpdateStatus.NoneWifi: // none wifi
+                            ToastUtil.showShortToast(getActivity(), "没有wifi连接， 只在wifi下更新");
+                            break;*/
+                        case UpdateStatus.Timeout: // time out
+                            ToastUtil.showShortToast(getActivity(), getString(R.string.connection_time_out));
+                            break;
+                    }
+                } catch (Exception e) {
+                    LogUtil.e(LOG_TAG, "onUpdateReturned: " + e.toString());
+                }
+            }
+        });
+        UmengUpdateAgent.update(getActivity());
+
+        showProgressDialog(getString(R.string.catching_version));
+    }
+
+
+    /**
+     * 进度对话框
+     */
+    private Dialog mProgressDialog;
+
+    /**
+     * 显示进度对话框
+     */
+    private void showProgressDialog(String message) {
+        if (mProgressDialog == null) {
+            mProgressDialog = new Dialog(getActivity(), R.style.Theme_MyDialog);
+            mProgressDialog.setContentView(R.layout.loading_dialog);
+            mProgressDialog.setCancelable(false);
+            TextView msg = (TextView) mProgressDialog.findViewById(R.id.dialog_msg);
+            msg.setText(message);
+            mProgressDialog.show();
+
+        }
+        mProgressDialog.show();
+    }
+
+    /**
+     * 关闭进度对话框
+     */
+    private void closeProgressDialog() {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+        }
     }
 
     private void operateFeedback() {

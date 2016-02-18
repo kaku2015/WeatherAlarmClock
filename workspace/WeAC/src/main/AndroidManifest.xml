@@ -211,6 +211,15 @@
         android:name="com.umeng.fb.ConversationActivity"
         android:theme="@style/Transparent.Light"/>
         -->
+
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
     </application>
 
 </manifest>

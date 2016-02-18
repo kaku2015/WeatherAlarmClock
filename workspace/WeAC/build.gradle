@@ -72,7 +72,8 @@ dependencies {
     compile 'jp.wasabeef:recyclerview-animators:2.2.0'
     compile 'com.balysv:material-ripple:1.0.2'
     compile 'com.makeramen:roundedimageview:2.2.1'
-    compile project(':overscroll-decor')
+    compile 'me.everything:overscroll-decor-android:1.0.1'
     compile 'com.umeng:fb:5.4.0'
     compile 'com.umeng.analytics:analytics:latest.integration'
+    compile files('libs/umeng-update-v2.6.0.1.jar')
 }

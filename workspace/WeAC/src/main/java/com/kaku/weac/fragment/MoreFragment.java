@@ -7,10 +7,12 @@ import android.animation.IntEvaluator;
 import android.animation.ValueAnimator;
 import android.app.ActivityManager;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -146,8 +148,8 @@ public class MoreFragment extends BaseFragment {
             }
         });
 
-        // 软件更新
-        view.findViewById(R.id.software_update).setOnClickListener(new OnClickListener() {
+        // 检查更新
+        view.findViewById(R.id.check_update).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 operateUpdate();
@@ -155,10 +157,30 @@ public class MoreFragment extends BaseFragment {
             }
         });
 
+        // 赏个好评
+        view.findViewById(R.id.give_favor).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                giveFavor();
+            }
+        });
+
+    }
+
+    private void giveFavor() {
+        try {
+            Uri uri = Uri.parse("market://details?id=" + getActivity().getPackageName());
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            ToastUtil.showShortToast(getActivity(), getString(R.string.launch_market_fail));
+        }
     }
 
     private void operateUpdate() {
         // UmengUpdateAgent.forceUpdate(getActivity());
+        // 关闭友盟自动弹出提示
         UmengUpdateAgent.setUpdateAutoPopup(false);
         // FIXME：提示没有wifi是否更新
         UmengUpdateAgent.setUpdateOnlyWifi(false);

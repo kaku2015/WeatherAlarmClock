@@ -39,26 +39,11 @@
                             android:text="@string/theme"/>
                     </LinearLayout>
                 </com.balysv.materialripple.MaterialRippleLayout>
+            </LinearLayout>
 
-                <View style="@style/more_item_divider"/>
+            <View style="@style/more_item_area_divider"/>
 
-                <com.balysv.materialripple.MaterialRippleLayout
-                    android:id="@+id/discover_app"
-                    style="@style/more_item_area_ripple"
-                    app:mrl_rippleColor="@color/white">
-
-                    <LinearLayout
-                        style="@style/more_item_group">
-
-                        <TextView
-                            style="@style/more_item_title_tv"
-                            android:drawableLeft="@drawable/ic_more_discover_app"
-                            android:text="@string/discover_app"/>
-
-                    </LinearLayout>
-                </com.balysv.materialripple.MaterialRippleLayout>
-
-                <View style="@style/more_item_divider"/>
+            <LinearLayout style="@style/more_item_area">
 
                 <com.balysv.materialripple.MaterialRippleLayout
                     android:id="@+id/scan_scan"
@@ -178,6 +163,7 @@
                         <TextView
                             style="@style/more_item_title_tv"
                             android:drawableLeft="@drawable/ic_more_friend_share"
+                            android:drawableRight="@null"
                             android:text="@string/friend_share"/>
 
                     </LinearLayout>
@@ -186,7 +172,7 @@
                 <View style="@style/more_item_divider"/>
 
                 <com.balysv.materialripple.MaterialRippleLayout
-                    android:id="@+id/software_update"
+                    android:id="@+id/check_update"
                     style="@style/more_item_area_ripple"
                     app:mrl_rippleColor="@color/white">
 
@@ -197,7 +183,7 @@
                             style="@style/more_item_title_tv"
                             android:drawableLeft="@drawable/ic_more_software_update"
                             android:drawableRight="@null"
-                            android:text="@string/software_update"/>
+                            android:text="@string/check_update"/>
 
                     </LinearLayout>
                 </com.balysv.materialripple.MaterialRippleLayout>
@@ -241,7 +227,7 @@
                 <View style="@style/more_item_divider"/>
 
                 <com.balysv.materialripple.MaterialRippleLayout
-                    android:id="@+id/give_good_reputation"
+                    android:id="@+id/give_favor"
                     style="@style/more_item_area_ripple"
                     app:mrl_rippleColor="@color/white">
 
@@ -251,6 +237,7 @@
                         <TextView
                             style="@style/more_item_title_tv"
                             android:drawableLeft="@drawable/ic_more_give_good_reputation"
+                            android:drawableRight="@null"
                             android:text="@string/give_good_reputation"/>
 
                     </LinearLayout>
@@ -275,24 +262,6 @@
                 </com.balysv.materialripple.MaterialRippleLayout>
             </LinearLayout>
 
-            <View style="@style/more_item_area_divider"/>
-
-            <com.balysv.materialripple.MaterialRippleLayout
-                android:id="@+id/quit"
-                style="@style/more_item_area_ripple"
-                app:mrl_rippleColor="@color/white">
-
-                <LinearLayout
-                    style="@style/more_item_group"
-                    android:background="@color/black_trans20">
-
-                    <TextView
-                        style="@style/more_item_title_tv"
-                        android:drawableLeft="@drawable/ic_more_quit"
-                        android:text="@string/quit"/>
-
-                </LinearLayout>
-            </com.balysv.materialripple.MaterialRippleLayout>
         </LinearLayout>
     </ScrollView>
 

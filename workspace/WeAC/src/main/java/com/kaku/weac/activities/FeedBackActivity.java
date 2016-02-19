@@ -19,7 +19,6 @@ import com.umeng.fb.fragment.FeedbackFragment;
  * @version 1.0 2016/2/15
  */
 public class FeedbackActivity extends BaseActivity {
-    FeedbackFragment mFeedbackFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +27,10 @@ public class FeedbackActivity extends BaseActivity {
         assignViews();
 
         String conversationId = getIntent().getStringExtra(FeedbackFragment.BUNDLE_KEY_CONVERSATION_ID);
-        mFeedbackFragment = FeedbackFragment.newInstance(conversationId);
+        FeedbackFragment feedbackFragment = FeedbackFragment.newInstance(conversationId);
 
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.container, mFeedbackFragment)
+                .add(R.id.container, feedbackFragment)
                 .commit();
 
     }

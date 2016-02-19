@@ -165,6 +165,23 @@ public class MoreFragment extends BaseFragment {
             }
         });
 
+        // 好友分享
+        view.findViewById(R.id.friend_share).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                friendShare();
+            }
+        });
+
+    }
+
+    public void friendShare() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+//        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.friend_share));
+        intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(Intent.createChooser(intent, getString(R.string.friend_share)));
     }
 
     private void giveFavor() {
@@ -264,58 +281,6 @@ public class MoreFragment extends BaseFragment {
         // 更新壁纸
         MyUtil.setBackground(vg, getActivity());
     }
-
-/*    @Override
-    public void onClick(View v) {
-        if (MyUtil.isFastDoubleClick()) {
-            return;
-        }
-        switch (v.getId()) {
-            // 主题
-            case R.id.theme:
-                Intent intent = new Intent(getActivity(), ThemeActivity.class);
-                // 启动主题界面
-                startActivity(intent);
-                break;
-            // 扫码
-            case R.id.scan_scan:
-                Intent openCameraIntent = new Intent(getActivity(), CaptureActivity.class);
-                startActivity(openCameraIntent);
-                break;
-            // 造码
-            case R.id.generate_code:
-                // 打开扫描界面扫描条形码或二维码
-                Intent generateCodeIntent = new Intent(getActivity(), GenerateCodeActivity.class);
-                startActivity(generateCodeIntent);
-                break;
-            // 清除缓存
-            case R.id.clear_memory:
-                operateClearMemory();
-                break;
-            // 一键清理
-            case R.id.clean_up:
-                new CleanUpAsyncTask().execute();
-                break;
-            // 意见反馈
-            case R.id.feedback:
-                FeedbackAgent mFeedbackAgent = new FeedbackAgent(getActivity());
-                // 关闭反馈推送
-                mFeedbackAgent.closeFeedbackPush();
-                // 关闭语音反馈
-                mFeedbackAgent.closeAudioFeedback();
-                mFeedbackAgent.setWelcomeInfo("感谢您提出反馈意见,我会尽快回复");
-                Intent intentFeedback = new Intent(getActivity(), FeedbackActivity.class);
-                intentFeedback.putExtra(FeedbackFragment.BUNDLE_KEY_CONVERSATION_ID,
-                        mFeedbackAgent.getDefaultConversation().getId());
-                startActivity(intentFeedback);
-                break;
-            // 关于
-            case R.id.abort:
-                Intent intentAbout = new Intent(getActivity(), AboutActivity.class);
-                startActivity(intentAbout);
-                break;
-        }
-    }*/
 
     private void operateClearMemory() {
         // 清理前缓存

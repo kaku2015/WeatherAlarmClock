@@ -149,6 +149,10 @@
         <activity
             android:name=".activities.AboutActivity"
             android:theme="@style/Transparent.Light"/>
+        <activity
+            android:name=".activities.FAQActivity"
+            android:theme="@style/Transparent.Light">
+        </activity>
 
         <receiver
             android:name=".broadcast.AlarmClockBroadcast"
@@ -214,11 +218,12 @@
 
         <service
             android:name="com.umeng.update.net.DownloadingService"
-            android:process=":DownloadingService" >
+            android:process=":DownloadingService">
         </service>
+
         <activity
             android:name="com.umeng.update.UpdateDialogActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
         </activity>
     </application>
 

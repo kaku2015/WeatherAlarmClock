@@ -191,6 +191,25 @@
                 <View style="@style/more_item_divider"/>
 
                 <com.balysv.materialripple.MaterialRippleLayout
+                    android:id="@+id/give_favor"
+                    style="@style/more_item_area_ripple"
+                    app:mrl_rippleColor="@color/white">
+
+                    <LinearLayout
+                        style="@style/more_item_group">
+
+                        <TextView
+                            style="@style/more_item_title_tv"
+                            android:drawableLeft="@drawable/ic_more_give_good_reputation"
+                            android:drawableRight="@null"
+                            android:text="@string/give_good_reputation"/>
+
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
+
+                <View style="@style/more_item_divider"/>
+
+                <com.balysv.materialripple.MaterialRippleLayout
                     android:id="@+id/faq"
                     style="@style/more_item_area_ripple"
                     app:mrl_rippleColor="@color/white">
@@ -220,25 +239,6 @@
                             style="@style/more_item_title_tv"
                             android:drawableLeft="@drawable/ic_more_suggestion_feedback"
                             android:text="@string/feedback"/>
-
-                    </LinearLayout>
-                </com.balysv.materialripple.MaterialRippleLayout>
-
-                <View style="@style/more_item_divider"/>
-
-                <com.balysv.materialripple.MaterialRippleLayout
-                    android:id="@+id/give_favor"
-                    style="@style/more_item_area_ripple"
-                    app:mrl_rippleColor="@color/white">
-
-                    <LinearLayout
-                        style="@style/more_item_group">
-
-                        <TextView
-                            style="@style/more_item_title_tv"
-                            android:drawableLeft="@drawable/ic_more_give_good_reputation"
-                            android:drawableRight="@null"
-                            android:text="@string/give_good_reputation"/>
 
                     </LinearLayout>
                 </com.balysv.materialripple.MaterialRippleLayout>

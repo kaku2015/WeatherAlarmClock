@@ -11009,6 +11009,8 @@
     <string name="camera">相机</string>
     <string name="camera_error">相机错误</string>
     <string name="can_not_find_current_location">无法获取当前位置,请手动添加城市</string>
+    <string name="can_not_location">☆ 无法自动定位？</string>
+    <string name="can_not_location_detail">请检查手机设置是否已经授权定位权限，如果还是无法定位或定位不准确请手动添加城市。</string>
     <string name="cancel">取消</string>
     <string name="capture">拍照</string>
     <string name="car_wash">洗车</string>
@@ -11153,6 +11155,10 @@
     <string name="nap_to">小睡至%1$s闹钟再次响起，轻触取消</string>
     <string name="new_alarm_clock">新建闹钟</string>
     <string name="no">暂无</string>
+    <string name="no_alarm">☆ 闹钟没有响起？</string>
+    <string name="no_alarm_detail1">1.关机了</string>
+    <string name="no_alarm_detail2">2.应用被其他优化软件清理，请进入该软件并将天气闹钟加入忽略清单。</string>
+    <string name="no_alarm_detail3">3.手机重启时没有允许天气闹钟自动启动。</string>
     <string name="no_city_info">城市不存在</string>
     <string name="no_city_weather_info">暂无天气预报信息</string>
     <string name="no_data">暂无数据</string>
@@ -11226,8 +11232,8 @@
     <string name="select_logo">从相册选取Logo</string>
     <string name="selected_xx_item">已选择%1$d项</string>
     <string name="set_default">设为默认</string>
-    <string name="share_text">我正在使用『天气闹钟』，推荐您也来用用。下载地址：https://github.com/kaku2015
-        或登陆应用市场搜索天气闹钟即可下载。</string>
+    <string name="share_text">我正在使用『天气闹钟』，推荐您也来试试。下载地址：https://github.com/kaku2015
+        或登陆应用商城搜索『天气闹钟』即可下载。</string>
     <string name="siesta">午睡</string>
     <string name="six_h">六</string>
     <string name="sport">运动</string>
@@ -11345,6 +11351,10 @@
     <string name="wea">天气</string>
     <string name="wea_prompt">天气提示</string>
     <string name="weac_version">天气闹钟 v%1$s</string>
+    <string name="weather_can_not_update">☆ 天气不能更新？</string>
+    <string name="weather_can_not_update_detail">请检查网络环境，如果网络正常仍然无法更新，请稍后再试。</string>
+    <string name="weather_prompt_wrong">☆ 天气提示城市不准确？</string>
+    <string name="weather_prompt_wrong_detail">进入城市管理界面，将天气提示城市设为默认。</string>
     <string name="weather_type">%1$s   %2$s~%3$s℃</string>
     <string name="wednesday">周三</string>
     <string name="week">周</string>
@@ -13028,6 +13038,22 @@
         <item name="android:layout_width">0.5dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">@color/white_trans20</item>
+    </style>
+    <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles_faq.xml -->
+    <eat-comment/>
+    <style name="faq_detail">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:textSize">@dimen/big_small</item>
+        <item name="android:layout_marginTop">2dp</item>
+    </style>
+    <style name="faq_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black_text_normal_common</item>
+        <item name="android:textSize">@dimen/medium</item>
+        <item name="android:layout_marginTop">10dp</item>
     </style>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/styles_city.xml -->
     <eat-comment/>

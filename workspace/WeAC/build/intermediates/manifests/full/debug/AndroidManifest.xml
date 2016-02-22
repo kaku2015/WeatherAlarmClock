@@ -153,6 +153,10 @@
         <activity
             android:name="com.kaku.weac.activities.AboutActivity"
             android:theme="@style/Transparent.Light" />
+        <activity
+            android:name="com.kaku.weac.activities.FAQActivity"
+            android:theme="@style/Transparent.Light" >
+        </activity>
 
         <receiver
             android:name="com.kaku.weac.broadcast.AlarmClockBroadcast"

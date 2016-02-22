@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.kaku.weac.R;
 import com.kaku.weac.activities.AboutActivity;
+import com.kaku.weac.activities.FAQActivity;
 import com.kaku.weac.activities.FeedbackActivity;
 import com.kaku.weac.activities.GenerateCodeActivity;
 import com.kaku.weac.activities.ThemeActivity;
@@ -170,6 +171,14 @@ public class MoreFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 friendShare();
+            }
+        });
+
+        // 常见问题
+        view.findViewById(R.id.faq).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyUtil.startActivity(getActivity(), FAQActivity.class);
             }
         });
 

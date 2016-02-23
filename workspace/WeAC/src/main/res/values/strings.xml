@@ -290,8 +290,8 @@
 
     <!--关于-->
     <string name="weac_version">天气闹钟 v%1$s</string>
-    <string name="about_words">风雨无阻，准时与你相约</string>
-    <string name="copyright">Copyright © 2016 Kaku. \nAll Rights Reserved.</string>
+    <string name="weac_slogan">准时叫醒你的梦想</string>
+    <string name="copyright">© 2016 Kaku. All Rights Reserved.</string>
 
     <!--软件更新-->
     <string name="latest_version">当前已是最新版本</string>
@@ -303,14 +303,15 @@
     <string name="share_text">我正在使用『天气闹钟』，推荐您也来试试。下载地址：https://github.com/kaku2015
         或登陆应用商城搜索『天气闹钟』即可下载。</string>
     <!--常见问题-->
-    <string name="no_alarm">☆ 闹钟没有响起？</string>
-    <string name="no_alarm_detail1">1.关机了</string>
-    <string name="no_alarm_detail2">2.应用被其他优化软件清理，请进入该软件并将天气闹钟加入忽略清单。</string>
-    <string name="no_alarm_detail3">3.手机重启时没有允许天气闹钟自动启动。</string>
-    <string name="weather_prompt_wrong">☆ 天气提示城市不准确？</string>
+    <string name="no_alarm">☆ 闹钟没有正常响起\n以下原因均会导致闹钟无法正常响起：</string>
+    <string name="no_alarm_detail1">1.关机，请开启您的设备，确保天气闹钟能够正常运行</string>
+    <string name="no_alarm_detail2">2.其他优化软件清理了天气闹钟，请进入该优化软件将天气闹钟加入忽略清单。</string>
+    <string name="no_alarm_detail3">3.手机重启时没有允许天气闹钟自动启动，请在手机设置中开启天气闹钟自动启动功能，确保闹钟正常响起。</string>
+    <string name="weather_prompt_wrong">☆ 天气提示城市不准确</string>
     <string name="weather_prompt_wrong_detail">进入城市管理界面，将天气提示城市设为默认。</string>
-    <string name="can_not_location">☆ 无法自动定位？</string>
-    <string name="can_not_location_detail">请检查手机设置是否已经授权定位权限，如果还是无法定位或定位不准确请手动添加城市。</string>
+    <string name="can_not_location">☆ 无法自动定位城市</string>
+    <string name="can_not_location_detail">自动定位功能需要打开GPS，并授权天气闹钟使用该功能，
+        请确认是否打开并授权该功能，如果自动定位功能设置正常仍出现无法定位或定位不准确的情况，请您手动添加城市。</string>
     <string name="weather_can_not_update">☆ 天气不能更新？</string>
-    <string name="weather_can_not_update_detail">请检查网络环境，如果网络正常仍然无法更新，请稍后再试。</string>
+    <string name="weather_can_not_update_detail">天气更新需要连接网络，请确认网络连接是否正常，若网络正常仍然无法更新，请稍后再试。</string>
 </resources>

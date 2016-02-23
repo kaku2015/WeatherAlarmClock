@@ -10978,7 +10978,6 @@
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="abort">关于</string>
-    <string name="about_words">风雨无阻，准时与你相约</string>
     <string name="add_alarm_clock">  添加闹钟  </string>
     <string name="add_city">添加城市</string>
     <string name="add_city_fail">添加城市失败，请重试</string>
@@ -11009,8 +11008,9 @@
     <string name="camera">相机</string>
     <string name="camera_error">相机错误</string>
     <string name="can_not_find_current_location">无法获取当前位置,请手动添加城市</string>
-    <string name="can_not_location">☆ 无法自动定位？</string>
-    <string name="can_not_location_detail">请检查手机设置是否已经授权定位权限，如果还是无法定位或定位不准确请手动添加城市。</string>
+    <string name="can_not_location">☆ 无法自动定位城市</string>
+    <string name="can_not_location_detail">自动定位功能需要打开GPS，并授权天气闹钟使用该功能，
+        请确认是否打开并授权该功能，如果自动定位功能设置正常仍出现无法定位或定位不准确的情况，请您手动添加城市。</string>
     <string name="cancel">取消</string>
     <string name="capture">拍照</string>
     <string name="car_wash">洗车</string>
@@ -11038,7 +11038,7 @@
     <string name="colors">颜色</string>
     <string name="connection_time_out">连接超时</string>
     <string name="copy">复制</string>
-    <string name="copyright">Copyright © 2016 Kaku. \nAll Rights Reserved.</string>
+    <string name="copyright">© 2016 Kaku. All Rights Reserved.</string>
     <string name="countdown_day_hour_minute">距闹钟响起还有%1$d天%2$d小时%3$d分</string>
     <string name="countdown_hour_minute">距闹钟响起还有%1$d小时%2$d分</string>
     <string name="countdown_minute">距闹钟响起还有%1$d分钟</string>
@@ -11155,10 +11155,10 @@
     <string name="nap_to">小睡至%1$s闹钟再次响起，轻触取消</string>
     <string name="new_alarm_clock">新建闹钟</string>
     <string name="no">暂无</string>
-    <string name="no_alarm">☆ 闹钟没有响起？</string>
-    <string name="no_alarm_detail1">1.关机了</string>
-    <string name="no_alarm_detail2">2.应用被其他优化软件清理，请进入该软件并将天气闹钟加入忽略清单。</string>
-    <string name="no_alarm_detail3">3.手机重启时没有允许天气闹钟自动启动。</string>
+    <string name="no_alarm">☆ 闹钟没有正常响起\n以下原因均会导致闹钟无法正常响起：</string>
+    <string name="no_alarm_detail1">1.关机，请开启您的设备，确保天气闹钟能够正常运行</string>
+    <string name="no_alarm_detail2">2.其他优化软件清理了天气闹钟，请进入该优化软件将天气闹钟加入忽略清单。</string>
+    <string name="no_alarm_detail3">3.手机重启时没有允许天气闹钟自动启动，请在手机设置中开启天气闹钟自动启动功能，确保闹钟正常响起。</string>
     <string name="no_city_info">城市不存在</string>
     <string name="no_city_weather_info">暂无天气预报信息</string>
     <string name="no_data">暂无数据</string>
@@ -11350,10 +11350,11 @@
     <string name="we_chat">微信</string>
     <string name="wea">天气</string>
     <string name="wea_prompt">天气提示</string>
+    <string name="weac_slogan">准时叫醒你的梦想</string>
     <string name="weac_version">天气闹钟 v%1$s</string>
     <string name="weather_can_not_update">☆ 天气不能更新？</string>
-    <string name="weather_can_not_update_detail">请检查网络环境，如果网络正常仍然无法更新，请稍后再试。</string>
-    <string name="weather_prompt_wrong">☆ 天气提示城市不准确？</string>
+    <string name="weather_can_not_update_detail">天气更新需要连接网络，请确认网络连接是否正常，若网络正常仍然无法更新，请稍后再试。</string>
+    <string name="weather_prompt_wrong">☆ 天气提示城市不准确</string>
     <string name="weather_prompt_wrong_detail">进入城市管理界面，将天气提示城市设为默认。</string>
     <string name="weather_type">%1$s   %2$s~%3$s℃</string>
     <string name="wednesday">周三</string>

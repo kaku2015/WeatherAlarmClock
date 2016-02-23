@@ -126,6 +126,14 @@ public class MyUtil {
         }
     }
 
+    public static void setStatusBarTranslucent(Activity activity) {
+        // 如果版本在4.4以上
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            // 状态栏透明
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+    }
+
     public static int getStatusBarHeight(Activity activity) {
         int height = 0;
         int resourceId = activity.getResources().getIdentifier("status_bar_height", "dimen",
@@ -1209,7 +1217,7 @@ public class MyUtil {
         edit.apply();
     }
 
-    public static void startActivity(Context context,Class<?> cls) {
+    public static void startActivity(Context context, Class<?> cls) {
         Intent intent = new Intent(context, cls);
         context.startActivity(intent);
     }

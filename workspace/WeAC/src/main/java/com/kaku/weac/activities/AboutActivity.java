@@ -62,7 +62,7 @@ public class AboutActivity extends BaseActivity {
 
         try {
             AssetManager mgr = getAssets();
-            Typeface fontFace = Typeface.createFromAsset(mgr, "fonts/lingzhiti_about.ttf");
+            Typeface fontFace = Typeface.createFromAsset(mgr, "fonts/weac_slogan.ttf");
             // 字体文件必须是true type font的格式(ttf)；
             // 当使用外部字体却又发现字体没有变化的时候(以 Droid Sans代替)，通常是因为
             // 这个字体android没有支持,而非你的程序发生了错误

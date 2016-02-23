@@ -24,53 +24,58 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray_background_color"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/border_margin"
-        android:paddingRight="@dimen/border_margin">
+        android:background="@color/gray_background_color">
 
-        <TextView
-            style="@style/faq_title"
-            android:text="@string/no_alarm"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/border_margin"
+            android:paddingRight="@dimen/border_margin">
 
-        <TextView
-            style="@style/faq_detail"
-            android:text="@string/no_alarm_detail1"/>
+            <TextView
+                style="@style/faq_title"
+                android:text="@string/no_alarm"/>
 
-        <TextView
-            style="@style/faq_detail"
-            android:text="@string/no_alarm_detail2"/>
+            <TextView
+                style="@style/faq_detail"
+                android:text="@string/no_alarm_detail1"/>
 
-        <TextView
-            style="@style/faq_detail"
-            android:text="@string/no_alarm_detail3"/>
+            <TextView
+                style="@style/faq_detail"
+                android:text="@string/no_alarm_detail2"/>
 
-        <TextView
-            style="@style/faq_title"
-            android:text="@string/weather_prompt_wrong"/>
+            <TextView
+                style="@style/faq_detail"
+                android:text="@string/no_alarm_detail3"/>
 
-        <TextView
-            style="@style/faq_detail"
-            android:text="@string/weather_prompt_wrong_detail"/>
+            <TextView
+                style="@style/faq_title"
+                android:text="@string/weather_prompt_wrong"/>
 
-        <TextView
-            style="@style/faq_title"
-            android:text="@string/weather_can_not_update"/>
+            <TextView
+                style="@style/faq_detail"
+                android:text="@string/weather_prompt_wrong_detail"/>
 
-        <TextView
-            style="@style/faq_detail"
-            android:text="@string/weather_can_not_update_detail"/>
+            <TextView
+                style="@style/faq_title"
+                android:text="@string/weather_can_not_update"/>
 
-        <TextView
-            style="@style/faq_title"
-            android:text="@string/can_not_location"/>
+            <TextView
+                style="@style/faq_detail"
+                android:text="@string/weather_can_not_update_detail"/>
 
-        <TextView
-        style="@style/faq_detail"
-        android:text="@string/can_not_location_detail"/>
+            <TextView
+                style="@style/faq_title"
+                android:text="@string/can_not_location"/>
 
-    </LinearLayout>
+            <TextView
+                style="@style/faq_detail"
+                android:text="@string/can_not_location_detail"/>
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

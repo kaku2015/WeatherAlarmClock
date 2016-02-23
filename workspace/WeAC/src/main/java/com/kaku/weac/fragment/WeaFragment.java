@@ -729,55 +729,59 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
 
         @Override
         public void onReceiveLocation(BDLocation location) {
-            mLocationClient.stop();
-            mLocationClient.unRegisterLocationListener(mBDLocationListener);
-            if (location == null) {
-                ToastUtil.showShortToast(getActivity(), getString(R.string.location_fail));
-                return;
-            }
-            LogUtil.d(LOG_TAG, "纬度：" + location.getLatitude() + ",经度：" + location.getLongitude());
+            try {
+                mLocationClient.stop();
+                mLocationClient.unRegisterLocationListener(mBDLocationListener);
+                if (location == null) {
+                    ToastUtil.showShortToast(getActivity(), getString(R.string.location_fail));
+                    return;
+                }
+                LogUtil.d(LOG_TAG, "纬度：" + location.getLatitude() + ",经度：" + location.getLongitude());
 
-            String address = location.getAddrStr();
-            // 定位成功
-            if (161 == location.getLocType() && address != null) {
-                String cityName = MyUtil.formatCity(address);
-                if (cityName != null) {
-                    LogUtil.d(LOG_TAG, "城市名：" + cityName);
-                    mCityName = cityName;
-                    mCityWeatherCode = getString(R.string.auto_location);
+                String address = location.getAddrStr();
+                // 定位成功
+                if (161 == location.getLocType() && address != null) {
+                    String cityName = MyUtil.formatCity(address);
+                    if (cityName != null) {
+                        LogUtil.d(LOG_TAG, "城市名：" + cityName);
+                        mCityName = cityName;
+                        mCityWeatherCode = getString(R.string.auto_location);
 
-                    // 初次加载定位保存
-                    if (mIsFirstUse) {
-                        SharedPreferences share = getActivity().getSharedPreferences(
-                                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = share.edit();
-                        // 保存默认的城市名
-                        editor.putString(WeacConstants.DEFAULT_CITY_NAME, mCityName);
-                        // 保存默认的天气代码
-                        editor.putString(WeacConstants.DEFAULT_WEATHER_CODE, mCityWeatherCode);
-                        editor.apply();
-                        mIsFirstUse = false;
-                    }
+                        // 初次加载定位保存
+                        if (mIsFirstUse) {
+                            SharedPreferences share = getActivity().getSharedPreferences(
+                                    WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = share.edit();
+                            // 保存默认的城市名
+                            editor.putString(WeacConstants.DEFAULT_CITY_NAME, mCityName);
+                            // 保存默认的天气代码
+                            editor.putString(WeacConstants.DEFAULT_WEATHER_CODE, mCityWeatherCode);
+                            editor.apply();
+                            mIsFirstUse = false;
+                        }
 
-                    // 立刻更新
-                    if (mIsPromptRefresh) {
-                        LogUtil.d(LOG_TAG, "onReceiveLocation：refreshWeather()");
-                        refreshWeather();
+                        // 立刻更新
+                        if (mIsPromptRefresh) {
+                            LogUtil.d(LOG_TAG, "onReceiveLocation：refreshWeather()");
+                            refreshWeather();
+                        } else {
+                            mIsPromptRefresh = true;
+                            mIsLocated = true;
+                            isPrepared = true;
+                            LogUtil.d(LOG_TAG, "onReceiveLocation：lazyLoad()");
+                            lazyLoad();
+                        }
                     } else {
-                        mIsPromptRefresh = true;
-                        mIsLocated = true;
-                        isPrepared = true;
-                        LogUtil.d(LOG_TAG, "onReceiveLocation：lazyLoad()");
-                        lazyLoad();
+                        stopRefresh();
+                        ToastUtil.showShortToast(getActivity(), getString(R.string.can_not_find_current_location));
                     }
+                    // 定位失败
                 } else {
                     stopRefresh();
-                    ToastUtil.showShortToast(getActivity(), getString(R.string.can_not_find_current_location));
+                    ToastUtil.showShortToast(getActivity(), getString(R.string.auto_location_error_retry));
                 }
-                // 定位失败
-            } else {
-                stopRefresh();
-                ToastUtil.showShortToast(getActivity(), getString(R.string.auto_location_error_retry));
+            } catch (Exception e) {
+                LogUtil.e(LOG_TAG, "onReceiveLocation: " + e.toString());
             }
 
         }

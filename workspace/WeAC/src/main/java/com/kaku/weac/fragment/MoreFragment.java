@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.kaku.weac.Listener.OnVisibleListener;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.AboutActivity;
 import com.kaku.weac.activities.FAQActivity;
@@ -60,7 +61,7 @@ import me.itangqi.waveloadingview.WaveLoadingView;
  * @author 咖枯
  * @version 1.0 2015
  */
-public class MoreFragment extends BaseFragment {
+public class MoreFragment extends LazyLoadFragment {
     /**
      * Log tag ：MoreFragment
      */
@@ -70,18 +71,45 @@ public class MoreFragment extends BaseFragment {
     private ActivityManager mActivityManager;
     private WaveLoadingView mClearMemoryIv;
 
+    /**
+     * 标志位，标志已经初始化完成
+     */
+    private boolean mIsPrepared;
+
+    private OnVisibleListener mOnVisibleListener;
+
+    @Override
+    protected void lazyLoad() {
+        if (!mIsPrepared && mIsVisible) {
+            if (mOnVisibleListener != null) {
+                mOnVisibleListener.onVisible();
+            }
+        }
+        if (mIsPrepared && mIsVisible) {
+            updateUIStatus();
+        }
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         OttoAppConfig.getInstance().register(this);
-        mActivityManager = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fm_more, container, false);
-        assignViews(view);
+        final View view = inflater.inflate(R.layout.fm_more, container, false);
+
+        mOnVisibleListener = new OnVisibleListener() {
+            @Override
+            public void onVisible() {
+                mActivityManager = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+                assignViews(view);
+
+                mIsPrepared = true;
+            }
+        };
         return view;
     }
 
@@ -92,6 +120,8 @@ public class MoreFragment extends BaseFragment {
         mUsedMemoryTv = (TextView) view.findViewById(R.id.used_memory_tv);
         mCleanUpCP = (CircleProgress) view.findViewById(R.id.circle_progress);
         mClearMemoryIv = (WaveLoadingView) view.findViewById(R.id.wave_view);
+
+        updateUIStatus();
 
         // 主题
         view.findViewById(R.id.theme).setOnClickListener(new OnClickListener() {
@@ -490,15 +520,7 @@ public class MoreFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         LogUtil.d(LOG_TAG, "onResume");
-        updateUIStatus();
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        LogUtil.d(LOG_TAG, "setUserVisibleHint");
-        if (getUserVisibleHint()) {
-            LogUtil.d(LOG_TAG, "getUserVisibleHint = true");
+        if (mIsPrepared) {
             updateUIStatus();
         }
     }

@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.kaku.weac.Listener.OnVisibleListener;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.RingSelectActivity;
 import com.kaku.weac.activities.TimerOnTimeActivity;
@@ -36,7 +37,7 @@ import java.util.Calendar;
  * @author 咖枯
  * @version 1.0 2015/12/27
  */
-public class TimeFragment extends BaseFragment implements View.OnClickListener,
+public class TimeFragment extends LazyLoadFragment implements View.OnClickListener,
         MyTimer.OnTimeChangeListener, MyTimer.OnMinChangListener {
     /**
      * Log tag ：TimeFragment
@@ -88,11 +89,38 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
      */
     private boolean isQuickTimerOptionsInitialized;
 
+    /**
+     * 标志位，标志已经初始化完成
+     */
+    private boolean mIsPrepared;
+
+    private OnVisibleListener mOnVisibleListener;
+
+    @Override
+    protected void lazyLoad() {
+        if (!mIsPrepared && mIsVisible) {
+            if (mOnVisibleListener != null) {
+                mOnVisibleListener.onVisible();
+            }
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fm_time, container, false);
+        final View view = inflater.inflate(R.layout.fm_time, container, false);
 
+        mOnVisibleListener = new OnVisibleListener() {
+            @Override
+            public void onVisible() {
+                assignViews(view);
+            }
+        };
+
+        return view;
+    }
+
+    private void assignViews(View view) {
         mStartLLyt = (ViewGroup) view.findViewById(R.id.btn_start_llyt);
         mStartLLyt2 = (ViewGroup) view.findViewById(R.id.btn_start_llyt2);
 
@@ -105,28 +133,21 @@ public class TimeFragment extends BaseFragment implements View.OnClickListener,
         // 铃声按钮
         TextView ringBtn = (TextView) view.findViewById(R.id.btn_ring);
 
-        mStartBtn2.setOnClickListener(this);
-        mStopBtn.setOnClickListener(this);
-        resetBtn.setOnClickListener(this);
-        mQuickBtn.setOnClickListener(this);
-        ringBtn.setOnClickListener(this);
+        mStartBtn2.setOnClickListener(TimeFragment.this);
+        mStopBtn.setOnClickListener(TimeFragment.this);
+        resetBtn.setOnClickListener(TimeFragment.this);
+        mQuickBtn.setOnClickListener(TimeFragment.this);
+        ringBtn.setOnClickListener(TimeFragment.this);
 
         mTimer = (MyTimer) view.findViewById(R.id.timer);
-        mTimer.setOnTimeChangeListener(this);
-        mTimer.setTimeChangListener(this);
+        mTimer.setOnTimeChangeListener(TimeFragment.this);
+        mTimer.setTimeChangListener(TimeFragment.this);
         mTimer.setModel(TimeModel.Timer);
 //        mTimer.setStartTime(0, 0, 0, true, false);
         setTimer();
+        mTimer.showAnimation();
 
-        return view;
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (getUserVisibleHint()) {
-            mTimer.showAnimation();
-        }
+        mIsPrepared = true;
     }
 
     private void setTimer() {

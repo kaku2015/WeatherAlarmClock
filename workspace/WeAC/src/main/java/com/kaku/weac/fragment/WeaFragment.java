@@ -4,7 +4,6 @@
 package com.kaku.weac.fragment;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
@@ -33,6 +32,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.handmark.pulltorefresh.library.ScrollViewListener;
 import com.kaku.weac.Listener.HttpCallbackListener;
+import com.kaku.weac.Listener.OnVisibleListener;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.CityManageActivity;
 import com.kaku.weac.activities.LifeIndexDetailActivity;
@@ -557,12 +557,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
     /**
      * 标志位，标志已经初始化完成
      */
-    private boolean isPrepared;
-
-    /**
-     * 是否已被加载过一次，第二次就不再去请求数据了
-     */
-    private boolean mHasLoadedOnce;
+    private boolean mIsPrepared;
 
     /**
      * 上次主动更新时间
@@ -611,11 +606,6 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
     private BDLocationListener mBDLocationListener;
 
     /**
-     * 进度对话框
-     */
-    private ProgressDialog mProgressDialog;
-
-    /**
      * 首次打开天气界面
      */
     private boolean mIsFirstUse = false;
@@ -629,6 +619,8 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
      * 是否自动定位过
      */
     private boolean mIsLocated = false;
+
+    private OnVisibleListener mOnVisibleListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -648,41 +640,45 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        LogUtil.i(LOG_TAG, "onCreateView");
-
         final View view = inflater.inflate(R.layout.fm_wea, container, false);
-        init(view);
 
-        mCityName = getDefaultCityName();
-        mCityWeatherCode = getDefaultWeatherCode();
+        mOnVisibleListener = new OnVisibleListener() {
+            @Override
+            public void onVisible() {
+                init(view);
 
-        // 不是第一次加载天气界面
-        if (mCityName != null) {
-            // 初始化天气
-            // FIXME: 2015/10/29
-            try {
-                initWeather(WeatherUtil.readWeatherInfo(getActivity(), mCityName));
-            } catch (Exception e) {
-                LogUtil.e(LOG_TAG, e.toString());
+                mCityName = getDefaultCityName();
+                mCityWeatherCode = getDefaultWeatherCode();
+
+                // 不是第一次加载天气界面
+                if (mCityName != null) {
+                    // 初始化天气
+                    // FIXME: 2015/10/29
+                    try {
+                        initWeather(WeatherUtil.readWeatherInfo(getActivity(), mCityName));
+                    } catch (Exception e) {
+                        LogUtil.e(LOG_TAG, e.toString());
+                    }
+
+                    // 不是自动定位
+                    if (!mCityWeatherCode.equals(getString(R.string.auto_location))) {
+                        mIsPrepared = true;
+//                        lazyLoad();
+                    } else {
+                        mIsFirstUse = false;
+                        mIsPromptRefresh = false;
+                        startLocation();
+                    }
+                } else {
+                    // 首次进入天气界面，自动定位天气
+                    mIsFirstUse = true;
+                    // 不立刻刷新
+                    mIsPromptRefresh = false;
+                    // 自动定位
+                    startLocation();
+                }
             }
-
-            isPrepared = true;
-            // 不是自动定位
-            if (!mCityWeatherCode.equals(getString(R.string.auto_location))) {
-                lazyLoad();
-            } else {
-                mIsFirstUse = false;
-                mIsPromptRefresh = false;
-                startLocation();
-            }
-        } else {
-            // 首次进入天气界面，自动定位天气
-            mIsFirstUse = true;
-            // 不立刻刷新
-            mIsPromptRefresh = false;
-            // 自动定位
-            startLocation();
-        }
+        };
         return view;
     }
 
@@ -767,9 +763,9 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                         } else {
                             mIsPromptRefresh = true;
                             mIsLocated = true;
-                            isPrepared = true;
+                            mIsPrepared = true;
                             LogUtil.d(LOG_TAG, "onReceiveLocation：lazyLoad()");
-                            lazyLoad();
+                            pullToRefresh();
                         }
                     } else {
                         stopRefresh();
@@ -789,11 +785,15 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
 
     @Override
     protected void lazyLoad() {
-        if (!isPrepared || !mIsVisible || mHasLoadedOnce) {
-            return;
+        if (!mIsPrepared && mIsVisible) {
+            if (mOnVisibleListener != null) {
+                mOnVisibleListener.onVisible();
+            }
         }
-        // 自动下拉刷新
-        pullToRefresh();
+        if (mIsPrepared && mIsVisible) {
+            // 自动下拉刷新
+            pullToRefresh();
+        }
     }
 
     /**

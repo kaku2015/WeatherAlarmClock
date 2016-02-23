@@ -781,7 +781,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                     ToastUtil.showShortToast(getActivity(), getString(R.string.auto_location_error_retry));
                 }
             } catch (Exception e) {
-                LogUtil.e(LOG_TAG, "onReceiveLocation: " + e.toString());
+                LogUtil.e(LOG_TAG, "onReceiveLocation" + e.toString());
             }
 
         }
@@ -850,11 +850,6 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                 operatingAnim.setInterpolator(lin);
                 mRefreshBtn.startAnimation(operatingAnim);
                 locationOrRefresh();
-
-                ////////////////////////
-//                Intent intent = new Intent(getActivity(), AutoUpdateService.class);
-//                getActivity().startService(intent);
-/////////////////////////////////////////////////
                 break;
             // 城市管理按钮
             case R.id.action_home:
@@ -887,16 +882,6 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                 }
                 intent1.putExtra(WeacConstants.CITY_NAME, cityName);
                 startActivityForResult(intent1, REQUEST_WEA);
-
-
-                //////////////////////
-//                Intent i = new Intent(getActivity(), AutoUpdateReceiver.class);
-//                PendingIntent p = PendingIntent.getBroadcast(getActivity(), 1000,
-//                        i, PendingIntent.FLAG_UPDATE_CURRENT);
-//                AlarmManager am = (AlarmManager) getActivity()
-//                        .getSystemService(Activity.ALARM_SERVICE);
-//                am.cancel(p);
-                //////////////////////////
                 break;
             // 雨伞指数
             case R.id.wea_life_index_rlyt_umbrella:

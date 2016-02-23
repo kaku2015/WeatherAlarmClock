@@ -180,10 +180,6 @@
                     android:process=":pushservice">
                 </service>-->
         <service
-            android:name=".test.AutoUpdateService"
-            android:exported="false">
-        </service>
-        <service
             android:name=".service.DaemonService"
             android:exported="true"
             android:process=":pushservice">
@@ -211,10 +207,6 @@
                     android:name="UMENG_CHANNEL"
                     android:value="${CHANNEL_VALUE}"/>
         -->
-
-        <receiver
-            android:name=".test.AutoUpdateReceiver"
-            android:process=":test"/>
 
         <!--
         <activity

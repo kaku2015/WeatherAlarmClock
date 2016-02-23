@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import com.kaku.weac.fragment.WeaFragment;
 import com.kaku.weac.service.DaemonService;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
+import com.kaku.weac.util.ToastUtil;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.update.UmengUpdateAgent;
@@ -481,4 +483,21 @@ public class MainActivity extends BaseActivity implements OnClickListener {
         super.onDestroy();
     }
 
+    private long mExitTime = 0;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - mExitTime) > 2000) {
+                ToastUtil.showShortToast(this, getString(R.string.press_again_exit));
+                mExitTime = System.currentTimeMillis();
+            } else {
+                MobclickAgent.onKillProcess(this);
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

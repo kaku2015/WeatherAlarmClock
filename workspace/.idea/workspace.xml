@@ -265,28 +265,16 @@
     <bookmark url="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/FAQActivity.java" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dd13465a-1f53-468b-aa88-adc0628e1005" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/SplashActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WeAC/src/main/res/layout/activity_splash.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WeAC/src/main/res/anim/splash.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WeAC/src/main/assets/fonts/weac_slogan.ttf" />
-      <change type="DELETED" beforePath="D:\AndroidStudioProjects\workspace\WeAC\src\main\assets\fonts\lingzhiti_about.ttf" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PagerSlidingTabStrip/build/outputs/aar/PagerSlidingTabStrip-release.aar" afterPath="$PROJECT_DIR$/PagerSlidingTabStrip/build/outputs/aar/PagerSlidingTabStrip-release.aar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PagerSlidingTabStrip/build/intermediates/bundles/release/classes.jar" afterPath="$PROJECT_DIR$/PagerSlidingTabStrip/build/intermediates/bundles/release/classes.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/exploded-aar/workspace/PagerSlidingTabStrip/unspecified/jars/classes.jar" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/exploded-aar/workspace/PagerSlidingTabStrip/unspecified/jars/classes.jar" />
+    <list default="true" id="dd13465a-1f53-468b-aa88-adc0628e1005" name="Default" comment="splash Activity">
+      <change type="DELETED" beforePath="D:\AndroidStudioProjects\workspace\WeAC\src\main\java\com\kaku\weac\service\NotificationCenter.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/res/resources-debug.ap_" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/res/resources-debug.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/AboutActivity.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/AboutActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/manifests/full/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/WeAC/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/MyUtil.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/MyUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/service/DaemonService.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/service/DaemonService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/MainActivity.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/generated/source/r/debug/com/kaku/weac/R.java" afterPath="$PROJECT_DIR$/WeAC/build/generated/source/r/debug/com/kaku/weac/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/symbols/debug/R.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/WeaFragment.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/WeaFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/res/layout/activity_about.xml" afterPath="$PROJECT_DIR$/WeAC/src/main/res/layout/activity_about.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/res/layout/activity_faq.xml" afterPath="$PROJECT_DIR$/WeAC/src/main/res/layout/activity_faq.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/outputs/logs/manifest-merger-debug-report.txt" afterPath="$PROJECT_DIR$/WeAC/build/outputs/logs/manifest-merger-debug-report.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/incremental/mergeAssets/debug/merger.xml" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/incremental/mergeAssets/debug/merger.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/incremental/mergeResourcesdebug/merger.xml" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/incremental/mergeResourcesdebug/merger.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build/intermediates/res/merged/debug/values/values.xml" afterPath="$PROJECT_DIR$/WeAC/build/intermediates/res/merged/debug/values/values.xml" />
@@ -324,8 +312,8 @@
       <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.571428">
-              <caret line="308" column="80" selection-start-line="308" selection-start-column="80" selection-end-line="308" selection-end-column="80" />
+            <state vertical-scroll-proportion="-3.857143">
+              <caret line="6" column="42" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -335,7 +323,17 @@
         <entry file="file://$PROJECT_DIR$/WeAC/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+              <caret line="179" column="45" selection-start-line="179" selection-start-column="45" selection-end-line="179" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DaemonService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/service/DaemonService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -344,11 +342,33 @@
       <file leaf-file-name="SplashActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/SplashActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6238806">
-              <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.24776119">
+              <caret line="51" column="80" selection-start-line="51" selection-start-column="80" selection-end-line="51" selection-end-column="80" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="496" column="31" selection-start-line="496" selection-start-column="31" selection-end-line="496" selection-end-column="31" />
+              <folding>
+                <element signature="e#14244#14280#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MoreFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/MoreFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="390" column="79" selection-start-line="390" selection-start-column="79" selection-end-line="390" selection-end-column="79" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -380,58 +400,6 @@
               <caret line="750" column="42" selection-start-line="750" selection-start-column="42" selection-end-line="750" selection-end-column="42" />
               <folding />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="splash.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/anim/splash.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_splash.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_splash.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.2">
-              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-              <folding>
-                <element signature="e#1404#1425#0" expanded="true" />
-                <element signature="e#1803#1822#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_about.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_about.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="8.066667">
-              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_faq.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_faq.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.0">
-              <caret line="31" column="21" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
           </provider>
         </entry>
       </file>
@@ -5482,8 +5450,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/GlideRoundTransform.java" />
-        <option value="$PROJECT_DIR$/roundedimageview/src/main/java/com/makeramen/roundedimageview/RoundedTransformationBuilder.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/GlideCircleTransform.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/adapter/ThemeAdapter.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/view/XCRoundRectImageView.java" />
@@ -5520,18 +5486,20 @@
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/adapter/AlarmClockAdapter.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/FeedbackActivity.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/LoadingDialog.java" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/MainActivity.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/MoreFragment.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/res/values/styles_faq.xml" />
         <option value="$PROJECT_DIR$/WeAC/src/main/res/layout/fm_more.xml" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/FAQActivity.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/MyUtil.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/WeaFragment.java" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/WeAC/src/main/res/layout/activity_splash.xml" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/WeAC/src/main/res/layout/activity_faq.xml" />
         <option value="$PROJECT_DIR$/WeAC/src/main/res/anim/splash.xml" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/MainActivity.java" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/service/NotificationCenter.java" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/service/DaemonService.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/SplashActivity.java" />
       </list>
     </option>
@@ -5982,6 +5950,40 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WeAC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="weac" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="fragment" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -6337,12 +6339,6 @@
       <option name="project" value="LOCAL" />
       <updated>1453821991541</updated>
     </task>
-    <task id="LOCAL-00024" summary="添加闹钟方法提示布局修正">
-      <created>1453298566501</created>
-      <option name="number" value="00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1453298566501</updated>
-    </task>
     <task id="LOCAL-00025" summary="添加zxing二维码扫描">
       <created>1453484817256</created>
       <option name="number" value="00025" />
@@ -6625,7 +6621,13 @@
       <option name="project" value="LOCAL" />
       <updated>1456153557236</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="splash Activity">
+      <created>1456231391844</created>
+      <option name="number" value="00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1456231391845</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -6643,8 +6645,8 @@
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Android WiFi ADB" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953864" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2224694" sideWeight="0.48720682" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38042268" sideWeight="0.5127932" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2224694" sideWeight="0.48507464" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5817575" sideWeight="0.5063966" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32249466" sideWeight="0.51608187" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.48164627" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -6658,12 +6660,13 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18576196" sideWeight="0.48507464" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5817575" sideWeight="0.4936034" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="CodotaView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38709676" sideWeight="0.4914712" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22547974" sideWeight="0.5158831" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18798666" sideWeight="0.4978678" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18798666" sideWeight="0.49573562" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953864" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" x="92" y="92" width="1736" height="856" />
@@ -6671,7 +6674,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30812013" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Analyze Dataflow to" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24471635" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39933258" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -6689,7 +6691,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="可以变更二维码颜色 保存自定义颜色" />
     <MESSAGE value="造码 使用material design dialog 需要appcompt主题 修改滑动父类继承appcompt 修改其他不整合如自定义dialog" />
     <MESSAGE value="删除自定义缓存策略" />
     <MESSAGE value="OverScroll" />
@@ -6714,7 +6715,8 @@
     <MESSAGE value="赏个好评" />
     <MESSAGE value="好友分享1" />
     <MESSAGE value="常见问题activity" />
-    <option name="LAST_COMMIT_MESSAGE" value="常见问题activity" />
+    <MESSAGE value="splash Activity" />
+    <option name="LAST_COMMIT_MESSAGE" value="splash Activity" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6845071" />
   </component>
   <component name="XDebuggerManager">
@@ -6879,20 +6881,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/BaseActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/AlarmClockNapNotificationActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="43" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/SingleFragmentActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -7128,33 +7116,11 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="224" column="13" selection-start-line="224" selection-start-column="13" selection-end-line="224" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/values/styles_city.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/MoreFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="185" column="0" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#3321#3506#0" expanded="false" />
-            <element signature="e#3505#3506#0" expanded="false" />
-            <element signature="e#5759#5942#0" expanded="false" />
-            <element signature="e#5941#5942#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -7186,6 +7152,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="11" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#1004#0" expanded="true" />
+            <element signature="e#851#993#0" expanded="true" />
+            <element signature="e#992#993#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -7223,22 +7194,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.571428">
-          <caret line="308" column="80" selection-start-line="308" selection-start-column="80" selection-end-line="308" selection-end-column="80" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -7311,10 +7266,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/MoreFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="390" column="79" selection-start-line="390" selection-start-column="79" selection-end-line="390" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="179" column="45" selection-start-line="179" selection-start-column="45" selection-end-line="179" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.857143">
+          <caret line="6" column="42" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="496" column="31" selection-start-line="496" selection-start-column="31" selection-end-line="496" selection-end-column="31" />
+          <folding>
+            <element signature="e#14244#14280#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/service/DaemonService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/SplashActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6238806">
-          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.24776119">
+          <caret line="51" column="80" selection-start-line="51" selection-start-column="80" selection-end-line="51" selection-end-column="80" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

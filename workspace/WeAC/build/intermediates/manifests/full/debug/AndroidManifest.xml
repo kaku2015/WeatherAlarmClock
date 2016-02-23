@@ -178,11 +178,13 @@
             </intent-filter>
         </receiver>
 
-        <service
-            android:name="com.kaku.weac.service.NotificationCenter"
-            android:exported="false"
-            android:process=":pushservice" >
-        </service>
+        <!--
+                    <service
+                    android:name=".service.NotificationCenter"
+                    android:exported="false"
+                    android:process=":pushservice">
+                </service>
+        -->
         <service
             android:name="com.kaku.weac.test.AutoUpdateService"
             android:exported="false" >

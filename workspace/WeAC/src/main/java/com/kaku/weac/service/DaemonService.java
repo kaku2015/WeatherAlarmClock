@@ -28,12 +28,15 @@ public class DaemonService extends Service {
         super.onCreate();
         LogUtil.d(LOG_TAG, "onCreate");
 
+        // Notification notification = new Notification();
+        // startForeground(-1, notification);
+
         new Thread(new Runnable() {
             @Override
             public void run() {
                 Daemon.run(DaemonService.this, DaemonService.class, Daemon.INTERVAL_ONE_MINUTE);
 
-                startService(new Intent(DaemonService.this, NotificationCenter.class));
+//                startService(new Intent(DaemonService.this, NotificationCenter.class));
 
                 List<AlarmClock> list = AlarmClockOperate.getInstance().loadAlarmClocks();
                 for (AlarmClock alarmClock : list) {

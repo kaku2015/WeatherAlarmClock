@@ -174,11 +174,11 @@
             </intent-filter>
         </receiver>
 
-        <service
-            android:name=".service.NotificationCenter"
-            android:exported="false"
-            android:process=":pushservice">
-        </service>
+        <!--        <service
+                    android:name=".service.NotificationCenter"
+                    android:exported="false"
+                    android:process=":pushservice">
+                </service>-->
         <service
             android:name=".test.AutoUpdateService"
             android:exported="false">

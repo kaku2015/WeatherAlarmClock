@@ -8,6 +8,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -1220,5 +1222,25 @@ public class MyUtil {
     public static void startActivity(Context context, Class<?> cls) {
         Intent intent = new Intent(context, cls);
         context.startActivity(intent);
+    }
+
+    /**
+     * 获取应用版本号
+     *
+     * @param context context
+     * @return 版本号
+     */
+    public static String getVersion(Context context) {
+        String version;
+        try {
+            PackageManager packageManager = context.getPackageManager();
+            // getPackageName()是你当前类的包名，0代表是获取版本信息
+            PackageInfo packInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
+            version = packInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            LogUtil.e(LOG_TAG, "assignViews: " + e.toString());
+            version = context.getString(R.string.version);
+        }
+        return version;
     }
 }

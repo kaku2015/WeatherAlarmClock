@@ -3,9 +3,6 @@
  */
 package com.kaku.weac.activities;
 
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -46,31 +43,24 @@ public class AboutActivity extends BaseActivity {
             }
         });
 
-        // 应用版本号
-        String version;
-        try {
-            PackageManager packageManager = getPackageManager();
-            // getPackageName()是你当前类的包名，0代表是获取版本信息
-            PackageInfo packInfo = packageManager.getPackageInfo(getPackageName(), 0);
-            version = packInfo.versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            LogUtil.e(LOG_TAG, "assignViews: " + e.toString());
-            version = getString(R.string.version);
-        }
-        TextView versionTv = (TextView) findViewById(R.id.version_tv);
-        versionTv.setText(getString(R.string.weac_version, version));
+        // 设置版本号
+        setVersion();
+        // 设置标语
+        setSlogan();
+    }
 
+    private void setSlogan() {
         try {
-            AssetManager mgr = getAssets();
-            Typeface fontFace = Typeface.createFromAsset(mgr, "fonts/weac_slogan.ttf");
-            // 字体文件必须是true type font的格式(ttf)；
-            // 当使用外部字体却又发现字体没有变化的时候(以 Droid Sans代替)，通常是因为
-            // 这个字体android没有支持,而非你的程序发生了错误
-
-            TextView text = (TextView) findViewById(R.id.words);
-            text.setTypeface(fontFace);
+            Typeface fontFace = Typeface.createFromAsset(getAssets(), "fonts/weac_slogan.ttf");
+            TextView SloganTv = (TextView) findViewById(R.id.weac_slogan_tv);
+            SloganTv.setTypeface(fontFace);
         } catch (Exception e) {
             LogUtil.e(LOG_TAG, "Typeface.createFromAsset: " + e.toString());
         }
+    }
+
+    private void setVersion() {
+        TextView versionTv = (TextView) findViewById(R.id.version_tv);
+        versionTv.setText(getString(R.string.weac_version, MyUtil.getVersion(this)));
     }
 }

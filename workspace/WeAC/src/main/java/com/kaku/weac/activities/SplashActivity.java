@@ -39,15 +39,15 @@ public class SplashActivity extends Activity {
     }
 
     private void assignViews() {
-        TextView splashSloganTv = (TextView) findViewById(R.id.splash_slogan_tv);
-        try {
-            AssetManager mgr = getAssets();
-            Typeface fontFace = Typeface.createFromAsset(mgr, "fonts/weac_slogan.ttf");
-            splashSloganTv.setTypeface(fontFace);
-        } catch (Exception e) {
-            LogUtil.e(LOG_TAG, "Typeface.createFromAsset: " + e.toString());
-        }
+        // 设置版本号
+        setVersion();
+        // 设置标语
+        setSlogan();
+        // 开启欢迎动画
+        startAnimation();
+    }
 
+    private void startAnimation() {
         View splashIv = findViewById(R.id.splash_iv);
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.splash);
         splashIv.startAnimation(animation);
@@ -69,5 +69,21 @@ public class SplashActivity extends Activity {
 
             }
         });
+    }
+
+    private void setSlogan() {
+        try {
+            AssetManager mgr = getAssets();
+            Typeface fontFace = Typeface.createFromAsset(mgr, "fonts/weac_slogan.ttf");
+            TextView SloganTv = (TextView) findViewById(R.id.weac_slogan_tv);
+            SloganTv.setTypeface(fontFace);
+        } catch (Exception e) {
+            LogUtil.e(LOG_TAG, "Typeface.createFromAsset: " + e.toString());
+        }
+    }
+
+    private void setVersion() {
+        TextView versionTv = (TextView) findViewById(R.id.version_tv);
+        versionTv.setText(getString(R.string.weac_version, MyUtil.getVersion(this)));
     }
 }

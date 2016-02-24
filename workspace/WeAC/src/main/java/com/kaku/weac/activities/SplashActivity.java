@@ -3,7 +3,6 @@
  */
 package com.kaku.weac.activities;
 
-import android.app.Activity;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -21,13 +20,15 @@ import com.kaku.weac.util.MyUtil;
  * @version 1.0 2016/2/22
  */
 
-public class SplashActivity extends Activity {
+public class SplashActivity extends BaseActivity {
     private static final String LOG_TAG = "SplashActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(android.R.anim.fade_in, 0);
+        // 禁止滑动后退
+        setSwipeBackEnable(false);
         setContentView(R.layout.activity_splash);
         MyUtil.setStatusBarTranslucent(this);
         assignViews();

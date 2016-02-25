@@ -8,7 +8,6 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.kaku.weac.util.LogUtil;
-import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
 import org.litepal.LitePalApplication;
@@ -27,10 +26,16 @@ public class LeakCanaryApplication extends LitePalApplication {
 
     private RefWatcher refWatcher;
 
+    protected RefWatcher installLeakCanary() {
+        return RefWatcher.DISABLED;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
-        refWatcher = LeakCanary.install(this);
+//        refWatcher = LeakCanary.install(this);
+        // release 版本
+        refWatcher = installLeakCanary();
         this.registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {

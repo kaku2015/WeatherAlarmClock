@@ -845,7 +845,7 @@ public class AddCityActivity extends BaseActivity implements View.OnClickListene
     private void showProgressDialog(String message) {
         if (mProgressDialog == null) {
             mProgressDialog = new Dialog(this, R.style.Theme_MyDialog);
-            mProgressDialog.setContentView(R.layout.loading_dialog);
+            mProgressDialog.setContentView(R.layout.dialog_loading);
             mProgressDialog.setCancelable(false);
             TextView msg = (TextView) mProgressDialog.findViewById(R.id.dialog_msg);
             msg.setText(message);

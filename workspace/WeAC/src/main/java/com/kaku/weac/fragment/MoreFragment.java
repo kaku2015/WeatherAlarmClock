@@ -105,12 +105,23 @@ public class MoreFragment extends LazyLoadFragment {
             @Override
             public void onVisible() {
                 mActivityManager = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+                showMoreLayout(view);
                 assignViews(view);
 
                 mIsPrepared = true;
             }
         };
         return view;
+    }
+
+    private void showMoreLayout(View view) {
+        // 更多布局
+        ViewGroup moreGroup = (ViewGroup) view.findViewById(R.id.more_layout);
+        moreGroup.setVisibility(View.VISIBLE);
+
+        // 加载中进度框
+        ViewGroup progressBar = (ViewGroup) view.findViewById(R.id.progress_bar_llyt);
+        progressBar.setVisibility(View.GONE);
     }
 
     private void assignViews(View view) {
@@ -281,7 +292,7 @@ public class MoreFragment extends LazyLoadFragment {
     private void showProgressDialog(String message) {
         if (mProgressDialog == null) {
             mProgressDialog = new Dialog(getActivity(), R.style.Theme_MyDialog);
-            mProgressDialog.setContentView(R.layout.loading_dialog);
+            mProgressDialog.setContentView(R.layout.dialog_loading);
             mProgressDialog.setCancelable(false);
             TextView msg = (TextView) mProgressDialog.findViewById(R.id.dialog_msg);
             msg.setText(message);

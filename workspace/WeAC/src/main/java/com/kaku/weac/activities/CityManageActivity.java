@@ -571,7 +571,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
      * @param weatherInfo 天气信息
      */
     private void setCityManageInfo(CityManage cityManage, WeatherInfo weatherInfo) {
-        if (weatherInfo.getWeatherDaysForecast().size() == 6) {
+        if (weatherInfo.getWeatherDaysForecast().size() > 5) {
             WeatherDaysForecast weather;
 
             String time[] = weatherInfo.getUpdateTime().split(":");

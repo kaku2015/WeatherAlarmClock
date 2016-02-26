@@ -620,6 +620,16 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
      */
     private boolean mIsLocated = false;
 
+    /**
+     * 天气界面布局
+     */
+    private ViewGroup mWeatherGroup;
+
+    /**
+     * 加载中进度框
+     */
+    private ViewGroup mProgressBar;
+
     private OnVisibleListener mOnVisibleListener;
 
     @Override
@@ -660,6 +670,8 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                         LogUtil.e(LOG_TAG, e.toString());
                     }
 
+                    showWeatherLayout();
+
                     // 不是自动定位
                     if (!mCityWeatherCode.equals(getString(R.string.auto_location))) {
                         mIsPrepared = true;
@@ -670,6 +682,8 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                         startLocation();
                     }
                 } else {
+                    showWeatherLayout();
+
                     // 首次进入天气界面，自动定位天气
                     mIsFirstUse = true;
                     // 不立刻刷新
@@ -680,6 +694,13 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
             }
         };
         return view;
+    }
+
+    private void showWeatherLayout() {
+        // 隐藏加载进度框
+        mProgressBar.setVisibility(View.GONE);
+        // 首次进入天气界面显示初始布局
+        mWeatherGroup.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -1891,6 +1912,9 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
      * @param view view
      */
     private void init(View view) {
+        mWeatherGroup = (ViewGroup) view.findViewById(R.id.weather_layout);
+        mProgressBar = (ViewGroup) view.findViewById(R.id.progress_bar_llyt);
+
         mRefreshBtn = (ImageView) view.findViewById(R.id.action_refresh);
         mRefreshBtn.setOnClickListener(this);
         // HOME按钮

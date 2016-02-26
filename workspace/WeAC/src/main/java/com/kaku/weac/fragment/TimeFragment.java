@@ -113,6 +113,7 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
         mOnVisibleListener = new OnVisibleListener() {
             @Override
             public void onVisible() {
+                showTimeLayout(view);
                 assignViews(view);
             }
         };
@@ -145,9 +146,18 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
         mTimer.setModel(TimeModel.Timer);
 //        mTimer.setStartTime(0, 0, 0, true, false);
         setTimer();
-        mTimer.showAnimation();
 
         mIsPrepared = true;
+    }
+
+    private void showTimeLayout(View view) {
+        // 计时布局
+        ViewGroup timerGroup = (ViewGroup) view.findViewById(R.id.timer_layout);
+        timerGroup.setVisibility(View.VISIBLE);
+
+        // 加载中进度框
+        ViewGroup progressBar = (ViewGroup) view.findViewById(R.id.progress_bar_llyt);
+        progressBar.setVisibility(View.GONE);
     }
 
     private void setTimer() {
@@ -181,11 +191,20 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putLong(WeacConstants.COUNTDOWN_TIME, 0);
                 editor.apply();
-                setStartBtnNoClickable();
+
+                initTimer();
             }
         } else {
-            setStartBtnNoClickable();
+            initTimer();
         }
+    }
+
+    /**
+     * 初始化timer
+     */
+    private void initTimer() {
+        setStartBtnNoClickable();
+        mTimer.showAnimation();
     }
 
     @Override

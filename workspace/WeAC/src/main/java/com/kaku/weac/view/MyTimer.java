@@ -736,27 +736,36 @@ public class MyTimer extends View {
     /**
      * 设置默认开始时间
      *
-     * @param h             小时
-     * @param m             分钟
-     * @param s             秒
-     * @param isStop        是否为暂停状态
-     * @param isInitialized 是否已经初始化
+     * @param h          小时
+     * @param m          分钟
+     * @param s          秒
+     * @param isStop     是否为暂停状态
+     * @param isCanStart 是否可以直接开始
      */
-    public void setStartTime(final int h, final int m, final int s, final boolean isStop, boolean isInitialized) {
-        if (!isInitialized) {
-            mInitialFinishListener = new OnInitialFinishListener() {
-                @Override
-                public void onInitialFinish() {
-                    if (!mIsReset) {
-                        process(h, m, s, isStop);
-                    } else {
-                        process(0, 0, 0, true);
-                        mIsReset = false;
+    public void setStartTime(final int h, final int m, final int s, final boolean isStop, boolean isCanStart) {
+        if (!isCanStart) {
+            // 组件已经初始化完毕
+            if (!mIsInitialized) {
+                mInitialFinishListener = new OnInitialFinishListener() {
+                    @Override
+                    public void onInitialFinish() {
+                        executeSetOrReset(h, m, s, isStop);
                     }
-                }
-            };
+                };
+            } else {
+                executeSetOrReset(h, m, s, isStop);
+            }
         } else {
             process(h, m, s, isStop);
+        }
+    }
+
+    private void executeSetOrReset(int h, int m, int s, boolean isStop) {
+        if (!mIsReset) {
+            process(h, m, s, isStop);
+        } else {
+            process(0, 0, 0, true);
+            mIsReset = false;
         }
     }
 

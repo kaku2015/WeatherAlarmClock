@@ -20,6 +20,13 @@ android {
         }
     }
 
+// gradle bug 去掉release编译警告
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude '.readme'
+    }
+
 /*    productFlavors {
         wandoujia {}
         baidu {}

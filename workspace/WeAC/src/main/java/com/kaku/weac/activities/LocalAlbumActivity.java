@@ -111,6 +111,9 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
     }
 
     private void assignViews() {
+        TextView loadingMsg = (TextView) findViewById(R.id.loading_msg);
+        loadingMsg.setText(R.string.scanning);
+
         ImageView backBtn = (ImageView) findViewById(R.id.action_back);
         TextView captureBtn = (TextView) findViewById(R.id.action_capture);
 

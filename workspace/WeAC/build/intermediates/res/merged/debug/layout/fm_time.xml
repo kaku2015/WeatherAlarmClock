@@ -1,92 +1,105 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-    <include layout="@layout/layout_loading"/>
-
-    <LinearLayout
-        android:id="@+id/timer_layout"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:layout_height="54dp"
+        android:gravity="center"
+        android:text="@string/time"
+        android:textColor="@color/white_trans90"
+        android:textSize="20sp"/>
 
-        <com.kaku.weac.view.MyTimer
-            android:id="@+id/timer"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/layout_loading"/>
+
+        <LinearLayout
+            android:id="@+id/timer_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layerType="software"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RelativeLayout
-                android:id="@+id/btn_start_llyt"
+            <com.kaku.weac.view.MyTimer
+                android:id="@+id/timer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp">
+                android:layerType="software"/>
 
-                <TextView
-                    android:id="@+id/btn_start"
-                    style="@style/timer_btn"
-                    android:layout_alignParentLeft="true"
-                    android:drawableTop="@drawable/btn_timer_start"
-                    android:text="@string/start"/>
-
-                <TextView
-                    android:id="@+id/btn_quick"
-                    style="@style/timer_btn"
-                    android:layout_centerInParent="true"
-                    android:drawableTop="@drawable/btn_timer_quick"
-                    android:text="@string/quick_timer"/>
-
-                <TextView
-                    android:id="@+id/btn_ring"
-                    style="@style/timer_btn"
-                    android:layout_alignParentRight="true"
-                    android:layout_gravity="right"
-                    android:drawableTop="@drawable/btn_timer_ring"
-                    android:text="@string/ring"/>
-            </RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/btn_start_llyt2"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:visibility="gone">
+                android:layout_height="wrap_content">
 
-                <FrameLayout
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/btn_start_llyt"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="60dp">
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp">
 
                     <TextView
-                        android:id="@+id/btn_stop"
+                        android:id="@+id/btn_start"
                         style="@style/timer_btn"
-                        android:drawableTop="@drawable/btn_timer_pause"
-                        android:text="@string/stop"/>
-
-                    <TextView
-                        android:id="@+id/btn_start2"
-                        style="@style/timer_btn"
+                        android:layout_alignParentLeft="true"
                         android:drawableTop="@drawable/btn_timer_start"
-                        android:text="@string/start"
-                        android:visibility="gone"/>
-                </FrameLayout>
+                        android:text="@string/start"/>
 
-                <TextView
-                    android:id="@+id/btn_reset"
-                    style="@style/timer_btn"
-                    android:drawableTop="@drawable/btn_timer_reset"
-                    android:text="@string/reset"/>
+                    <TextView
+                        android:id="@+id/btn_quick"
+                        style="@style/timer_btn"
+                        android:layout_centerInParent="true"
+                        android:drawableTop="@drawable/btn_timer_quick"
+                        android:text="@string/quick_timer"/>
 
-            </LinearLayout>
-        </FrameLayout>
-    </LinearLayout>
+                    <TextView
+                        android:id="@+id/btn_ring"
+                        style="@style/timer_btn"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="right"
+                        android:drawableTop="@drawable/btn_timer_ring"
+                        android:text="@string/ring"/>
+                </RelativeLayout>
 
-</FrameLayout>
+                <LinearLayout
+                    android:id="@+id/btn_start_llyt2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="60dp">
+
+                        <TextView
+                            android:id="@+id/btn_stop"
+                            style="@style/timer_btn"
+                            android:drawableTop="@drawable/btn_timer_pause"
+                            android:text="@string/stop"/>
+
+                        <TextView
+                            android:id="@+id/btn_start2"
+                            style="@style/timer_btn"
+                            android:drawableTop="@drawable/btn_timer_start"
+                            android:text="@string/start"
+                            android:visibility="gone"/>
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/btn_reset"
+                        style="@style/timer_btn"
+                        android:drawableTop="@drawable/btn_timer_reset"
+                        android:text="@string/reset"/>
+
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>
 <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/layout/fm_time.xml -->

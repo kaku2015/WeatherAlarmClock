@@ -26,7 +26,7 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(android.R.anim.fade_in, 0);
+        overridePendingTransition(R.anim.zoomin, 0);
         // 禁止滑动后退
         setSwipeBackEnable(false);
         setContentView(R.layout.activity_splash);
@@ -61,7 +61,7 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 MyUtil.startActivity(SplashActivity.this, MainActivity.class);
-                overridePendingTransition(0, 0);
+                overridePendingTransition(0, android.R.anim.fade_out);
                 finish();
             }
 

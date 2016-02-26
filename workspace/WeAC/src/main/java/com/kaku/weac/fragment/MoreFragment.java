@@ -138,6 +138,9 @@ public class MoreFragment extends LazyLoadFragment {
         view.findViewById(R.id.theme).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (MyUtil.isFastDoubleClick()) {
+                    return;
+                }
                 MyUtil.startActivity(getActivity(), ThemeActivity.class);
             }
         });
@@ -146,6 +149,9 @@ public class MoreFragment extends LazyLoadFragment {
         view.findViewById(R.id.scan_scan).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (MyUtil.isFastDoubleClick()) {
+                    return;
+                }
                 MyUtil.startActivity(getActivity(), CaptureActivity.class);
             }
         });
@@ -154,6 +160,9 @@ public class MoreFragment extends LazyLoadFragment {
         view.findViewById(R.id.generate_code).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (MyUtil.isFastDoubleClick()) {
+                    return;
+                }
                 MyUtil.startActivity(getActivity(), GenerateCodeActivity.class);
             }
         });
@@ -162,6 +171,9 @@ public class MoreFragment extends LazyLoadFragment {
         view.findViewById(R.id.clear_memory).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (MyUtil.isFastDoubleClick()) {
+                    return;
+                }
                 operateClearMemory();
             }
         });
@@ -170,6 +182,9 @@ public class MoreFragment extends LazyLoadFragment {
         view.findViewById(R.id.clean_up).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (MyUtil.isFastDoubleClick()) {
+                    return;
+                }
                 new CleanUpAsyncTask().execute();
             }
         });
@@ -178,6 +193,9 @@ public class MoreFragment extends LazyLoadFragment {
         view.findViewById(R.id.feedback).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (MyUtil.isFastDoubleClick()) {
+                    return;
+                }
                 operateFeedback();
             }
         });
@@ -186,6 +204,9 @@ public class MoreFragment extends LazyLoadFragment {
         view.findViewById(R.id.abort).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (MyUtil.isFastDoubleClick()) {
+                    return;
+                }
                 MyUtil.startActivity(getActivity(), AboutActivity.class);
             }
         });
@@ -194,6 +215,9 @@ public class MoreFragment extends LazyLoadFragment {
         view.findViewById(R.id.check_update).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (MyUtil.isFastDoubleClick()) {
+                    return;
+                }
                 operateUpdate();
 
             }
@@ -203,6 +227,9 @@ public class MoreFragment extends LazyLoadFragment {
         view.findViewById(R.id.give_favor).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (MyUtil.isFastDoubleClick()) {
+                    return;
+                }
                 giveFavor();
             }
         });
@@ -211,6 +238,9 @@ public class MoreFragment extends LazyLoadFragment {
         view.findViewById(R.id.friend_share).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (MyUtil.isFastDoubleClick()) {
+                    return;
+                }
                 friendShare();
             }
         });
@@ -219,6 +249,9 @@ public class MoreFragment extends LazyLoadFragment {
         view.findViewById(R.id.faq).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (MyUtil.isFastDoubleClick()) {
+                    return;
+                }
                 MyUtil.startActivity(getActivity(), FAQActivity.class);
             }
         });

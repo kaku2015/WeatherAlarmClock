@@ -490,14 +490,17 @@ public class RecorderFragment extends BaseFragment implements OnClickListener {
         for (File file1 : files) {
             // 音频文件名
             String ringName = file1.getName();
-            // 去掉音频文件的扩展名
-            ringName = MyUtil.removeEx(ringName);
-            // 取得音频文件的地址
-            String ringUrl = file1.getAbsolutePath();
-            Map<String, String> map = new HashMap<>();
-            map.put(WeacConstants.RING_NAME, ringName);
-            map.put(WeacConstants.RING_URL, ringUrl);
-            mList.add(map);
+            // String prefix=fileName.substring(fileName.lastIndexOf(".")+1);
+            if (ringName.endsWith(".amr")) {
+                // 去掉音频文件的扩展名
+                ringName = MyUtil.removeEx(ringName);
+                // 取得音频文件的地址
+                String ringUrl = file1.getAbsolutePath();
+                Map<String, String> map = new HashMap<>();
+                map.put(WeacConstants.RING_NAME, ringName);
+                map.put(WeacConstants.RING_URL, ringUrl);
+                mList.add(map);
+            }
         }
 
         // 排序铃声列表

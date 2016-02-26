@@ -3579,7 +3579,7 @@ containing a value of this type.
         public static final int md_selector_dark=0x7f0200f6;
         public static final int md_transparent=0x7f0200f7;
         public static final int minus=0x7f0200f8;
-        public static final int notification_template_icon_bg=0x7f020161;
+        public static final int notification_template_icon_bg=0x7f02015d;
         public static final int number_0=0x7f0200f9;
         public static final int number_1=0x7f0200fa;
         public static final int number_2=0x7f0200fb;
@@ -3674,16 +3674,12 @@ containing a value of this type.
         public static final int umeng_update_wifi_disable=0x7f020154;
         public static final int wallpaper_0=0x7f020155;
         public static final int wallpaper_1=0x7f020156;
-        public static final int wallpaper_10=0x7f020157;
-        public static final int wallpaper_11=0x7f020158;
-        public static final int wallpaper_2=0x7f020159;
-        public static final int wallpaper_3=0x7f02015a;
-        public static final int wallpaper_4=0x7f02015b;
-        public static final int wallpaper_5=0x7f02015c;
-        public static final int wallpaper_6=0x7f02015d;
-        public static final int wallpaper_7=0x7f02015e;
-        public static final int wallpaper_8=0x7f02015f;
-        public static final int wallpaper_9=0x7f020160;
+        public static final int wallpaper_11=0x7f020157;
+        public static final int wallpaper_2=0x7f020158;
+        public static final int wallpaper_3=0x7f020159;
+        public static final int wallpaper_4=0x7f02015a;
+        public static final int wallpaper_7=0x7f02015b;
+        public static final int wallpaper_8=0x7f02015c;
     }
     public static final class id {
         public static final int __leak_canary_action=0x7f0e0056;

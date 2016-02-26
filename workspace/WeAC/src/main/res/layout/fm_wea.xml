@@ -20,7 +20,8 @@
             android:id="@+id/action_title"
             style="@style/action_title"
             android:drawablePadding="5dp"
-            android:gravity="center_vertical"/>
+            android:gravity="center_vertical"
+            android:text="@string/dash"/>
 
         <ImageView
             android:id="@+id/action_refresh"

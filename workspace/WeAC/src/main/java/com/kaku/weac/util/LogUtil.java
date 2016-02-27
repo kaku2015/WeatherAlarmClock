@@ -25,6 +25,7 @@ public class LogUtil {
 
     private static final int NOTHING = 6;
 
+    // TODO release >>> NOTHING
     private static final int LEVEL = VERBOSE;
 
     public static void v(String tag, String msg) {

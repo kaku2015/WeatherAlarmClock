@@ -8,15 +8,40 @@ android {
         applicationId "com.kaku.weac"
         minSdkVersion 16
         targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
 
 //        manifestPlaceholders = [ UMENG_CHANNEL_VALUE:"wandoujia" ]
     }
 
     buildTypes {
+        debug {
+            minifyEnabled false
+            zipAlignEnabled false
+        }
+
         release {
+            // 是否生成debug apk
             debuggable false
+            //混淆
             minifyEnabled true
+            //Zipalign优化APK http://www.jizhuomi.com/android/environment/203.html
+            zipAlignEnabled true
+            // 移除无用的resource(资源)文件 getIdentifier等将获取不到 慎用！！！
+//            shrinkResources true
+            //签名
+//            signingConfig signingConfigs.relealse
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def fileName = outputFile.name.replace(".apk", "-${defaultConfig.versionName}.apk")
+                output.outputFile = new File(outputFile.parent, fileName)
+            }
         }
     }
 

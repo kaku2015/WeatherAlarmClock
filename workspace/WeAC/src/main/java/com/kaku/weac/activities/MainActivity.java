@@ -116,9 +116,9 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
         mFm = getSupportFragmentManager();
         // Tab选中文字颜色
-        mSelectColor = getResources().getColor(R.color.blue_tab);
+        mSelectColor = getResources().getColor(R.color.white);
         // Tab未选中文字颜色
-        mUnSelectColor = getResources().getColor(R.color.gray_tab);
+        mUnSelectColor = getResources().getColor(R.color.white_trans50);
         // 初始化布局元素
         initViews();
         // 启动程序后选中Tab为闹钟

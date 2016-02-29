@@ -311,14 +311,16 @@ public class RecordDeleteBatchFragment extends BaseFragment implements
         for (File file1 : files) {
             // 音频文件名
             String ringName = file1.getName();
-            // 去掉音频文件的扩展名
-            ringName = MyUtil.removeEx(ringName);
-            // 取得音频文件的地址
-            String ringUrl = file1.getAbsolutePath();
-            // 录音删除信息实例
-            RecordDeleteItem item = new RecordDeleteItem(ringUrl, ringName,
-                    false);
-            mRecordList.add(item);
+            if (ringName.endsWith(".amr")) {
+                // 去掉音频文件的扩展名
+                ringName = MyUtil.removeEx(ringName);
+                // 取得音频文件的地址
+                String ringUrl = file1.getAbsolutePath();
+                // 录音删除信息实例
+                RecordDeleteItem item = new RecordDeleteItem(ringUrl, ringName,
+                        false);
+                mRecordList.add(item);
+            }
         }
 
         // 排序铃声列表

@@ -132,7 +132,6 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
     private ViewGroup mWeatherInfoGroup;
     private ProgressBar mWeatherPbar;
     private TextView mWeatherTypeTv;
-    private TextView mTemperatureTv;
     private TextView mUmbrellaTv;
     private String mCurrentTimeDisplay = "";
 
@@ -255,7 +254,6 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
             mWeatherInfoGroup = (ViewGroup) view.findViewById(R.id.weather_info_group);
             mWeatherPbar = (ProgressBar) view.findViewById(R.id.progress_bar);
             mWeatherTypeTv = (TextView) view.findViewById(R.id.weather_type_tv);
-            mTemperatureTv = (TextView) view.findViewById(R.id.temperature_tv);
             mUmbrellaTv = (TextView) view.findViewById(R.id.umbrella_tv);
             // 初始化天气预报
             initWeather();
@@ -341,6 +339,10 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
                 return;
             }
 
+            // 设置城市名
+            TextView cityName = (TextView) getActivity().findViewById(R.id.city_name_tv);
+            cityName.setText(mWeatherInfo.getCity());
+
             // 多天预报信息
             List<WeatherDaysForecast> weatherDaysForecasts = mWeatherInfo.getWeatherDaysForecast();
             if (weatherDaysForecasts.size() < 6) {
@@ -392,13 +394,13 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
             String tempLow = weather.getLow().replace("℃", "").substring(3);
             mWeatherTypeTv.setText(String.format(getString(R.string.weather_type), type, tempHigh, tempLow));
 
-            mTemperatureTv.setText(String.format(getString(R.string.temperature), mWeatherInfo.getTemperature()));
-
             // 生活指数信息
             List<WeatherLifeIndex> weatherLifeIndexes = mWeatherInfo.getWeatherLifeIndex();
             for (WeatherLifeIndex index : weatherLifeIndexes) {
                 if (index.getIndexName().equals("雨伞指数")) {
-                    mUmbrellaTv.setText(index.getIndexValue());
+                    if (index.getIndexValue().equals("带伞")) {
+                        mUmbrellaTv.setVisibility(View.VISIBLE);
+                    }
                 }
             }
 

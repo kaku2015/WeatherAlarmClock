@@ -139,6 +139,9 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
         mLocalAlbumListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (MyUtil.isFastDoubleClick()) {
+                    return;
+                }
                 Intent intent = new Intent(LocalAlbumActivity.this, LocalAlbumDetailActivity.class);
                 intent.putParcelableArrayListExtra(ALBUM_PATH,
                         mLocalAlbumAdapter.getItem(position).bucketList);

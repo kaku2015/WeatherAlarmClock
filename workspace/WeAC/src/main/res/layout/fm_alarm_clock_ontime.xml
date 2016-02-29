@@ -80,27 +80,22 @@
                 android:visibility="gone">
 
                 <TextView
-                    android:id="@+id/weather_type_tv"
+                    android:id="@+id/city_name_tv"
                     style="@style/alarm_clock_on_time_weather_tv"/>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <TextView
+                    android:id="@+id/weather_type_tv"
+                    style="@style/alarm_clock_on_time_weather_tv"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:id="@+id/umbrella_tv"
+                    style="@style/alarm_clock_on_time_weather_tv"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/temperature_tv"
-                        style="@style/alarm_clock_on_time_weather_tv"
-                        android:drawableLeft="@drawable/ic_temp"/>
-
-                    <TextView
-                        android:id="@+id/umbrella_tv"
-                        style="@style/alarm_clock_on_time_weather_tv"
-                        android:layout_marginLeft="10dp"
-                        android:drawableLeft="@drawable/ic_lifeindex_umbrella"
-                        android:text="@string/no"/>
-                </LinearLayout>
+                    android:drawableLeft="@drawable/ic_lifeindex_umbrella"
+                    android:text="@string/bring_an_umbrella"
+                    android:visibility="gone"/>
             </LinearLayout>
 
             <ProgressBar

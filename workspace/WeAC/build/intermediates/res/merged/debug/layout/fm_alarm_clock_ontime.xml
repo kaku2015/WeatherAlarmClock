@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="match_parent"
              android:layout_height="match_parent">
-
+    <!--动态设置背景壁纸，会导致异步回调后再设置数据显示不出来，必须设置数据后才能再动态设置壁纸-->
     <com.kaku.weac.view.MySlidingView
         android:id="@+id/my_sliding_view"
         android:layout_width="match_parent"

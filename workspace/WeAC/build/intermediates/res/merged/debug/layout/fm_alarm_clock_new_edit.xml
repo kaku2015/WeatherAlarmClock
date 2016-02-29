@@ -59,7 +59,9 @@
                     android:id="@+id/time_picker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp"/>
             </LinearLayout>
 
             <View style="@style/divider_line_blank"/>
@@ -240,6 +242,8 @@
                         android:layout_gravity="center"
                         android:layout_marginRight="10dp"
                         android:max="15"
+                        android:maxHeight="12dp"
+                        android:minHeight="8dp"
                         android:progressDrawable="@drawable/seekbar_define_color_style"
                         android:thumb="@drawable/seekbar_thumb"/>
                 </LinearLayout>

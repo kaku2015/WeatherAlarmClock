@@ -17,9 +17,14 @@ public class WeacConstants {
     public static final String EXTRA_WEAC_SHARE = "extra_weac_shared_preferences_file";
 
     /**
-     * 保存的壁纸名称
+     * 保存的壁纸key
      */
     public static final String WALLPAPER_NAME = "wallpaper_name";
+
+    /**
+     * 保存的壁纸value
+     */
+    public static final String DEFAULT_WALLPAPER_NAME = "wallpaper_default";
 
     /**
      * 保存的壁纸地址

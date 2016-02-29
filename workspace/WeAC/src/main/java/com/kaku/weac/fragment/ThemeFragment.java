@@ -151,7 +151,7 @@ public class ThemeFragment extends BaseFragment implements View.OnClickListener 
         } else {
             // 取得使用中壁纸的位置
             mWallpaperName = share.getString(WeacConstants.WALLPAPER_NAME,
-                    getString(R.string.default_wallpaper_name));
+                    WeacConstants.DEFAULT_WALLPAPER_NAME);
         }
         mList = new ArrayList<>();
         // 资源文件集合

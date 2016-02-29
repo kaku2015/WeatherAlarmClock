@@ -402,8 +402,8 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
                 }
             }
 
-            mWeatherPbar.setVisibility(View.GONE);
             mWeatherInfoGroup.setVisibility(View.VISIBLE);
+            mWeatherPbar.setVisibility(View.GONE);
         }
     }
 

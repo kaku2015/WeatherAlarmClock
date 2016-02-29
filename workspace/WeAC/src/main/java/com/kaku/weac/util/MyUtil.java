@@ -100,8 +100,7 @@ public class MyUtil {
             if (drawable1 != null) {
                 vg.setBackground(drawable1);
             } else {
-                saveWallpaper(activity, WeacConstants.WALLPAPER_NAME, activity.getString(R
-                        .string.default_wallpaper_name));
+                saveWallpaper(activity, WeacConstants.WALLPAPER_NAME, WeacConstants.DEFAULT_WALLPAPER_NAME);
                 setWallpaper(vg, activity, share);
             }
         } else {
@@ -152,8 +151,7 @@ public class MyUtil {
     }
 
     private static int getResId(Context context, SharedPreferences share) {
-        String value = share.getString(WeacConstants.WALLPAPER_NAME, context.getString(R
-                .string.default_wallpaper_name));
+        String value = share.getString(WeacConstants.WALLPAPER_NAME, WeacConstants.DEFAULT_WALLPAPER_NAME);
 //        int resId = context.getApplicationContext().getResources().getIdentifier(
 //                value, "drawable", context.getPackageName());
 
@@ -163,7 +161,7 @@ public class MyUtil {
             Field field = drawable.getField(value);
             resId = field.getInt(field.getName());
         } catch (Exception e) {
-            resId = R.drawable.wallpaper_0;
+            resId = R.drawable.wallpaper_default;
             LogUtil.e(LOG_TAG, "setWallPaper(Context context): " + e.toString());
         }
         return resId;

@@ -83,6 +83,7 @@
 -dontwarn com.makeramen.roundedimageview.**
 -keep class com.handmark.pulltorefresh.**{*;}
 -dontwarn com.handmark.pulltorefresh.**
+-dontwarn com.squareup.leakcanary.**
 
 # litepal
 -keep public class * extends org.litepal.crud.DataSupport{*;}     # 保留类及其所有成员不被混淆

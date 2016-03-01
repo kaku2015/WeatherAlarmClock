@@ -43,7 +43,6 @@
         <activity
             android:name=".activities.SplashActivity"
             android:excludeFromRecents="false"
-            android:noHistory="true"
             android:theme="@style/Transparent.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

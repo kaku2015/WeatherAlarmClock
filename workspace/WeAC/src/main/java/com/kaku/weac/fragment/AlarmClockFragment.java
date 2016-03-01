@@ -277,6 +277,7 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
         checkIsEmpty(list);
 
         mAdapter.notifyItemInserted(position);
+        mRecyclerView.scrollToPosition(position);
     }
 
     private void deleteList(AlarmClockDeleteEvent event) {

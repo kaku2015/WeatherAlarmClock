@@ -33,7 +33,7 @@ public class AlarmClockOperate {
     }
 
     public boolean saveAlarmClock(AlarmClock AlarmClock) {
-        return AlarmClock != null && AlarmClock.save();
+        return AlarmClock != null && AlarmClock.saveFast();
     }
 
     public void updateAlarmClock(AlarmClock alarmClock) {

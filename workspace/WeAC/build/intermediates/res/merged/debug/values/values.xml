@@ -11154,6 +11154,7 @@
     <string name="nap_set">小睡设置</string>
     <string name="nap_time">小睡%1$d分钟</string>
     <string name="nap_to">小睡至%1$s闹钟再次响起，轻触取消</string>
+    <string name="need_charge">电量不足，求发个红包补充电量。</string>
     <string name="new_alarm_clock">新建闹钟</string>
     <string name="no">暂无</string>
     <string name="no_alarm">☆ 闹钟没有正常响起\n以下原因均会导致闹钟无法正常响起：</string>
@@ -11215,6 +11216,7 @@
     <string name="reset_logo_color">重置Logo、前景色、背景色？</string>
     <string name="restore">恢复默认</string>
     <string name="retry">重试</string>
+    <string name="rewards_me">打赏我</string>
     <string name="ring">铃声</string>
     <string name="ring_select">铃声选择</string>
     <string name="roger">知道了</string>
@@ -13303,7 +13305,6 @@
     <style name="timer_btn">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/bg_timer_button</item>
         <item name="android:gravity">center</item>
         <item name="android:drawablePadding">5dp</item>
         <item name="android:textSize">14sp</item>

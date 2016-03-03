@@ -28,20 +28,25 @@
 
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/local_album_lv"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/action_bar"
-        android:layout_marginLeft="@dimen/list_view_margin"
-        android:layout_marginRight="@dimen/list_view_margin"
-        android:cacheColorHint="@color/transparent"
-        android:divider="@color/white_trans10"
-        android:dividerHeight="@dimen/divider_line_thin"
-        android:listSelector="@color/transparent"
-        android:overScrollMode="never">
+        android:layout_height="match_parent"
+        android:layout_below="@id/action_bar">
 
-    </ListView>
+        <ListView
+            android:id="@+id/local_album_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/list_view_margin"
+            android:layout_marginRight="@dimen/list_view_margin"
+            android:cacheColorHint="@color/transparent"
+            android:divider="@color/white_trans10"
+            android:dividerHeight="@dimen/divider_line_thin"
+            android:listSelector="@color/transparent"
+            android:overScrollMode="never">
+
+        </ListView>
+    </FrameLayout>
 
     <TextView
         android:id="@+id/local_album_lv_empty"

@@ -37,7 +37,7 @@ public class WeatherDBOperate {
      * @return 是否存储成功
      */
     public boolean saveCityManage(CityManage cityManage) {
-        return cityManage != null && cityManage.save();
+        return cityManage != null && cityManage.saveFast();
     }
 
     /**

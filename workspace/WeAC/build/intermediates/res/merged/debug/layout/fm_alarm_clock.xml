@@ -39,14 +39,19 @@
             android:src="@drawable/ic_action_new"/>
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/list_view"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:scrollbars="none">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:scrollbars="none">
+        </android.support.v7.widget.RecyclerView>
+    </FrameLayout>
     <!--android:cacheColorHint：自定义listview的时候，当不使用android:cacheColorHint=“#00000000”
     会出现选中一个空间黑色底色的情况，破坏整体美观度：当你不使用android:listSelector属性，
     默认会显示选中的item为橙黄底色，有时候我们需要去掉这种效果：-->

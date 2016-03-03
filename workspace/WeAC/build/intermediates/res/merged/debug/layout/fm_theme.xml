@@ -25,15 +25,19 @@
             android:text="@string/custom_define"/>
     </RelativeLayout>
 
-    <GridView
-        android:id="@+id/gv_change_theme"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="10dp"
-        android:background="@color/white_trans20"
-        android:horizontalSpacing="10dp"
-        android:numColumns="2"
-        android:scrollbars="none"
-        android:verticalSpacing="10dp"/>
+        android:layout_height="match_parent">
 
+        <GridView
+            android:id="@+id/gv_change_theme"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white_trans20"
+            android:horizontalSpacing="10dp"
+            android:numColumns="2"
+            android:padding="10dp"
+            android:scrollbars="none"
+            android:verticalSpacing="10dp"/>
+    </FrameLayout>
 </LinearLayout><!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/layout/fm_theme.xml -->

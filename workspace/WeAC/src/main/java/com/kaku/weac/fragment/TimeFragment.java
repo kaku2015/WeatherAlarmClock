@@ -343,7 +343,7 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
     private void setStartBtnClickable() {
         mStartBtn.setAlpha(1);
         //noinspection deprecation
-        mStartBtn.setBackground(getResources().getDrawable(R.drawable.bg_timer_button));
+//        mStartBtn.setBackground(getResources().getDrawable(R.drawable.bg_timer_button));
         mStartBtn.setOnClickListener(this);
     }
 

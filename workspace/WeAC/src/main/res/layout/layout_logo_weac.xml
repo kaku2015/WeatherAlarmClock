@@ -4,52 +4,57 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent">
 
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_centerInParent="true"
-           android:gravity="center"
-           android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/logo_rlyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-              <!--// FIXME：-->
-              <com.makeramen.roundedimageview.RoundedImageView
-                  android:layout_width="80dp"
-                  android:layout_height="80dp"
-                  android:layout_gravity="center"
-                  android:src="@drawable/ic_launcher"
-                  app:riv_corner_radius="10dip">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical">
 
-              </com.makeramen.roundedimageview.RoundedImageView>
+            <!--// FIXME：-->
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_launcher"
+                app:riv_corner_radius="10dip">
 
-              <TextView
-                  android:id="@+id/version_tv"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="5dp"
-                  android:text="@string/weac_version"
-                  android:textColor="@color/white_trans90"
-                  android:textSize="@dimen/small"/>
+            </com.makeramen.roundedimageview.RoundedImageView>
 
-              <TextView
-                  android:id="@+id/weac_slogan_tv"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="30dp"
-                  android:text="@string/weac_slogan"
-                  android:textColor="@color/white_trans90"
-                  android:textSize="@dimen/large"/>
+            <TextView
+                android:id="@+id/version_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/weac_version"
+                android:textColor="@color/white_trans90"
+                android:textSize="@dimen/small"/>
 
-       </LinearLayout>
+            <TextView
+                android:id="@+id/weac_slogan_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/weac_slogan"
+                android:textColor="@color/white"
+                android:textSize="@dimen/big_large"/>
 
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_alignParentBottom="true"
-           android:layout_centerInParent="true"
-           android:layout_marginBottom="10dp"
-           android:gravity="center"
-           android:text="@string/copyright"
-           android:textColor="@color/white_trans90"
-           android:textSize="@dimen/small"/>
+        </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="@string/copyright"
+            android:textColor="@color/white_trans90"
+            android:textSize="@dimen/small"/>
+    </RelativeLayout>
 </merge>

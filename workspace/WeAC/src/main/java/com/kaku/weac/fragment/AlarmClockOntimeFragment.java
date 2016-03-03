@@ -269,10 +269,9 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
 
         SharedPreferences share = getActivity().getSharedPreferences(
                 WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
-        String weatherCode = share.getString(WeacConstants.DEFAULT_WEATHER_CODE, null);
-        if (weatherCode == null) {
-            return;
-        }
+        // 没有默认城市自动定位
+        String weatherCode = share.getString(WeacConstants.DEFAULT_WEATHER_CODE,
+                getString(R.string.auto_location));
 
         String cityName;
         String address;

@@ -47,14 +47,14 @@
                         android:id="@+id/btn_start"
                         style="@style/timer_btn"
                         android:layout_alignParentLeft="true"
-                        android:drawableTop="@drawable/btn_timer_start"
+                        android:drawableTop="@drawable/bg_timer_start_btn"
                         android:text="@string/start"/>
 
                     <TextView
                         android:id="@+id/btn_quick"
                         style="@style/timer_btn"
                         android:layout_centerInParent="true"
-                        android:drawableTop="@drawable/btn_timer_quick"
+                        android:drawableTop="@drawable/bg_timer_quick_btn"
                         android:text="@string/quick_timer"/>
 
                     <TextView
@@ -62,7 +62,7 @@
                         style="@style/timer_btn"
                         android:layout_alignParentRight="true"
                         android:layout_gravity="right"
-                        android:drawableTop="@drawable/btn_timer_ring"
+                        android:drawableTop="@drawable/bg_timer_ring_btn"
                         android:text="@string/ring"/>
                 </RelativeLayout>
 
@@ -82,13 +82,13 @@
                         <TextView
                             android:id="@+id/btn_stop"
                             style="@style/timer_btn"
-                            android:drawableTop="@drawable/btn_timer_pause"
+                            android:drawableTop="@drawable/bg_timer_pause_btn"
                             android:text="@string/stop"/>
 
                         <TextView
                             android:id="@+id/btn_start2"
                             style="@style/timer_btn"
-                            android:drawableTop="@drawable/btn_timer_start"
+                            android:drawableTop="@drawable/bg_timer_start_btn"
                             android:text="@string/start"
                             android:visibility="gone"/>
                     </FrameLayout>
@@ -96,7 +96,7 @@
                     <TextView
                         android:id="@+id/btn_reset"
                         style="@style/timer_btn"
-                        android:drawableTop="@drawable/btn_timer_reset"
+                        android:drawableTop="@drawable/bg_timer_reset_btn"
                         android:text="@string/reset"/>
 
                 </LinearLayout>

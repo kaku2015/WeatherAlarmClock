@@ -309,8 +309,9 @@
     <string name="no_alarm_detail1">1.关机，请开启您的设备，确保天气闹钟能够正常运行</string>
     <string name="no_alarm_detail2">2.其他优化软件清理了天气闹钟，请进入该优化软件将天气闹钟加入忽略清单。</string>
     <string name="no_alarm_detail3">3.手机重启时没有允许天气闹钟自动启动，请在手机设置中开启天气闹钟自动启动功能，确保闹钟正常响起。</string>
-    <string name="weather_prompt_wrong">☆ 天气提示城市不准确</string>
-    <string name="weather_prompt_wrong_detail">进入城市管理界面，将天气提示城市设为默认。</string>
+    <string name="weather_prompt_wrong">☆ 天气提示城市无或不准确</string>
+    <string name="weather_prompt_wrong_detail">进入城市管理界面，将天气提示城市设为默认。如果是自动定位不准确，
+        请手动添加城市，并设为默认。</string>
     <string name="can_not_location">☆ 无法自动定位城市</string>
     <string name="can_not_location_detail">自动定位功能需要打开GPS，并授权天气闹钟使用该功能，
         请确认是否打开并授权该功能，如果自动定位功能设置正常仍出现无法定位或定位不准确的情况，请您手动添加城市。</string>

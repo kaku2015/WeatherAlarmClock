@@ -632,6 +632,11 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
 
     private OnVisibleListener mOnVisibleListener;
 
+    /**
+     * 默认城市名
+     */
+    private String mDefaultCityName;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -879,6 +884,9 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                     return;
                 }
 
+                // 保存默认城市名，判断滑动返回前是否更改了默认城市
+                mDefaultCityName = getDefaultCityName();
+
                 // 当不是天气界面并且已经开始延迟刷新天气线程
                 if (mHandler != null && mIsPostDelayed) {
                     // 取消线程
@@ -977,10 +985,18 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         // 取消返回或者滑动返回
         if (resultCode != Activity.RESULT_OK) {
             // 当改变了默认城市后滑动返回
-            if (!mCityName.equals(getDefaultCityName())) {
+            if (!mDefaultCityName.equals(getDefaultCityName())) {
                 changeCityWeatherInfo(getDefaultCityName(), getDefaultWeatherCode());
             } else {
-                int number = WeatherDBOperate.getInstance().queryCityManage(mCityName);
+                String cityName;
+                // 自动定位
+                if (mCityWeatherCode.equals(getString(R.string.auto_location))) {
+                    cityName = getString(R.string.auto_location);
+                } else {
+                    cityName = mCityName;
+                }
+
+                int number = WeatherDBOperate.getInstance().queryCityManage(cityName);
                 // 删除当前城市后滑动返回
                 if (number == 0) {
                     changeCityWeatherInfo(getDefaultCityName(), getDefaultWeatherCode());

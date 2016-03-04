@@ -668,7 +668,6 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                 // 不是第一次加载天气界面
                 if (mCityName != null) {
                     // 初始化天气
-                    // FIXME: 2015/10/29
                     try {
                         initWeather(WeatherUtil.readWeatherInfo(getActivity(), mCityName));
                     } catch (Exception e) {
@@ -1086,7 +1085,6 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
      * 刷新天气
      */
     private void refreshWeather() {
-        // FIXME：回调try catch
         String address;
         String cityName;
         // 自动定位
@@ -1238,224 +1236,93 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
 
         // 设置城市名
-        if (weatherInfo.getCity() != null) {
-            mCityNameTv.setText(weatherInfo.getCity());
-            // 不是自动定位
-            if (!getString(R.string.auto_location).equals(mCityWeatherCode)) {
-                mCityNameTv.setCompoundDrawables(null, null, null, null);
-            } else {
-                Drawable drawable = getResources().getDrawable(R.drawable.ic_gps);
-                if (drawable != null) {
-                    drawable.setBounds(0, 0, drawable.getMinimumWidth(),
-                            drawable.getMinimumHeight());
-                    // 设置图标
-                    mCityNameTv.setCompoundDrawables(drawable, null, null, null);
-                }
-            }
-        } else {
-            mCityNameTv.setText(getString(R.string.dash));
-            mCityNameTv.setCompoundDrawables(null, null, null, null);
-        }
-
+        setCityName(weatherInfo);
         // 设置预警信息
-        if (weatherInfo.getAlarmType() != null) {
-            mAlarmTv.setVisibility(View.VISIBLE);
-            mAlarmTv.setText(getString(R.string.alarm, weatherInfo.getAlarmType()));
-            mAlarmTv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // 警报详情
-                    String detail = weatherInfo.getAlarmDetail();
-                    // 替换换行"\r\n"  \\\：转义字符
-                    detail = detail.replaceAll("\\\\r\\\\n", "");
-                    String format;
-                    try {
-                        Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-                                .parse(weatherInfo.getAlarmTime());
-                        format = new SimpleDateFormat("MM月dd日 HH:mm", Locale.getDefault()).format(date);
-                    } catch (ParseException e) {
-                        LogUtil.e(LOG_TAG, "initWeather: " + e.toString());
-                        format = weatherInfo.getAlarmTime();
-                    }
-                    String time = getString(R.string.release_time, format);
-
-                    Intent intent = new Intent(getActivity(), WeatherAlarmActivity.class);
-                    intent.putExtra(WeacConstants.TITLE, getString(R.string.alarm_title,
-                            weatherInfo.getAlarmType(), weatherInfo.getAlarmDegree()));
-                    intent.putExtra(WeacConstants.DETAIL, detail);
-                    intent.putExtra(WeacConstants.TIME, time);
-                    startActivity(intent);
-                }
-            });
-        } else {
-            mAlarmTv.setVisibility(View.GONE);
-        }
+        setAlarmInfo(weatherInfo);
         // 设置更新时间
-        if (weatherInfo.getUpdateTime() != null) {
-            long now = System.currentTimeMillis();
-            SharedPreferences share = getActivity().getSharedPreferences(
-                    WeacConstants.BASE64, Activity.MODE_PRIVATE);
-            // 最近一次天气更新时间
-            long lastTime = share.getLong(getString(R.string.city_weather_update_time,
-                    weatherInfo.getCity()), 0);
-            // 更新间隔时间（小时）
-            long minuteD = (now - lastTime) / 1000 / 60 / 60;
-            // 更新时间
-            String updateTime;
-            if (minuteD < 24) {
-                updateTime = String.format(getString(R.string.update_time), weatherInfo.getUpdateTime());
-            } else if (minuteD >= 24 && minuteD < 48) {
-                updateTime = String.format(getString(R.string.update_time2), weatherInfo.getUpdateTime());
-            } else if (minuteD >= 48 && minuteD < 72) {
-                updateTime = String.format(getString(R.string.update_time3), weatherInfo.getUpdateTime());
-            } else if (minuteD >= 72 && minuteD < 96) {
-                updateTime = String.format(getString(R.string.update_time4), 3);
-            } else if (minuteD >= 96 && minuteD < 120) {
-                updateTime = String.format(getString(R.string.update_time4), 4);
-            } else if (minuteD >= 120 && minuteD < 144) {
-                updateTime = String.format(getString(R.string.update_time4), 5);
-            } else if (minuteD >= 144 && minuteD < 168) {
-                updateTime = String.format(getString(R.string.update_time4), 6);
-            } else {
-                updateTime = getString(R.string.data_void);
-            }
-            mUpdateTimeTv.setText(updateTime);
-            // 当不是数据过期
-            if (!updateTime.equals(getString(R.string.data_void))) {
-                mUpdateTimeTv.setTextColor(getResources().getColor(R.color.white_trans60));
-            } else {
-                mUpdateTimeTv.setTextColor(getResources().getColor(R.color.red));
-            }
-        } else {
-            mUpdateTimeTv.setText(getString(R.string.dash));
-            mUpdateTimeTv.setTextColor(getResources().getColor(R.color.white_trans60));
-        }
-
+        setUpdateTime(weatherInfo);
         // 设置温度
-        String temp = weatherInfo.getTemperature();
-        mTemperature1Iv.setVisibility(View.VISIBLE);
-        mTemperature2Iv.setVisibility(View.VISIBLE);
-        mTemperature3Iv.setVisibility(View.VISIBLE);
-        if (temp != null) {
-            // 两位正数
-            if (temp.length() == 2 && !temp.contains("-")) {
-                int temp1 = Integer.parseInt(temp.substring(0, 1));
-                setTemperatureImage(temp1, mTemperature1Iv);
-                int temp2 = Integer.parseInt(temp.substring(1));
-                setTemperatureImage(temp2, mTemperature2Iv);
-                mTemperature3Iv.setVisibility(View.GONE);
-                // 一位
-            } else if (temp.length() == 1 && !temp.contains("-")) {
-                int temp1 = Integer.parseInt(temp);
-                setTemperatureImage(temp1, mTemperature1Iv);
-                mTemperature2Iv.setVisibility(View.GONE);
-                mTemperature3Iv.setVisibility(View.GONE);
-                // 两位负数
-            } else if (temp.length() == 2 && temp.contains("-")) {
-                mTemperature1Iv.setImageResource(R.drawable.minus);
-                int temp2 = Integer.parseInt(temp.substring(1));
-                setTemperatureImage(temp2, mTemperature2Iv);
-                mTemperature3Iv.setVisibility(View.GONE);
-                // 三位负数
-            } else if (temp.length() == 3 && temp.contains("-")) {
-                mTemperature1Iv.setImageResource(R.drawable.minus);
-                int temp2 = Integer.parseInt(temp.substring(1, 2));
-                setTemperatureImage(temp2, mTemperature2Iv);
-                int temp3 = Integer.parseInt(temp.substring(2));
-                setTemperatureImage(temp3, mTemperature3Iv);
-            } else {
-                mTemperature1Iv.setImageResource(R.drawable.number_0);
-                mTemperature2Iv.setImageResource(R.drawable.number_0);
-                mTemperature3Iv.setImageResource(R.drawable.number_0);
-            }
-        } else {
-            mTemperature1Iv.setImageResource(R.drawable.number_0);
-            mTemperature2Iv.setImageResource(R.drawable.number_0);
-            mTemperature3Iv.setImageResource(R.drawable.number_0);
-        }
-
-
+        setTemperature(weatherInfo);
         // 设置天气类型
-        if (hour < 18) {
-            // 白天天气
-            mWeatherTypeTv.setText(weather2.getTypeDay());
-        } else {
-            // 夜间天气
-            mWeatherTypeTv.setText(weather2.getTypeNight());
-        }
-
-
-        if (weatherInfo.getQuality() != null && weatherInfo.getAQI() != null) {
-            mAqiTv.setVisibility(View.VISIBLE);
-            // 设置空气质量图片
-            setImage(mAqiTv, getQualityImageId(weatherInfo.getQuality()));
-            // 设置空气质量
-            mAqiTv.setText(String.format(getString(R.string.aqi),
-                    weatherInfo.getQuality(), weatherInfo.getAQI()));
-        } else {
-            mAqiTv.setVisibility(View.GONE);
-        }
-
-        if (weatherInfo.getHumidity() != null) {
-            // 设置湿度图片
-            setImage(mHumidityTv, getHumidityImageId(weatherInfo.getHumidity()));
-            // 设置湿度
-            mHumidityTv.setText(String.format(getString(R.string.humidity),
-                    weatherInfo.getHumidity()));
-        } else {
-            setImage(mHumidityTv, R.drawable.ic_humidity20);
-            mHumidityTv.setText(R.string.no);
-        }
-
-        if (weatherInfo.getWindDirection() != null && weatherInfo.getWindPower() != null) {
-            // 设置风向图片
-            setImage(mWindTv, getWindImageId(weatherInfo.getWindDirection()));
-            // 设置风向、风力
-            mWindTv.setText(String.format(getString(R.string.aqi)
-                    , weatherInfo.getWindDirection(), weatherInfo.getWindPower()));
-        } else {
-            setImage(mWindTv, R.drawable.ic_wind_3);
-            mWindTv.setText(R.string.no);
-        }
-
-        // 天气类型图片id
-        int weatherId;
-
-        // 设置今天天气信息
-        // 当前为凌晨
-        if (hour >= 0 && hour < 6) {
-            weatherId = MyUtil.getWeatherTypeImageID(weather2.getTypeDay(), false);
-            // 当前为白天时
-        } else if (hour >= 6 && hour < 18) {
-            weatherId = MyUtil.getWeatherTypeImageID(weather2.getTypeDay(), true);
-            // 当前为夜间
-        } else {
-            weatherId = MyUtil.getWeatherTypeImageID(weather2.getTypeNight(), false);
-        }
-        mWeatherTypeIvToday.setImageResource(weatherId);
-        mTempHighTvToday.setText(weather2.getHigh().substring(3));
-        mTempLowTvToday.setText(weather2.getLow().substring(3));
-        mWeatherTypeTvToday.setText(MyUtil.getWeatherType
-                (getActivity(), weather2.getTypeDay(), weather2.getTypeNight()));
-
-        // 设置明天天气信息
-        weatherId = MyUtil.getWeatherTypeImageID(weather3.getTypeDay(), true);
-        mWeatherTypeIvTomorrow.setImageResource(weatherId);
-        mTempHighTvTomorrow.setText(weather3.getHigh().substring(3));
-        mTempLowTvTomorrow.setText(weather3.getLow().substring(3));
-        mWeatherTypeTvTomorrow.setText(MyUtil.getWeatherType
-                (getActivity(), weather3.getTypeDay(), weather3.getTypeNight()));
-
-        // 设置后天天气信息
-        weatherId = MyUtil.getWeatherTypeImageID(weather4.getTypeDay(), true);
-        mWeatherTypeIvDayAfterTomorrow.setImageResource(weatherId);
-        mTempHighTvDayAfterTomorrow.setText(weather4.getHigh().substring(3));
-        mTempLowTvDayAfterTomorrow.setText(weather4.getLow().substring(3));
-        mWeatherTypeTvDayAfterTomorrow.setText(MyUtil.getWeatherType
-                (getActivity(), weather4.getTypeDay(), weather4.getTypeNight()));
+        setWeatherType(weather2, hour);
+        // 设置aqi
+        setAQI(weatherInfo);
+        // 设置湿度
+        setHumidity(weatherInfo);
+        // 设置风向、风力
+        setWind(weatherInfo);
+        // 设置今天，明天，后天大概天气
+        setThreeDaysWeather(weather2, weather3, weather4, hour);
 
         // 设置多天天气预报
+        setDaysForecast(weather, weather1, weather2, weather3, weather4, weather5, weather6,
+                hour1, minute1, calendar);
 
+        // 生活指数信息
+        setLifeIndex(weatherInfo);
+
+        // 处理城市管理表
+        processCityManageTable(weatherInfo, weather2);
+
+    }
+
+    /**
+     * 处理城市管理表
+     */
+    private void processCityManageTable(WeatherInfo weatherInfo, WeatherDaysForecast weather2) {
+        String cityName;
+        // 自动定位
+        if (getString(R.string.auto_location).equals(mCityWeatherCode)) {
+            cityName = mCityWeatherCode;
+        } else {
+            cityName = weatherInfo.getCity();
+        }
+
+        CityManage cityManage = new CityManage();
+        cityManage.setTempHigh(weather2.getHigh().substring(3));
+        cityManage.setTempLow(weather2.getLow().substring(3));
+        cityManage.setWeatherType(MyUtil.getWeatherType
+                (getActivity(), weather2.getTypeDay(), weather2.getTypeNight()));
+        cityManage.setWeatherTypeDay(weather2.getTypeDay());
+        cityManage.setWeatherTypeNight(weather2.getTypeNight());
+
+        // CityManage表中存在此城市时
+        if (1 == WeatherDBOperate.getInstance().queryCityManage(cityName)) {
+            // 修改城市管理item信息
+            WeatherDBOperate.getInstance().updateCityManage(cityManage, cityName);
+        }
+
+        int number = WeatherDBOperate.getInstance().queryCityManage(mCityWeatherCode);
+        // 城市管理表不存在定位
+        if (mCityWeatherCode.equals(getString(R.string.auto_location)) && number == 0) {
+            cityManage.setCityName(mCityWeatherCode);
+            cityManage.setWeatherCode(mCityWeatherCode);
+            cityManage.setLocationCity(mCityName);
+
+            // 存储城市管理表
+            boolean result = WeatherDBOperate.getInstance().saveCityManage(cityManage);
+            // 城市管理表城市个数
+            int total = WeatherDBOperate.getInstance().queryCityManage();
+            // 存储成功
+            if (result && total <= 1) {
+                SharedPreferences share = getActivity().getSharedPreferences(
+                        WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+                SharedPreferences.Editor editor = share.edit();
+                // 保存城市管理的默认城市
+                editor.putString(WeacConstants.DEFAULT_CITY, mCityWeatherCode);
+                editor.apply();
+            }
+        }
+    }
+
+    /**
+     * 设置多天天气预报
+     */
+    private void setDaysForecast(WeatherDaysForecast weather, WeatherDaysForecast weather1,
+                                 WeatherDaysForecast weather2, WeatherDaysForecast weather3,
+                                 WeatherDaysForecast weather4, WeatherDaysForecast weather5,
+                                 WeatherDaysForecast weather6, int hour1, int minute1,
+                                 Calendar calendar) {
         // 日期和星期标题 【索引0：日期;索引1：星期】
         String[] day1;
         String[] day2;
@@ -1594,59 +1461,292 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         mDaysForecastWindPowerTv4.setText(weather4.getWindPowerDay());
         mDaysForecastWindPowerTv5.setText(weather5.getWindPowerDay());
         mDaysForecastWindPowerTv6.setText(weather6.getWindPowerDay());
+    }
 
-
-        // 生活指数信息
+    /**
+     * 生活指数信息
+     */
+    private void setLifeIndex(WeatherInfo weatherInfo) {
         List<WeatherLifeIndex> weatherLifeIndexes = weatherInfo.getWeatherLifeIndex();
         // 设置生活指数
         for (WeatherLifeIndex index : weatherLifeIndexes) {
             setLifeIndex(index);
         }
+    }
 
-        String cityName;
-        // 自动定位
-        if (getString(R.string.auto_location).equals(mCityWeatherCode)) {
-            cityName = mCityWeatherCode;
+    /**
+     * 设置今天，明天，后天大概天气
+     *
+     * @param weather2 今天
+     * @param weather3 明天
+     * @param weather4 后天
+     * @param hour     当前小时
+     */
+    private void setThreeDaysWeather(WeatherDaysForecast weather2, WeatherDaysForecast weather3,
+                                     WeatherDaysForecast weather4, int hour) {
+        // 天气类型图片id
+        int weatherId;
+
+        // 设置今天天气信息
+        // 当前为凌晨
+        if (hour >= 0 && hour < 6) {
+            weatherId = MyUtil.getWeatherTypeImageID(weather2.getTypeDay(), false);
+            // 当前为白天时
+        } else if (hour >= 6 && hour < 18) {
+            weatherId = MyUtil.getWeatherTypeImageID(weather2.getTypeDay(), true);
+            // 当前为夜间
         } else {
-            cityName = weatherInfo.getCity();
+            weatherId = MyUtil.getWeatherTypeImageID(weather2.getTypeNight(), false);
         }
-
-        CityManage cityManage = new CityManage();
-        cityManage.setTempHigh(weather2.getHigh().substring(3));
-        cityManage.setTempLow(weather2.getLow().substring(3));
-        cityManage.setWeatherType(MyUtil.getWeatherType
+        mWeatherTypeIvToday.setImageResource(weatherId);
+        mTempHighTvToday.setText(weather2.getHigh().substring(3));
+        mTempLowTvToday.setText(weather2.getLow().substring(3));
+        mWeatherTypeTvToday.setText(MyUtil.getWeatherType
                 (getActivity(), weather2.getTypeDay(), weather2.getTypeNight()));
-        cityManage.setWeatherTypeDay(weather2.getTypeDay());
-        cityManage.setWeatherTypeNight(weather2.getTypeNight());
 
-        // CityManage表中存在此城市时
-        if (1 == WeatherDBOperate.getInstance().queryCityManage(cityName)) {
-            // 修改城市管理item信息
-            WeatherDBOperate.getInstance().updateCityManage(cityManage, cityName);
+        // 设置明天天气信息
+        weatherId = MyUtil.getWeatherTypeImageID(weather3.getTypeDay(), true);
+        mWeatherTypeIvTomorrow.setImageResource(weatherId);
+        mTempHighTvTomorrow.setText(weather3.getHigh().substring(3));
+        mTempLowTvTomorrow.setText(weather3.getLow().substring(3));
+        mWeatherTypeTvTomorrow.setText(MyUtil.getWeatherType
+                (getActivity(), weather3.getTypeDay(), weather3.getTypeNight()));
+
+        // 设置后天天气信息
+        weatherId = MyUtil.getWeatherTypeImageID(weather4.getTypeDay(), true);
+        mWeatherTypeIvDayAfterTomorrow.setImageResource(weatherId);
+        mTempHighTvDayAfterTomorrow.setText(weather4.getHigh().substring(3));
+        mTempLowTvDayAfterTomorrow.setText(weather4.getLow().substring(3));
+        mWeatherTypeTvDayAfterTomorrow.setText(MyUtil.getWeatherType
+                (getActivity(), weather4.getTypeDay(), weather4.getTypeNight()));
+    }
+
+    /**
+     * 设置风向、风力
+     */
+    private void setWind(WeatherInfo weatherInfo) {
+        if (weatherInfo.getWindDirection() != null && weatherInfo.getWindPower() != null) {
+            // 设置风向图片
+            setImage(mWindTv, getWindImageId(weatherInfo.getWindDirection()));
+            // 设置风向、风力
+            mWindTv.setText(String.format(getString(R.string.aqi)
+                    , weatherInfo.getWindDirection(), weatherInfo.getWindPower()));
+        } else {
+            setImage(mWindTv, R.drawable.ic_wind_3);
+            mWindTv.setText(R.string.no);
         }
+    }
 
-        int number = WeatherDBOperate.getInstance().queryCityManage(mCityWeatherCode);
-        // 城市管理表不存在定位
-        if (mCityWeatherCode.equals(getString(R.string.auto_location)) && number == 0) {
-            cityManage.setCityName(mCityWeatherCode);
-            cityManage.setWeatherCode(mCityWeatherCode);
-            cityManage.setLocationCity(mCityName);
+    /**
+     * 设置湿度
+     */
+    private void setHumidity(WeatherInfo weatherInfo) {
+        if (weatherInfo.getHumidity() != null) {
+            // 设置湿度图片
+            setImage(mHumidityTv, getHumidityImageId(weatherInfo.getHumidity()));
+            // 设置湿度
+            mHumidityTv.setText(String.format(getString(R.string.humidity),
+                    weatherInfo.getHumidity()));
+        } else {
+            setImage(mHumidityTv, R.drawable.ic_humidity20);
+            mHumidityTv.setText(R.string.no);
+        }
+    }
 
-            // 存储城市管理表
-            boolean result = WeatherDBOperate.getInstance().saveCityManage(cityManage);
-            // 城市管理表城市个数
-            int total = WeatherDBOperate.getInstance().queryCityManage();
-            // 存储成功
-            if (result && total <= 1) {
-                SharedPreferences share = getActivity().getSharedPreferences(
-                        WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
-                SharedPreferences.Editor editor = share.edit();
-                // 保存城市管理的默认城市
-                editor.putString(WeacConstants.DEFAULT_CITY, mCityWeatherCode);
-                editor.apply();
+    /**
+     * 设置aqi
+     */
+    private void setAQI(WeatherInfo weatherInfo) {
+        if (weatherInfo.getQuality() != null && weatherInfo.getAQI() != null) {
+            mAqiTv.setVisibility(View.VISIBLE);
+            // 设置空气质量图片
+            setImage(mAqiTv, getQualityImageId(weatherInfo.getQuality()));
+            // 设置空气质量
+            mAqiTv.setText(String.format(getString(R.string.aqi),
+                    weatherInfo.getQuality(), weatherInfo.getAQI()));
+        } else {
+            mAqiTv.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * 设置天气类型
+     *
+     * @param weatherToday 今天天气信息
+     * @param hour         当前小时
+     */
+    private void setWeatherType(WeatherDaysForecast weatherToday, int hour) {
+        if (hour < 18) {
+            // 白天天气
+            mWeatherTypeTv.setText(weatherToday.getTypeDay());
+        } else {
+            // 夜间天气
+            mWeatherTypeTv.setText(weatherToday.getTypeNight());
+        }
+    }
+
+    /**
+     * 设置温度
+     *
+     * @param weatherInfo weatherInfo
+     */
+    private void setTemperature(WeatherInfo weatherInfo) {
+        String temp = weatherInfo.getTemperature();
+        mTemperature1Iv.setVisibility(View.VISIBLE);
+        mTemperature2Iv.setVisibility(View.VISIBLE);
+        mTemperature3Iv.setVisibility(View.VISIBLE);
+        if (temp != null) {
+            // 两位正数
+            if (temp.length() == 2 && !temp.contains("-")) {
+                int temp1 = Integer.parseInt(temp.substring(0, 1));
+                setTemperatureImage(temp1, mTemperature1Iv);
+                int temp2 = Integer.parseInt(temp.substring(1));
+                setTemperatureImage(temp2, mTemperature2Iv);
+                mTemperature3Iv.setVisibility(View.GONE);
+                // 一位
+            } else if (temp.length() == 1 && !temp.contains("-")) {
+                int temp1 = Integer.parseInt(temp);
+                setTemperatureImage(temp1, mTemperature1Iv);
+                mTemperature2Iv.setVisibility(View.GONE);
+                mTemperature3Iv.setVisibility(View.GONE);
+                // 两位负数
+            } else if (temp.length() == 2 && temp.contains("-")) {
+                mTemperature1Iv.setImageResource(R.drawable.minus);
+                int temp2 = Integer.parseInt(temp.substring(1));
+                setTemperatureImage(temp2, mTemperature2Iv);
+                mTemperature3Iv.setVisibility(View.GONE);
+                // 三位负数
+            } else if (temp.length() == 3 && temp.contains("-")) {
+                mTemperature1Iv.setImageResource(R.drawable.minus);
+                int temp2 = Integer.parseInt(temp.substring(1, 2));
+                setTemperatureImage(temp2, mTemperature2Iv);
+                int temp3 = Integer.parseInt(temp.substring(2));
+                setTemperatureImage(temp3, mTemperature3Iv);
+            } else {
+                mTemperature1Iv.setImageResource(R.drawable.number_0);
+                mTemperature2Iv.setImageResource(R.drawable.number_0);
+                mTemperature3Iv.setImageResource(R.drawable.number_0);
             }
+        } else {
+            mTemperature1Iv.setImageResource(R.drawable.number_0);
+            mTemperature2Iv.setImageResource(R.drawable.number_0);
+            mTemperature3Iv.setImageResource(R.drawable.number_0);
         }
+    }
 
+    /**
+     * 设置更新时间
+     *
+     * @param weatherInfo weatherInfo
+     */
+    @SuppressWarnings("deprecation")
+    private void setUpdateTime(WeatherInfo weatherInfo) {
+        if (weatherInfo.getUpdateTime() != null) {
+            long now = System.currentTimeMillis();
+            SharedPreferences share = getActivity().getSharedPreferences(
+                    WeacConstants.BASE64, Activity.MODE_PRIVATE);
+            // 最近一次天气更新时间
+            long lastTime = share.getLong(getString(R.string.city_weather_update_time,
+                    weatherInfo.getCity()), 0);
+            // 更新间隔时间（小时）
+            long minuteD = (now - lastTime) / 1000 / 60 / 60;
+            // 更新时间
+            String updateTime;
+            if (minuteD < 24) {
+                updateTime = String.format(getString(R.string.update_time), weatherInfo.getUpdateTime());
+            } else if (minuteD >= 24 && minuteD < 48) {
+                updateTime = String.format(getString(R.string.update_time2), weatherInfo.getUpdateTime());
+            } else if (minuteD >= 48 && minuteD < 72) {
+                updateTime = String.format(getString(R.string.update_time3), weatherInfo.getUpdateTime());
+            } else if (minuteD >= 72 && minuteD < 96) {
+                updateTime = String.format(getString(R.string.update_time4), 3);
+            } else if (minuteD >= 96 && minuteD < 120) {
+                updateTime = String.format(getString(R.string.update_time4), 4);
+            } else if (minuteD >= 120 && minuteD < 144) {
+                updateTime = String.format(getString(R.string.update_time4), 5);
+            } else if (minuteD >= 144 && minuteD < 168) {
+                updateTime = String.format(getString(R.string.update_time4), 6);
+            } else {
+                updateTime = getString(R.string.data_void);
+            }
+            mUpdateTimeTv.setText(updateTime);
+            // 当不是数据过期
+            if (!updateTime.equals(getString(R.string.data_void))) {
+                mUpdateTimeTv.setTextColor(getResources().getColor(R.color.white_trans60));
+            } else {
+                mUpdateTimeTv.setTextColor(getResources().getColor(R.color.red));
+            }
+        } else {
+            mUpdateTimeTv.setText(getString(R.string.dash));
+            mUpdateTimeTv.setTextColor(getResources().getColor(R.color.white_trans60));
+        }
+    }
+
+    /**
+     * 设置预警信息
+     *
+     * @param weatherInfo weatherInfo
+     */
+    private void setAlarmInfo(final WeatherInfo weatherInfo) {
+        if (weatherInfo.getAlarmType() != null) {
+            mAlarmTv.setVisibility(View.VISIBLE);
+            mAlarmTv.setText(getString(R.string.alarm, weatherInfo.getAlarmType()));
+            mAlarmTv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 警报详情
+                    String detail = weatherInfo.getAlarmDetail();
+                    // 替换换行"\r\n"  \\\：转义字符
+                    detail = detail.replaceAll("\\\\r\\\\n", "");
+                    String format;
+                    try {
+                        Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+                                .parse(weatherInfo.getAlarmTime());
+                        format = new SimpleDateFormat("MM月dd日 HH:mm", Locale.getDefault()).format(date);
+                    } catch (ParseException e) {
+                        LogUtil.e(LOG_TAG, "initWeather: " + e.toString());
+                        format = weatherInfo.getAlarmTime();
+                    }
+                    String time = getString(R.string.release_time, format);
+
+                    Intent intent = new Intent(getActivity(), WeatherAlarmActivity.class);
+                    intent.putExtra(WeacConstants.TITLE, getString(R.string.alarm_title,
+                            weatherInfo.getAlarmType(), weatherInfo.getAlarmDegree()));
+                    intent.putExtra(WeacConstants.DETAIL, detail);
+                    intent.putExtra(WeacConstants.TIME, time);
+                    startActivity(intent);
+                }
+            });
+        } else {
+            mAlarmTv.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * 设置城市名
+     *
+     * @param weatherInfo weatherInfo
+     */
+    @SuppressWarnings("deprecation")
+    private void setCityName(WeatherInfo weatherInfo) {
+        if (weatherInfo.getCity() != null) {
+            mCityNameTv.setText(weatherInfo.getCity());
+            // 不是自动定位
+            if (!getString(R.string.auto_location).equals(mCityWeatherCode)) {
+                mCityNameTv.setCompoundDrawables(null, null, null, null);
+            } else {
+                Drawable drawable = getResources().getDrawable(R.drawable.ic_gps);
+                if (drawable != null) {
+                    drawable.setBounds(0, 0, drawable.getMinimumWidth(),
+                            drawable.getMinimumHeight());
+                    // 设置图标
+                    mCityNameTv.setCompoundDrawables(drawable, null, null, null);
+                }
+            }
+        } else {
+            mCityNameTv.setText(getString(R.string.dash));
+            mCityNameTv.setCompoundDrawables(null, null, null, null);
+        }
     }
 
     /**

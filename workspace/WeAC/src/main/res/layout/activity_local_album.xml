@@ -46,17 +46,17 @@
             android:overScrollMode="never">
 
         </ListView>
+
+        <TextView
+            android:id="@+id/local_album_lv_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/no_local_album"
+            android:textColor="@color/white_trans90"
+            android:textSize="@dimen/big_small"
+            android:visibility="gone"/>
+
+        <include layout="@layout/layout_loading"/>
     </FrameLayout>
-
-    <TextView
-        android:id="@+id/local_album_lv_empty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/no_local_album"
-        android:textColor="@color/white_trans90"
-        android:textSize="@dimen/big_small"
-        android:visibility="gone"/>
-
-    <include layout="@layout/layout_loading"/>
 </RelativeLayout>

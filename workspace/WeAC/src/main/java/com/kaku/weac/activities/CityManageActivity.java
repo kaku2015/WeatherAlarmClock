@@ -335,7 +335,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
     private void modifyCity() {
         SharedPreferences share = getSharedPreferences(WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
         myFinish(share.getString(WeacConstants.DEFAULT_CITY_NAME, null),
-                share.getString(WeacConstants.DEFAULT_WEATHER_CODE, "101010100"));
+                share.getString(WeacConstants.DEFAULT_WEATHER_CODE, getString(R.string.auto_location)));
     }
 
     /**

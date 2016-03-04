@@ -983,25 +983,26 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         super.onActivityResult(requestCode, resultCode, data);
         // 取消返回或者滑动返回
         if (resultCode != Activity.RESULT_OK) {
-            // 当改变了默认城市后滑动返回
-            if (!mDefaultCityName.equals(getDefaultCityName())) {
-                changeCityWeatherInfo(getDefaultCityName(), getDefaultWeatherCode());
-            } else {
-                String cityName;
-                // 自动定位
-                if (mCityWeatherCode.equals(getString(R.string.auto_location))) {
-                    cityName = getString(R.string.auto_location);
-                } else {
-                    cityName = mCityName;
-                }
-
-                int number = WeatherDBOperate.getInstance().queryCityManage(cityName);
-                // 删除当前城市后滑动返回
-                if (number == 0) {
+            if (mDefaultCityName != null && getDefaultCityName() != null) {
+                // 当改变了默认城市后滑动返回
+                if (!mDefaultCityName.equals(getDefaultCityName())) {
                     changeCityWeatherInfo(getDefaultCityName(), getDefaultWeatherCode());
+                } else {
+                    String cityName;
+                    // 自动定位
+                    if (mCityWeatherCode.equals(getString(R.string.auto_location))) {
+                        cityName = getString(R.string.auto_location);
+                    } else {
+                        cityName = mCityName;
+                    }
+
+                    int number = WeatherDBOperate.getInstance().queryCityManage(cityName);
+                    // 删除当前城市后滑动返回
+                    if (number == 0) {
+                        changeCityWeatherInfo(getDefaultCityName(), getDefaultWeatherCode());
+                    }
                 }
             }
-
             return;
         }
         if (requestCode == REQUEST_WEA) {
@@ -1065,7 +1066,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
     private String getDefaultWeatherCode() {
         SharedPreferences share = getActivity().getSharedPreferences(
                 WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
-        return share.getString(WeacConstants.DEFAULT_WEATHER_CODE, "101010100");
+        return share.getString(WeacConstants.DEFAULT_WEATHER_CODE, getString(R.string.auto_location));
     }
 
     /**

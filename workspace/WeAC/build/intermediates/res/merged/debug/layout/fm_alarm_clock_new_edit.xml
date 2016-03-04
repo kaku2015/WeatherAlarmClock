@@ -225,6 +225,8 @@
                             android:id="@+id/ring_describe"
                             style="@style/new_alarm_clcok_item_describe"
                             android:layout_marginRight="6dp"
+                            android:drawablePadding="5dp"
+                            android:drawableRight="@drawable/ic_more_arrow_dark"
                             android:ellipsize="end"
                             android:maxWidth="230dp"
                             android:singleLine="true"

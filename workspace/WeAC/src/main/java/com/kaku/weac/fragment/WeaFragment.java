@@ -974,38 +974,58 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        // 取消返回或者滑动返回
         if (resultCode != Activity.RESULT_OK) {
+            // 当改变了默认城市后滑动返回
+            if (!mCityName.equals(getDefaultCityName())) {
+                changeCityWeatherInfo(getDefaultCityName(), getDefaultWeatherCode());
+            } else {
+                int number = WeatherDBOperate.getInstance().queryCityManage(mCityName);
+                // 删除当前城市后滑动返回
+                if (number == 0) {
+                    changeCityWeatherInfo(getDefaultCityName(), getDefaultWeatherCode());
+                }
+            }
+
             return;
         }
         if (requestCode == REQUEST_WEA) {
             String cityName = data.getStringExtra(WeacConstants.CITY_NAME);
-            if (!TextUtils.isEmpty(cityName)) {
-                mCityName = cityName;
-                mCityWeatherCode = data.getStringExtra(WeacConstants.WEATHER_CODE);
+            String weatherCode = data.getStringExtra(WeacConstants.WEATHER_CODE);
+            changeCityWeatherInfo(cityName, weatherCode);
+        }
+    }
 
-                // 滚动到顶端
-                mPullRefreshScrollView.getRefreshableView().scrollTo(0, 0);
-                WeatherInfo weatherInfo = WeatherUtil.readWeatherInfo(getActivity(), mCityName);
-                if (weatherInfo == null) {
-                    return;
-                }
-                initWeather(weatherInfo);
+    /**
+     * 当更改默认城市或者删除当前城市时更新城市天气信息
+     */
+    private void changeCityWeatherInfo(String cityName, String cityWeatherCode) {
+        if (!TextUtils.isEmpty(cityName)) {
+            mCityName = cityName;
+            mCityWeatherCode = cityWeatherCode;
 
-                long now = System.currentTimeMillis();
-                SharedPreferences share = getActivity().getSharedPreferences(
-                        WeacConstants.BASE64, Activity.MODE_PRIVATE);
-                // 最近一次天气更新时间
-                long lastTime = share.getLong(getString(R.string.city_weather_update_time,
-                        weatherInfo.getCity()), 0);
-                long minuteD = (now - lastTime) / 1000 / 60;
-                // 更新间隔大于10分钟自动下拉刷新
-                if (minuteD > 10) {
-                    // 自动定位
-                    if (mCityWeatherCode.equals(getString(R.string.auto_location))) {
-                        locationPromptRefresh();
-                    } else {
-                        mPullRefreshScrollView.setRefreshing();
-                    }
+            // 滚动到顶端
+            mPullRefreshScrollView.getRefreshableView().scrollTo(0, 0);
+            WeatherInfo weatherInfo = WeatherUtil.readWeatherInfo(getActivity(), mCityName);
+            if (weatherInfo == null) {
+                return;
+            }
+            initWeather(weatherInfo);
+
+            long now = System.currentTimeMillis();
+            SharedPreferences share = getActivity().getSharedPreferences(
+                    WeacConstants.BASE64, Activity.MODE_PRIVATE);
+            // 最近一次天气更新时间
+            long lastTime = share.getLong(getString(R.string.city_weather_update_time,
+                    weatherInfo.getCity()), 0);
+            long minuteD = (now - lastTime) / 1000 / 60;
+            // 更新间隔大于10分钟自动下拉刷新
+            if (minuteD > 10) {
+                // 自动定位
+                if (mCityWeatherCode.equals(getString(R.string.auto_location))) {
+                    locationPromptRefresh();
+                } else {
+                    mPullRefreshScrollView.setRefreshing();
                 }
             }
         }

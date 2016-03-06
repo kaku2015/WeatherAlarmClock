@@ -22,11 +22,6 @@ public class AlarmClock extends DataSupport implements Parcelable {
     private int id;
 
     /**
-     * 闹钟启动code
-     */
-    private int alarmClockCode;
-
-    /**
      * 小时
      */
     private int hour;
@@ -108,7 +103,6 @@ public class AlarmClock extends DataSupport implements Parcelable {
     /**
      * 闹钟实例构造方法
      *
-     * @param alarmClockCode 闹钟启动code
      * @param hour           小时
      * @param minute         分钟
      * @param repeat         重复
@@ -125,12 +119,11 @@ public class AlarmClock extends DataSupport implements Parcelable {
      * @param weaPrompt      天气提示
      * @param onOff          开关
      */
-    public AlarmClock(int alarmClockCode, int hour, int minute, String repeat,
+    public AlarmClock(int hour, int minute, String repeat,
                       String weeks, String tag, String ringName, String ringUrl,
                       int ringPager, int volume, boolean vibrate, boolean nap,
                       int napInterval, int napTimes, boolean weaPrompt, boolean onOff) {
         super();
-        this.alarmClockCode = alarmClockCode;
         this.hour = hour;
         this.minute = minute;
         this.repeat = repeat;
@@ -151,7 +144,6 @@ public class AlarmClock extends DataSupport implements Parcelable {
     @Override
     public void writeToParcel(Parcel out, int flags) {
         out.writeInt(id);
-        out.writeInt(alarmClockCode);
         out.writeInt(hour);
         out.writeInt(minute);
         out.writeString(repeat);
@@ -176,7 +168,6 @@ public class AlarmClock extends DataSupport implements Parcelable {
 
     private AlarmClock(Parcel in) {
         id = in.readInt();
-        alarmClockCode = in.readInt();
         hour = in.readInt();
         minute = in.readInt();
         repeat = in.readString();
@@ -230,14 +221,6 @@ public class AlarmClock extends DataSupport implements Parcelable {
 
     public void setNapTimes(int napTimes) {
         this.napTimes = napTimes;
-    }
-
-    public int getAlarmClockCode() {
-        return alarmClockCode;
-    }
-
-    public void setAlarmClockCode(int alarmClockCode) {
-        this.alarmClockCode = alarmClockCode;
     }
 
     public int getHour() {

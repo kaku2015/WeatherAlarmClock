@@ -36,7 +36,7 @@ public class AlarmClockBroadcast extends BroadcastReceiver {
         // 单次响铃
         if (alarmClock.getWeeks() == null) {
             AlarmClockOperate.getInstance().updateAlarmClock(false,
-                    alarmClock.getAlarmClockCode());
+                    alarmClock.getId());
 
             Intent i = new Intent("com.kaku.weac.AlarmClockOff");
             context.sendBroadcast(i);

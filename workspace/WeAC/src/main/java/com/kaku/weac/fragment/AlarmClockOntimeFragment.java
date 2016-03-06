@@ -192,7 +192,7 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
         mNotificationManager = (NotificationManager) getActivity()
                 .getSystemService(Activity.NOTIFICATION_SERVICE);
         // 取消下拉列表通知消息
-        mNotificationManager.cancel(mAlarmClock.getAlarmClockCode());
+        mNotificationManager.cancel(mAlarmClock.getId());
 
         mShowTimeHandler = new ShowTimeHandler(this);
     }
@@ -522,7 +522,7 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
         intent.putExtra(WeacConstants.ALARM_CLOCK, mAlarmClock);
         intent.putExtra(WeacConstants.NAP_RAN_TIMES, mNapTimesRan);
         PendingIntent pi = PendingIntent.getBroadcast(getActivity(),
-                -mAlarmClock.getAlarmClockCode(), intent,
+                -mAlarmClock.getId(), intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getActivity()
                 .getSystemService(Activity.ALARM_SERVICE);
@@ -546,7 +546,7 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
         // FLAG_UPDATE_CURRENT 点击通知有时不会跳转！！
         // FLAG_ONE_SHOT 清除列表只响应一个
         PendingIntent napCancel = PendingIntent.getActivity(getActivity(),
-                mAlarmClock.getAlarmClockCode(), it,
+                mAlarmClock.getId(), it,
                 PendingIntent.FLAG_CANCEL_CURRENT);
         // 下拉列表通知显示的时间
         CharSequence time = new SimpleDateFormat("HH:mm", Locale.getDefault())
@@ -580,8 +580,7 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
         notification.flags |= Notification.FLAG_SHOW_LIGHTS;
 
         // 下拉列表显示小睡信息
-        mNotificationManager.notify(mAlarmClock.getAlarmClockCode(),
-                notification);
+        mNotificationManager.notify(mAlarmClock.getId(),notification);
     }
 
     /**

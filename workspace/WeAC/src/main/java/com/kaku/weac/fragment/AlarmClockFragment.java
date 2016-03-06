@@ -262,7 +262,6 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
         int position = 0;
         List<AlarmClock> list = AlarmClockOperate.getInstance().loadAlarmClocks();
         for (AlarmClock alarmClock : list) {
-            alarmClock.setAlarmClockCode(alarmClock.getId());
             mAlarmClockList.add(alarmClock);
 
             if (id == alarmClock.getId()) {
@@ -286,7 +285,6 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
         int position = event.getPosition();
         List<AlarmClock> list = AlarmClockOperate.getInstance().loadAlarmClocks();
         for (AlarmClock alarmClock : list) {
-            alarmClock.setAlarmClockCode(alarmClock.getId());
             mAlarmClockList.add(alarmClock);
         }
         // 列表为空时不显示删除，完成按钮
@@ -307,7 +305,6 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
 
         List<AlarmClock> list = AlarmClockOperate.getInstance().loadAlarmClocks();
         for (AlarmClock alarmClock : list) {
-            alarmClock.setAlarmClockCode(alarmClock.getId());
             mAlarmClockList.add(alarmClock);
 
             // 当闹钟为开时刷新开启闹钟

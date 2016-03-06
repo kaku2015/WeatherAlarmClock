@@ -23,7 +23,7 @@ public class AlarmClockNapNotificationActivity extends BaseActivitySimple {
         AlarmClock alarmClock = getIntent().getParcelableExtra(
                 WeacConstants.ALARM_CLOCK);
         // 关闭小睡
-        MyUtil.cancelAlarmClock(this, -alarmClock.getAlarmClockCode());
+        MyUtil.cancelAlarmClock(this, -alarmClock.getId());
         finish();
     }
 

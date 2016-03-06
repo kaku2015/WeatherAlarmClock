@@ -144,15 +144,15 @@ public class AlarmClockAdapter extends RecyclerView.Adapter<AlarmClockAdapter.My
 
                     // 关闭闹钟
                     MyUtil.cancelAlarmClock(mContext,
-                            alarmClock.getAlarmClockCode());
+                            alarmClock.getId());
                     // 关闭小睡
                     MyUtil.cancelAlarmClock(mContext,
-                            -alarmClock.getAlarmClockCode());
+                            -alarmClock.getId());
 
                     NotificationManager notificationManager = (NotificationManager) mContext
                             .getSystemService(Activity.NOTIFICATION_SERVICE);
                     // 取消下拉列表通知消息
-                    notificationManager.cancel(alarmClock.getAlarmClockCode());
+                    notificationManager.cancel(alarmClock.getId());
 
                 }
             });
@@ -189,17 +189,16 @@ public class AlarmClockAdapter extends RecyclerView.Adapter<AlarmClockAdapter.My
                             updateTab(false);
                             // 取消闹钟
                             MyUtil.cancelAlarmClock(mContext,
-                                    alarmClock.getAlarmClockCode());
+                                    alarmClock.getId());
                             // 取消小睡
                             MyUtil.cancelAlarmClock(mContext,
-                                    -alarmClock.getAlarmClockCode());
+                                    -alarmClock.getId());
 
                             NotificationManager notificationManager = (NotificationManager) mContext.
                                     getSystemService(
                                             Activity.NOTIFICATION_SERVICE);
                             // 取消下拉列表通知消息
-                            notificationManager.cancel(alarmClock
-                                    .getAlarmClockCode());
+                            notificationManager.cancel(alarmClock.getId());
 
                             // 停止播放
                             AudioPlayer.getInstance(mContext).stop();
@@ -218,7 +217,7 @@ public class AlarmClockAdapter extends RecyclerView.Adapter<AlarmClockAdapter.My
 //                        TabAlarmClockOperate.getInstance(mContext).update(onOff,
 //                                alarmClock.getAlarmClockCode());
                         AlarmClockOperate.getInstance().updateAlarmClock(onOff,
-                                alarmClock.getAlarmClockCode());
+                                alarmClock.getId());
                         OttoAppConfig.getInstance().post(new AlarmClockUpdateEvent());
                     }
                 });

@@ -777,8 +777,10 @@ public class MyUtil {
                 weatherId = R.drawable.ic_weather_thunder_shower;
                 break;
             case "雨夹雪":
-            case "冻雨":
                 weatherId = R.drawable.ic_weather_sleet;
+                break;
+            case "冻雨":
+                weatherId = R.drawable.ic_weather_ice_rain;
                 break;
             case "小雨":
             case "小到中雨":
@@ -817,8 +819,10 @@ public class MyUtil {
                 weatherId = R.drawable.ic_weather_snowstrom;
                 break;
             case "雾":
-            case "霾":
                 weatherId = R.drawable.ic_weather_foggy;
+                break;
+            case "霾":
+                weatherId = R.drawable.ic_weather_haze;
                 break;
             case "沙尘暴":
                 weatherId = R.drawable.ic_weather_duststorm;
@@ -836,7 +840,7 @@ public class MyUtil {
                 } else if (type.contains("雾") || type.contains("霾")) {
                     weatherId = R.drawable.ic_weather_foggy;
                 } else if (type.contains("雨")) {
-                    weatherId = R.drawable.ic_weather_sleet;
+                    weatherId = R.drawable.ic_weather_ice_rain;
                 } else if (type.contains("雪") || type.contains("冰雹")) {
                     weatherId = R.drawable.ic_weather_moderate_snow;
                 } else {

@@ -243,7 +243,7 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
                 break;
             // 午睡
             case R.id.btn_siesta:
-                processQuickTimer(0, 30, 0);
+                processQuickTimer(0, 45, 0);
                 break;
             // 面膜
             case R.id.btn_facial_mask:

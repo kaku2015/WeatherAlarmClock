@@ -1544,12 +1544,12 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
     private void setHumidity(WeatherInfo weatherInfo) {
         if (weatherInfo.getHumidity() != null) {
             // 设置湿度图片
-            setImage(mHumidityTv, getHumidityImageId(weatherInfo.getHumidity()));
+//            setImage(mHumidityTv, getHumidityImageId(weatherInfo.getHumidity()));
             // 设置湿度
             mHumidityTv.setText(String.format(getString(R.string.humidity),
                     weatherInfo.getHumidity()));
         } else {
-            setImage(mHumidityTv, R.drawable.ic_humidity20);
+//            setImage(mHumidityTv, R.drawable.ic_humidity20);
             mHumidityTv.setText(R.string.no);
         }
     }
@@ -1612,13 +1612,13 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                 mTemperature3Iv.setVisibility(View.GONE);
                 // 两位负数
             } else if (temp.length() == 2 && temp.contains("-")) {
-                mTemperature1Iv.setImageResource(R.drawable.minus);
+                mTemperature1Iv.setImageResource(R.drawable.ic_minus);
                 int temp2 = Integer.parseInt(temp.substring(1));
                 setTemperatureImage(temp2, mTemperature2Iv);
                 mTemperature3Iv.setVisibility(View.GONE);
                 // 三位负数
             } else if (temp.length() == 3 && temp.contains("-")) {
-                mTemperature1Iv.setImageResource(R.drawable.minus);
+                mTemperature1Iv.setImageResource(R.drawable.ic_minus);
                 int temp2 = Integer.parseInt(temp.substring(1, 2));
                 setTemperatureImage(temp2, mTemperature2Iv);
                 int temp3 = Integer.parseInt(temp.substring(2));
@@ -1790,12 +1790,12 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         return imgId;
     }
 
-    /**
+/*    *//**
      * 取得湿度图片id
      *
      * @param humidity 湿度
      * @return 湿度图片id
-     */
+     *//*
     private int getHumidityImageId(String humidity) {
         int imgId;
         int num = Integer.parseInt(humidity.split("%")[0]);
@@ -1823,7 +1823,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
             imgId = R.drawable.ic_humidity100;
         else imgId = R.drawable.ic_humidity20;
         return imgId;
-    }
+    }*/
 
     /**
      * 设置左侧图片

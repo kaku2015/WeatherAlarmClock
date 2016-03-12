@@ -89,9 +89,9 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="51dp"
+                    android:layout_marginBottom="60dp"
                     android:layout_marginLeft="19dp"
-                    android:layout_marginTop="51dp"
+                    android:layout_marginTop="60dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -126,7 +126,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:contentDescription="@null"
-                                android:src="@drawable/centigrade"/>
+                                android:src="@drawable/ic_centigrade"/>
 
                             <TextView
                                 android:id="@+id/weather_type"
@@ -148,7 +148,7 @@
                     <TextView
                         android:id="@+id/humidity"
                         style="@style/wea_prompt"
-                        android:drawableLeft="@drawable/ic_humidity20"/>
+                        android:drawableLeft="@drawable/ic_humidity"/>
 
                     <TextView
                         android:id="@+id/wind"

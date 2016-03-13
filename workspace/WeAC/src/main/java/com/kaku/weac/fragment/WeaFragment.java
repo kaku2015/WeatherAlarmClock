@@ -644,12 +644,13 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         OttoAppConfig.getInstance().register(this);
     }
 
+    @SuppressWarnings("deprecation")
     @Subscribe
     public void onWallpaperUpdate(WallpaperEvent wallpaperEvent) {
         if (mBackGround != null) {
             mBlurDrawable = MyUtil.getWallPaperBlurDrawable(getActivity());
             mBlurDrawable.setAlpha(mAlpha);
-            mBackGround.setBackground(mBlurDrawable);
+            mBackGround.setBackgroundDrawable(mBlurDrawable);
         }
     }
 
@@ -2206,7 +2207,8 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                 // 设置模糊处理后drawable的透明度
                 mBlurDrawable.setAlpha(mAlpha);
                 // 设置背景
-                mBackGround.setBackground(mBlurDrawable);
+                //noinspection deprecation
+                mBackGround.setBackgroundDrawable(mBlurDrawable);
             }
         });
     }

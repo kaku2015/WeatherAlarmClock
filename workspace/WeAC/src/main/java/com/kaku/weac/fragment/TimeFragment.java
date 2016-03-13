@@ -351,9 +351,10 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
     /**
      * 设置计时前开始按钮不可点击
      */
+    @SuppressWarnings("deprecation")
     private void setStartBtnNoClickable() {
         mStartBtn.setAlpha(0.2f);
-        mStartBtn.setBackground(null);
+        mStartBtn.setBackgroundDrawable(null);
         mStartBtn.setOnClickListener(null);
     }
 

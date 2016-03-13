@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="16"
+        android:minSdkVersion="14"
         android:targetSdkVersion="23" />
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -231,6 +231,10 @@
             android:name="com.umeng.update.UpdateDialogActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
+        <activity
+            android:name="com.karumi.dexter.DexterActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Transparent" />
 
         <service
             android:name="com.squareup.leakcanary.internal.HeapAnalyzerService"

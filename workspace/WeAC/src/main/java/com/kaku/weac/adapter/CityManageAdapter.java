@@ -189,11 +189,11 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
         });
         // 默认城市
         if (mDefaultCity.equals(cityManage.getCityName())) {
-            viewHolder.setDefaultTv.setBackground(mContext.getResources().getDrawable(
+            viewHolder.setDefaultTv.setBackgroundDrawable(mContext.getResources().getDrawable(
                     R.drawable.bg_gv_city_manage_default));
             viewHolder.setDefaultTv.setText(R.string.my_default);
         } else {
-            viewHolder.setDefaultTv.setBackground(mContext.getResources().getDrawable(
+            viewHolder.setDefaultTv.setBackgroundDrawable(mContext.getResources().getDrawable(
                     R.drawable.bg_gv_city_manage_set_default));
             viewHolder.setDefaultTv.setText(R.string.set_default);
         }

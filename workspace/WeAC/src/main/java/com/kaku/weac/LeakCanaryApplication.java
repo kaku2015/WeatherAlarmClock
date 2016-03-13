@@ -8,6 +8,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.kaku.weac.util.LogUtil;
+import com.karumi.dexter.Dexter;
 import com.squareup.leakcanary.RefWatcher;
 
 import org.litepal.LitePalApplication;
@@ -36,6 +37,8 @@ public class LeakCanaryApplication extends LitePalApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        Dexter.initialize(this);
+
 //        refWatcher = LeakCanary.install(this);
         refWatcher = installLeakCanary();
         this.registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {

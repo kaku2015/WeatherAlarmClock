@@ -1,6 +1,4 @@
-/*
- * © 2016 咖枯. All Rights Reserved.
- */
+
 package com.kaku.weac.util;
 
 import android.annotation.TargetApi;
@@ -25,10 +23,6 @@ import android.os.Environment;
 import android.os.SystemClock;
 import android.os.Vibrator;
 import android.provider.MediaStore;
-import android.renderscript.Allocation;
-import android.renderscript.Element;
-import android.renderscript.RenderScript;
-import android.renderscript.ScriptIntrinsicBlur;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
@@ -89,6 +83,7 @@ public class MyUtil {
      * @param vg       viewGroup
      * @param activity activity
      */
+    @SuppressWarnings("deprecation")
     public static void setBackground(ViewGroup vg, Activity activity) {
         // 取得主题背景配置信息
         SharedPreferences share = activity.getSharedPreferences(WeacConstants.EXTRA_WEAC_SHARE,
@@ -100,7 +95,7 @@ public class MyUtil {
             Drawable drawable1 = Drawable.createFromPath(value);
             // 文件没有被删除
             if (drawable1 != null) {
-                vg.setBackground(drawable1);
+                vg.setBackgroundDrawable(drawable1);
             } else {
                 saveWallpaper(activity, WeacConstants.WALLPAPER_NAME, WeacConstants.DEFAULT_WALLPAPER_NAME);
                 setWallpaper(vg, activity, share);
@@ -175,8 +170,9 @@ public class MyUtil {
      * @param vg       viewGroup
      * @param activity activity
      */
+    @SuppressWarnings("deprecation")
     public static void setBackgroundBlur(ViewGroup vg, Activity activity) {
-        vg.setBackground(getWallPaperBlurDrawable(activity));
+        vg.setBackgroundDrawable(getWallPaperBlurDrawable(activity));
         setStatusBarTranslucent(vg, activity);
     }
 
@@ -460,7 +456,7 @@ public class MyUtil {
 //            }
         }
     }
-
+/*
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     private static Bitmap blurBitmap(Context context, Bitmap sentBitmap, int radius) {
         Bitmap bitmap = sentBitmap.copy(sentBitmap.getConfig(), true);
@@ -470,12 +466,12 @@ public class MyUtil {
                 Allocation.USAGE_SCRIPT);
         final Allocation output = Allocation.createTyped(rs, input.getType());
         final ScriptIntrinsicBlur script = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
-        script.setRadius(radius /* e.g. 3.f */);
+        script.setRadius(radius *//* e.g. 3.f *//*);
         script.setInput(input);
         script.forEach(output);
         output.copyTo(bitmap);
         return bitmap;
-    }
+    }*/
 
     /**
      * 开启闹钟
@@ -1202,14 +1198,14 @@ public class MyUtil {
         final float scale = resources.getDisplayMetrics().scaledDensity;
         return sp * scale;
     }
-
-    /**
+/*
+    *//**
      * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
-     */
+     *//*
     public static int px2dip(Context context, float pxValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
-    }
+    }*/
 
     /**
      * 保存自定义二维码logo地址

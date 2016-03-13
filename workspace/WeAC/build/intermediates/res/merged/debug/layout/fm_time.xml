@@ -17,11 +17,16 @@
 
         <include layout="@layout/layout_loading"/>
 
-        <ViewStub
-            android:id="@+id/viewstub_time"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout="@layout/viewstub_time"/>
+            android:layout_height="match_parent">
+
+            <ViewStub
+                android:id="@+id/viewstub_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout="@layout/viewstub_time"/>
+        </ScrollView>
     </FrameLayout>
 </LinearLayout>
 <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/layout/fm_time.xml -->

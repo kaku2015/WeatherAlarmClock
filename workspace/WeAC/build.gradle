@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.kaku.weac"
-        minSdkVersion 16
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -41,6 +41,7 @@ android {
             def outputFile = output.outputFile
             if (outputFile != null && outputFile.name.endsWith('.apk')) {
                 def fileName = outputFile.name.replace(".apk", "-${defaultConfig.versionName}.apk")
+                //noinspection GroovyAssignabilityCheck
                 output.outputFile = new File(outputFile.parent, fileName)
             }
         }
@@ -110,4 +111,5 @@ dependencies {
     compile 'com.umeng:fb:5.4.0'
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile files('libs/umeng-update-v2.6.0.1.jar')
+    compile 'com.karumi:dexter:2.2.1'
 }

@@ -294,7 +294,7 @@ public class MoreFragment extends LazyLoadFragment {
                 .show();
     }
 
-    public void friendShare() {
+    private void friendShare() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
 //        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.friend_share));
@@ -533,7 +533,7 @@ public class MoreFragment extends LazyLoadFragment {
         }
     }
 
-    public ApplicationInfo getApplicationInfo(String processName, PackageManager packageManager) {
+    private ApplicationInfo getApplicationInfo(String processName, PackageManager packageManager) {
         if (processName == null) {
             return null;
         }
@@ -589,11 +589,6 @@ public class MoreFragment extends LazyLoadFragment {
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
         mActivityManager.getMemoryInfo(mi);
         return mi.availMem;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
     }
 
     @Override

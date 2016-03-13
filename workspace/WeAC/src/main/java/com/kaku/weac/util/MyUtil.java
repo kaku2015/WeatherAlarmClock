@@ -447,16 +447,15 @@ public class MyUtil {
             return (bitmap);
         } catch (Exception e) {
             LogUtil.e("MyUtil", e.toString());
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
+/*            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
                 return blurBitmap(context, sentBitmap, radius);
+            } else {*/
+            if (filePath == null) {
+                return BitmapFactory.decodeResource(context.getResources(), resId);
             } else {
-                // TODO : 天气模糊背景返回透明色
-                if (filePath == null) {
-                    return BitmapFactory.decodeResource(context.getResources(), resId);
-                } else {
-                    return BitmapFactory.decodeFile(filePath);
-                }
+                return BitmapFactory.decodeFile(filePath);
             }
+//            }
         }
     }
 

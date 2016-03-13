@@ -171,7 +171,9 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.kaku.weac.broadcast.AlarmClockProcessReceiver" >
+        <receiver
+            android:name="com.kaku.weac.broadcast.AlarmClockProcessReceiver"
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.kaku.weac.AlarmClockOff" />
             </intent-filter>

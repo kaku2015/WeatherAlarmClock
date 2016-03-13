@@ -46,54 +46,6 @@ public class DaemonService extends Service {
                     }
                 }
 
-                /*// FIXME: 修改或改为共用代码
-                Cursor cursor = getContentResolver().query(WeacDBMetaData.CONTENT_URI,
-                        null, null, null, WeacDBMetaData.SORT_ORDER);
-                if (cursor != null) {
-                    for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                        int id = cursor.getInt(cursor.getColumnIndex(WeacDBMetaData.AC_ID));
-                        int hour = cursor.getInt(cursor
-                                .getColumnIndex(WeacDBMetaData.AC_HOUR));
-                        int minute = cursor.getInt(cursor
-                                .getColumnIndex(WeacDBMetaData.AC_MINUTE));
-                        String weeks = cursor.getString(cursor
-                                .getColumnIndex(WeacDBMetaData.AC_WEEKS));
-                        String repeat = cursor.getString(cursor
-                                .getColumnIndex(WeacDBMetaData.AC_REPEAT));
-                        String tag = cursor.getString(cursor
-                                .getColumnIndex(WeacDBMetaData.AC_TAG));
-                        String ringName = cursor.getString(cursor
-                                .getColumnIndex(WeacDBMetaData.AC_RING_NAME));
-                        String ringUrl = cursor.getString(cursor
-                                .getColumnIndex(WeacDBMetaData.AC_RING_URL));
-                        int ringPager = cursor.getInt(cursor
-                                .getColumnIndex(WeacDBMetaData.AC_RING_PAGER));
-                        int volume = cursor.getInt(cursor
-                                .getColumnIndex(WeacDBMetaData.AC_VOLUME));
-                        boolean vibrate = cursor.getInt(cursor
-                                .getColumnIndex(WeacDBMetaData.AC_VIBRATE)) == 1;
-                        boolean nap = cursor.getInt(cursor
-                                .getColumnIndex(WeacDBMetaData.AC_NAP)) == 1;
-                        int napInterval = cursor.getInt(cursor
-                                .getColumnIndex(WeacDBMetaData.AC_NAP_INTERVAL));
-                        int napTimes = cursor.getInt(cursor
-                                .getColumnIndex(WeacDBMetaData.AC_NAP_TIMES));
-                        boolean weaPrompt = cursor.getInt(cursor
-                                .getColumnIndex(WeacDBMetaData.AC_WEA_PROMPT)) == 1;
-                        boolean onOff = cursor.getInt(cursor
-                                .getColumnIndex(WeacDBMetaData.AC_ON_OFF)) == 1;
-                        AlarmClock alarmClock = new AlarmClock(id, hour, minute, repeat,
-                                weeks, tag, ringName, ringUrl, ringPager, volume, vibrate,
-                                nap, napInterval, napTimes, weaPrompt, onOff);
-
-                        if (onOff) {
-                            MyUtil.startAlarmClock(DaemonService.this, alarmClock);
-                        }
-
-                    }
-                    cursor.close();
-                }*/
-
                 SharedPreferences preferences = getSharedPreferences(
                         WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
                 // 倒计时时间

@@ -568,12 +568,12 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
     /**
      * 设置壁纸
      */
-    LinearLayout mBackGround;
+    private LinearLayout mBackGround;
 
     /**
      * 模糊处理过的Drawable
      */
-    Drawable mBlurDrawable;
+    private Drawable mBlurDrawable;
 
     /**
      * 屏幕密度
@@ -583,7 +583,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
     /**
      * 透明
      */
-    int mAlpha = 0;
+    private int mAlpha = 0;
 
     /**
      * 当前天气预报城市名

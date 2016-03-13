@@ -51,6 +51,7 @@ public class AddCityAdapter extends ArrayAdapter<String> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         if (cityName.equals("定位")) {
+            @SuppressWarnings("deprecation")
             Drawable drawable = getContext().getResources().getDrawable(R.drawable.ic_gps);
             if (drawable != null) {
                 drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());

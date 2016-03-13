@@ -99,7 +99,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     /**
      * 展示天气的Fragment
      */
-    WeaFragment mWeaFragment;
+    private WeaFragment mWeaFragment;
 
     @SuppressWarnings("deprecation")
     @Override

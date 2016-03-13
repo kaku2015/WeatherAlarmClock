@@ -32,7 +32,6 @@ public class HttpUtil {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                // FIXME: okHttp
 //                HttpURLConnection connection = null;
                 try {
                     String address1;

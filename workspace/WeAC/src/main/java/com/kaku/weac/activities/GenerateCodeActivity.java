@@ -52,12 +52,12 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
     /**
      * 二维码前景色：默认黑色
      */
-    public int mForeColor;
+    private int mForeColor;
 
     /**
      * 二维码背景色：默认白色
      */
-    public int mBackColor;
+    private int mBackColor;
     private ImageView mActionOverflow;
     private PopupMenu mPopupMenu;
     private EditText mQrCodeEt;

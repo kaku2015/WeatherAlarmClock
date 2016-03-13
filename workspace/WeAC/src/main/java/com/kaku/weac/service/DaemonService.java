@@ -1,3 +1,6 @@
+/*
+ * © 2016 咖枯. All Rights Reserved.
+ */
 package com.kaku.weac.service;
 
 import android.app.Activity;

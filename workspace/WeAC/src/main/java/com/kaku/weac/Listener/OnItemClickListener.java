@@ -1,6 +1,6 @@
 package com.kaku.weac.Listener;
 /*
- * Copyright (c) 2016. Kaku咖枯 Inc. All rights reserved.
+ * © 2016 咖枯. All Rights Reserved.
  */
 
 import android.view.View;

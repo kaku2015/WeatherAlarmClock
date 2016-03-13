@@ -1,4 +1,6 @@
-
+/*
+ * © 2016 咖枯. All Rights Reserved.
+ */
 package com.kaku.weac.util;
 
 import android.annotation.TargetApi;

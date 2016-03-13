@@ -68,7 +68,7 @@
     <string name="xx_naping">%1$s (小睡中……)</string>
     <string name="nap_to">小睡至%1$s闹钟再次响起，轻触取消</string>
     <string name="nap_time">小睡%1$d分钟</string>
-    <string name="weather_type">%1$s&#160;&#160;&#160;%2$s~%3$s℃</string>
+    <string name="weather_type">%1$s&#160;%2$s~%3$s℃</string>
     <string name="temperature">%1$s℃</string>
     <string name="bring_an_umbrella">带伞</string>
 
@@ -233,7 +233,7 @@
     <string name="faq">常见问题</string>
     <string name="feedback">意见反馈</string>
     <string name="give_good_reputation">赏个好评</string>
-    <string name="rewards_me">打赏我</string>
+    <string name="rewards">打赏</string>
     <string name="abort">关于</string>
 
     <string name="quit">退出应用</string>
@@ -264,7 +264,7 @@
     <string name="scan_result">扫描结果</string>
     <string name="copy">复制</string>
     <string name="search">搜索</string>
-    <string name="text_already_copied">文本已复制到剪贴板</string>
+    <string name="text_already_copied">已复制到剪贴板</string>
     <string name="bar_code">条形码：%1$s</string>
     <string name="decode_null">未发现二维码/条形码</string>
     <string name="Alignment_code">对准二维码/条形码</string>
@@ -319,5 +319,7 @@
     <string name="weather_can_not_update_detail">天气更新需要连接网络，请确认网络连接是否正常，若网络正常仍然无法更新，请稍后再试。</string>
 
     <!--打赏我-->
-    <string name="need_charge">电量不足，求发个红包补充电量。</string>
+    <string name="rewards_title">给作者充电？</string>
+    <string name="rewards_detail">点击按钮后，作者支付宝账号将会复制到剪贴板，您就可以使用支付宝给作者补充电量啦。</string>
+    <string name="ok">好的</string>
 </resources>

@@ -43,7 +43,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:overScrollMode="never"
-            ptr:ptrAnimationStyle="rotate">
+            ptr:ptrAnimationStyle="rotate"
+            ptr:ptrHeaderSubTextColor="@color/white_trans60"
+            ptr:ptrHeaderTextColor="@color/white_trans90">
 
             <LinearLayout
                 android:id="@+id/weather_layout"

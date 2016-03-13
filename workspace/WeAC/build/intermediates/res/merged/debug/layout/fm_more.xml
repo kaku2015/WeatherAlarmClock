@@ -218,6 +218,25 @@
                     <View style="@style/more_item_divider"/>
 
                     <com.balysv.materialripple.MaterialRippleLayout
+                        android:id="@+id/rewards"
+                        style="@style/more_item_area_ripple"
+                        app:mrl_rippleColor="@color/white">
+
+                        <LinearLayout
+                            style="@style/more_item_group">
+
+                            <TextView
+                                style="@style/more_item_title_tv"
+                                android:drawableLeft="@drawable/ic_more_rewards"
+                                android:drawableRight="@null"
+                                android:text="@string/rewards"/>
+
+                        </LinearLayout>
+                    </com.balysv.materialripple.MaterialRippleLayout>
+
+                    <View style="@style/more_item_divider"/>
+
+                    <com.balysv.materialripple.MaterialRippleLayout
                         android:id="@+id/faq"
                         style="@style/more_item_area_ripple"
                         app:mrl_rippleColor="@color/white">

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kaku.weac"
     android:versionCode="1"
-    android:versionName="@string/version" >
+    android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="16"
@@ -59,7 +59,7 @@
         <activity
             android:name="com.kaku.weac.activities.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" >
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.SET_ALARM" />
 

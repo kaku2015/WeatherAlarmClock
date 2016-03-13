@@ -8,6 +8,8 @@ import android.animation.ValueAnimator;
 import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -15,6 +17,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +26,8 @@ import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.kaku.weac.Listener.OnVisibleListener;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.AboutActivity;
@@ -234,6 +239,17 @@ public class MoreFragment extends LazyLoadFragment {
             }
         });
 
+        // 打赏
+        view.findViewById(R.id.rewards).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (MyUtil.isFastDoubleClick()) {
+                    return;
+                }
+                showRewardsDialog();
+            }
+        });
+
         // 好友分享
         view.findViewById(R.id.friend_share).setOnClickListener(new OnClickListener() {
             @Override
@@ -256,6 +272,25 @@ public class MoreFragment extends LazyLoadFragment {
             }
         });
 
+    }
+
+    private void showRewardsDialog() {
+        new MaterialDialog.Builder(getActivity())
+                .title(R.string.rewards_title)
+                .content(R.string.rewards_detail)
+                .positiveText(R.string.ok)
+//                .negativeText(R.string.disagree)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        ClipboardManager clipboardManager = (ClipboardManager) getActivity().getSystemService(
+                                Context.CLIPBOARD_SERVICE);
+                        // 将文本复制到剪贴板
+                        clipboardManager.setPrimaryClip(ClipData.newPlainText("data", "3772304@qq.com"));
+                        ToastUtil.showShortToast(getActivity(), getString(R.string.text_already_copied));
+                    }
+                })
+                .show();
     }
 
     public void friendShare() {

@@ -56,10 +56,6 @@ public class CityManage extends DataSupport {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getLocationCity() {
         return locationCity;
     }

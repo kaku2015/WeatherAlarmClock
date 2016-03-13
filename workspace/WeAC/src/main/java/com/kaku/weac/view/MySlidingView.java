@@ -21,8 +21,6 @@ import android.widget.Scroller;
  */
 public class MySlidingView extends RelativeLayout {
 
-    private static final String LOG_TAG = "MySlidingView";
-
     /**
      * smooth scroll time
      */

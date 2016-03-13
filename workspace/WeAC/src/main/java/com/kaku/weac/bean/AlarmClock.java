@@ -203,10 +203,6 @@ public class AlarmClock extends DataSupport implements Parcelable {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getNapInterval() {
         return napInterval;
     }

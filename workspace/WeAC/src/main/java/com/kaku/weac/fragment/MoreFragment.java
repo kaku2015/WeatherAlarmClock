@@ -613,43 +613,43 @@ public class MoreFragment extends LazyLoadFragment {
         int progress;
         if (memory.contains("KB")) {
             if (memory.equals("0KB")) {
-                progress = 100;
+                progress = 0;
             } else {
-                progress = 95;
+                progress = 5;
             }
         } else if (memory.contains("MB")) {
             float mem = Integer.parseInt(memory.split("M")[0]);
             if (mem < 2) {
-                progress = 90;
+                progress = 10;
             } else if (mem < 3) {
-                progress = 85;
+                progress = 15;
             } else if (mem < 4) {
-                progress = 80;
+                progress = 20;
             } else if (mem < 6) {
-                progress = 75;
+                progress = 25;
             } else if (mem < 8) {
-                progress = 70;
+                progress = 30;
             } else if (mem < 10) {
-                progress = 65;
+                progress = 35;
             } else if (mem < 15) {
-                progress = 60;
+                progress = 40;
             } else if (mem < 20) {
-                progress = 55;
+                progress = 45;
             } else if (mem < 25) {
                 progress = 50;
             } else if (mem < 30) {
-                progress = 40;
+                progress = 60;
             } else if (mem < 40) {
-                progress = 30;
+                progress = 70;
             } else if (mem < 50) {
-                progress = 20;
+                progress = 80;
             } else if (mem < 60) {
-                progress = 10;
+                progress = 90;
             } else {
-                progress = 5;
+                progress = 95;
             }
         } else {
-            progress = 0;
+            progress = 100;
         }
         mClearMemoryIv.setProgressValue(progress);
     }

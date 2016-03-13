@@ -4,13 +4,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="10dp">
+    android:paddingBottom="10dp"
+    android:orientation="vertical">
 
     <com.kaku.weac.view.MyTimer
         android:id="@+id/timer"
         android:layout_width="match_parent"
-        android:layout_height="310dp"
+        android:layout_height="300dp"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:layerType="software"/>

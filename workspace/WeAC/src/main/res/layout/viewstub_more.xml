@@ -82,11 +82,11 @@
                     android:id="@+id/wave_view"
                     android:layout_width="37dp"
                     android:layout_height="37dp"
-                    app:mlv_borderColor="@color/memory"
-                    app:mlv_borderWidth="0.5dp"
-                    app:mlv_shapeType="circle"
-                    app:mlv_waveAmplitude="50"
-                    app:mlv_waveColor="@color/memory"/>
+                    app:wlv_borderColor="@color/memory"
+                    app:wlv_borderWidth="0.5dp"
+                    app:wlv_shapeType="circle"
+                    app:wlv_waveAmplitude="50"
+                    app:wlv_waveColor="@color/memory"/>
 
                 <TextView
                     style="@style/more_item_title_tv"

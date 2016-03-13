@@ -1579,142 +1579,6 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int menu=0x7f010094;
-        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
-"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int mlv_borderColor=0x7f010181;
-        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int mlv_borderWidth=0x7f010180;
-        /** <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int mlv_progressValue=0x7f010182;
-        /** <p>Must be one of the following constant values.</p>
-<table>
-<colgroup align="left" />
-<colgroup align="left" />
-<colgroup align="left" />
-<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-<tr><td><code>circle</code></td><td>0</td><td></td></tr>
-<tr><td><code>square</code></td><td>1</td><td></td></tr>
-</table>
-         */
-        public static final int mlv_shapeType=0x7f010183;
-        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int mlv_titleBottom=0x7f01018e;
-        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
-"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int mlv_titleBottomColor=0x7f01018b;
-        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int mlv_titleBottomSize=0x7f010188;
-        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int mlv_titleCenter=0x7f01018d;
-        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
-"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int mlv_titleCenterColor=0x7f01018a;
-        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int mlv_titleCenterSize=0x7f010187;
-        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int mlv_titleTop=0x7f01018c;
-        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
-"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int mlv_titleTopColor=0x7f010189;
-        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int mlv_titleTopSize=0x7f010186;
-        /** <p>Must be a floating point value, such as "<code>1.2</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int mlv_waveAmplitude=0x7f010185;
-        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
-"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int mlv_waveColor=0x7f010184;
         /** <p>Must be one of the following constant values.</p>
 <table>
 <colgroup align="left" />
@@ -2989,6 +2853,142 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int windowNoTitle=0x7f010101;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int wlv_borderColor=0x7f010181;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int wlv_borderWidth=0x7f010180;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int wlv_progressValue=0x7f010182;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>circle</code></td><td>0</td><td></td></tr>
+<tr><td><code>square</code></td><td>1</td><td></td></tr>
+</table>
+         */
+        public static final int wlv_shapeType=0x7f010183;
+        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int wlv_titleBottom=0x7f01018e;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int wlv_titleBottomColor=0x7f01018b;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int wlv_titleBottomSize=0x7f010188;
+        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int wlv_titleCenter=0x7f01018d;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int wlv_titleCenterColor=0x7f01018a;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int wlv_titleCenterSize=0x7f010187;
+        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int wlv_titleTop=0x7f01018c;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int wlv_titleTopColor=0x7f010189;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int wlv_titleTopSize=0x7f010186;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int wlv_waveAmplitude=0x7f010185;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int wlv_waveColor=0x7f010184;
     }
     public static final class bool {
         public static final int abc_action_bar_embed_tabs=0x7f080003;
@@ -12314,37 +12314,37 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #WaveLoadingView_mlv_borderColor com.kaku.weac:mlv_borderColor}</code></td><td></td></tr>
-           <tr><td><code>{@link #WaveLoadingView_mlv_borderWidth com.kaku.weac:mlv_borderWidth}</code></td><td></td></tr>
-           <tr><td><code>{@link #WaveLoadingView_mlv_progressValue com.kaku.weac:mlv_progressValue}</code></td><td></td></tr>
-           <tr><td><code>{@link #WaveLoadingView_mlv_shapeType com.kaku.weac:mlv_shapeType}</code></td><td></td></tr>
-           <tr><td><code>{@link #WaveLoadingView_mlv_titleBottom com.kaku.weac:mlv_titleBottom}</code></td><td></td></tr>
-           <tr><td><code>{@link #WaveLoadingView_mlv_titleBottomColor com.kaku.weac:mlv_titleBottomColor}</code></td><td></td></tr>
-           <tr><td><code>{@link #WaveLoadingView_mlv_titleBottomSize com.kaku.weac:mlv_titleBottomSize}</code></td><td></td></tr>
-           <tr><td><code>{@link #WaveLoadingView_mlv_titleCenter com.kaku.weac:mlv_titleCenter}</code></td><td></td></tr>
-           <tr><td><code>{@link #WaveLoadingView_mlv_titleCenterColor com.kaku.weac:mlv_titleCenterColor}</code></td><td></td></tr>
-           <tr><td><code>{@link #WaveLoadingView_mlv_titleCenterSize com.kaku.weac:mlv_titleCenterSize}</code></td><td></td></tr>
-           <tr><td><code>{@link #WaveLoadingView_mlv_titleTop com.kaku.weac:mlv_titleTop}</code></td><td></td></tr>
-           <tr><td><code>{@link #WaveLoadingView_mlv_titleTopColor com.kaku.weac:mlv_titleTopColor}</code></td><td></td></tr>
-           <tr><td><code>{@link #WaveLoadingView_mlv_titleTopSize com.kaku.weac:mlv_titleTopSize}</code></td><td></td></tr>
-           <tr><td><code>{@link #WaveLoadingView_mlv_waveAmplitude com.kaku.weac:mlv_waveAmplitude}</code></td><td></td></tr>
-           <tr><td><code>{@link #WaveLoadingView_mlv_waveColor com.kaku.weac:mlv_waveColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #WaveLoadingView_wlv_borderColor com.kaku.weac:wlv_borderColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #WaveLoadingView_wlv_borderWidth com.kaku.weac:wlv_borderWidth}</code></td><td></td></tr>
+           <tr><td><code>{@link #WaveLoadingView_wlv_progressValue com.kaku.weac:wlv_progressValue}</code></td><td></td></tr>
+           <tr><td><code>{@link #WaveLoadingView_wlv_shapeType com.kaku.weac:wlv_shapeType}</code></td><td></td></tr>
+           <tr><td><code>{@link #WaveLoadingView_wlv_titleBottom com.kaku.weac:wlv_titleBottom}</code></td><td></td></tr>
+           <tr><td><code>{@link #WaveLoadingView_wlv_titleBottomColor com.kaku.weac:wlv_titleBottomColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #WaveLoadingView_wlv_titleBottomSize com.kaku.weac:wlv_titleBottomSize}</code></td><td></td></tr>
+           <tr><td><code>{@link #WaveLoadingView_wlv_titleCenter com.kaku.weac:wlv_titleCenter}</code></td><td></td></tr>
+           <tr><td><code>{@link #WaveLoadingView_wlv_titleCenterColor com.kaku.weac:wlv_titleCenterColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #WaveLoadingView_wlv_titleCenterSize com.kaku.weac:wlv_titleCenterSize}</code></td><td></td></tr>
+           <tr><td><code>{@link #WaveLoadingView_wlv_titleTop com.kaku.weac:wlv_titleTop}</code></td><td></td></tr>
+           <tr><td><code>{@link #WaveLoadingView_wlv_titleTopColor com.kaku.weac:wlv_titleTopColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #WaveLoadingView_wlv_titleTopSize com.kaku.weac:wlv_titleTopSize}</code></td><td></td></tr>
+           <tr><td><code>{@link #WaveLoadingView_wlv_waveAmplitude com.kaku.weac:wlv_waveAmplitude}</code></td><td></td></tr>
+           <tr><td><code>{@link #WaveLoadingView_wlv_waveColor com.kaku.weac:wlv_waveColor}</code></td><td></td></tr>
            </table>
-           @see #WaveLoadingView_mlv_borderColor
-           @see #WaveLoadingView_mlv_borderWidth
-           @see #WaveLoadingView_mlv_progressValue
-           @see #WaveLoadingView_mlv_shapeType
-           @see #WaveLoadingView_mlv_titleBottom
-           @see #WaveLoadingView_mlv_titleBottomColor
-           @see #WaveLoadingView_mlv_titleBottomSize
-           @see #WaveLoadingView_mlv_titleCenter
-           @see #WaveLoadingView_mlv_titleCenterColor
-           @see #WaveLoadingView_mlv_titleCenterSize
-           @see #WaveLoadingView_mlv_titleTop
-           @see #WaveLoadingView_mlv_titleTopColor
-           @see #WaveLoadingView_mlv_titleTopSize
-           @see #WaveLoadingView_mlv_waveAmplitude
-           @see #WaveLoadingView_mlv_waveColor
+           @see #WaveLoadingView_wlv_borderColor
+           @see #WaveLoadingView_wlv_borderWidth
+           @see #WaveLoadingView_wlv_progressValue
+           @see #WaveLoadingView_wlv_shapeType
+           @see #WaveLoadingView_wlv_titleBottom
+           @see #WaveLoadingView_wlv_titleBottomColor
+           @see #WaveLoadingView_wlv_titleBottomSize
+           @see #WaveLoadingView_wlv_titleCenter
+           @see #WaveLoadingView_wlv_titleCenterColor
+           @see #WaveLoadingView_wlv_titleCenterSize
+           @see #WaveLoadingView_wlv_titleTop
+           @see #WaveLoadingView_wlv_titleTopColor
+           @see #WaveLoadingView_wlv_titleTopSize
+           @see #WaveLoadingView_wlv_waveAmplitude
+           @see #WaveLoadingView_wlv_waveColor
          */
         public static final int[] WaveLoadingView = {
             0x7f010180, 0x7f010181, 0x7f010182, 0x7f010183,
@@ -12353,7 +12353,7 @@ containing a value of this type.
             0x7f01018c, 0x7f01018d, 0x7f01018e
         };
         /**
-          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#mlv_borderColor}
+          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#wlv_borderColor}
           attribute's value can be found in the {@link #WaveLoadingView} array.
 
 
@@ -12364,11 +12364,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.kaku.weac:mlv_borderColor
+          @attr name com.kaku.weac:wlv_borderColor
         */
-        public static final int WaveLoadingView_mlv_borderColor = 1;
+        public static final int WaveLoadingView_wlv_borderColor = 1;
         /**
-          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#mlv_borderWidth}
+          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#wlv_borderWidth}
           attribute's value can be found in the {@link #WaveLoadingView} array.
 
 
@@ -12380,11 +12380,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.kaku.weac:mlv_borderWidth
+          @attr name com.kaku.weac:wlv_borderWidth
         */
-        public static final int WaveLoadingView_mlv_borderWidth = 0;
+        public static final int WaveLoadingView_wlv_borderWidth = 0;
         /**
-          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#mlv_progressValue}
+          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#wlv_progressValue}
           attribute's value can be found in the {@link #WaveLoadingView} array.
 
 
@@ -12394,11 +12394,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.kaku.weac:mlv_progressValue
+          @attr name com.kaku.weac:wlv_progressValue
         */
-        public static final int WaveLoadingView_mlv_progressValue = 2;
+        public static final int WaveLoadingView_wlv_progressValue = 2;
         /**
-          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#mlv_shapeType}
+          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#wlv_shapeType}
           attribute's value can be found in the {@link #WaveLoadingView} array.
 
 
@@ -12411,11 +12411,11 @@ containing a value of this type.
 <tr><td><code>circle</code></td><td>0</td><td></td></tr>
 <tr><td><code>square</code></td><td>1</td><td></td></tr>
 </table>
-          @attr name com.kaku.weac:mlv_shapeType
+          @attr name com.kaku.weac:wlv_shapeType
         */
-        public static final int WaveLoadingView_mlv_shapeType = 3;
+        public static final int WaveLoadingView_wlv_shapeType = 3;
         /**
-          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#mlv_titleBottom}
+          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#wlv_titleBottom}
           attribute's value can be found in the {@link #WaveLoadingView} array.
 
 
@@ -12425,11 +12425,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.kaku.weac:mlv_titleBottom
+          @attr name com.kaku.weac:wlv_titleBottom
         */
-        public static final int WaveLoadingView_mlv_titleBottom = 14;
+        public static final int WaveLoadingView_wlv_titleBottom = 14;
         /**
-          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#mlv_titleBottomColor}
+          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#wlv_titleBottomColor}
           attribute's value can be found in the {@link #WaveLoadingView} array.
 
 
@@ -12440,11 +12440,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.kaku.weac:mlv_titleBottomColor
+          @attr name com.kaku.weac:wlv_titleBottomColor
         */
-        public static final int WaveLoadingView_mlv_titleBottomColor = 11;
+        public static final int WaveLoadingView_wlv_titleBottomColor = 11;
         /**
-          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#mlv_titleBottomSize}
+          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#wlv_titleBottomSize}
           attribute's value can be found in the {@link #WaveLoadingView} array.
 
 
@@ -12456,11 +12456,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.kaku.weac:mlv_titleBottomSize
+          @attr name com.kaku.weac:wlv_titleBottomSize
         */
-        public static final int WaveLoadingView_mlv_titleBottomSize = 8;
+        public static final int WaveLoadingView_wlv_titleBottomSize = 8;
         /**
-          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#mlv_titleCenter}
+          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#wlv_titleCenter}
           attribute's value can be found in the {@link #WaveLoadingView} array.
 
 
@@ -12470,11 +12470,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.kaku.weac:mlv_titleCenter
+          @attr name com.kaku.weac:wlv_titleCenter
         */
-        public static final int WaveLoadingView_mlv_titleCenter = 13;
+        public static final int WaveLoadingView_wlv_titleCenter = 13;
         /**
-          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#mlv_titleCenterColor}
+          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#wlv_titleCenterColor}
           attribute's value can be found in the {@link #WaveLoadingView} array.
 
 
@@ -12485,11 +12485,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.kaku.weac:mlv_titleCenterColor
+          @attr name com.kaku.weac:wlv_titleCenterColor
         */
-        public static final int WaveLoadingView_mlv_titleCenterColor = 10;
+        public static final int WaveLoadingView_wlv_titleCenterColor = 10;
         /**
-          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#mlv_titleCenterSize}
+          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#wlv_titleCenterSize}
           attribute's value can be found in the {@link #WaveLoadingView} array.
 
 
@@ -12501,11 +12501,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.kaku.weac:mlv_titleCenterSize
+          @attr name com.kaku.weac:wlv_titleCenterSize
         */
-        public static final int WaveLoadingView_mlv_titleCenterSize = 7;
+        public static final int WaveLoadingView_wlv_titleCenterSize = 7;
         /**
-          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#mlv_titleTop}
+          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#wlv_titleTop}
           attribute's value can be found in the {@link #WaveLoadingView} array.
 
 
@@ -12515,11 +12515,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.kaku.weac:mlv_titleTop
+          @attr name com.kaku.weac:wlv_titleTop
         */
-        public static final int WaveLoadingView_mlv_titleTop = 12;
+        public static final int WaveLoadingView_wlv_titleTop = 12;
         /**
-          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#mlv_titleTopColor}
+          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#wlv_titleTopColor}
           attribute's value can be found in the {@link #WaveLoadingView} array.
 
 
@@ -12530,11 +12530,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.kaku.weac:mlv_titleTopColor
+          @attr name com.kaku.weac:wlv_titleTopColor
         */
-        public static final int WaveLoadingView_mlv_titleTopColor = 9;
+        public static final int WaveLoadingView_wlv_titleTopColor = 9;
         /**
-          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#mlv_titleTopSize}
+          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#wlv_titleTopSize}
           attribute's value can be found in the {@link #WaveLoadingView} array.
 
 
@@ -12546,11 +12546,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.kaku.weac:mlv_titleTopSize
+          @attr name com.kaku.weac:wlv_titleTopSize
         */
-        public static final int WaveLoadingView_mlv_titleTopSize = 6;
+        public static final int WaveLoadingView_wlv_titleTopSize = 6;
         /**
-          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#mlv_waveAmplitude}
+          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#wlv_waveAmplitude}
           attribute's value can be found in the {@link #WaveLoadingView} array.
 
 
@@ -12560,11 +12560,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.kaku.weac:mlv_waveAmplitude
+          @attr name com.kaku.weac:wlv_waveAmplitude
         */
-        public static final int WaveLoadingView_mlv_waveAmplitude = 5;
+        public static final int WaveLoadingView_wlv_waveAmplitude = 5;
         /**
-          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#mlv_waveColor}
+          <p>This symbol is the offset where the {@link com.kaku.weac.R.attr#wlv_waveColor}
           attribute's value can be found in the {@link #WaveLoadingView} array.
 
 
@@ -12575,8 +12575,8 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.kaku.weac:mlv_waveColor
+          @attr name com.kaku.weac:wlv_waveColor
         */
-        public static final int WaveLoadingView_mlv_waveColor = 4;
+        public static final int WaveLoadingView_wlv_waveColor = 4;
     };
 }

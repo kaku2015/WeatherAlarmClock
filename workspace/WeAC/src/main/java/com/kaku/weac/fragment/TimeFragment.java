@@ -16,6 +16,7 @@ import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -152,8 +153,8 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
 
     private void showTimeLayout(View view) {
         // 计时布局
-        ViewGroup timerGroup = (ViewGroup) view.findViewById(R.id.timer_layout);
-        timerGroup.setVisibility(View.VISIBLE);
+        ViewStub viewStub = (ViewStub) view.findViewById(R.id.viewstub_time);
+        viewStub.inflate();
 
         // 加载中进度框
         ViewGroup progressBar = (ViewGroup) view.findViewById(R.id.progress_bar_llyt);

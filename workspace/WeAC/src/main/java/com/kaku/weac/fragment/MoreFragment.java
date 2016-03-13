@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -121,8 +122,8 @@ public class MoreFragment extends LazyLoadFragment {
 
     private void showMoreLayout(View view) {
         // 更多布局
-        ViewGroup moreGroup = (ViewGroup) view.findViewById(R.id.more_layout);
-        moreGroup.setVisibility(View.VISIBLE);
+        ViewStub viewStub = (ViewStub) view.findViewById(R.id.viewstub_more);
+        viewStub.inflate();
 
         // 加载中进度框
         ViewGroup progressBar = (ViewGroup) view.findViewById(R.id.progress_bar_llyt);
@@ -276,9 +277,9 @@ public class MoreFragment extends LazyLoadFragment {
 
     private void showRewardsDialog() {
         new MaterialDialog.Builder(getActivity())
-                .title(R.string.rewards_title)
+                .title(R.string.rewards_author)
                 .content(R.string.rewards_detail)
-                .positiveText(R.string.ok)
+                .positiveText(R.string.rewards)
 //                .negativeText(R.string.disagree)
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override

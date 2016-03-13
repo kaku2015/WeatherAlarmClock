@@ -386,7 +386,7 @@ public class MoreFragment extends LazyLoadFragment {
         mFeedbackAgent.closeFeedbackPush();
         // 关闭语音反馈
         mFeedbackAgent.closeAudioFeedback();
-        mFeedbackAgent.setWelcomeInfo("感谢您提出反馈意见,我会尽快回复");
+        mFeedbackAgent.setWelcomeInfo(getString(R.string.welcome_suggestion));
         Intent intentFeedback = new Intent(getActivity(), FeedbackActivity.class);
         intentFeedback.putExtra(FeedbackFragment.BUNDLE_KEY_CONVERSATION_ID,
                 mFeedbackAgent.getDefaultConversation().getId());

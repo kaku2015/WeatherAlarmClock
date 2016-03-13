@@ -229,8 +229,8 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
         }
 
 //        beepManager.playBeepSoundAndVibrate();
-        AudioPlayer.getInstance(this).playRaw(R.raw.beep, false, false);
-        MyUtil.vibrate(this);
+        AudioPlayer.getInstance(this).playRaw(R.raw.scan, false, false);
+//        MyUtil.vibrate(this);
 
         operateResult(rawResult);
     }

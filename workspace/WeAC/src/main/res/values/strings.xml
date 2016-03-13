@@ -10,8 +10,6 @@
     <string name="time">计时</string>
     <string name="wea">天气</string>
     <string name="more">更多</string>
-    <!-- 主题界面 -->
-    <string name="theme_wallpaper">主题壁纸</string>
     <!-- 闹铃界面 -->
     <string name="press_right_top">按右上的  </string>
     <string name="add_alarm_clock">  添加闹钟  </string>
@@ -69,7 +67,6 @@
     <string name="nap_to">小睡至%1$s闹钟再次响起，轻触取消</string>
     <string name="nap_time">小睡%1$d分钟</string>
     <string name="weather_type">%1$s&#160;%2$s~%3$s℃</string>
-    <string name="temperature">%1$s℃</string>
     <string name="bring_an_umbrella">带伞</string>
 
     <!-- 小睡编辑界面 -->
@@ -91,7 +88,6 @@
     <string name="click_record">点击录音</string>
     <string name="click_stop">点击结束</string>
     <string name="record_file_name">/录音%1$s.amr</string>
-    <string name="error_sd_card">错误，SD卡不存在</string>
     <string name="error_delete_fail">删除失败</string>
     <string name="record_fail">录音失败</string>
     <string name="record_fail_confirm">录音失败，请检查录音权限是否开启或录音已被其他应用占用。</string>
@@ -169,10 +165,6 @@
     <string name="sport_detail">运动指数详情</string>
     <string name="car_wash_detail">洗车指数详情</string>
     <string name="air_cure_detail">晾晒指数详情</string>
-    <string name="interval_day">%1$d天前更新</string>
-    <string name="interval_hour">%1$d小时前更新</string>
-    <string name="interval_minute">%1$d分钟前更新</string>
-    <string name="interval_just">刚刚更新</string>
     <string name="internet_fail">连接失败，请重试</string>
     <string name="internet_error">网络异常,请检查网络设置</string>
     <string name="auto_location_error_retry">自动定位失败,请重试</string>
@@ -192,9 +184,7 @@
     <string name="china">中国</string>
     <string name="now_loading">正在加载，请稍候…</string>
     <string name="now_locating">正在定位，请稍候…</string>
-    <string name="address_city">http://www.weather.com.cn/data/list3/city%1$s.xml</string>
     <string name="address_weather">http://wthrcdn.etouch.cn/WeatherApi?citykey=%1$s</string>
-    <string name="no_city_info">城市不存在</string>
     <string name="city_already_added">城市（%1$s）已添加</string>
     <string name="location_already_added">自动定位已添加</string>
     <string name="city_weather_update_time">%1$s更新时间</string>
@@ -203,10 +193,8 @@
     <string name="auto_location">自动定位</string>
     <string name="prompt">提示</string>
     <string name="retry">重试</string>
-    <string name="forbid_power">未开启读取位置权限</string>
     <string name="input_city_name">请输入城市名称或拼音</string>
     <string name="no_matched_city">没有符合条件的城市</string>
-    <string name="unknown_error">未知错误</string>
 
     <!--计时-->
     <string name="timer_on_time">计时器时间到了！</string>
@@ -221,7 +209,6 @@
 
     <!--更多-->
     <string name="theme">主题、壁纸</string>
-    <string name="discover_app">发现APP</string>
     <string name="scan_code">扫码</string>
     <string name="generate_code">造码</string>
 
@@ -235,11 +222,7 @@
     <string name="give_good_reputation">赏个好评</string>
     <string name="rewards_author">打赏作者</string>
     <string name="abort">关于</string>
-
-    <string name="quit">退出应用</string>
-
     <string name="clean_up_result">清理进程%1$d个,释放内存%2$s</string>
-    <string name="clean_up_complete">清理完成</string>
 
     <!--主题-->
     <string name="custom_define">自定义</string>
@@ -260,7 +243,6 @@
 
     <!--扫描二维码-->
     <string name="album">相册</string>
-    <string name="qr_code_generate">二维码生成</string>
     <string name="scan_result">扫描结果</string>
     <string name="copy">复制</string>
     <string name="search">搜索</string>

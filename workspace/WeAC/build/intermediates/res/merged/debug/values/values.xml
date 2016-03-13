@@ -10443,7 +10443,6 @@
     <color name="blue_green50">#800CCDF6</color>
     <color name="blue_green60">#9A0CCDF6</color>
     <color name="blue_ice">#72abf8</color>
-    <color name="blue_tab">#00A0F3</color>
     <color name="blue_tog_btn">#397cbf</color>
     <color name="blue_tog_btn_pressed">#286DD4</color>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
@@ -10458,9 +10457,6 @@
     <color name="button_material_light">#ffd6d7d7</color>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/color.xml -->
     <eat-comment/>
-    <color name="colorAccent">#FF4081</color>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorTimer">#009688</color>
     <color name="colorTimerDark">#00796B</color>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/build/intermediates/exploded-aar/com.github.castorflex.smoothprogressbar/library-circular/1.2.0/res/values/values.xml -->
@@ -10982,7 +10978,6 @@
     <string name="add_city">添加城市</string>
     <string name="add_city_fail">添加城市失败，请重试</string>
     <string name="add_location_fail">添加自动定位失败，请重试</string>
-    <string name="address_city">http://www.weather.com.cn/data/list3/city%1$s.xml</string>
     <string name="address_weather">http://wthrcdn.etouch.cn/WeatherApi?citykey=%1$s</string>
     <string name="air_cure">晾晒</string>
     <string name="air_cure_detail">晾晒指数详情</string>
@@ -11028,7 +11023,6 @@
     <string name="city_manage">城市管理</string>
     <string name="city_weather_update_time">%1$s更新时间</string>
     <string name="clean_up">一键清理</string>
-    <string name="clean_up_complete">清理完成</string>
     <string name="clean_up_result">清理进程%1$d个,释放内存%2$s</string>
     <string name="clear_memory">清除缓存</string>
     <string name="click_record">点击录音</string>
@@ -11067,14 +11061,12 @@
     <string name="delete_batch">批量删除</string>
     <string name="delete_success">删除成功</string>
     <string name="detail">详情</string>
-    <string name="discover_app">发现APP</string>
     <string name="download">下载</string>
     <string name="dress">穿衣</string>
     <string name="dress_detail">穿衣指数详情</string>
     <string name="edit_alarm_clock">编辑闹钟</string>
     <string name="eight">8</string>
     <string name="error_delete_fail">删除失败</string>
-    <string name="error_sd_card">错误，SD卡不存在</string>
     <string name="every_day">每天</string>
     <string name="facial_mask">面膜</string>
     <string name="faq">常见问题</string>
@@ -11085,7 +11077,6 @@
     <string name="file_size">文件大小：</string>
     <string name="five">5</string>
     <string name="five_h">五</string>
-    <string name="forbid_power">未开启读取位置权限</string>
     <string name="fore_color">前景色</string>
     <string name="four_h">四</string>
     <string name="friday">周五</string>
@@ -11104,10 +11095,6 @@
     <string name="internet_error">网络异常,请检查网络设置</string>
     <string name="internet_fail">连接失败，请重试</string>
     <string name="interval">间隔 (分钟)</string>
-    <string name="interval_day">%1$d天前更新</string>
-    <string name="interval_hour">%1$d小时前更新</string>
-    <string name="interval_just">刚刚更新</string>
-    <string name="interval_minute">%1$d分钟前更新</string>
     <string name="latest_version">当前已是最新版本</string>
     <string name="launch_market_fail">无法打开应用市场</string>
     <string name="leave_to_refresh">松手可更新</string>
@@ -11160,7 +11147,6 @@
     <string name="no_alarm_detail1">1.关机，请开启您的设备，确保天气闹钟能够正常运行</string>
     <string name="no_alarm_detail2">2.其他优化软件清理了天气闹钟，请进入该优化软件将天气闹钟加入忽略清单。</string>
     <string name="no_alarm_detail3">3.手机重启时没有允许天气闹钟自动启动，请在手机设置中开启天气闹钟自动启动功能，确保闹钟正常响起。</string>
-    <string name="no_city_info">城市不存在</string>
     <string name="no_city_weather_info">暂无天气预报信息</string>
     <string name="no_data">暂无数据</string>
     <string name="no_local_album">没有本地图片</string>
@@ -11194,11 +11180,9 @@
     <string name="pull_to_refresh_release_label">Release to refresh…</string>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="qr_code_generate">二维码生成</string>
     <string name="qrcode_back_color">二维码背景色</string>
     <string name="qrcode_fore_color">二维码前景色</string>
     <string name="quick_timer">快捷计时</string>
-    <string name="quit">退出应用</string>
     <string name="recent">最近</string>
     <string name="record">录音</string>
     <string name="record_fail">录音失败</string>
@@ -11260,12 +11244,10 @@
     <string name="tb_munion_tip_download_prefix">正在下载:</string>
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="temperature">%1$s℃</string>
     <string name="ten">10</string>
     <string name="text_already_copied">已复制到剪贴板</string>
     <string name="the_day_of_tomorrow">后天</string>
     <string name="theme">主题、壁纸</string>
-    <string name="theme_wallpaper">主题壁纸</string>
     <string name="thirty">30</string>
     <string name="three">3</string>
     <string name="three_h">三</string>
@@ -11344,7 +11326,6 @@
     <!-- From: file:/D:/AndroidStudioProjects/workspace/WeAC/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="unknown">未知</string>
-    <string name="unknown_error">未知错误</string>
     <string name="update_time">%1$s发布</string>
     <string name="update_time2">昨天%1$s发布</string>
     <string name="update_time3">前天%1$s发布</string>

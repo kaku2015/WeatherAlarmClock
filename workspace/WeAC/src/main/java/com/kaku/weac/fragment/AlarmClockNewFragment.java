@@ -241,8 +241,8 @@ public class AlarmClockNewFragment extends BaseFragment implements OnClickListen
         mTimePickerTv = (TextView) view.findViewById(R.id.time_picker_tv);
         countDown = getResources()
                 .getString(R.string.countdown_day_hour_minute);
-        // 设置下次响铃时间提示内容
-        mTimePickerTv.setText(String.format(countDown, 1, 0, 0));
+//        // 设置下次响铃时间提示内容
+//        mTimePickerTv.setText(String.format(countDown, 1, 0, 0));
 
         // 闹钟时间选择器
         TimePicker timePicker = (TimePicker) view.findViewById(R.id.time_picker);
@@ -255,6 +255,8 @@ public class AlarmClockNewFragment extends BaseFragment implements OnClickListen
         mAlarmClock.setHour(currentHour);
         // 初始化闹钟实例的分钟
         mAlarmClock.setMinute(currentMinute);
+
+        displayCountDown();
 
         timePicker.setOnTimeChangedListener(new OnTimeChangedListener() {
 

@@ -7,7 +7,6 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +20,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationManagerCompat;
+import android.support.v7.app.NotificationCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,7 +93,7 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
     /**
      * 通知消息管理
      */
-    private NotificationManager mNotificationManager;
+    private NotificationManagerCompat mNotificationManager;
 
     /**
      * 小睡间隔
@@ -189,8 +190,7 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
         // 播放铃声
         playRing();
 
-        mNotificationManager = (NotificationManager) getActivity()
-                .getSystemService(Activity.NOTIFICATION_SERVICE);
+        mNotificationManager = NotificationManagerCompat.from(getActivity());
         // 取消下拉列表通知消息
         mNotificationManager.cancel(mAlarmClock.getId());
 
@@ -237,8 +237,14 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
 
         // 滑动提示
         TextView slidingTipIv = (TextView) view.findViewById(R.id.sliding_tip_tv);
-        AnimationDrawable animationDrawable = (AnimationDrawable) slidingTipIv.getCompoundDrawables()[0];
-        animationDrawable.start();
+        final AnimationDrawable animationDrawable = (AnimationDrawable) slidingTipIv.getCompoundDrawables()[0];
+        // 直接启动动画，测试4.0模拟器没有动画效果
+        slidingTipIv.post(new Runnable() {
+            @Override
+            public void run() {
+                animationDrawable.start();
+            }
+        });
 
         MySlidingView mySlidingView = (MySlidingView) view.findViewById(R.id.my_sliding_view);
         mySlidingView.setSlidingTipListener(new MySlidingView.SlidingTipListener() {
@@ -553,10 +559,10 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
                 .format(nextTime);
 
         // 通知
-        Notification notification = new Notification.Builder(getActivity())
-                // 设置PendingIntent
-                .setContentIntent(napCancel)
-                        // 当清除下拉列表触发
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity());
+        // 设置PendingIntent
+        Notification notification = builder.setContentIntent(napCancel)
+                // 当清除下拉列表触发
                 .setDeleteIntent(napCancel)
                         // 设置下拉列表标题
                 .setContentTitle(
@@ -574,13 +580,14 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
                 .setLargeIcon(
                         BitmapFactory.decodeResource(getResources(),
                                 R.drawable.ic_launcher)).setAutoCancel(true)
+                        // 默认呼吸灯
+                .setDefaults(NotificationCompat.DEFAULT_LIGHTS | NotificationCompat.FLAG_SHOW_LIGHTS)
                 .build();
-        // 默认呼吸灯
-        notification.defaults |= Notification.DEFAULT_LIGHTS;
-        notification.flags |= Notification.FLAG_SHOW_LIGHTS;
+/*        notification.defaults |= Notification.DEFAULT_LIGHTS;
+        notification.flags |= Notification.FLAG_SHOW_LIGHTS;*/
 
         // 下拉列表显示小睡信息
-        mNotificationManager.notify(mAlarmClock.getId(),notification);
+        mNotificationManager.notify(mAlarmClock.getId(), notification);
     }
 
     /**

@@ -382,6 +382,7 @@ public class MyTimer extends View {
 //        int height = getDimension(width, heightMeasureSpec);
 
         mViewWidth = width;
+        // FIXME :
 //        mViewHeight = height;
 
         float density = getResources().getDisplayMetrics().density;

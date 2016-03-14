@@ -661,10 +661,10 @@ public class MyTimer extends View {
      * @return 计时时间是否为0
      */
     private boolean isTimeEmpty() {
-        return mTimeRemain.get(Calendar.HOUR_OF_DAY) != 0
-                && mTimeRemain.get(Calendar.MINUTE) != 0
-                && mTimeRemain.get(Calendar.SECOND) != 0
-                && mTimeRemain.get(Calendar.MILLISECOND) != 0;
+        return !(mTimeRemain.get(Calendar.HOUR_OF_DAY) != 0
+                || mTimeRemain.get(Calendar.MINUTE) != 0
+                || mTimeRemain.get(Calendar.SECOND) != 0
+                || mTimeRemain.get(Calendar.MILLISECOND) != 0);
     }
 
     public void setOnTimeChangeListener(OnTimeChangeListener listener) {

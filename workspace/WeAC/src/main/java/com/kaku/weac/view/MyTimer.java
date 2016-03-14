@@ -379,12 +379,15 @@ public class MyTimer extends View {
         // 控件默认宽度（屏幕宽度）
         int defaultViewWidth = (int) (360 * getResources().getDisplayMetrics().density);
         int width = getDimension(defaultViewWidth, widthMeasureSpec);
-        int height = getDimension(width, heightMeasureSpec);
+//        int height = getDimension(width, heightMeasureSpec);
 
         mViewWidth = width;
-        mViewHeight = height;
+//        mViewHeight = height;
 
-        setMeasuredDimension(width, height);
+        float density = getResources().getDisplayMetrics().density;
+        mViewHeight = defaultViewWidth / 3 * 2 + 60 * density;
+
+        setMeasuredDimension(width, (int) mViewHeight);
     }
 
     /**

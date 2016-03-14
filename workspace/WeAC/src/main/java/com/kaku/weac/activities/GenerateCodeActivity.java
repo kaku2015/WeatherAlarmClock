@@ -253,7 +253,7 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
                                             mLogoPath = null;
                                             mForeColor = 0xff000000;
                                             mBackColor = 0xffffffff;
-                                            mLogoIv.setImageResource(R.drawable.ic_launcher);
+                                            mLogoIv.setImageResource(R.drawable.ic_logo);
                                             if (mIsQRcodeGenerated) {
                                                 generateQRcode();
                                             }
@@ -295,7 +295,7 @@ public class GenerateCodeActivity extends BaseActivity implements View.OnClickLi
             }
             if (logoBitmap == null) {
                 // 默认logo为应用图标
-                logoBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+                logoBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_logo);
             }
         }
         int size = MyUtil.dip2px(this, 200);

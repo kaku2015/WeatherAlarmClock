@@ -289,6 +289,22 @@ public class MoreFragment extends LazyLoadFragment {
                         // 将文本复制到剪贴板
                         clipboardManager.setPrimaryClip(ClipData.newPlainText("data", "3772304@qq.com"));
                         ToastUtil.showShortToast(getActivity(), getString(R.string.text_already_copied));
+
+                        startAliPay();
+                    }
+
+                    private void startAliPay() {
+                        Intent intent1 = getActivity().getPackageManager().
+                                getLaunchIntentForPackage("com.eg.android.AlipayGphone");
+                        if (intent1 != null) {
+                            startActivity(intent1);
+                        } /*else {
+                            Intent intent = new Intent("android.intent.action.VIEW");
+                            Uri uri = Uri.parse("https://mobile.alipay.com/index.htm");
+                            intent.setData(uri);
+                            startActivity(intent);
+                        }
+*/
                     }
                 })
                 .show();

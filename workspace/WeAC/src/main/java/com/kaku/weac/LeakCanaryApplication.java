@@ -37,6 +37,7 @@ public class LeakCanaryApplication extends LitePalApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        // 注册M权限回调
         Dexter.initialize(this);
 
 //        refWatcher = LeakCanary.install(this);

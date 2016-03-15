@@ -189,7 +189,7 @@
         <service
             android:name="com.kaku.weac.service.DaemonService"
             android:exported="true"
-            android:process=":pushservice" >
+            android:process=":daemon" >
         </service>
         <service
             android:name="com.baidu.location.f"

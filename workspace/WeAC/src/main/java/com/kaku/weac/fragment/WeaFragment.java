@@ -1007,6 +1007,9 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                         changeCityWeatherInfo(getDefaultCityName(), getDefaultWeatherCode());
                     }
                 }
+                // 初次添加城市后滑动返回
+            } else if (mDefaultCityName == null && getDefaultCityName() != null) {
+                changeCityWeatherInfo(getDefaultCityName(), getDefaultWeatherCode());
             }
             return;
         }

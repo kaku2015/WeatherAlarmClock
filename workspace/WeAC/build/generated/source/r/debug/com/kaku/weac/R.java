@@ -3568,7 +3568,7 @@ containing a value of this type.
         public static final int md_selector=0x7f0200ef;
         public static final int md_selector_dark=0x7f0200f0;
         public static final int md_transparent=0x7f0200f1;
-        public static final int notification_template_icon_bg=0x7f020154;
+        public static final int notification_template_icon_bg=0x7f020151;
         public static final int number_0=0x7f0200f2;
         public static final int number_1=0x7f0200f3;
         public static final int number_2=0x7f0200f4;
@@ -3659,14 +3659,11 @@ containing a value of this type.
         public static final int umeng_update_title_bg=0x7f020149;
         public static final int umeng_update_wifi_disable=0x7f02014a;
         public static final int wallpaper_0=0x7f02014b;
-        public static final int wallpaper_11=0x7f02014c;
-        public static final int wallpaper_3=0x7f02014d;
-        public static final int wallpaper_4=0x7f02014e;
-        public static final int wallpaper_5=0x7f02014f;
-        public static final int wallpaper_6=0x7f020150;
-        public static final int wallpaper_7=0x7f020151;
-        public static final int wallpaper_8=0x7f020152;
-        public static final int wallpaper_default=0x7f020153;
+        public static final int wallpaper_1=0x7f02014c;
+        public static final int wallpaper_2=0x7f02014d;
+        public static final int wallpaper_3=0x7f02014e;
+        public static final int wallpaper_4=0x7f02014f;
+        public static final int wallpaper_5=0x7f020150;
     }
     public static final class id {
         public static final int __leak_canary_action=0x7f0e0056;

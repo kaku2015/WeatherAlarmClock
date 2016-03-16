@@ -24,7 +24,7 @@ public class WeacConstants {
     /**
      * 保存的壁纸value
      */
-    public static final String DEFAULT_WALLPAPER_NAME = "wallpaper_default";
+    public static final String DEFAULT_WALLPAPER_NAME = "wallpaper_0";
 
     /**
      * 保存的壁纸地址

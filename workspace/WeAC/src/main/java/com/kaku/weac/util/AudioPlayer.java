@@ -129,7 +129,9 @@ public class AudioPlayer {
 
             @Override
             public void onCompletion(MediaPlayer mp) {
-                stopPlay();
+                if (!mPlayer.isLooping()) {
+                    stopPlay();
+                }
 
             }
         });
@@ -177,7 +179,10 @@ public class AudioPlayer {
 
             @Override
             public void onCompletion(MediaPlayer mp) {
-                stopPlay();
+                if (!mPlayer.isLooping()) {
+                    stopPlay();
+                }
+
                 // 当播放录音停止音时
                 if (resId == R.raw.record_stop) {
                     sIsRecordStopMusic = false;

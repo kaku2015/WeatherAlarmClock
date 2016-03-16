@@ -22,12 +22,10 @@ import com.kaku.weac.adapter.ThemeAdapter;
 import com.kaku.weac.bean.Event.WallpaperEvent;
 import com.kaku.weac.bean.Theme;
 import com.kaku.weac.common.WeacConstants;
-import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.OttoAppConfig;
 import com.squareup.otto.Subscribe;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -154,7 +152,15 @@ public class ThemeFragment extends BaseFragment implements View.OnClickListener 
                     WeacConstants.DEFAULT_WALLPAPER_NAME);
         }
         mList = new ArrayList<>();
-        // 资源文件集合
+
+        for (int i = 0; i < 6; i++) {
+            Theme theme = new Theme();
+            theme.setResName("wallpaper_" + i);
+            theme.setResId(getDrawableId(i));
+            this.mList.add(theme);
+        }
+
+/*        // 资源文件集合
         Field[] fields = R.drawable.class.getDeclaredFields();
         // 遍历资源文件
         for (Field field : fields) {
@@ -170,9 +176,38 @@ public class ThemeFragment extends BaseFragment implements View.OnClickListener 
                     LogUtil.e(LOG_TAG, "initAdapter(): " + e.toString());
                 }
             }
-        }
+        }*/
+
         // 创建主题壁纸适配器
         this.mAdapter = new ThemeAdapter(getActivity(), mList, mWallpaperName);
+    }
+
+    /**
+     * 取得壁纸资源id
+     */
+    private int getDrawableId(int i) {
+        int drawableId = 0;
+        switch (i) {
+            case 0:
+                drawableId = R.drawable.wallpaper_0;
+                break;
+            case 1:
+                drawableId = R.drawable.wallpaper_1;
+                break;
+            case 2:
+                drawableId = R.drawable.wallpaper_2;
+                break;
+            case 3:
+                drawableId = R.drawable.wallpaper_3;
+                break;
+            case 4:
+                drawableId = R.drawable.wallpaper_4;
+                break;
+            case 5:
+                drawableId = R.drawable.wallpaper_5;
+                break;
+        }
+        return drawableId;
     }
 
     @Override

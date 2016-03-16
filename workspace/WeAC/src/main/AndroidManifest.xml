@@ -67,11 +67,11 @@
         <activity
             android:name=".activities.AlarmClockNewActivity"
             android:launchMode="singleTop"
-            android:theme="@style/Transparent.Light"/>
+            android:theme="@style/Transparent.holo"/>
         <activity
             android:name=".activities.AlarmClockEditActivity"
             android:launchMode="singleTop"
-            android:theme="@style/Transparent.Light"/>
+            android:theme="@style/Transparent.holo"/>
         <activity
             android:name=".activities.RingSelectActivity"
             android:launchMode="singleTop"

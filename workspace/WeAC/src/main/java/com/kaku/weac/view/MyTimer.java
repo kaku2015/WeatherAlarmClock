@@ -87,6 +87,11 @@ public class MyTimer extends View {
     private float mCircleRadiusDragButtonTouch;
 
     /**
+     * 拖动中按钮触摸半径
+     */
+    private float mCircleRadiusDraggingButtonTouch;
+
+    /**
      * 当前角度
      */
     private float mCurrentDegree;
@@ -140,6 +145,11 @@ public class MyTimer extends View {
      * 辉光效果画笔
      */
     private Paint mPaintGlowEffect;
+
+    /**
+     * 拖动中画笔
+     */
+    private Paint mPaintDragging;
 
     /**
      * 剩余时间变化回调
@@ -218,8 +228,14 @@ public class MyTimer extends View {
         canvas.drawArc(mRectF, -90, mCurrentDegree, false, mPaintArc);
         // 画按钮
         canvas.drawCircle(mDragButtonPosition[0], mDragButtonPosition[1], mStrokeWidth / 2, mPaintDragButton);
-        // 画按钮的辉光效果
-        canvas.drawCircle(mDragButtonPosition[0], mDragButtonPosition[1], mStrokeWidth, mPaintGlowEffect);
+
+        if (!mIsInDragButton) {
+            // 画按钮的辉光效果
+            canvas.drawCircle(mDragButtonPosition[0], mDragButtonPosition[1], mStrokeWidth, mPaintGlowEffect);
+        } else {
+            canvas.drawCircle(mDragButtonPosition[0], mDragButtonPosition[1], mCircleRadiusDraggingButtonTouch, mPaintDragging);
+        }
+
         // 设置显示的剩余时间
         setDisplayNumber();
         // 画剩余时间
@@ -234,6 +250,7 @@ public class MyTimer extends View {
      *
      * @param canvas canvas
      */
+    @SuppressWarnings("deprecation")
     private void initialize(Canvas canvas) {
         mTimeRemain = Calendar.getInstance();
         mTimeStart = Calendar.getInstance();
@@ -250,6 +267,7 @@ public class MyTimer extends View {
 
         mStrokeWidth = 10 * density;
         mCircleRadiusDragButtonTouch = 30 * density;
+        mCircleRadiusDraggingButtonTouch = 25 * density;
 
         mCircleRadiusWatcher = mViewWidth / 3;
         mCurrentDegree = 0;
@@ -264,9 +282,9 @@ public class MyTimer extends View {
         mPaintArc = new Paint();
         mPaintRemainTime = new Paint();
         mPaintGlowEffect = new Paint();
+        mPaintDragging = new Paint();
 
         // 表盘外圈颜色
-        @SuppressWarnings("deprecation")
         int colorWatcher = getResources().getColor(R.color.white_trans10);
         mPaintCircleBackground.setColor(colorWatcher);
         mPaintCircleBackground.setStrokeWidth(mStrokeWidth);
@@ -299,6 +317,11 @@ public class MyTimer extends View {
         mPaintGlowEffect.setColor(colorRemainTime);
         mPaintGlowEffect.setStyle(Paint.Style.FILL);
 
+        int colorDragging = getResources().getColor(R.color.white_trans20);
+        mPaintDragging.setColor(colorDragging);
+        mPaintDragging.setAntiAlias(true);
+        mPaintDragging.setStyle(Paint.Style.FILL);
+
         mRectF = new RectF(mCenterX - mCircleRadiusWatcher, mCenterY - mCircleRadiusWatcher
                 , mCenterX + mCircleRadiusWatcher, mCenterY + mCircleRadiusWatcher);
 
@@ -329,6 +352,7 @@ public class MyTimer extends View {
                         + Math.pow(event.getY() - mDragButtonPosition[1], 2))) {
                     //在拖动按钮中
                     mIsInDragButton = true;
+                    invalidate();
                 } else {
                     getParent().requestDisallowInterceptTouchEvent(false);
                     return false;
@@ -366,6 +390,7 @@ public class MyTimer extends View {
 
             case MotionEvent.ACTION_UP:
                 mIsInDragButton = false;
+                invalidate();
                 break;
         }
 

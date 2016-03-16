@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="23" />
+        android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -73,11 +73,11 @@
         <activity
             android:name="com.kaku.weac.activities.AlarmClockNewActivity"
             android:launchMode="singleTop"
-            android:theme="@style/Transparent.Light" />
+            android:theme="@style/Transparent.holo" />
         <activity
             android:name="com.kaku.weac.activities.AlarmClockEditActivity"
             android:launchMode="singleTop"
-            android:theme="@style/Transparent.Light" />
+            android:theme="@style/Transparent.holo" />
         <activity
             android:name="com.kaku.weac.activities.RingSelectActivity"
             android:launchMode="singleTop"
@@ -231,10 +231,6 @@
             android:name="com.umeng.update.UpdateDialogActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
-        <activity
-            android:name="com.karumi.dexter.DexterActivity"
-            android:launchMode="singleTask"
-            android:theme="@style/Theme.Transparent" />
 
         <service
             android:name="com.squareup.leakcanary.internal.HeapAnalyzerService"

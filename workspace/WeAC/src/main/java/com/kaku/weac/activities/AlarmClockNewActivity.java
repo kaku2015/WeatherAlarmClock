@@ -14,7 +14,7 @@ import com.kaku.weac.fragment.AlarmClockNewFragment;
  * @author 咖枯
  * @version 1.0 2015
  */
-public class AlarmClockNewActivity extends SingleFragmentActivity {
+public class AlarmClockNewActivity extends SingleFragmentOrdinaryActivity {
 
     @Override
     protected Fragment createFragment() {

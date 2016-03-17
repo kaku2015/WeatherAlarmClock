@@ -670,6 +670,8 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                 mCityName = getDefaultCityName();
                 mCityWeatherCode = getDefaultWeatherCode();
 
+                mIsPrepared = true;
+
                 // 不是第一次加载天气界面
                 if (mCityName != null) {
                     // 初始化天气
@@ -681,11 +683,8 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
 
                     showWeatherLayout();
 
-                    // 不是自动定位
-                    if (!mCityWeatherCode.equals(getString(R.string.auto_location))) {
-                        mIsPrepared = true;
-//                        lazyLoad();
-                    } else {
+                    // 是自动定位
+                    if (mCityWeatherCode.equals(getString(R.string.auto_location))) {
                         mIsFirstUse = false;
                         mIsPromptRefresh = false;
                         startLocation();
@@ -793,7 +792,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                         } else {
                             mIsPromptRefresh = true;
                             mIsLocated = true;
-                            mIsPrepared = true;
+//                            mIsPrepared = true;
                             LogUtil.d(LOG_TAG, "onReceiveLocation：lazyLoad()");
                             pullToRefresh();
                         }

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'tinyPIC'
 
 android {
     compileSdkVersion 23
@@ -12,6 +13,15 @@ android {
         versionName "1.0"
 
 //        manifestPlaceholders = [ UMENG_CHANNEL_VALUE:"wandoujia" ]
+    }
+
+
+    tinyinfo {
+        apiKey = 'b7FRW-xzgURGr0KlpRnq3BYjoRJMgx9L'
+        //是否跳过此task
+        skip = false
+        //是否打印日志
+        isShowLog = true
     }
 
     buildTypes {

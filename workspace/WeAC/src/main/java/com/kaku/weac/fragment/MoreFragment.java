@@ -16,6 +16,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -136,7 +137,12 @@ public class MoreFragment extends LazyLoadFragment {
 
         mUsedMemoryTv = (TextView) view.findViewById(R.id.used_memory_tv);
         mCleanUpCP = (CircleProgress) view.findViewById(R.id.circle_progress);
+
         mClearMemoryIv = (WaveLoadingView) view.findViewById(R.id.wave_view);
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            // FIXME: 暂时解决4.0显示bug
+            mClearMemoryIv.setAmplitudeRatio(100);
+        }
 
         updateUIStatus();
 

@@ -19,9 +19,9 @@ android {
     tinyinfo {
         apiKey = 'b7FRW-xzgURGr0KlpRnq3BYjoRJMgx9L'
         //是否跳过此task
-        skip = false
+        skip = true
         //是否打印日志
-        isShowLog = true
+        isShowLog = false
     }
 
     buildTypes {

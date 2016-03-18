@@ -3,6 +3,7 @@
  */
 package com.kaku.weac.activities;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -26,12 +27,29 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // 解决初次安装后打开后按home返回后重新打开重启问题。。。
+        if (!this.isTaskRoot()) { //判断该Activity是不是任务空间的源Activity，“非”也就是说是被系统重新实例化出来
+            //如果你就放在launcher Activity中话，这里可以直接return了
+            Intent mainIntent = getIntent();
+            String action = mainIntent.getAction();
+            if (mainIntent.hasCategory(Intent.CATEGORY_LAUNCHER) && action.equals(Intent.ACTION_MAIN)) {
+                finish();
+                return;//finish()之后该活动会继续执行后面的代码，你可以logCat验证，加return避免可能的exception
+            }
+        }
+
+/*        if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
+            finish();
+        }*/
+
         overridePendingTransition(R.anim.zoomin, 0);
         // 禁止滑动后退
         setSwipeBackEnable(false);
         setContentView(R.layout.activity_splash);
         MyUtil.setStatusBarTranslucent(this);
         assignViews();
+
     }
 
     @Override

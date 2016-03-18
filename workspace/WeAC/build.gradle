@@ -12,7 +12,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-//        manifestPlaceholders = [ UMENG_CHANNEL_VALUE:"wandoujia" ]
+//        manifestPlaceholders = [ UMENG_CHANNEL_VALUE:"bugly" ]
     }
 
 
@@ -64,20 +64,29 @@ android {
         exclude '.readme'
     }
 
-/*    productFlavors {
+    productFlavors {
+        bugly {}
+        _360 {}
         wandoujia {}
+        _91zhushou {}
         baidu {}
         uc {}
-        _360 {}
-        yingyongbao {}
-        xiaomi {}
-        huawei {}
         jifeng {}
+        yingyonghui {}
+        yingyongbao {}
+        ku {}
+        anzhi {}
+        mumayi {}
+        huawei {}
+        xiaomi {}
+        meizu {}
+        lianxiang {}
+        google {}
 
         productFlavors.all { flavor ->
             flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
         }
-    }*/
+    }
 }
 /*    sourceSets {
         main {

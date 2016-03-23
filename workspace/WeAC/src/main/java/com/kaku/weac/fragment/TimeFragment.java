@@ -419,6 +419,9 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mTimer.cancelTimer();
+        // 未知空指针异常，空检查，不知道是不是这里的问题
+        if (mTimer != null) {
+            mTimer.cancelTimer();
+        }
     }
 }

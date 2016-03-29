@@ -417,6 +417,8 @@ public class AlarmClockEditFragment extends BaseFragment implements
                 break;
             // 当点击确认按钮
             case R.id.action_accept:
+                saveDefaultAlarmTime();
+
                 Intent data = new Intent();
                 data.putExtra(WeacConstants.ALARM_CLOCK, mAlarmClock);
                 getActivity().setResult(Activity.RESULT_OK, data);
@@ -451,6 +453,15 @@ public class AlarmClockEditFragment extends BaseFragment implements
                 startActivityForResult(nap, REQUEST_NAP_EDIT);
                 break;
         }
+    }
+
+    private void saveDefaultAlarmTime() {
+        SharedPreferences share = getActivity().getSharedPreferences(
+                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = share.edit();
+        editor.putInt(WeacConstants.DEFAULT_ALARM_HOUR, mAlarmClock.getHour());
+        editor.putInt(WeacConstants.DEFAULT_ALARM_MINUTE, mAlarmClock.getMinute());
+        editor.apply();
     }
 
     /**

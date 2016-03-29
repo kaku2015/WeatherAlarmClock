@@ -236,6 +236,7 @@ public class AlarmClockNewFragment extends BaseFragment implements OnClickListen
      *
      * @param view view
      */
+    @SuppressWarnings("deprecation")
     private void initTimeSelect(View view) {
         // 下次响铃提示
         mTimePickerTv = (TextView) view.findViewById(R.id.time_picker_tv);
@@ -247,10 +248,15 @@ public class AlarmClockNewFragment extends BaseFragment implements OnClickListen
         // 闹钟时间选择器
         TimePicker timePicker = (TimePicker) view.findViewById(R.id.time_picker);
         timePicker.setIs24HourView(true);
-        //noinspection deprecation
-        int currentHour = timePicker.getCurrentHour();
-        //noinspection deprecation
-        int currentMinute = timePicker.getCurrentMinute();
+
+        SharedPreferences share = getActivity().getSharedPreferences(
+                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+        int currentHour = share.getInt(WeacConstants.DEFAULT_ALARM_HOUR, timePicker.getCurrentHour());
+        int currentMinute = share.getInt(WeacConstants.DEFAULT_ALARM_MINUTE, timePicker.getCurrentMinute());
+
+        timePicker.setCurrentHour(currentHour);
+        timePicker.setCurrentMinute(currentMinute);
+
         // 初始化闹钟实例的小时
         mAlarmClock.setHour(currentHour);
         // 初始化闹钟实例的分钟
@@ -417,6 +423,8 @@ public class AlarmClockNewFragment extends BaseFragment implements OnClickListen
                 break;
             // 当点击确认按钮
             case R.id.action_accept:
+                saveDefaultAlarmTime();
+
                 Intent data = new Intent();
                 data.putExtra(WeacConstants.ALARM_CLOCK, mAlarmClock);
                 getActivity().setResult(Activity.RESULT_OK, data);
@@ -447,6 +455,15 @@ public class AlarmClockNewFragment extends BaseFragment implements OnClickListen
                 startActivityForResult(nap, REQUEST_NAP_EDIT);
                 break;
         }
+    }
+
+    private void saveDefaultAlarmTime() {
+        SharedPreferences share = getActivity().getSharedPreferences(
+                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = share.edit();
+        editor.putInt(WeacConstants.DEFAULT_ALARM_HOUR, mAlarmClock.getHour());
+        editor.putInt(WeacConstants.DEFAULT_ALARM_MINUTE, mAlarmClock.getMinute());
+        editor.apply();
     }
 
     /**

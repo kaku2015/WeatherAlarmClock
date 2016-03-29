@@ -32,6 +32,16 @@ public class WeacConstants {
     public static final String WALLPAPER_PATH = "wallpaper_path";
 
     /**
+     * 默认闹铃小时
+     */
+    public static final String DEFAULT_ALARM_HOUR = "default_alarm_hour";
+
+    /**
+     * 默认闹铃分钟
+     */
+    public static final String DEFAULT_ALARM_MINUTE = "default_alarm_minute";
+
+    /**
      * 保存的闹钟铃声音量
      */
     public static final String AlARM_VOLUME = "alarm_volume";

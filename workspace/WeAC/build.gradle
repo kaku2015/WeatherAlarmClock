@@ -9,10 +9,10 @@ android {
         applicationId "com.kaku.weac"
         minSdkVersion 14
         targetSdkVersion 19
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.1"
 
-        manifestPlaceholders = [UMENG_CHANNEL_VALUE: "kaku"]
+        manifestPlaceholders = [UMENG_CHANNEL_VALUE: "Umeng"]
     }
 
 
@@ -58,22 +58,21 @@ android {
     }
 
 // gradle bug 去掉release编译警告
-    packagingOptions {
+/*    packagingOptions {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
         exclude '.readme'
-    }
-/*
+    }*/
     productFlavors {
-        bugly {}
         _360 {}
         wandoujia {}
+        yingyongbao {}
+/*        bugly {}
         _91zhushou {}
         baidu {}
         uc {}
         jifeng {}
         yingyonghui {}
-        yingyongbao {}
         ku {}
         anzhi {}
         mumayi {}
@@ -81,12 +80,12 @@ android {
         xiaomi {}
         meizu {}
         lianxiang {}
-        google {}
+        google {}*/
 
         productFlavors.all { flavor ->
             flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
         }
-    }*/
+    }
 }
 /*    sourceSets {
         main {

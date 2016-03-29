@@ -1012,7 +1012,8 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         if (resultCode != Activity.RESULT_OK) {
             if (mDefaultCityName != null && getDefaultCityName() != null) {
                 // 当改变了默认城市后滑动返回
-                if (!mDefaultCityName.equals(getDefaultCityName())) {
+                if (!mDefaultCityName.equals(getDefaultCityName()) ||
+                        !mCityWeatherCode.equals(getDefaultWeatherCode())) {
                     changeCityWeatherInfo(getDefaultCityName(), getDefaultWeatherCode());
                 } else {
                     String cityName;

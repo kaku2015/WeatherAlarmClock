@@ -605,11 +605,11 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
      * 百度定位监听
      */
     private BDLocationListener mBDLocationListener;
-
-    /**
+/*
+    *//**
      * 首次打开天气界面
-     */
-    private boolean mIsFirstUse = false;
+     *//*
+    private boolean mIsFirstUse = false;*/
 
     /**
      * 是否立刻刷新
@@ -659,6 +659,8 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fm_wea, container, false);
 
+        onlyLocation();
+
         mOnVisibleListener = new OnVisibleListener() {
             @Override
             public void onVisible() {
@@ -685,7 +687,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
 
                     // 是自动定位
                     if (mCityWeatherCode.equals(getString(R.string.auto_location))) {
-                        mIsFirstUse = false;
+//                        mIsFirstUse = false;
                         mIsPromptRefresh = false;
                         startLocation();
                     }
@@ -693,7 +695,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                     showWeatherLayout();
 
                     // 首次进入天气界面，自动定位天气
-                    mIsFirstUse = true;
+//                    mIsFirstUse = true;
                     // 不立刻刷新
                     mIsPromptRefresh = false;
                     // 自动定位
@@ -717,6 +719,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
     private void startLocation() {
         if (!MyUtil.isNetworkAvailable(getActivity())) {
             ToastUtil.showShortToast(getActivity(), getString(R.string.internet_error));
+            mIsOnlyLocation = false;
             return;
         }
 
@@ -759,6 +762,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                 mLocationClient.unRegisterLocationListener(mBDLocationListener);
                 if (location == null) {
                     ToastUtil.showShortToast(getActivity(), getString(R.string.location_fail));
+                    mIsOnlyLocation = false;
                     return;
                 }
                 LogUtil.d(LOG_TAG, "纬度：" + location.getLatitude() + ",经度：" + location.getLongitude());
@@ -773,7 +777,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                         mCityWeatherCode = getString(R.string.auto_location);
 
                         // 初次加载定位保存
-                        if (mIsFirstUse) {
+                        if (/*mIsFirstUse || */getDefaultCityName() == null) {
                             SharedPreferences share = getActivity().getSharedPreferences(
                                     WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
                             SharedPreferences.Editor editor = share.edit();
@@ -782,7 +786,12 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                             // 保存默认的天气代码
                             editor.putString(WeacConstants.DEFAULT_WEATHER_CODE, mCityWeatherCode);
                             editor.apply();
-                            mIsFirstUse = false;
+//                            mIsFirstUse = false;
+                        }
+
+                        if (mIsOnlyLocation) {
+                            mIsOnlyLocation = false;
+                            return;
                         }
 
                         // 立刻更新
@@ -797,20 +806,25 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
                             pullToRefresh();
                         }
                     } else {
+                        mIsOnlyLocation = false;
                         stopRefresh();
                         ToastUtil.showShortToast(getActivity(), getString(R.string.can_not_find_current_location));
                     }
                     // 定位失败
                 } else {
+                    mIsOnlyLocation = false;
                     stopRefresh();
                     ToastUtil.showShortToast(getActivity(), getString(R.string.auto_location_error_retry));
                 }
             } catch (Exception e) {
+                mIsOnlyLocation = false;
                 LogUtil.e(LOG_TAG, "onReceiveLocation" + e.toString());
             }
 
         }
     }
+
+    private boolean mIsOnlyLocation;
 
     @Override
     protected void lazyLoad() {
@@ -822,6 +836,15 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         if (mIsPrepared && mIsVisible) {
             // 自动下拉刷新
             pullToRefresh();
+        }
+    }
+
+    private void onlyLocation() {
+        // 初次使用天气闹钟，首先需要定位以便能够正确显示天气提示内容
+        if (getDefaultCityName() == null) {
+            mIsOnlyLocation = true;
+//            mIsFirstUse = true;
+            startLocation();
         }
     }
 
@@ -977,7 +1000,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
      * 定位并立即刷新
      */
     private void locationPromptRefresh() {
-        mIsFirstUse = false;
+//        mIsFirstUse = false;
         mIsPromptRefresh = true;
         startLocation();
     }

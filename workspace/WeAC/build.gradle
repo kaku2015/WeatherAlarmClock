@@ -12,7 +12,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-//        manifestPlaceholders = [ UMENG_CHANNEL_VALUE:"bugly" ]
+        manifestPlaceholders = [UMENG_CHANNEL_VALUE: "kaku"]
     }
 
 
@@ -26,8 +26,8 @@ android {
 
     buildTypes {
         debug {
-            minifyEnabled true
-            zipAlignEnabled true
+            minifyEnabled false
+            zipAlignEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
@@ -63,7 +63,7 @@ android {
         exclude 'META-INF/NOTICE.txt'
         exclude '.readme'
     }
-
+/*
     productFlavors {
         bugly {}
         _360 {}
@@ -86,7 +86,7 @@ android {
         productFlavors.all { flavor ->
             flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
         }
-    }
+    }*/
 }
 /*    sourceSets {
         main {

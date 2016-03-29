@@ -104,6 +104,7 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
                 .findViewById(R.id.alarm_clock_empty);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list_view);
+        mRecyclerView.setHasFixedSize(true);
         //设置布局管理器
 //        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setLayoutManager(new ErrorCatchLinearLayoutManager(getActivity(),

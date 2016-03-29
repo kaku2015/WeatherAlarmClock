@@ -304,11 +304,7 @@
     <bookmark url="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockOntimeFragment.java" line="561" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dd13465a-1f53-468b-aa88-adc0628e1005" name="Default" comment="修复 初次使用天气闹钟天气提示功能之前没有设置默认城市不显示天气提示信息">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/WeAC.iml" afterPath="$PROJECT_DIR$/WeAC/WeAC.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/WeaFragment.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/WeaFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build.gradle" afterPath="$PROJECT_DIR$/WeAC/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
+    <list default="true" id="dd13465a-1f53-468b-aa88-adc0628e1005" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -387,17 +383,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WeaFragment.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="WeaFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/WeaFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3171806">
-              <caret line="795" column="0" selection-start-line="795" selection-start-column="0" selection-end-line="795" selection-end-column="0" />
+            <state vertical-scroll-proportion="-6.5333333">
+              <caret line="1015" column="76" selection-start-line="1015" selection-start-column="76" selection-end-line="1015" selection-end-column="76" />
               <folding>
                 <element signature="e#15728#15761#0" expanded="true" />
                 <element signature="e#17687#17732#0" expanded="true" />
                 <element signature="e#23454#23487#0" expanded="true" />
-                <element signature="e#27514#27547#0" expanded="true" />
+                <element signature="e#24614#24647#0" expanded="true" />
+                <element signature="e#27591#27624#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CityManageActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/CityManageActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="573" column="0" selection-start-line="573" selection-start-column="0" selection-end-line="573" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -457,26 +464,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AboutActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/AboutActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-              <folding>
-                <element signature="e#0#1808#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#1084#1085#0" expanded="false" />
-                <element signature="e#1124#1125#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="295" column="22" selection-start-line="295" selection-start-column="22" selection-end-line="295" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.6573939">
+              <caret line="297" column="61" selection-start-line="297" selection-start-column="61" selection-end-line="297" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -5630,11 +5622,11 @@
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/SplashActivity.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/TimeFragment.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/res/layout/fm_alarm_clock.xml" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockOntimeFragment.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/LazyLoadFragment.java" />
-        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/WeaFragment.java" />
         <option value="$PROJECT_DIR$/WeAC/build.gradle" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/WeaFragment.java" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml" />
       </list>
     </option>
   </component>
@@ -6400,18 +6392,6 @@
       <option name="number" value="Default" />
       <updated>1453821991269</updated>
     </task>
-    <task id="LOCAL-00067" summary="生成二维码开关自动生成，清理进程数计算修改">
-      <created>1455538330093</created>
-      <option name="number" value="00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1455538330093</updated>
-    </task>
-    <task id="LOCAL-00068" summary="moreFragment item 添加ripple效果 并进行了layout优化">
-      <created>1455711042538</created>
-      <option name="number" value="00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1455711042539</updated>
-    </task>
     <task id="LOCAL-00069" summary="友盟自动更新">
       <created>1455814381010</created>
       <option name="number" value="00069" />
@@ -6694,7 +6674,19 @@
       <option name="project" value="LOCAL" />
       <updated>1458741270572</updated>
     </task>
-    <option name="localTasksCounter" value="116" />
+    <task id="LOCAL-00116" summary="修复 初次使用天气闹钟天气提示功能之前没有设置默认城市不显示天气提示信息">
+      <created>1459255028660</created>
+      <option name="number" value="00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1459255028661</updated>
+    </task>
+    <task id="LOCAL-00117" summary="修复 城市管理界面选择定位为默认滑动返回不切换">
+      <created>1459256035534</created>
+      <option name="number" value="00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1459256035534</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers />
   </component>
   <component name="TodoView">
@@ -6759,8 +6751,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="铃声向右箭头" />
-    <MESSAGE value="删除AlarmClockCode" />
     <MESSAGE value="发布版本图标：天气，计时，更多。。。" />
     <MESSAGE value="图片制作完毕" />
     <MESSAGE value="打赏" />
@@ -6784,7 +6774,9 @@
     <MESSAGE value="修改timer间距" />
     <MESSAGE value="修复初次安装自动重启问题" />
     <MESSAGE value="友盟检测的空指针异常修复，不知道是不是这里问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="友盟检测的空指针异常修复，不知道是不是这里问题" />
+    <MESSAGE value="修复 初次使用天气闹钟天气提示功能之前没有设置默认城市不显示天气提示信息" />
+    <MESSAGE value="修复 城市管理界面选择定位为默认滑动返回不切换" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复 城市管理界面选择定位为默认滑动返回不切换" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6845071" />
   </component>
   <component name="XDebuggerManager">
@@ -6804,7 +6796,7 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/WeaFragment.java</url>
-          <line>1266</line>
+          <line>1267</line>
           <properties />
           <option name="timeStamp" value="81" />
         </line-breakpoint>
@@ -6912,7 +6904,7 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/WeaFragment.java</url>
-          <line>1118</line>
+          <line>1119</line>
           <properties />
           <option name="timeStamp" value="439" />
         </line-breakpoint>
@@ -6951,18 +6943,6 @@
           <line>120</line>
           <properties />
           <option name="timeStamp" value="466" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/CityManageActivity.java</url>
-          <line>353</line>
-          <properties />
-          <option name="timeStamp" value="467" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/CityManageActivity.java</url>
-          <line>573</line>
-          <properties />
-          <option name="timeStamp" value="468" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockOntimeFragment.java</url>
@@ -7015,21 +6995,9 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/WeaFragment.java</url>
-          <line>719</line>
+          <line>1011</line>
           <properties />
-          <option name="timeStamp" value="536" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/WeaFragment.java</url>
-          <line>988</line>
-          <properties />
-          <option name="timeStamp" value="540" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/WeaFragment.java</url>
-          <line>791</line>
-          <properties />
-          <option name="timeStamp" value="551" />
+          <option name="timeStamp" value="555" />
         </line-breakpoint>
         <line-breakpoint suspend="ALL" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/LocalAlbumImagePickerHelper.java</url>
@@ -7054,7 +7022,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="553" />
+      <option name="time" value="556" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Remote">
@@ -7063,11 +7031,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/drawable-xxhdpi/ic_wind_3.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/drawable-xxhdpi/ic_wind_2.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -7425,14 +7388,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="295" column="22" selection-start-line="295" selection-start-column="22" selection-end-line="295" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockOntimeFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -7477,16 +7432,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/CityManageActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="573" column="0" selection-start-line="573" selection-start-column="0" selection-end-line="573" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/WeaFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3171806">
-          <caret line="795" column="0" selection-start-line="795" selection-start-column="0" selection-end-line="795" selection-end-column="0" />
+        <state vertical-scroll-proportion="-6.5333333">
+          <caret line="1015" column="76" selection-start-line="1015" selection-start-column="76" selection-end-line="1015" selection-end-column="76" />
           <folding>
             <element signature="e#15728#15761#0" expanded="true" />
             <element signature="e#17687#17732#0" expanded="true" />
             <element signature="e#23454#23487#0" expanded="true" />
-            <element signature="e#27514#27547#0" expanded="true" />
+            <element signature="e#24614#24647#0" expanded="true" />
+            <element signature="e#27591#27624#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6573939">
+          <caret line="297" column="61" selection-start-line="297" selection-start-column="61" selection-end-line="297" selection-end-column="61" />
+          <folding />
         </state>
       </provider>
     </entry>

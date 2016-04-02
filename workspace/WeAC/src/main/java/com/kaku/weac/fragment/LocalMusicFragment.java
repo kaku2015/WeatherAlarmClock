@@ -133,38 +133,42 @@ public class LocalMusicFragment extends BaseListFragment implements
                 List<Map<String, String>> list = new ArrayList<>();
                 // 过滤重复音频文件的Set
                 HashSet<String> set = new HashSet<>();
-                for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor
-                        .moveToNext()) {
-                    // 音频文件名
-                    String ringName = cursor.getString(cursor
-                            .getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME));
-                    // 取得音频文件的地址
-                    String ringUrl = cursor.getString(cursor
-                            .getColumnIndex(MediaStore.Audio.Media.DATA));
-                    if (ringName != null) {
-                        // 当过滤集合里不存在此音频文件，并且文件扩展名不为[.amr]，并且不是默认铃声
-                        if (!set.contains(ringName)
-                                && !ringUrl.contains("/WeaAlarmClock/audio/record")
-                                && !ringName.equals("record_start.mp3")
-                                && !ringName.equals("record_stop.mp3")
-                                && !ringName
-                                .equals("ring_weac_alarm_clock_default.mp3")) {
-                            // 添加音频文件到列表过滤同名文件
-                            set.add(ringName);
-                            // 去掉音频文件的扩展名
-                            ringName = MyUtil.removeEx(ringName);
-                            Map<String, String> map = new HashMap<>();
-                            map.put(WeacConstants.RING_NAME, ringName);
-                            map.put(WeacConstants.RING_URL, ringUrl);
-                            list.add(map);
-                            // 当列表中存在与保存的铃声名一致时，设置该列表的显示位置
-                            if (ringName.equals(ringName1)) {
-                                mPosition = list.size() - 1;
-                                RingSelectItem.getInstance().setRingPager(1);
+
+                if (cursor != null) {
+                    for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor
+                            .moveToNext()) {
+                        // 音频文件名
+                        String ringName = cursor.getString(cursor
+                                .getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME));
+                        // 取得音频文件的地址
+                        String ringUrl = cursor.getString(cursor
+                                .getColumnIndex(MediaStore.Audio.Media.DATA));
+                        if (ringName != null) {
+                            // 当过滤集合里不存在此音频文件，并且文件扩展名不为[.amr]，并且不是默认铃声
+                            if (!set.contains(ringName)
+                                    && !ringUrl.contains("/WeaAlarmClock/audio/record")
+                                    && !ringName.equals("record_start.mp3")
+                                    && !ringName.equals("record_stop.mp3")
+                                    && !ringName
+                                    .equals("ring_weac_alarm_clock_default.mp3")) {
+                                // 添加音频文件到列表过滤同名文件
+                                set.add(ringName);
+                                // 去掉音频文件的扩展名
+                                ringName = MyUtil.removeEx(ringName);
+                                Map<String, String> map = new HashMap<>();
+                                map.put(WeacConstants.RING_NAME, ringName);
+                                map.put(WeacConstants.RING_URL, ringUrl);
+                                list.add(map);
+                                // 当列表中存在与保存的铃声名一致时，设置该列表的显示位置
+                                if (ringName.equals(ringName1)) {
+                                    mPosition = list.size() - 1;
+                                    RingSelectItem.getInstance().setRingPager(1);
+                                }
                             }
                         }
                     }
                 }
+
                 mLocalMusicAdapter = new RingSelectAdapter(getActivity(), list, ringName1);
                 setListAdapter(mLocalMusicAdapter);
                 setSelection(mPosition);

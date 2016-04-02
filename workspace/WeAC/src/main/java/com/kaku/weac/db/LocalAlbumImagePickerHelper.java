@@ -71,18 +71,20 @@ public class LocalAlbumImagePickerHelper {
 
     private void getThumbnailColumnData(Cursor cursor) {
         mThumbnailList.clear();
-        if (cursor.moveToFirst()) {
-            int image_idColumn = cursor.getColumnIndex(Thumbnails.IMAGE_ID);
-            int image_pathColumn = cursor.getColumnIndex(Thumbnails.DATA);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                int image_idColumn = cursor.getColumnIndex(Thumbnails.IMAGE_ID);
+                int image_pathColumn = cursor.getColumnIndex(Thumbnails.DATA);
 
-            do {
-                // 图片缩略图id
-                int image_id = cursor.getInt(image_idColumn);
-                // 图片缩略图path
-                String image_path = cursor.getString(image_pathColumn);
+                do {
+                    // 图片缩略图id
+                    int image_id = cursor.getInt(image_idColumn);
+                    // 图片缩略图path
+                    String image_path = cursor.getString(image_pathColumn);
 
-                mThumbnailList.put("" + image_id, image_path);
-            } while (cursor.moveToNext());
+                    mThumbnailList.put("" + image_id, image_path);
+                } while (cursor.moveToNext());
+            }
         }
     }
 

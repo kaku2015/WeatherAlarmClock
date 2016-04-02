@@ -153,8 +153,8 @@ public class SystemRingFragment extends BaseListFragment implements
                 List<Map<String, String>> list = new ArrayList<>();
                 // 添加默认铃声
                 Map<String, String> defaultRing = new HashMap<>();
-                defaultRing.put(WeacConstants.RING_NAME,getString(R.string.default_ring));
-                defaultRing.put(WeacConstants.RING_URL,WeacConstants.DEFAULT_RING_URL);
+                defaultRing.put(WeacConstants.RING_NAME, getString(R.string.default_ring));
+                defaultRing.put(WeacConstants.RING_URL, WeacConstants.DEFAULT_RING_URL);
                 list.add(defaultRing);
                 set.add(getString(R.string.default_ring));
 
@@ -177,33 +177,36 @@ public class SystemRingFragment extends BaseListFragment implements
                     RingSelectItem.getInstance().setRingPager(0);
                 }
 
-                for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor
-                        .moveToNext()) {
-                    // 音频文件名
-                    String ringName = cursor.getString(cursor
-                            .getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME));
-                    if (ringName != null) {
-                        // 当过滤集合里不存在此音频文件
-                        if (!set.contains(ringName)) {
-                            // 添加音频文件到列表过滤同名文件
-                            set.add(ringName);
-                            // 去掉音频文件的扩展名
-                            ringName = MyUtil.removeEx(ringName);
-                            // 取得音频文件的地址
-                            String ringUrl = cursor.getString(cursor
-                                    .getColumnIndex(MediaStore.Audio.Media.DATA));
-                            Map<String, String> map = new HashMap<>();
-                            map.put(WeacConstants.RING_NAME, ringName);
-                            map.put(WeacConstants.RING_URL, ringUrl);
-                            list.add(map);
-                            // 当列表中存在与保存的铃声名一致时，设置该列表的显示位置
-                            if (ringName.equals(ringName1)) {
-                                mPosition = list.size() - 1;
-                                RingSelectItem.getInstance().setRingPager(0);
+                if (cursor != null) {
+                    for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor
+                            .moveToNext()) {
+                        // 音频文件名
+                        String ringName = cursor.getString(cursor
+                                .getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME));
+                        if (ringName != null) {
+                            // 当过滤集合里不存在此音频文件
+                            if (!set.contains(ringName)) {
+                                // 添加音频文件到列表过滤同名文件
+                                set.add(ringName);
+                                // 去掉音频文件的扩展名
+                                ringName = MyUtil.removeEx(ringName);
+                                // 取得音频文件的地址
+                                String ringUrl = cursor.getString(cursor
+                                        .getColumnIndex(MediaStore.Audio.Media.DATA));
+                                Map<String, String> map = new HashMap<>();
+                                map.put(WeacConstants.RING_NAME, ringName);
+                                map.put(WeacConstants.RING_URL, ringUrl);
+                                list.add(map);
+                                // 当列表中存在与保存的铃声名一致时，设置该列表的显示位置
+                                if (ringName.equals(ringName1)) {
+                                    mPosition = list.size() - 1;
+                                    RingSelectItem.getInstance().setRingPager(0);
+                                }
                             }
                         }
                     }
                 }
+
                 mSystemRingAdapter = new RingSelectAdapter(getActivity(), list, ringName1);
                 setListAdapter(mSystemRingAdapter);
                 setSelection(mPosition);

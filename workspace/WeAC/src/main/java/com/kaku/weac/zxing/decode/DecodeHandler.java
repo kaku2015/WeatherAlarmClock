@@ -64,17 +64,17 @@ public class DecodeHandler extends Handler {
         if (!running) {
             return;
         }
-        if (message.what == R.id.decode) {
-            decode((byte[]) message.obj, message.arg1, message.arg2);
+        try {
+            if (message.what == R.id.decode) {
+                decode((byte[]) message.obj, message.arg1, message.arg2);
 
-        } else if (message.what == R.id.quit) {
-            try {
+            } else if (message.what == R.id.quit) {
                 running = false;
                 // FIXME :NullPointerException
                 Looper.myLooper().quit();
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
 
         }
     }
@@ -93,6 +93,7 @@ public class DecodeHandler extends Handler {
 
         // 这里需要将获取的data翻转一下，因为相机默认拿的的横屏的数据
         byte[] rotatedData = new byte[data.length];
+        // FIXME :NullPointerException
         for (int y = 0; y < size.height; y++) {
             for (int x = 0; x < size.width; x++)
                 rotatedData[x * size.height + size.height - y - 1] = data[x + y * size.width];

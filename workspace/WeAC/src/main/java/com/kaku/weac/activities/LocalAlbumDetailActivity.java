@@ -24,6 +24,7 @@ import com.kaku.weac.bean.ImageItem;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.OttoAppConfig;
+import com.kaku.weac.util.ToastUtil;
 
 import java.io.File;
 import java.util.List;
@@ -93,15 +94,22 @@ public class LocalAlbumDetailActivity extends BaseActivity implements View.OnCli
                 }
             }
         });
-        
+
         OverScrollDecoratorHelper.setUpOverScroll(albumPictureDetailGv);
     }
 
     private void cropImage(int type, int requestType, String sourcePath, String savePath) {
         Uri imageUri = Uri.fromFile(new File(sourcePath));
         Intent intent = MyUtil.getCropImageOptions(this, imageUri, savePath, type);
-        startActivityForResult(intent, requestType);
-        overridePendingTransition(0, 0);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(intent, requestType);
+            overridePendingTransition(0, 0);
+        } else {
+            // 不可以复制其他应用的内部文件
+            // TODO: 全屏裁剪&自定义裁剪功能
+            ToastUtil.showLongToast(this, getString(R.string.no_crop_action));
+        }
     }
 
     @Override

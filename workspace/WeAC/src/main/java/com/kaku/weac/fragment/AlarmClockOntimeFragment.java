@@ -344,73 +344,78 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
                 return;
             }
 
-            // 设置城市名
-            TextView cityName = (TextView) getActivity().findViewById(R.id.city_name_tv);
-            cityName.setText(mWeatherInfo.getCity());
+            try {
+                // 设置城市名
+                TextView cityName = (TextView) getActivity().findViewById(R.id.city_name_tv);
+                cityName.setText(mWeatherInfo.getCity());
 
-            // 多天预报信息
-            List<WeatherDaysForecast> weatherDaysForecasts = mWeatherInfo.getWeatherDaysForecast();
-            if (weatherDaysForecasts.size() < 6) {
-                mWeatherPbar.setVisibility(View.GONE);
-                return;
-            }
-            // 今天天气信息
-            WeatherDaysForecast weather;
-            String time[] = mWeatherInfo.getUpdateTime().split(":");
-            int hour1 = Integer.parseInt(time[0]);
-            int minute1 = Integer.parseInt(time[1]);
-            //更新时间从23：45开始到05：20以前的数据，后移一天填充
-            if ((hour1 == 23 && minute1 >= 45) || (hour1 < 5) ||
-                    ((hour1 == 5) && (minute1 < 20))) {
-                weather = weatherDaysForecasts.get(2);
-            } else {
-                weather = weatherDaysForecasts.get(1);
-            }
+                // 多天预报信息
+                List<WeatherDaysForecast> weatherDaysForecasts = mWeatherInfo.getWeatherDaysForecast();
+                if (weatherDaysForecasts.size() < 6) {
+                    mWeatherPbar.setVisibility(View.GONE);
+                    return;
+                }
+                // 今天天气信息
+                WeatherDaysForecast weather;
+                String time[] = mWeatherInfo.getUpdateTime().split(":");
+                int hour1 = Integer.parseInt(time[0]);
+                int minute1 = Integer.parseInt(time[1]);
+                //更新时间从23：45开始到05：20以前的数据，后移一天填充
+                if ((hour1 == 23 && minute1 >= 45) || (hour1 < 5) ||
+                        ((hour1 == 5) && (minute1 < 20))) {
+                    weather = weatherDaysForecasts.get(2);
+                } else {
+                    weather = weatherDaysForecasts.get(1);
+                }
 
-            Calendar calendar = Calendar.getInstance();
-            // 现在小时
-            int hour = calendar.get(Calendar.HOUR_OF_DAY);
-            // 天气类型图片id
-            int weatherId;
-            // 设置今天天气信息
-            // 当前为凌晨
-            if (hour >= 0 && hour < 6) {
-                weatherId = MyUtil.getWeatherTypeImageID(weather.getTypeDay(), false);
-                // 当前为白天时
-            } else if (hour >= 6 && hour < 18) {
-                weatherId = MyUtil.getWeatherTypeImageID(weather.getTypeDay(), true);
-                // 当前为夜间
-            } else {
-                weatherId = MyUtil.getWeatherTypeImageID(weather.getTypeNight(), false);
-            }
+                Calendar calendar = Calendar.getInstance();
+                // 现在小时
+                int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                // 天气类型图片id
+                int weatherId;
+                // 设置今天天气信息
+                // 当前为凌晨
+                if (hour >= 0 && hour < 6) {
+                    weatherId = MyUtil.getWeatherTypeImageID(weather.getTypeDay(), false);
+                    // 当前为白天时
+                } else if (hour >= 6 && hour < 18) {
+                    weatherId = MyUtil.getWeatherTypeImageID(weather.getTypeDay(), true);
+                    // 当前为夜间
+                } else {
+                    weatherId = MyUtil.getWeatherTypeImageID(weather.getTypeNight(), false);
+                }
 
-            @SuppressWarnings("deprecation")
-            Drawable drawable = getResources().getDrawable(weatherId);
-            if (drawable != null) {
-                drawable.setBounds(0, 0, drawable.getMinimumWidth(),
-                        drawable.getMinimumHeight());
-                // 设置图标
-                mWeatherTypeTv.setCompoundDrawables(drawable, null, null, null);
-            }
+                @SuppressWarnings("deprecation")
+                Drawable drawable = getResources().getDrawable(weatherId);
+                if (drawable != null) {
+                    drawable.setBounds(0, 0, drawable.getMinimumWidth(),
+                            drawable.getMinimumHeight());
+                    // 设置图标
+                    mWeatherTypeTv.setCompoundDrawables(drawable, null, null, null);
+                }
 
-            String type = MyUtil.getWeatherType
-                    (getActivity(), weather.getTypeDay(), weather.getTypeNight());
-            String tempHigh = weather.getHigh().replace("℃", "").substring(3);
-            String tempLow = weather.getLow().replace("℃", "").substring(3);
-            mWeatherTypeTv.setText(String.format(getString(R.string.weather_type), type, tempHigh, tempLow));
+                String type = MyUtil.getWeatherType
+                        (getActivity(), weather.getTypeDay(), weather.getTypeNight());
+                String tempHigh = weather.getHigh().replace("℃", "").substring(3);
+                String tempLow = weather.getLow().replace("℃", "").substring(3);
+                mWeatherTypeTv.setText(String.format(getString(R.string.weather_type), type, tempHigh, tempLow));
 
-            // 生活指数信息
-            List<WeatherLifeIndex> weatherLifeIndexes = mWeatherInfo.getWeatherLifeIndex();
-            for (WeatherLifeIndex index : weatherLifeIndexes) {
-                if (index.getIndexName().equals("雨伞指数")) {
-                    if (index.getIndexValue().equals("带伞")) {
-                        mUmbrellaTv.setVisibility(View.VISIBLE);
+                // 生活指数信息
+                List<WeatherLifeIndex> weatherLifeIndexes = mWeatherInfo.getWeatherLifeIndex();
+                for (WeatherLifeIndex index : weatherLifeIndexes) {
+                    if (index.getIndexName().equals("雨伞指数")) {
+                        if (index.getIndexValue().equals("带伞")) {
+                            mUmbrellaTv.setVisibility(View.VISIBLE);
+                        }
                     }
                 }
-            }
 
-            mWeatherInfoGroup.setVisibility(View.VISIBLE);
-            mWeatherPbar.setVisibility(View.GONE);
+                mWeatherInfoGroup.setVisibility(View.VISIBLE);
+            } catch (Exception e) {
+                LogUtil.e(LOG_TAG, e.toString());
+            } finally {
+                mWeatherPbar.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -564,23 +569,23 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
         Notification notification = builder.setContentIntent(napCancel)
                 // 当清除下拉列表触发
                 .setDeleteIntent(napCancel)
-                        // 设置下拉列表标题
+                // 设置下拉列表标题
                 .setContentTitle(
                         String.format(getString(R.string.xx_naping),
                                 mAlarmClock.getTag()))
-                        // 设置下拉列表显示内容
+                // 设置下拉列表显示内容
                 .setContentText(String.format(getString(R.string.nap_to), time))
-                        // 设置状态栏显示的信息
+                // 设置状态栏显示的信息
                 .setTicker(
                         String.format(getString(R.string.nap_time),
                                 mNapInterval))
-                        // 设置状态栏（小图标）
+                // 设置状态栏（小图标）
                 .setSmallIcon(R.drawable.ic_nap_notification)
-                        // 设置下拉列表（大图标）
+                // 设置下拉列表（大图标）
                 .setLargeIcon(
                         BitmapFactory.decodeResource(getResources(),
                                 R.drawable.ic_launcher)).setAutoCancel(true)
-                        // 默认呼吸灯
+                // 默认呼吸灯
                 .setDefaults(NotificationCompat.DEFAULT_LIGHTS | NotificationCompat.FLAG_SHOW_LIGHTS)
                 .build();
 /*        notification.defaults |= Notification.DEFAULT_LIGHTS;

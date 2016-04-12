@@ -41,7 +41,7 @@ public class Connector {
 	/**
 	 * The quote of LitePalHelper.
 	 */
-	private static LitePalOpenHelper mLitePalHelper;
+	private volatile static LitePalOpenHelper mLitePalHelper;
 
 	/**
 	 * Get a writable SQLiteDatabase.

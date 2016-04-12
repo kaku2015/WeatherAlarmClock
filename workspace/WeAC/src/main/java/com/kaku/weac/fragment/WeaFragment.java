@@ -638,6 +638,11 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
      */
     private String mDefaultCityName;
 
+    /**
+     * 默认城市天气代号
+     */
+    private String mDefaultCityWeatherCode;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -912,6 +917,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
 
                 // 保存默认城市名，判断滑动返回前是否更改了默认城市
                 mDefaultCityName = getDefaultCityName();
+                mDefaultCityWeatherCode = getDefaultWeatherCode();
 
                 // 当不是天气界面并且已经开始延迟刷新天气线程
                 if (mHandler != null && mIsPostDelayed) {
@@ -1013,7 +1019,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
             if (mDefaultCityName != null && getDefaultCityName() != null) {
                 // 当改变了默认城市后滑动返回
                 if (!mDefaultCityName.equals(getDefaultCityName()) ||
-                        !mCityWeatherCode.equals(getDefaultWeatherCode())) {
+                        !mDefaultCityWeatherCode.equals(getDefaultWeatherCode())) {
                     changeCityWeatherInfo(getDefaultCityName(), getDefaultWeatherCode());
                 } else {
                     String cityName;
@@ -1054,17 +1060,16 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
             // 滚动到顶端
             mPullRefreshScrollView.getRefreshableView().scrollTo(0, 0);
             WeatherInfo weatherInfo = WeatherUtil.readWeatherInfo(getActivity(), mCityName);
-            if (weatherInfo == null) {
-                return;
+            if (weatherInfo != null) {
+                initWeather(weatherInfo);
             }
-            initWeather(weatherInfo);
 
             long now = System.currentTimeMillis();
             SharedPreferences share = getActivity().getSharedPreferences(
                     WeacConstants.BASE64, Activity.MODE_PRIVATE);
             // 最近一次天气更新时间
             long lastTime = share.getLong(getString(R.string.city_weather_update_time,
-                    weatherInfo.getCity()), 0);
+                    mCityName), 0);
             long minuteD = (now - lastTime) / 1000 / 60;
             // 更新间隔大于10分钟自动下拉刷新
             if (minuteD > 10) {

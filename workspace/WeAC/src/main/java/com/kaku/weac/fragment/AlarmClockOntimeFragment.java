@@ -351,10 +351,10 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
 
                 // 多天预报信息
                 List<WeatherDaysForecast> weatherDaysForecasts = mWeatherInfo.getWeatherDaysForecast();
-                if (weatherDaysForecasts.size() < 6) {
+/*                if (weatherDaysForecasts.size() < 6) {
                     mWeatherPbar.setVisibility(View.GONE);
                     return;
-                }
+                }*/
                 // 今天天气信息
                 WeatherDaysForecast weather;
                 String time[] = mWeatherInfo.getUpdateTime().split(":");

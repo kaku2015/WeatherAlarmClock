@@ -222,12 +222,6 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
                 startActivityForResult(intent, REQUEST_CITY_MANAGE);
             } else {
                 CityManage cityManage = mCityManageAdapter.getItem(position);
-
-                if (cityManage.getWeatherType().equals(getString(R.string.no))) {
-                    ToastUtil.showShortToast(CityManageActivity.this, getString(R.string.no_city_weather_info));
-                    return;
-                }
-
                 // 不是自动定位
                 if (cityManage.getLocationCity() == null) {
                     myFinish(cityManage.getCityName(), cityManage.getWeatherCode());
@@ -571,7 +565,7 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
      * @param weatherInfo 天气信息
      */
     private void setCityManageInfo(CityManage cityManage, WeatherInfo weatherInfo) {
-        if (weatherInfo.getWeatherDaysForecast().size() > 5) {
+        if (weatherInfo.getWeatherDaysForecast().size() >= 5) {
             WeatherDaysForecast weather;
 
             String time[] = weatherInfo.getUpdateTime().split(":");

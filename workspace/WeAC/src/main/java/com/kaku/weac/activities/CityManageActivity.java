@@ -31,6 +31,7 @@ import com.kaku.weac.util.WeatherUtil;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -568,13 +569,17 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
         if (weatherInfo.getWeatherDaysForecast().size() >= 5) {
             WeatherDaysForecast weather;
 
+            Calendar calendar = Calendar.getInstance();
+            // 现在小时
+            int hour = calendar.get(Calendar.HOUR_OF_DAY);
+
             String time[] = weatherInfo.getUpdateTime().split(":");
-            int hour = Integer.parseInt(time[0]);
+            int hour1 = Integer.parseInt(time[0]);
             int minute = Integer.parseInt(time[1]);
 
-            //更新时间从23：45开始到05：20以前的数据，后移一天填充
-            if ((hour == 23 && minute >= 45) || (hour < 5) ||
-                    ((hour == 5) && (minute < 20))) {
+            //更新时间从23：45开始到05：20以前的数据，或者早上5点以前，后移一天填充
+            if ((hour1 == 23 && minute >= 45) || (hour1 < 5) ||
+                    ((hour1 == 5) && (minute < 20)) || hour <= 5) {
                 weather = weatherInfo.getWeatherDaysForecast().get(2);
             } else {
                 weather = weatherInfo.getWeatherDaysForecast().get(1);

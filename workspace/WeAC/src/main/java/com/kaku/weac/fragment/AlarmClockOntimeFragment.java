@@ -343,8 +343,11 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
                 mWeatherPbar.setVisibility(View.GONE);
                 return;
             }
-
             try {
+                Calendar calendar = Calendar.getInstance();
+                // 现在小时
+                int hour = calendar.get(Calendar.HOUR_OF_DAY);
+
                 // 设置城市名
                 TextView cityName = (TextView) getActivity().findViewById(R.id.city_name_tv);
                 cityName.setText(mWeatherInfo.getCity());
@@ -360,17 +363,14 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
                 String time[] = mWeatherInfo.getUpdateTime().split(":");
                 int hour1 = Integer.parseInt(time[0]);
                 int minute1 = Integer.parseInt(time[1]);
-                //更新时间从23：45开始到05：20以前的数据，后移一天填充
+                //更新时间从23：45开始到05：20以前的数据，或者早上5点以前，后移一天填充
                 if ((hour1 == 23 && minute1 >= 45) || (hour1 < 5) ||
-                        ((hour1 == 5) && (minute1 < 20))) {
+                        ((hour1 == 5) && (minute1 < 20)) || hour <= 5) {
                     weather = weatherDaysForecasts.get(2);
                 } else {
                     weather = weatherDaysForecasts.get(1);
                 }
 
-                Calendar calendar = Calendar.getInstance();
-                // 现在小时
-                int hour = calendar.get(Calendar.HOUR_OF_DAY);
                 // 天气类型图片id
                 int weatherId;
                 // 设置今天天气信息

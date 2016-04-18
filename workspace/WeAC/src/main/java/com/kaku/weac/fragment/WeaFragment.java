@@ -1223,11 +1223,6 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         if (weatherInfo == null) {
             return;
         }
-
-        Calendar calendar = Calendar.getInstance();
-        // 现在小时
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-
         // 多天预报信息
         List<WeatherDaysForecast> weatherDaysForecasts = weatherInfo.getWeatherDaysForecast();
 /*        if (weatherDaysForecasts.size() < 6) {
@@ -1253,9 +1248,9 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         String time[] = weatherInfo.getUpdateTime().split(":");
         int hour1 = Integer.parseInt(time[0]);
         int minute1 = Integer.parseInt(time[1]);
-        //更新时间从23：45开始到05：20以前的数据，或者早上5点以前，后移一天填充
+        //更新时间从23：45开始到05：20以前的数据，后移一天填充
         if ((hour1 == 23 && minute1 >= 45) || (hour1 < 5) ||
-                ((hour1 == 5) && (minute1 < 20)) || hour <= 5) {
+                ((hour1 == 5) && (minute1 < 20))) {
             if (weatherDaysForecasts.size() >= 6) {
                 weather = weatherDaysForecasts.get(0);
                 weather1 = weatherDaysForecasts.get(1);
@@ -1294,6 +1289,10 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
             }
         }
 
+        Calendar calendar = Calendar.getInstance();
+        // 现在小时
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+
         // 设置城市名
         setCityName(weatherInfo);
         // 设置预警信息
@@ -1314,7 +1313,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         setThreeDaysWeather(weather2, weather3, weather4, hour);
 
         // 设置多天天气预报
-        setDaysForecast(hour,weather, weather1, weather2, weather3, weather4, weather5, weather6,
+        setDaysForecast(weather, weather1, weather2, weather3, weather4, weather5, weather6,
                 hour1, minute1, calendar);
 
         // 生活指数信息
@@ -1377,7 +1376,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
     /**
      * 设置多天天气预报
      */
-    private void setDaysForecast(int hour,WeatherDaysForecast weather, WeatherDaysForecast weather1,
+    private void setDaysForecast(WeatherDaysForecast weather, WeatherDaysForecast weather1,
                                  WeatherDaysForecast weather2, WeatherDaysForecast weather3,
                                  WeatherDaysForecast weather4, WeatherDaysForecast weather5,
                                  WeatherDaysForecast weather6, int hour1, int minute1,
@@ -1389,7 +1388,7 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         String[] day4;
         String[] day5;
         String[] day6;
-        if ((hour1 == 23 && minute1 >= 45) || (hour1 < 5) || ((hour1 == 5) && (minute1 < 20)) || hour <= 5) {
+        if ((hour1 == 23 && minute1 >= 45) || (hour1 < 5) || ((hour1 == 5) && (minute1 < 20))) {
             if (weather != null) {
                 day1 = getDay(weather.getDate());
             } else {

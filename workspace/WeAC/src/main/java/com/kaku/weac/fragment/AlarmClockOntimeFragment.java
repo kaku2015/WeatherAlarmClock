@@ -177,7 +177,7 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
                         | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         mAlarmClock = getActivity().getIntent()
-                .getParcelableExtra(WeacConstants.ALARM_CLOCK);
+        .getParcelableExtra(WeacConstants.ALARM_CLOCK);
         // 取得小睡间隔
         mNapInterval = mAlarmClock.getNapInterval();
         // 取得小睡次数

@@ -112,6 +112,7 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final CityManage cityManage = getItem(position);
+        final String cityName = cityManage.getCityName();
         final ViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(
@@ -153,7 +154,7 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
                 SharedPreferences share = mContext.getSharedPreferences(
                         WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
                 // 重复设置默认城市
-                if (share.getString(WeacConstants.DEFAULT_CITY, "").equals(cityManage.getCityName())) {
+                if (cityName != null && share.getString(WeacConstants.DEFAULT_CITY, "").equals(cityName)) {
                     return;
                 }
 
@@ -187,7 +188,7 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
             }
         });
         // 默认城市
-        if (mDefaultCity.equals(cityManage.getCityName())) {
+        if (cityName != null && mDefaultCity.equals(cityName)) {
             viewHolder.setDefaultTv.setBackgroundDrawable(mContext.getResources().getDrawable(
                     R.drawable.bg_gv_city_manage_default));
             viewHolder.setDefaultTv.setText(R.string.my_default);
@@ -205,7 +206,7 @@ public class CityManageAdapter extends ArrayAdapter<CityManage> {
                 @Override
                 public void onClick(View v) {
                     // 默认城市不可删除
-                    if (mDefaultCity.equals(cityManage.getCityName())) {
+                    if (cityName != null && mDefaultCity.equals(cityName)) {
                         return;
                     }
                     WeatherDBOperate.getInstance().deleteCityManage(cityManage);

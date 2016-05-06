@@ -58,9 +58,13 @@ public class AudioRecorder {
      */
     public void stop() {
         if (mRecorder != null) {
-            mRecorder.stop();
-            mRecorder.release();
-            mRecorder = null;
+            try {
+                mRecorder.stop();
+                mRecorder.release();
+                mRecorder = null;
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            }
         }
 
     }

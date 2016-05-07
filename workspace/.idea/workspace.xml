@@ -304,12 +304,10 @@
     <bookmark url="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockOntimeFragment.java" line="570" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dd13465a-1f53-468b-aa88-adc0628e1005" name="Default" comment="修复城市列表equals比较null异常和录音stop异常stop内进行try catch">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockOntimeFragment.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockOntimeFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/AudioRecorder.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/AudioRecorder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/adapter/CityManageAdapter.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/adapter/CityManageAdapter.java" />
+    <list default="true" id="dd13465a-1f53-468b-aa88-adc0628e1005" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumActivity.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/WeAC.iml" afterPath="$PROJECT_DIR$/WeAC/WeAC.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/build.gradle" afterPath="$PROJECT_DIR$/WeAC/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="a34644ec-df9b-4c2e-bc69-1fcc9f584167" name="Failed commit: Default" comment="友盟意见反馈" />
@@ -346,31 +344,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="WeatherDBOperate.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/WeatherDBOperate.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-              <folding>
-                <element signature="e#395#396#0" expanded="true" />
-                <element signature="e#434#435#0" expanded="true" />
-                <element signature="e#2206#2207#0" expanded="true" />
-                <element signature="e#2264#2265#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AddCityActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/AddCityActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="659" column="26" selection-start-line="659" selection-start-column="0" selection-end-line="660" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WeAC/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
@@ -385,7 +358,7 @@
         <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/MyUtil.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="130" column="82" selection-start-line="130" selection-start-column="82" selection-end-line="130" selection-end-column="82" />
+              <caret line="1108" column="28" selection-start-line="1108" selection-start-column="28" selection-end-line="1108" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -396,7 +369,18 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="179" column="0" selection-start-line="179" selection-start-column="0" selection-end-line="179" selection-end-column="0" />
-              <folding />
+              <folding>
+                <element signature="e#0#23848#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#7072#7073#0" expanded="false" />
+                <element signature="e#7129#7130#0" expanded="false" />
+                <element signature="e#9620#9621#0" expanded="false" />
+                <element signature="e#9737#9738#0" expanded="false" />
+                <element signature="e#10270#10271#0" expanded="false" />
+                <element signature="e#10379#10380#0" expanded="false" />
+                <element signature="e#10770#10771#0" expanded="false" />
+                <element signature="e#10820#10821#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -406,7 +390,12 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="32" column="11" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
-              <folding />
+              <folding>
+                <element signature="e#0#5072#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#836#837#0" expanded="false" />
+                <element signature="e#873#874#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -417,18 +406,52 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="63" column="33" selection-start-line="63" selection-start-column="33" selection-end-line="63" selection-end-column="33" />
               <folding>
-                <element signature="e#2342#2639#0" expanded="true" />
-                <element signature="e#2638#2639#0" expanded="true" />
+                <element signature="e#0#2651#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#673#674#0" expanded="false" />
+                <element signature="e#710#711#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WeAC/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3321859">
-              <caret line="80" column="14" selection-start-line="80" selection-start-column="14" selection-end-line="80" selection-end-column="14" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="93" column="19" selection-start-line="93" selection-start-column="19" selection-end-line="93" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DaemonService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/service/DaemonService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="67" column="13" selection-start-line="67" selection-start-column="13" selection-end-line="67" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LocalAlbumActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.41208792">
+              <caret line="259" column="33" selection-start-line="259" selection-start-column="33" selection-end-line="259" selection-end-column="33" />
+              <folding>
+                <element signature="e#9807#9841#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LocalAlbumDetailActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumDetailActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="100" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -439,17 +462,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="160" column="35" selection-start-line="160" selection-start-column="35" selection-end-line="160" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RingSelectItem.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/bean/RingSelectItem.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-              <folding />
+              <folding>
+                <element signature="e#0#11609#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#1158#1159#0" expanded="false" />
+                <element signature="e#1194#1195#0" expanded="false" />
+                <element signature="e#1724#1725#0" expanded="false" />
+                <element signature="e#1766#1767#0" expanded="false" />
+                <element signature="e#2434#2435#0" expanded="false" />
+                <element signature="e#2472#2473#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -8757,7 +8779,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/WeAC/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/WeAC/src/main/res/layout/fm_alarm_clock_new_edit.xml" />
         <option value="$PROJECT_DIR$/WeAC/src/main/res/drawable/seekbar_thumb.xml" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/BaseActivityOrdinary.java" />
@@ -8808,6 +8829,7 @@
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/db/WeatherDBOperate.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/AudioPlayer.java" />
         <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/AudioRecorder.java" />
+        <option value="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumActivity.java" />
       </list>
     </option>
   </component>
@@ -8944,8 +8966,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -9094,6 +9114,40 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WeAC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="weac" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="fragment" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -9200,124 +9254,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="workspace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="workspace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="litepal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="workspace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="workspace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="litepal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="workspace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="workspace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="litepal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="litepal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="workspace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="workspace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="litepal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="litepal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tablemanager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="workspace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="workspace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="litepal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="AndroidView">
@@ -9400,7 +9336,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -9672,12 +9610,6 @@
       <created>1450972220008</created>
       <option name="number" value="Default" />
       <updated>1453821991269</updated>
-    </task>
-    <task id="LOCAL-00084" summary="闹钟响起画面布局修改">
-      <created>1456757578928</created>
-      <option name="number" value="00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1456757578928</updated>
     </task>
     <task id="LOCAL-00085" summary="修改计时高度，更改闹钟主图标和图标文字为白色">
       <created>1456763350506</created>
@@ -9967,7 +9899,13 @@
       <option name="project" value="LOCAL" />
       <updated>1460997796162</updated>
     </task>
-    <option name="localTasksCounter" value="133" />
+    <task id="LOCAL-00133" summary="修复城市列表equals比较null异常和录音stop异常stop内进行try catch">
+      <created>1462542390496</created>
+      <option name="number" value="00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1462542390497</updated>
+    </task>
+    <option name="localTasksCounter" value="134" />
     <servers />
   </component>
   <component name="TodoView">
@@ -9980,14 +9918,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Android WiFi ADB" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942432" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.10233593" sideWeight="0.4936034" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15795328" sideWeight="0.47258064" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15795328" sideWeight="0.47258064" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38709676" sideWeight="0.4936034" order="1" side_tool="false" content_ui="tabs" />
@@ -9998,10 +9936,10 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26545843" sideWeight="0.5249458" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43604004" sideWeight="0.510661" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43604004" sideWeight="0.48933902" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23359288" sideWeight="0.48933902" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26545843" sideWeight="0.5249458" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3214683" sideWeight="0.4172043" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3214683" sideWeight="0.4172043" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953864" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1948775" sideWeight="0.49573562" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -10095,7 +10033,7 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumActivity.java</url>
-          <line>170</line>
+          <line>171</line>
           <properties />
           <option name="timeStamp" value="269" />
         </line-breakpoint>
@@ -10244,12 +10182,6 @@
           <option name="timeStamp" value="532" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/MyUtil.java</url>
-          <line>1119</line>
-          <properties />
-          <option name="timeStamp" value="561" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/CityManageActivity.java</url>
           <line>219</line>
           <properties />
@@ -10299,16 +10231,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_about.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.litepal.android/core/1.3.1/3855f854fde582765b2da26eb45e9526a46ef47c/core-1.3.1-sources.jar!/org/litepal/tablemanager/Connector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.84827584">
@@ -10403,14 +10325,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="252" column="46" selection-start-line="252" selection-start-column="46" selection-end-line="252" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/FAQActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -10433,20 +10347,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/res/layout/activity_faq.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="36" column="54" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumDetailActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30038512">
-          <caret line="108" column="29" selection-start-line="108" selection-start-column="29" selection-end-line="108" selection-end-column="29" />
-        </state>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/WeatherUtil.java">
@@ -10519,7 +10426,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="36" selection-start-line="0" selection-start-column="36" selection-end-line="0" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -10602,7 +10508,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="43" column="60" selection-start-line="43" selection-start-column="46" selection-end-line="43" selection-end-column="60" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -10650,7 +10555,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -10658,7 +10562,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="659" column="26" selection-start-line="659" selection-start-column="0" selection-end-line="660" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#0#27900#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -10667,10 +10574,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
-            <element signature="e#395#396#0" expanded="true" />
-            <element signature="e#434#435#0" expanded="true" />
-            <element signature="e#2206#2207#0" expanded="true" />
-            <element signature="e#2264#2265#0" expanded="true" />
+            <element signature="e#0#2268#0" expanded="false" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -10679,7 +10584,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="32" column="11" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
-          <folding />
+          <folding>
+            <element signature="e#0#5072#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#836#837#0" expanded="false" />
+            <element signature="e#873#874#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -10691,19 +10601,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/MyUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="130" column="82" selection-start-line="130" selection-start-column="82" selection-end-line="130" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockOntimeFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="179" column="0" selection-start-line="179" selection-start-column="0" selection-end-line="179" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#0#23848#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#7072#7073#0" expanded="false" />
+            <element signature="e#7129#7130#0" expanded="false" />
+            <element signature="e#9620#9621#0" expanded="false" />
+            <element signature="e#9737#9738#0" expanded="false" />
+            <element signature="e#10270#10271#0" expanded="false" />
+            <element signature="e#10379#10380#0" expanded="false" />
+            <element signature="e#10770#10771#0" expanded="false" />
+            <element signature="e#10820#10821#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -10712,8 +10625,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="63" column="33" selection-start-line="63" selection-start-column="33" selection-end-line="63" selection-end-column="33" />
           <folding>
-            <element signature="e#2342#2639#0" expanded="true" />
-            <element signature="e#2638#2639#0" expanded="true" />
+            <element signature="e#0#2651#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#673#674#0" expanded="false" />
+            <element signature="e#710#711#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -10722,15 +10637,58 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="160" column="35" selection-start-line="160" selection-start-column="35" selection-end-line="160" selection-end-column="35" />
-          <folding />
+          <folding>
+            <element signature="e#0#11609#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1158#1159#0" expanded="false" />
+            <element signature="e#1194#1195#0" expanded="false" />
+            <element signature="e#1724#1725#0" expanded="false" />
+            <element signature="e#1766#1767#0" expanded="false" />
+            <element signature="e#2434#2435#0" expanded="false" />
+            <element signature="e#2472#2473#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WeAC/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3321859">
-          <caret line="80" column="14" selection-start-line="80" selection-start-column="14" selection-end-line="80" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="93" column="19" selection-start-line="93" selection-start-column="19" selection-end-line="93" selection-end-column="19" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/service/DaemonService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="67" column="13" selection-start-line="67" selection-start-column="13" selection-end-line="67" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/util/MyUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1108" column="28" selection-start-line="1108" selection-start-column="28" selection-end-line="1108" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumDetailActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="100" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/activities/LocalAlbumActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41208792">
+          <caret line="259" column="33" selection-start-line="259" selection-start-column="33" selection-end-line="259" selection-end-column="33" />
+          <folding>
+            <element signature="e#9807#9841#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -4,7 +4,13 @@
 package com.kaku.weac.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,14 +26,17 @@ import com.kaku.weac.Listener.OnItemClickListener;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.AlarmClockEditActivity;
 import com.kaku.weac.activities.AlarmClockNewActivity;
+import com.kaku.weac.activities.ShakeExplainActivity;
 import com.kaku.weac.adapter.AlarmClockAdapter;
 import com.kaku.weac.bean.AlarmClock;
 import com.kaku.weac.bean.Event.AlarmClockDeleteEvent;
 import com.kaku.weac.bean.Event.AlarmClockUpdateEvent;
+import com.kaku.weac.bean.Event.ShakeExplainCloseEvent;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.db.AlarmClockOperate;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.OttoAppConfig;
+import com.kaku.weac.util.ToastUtil;
 import com.kaku.weac.view.ErrorCatchLinearLayoutManager;
 import com.squareup.otto.Subscribe;
 
@@ -196,6 +205,10 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
 
     }
 
+    private SensorManager mSensorManager;
+    private SensorEventListener mSensorEventListener;
+    private AlarmClock mDeletedAlarmClock;
+
     /**
      * 显示删除，完成按钮，隐藏修改按钮
      */
@@ -205,7 +218,37 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
         mAdapter.notifyDataSetChanged();
         mEditAction.setVisibility(View.GONE);
         mAcceptAction.setVisibility(View.VISIBLE);
+
+        if (mSensorManager == null) {
+            mSensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+            mSensorEventListener = new SensorEventListener() {
+                @Override
+                public void onSensorChanged(SensorEvent event) {
+                    float xValue = Math.abs(event.values[0]);
+                    float yValue = Math.abs(event.values[1]);
+                    float zValue = Math.abs(event.values[2]);
+                    // 认为用户摇动了手机，找回被删除的闹钟
+                    if (xValue > 15 || yValue > 15 || zValue > 15) {
+                        if (mDeletedAlarmClock != null) {
+                            MyUtil.vibrate(getActivity());
+                            AlarmClockOperate.getInstance().saveAlarmClock(mDeletedAlarmClock);
+                            addList(mDeletedAlarmClock);
+                            mDeletedAlarmClock = null;
+                            ToastUtil.showShortToast(getActivity(), getString(R.string.retrieve_alarm_clock_success));
+                        }
+                    }
+                }
+
+                @Override
+                public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+                }
+            };
+        }
+        mSensorManager.registerListener(mSensorEventListener,
+                mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
     }
+
 
     /**
      * 隐藏删除，完成按钮,显示修改按钮
@@ -216,6 +259,10 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
         mAdapter.notifyDataSetChanged();
         mAcceptAction.setVisibility(View.GONE);
         mEditAction.setVisibility(View.VISIBLE);
+
+        if (mSensorManager != null) {
+            mSensorManager.unregisterListener(mSensorEventListener);
+        }
     }
 
     @Override
@@ -250,9 +297,28 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
         updateList();
     }
 
+    private boolean isShowingShakeExplain;
+
     @Subscribe
     public void OnAlarmClockDelete(AlarmClockDeleteEvent event) {
         deleteList(event);
+
+        mDeletedAlarmClock = event.getAlarmClock();
+
+        SharedPreferences share = getActivity().getSharedPreferences(
+                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+        boolean isACDeleteFirstUse = share.getBoolean(WeacConstants.SHAKE_RETRIEVE_AC, true);
+        if (isACDeleteFirstUse) {
+            isShowingShakeExplain = true;
+            Intent intent = new Intent(getActivity(), ShakeExplainActivity.class);
+            startActivity(intent);
+        }
+
+    }
+
+    @Subscribe
+    public void OnShakeExplainClose(ShakeExplainCloseEvent event) {
+        isShowingShakeExplain = false;
     }
 
     private void addList(AlarmClock ac) {
@@ -326,6 +392,10 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
         } else {
             mRecyclerView.setVisibility(View.GONE);
             mEmptyView.setVisibility(View.VISIBLE);
+
+            if (mSensorManager != null) {
+                mSensorManager.unregisterListener(mSensorEventListener);
+            }
         }
     }
 
@@ -400,8 +470,11 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
     @Override
     public void onPause() {
         super.onPause();
-        // 隐藏删除，完成按钮,显示修改按钮
-        hideDeleteAccept();
+        // 当没有显示摇一摇找回删除的闹钟操作说明
+        if (!isShowingShakeExplain) {
+            // 隐藏删除，完成按钮,显示修改按钮
+            hideDeleteAccept();
+        }
     }
 
     @Override

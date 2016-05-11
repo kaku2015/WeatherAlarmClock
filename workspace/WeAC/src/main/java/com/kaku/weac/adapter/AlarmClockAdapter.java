@@ -140,7 +140,7 @@ public class AlarmClockAdapter extends RecyclerView.Adapter<AlarmClockAdapter.My
 //                    TabAlarmClockOperate.getInstance(mContext).delete(alarmClock
 //                            .getAlarmClockCode());
                     AlarmClockOperate.getInstance().deleteAlarmClock(alarmClock);
-                    OttoAppConfig.getInstance().post(new AlarmClockDeleteEvent(viewHolder.getAdapterPosition()));
+                    OttoAppConfig.getInstance().post(new AlarmClockDeleteEvent(viewHolder.getAdapterPosition(), alarmClock));
 
                     // 关闭闹钟
                     MyUtil.cancelAlarmClock(mContext,

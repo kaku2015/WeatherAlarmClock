@@ -242,4 +242,9 @@ public class WeacConstants {
      */
     public static final String BACK_COLOR = "background_color";
 
+    /**
+     * 记录是否提示摇一摇恢复闹钟操作方法
+     */
+    public static final String SHAKE_RETRIEVE_AC = "shake_retrieve_ac";
+
 }

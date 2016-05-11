@@ -118,6 +118,9 @@
             android:name=".activities.TimerOnTimeActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <activity
+            android:name=".activities.ShakeExplainActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity
             android:name=".activities.RecordDeleteBatchActivity"
             android:theme="@style/Transparent.Light"/>
         <activity

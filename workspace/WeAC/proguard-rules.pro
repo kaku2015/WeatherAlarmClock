@@ -31,6 +31,11 @@
 
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*  # 混淆时所采用的算法
 
+# 将.class信息中的类名重新定义为"Proguard"字符串
+-renamesourcefileattribute Proguard
+# 并保留源文件名为"Proguard"字符串，而非原始的类名 并保留行号 // blog from sodino.com
+-keepattributes SourceFile,LineNumberTable
+
 # 只保留类名，类名不会混淆重命名，但是其成员和方法会混淆
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Application

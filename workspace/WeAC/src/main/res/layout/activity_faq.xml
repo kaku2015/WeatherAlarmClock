@@ -77,6 +77,14 @@
                 style="@style/faq_detail"
                 android:text="@string/can_not_location_detail"/>
 
+            <TextView
+                style="@style/faq_title"
+                android:text="@string/ac_delete_miss"/>
+
+            <TextView
+                style="@style/faq_detail"
+                android:text="@string/shake_retrieve_recently_deleted_ac"/>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -234,7 +234,7 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
                             AlarmClockOperate.getInstance().saveAlarmClock(mDeletedAlarmClock);
                             addList(mDeletedAlarmClock);
                             mDeletedAlarmClock = null;
-                            ToastUtil.showShortToast(getActivity(), getString(R.string.retrieve_alarm_clock_success));
+                            ToastUtil.showLongToast(getActivity(), getString(R.string.retrieve_alarm_clock_success));
                         }
                     }
                 }

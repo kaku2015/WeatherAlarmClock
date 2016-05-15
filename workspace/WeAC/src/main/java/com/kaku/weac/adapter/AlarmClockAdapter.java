@@ -53,7 +53,7 @@ public class AlarmClockAdapter extends RecyclerView.Adapter<AlarmClockAdapter.My
     /**
      * 淡灰色
      */
-    private int mGray;
+    private int mWhiteTrans;
 
     private List<AlarmClock> mList;
 
@@ -74,7 +74,7 @@ public class AlarmClockAdapter extends RecyclerView.Adapter<AlarmClockAdapter.My
         mContext = context;
         mList = objects;
         mWhite = mContext.getResources().getColor(android.R.color.white);
-        mGray = mContext.getResources().getColor(R.color.gray_tab);
+        mWhiteTrans = mContext.getResources().getColor(R.color.white_trans30);
     }
 
     @Override
@@ -123,9 +123,9 @@ public class AlarmClockAdapter extends RecyclerView.Adapter<AlarmClockAdapter.My
             viewHolder.tag.setTextColor(mWhite);
         } else {
             // 设置字体颜色为淡灰色
-            viewHolder.time.setTextColor(mGray);
-            viewHolder.repeat.setTextColor(mGray);
-            viewHolder.tag.setTextColor(mGray);
+            viewHolder.time.setTextColor(mWhiteTrans);
+            viewHolder.repeat.setTextColor(mWhiteTrans);
+            viewHolder.tag.setTextColor(mWhiteTrans);
 
         }
 

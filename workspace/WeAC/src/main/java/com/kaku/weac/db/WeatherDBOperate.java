@@ -97,6 +97,16 @@ public class WeatherDBOperate {
     }
 
     /**
+     * 查询定位城市是否已存在城市管理列表
+     *
+     * @param locationCity 定位城市名
+     * @return 件数
+     */
+    public int queryCityManageLocationCity(String locationCity) {
+        return DataSupport.where("locationCity = ?", locationCity).count(CityManage.class);
+    }
+
+    /**
      * 查询城市管理列表城市个数
      *
      * @return 件数

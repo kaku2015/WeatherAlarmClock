@@ -1351,26 +1351,50 @@ public class WeaFragment extends LazyLoadFragment implements View.OnClickListene
         }
 
         int number = WeatherDBOperate.getInstance().queryCityManage(mCityWeatherCode);
-        // 城市管理表不存在定位
-        if (mCityWeatherCode.equals(getString(R.string.auto_location)) && number == 0) {
-            cityManage.setCityName(mCityWeatherCode);
-            cityManage.setWeatherCode(mCityWeatherCode);
-            cityManage.setLocationCity(mCityName);
+        if (mCityWeatherCode.equals(getString(R.string.auto_location))) {
+            // 城市管理表不存在定位
+            if (number == 0) {
+                setCityManage(cityManage);
 
-            // 存储城市管理表
-            boolean result = WeatherDBOperate.getInstance().saveCityManage(cityManage);
-            // 城市管理表城市个数
-            int total = WeatherDBOperate.getInstance().queryCityManage();
-            // 存储成功
-            if (result && total <= 1) {
-                SharedPreferences share = getActivity().getSharedPreferences(
-                        WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
-                SharedPreferences.Editor editor = share.edit();
-                // 保存城市管理的默认城市
-                editor.putString(WeacConstants.DEFAULT_CITY, mCityWeatherCode);
-                editor.apply();
+                // 存储城市管理表
+                boolean result = WeatherDBOperate.getInstance().saveCityManage(cityManage);
+                // 城市管理表城市个数
+                int total = WeatherDBOperate.getInstance().queryCityManage();
+                // 存储成功
+                if (result && total <= 1) {
+                    SharedPreferences share = getActivity().getSharedPreferences(
+                            WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = share.edit();
+                    // 保存城市管理的默认城市
+                    editor.putString(WeacConstants.DEFAULT_CITY, mCityWeatherCode);
+                    editor.apply();
+                } // 城市管理表存在定位
+            } else {
+                int number1 = WeatherDBOperate.getInstance().queryCityManageLocationCity(mCityName);
+                // 定位城市发生变更
+                if (number1 == 0) {
+                    setCityManage(cityManage);
+
+                    // 更新城市管理表
+                    WeatherDBOperate.getInstance().updateCityManage(cityManage, mCityWeatherCode);
+
+                    // 默认城市是自动定位
+                    if (getDefaultWeatherCode().equals(mCityWeatherCode)) {
+                        SharedPreferences share = getActivity().getSharedPreferences(
+                                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = share.edit();
+                        editor.putString(WeacConstants.DEFAULT_CITY_NAME, mCityName);
+                        editor.apply();
+                    }
+                }
             }
         }
+    }
+
+    private void setCityManage(CityManage cityManage) {
+        cityManage.setCityName(mCityWeatherCode);
+        cityManage.setWeatherCode(mCityWeatherCode);
+        cityManage.setLocationCity(mCityName);
     }
 
     /**

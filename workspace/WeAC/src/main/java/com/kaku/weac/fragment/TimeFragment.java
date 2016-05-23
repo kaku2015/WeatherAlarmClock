@@ -24,11 +24,14 @@ import com.kaku.weac.Listener.OnVisibleListener;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.RingSelectActivity;
 import com.kaku.weac.activities.TimerOnTimeActivity;
+import com.kaku.weac.bean.Event.TimerOnTimeEvent;
 import com.kaku.weac.bean.model.TimeModel;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
+import com.kaku.weac.util.OttoAppConfig;
 import com.kaku.weac.view.MyTimer;
+import com.squareup.otto.Subscribe;
 
 import java.util.Calendar;
 
@@ -103,6 +106,19 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
             if (mOnVisibleListener != null) {
                 mOnVisibleListener.onVisible();
             }
+        }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        OttoAppConfig.getInstance().register(this);
+    }
+
+    @Subscribe
+    public void onTimerOnTime(TimerOnTimeEvent event) {
+        if (mTimer != null) {
+            mTimer.clearRemainTime();
         }
     }
 
@@ -423,5 +439,7 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
         if (mTimer != null) {
             mTimer.cancelTimer();
         }
+
+        OttoAppConfig.getInstance().unregister(this);
     }
 }

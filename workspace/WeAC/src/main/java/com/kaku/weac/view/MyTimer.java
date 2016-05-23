@@ -521,7 +521,9 @@ public class MyTimer extends View {
             switch (msg.what) {
                 // 正在倒计时
                 case STARTING:
-                    myTimer.mTimeRemain.add(Calendar.MILLISECOND, -1000);
+                    if (myTimer.mTimeRemain.getTimeInMillis() > 0) {
+                        myTimer.mTimeRemain.add(Calendar.MILLISECOND, -1000);
+                    }
 
 //                    if (myTimer.mRemainTimeChangeListener != null) {
 //                        myTimer.mRemainTimeChangeListener.onTimeChange(myTimer.mTimeStart.getTimeInMillis(),
@@ -864,6 +866,12 @@ public class MyTimer extends View {
                 animator.start();
             }
             mIsShow = true;
+        }
+    }
+
+    public void clearRemainTime() {
+        if (mTimeRemain != null && !isTimeEmpty()) {
+            mTimeRemain.clear();
         }
     }
 }

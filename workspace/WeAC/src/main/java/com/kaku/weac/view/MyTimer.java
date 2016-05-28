@@ -14,23 +14,20 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.os.Handler;
-import android.os.Message;
 import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.kaku.weac.bean.model.TimeModel;
 import com.kaku.weac.R;
+import com.kaku.weac.bean.Event.TimerStartEvent;
+import com.kaku.weac.bean.model.TimeModel;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.MyUtil;
+import com.kaku.weac.util.OttoAppConfig;
 
-import java.lang.ref.WeakReference;
 import java.util.Calendar;
 import java.util.TimeZone;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 /**
@@ -502,10 +499,10 @@ public class MyTimer extends View {
         mTimeStart.set(Calendar.SECOND, 0);
         mTimeRemain.set(Calendar.SECOND, 0);
     }
-
-    /**
+/*
+    *//**
      * 计时Handler
-     */
+     *//*
     static class TimerHandler extends Handler {
         private WeakReference<View> mWeakReference;
 
@@ -545,7 +542,7 @@ public class MyTimer extends View {
                     }
                     break;
 
-/*                //StopWatch running
+*//*                //StopWatch running
                 case 11:
                     mTimeRemain.add(Calendar.MILLISECOND, 1000);
                     if (mRemainTimeChangeListener != null) {
@@ -558,31 +555,51 @@ public class MyTimer extends View {
                 case 12:
                     mIsStarted = false;
                     mTimerTask.cancel();
-                    break;*/
+                    break;*//*
             }
         }
     }
 
-    /**
+    *//**
      * 计时Task
-     */
+     *//*
     private TimerTask mTimerTask;
 
-    /**
+    *//**
      * 正在计时
-     */
+     *//*
     private static final int STARTING = 1;
+
+    */
 
     /**
      * 停止计时
-     */
-    private static final int STOP = 2;
-
+     *//*
+    private static final int STOP = 2;*/
     public void setIsStarted(boolean isStarted) {
         mIsStarted = isStarted;
     }
 
-    private Handler mTimeHandler;
+//    private Handler mTimeHandler;
+
+    public void updateDisplayTime() {
+        // 时间不为0，继续倒计时
+        if (!isTimeEmpty()) {
+            if (mTimeRemain.getTimeInMillis() > 0) {
+                mTimeRemain.add(Calendar.MILLISECOND, -1000);
+            }
+            invalidate();
+        } else {
+            mIsStarted = false;
+//            mTimerTask.cancel();
+            saveRemainTime(0, false);
+
+            if (mRemainTimeChangeListener != null) {
+                mRemainTimeChangeListener.onTimeStop(mTimeStart.getTimeInMillis(),
+                        mTimeRemain.getTimeInMillis());
+            }
+        }
+    }
 
     /**
      * 开始计时
@@ -593,29 +610,29 @@ public class MyTimer extends View {
         // 倒计时
         if (mModel == TimeModel.Timer) {
             if (!isTimeEmpty()) {
-                if (mTimeHandler == null) {
-                    mTimeHandler = new TimerHandler(MyTimer.this);
-                }
+//                if (mTimeHandler == null) {
+//                    mTimeHandler = new TimerHandler(MyTimer.this);
+//                }
                 setRemainTime(false);
-                mTimerTask = new TimerTask() {
-                    @Override
-                    public void run() {
-                        // 时间不为0，继续倒计时
-                        if (!isTimeEmpty()) {
-                            Message message = new Message();
-                            message.what = STARTING;
-                            mTimeHandler.sendMessage(message);
-                            // 停止倒计时
-                        } else {
-                            Message message = new Message();
-                            message.what = STOP;
-                            mTimeHandler.sendMessage(message);
-                        }
-
-                    }
-                };
-
-                new Timer(true).schedule(mTimerTask, 1000, 1000);
+//                mTimerTask = new TimerTask() {
+//                    @Override
+//                    public void run() {
+//                        // 时间不为0，继续倒计时
+//                        if (!isTimeEmpty()) {
+//                            Message message = new Message();
+//                            message.what = STARTING;
+//                            mTimeHandler.sendMessage(message);
+//                            // 停止倒计时
+//                        } else {
+//                            Message message = new Message();
+//                            message.what = STOP;
+//                            mTimeHandler.sendMessage(message);
+//                        }
+//
+//                    }
+//                };
+//
+//                new Timer(true).schedule(mTimerTask, 1000, 1000);
                 mIsStarted = true;
 
                 if (mRemainTimeChangeListener != null) {
@@ -709,7 +726,7 @@ public class MyTimer extends View {
      * 停止计时
      */
     public void stop() {
-        cancelTimer();
+//        cancelTimer();
         setRemainTime(true);
     }
 
@@ -727,7 +744,7 @@ public class MyTimer extends View {
      * 重置
      */
     public void reset() {
-        cancelTimer();
+//        cancelTimer();
         mIsStarted = false;
         saveRemainTime(0, false);
         mRemainMinute = 0;
@@ -812,19 +829,22 @@ public class MyTimer extends View {
         // 计时状态
         if (!isStop) {
             // 开启计时
-            start();
+            if (start()) {
+                OttoAppConfig.getInstance().post(new TimerStartEvent());
+            }
         }
     }
+/*
+    */
 
     /**
      * 取消定时
-     */
+     *//*
     public void cancelTimer() {
         if (mTimerTask != null) {
             mTimerTask.cancel();
         }
-    }
-
+    }*/
     public void showAnimation() {
         if (!mIsInitialized) {
             mOnCanStartAnimationListener = new OnCanStartAnimationListener() {

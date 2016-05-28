@@ -188,6 +188,9 @@
             android:process=":daemon">
         </service>
         <service
+            android:name=".service.CountDownService">
+        </service>
+        <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":location">

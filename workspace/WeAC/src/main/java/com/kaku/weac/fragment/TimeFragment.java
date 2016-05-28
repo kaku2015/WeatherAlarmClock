@@ -7,11 +7,14 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,8 +28,10 @@ import com.kaku.weac.R;
 import com.kaku.weac.activities.RingSelectActivity;
 import com.kaku.weac.activities.TimerOnTimeActivity;
 import com.kaku.weac.bean.Event.TimerOnTimeEvent;
+import com.kaku.weac.bean.Event.TimerStartEvent;
 import com.kaku.weac.bean.model.TimeModel;
 import com.kaku.weac.common.WeacConstants;
+import com.kaku.weac.service.CountDownService;
 import com.kaku.weac.util.LogUtil;
 import com.kaku.weac.util.MyUtil;
 import com.kaku.weac.util.OttoAppConfig;
@@ -42,7 +47,7 @@ import java.util.Calendar;
  * @version 1.0 2015/12/27
  */
 public class TimeFragment extends LazyLoadFragment implements View.OnClickListener,
-        MyTimer.OnTimeChangeListener, MyTimer.OnMinChangListener {
+        MyTimer.OnTimeChangeListener, MyTimer.OnMinChangListener, CountDownService.TimerUpdateListener {
     /**
      * Log tag ：TimeFragment
      */
@@ -99,6 +104,11 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
     private boolean mIsPrepared;
 
     private OnVisibleListener mOnVisibleListener;
+
+    /**
+     * 绑定倒计时service
+     */
+    private boolean mIsBind;
 
     @Override
     protected void lazyLoad() {
@@ -229,7 +239,7 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
         switch (v.getId()) {
             // 开始
             case R.id.btn_start:
-                mTimer.start();
+                startCountDown();
                 setStratLlyt2Visible();
                 setStopVisible();
                 break;
@@ -239,19 +249,21 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
                 break;
             // 开始2
             case R.id.btn_start2:
-                mTimer.start();
+                startCountDown();
                 setStopVisible();
                 break;
             // 暂停
             case R.id.btn_stop:
                 stopAlarmClockTimer();
                 mTimer.stop();
+                stopCountDown();
                 setStart2Visible();
                 break;
             // 重置
             case R.id.btn_reset:
                 stopAlarmClockTimer();
                 mTimer.reset();
+                stopCountDown();
                 setStratLlytVisible();
                 break;
             // 铃声选择
@@ -276,6 +288,61 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
                 break;
         }
     }
+
+    @Subscribe
+    public void OnTimerStart(TimerStartEvent event) {
+        startCountDownService();
+    }
+
+    @Override
+    public void OnUpdateTime() {
+        if (mTimer != null) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mTimer.updateDisplayTime();
+                }
+            });
+        }
+    }
+
+    private void stopCountDown() {
+        try {
+            if (mIsBind) {
+                getActivity().unbindService(mConnection);
+                mIsBind = false;
+            }
+        } catch (Exception e) {
+            LogUtil.e(LOG_TAG, "stopCountDown(): " + e.toString());
+        }
+    }
+
+    private void startCountDown() {
+        if (mTimer.start()) {
+            startCountDownService();
+        }
+    }
+
+    private void startCountDownService() {
+        if (!mIsBind) {
+            Intent intent = new Intent(getActivity(), CountDownService.class);
+            mIsBind = getActivity().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+        }
+    }
+
+    private ServiceConnection mConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            LogUtil.d(LOG_TAG, ": onServiceConnected");
+            CountDownService.TimerBinder binder = (CountDownService.TimerBinder) service;
+            binder.setTimerUpdateListener(TimeFragment.this);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            LogUtil.d(LOG_TAG, ": onServiceDisconnected");
+        }
+    };
 
     private void processQuickTimer(int h, int m, int s) {
         mTimer.setStartTime(h, m, s, false, true);
@@ -415,6 +482,7 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
 
     @Override
     public void onTimeStop(long timeStart, long timeRemain) {
+        stopCountDown();
         setStratLlytVisible();
     }
 
@@ -435,11 +503,7 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
     @Override
     public void onDestroy() {
         super.onDestroy();
-        // 未知空指针异常，空检查，不知道是不是这里的问题
-        if (mTimer != null) {
-            mTimer.cancelTimer();
-        }
-
+        stopCountDown();
         OttoAppConfig.getInstance().unregister(this);
     }
 }

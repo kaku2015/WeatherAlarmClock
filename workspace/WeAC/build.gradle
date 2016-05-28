@@ -9,8 +9,8 @@ android {
         applicationId "com.kaku.weac"
         minSdkVersion 14
         targetSdkVersion 19
-        versionCode 4
-        versionName "1.1"
+        versionCode 5
+        versionName "1.1.1"
 
         manifestPlaceholders = [UMENG_CHANNEL_VALUE: "Umeng"]
     }
@@ -81,10 +81,11 @@ android {
         exclude 'META-INF/maven/com.squareup.okio/okio/pom.xml'
         exclude 'META-INF/maven/com.squareup.okio/okio/pom.properties'
     }
-/*    productFlavors {
-        _360 {}
-        wandoujia {}
-        yingyongbao {}
+    productFlavors {
+//        _360 {}
+//        wandoujia {}
+//        yingyongbao {}
+          baidu {}
 //        bugly {}
 //        _91zhushou {}
 //        baidu {}
@@ -103,7 +104,7 @@ android {
         productFlavors.all { flavor ->
             flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
         }
-    }*/
+    }
 
     lintOptions {
         checkReleaseBuilds false

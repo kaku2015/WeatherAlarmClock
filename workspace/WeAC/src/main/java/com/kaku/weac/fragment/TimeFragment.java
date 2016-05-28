@@ -27,7 +27,6 @@ import com.kaku.weac.Listener.OnVisibleListener;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.RingSelectActivity;
 import com.kaku.weac.activities.TimerOnTimeActivity;
-import com.kaku.weac.bean.Event.TimerOnTimeEvent;
 import com.kaku.weac.bean.Event.TimerStartEvent;
 import com.kaku.weac.bean.model.TimeModel;
 import com.kaku.weac.common.WeacConstants;
@@ -123,13 +122,6 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         OttoAppConfig.getInstance().register(this);
-    }
-
-    @Subscribe
-    public void onTimerOnTime(TimerOnTimeEvent event) {
-        if (mTimer != null) {
-            mTimer.clearRemainTime();
-        }
     }
 
     @Override

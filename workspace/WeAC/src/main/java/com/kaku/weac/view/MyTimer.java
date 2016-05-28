@@ -585,14 +585,12 @@ public class MyTimer extends View {
     public void updateDisplayTime() {
         // 时间不为0，继续倒计时
         if (!isTimeEmpty()) {
-            if (mTimeRemain.getTimeInMillis() > 0) {
-                mTimeRemain.add(Calendar.MILLISECOND, -1000);
-            }
+            mTimeRemain.add(Calendar.MILLISECOND, -1000);
             invalidate();
         } else {
             mIsStarted = false;
-//            mTimerTask.cancel();
             saveRemainTime(0, false);
+            invalidate();
 
             if (mRemainTimeChangeListener != null) {
                 mRemainTimeChangeListener.onTimeStop(mTimeStart.getTimeInMillis(),
@@ -886,12 +884,6 @@ public class MyTimer extends View {
                 animator.start();
             }
             mIsShow = true;
-        }
-    }
-
-    public void clearRemainTime() {
-        if (mTimeRemain != null && !isTimeEmpty()) {
-            mTimeRemain.clear();
         }
     }
 }

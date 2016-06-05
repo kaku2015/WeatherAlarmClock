@@ -115,8 +115,9 @@ public class GrayService extends Service {
 
     @Override
     public void onDestroy() {
-        LogUtil.i(TAG, "GrayService->onDestroy");
         super.onDestroy();
+        LogUtil.i(TAG, "GrayService->onDestroy");
+        startService(new Intent(this, GrayService.class));
     }
 
     /**

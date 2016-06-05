@@ -48,6 +48,10 @@ public class MyTimer extends View {
      */
     private boolean mIsStarted = false;
 
+    public void setIsInDragButton(boolean isInDragButton) {
+        mIsInDragButton = isInDragButton;
+    }
+
     /**
      * 是否拖动按钮获取事件
      */
@@ -400,7 +404,7 @@ public class MyTimer extends View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         // 控件默认宽度（屏幕宽度）
         int defaultViewWidth = (int) (360 * getResources().getDisplayMetrics().density);
-        int width = getDimension(defaultViewWidth, widthMeasureSpec);
+/*        int width = getDimension(defaultViewWidth, widthMeasureSpec);
 //        int height = getDimension(width, heightMeasureSpec);
 
         mViewWidth = width;
@@ -410,7 +414,15 @@ public class MyTimer extends View {
         float density = getResources().getDisplayMetrics().density;
         mViewHeight = defaultViewWidth / 3 * 2 + 60 * density;
 
-        setMeasuredDimension(width, (int) mViewHeight);
+        setMeasuredDimension(width, (int) mViewHeight);*/
+
+        int width = getDimension(defaultViewWidth, widthMeasureSpec);
+        int height = getDimension(width, heightMeasureSpec);
+
+        mViewWidth = width;
+        mViewHeight = height;
+
+        setMeasuredDimension(width, height);
     }
 
     /**

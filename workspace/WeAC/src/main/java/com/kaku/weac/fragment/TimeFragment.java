@@ -231,6 +231,7 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
         switch (v.getId()) {
             // 开始
             case R.id.btn_start:
+                mTimer.setIsInDragButton(false);
                 startCountDown();
                 setStratLlyt2Visible();
                 setStopVisible();

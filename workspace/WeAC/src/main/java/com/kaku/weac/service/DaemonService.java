@@ -3,21 +3,12 @@
  */
 package com.kaku.weac.service;
 
-import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.IBinder;
-import android.os.SystemClock;
 
 import com.coolerfall.daemon.Daemon;
-import com.kaku.weac.bean.AlarmClock;
-import com.kaku.weac.common.WeacConstants;
-import com.kaku.weac.db.AlarmClockOperate;
 import com.kaku.weac.util.LogUtil;
-import com.kaku.weac.util.MyUtil;
-
-import java.util.List;
 
 public class DaemonService extends Service {
 
@@ -31,16 +22,17 @@ public class DaemonService extends Service {
         super.onCreate();
         LogUtil.d(LOG_TAG, "onCreate");
 
+        Daemon.run(DaemonService.this, DaemonService.class, Daemon.INTERVAL_ONE_MINUTE);
+
+        Intent grayIntent = new Intent(getApplicationContext(), GrayService.class);
+        startService(grayIntent);
+
         // Notification notification = new Notification();
         // startForeground(-1, notification);
 
-        new Thread(new Runnable() {
+/*        new Thread(new Runnable() {
             @Override
             public void run() {
-                Daemon.run(DaemonService.this, DaemonService.class, Daemon.INTERVAL_ONE_MINUTE);
-
-//                startService(new Intent(DaemonService.this, NotificationCenter.class));
-
                 List<AlarmClock> list = AlarmClockOperate.getInstance().loadAlarmClocks();
                 for (AlarmClock alarmClock : list) {
                     // 当闹钟为开时刷新开启闹钟
@@ -62,7 +54,7 @@ public class DaemonService extends Service {
                     }
                 }
             }
-        }).start();
+        }).start();*/
     }
 
     @Override

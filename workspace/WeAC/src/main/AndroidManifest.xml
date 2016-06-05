@@ -163,7 +163,14 @@
 
         <receiver
             android:name=".broadcast.AlarmClockBroadcast"
-            android:process=":remote"/>
+            android:process=":gray">
+            <!--广播定义单独进程，在6.0上接受不到，不定义进程退到后台也接受不到。-->
+            <!--广播和后台运行的服务保持在一个线程，只要服务不死，这样就都可以接受到广播了-->
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.BOOT_COMPLETED"/>-->
+            <!--</intent-filter>-->
+        </receiver>
+
         <receiver android:name=".broadcast.BootBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
@@ -182,6 +189,38 @@
                     android:exported="false"
                     android:process=":pushservice">
                 </service>-->
+
+
+        <receiver
+            android:name=".broadcast.WakeReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.kaku.weac.wake.gray"/>
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".service.GrayService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":gray"/>
+        <service
+            android:name=".service.GrayService$GrayInnerService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":gray"/>
+        <service
+            android:name=".broadcast.WakeReceiver$WakeNotifyService"
+            android:enabled="true"
+            android:exported="false"/>
+
+        <service
+            android:name=".broadcast.WakeReceiver$WakeGrayInnerService"
+            android:enabled="true"
+            android:exported="false"/>
+
+
         <service
             android:name=".service.DaemonService"
             android:exported="true"

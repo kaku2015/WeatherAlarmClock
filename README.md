@@ -49,7 +49,7 @@
 ---------------
 * [WeatherChartView](https://github.com/kaku2015/WeatherChartView) 
 
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/wcv.png))
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/wcv.png)
 
 用到的开源库
 -------------
@@ -85,9 +85,7 @@
 在开发天气闹钟期间也遇到了大大小小的问题，但是最终大部分问题都得以解决。由于本人文笔不佳再加上业余时间不多，很多问题的思考解决过程没有及时总结记录，深感遗憾::>_<::，今后我会尽量养成即使总结的好习惯!方便自己的同时也希望能帮到更多的人。
 
 CSDN: http://blog.csdn.net/kaku2013
-
 sina：http://blog.sina.com.cn/kaku2013
-
 邮箱: kaku201313@163.com
 
 后续

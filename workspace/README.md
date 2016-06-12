@@ -1,5 +1,5 @@
 # WeatherAlarmClock 天气闹钟
-=======================================================
+-----------------
 
 ![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/logo.png)
 
@@ -17,25 +17,25 @@
 
 截图
 --------------
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/1.png)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/2.png)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/3.png)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/4.png)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/5.png)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/6.png)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/7.png)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/8.png)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/9.png)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/10.png)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/11.png)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/12.png)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/13.png)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/14.png)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/15.png)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/16.png)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/17.png)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/18.png)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/19.png)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/1.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/2.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/3.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/4.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/5.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/6.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/7.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/8.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/9.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/10.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/11.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/12.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/13.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/14.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/15.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/16.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/17.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/18.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/19.jpeg)
 
 参考项目
 --------------

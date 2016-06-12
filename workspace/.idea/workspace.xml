@@ -335,11 +335,10 @@
     <bookmark url="file://$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/fragment/AlarmClockOntimeFragment.java" line="583" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dd13465a-1f53-468b-aa88-adc0628e1005" name="Default" comment="修改灰色保活">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/service/DaemonService.java" afterPath="$PROJECT_DIR$/WeAC/src/main/java/com/kaku/weac/service/DaemonService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WeAC/WeAC.iml" afterPath="$PROJECT_DIR$/WeAC/WeAC.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="dd13465a-1f53-468b-aa88-adc0628e1005" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WeAC/screenshots/logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WeAC/screenshots/qrcode.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WeAC/screenshots/wcv.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="a34644ec-df9b-4c2e-bc69-1fcc9f584167" name="Failed commit: Default" comment="友盟意见反馈" />
@@ -7266,6 +7265,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WeAC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="screenshots" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -7622,12 +7639,6 @@
       <option name="number" value="Default" />
       <updated>1453821991269</updated>
     </task>
-    <task id="LOCAL-00100" summary="lint">
-      <created>1457875607873</created>
-      <option name="number" value="00100" />
-      <option name="project" value="LOCAL" />
-      <updated>1457875607873</updated>
-    </task>
     <task id="LOCAL-00101" summary="最低版本4.0  setBackground → setBackgroundDrawable">
       <created>1457884090022</created>
       <option name="number" value="00101" />
@@ -7916,7 +7927,13 @@
       <option name="project" value="LOCAL" />
       <updated>1465394421517</updated>
     </task>
-    <option name="localTasksCounter" value="149" />
+    <task id="LOCAL-00149" summary="change readme">
+      <created>1465699354451</created>
+      <option name="number" value="00149" />
+      <option name="project" value="LOCAL" />
+      <updated>1465699354452</updated>
+    </task>
+    <option name="localTasksCounter" value="150" />
     <servers />
   </component>
   <component name="TodoView" selected-index="5">
@@ -7930,7 +7947,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Android WiFi ADB" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942432" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -7955,7 +7972,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942432" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26865673" sideWeight="0.47505423" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26865673" sideWeight="0.47505423" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24026696" sideWeight="0.45042643" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="92" y="92" width="1736" height="856" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -7981,7 +7998,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="修复三星a8 cursor空指针问题" />
     <MESSAGE value="修复扫码空指针异常" />
     <MESSAGE value="修复个别机型没有提供图片裁剪功能，提示错误信息" />
     <MESSAGE value="修复常见问题底部余白" />
@@ -8006,7 +8022,8 @@
     <MESSAGE value="修改timer布局 适配5.5英寸手机 修正拖动按钮状态" />
     <MESSAGE value="加强闹钟响铃，针对5.0系统添加白色保活方案，针对6.0系统后台广播与前台服务保持在一个进程" />
     <MESSAGE value="change copyright" />
-    <option name="LAST_COMMIT_MESSAGE" value="change copyright" />
+    <MESSAGE value="change readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="change readme" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6845071" />
   </component>
   <component name="XDebuggerManager">
@@ -8544,6 +8561,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.32320443">
           <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -8551,6 +8569,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.27348065">
           <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -1,5 +1,4 @@
 # WeatherAlarmClock 天气闹钟
------------------
 
 ![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/WeAC/screenshots/logo.png)
 

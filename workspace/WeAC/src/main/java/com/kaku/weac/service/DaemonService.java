@@ -57,10 +57,9 @@ public class DaemonService extends Service {
     public void onCreate() {
         super.onCreate();
         LogUtil.d(LOG_TAG, "onCreate");
-
         Daemon.run(DaemonService.this, DaemonService.class, Daemon.INTERVAL_ONE_MINUTE);
-
         startTimeTask();
+        grayGuard();
 
         // Notification notification = new Notification();
         // startForeground(-1, notification);
@@ -109,9 +108,6 @@ public class DaemonService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         LogUtil.d(LOG_TAG, "onStartCommand");
-
-        grayGuard();
-
         flags = START_STICKY;
         return super.onStartCommand(intent, flags, startId);
     }

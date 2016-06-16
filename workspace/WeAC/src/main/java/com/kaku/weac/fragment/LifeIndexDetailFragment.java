@@ -58,7 +58,7 @@ public class LifeIndexDetailFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fm_life_index_detail, container,
+        View view = inflater.inflate(R.layout.fm_lifeindex_detail, container,
                 false);
         // 设置Dialog全屏显示
         getActivity().getWindow().setLayout(LayoutParams.MATCH_PARENT,

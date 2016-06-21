@@ -153,6 +153,5 @@ dependencies {
     compile 'com.umeng:fb:5.4.0'
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile files('libs/umeng-update-v2.6.0.1.jar')
-    //    compile 'com.karumi:dexter:2.2.1'
     compile project(':litepal')
 }

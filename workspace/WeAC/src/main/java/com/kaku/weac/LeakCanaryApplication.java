@@ -21,6 +21,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.kaku.weac.util.LogUtil;
+import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
 import org.litepal.LitePalApplication;
@@ -32,12 +33,28 @@ import org.litepal.LitePalApplication;
  * @version 1.0 2015/11/25
  */
 public class LeakCanaryApplication extends LitePalApplication {
+
+    private RefWatcher refWatcher;
+
     public static RefWatcher getRefWatcher(Context context) {
         LeakCanaryApplication application = (LeakCanaryApplication) context.getApplicationContext();
         return application.refWatcher;
     }
 
-    private RefWatcher refWatcher;
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        initLeakCanary();
+        initActivityLifecycleLogs();
+    }
+
+    private void initLeakCanary() {
+        if (BuildConfig.DEBUG) {
+            refWatcher = LeakCanary.install(this);
+        } else {
+            refWatcher = installLeakCanary();
+        }
+    }
 
     /**
      * release版本使用此方法
@@ -46,14 +63,7 @@ public class LeakCanaryApplication extends LitePalApplication {
         return RefWatcher.DISABLED;
     }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-/*        // 注册M权限回调
-        Dexter.initialize(this);*/
-
-//        refWatcher = LeakCanary.install(this);
-        refWatcher = installLeakCanary();
+    private void initActivityLifecycleLogs() {
         this.registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {

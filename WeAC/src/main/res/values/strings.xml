@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- app名 -->
+    <string name="app_name">天气闹钟</string>
+    <string name="version">1.1.2</string>
+    <string name="press_again_exit">再按一次退出</string>
+    <!-- Tab界面 -->
+    <string name="alarm_clock">闹钟</string>
+    <string name="time">计时</string>
+    <string name="wea">天气</string>
+    <string name="more">更多</string>
+    <!-- 闹铃界面 -->
+    <string name="press_right_top">按右上的  </string>
+    <string name="add_alarm_clock">  添加闹钟  </string>
+    <string name="retrieve_alarm_clock_success">被删除的闹钟已成功找回</string>
+    <!-- 新建编辑闹钟界面 -->
+    <string name="new_alarm_clock">新建闹钟</string>
+    <string name="edit_alarm_clock">编辑闹钟</string>
+    <string name="repeat">重复</string>
+    <string name="tag">标签</string>
+    <string name="ring">铃声</string>
+    <string name="default_ring">默认铃声</string>
+    <string name="volume">音量</string>
+    <string name="vibrate">振动</string>
+    <string name="nap">小睡</string>
+    <string name="wea_prompt">天气提示</string>
+    <string name="countdown_day_hour_minute">距闹钟响起还有%1$d天%2$d小时%3$d分</string>
+    <string name="countdown_hour_minute">距闹钟响起还有%1$d小时%2$d分</string>
+    <string name="countdown_minute">距闹钟响起还有%1$d分钟</string>
+    <string name="monday">周一</string>
+    <string name="tuesday">周二</string>
+    <string name="wednesday">周三</string>
+    <string name="thursday">周四</string>
+    <string name="friday">周五</string>
+    <string name="saturday">周六</string>
+    <string name="sunday">周日</string>
+    <string name="repeat_once">只响一次</string>
+    <string name="one_h">一</string>
+    <string name="two_h">二</string>
+    <string name="three_h">三</string>
+    <string name="four_h">四</string>
+    <string name="five_h">五</string>
+    <string name="six_h">六</string>
+    <string name="day">日</string>
+    <string name="every_day">每天</string>
+    <string name="week_day">平日</string>
+    <string name="week_end">周末</string>
+    <string name="week">周</string>
+    <string name="caesura">、</string>
+
+    <!-- 铃声选择界面 -->
+    <string name="ring_select">铃声选择</string>
+    <string name="no_system_ring_file">没有系统铃声文件</string>
+    <string name="no_local_music_file">没有本地音乐文件</string>
+    <string name="no_record_file">没有录音文件</string>
+    <string name="save">保存</string>
+    <string name="system_ring">系统铃声</string>
+    <string name="local_music">本地音乐</string>
+    <string name="record">录音</string>
+    <string name="no_ring">无铃声</string>
+    <string name="no_sd_card">无存储设备</string>
+
+    <!-- 闹钟响起界面 -->
+    <string name="touch_here_nap">轻按此处小睡%1$d分钟</string>
+    <string name="close_alarm_clock">右滑关闭闹钟</string>
+    <string name="xx_naping">%1$s (小睡中……)</string>
+    <string name="nap_to">小睡至%1$s闹钟再次响起，轻触取消</string>
+    <string name="nap_time">小睡%1$d分钟</string>
+    <string name="weather_type">%1$s&#160;%2$s~%3$s℃</string>
+    <string name="bring_an_umbrella">带伞</string>
+
+    <!-- 小睡编辑界面 -->
+    <string name="nap_set">小睡设置</string>
+    <string name="interval">间隔 (分钟)</string>
+    <string name="one">1</string>
+    <string name="three">3</string>
+    <string name="five">5</string>
+    <string name="eight">8</string>
+    <string name="ten">10</string>
+    <string name="twenty">20</string>
+    <string name="thirty">30</string>
+    <string name="num">60</string>
+    <string name="times">次数</string>
+    <string name="cancel">取消</string>
+
+    <!-- 录音 -->
+    <string name="zero_zero">00:00</string>
+    <string name="click_record">点击录音</string>
+    <string name="click_stop">点击结束</string>
+    <string name="record_file_name">/录音%1$s.amr</string>
+    <string name="error_delete_fail">删除失败</string>
+    <string name="record_fail">录音失败</string>
+    <string name="record_fail_confirm">录音失败，请检查录音权限是否开启或录音已被其他应用占用。</string>
+    <!-- 录音操作 -->
+    <string name="rename">重命名</string>
+    <string name="delete">删除</string>
+    <string name="delete_batch">批量删除</string>
+    <string name="detail">详情</string>
+    <!-- 录音详情画面 -->
+    <string name="file_name">文件名称：</string>
+    <string name="file_format">文件格式：</string>
+    <string name="file_size">文件大小：</string>
+    <string name="alter_time">修改时间：</string>
+    <string name="play_duration">播放时长：</string>
+    <string name="save_path">保存路径：</string>
+    <string name="roger">知道了</string>
+    <string name="unknown">未知</string>
+    <string name="amr">amr</string>
+
+    <!-- 录音重命名画面 -->
+    <string name="sure">确定</string>
+    <string name="rename_success">重命名成功</string>
+    <string name="file_name_exist">文件名已存在</string>
+    <string name="input_empty">输入内容为空</string>
+    <!-- 录音删除画面 -->
+    <string name="sure_delete">确定要删除吗？</string>
+    <string name="selected_xx_item">已选择%1$d项</string>
+    <string name="delete_success">删除成功</string>
+    <!-- 录音批量删除画面 -->
+    <string name="select_all">全选</string>
+    <string name="select_all_cancel">取消全选</string>
+    <!-- 音频播放 -->
+    <string name="play_fail">播放失败</string>
+
+    <!-- 天气 -->
+    <string name="loading">正在加载…</string>
+    <string name="yesterday">昨天</string>
+    <string name="today">今天</string>
+    <string name="tomorrow">明天</string>
+    <string name="the_day_of_tomorrow">后天</string>
+    <string name="days_forecast">多天预报</string>
+    <string name="life_index">生活指数</string>
+    <string name="umbrella">雨伞</string>
+    <string name="ultraviolet_rays">紫外线</string>
+    <string name="dress">穿衣</string>
+    <string name="cold">感冒</string>
+    <string name="morning_exercise">晨练</string>
+    <string name="sport">运动</string>
+    <string name="car_wash">洗车</string>
+    <string name="air_cure">晾晒</string>
+    <string name="no_data">暂无数据</string>
+    <string name="no">暂无</string>
+    <string name="dash">--</string>
+    <string name="dash_degree">--℃</string>
+    <string name="alarm">%1$s预警</string>
+    <string name="alarm_title">%1$s%2$s预警</string>
+    <string name="update_time">%1$s发布</string>
+    <string name="update_time2">昨天%1$s发布</string>
+    <string name="update_time3">前天%1$s发布</string>
+    <string name="update_time4">%1$s天前发布</string>
+    <string name="release_time">%1$s发布</string>
+    <string name="data_void">数据过期</string>
+    <string name="aqi">%1$s %2$s</string>
+    <string name="humidity">湿度 %1$s</string>
+    <string name="date">%1$s/%2$s</string>
+    <string name="pull_to_refresh">下拉更新</string>
+    <string name="refreshing">正在更新…</string>
+    <string name="leave_to_refresh">松手可更新</string>
+    <string name="turn">%1$s转%2$s</string>
+    <string name="umbrella_detail">雨伞指数详情</string>
+    <string name="ultraviolet_Rays_detail">紫外线指数详情</string>r
+    <string name="dress_detail">穿衣指数详情</string>
+    <string name="cold_detail">感冒指数详情</string>
+    <string name="morning_exercise_detail">晨练指数详情</string>
+    <string name="sport_detail">运动指数详情</string>
+    <string name="car_wash_detail">洗车指数详情</string>
+    <string name="air_cure_detail">晾晒指数详情</string>
+    <string name="internet_fail">连接失败，请重试</string>
+    <string name="internet_error">网络异常,请检查网络设置</string>
+    <string name="auto_location_error_retry">自动定位失败,请重试</string>
+    <string name="no_city_weather_info">暂无天气预报信息</string>
+
+    <!-- 城市管理，添加城市 -->
+    <string name="set_default">设为默认</string>
+    <string name="my_default">默认</string>
+    <string name="add_city_fail">添加城市失败，请重试</string>
+    <string name="add_location_fail">添加自动定位失败，请重试</string>
+    <string name="refresh_fail">城市（%1$s）刷新失败</string>
+    <string name="city_manage">城市管理</string>
+    <string name="add_city">添加城市</string>
+    <string name="hot_city">热门城市</string>
+    <string name="more_city">更多城市</string>
+    <string name="back">返回</string>
+    <string name="china">中国</string>
+    <string name="now_loading">正在加载，请稍候…</string>
+    <string name="now_locating">正在定位，请稍候…</string>
+    <string name="address_weather">http://wthrcdn.etouch.cn/WeatherApi?citykey=%1$s</string>
+    <string name="city_already_added">城市（%1$s）已添加</string>
+    <string name="location_already_added">自动定位已添加</string>
+    <string name="city_weather_update_time">%1$s更新时间</string>
+    <string name="location_fail">自动定位失败</string>
+    <string name="can_not_find_current_location">无法获取当前位置,请手动添加城市</string>
+    <string name="auto_location">自动定位</string>
+    <string name="prompt">提示</string>
+    <string name="retry">重试</string>
+    <string name="input_city_name">请输入城市名称或拼音</string>
+    <string name="no_matched_city">没有符合条件的城市</string>
+
+    <!--计时-->
+    <string name="timer_on_time">计时器时间到了！</string>
+    <string name="start">开始</string>
+    <string name="quick_timer">快捷计时</string>
+    <string name="stop">暂停</string>
+    <string name="reset">重置</string>
+    <string name="siesta">午睡</string>
+    <string name="facial_mask">面膜</string>
+    <string name="instant_noodles">泡面</string>
+    <string name="run">跑步</string>
+
+    <!--更多-->
+    <string name="theme">主题、壁纸</string>
+    <string name="scan_code">扫码</string>
+    <string name="generate_code">造码</string>
+
+    <string name="clear_memory">清除缓存</string>
+    <string name="clean_up">一键清理</string>
+
+    <string name="friend_share">好友分享</string>
+    <string name="check_update">检查更新</string>
+    <string name="faq">常见问题</string>
+    <string name="feedback">意见反馈</string>
+    <string name="give_good_reputation">赏个好评</string>
+    <string name="rewards_author">打赏作者</string>
+    <string name="abort">关于</string>
+    <string name="clean_up_result">清理进程%1$d个,释放内存%2$s</string>
+
+    <!--主题-->
+    <string name="custom_define">自定义</string>
+
+    <!--本地相册-->
+    <string name="local_album">本地相册</string>
+    <string name="picture_name_number">%1$s(%2$d张)</string>
+    <string name="scanning">正在准备相册…</string>
+    <string name="identifying">正在识别…</string>
+    <string name="no_local_album">没有本地图片</string>
+    <string name="capture">拍照</string>
+    <string name="recent">最近</string>
+    <string name="camera">相机</string>
+    <string name="screen_short">屏幕截图</string>
+    <string name="we_chat">微信</string>
+    <string name="download">下载</string>
+    <string name="picture">图片</string>
+    <string name="no_crop_action">您的设备没有提供裁剪图片功能</string>
+
+    <!--扫描二维码-->
+    <string name="album">相册</string>
+    <string name="scan_result">扫描结果</string>
+    <string name="copy">复制</string>
+    <string name="search">搜索</string>
+    <string name="text_already_copied">已复制到剪贴板</string>
+    <string name="bar_code">条形码：%1$s</string>
+    <string name="decode_null">未发现二维码/条形码</string>
+    <string name="Alignment_code">对准二维码/条形码</string>
+    <string name="camera_error">相机错误</string>
+    <!--生成二维码-->
+    <string name="generate_qr_code">生成二维码</string>
+    <string name="select_logo">从相册选取Logo</string>
+    <string name="save_qr_code">保存二维码到手机</string>
+    <string name="input_qr_code_content">输入二维码中的信息</string>
+    <string name="logo">Logo</string>
+    <string name="generate_qrcode_please">还没有生成二维码图片呢</string>
+    <string name="picture_already_save_to">图片已保存至%1$s</string>
+    <string name="save_fail_retry">保存失败，请重试</string>
+    <string name="logo_open_status">打开状态下，二维码图片中央区域显示Logo</string>
+    <string name="qrcode_fore_color">二维码前景色</string>
+    <string name="qrcode_back_color">二维码背景色</string>
+    <string name="restore">恢复默认</string>
+    <string name="reset_logo_color">重置Logo、前景色、背景色？</string>
+    <string name="fore_color">前景色</string>
+    <string name="back_color">背景色</string>
+    <string name="colors">颜色</string>
+
+    <!--意见反馈-->
+    <string name="welcome_suggestion">感谢您提出反馈意见,我会尽快回复</string>
+
+    <!--关于-->
+    <string name="weac_version">天气闹钟 v%1$s</string>
+    <string name="weac_slogan">准时叫醒你的梦想</string>
+    <string name="copyright">© 2016 咖枯. All Rights Reserved.</string>
+
+    <!--软件更新-->
+    <string name="latest_version">当前已是最新版本</string>
+    <string name="connection_time_out">连接超时</string>
+    <string name="catching_version">正在检查更新…</string>
+    <!--赏个好评-->
+    <string name="launch_market_fail">无法打开应用市场</string>
+    <!--好友分享-->
+    <string name="share_text">我正在使用『天气闹钟』，推荐您也来试试。下载地址：http://zhushou.360.cn/detail/index/soft_id/3242718
+        或登陆应用商城（360、豌豆荚、应用宝）搜索『天气闹钟』即可下载。</string>
+    <!--常见问题-->
+    <string name="no_alarm">☆ 闹钟没有正常响起\n以下原因均会导致闹钟无法正常响起：</string>
+    <string name="no_alarm_detail1">1.关机，请开启您的设备，确保天气闹钟能够正常运行。</string>
+    <string name="no_alarm_detail2">2.其他优化软件清理了天气闹钟，请进入该优化软件将天气闹钟加入忽略清单。</string>
+    <string name="no_alarm_detail3">3.手机重启时没有允许天气闹钟自动启动，请在手机设置中开启天气闹钟自动启动功能，确保闹钟正常响起。</string>
+    <string name="weather_prompt_wrong">☆ 天气提示城市无或不准确</string>
+    <string name="weather_prompt_wrong_detail">进入城市管理界面，将天气提示城市设为默认。如果是自动定位不准确，
+        请手动添加城市，并设为默认。\n※建议手动添加城市，以便更高效的获取更准确的天气信息。</string>
+    <string name="can_not_location">☆ 无法自动定位城市</string>
+    <string name="can_not_location_detail">请确认是否已授权天气闹钟读取位置信息，如果已授权仍出现无法定位或定位不准确的情况，请您手动添加城市。</string>
+    <string name="weather_can_not_update">☆ 天气不能更新</string>
+    <string name="weather_can_not_update_detail">天气更新需要连接网络，请确认网络连接是否正常，若网络正常仍然无法更新，请稍后再试。</string>
+    <string name="ac_delete_miss">☆ 闹钟误删</string>
+    <!--<string name="shake_retrieve_recently_deleted_ac_faq">编辑闹钟状态下摇动手机，您可以找回最近一次删除的闹钟。</string>-->
+
+    <!--打赏我-->
+    <string name="rewards">打赏</string>
+    <string name="rewards_detail">点击打赏按钮，作者支付宝账号便会自动复制到剪贴板上，此时您可以通过手机支付宝打赏作者。作者跪谢～</string>
+
+    <!--摇一摇找回闹钟说明-->
+    <string name="shake_retrieve_recently_deleted_ac">编辑状态下摇动手机，您可以找回最近一次删除的闹钟。</string>
+    <string name="no_tip">不再提示</string>
+</resources>

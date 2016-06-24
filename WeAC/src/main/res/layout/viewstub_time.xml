@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/timer_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.kaku.weac.view.MyTimer
+        android:id="@+id/timer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layerType="software"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/timer">
+
+        <RelativeLayout
+            android:id="@+id/btn_start_llyt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
+
+            <TextView
+                android:id="@+id/btn_start"
+                style="@style/timer_btn"
+                android:layout_alignParentLeft="true"
+                android:drawableTop="@drawable/bg_timer_start_btn"
+                android:text="@string/start"/>
+
+            <TextView
+                android:id="@+id/btn_quick"
+                style="@style/timer_btn"
+                android:layout_centerInParent="true"
+                android:drawableTop="@drawable/bg_timer_quick_btn"
+                android:text="@string/quick_timer"/>
+
+            <TextView
+                android:id="@+id/btn_ring"
+                style="@style/timer_btn"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right"
+                android:drawableTop="@drawable/bg_timer_ring_btn"
+                android:text="@string/ring"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_start_llyt2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="60dp">
+
+                <TextView
+                    android:id="@+id/btn_stop"
+                    style="@style/timer_btn"
+                    android:drawableTop="@drawable/bg_timer_pause_btn"
+                    android:text="@string/stop"/>
+
+                <TextView
+                    android:id="@+id/btn_start2"
+                    style="@style/timer_btn"
+                    android:drawableTop="@drawable/bg_timer_start_btn"
+                    android:text="@string/start"
+                    android:visibility="gone"/>
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/btn_reset"
+                style="@style/timer_btn"
+                android:drawableTop="@drawable/bg_timer_reset_btn"
+                android:text="@string/reset"/>
+
+        </LinearLayout>
+    </FrameLayout>
+</RelativeLayout>

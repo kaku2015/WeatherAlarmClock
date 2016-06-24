@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="divider_line_blank">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">5dp</item>
+    </style>
+
+    <style name="new_alarm_clcok_item_llyt">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:background">@drawable/shape_circle_dialog</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="new_alarm_clcok_item">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">54dp</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="new_alarm_clcok_item_type">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginLeft">19dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black_text_normal_common</item>
+    </style>
+
+    <style name="new_alarm_clcok_item_describe">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/darkgray</item>
+    </style>
+
+    <style name="new_alarm_clcok_item_toggle_btn">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginRight">18dp</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:button">@drawable/toggle_btn_alarm_on_off</item>
+        <item name="android:checked">true</item>
+        <item name="android:textOff">""</item>
+        <item name="android:textOn">""</item>
+    </style>
+
+    <style name="new_alarm_clcok_repeat_days_tog_btn">
+        <item name="android:layout_width">38dp</item>
+        <item name="android:layout_height">38dp</item>
+        <item name="android:background">@drawable/toggle_btn_repeat_week</item>
+        <item name="android:checked">false</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@drawable/text_color_toggle_btn_circle</item>
+    </style>
+
+    <style name="new_alarm_clock_repeat_days_llyt">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="new_alarm_clcok_nap_edit_radio_btn">
+        <item name="android:layout_width">38dp</item>
+        <item name="android:layout_height">38dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/toggle_btn_repeat_week</item>
+        <item name="android:button">@null</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@drawable/text_color_toggle_btn_circle</item>
+    </style>
+
+    <style name="new_alarm_clock_nap_edit_radio_btn_space">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">38dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="new_alarm_clcok_nap_edit_options_llyt">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="new_alarm_clcok_nap_edit_options_tv">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/gray_nap_edit</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="new_alarm_clcok_nap_edit_options_radio_group">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="dialog_llyt">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">25dp</item>
+        <item name="android:layout_marginRight">25dp</item>
+        <item name="android:background">@drawable/shape_circle_dialog</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="record_operate_item">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:paddingLeft">25dp</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="dialog_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="record_detail_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black_text_normal_common</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="record_detail_content">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/gray_nap_edit</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="record_detail_item_llyt">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="line_blue">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:background">@color/dark_blue</item>
+    </style>
+
+    <style name="ring_select_no_file_tv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black_text_normal_common</item>
+    </style>
+
+</resources>

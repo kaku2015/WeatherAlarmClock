@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/city_manage_background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout style="@style/action_llyt">
+
+        <ImageView
+            android:id="@+id/action_return"
+            style="@style/action_icon"
+            android:layout_alignParentLeft="true"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_action_previous_item"/>
+
+        <TextView
+            android:id="@+id/action_title"
+            style="@style/action_title"
+            android:text="@string/add_city"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_search_city_edit_text"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/search_city_edit_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawableLeft="@drawable/ic_search"
+            android:drawablePadding="2dp"
+            android:hint="@string/input_city_name"
+            android:paddingBottom="3dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="3dp"
+            android:singleLine="true"
+            android:textColor="@color/white_trans90"
+            android:textColorHint="@color/white_trans60"
+            android:textCursorDrawable="@drawable/cursor_search_city"
+            android:textSize="16sp"/>
+
+        <ImageView
+            android:id="@+id/clear_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingRight="5dp"
+            android:src="@drawable/ic_clear"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/city_contents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/gv_add_city_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="19dp"
+                android:text="@string/hot_city"
+                android:textColor="@color/white_trans90"
+                android:textSize="18sp"
+                />
+
+            <View
+                style="@style/divider_line_wea"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="19dp"
+                android:layout_marginRight="19dp"
+                android:layout_marginTop="5dp"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/more_city_and_return_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/bg_gv_city_manage">
+
+                    <TextView
+                        android:id="@+id/more_city_and_return_btn_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/more_city"
+                        android:textColor="@color/white_trans90"
+                        android:textSize="16sp"
+                        />
+                </LinearLayout>
+
+
+                <GridView
+                    android:id="@+id/gv_add_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/more_city_and_return_btn"
+                    android:layout_alignParentTop="true"
+                    android:numColumns="4">
+
+                </GridView>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/no_matched_city_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/no_matched_city"
+            android:textColor="@color/white_trans90"
+            android:textSize="16sp"
+            android:visibility="gone"/>
+
+        <ListView
+            android:id="@+id/lv_search_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:divider="@color/white_trans10"
+            android:dividerHeight="0.5dp"
+            android:visibility="gone"/>
+    </FrameLayout>
+</LinearLayout>

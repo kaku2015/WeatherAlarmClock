@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.kaku.weac.activities.GenerateCodeActivity">
+
+    <RelativeLayout style="@style/action_llyt">
+
+        <ImageView
+            android:id="@+id/action_back"
+            style="@style/action_icon"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/ic_action_previous_item"/>
+
+        <TextView
+            style="@style/action_title"
+            android:text="@string/generate_code"/>
+
+
+        <ImageView
+            android:id="@+id/action_overflow"
+            style="@style/action_icon"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_action_overflow"/>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_background_color">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/qr_code_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="@dimen/border_margin"
+                android:layout_marginRight="@dimen/border_margin"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/shape_qr_code_result"
+                android:hint="@string/input_qr_code_content"
+                android:maxLength="180"
+                android:padding="20dp"
+                android:textColor="@color/black_text_normal_common"
+                android:textCursorDrawable="@drawable/cursor_record_rename"
+                android:textSize="@dimen/big_small"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:id="@+id/logo_iv"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="19dp"
+                    android:background="@drawable/ic_logo"
+                    android:scaleType="centerCrop"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="35dp"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/logo"
+                        android:textColor="@color/black_text_normal_common"
+                        android:textSize="@dimen/big_small"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="3"
+                        android:text="@string/logo_open_status"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="@dimen/small"/>
+
+                </LinearLayout>
+
+                <ToggleButton
+                    android:id="@+id/logo_btn"
+                    style="@style/new_alarm_clcok_item_toggle_btn">
+                </ToggleButton>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/generate_qr_code_btn"
+                style="@style/single_btn"
+                android:background="@drawable/shape_circle_btn_sure_invalidate"
+                android:text="@string/generate_qr_code"
+                />
+
+            <ImageView
+                android:id="@+id/qr_code_result_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

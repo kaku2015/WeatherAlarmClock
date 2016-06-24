@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp" >
+
+    <TextView
+        android:id="@+id/ring_list_display_name"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="15dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/black_text_normal_common"
+        android:textSize="18sp" />
+
+    <ToggleButton
+        android:id="@+id/ring_list_toogle_btn"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:background="@android:color/transparent"
+        android:button="@drawable/toggle_btn_delete_batch"
+        android:checked="false"
+        android:focusable="false"
+        android:textOff=""
+        android:textOn="" />
+
+</RelativeLayout>

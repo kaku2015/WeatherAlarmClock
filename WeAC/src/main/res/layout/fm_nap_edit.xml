@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    style="@style/dialog_llyt"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        style="@style/dialog_title"
+        android:text="@string/nap_set"
+        android:textColor="@color/black_text_normal_common"/>
+
+    <LinearLayout
+        style="@style/new_alarm_clcok_nap_edit_options_llyt"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            style="@style/new_alarm_clcok_nap_edit_options_tv"
+            android:text="@string/interval"/>
+
+        <RadioGroup
+            android:id="@+id/nap_interval_radio_group"
+            style="@style/new_alarm_clcok_nap_edit_options_radio_group">
+
+            <RadioButton
+                android:id="@+id/nap_interval_btn5"
+                style="@style/new_alarm_clcok_nap_edit_radio_btn"
+                android:layout_marginLeft="0dp"
+                android:text="@string/five"/>
+
+            <View style="@style/new_alarm_clock_nap_edit_radio_btn_space"/>
+
+            <RadioButton
+                android:id="@+id/nap_interval_btn10"
+                style="@style/new_alarm_clcok_nap_edit_radio_btn"
+                android:text="@string/ten"/>
+
+            <View style="@style/new_alarm_clock_nap_edit_radio_btn_space"/>
+
+            <RadioButton
+                android:id="@+id/nap_interval_btn20"
+                style="@style/new_alarm_clcok_nap_edit_radio_btn"
+                android:text="@string/twenty"/>
+
+            <View style="@style/new_alarm_clock_nap_edit_radio_btn_space"/>
+
+            <RadioButton
+                android:id="@+id/nap_interval_btn30"
+                style="@style/new_alarm_clcok_nap_edit_radio_btn"
+                android:text="@string/thirty"/>
+
+            <View style="@style/new_alarm_clock_nap_edit_radio_btn_space"/>
+
+            <RadioButton
+                android:id="@+id/nap_interval_btn60"
+                style="@style/new_alarm_clcok_nap_edit_radio_btn"
+                android:text="@string/num"/>
+        </RadioGroup>
+    </LinearLayout>
+
+    <View
+        style="@style/divider_line"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout style="@style/new_alarm_clcok_nap_edit_options_llyt">
+
+        <TextView
+            style="@style/new_alarm_clcok_nap_edit_options_tv"
+            android:text="@string/times"/>
+
+        <RadioGroup
+            android:id="@+id/nap_times_radio_group"
+            style="@style/new_alarm_clcok_nap_edit_options_radio_group">
+
+            <RadioButton
+                android:id="@+id/nap_times_btn1"
+                style="@style/new_alarm_clcok_nap_edit_radio_btn"
+                android:text="@string/one"/>
+
+            <View style="@style/new_alarm_clock_nap_edit_radio_btn_space"/>
+
+            <RadioButton
+                android:id="@+id/nap_times_btn3"
+                style="@style/new_alarm_clcok_nap_edit_radio_btn"
+                android:text="@string/three"/>
+
+            <View style="@style/new_alarm_clock_nap_edit_radio_btn_space"/>
+
+            <RadioButton
+                android:id="@+id/nap_times_btn5"
+                style="@style/new_alarm_clcok_nap_edit_radio_btn"
+                android:checked="true"
+                android:text="@string/five"/>
+
+            <View style="@style/new_alarm_clock_nap_edit_radio_btn_space"/>
+
+            <RadioButton
+                android:id="@+id/nap_times_btn8"
+                style="@style/new_alarm_clcok_nap_edit_radio_btn"
+                android:text="@string/eight"/>
+
+            <View style="@style/new_alarm_clock_nap_edit_radio_btn_space"/>
+
+            <RadioButton
+                android:id="@+id/nap_times_btn10"
+                style="@style/new_alarm_clcok_nap_edit_radio_btn"
+                android:text="@string/ten"/>
+        </RadioGroup>
+    </LinearLayout>
+
+    <include layout="@layout/layout_btn_dialog_sure_cancel"/>
+
+</LinearLayout>

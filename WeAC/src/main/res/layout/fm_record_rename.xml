@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout style="@style/dialog_llyt"
+              xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        style="@style/dialog_title"
+        android:text="@string/rename"/>
+
+    <EditText
+        android:id="@+id/record_rename_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_circle_record_rename_edit_text"
+        android:inputType="textMultiLine"
+        android:maxLength="30"
+        android:maxLines="2"
+        android:padding="8dp"
+        android:selectAllOnFocus="true"
+        android:textColor="@color/black_text_normal_common"
+        android:textColorHighlight="@color/dark_blue_focus"
+        android:textCursorDrawable="@drawable/cursor_record_rename"
+        android:textSize="@dimen/big_small"/>
+
+    <TextView
+        android:id="@+id/record_rename_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/red"
+        android:textSize="16sp"
+        android:visibility="gone"/>
+
+    <include layout="@layout/layout_btn_dialog_sure_cancel"/>
+
+</LinearLayout>

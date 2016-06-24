@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/dialog_llyt" >
+
+    <TextView
+        android:id="@+id/record_rename"
+        style="@style/record_operate_item"
+        android:background="@drawable/bg_record_operate_item_top"
+        android:text="@string/rename" />
+
+    <View style="@style/divider_line_full" />
+
+    <TextView
+        android:id="@+id/record_delete"
+        style="@style/record_operate_item"
+        android:background="@drawable/bg_record_operate_item"
+        android:text="@string/delete" />
+
+    <View style="@style/divider_line_full" />
+
+    <TextView
+        android:id="@+id/record_delete_batch"
+        style="@style/record_operate_item"
+        android:background="@drawable/bg_record_operate_item"
+        android:text="@string/delete_batch" />
+
+    <View style="@style/divider_line_full" />
+
+    <TextView
+        android:id="@+id/record_detail"
+        style="@style/record_operate_item"
+        android:background="@drawable/bg_record_operate_item_bottom"
+        android:text="@string/detail" />
+
+</LinearLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/wea_background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout style="@style/action_llyt">
+
+        <ImageView
+            android:id="@+id/action_home"
+            style="@style/action_icon"
+            android:layout_alignParentLeft="true"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_action_home"/>
+
+        <TextView
+            android:id="@+id/action_title"
+            style="@style/action_title"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:text="@string/dash"/>
+
+        <ImageView
+            android:id="@+id/action_refresh"
+            style="@style/action_icon"
+            android:layout_alignParentRight="true"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_action_refresh"/>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/layout_loading"/>
+
+        <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+            android:id="@+id/pull_refresh_scrollview"
+            xmlns:ptr="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            ptr:ptrAnimationStyle="rotate"
+            ptr:ptrHeaderSubTextColor="@color/white_trans60"
+            ptr:ptrHeaderTextColor="@color/white_trans90">
+
+            <ViewStub
+                android:id="@+id/viewstub_wea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout="@layout/viewstub_wea"/>
+        </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+    </FrameLayout>
+</LinearLayout>

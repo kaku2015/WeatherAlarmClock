@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="transparent">#00000000</color>
+
+    <color name="white_trans10">#1affffff</color>
+    <!-- 白色:10 -->
+    <color name="white_trans20">#33ffffff</color>
+    <!-- 白色:20 -->
+    <color name="white_trans30">#4dffffff</color>
+    <!-- 白色:30 -->
+    <color name="white_trans40">#66ffffff</color>
+    <!-- 白色:40 -->
+    <color name="white_trans50">#80FFFFFF</color>
+    <!-- 白色:60 -->
+    <color name="white_trans60">#99FFFFFF</color>
+    <!-- 白色:60 -->
+    <color name="white_trans90">#e6ffffff</color>
+    <!-- 白色:90 -->
+    <color name="white">#FFFFFF</color>
+    <!-- 白色 -->
+    <color name="black_trans10">#1a000000</color>
+    <!-- 黑色: 10 -->
+    <color name="black_trans15">#26000000</color>
+    <!-- 黑色: 15 -->
+    <color name="black_trans20">#33000000</color>
+    <!-- 黑色: 20 -->
+    <color name="black_trans25">#40000000</color>
+    <!-- 黑色: 25 -->
+    <color name="black_trans30">#4d000000</color>
+    <!-- 黑色: 30 -->
+    <color name="black_trans40">#66000000</color>
+    <!-- 黑色: 40 -->
+    <color name="black_trans50">#80000000</color>
+    <!-- 黑色: 50 -->
+    <color name="black_trans60">#99000000</color>
+    <!-- 黑色：60 -->
+    <color name="black_trans70">#b3000000</color>
+    <!-- 黑色：70 -->
+    <color name="black_trans80">#CC000000</color>
+    <!-- 黑色：80 -->
+    <color name="black_trans90">#E6000000</color>
+    <!-- 黑色：90 -->
+    <color name="black">#000000</color>
+    <!-- 黑色 -->
+    <color name="red">#E6FF0000</color>
+    <!-- 红色 -->
+    <color name="gray_background_color">#F4F4F4</color>
+    <!-- 灰色1 -->
+    <color name="gray_divider_line">#DDDDDD</color>
+    <!-- 灰色2：分割线 -->
+    <color name="gray_record_operate_item">#D0D0D0</color>
+    <!-- 灰色3 -->
+    <color name="gray_seekbar">#C0C0C0</color>
+    <!-- 灰色4 -->
+    <color name="gray_tab">#989898</color>
+    <!-- 灰色4 -->
+    <color name="gray_nap_edit">#808080</color>
+    <!-- 灰色5 -->
+    <color name="black_text_normal_common">#4B4B4B</color>
+    <!-- 灰色6 -->
+    <color name="darkgray">#A9A9A9</color>
+    <!-- 灰色 -->
+    <color name="dark_gray">#989898</color>
+    <!-- 深灰色:取消按钮 -->
+    <color name="dark_gray_button_pressed">#808080</color>
+    <!-- 深灰色:取消按钮按下 -->
+    <color name="blue_green">#0CCDF6</color>
+    <!-- 蓝绿色:小睡 -->
+    <color name="blue_green50">#800CCDF6</color>
+    <!-- 蓝绿色:闹铃响起关闭按钮 50 -->
+    <color name="blue_green60">#9A0CCDF6</color>
+    <!-- 蓝绿色:闹铃响起关闭按钮 60 -->
+    <color name="dark_blue_focus">#403F51B5</color>
+    <!-- 深蓝色:文字焦点25 -->
+    <color name="dark_blue_invalidate">#993F51B5</color>
+    <!-- 深蓝色:确定按钮不可用60 -->
+    <color name="dark_blue">#3F51B5</color>
+    <!-- 深蓝色:确定按钮 -->
+    <color name="dark_blue_trans40">#663F51B5</color>
+    <!-- 深蓝色:40 -->
+    <color name="dark_blue_button_pressed">#303F9F</color>
+    <!-- 深蓝色:确定按钮按下 -->
+    <color name="blue_tog_btn">#397cbf</color>
+    <!-- 深蓝色:toggleBtn -->
+    <color name="blue_tog_btn_pressed">#286DD4</color>
+    <!-- 深蓝色:toggleBtn按下 -->
+    <color name="yellow_hot">#f9c000</color>
+    <!-- 暖黄色:白天气温 -->
+    <color name="blue_ice">#72abf8</color>
+    <!-- 冷蓝色:夜间气温 -->
+
+    <color name="progress_1">#448aff</color>
+    <color name="progress_2">#ff9800</color>
+    <color name="progress_3">#ff1744</color>
+
+    <color name="memory">#ff5252</color>
+
+    <color name="default_image_background">#FFDEDEDE</color>
+
+    <color name="colorTimer">#009688</color>
+    <color name="colorTimerDark">#00796B</color>
+
+    <integer-array name="gplus_colors">
+        <item>@color/gplus_color_1</item>
+        <item>@color/gplus_color_2</item>
+        <item>@color/gplus_color_3</item>
+        <item>@color/gplus_color_4</item>
+    </integer-array>
+
+    <!--    <color name="base_bg">#ffeeeeee</color>
+        <color name="base_msg_color">#ff999999</color>-->
+    <color name="gplus_color_1">#427fed</color>
+    <color name="gplus_color_2">#f4b400</color>
+    <color name="gplus_color_3">#3e802f</color>
+    <color name="gplus_color_4">#b23424</color>
+</resources>

@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/new_alarm_clock_llyt"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <RelativeLayout style="@style/action_llyt">
+
+        <ImageView
+            android:id="@+id/action_cancel"
+            style="@style/action_icon"
+            android:layout_alignParentLeft="true"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_action_cancel"/>
+
+        <TextView
+            android:id="@+id/action_title"
+            style="@style/action_title"/>
+
+        <ImageView
+            android:id="@+id/action_accept"
+            style="@style/action_icon"
+            android:layout_alignParentRight="true"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_action_accept"/>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:id="@+id/scrollView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout style="@style/new_alarm_clcok_item_llyt">
+
+                    <TextView
+                        android:id="@+id/time_picker_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="16sp"/>
+
+                    <View style="@style/divider_line"/>
+
+                    <TimePicker
+                        android:id="@+id/time_picker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginTop="2dp"/>
+                </LinearLayout>
+
+                <View style="@style/divider_line_blank"/>
+
+                <LinearLayout style="@style/new_alarm_clcok_item_llyt">
+
+                    <LinearLayout style="@style/new_alarm_clcok_item">
+
+                        <TextView
+                            style="@style/new_alarm_clcok_item_type"
+                            android:text="@string/repeat"/>
+
+                        <TextView
+                            android:id="@+id/repeat_describe"
+                            style="@style/new_alarm_clcok_item_describe"
+                            android:layout_marginRight="19dp"
+                            android:ellipsize="end"
+                            android:maxWidth="230dp"
+                            android:singleLine="true"
+                            android:text="@string/repeat_once"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            style="@style/new_alarm_clock_repeat_days_llyt">
+
+                            <ToggleButton
+                                android:id="@+id/tog_btn_monday"
+                                style="@style/new_alarm_clcok_repeat_days_tog_btn"
+                                android:textOff="@string/monday"
+                                android:textOn="@string/monday">
+                            </ToggleButton>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            style="@style/new_alarm_clock_repeat_days_llyt">
+
+                            <ToggleButton
+                                android:id="@+id/tog_btn_tuesday"
+                                style="@style/new_alarm_clcok_repeat_days_tog_btn"
+                                android:textOff="@string/tuesday"
+                                android:textOn="@string/tuesday">
+                            </ToggleButton>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            style="@style/new_alarm_clock_repeat_days_llyt">
+
+                            <ToggleButton
+                                android:id="@+id/tog_btn_wednesday"
+                                style="@style/new_alarm_clcok_repeat_days_tog_btn"
+                                android:textOff="@string/wednesday"
+                                android:textOn="@string/wednesday">
+                            </ToggleButton>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            style="@style/new_alarm_clock_repeat_days_llyt">
+
+                            <ToggleButton
+                                android:id="@+id/tog_btn_thursday"
+                                style="@style/new_alarm_clcok_repeat_days_tog_btn"
+                                android:textOff="@string/thursday"
+                                android:textOn="@string/thursday">
+                            </ToggleButton>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            style="@style/new_alarm_clock_repeat_days_llyt">
+
+                            <ToggleButton
+                                android:id="@+id/tog_btn_friday"
+                                style="@style/new_alarm_clcok_repeat_days_tog_btn"
+                                android:textOff="@string/friday"
+                                android:textOn="@string/friday">
+                            </ToggleButton>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            style="@style/new_alarm_clock_repeat_days_llyt">
+
+                            <ToggleButton
+                                android:id="@+id/tog_btn_saturday"
+                                style="@style/new_alarm_clcok_repeat_days_tog_btn"
+                                android:textOff="@string/saturday"
+                                android:textOn="@string/saturday">
+                            </ToggleButton>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            style="@style/new_alarm_clock_repeat_days_llyt">
+
+                            <ToggleButton
+                                android:id="@+id/tog_btn_sunday"
+                                style="@style/new_alarm_clcok_repeat_days_tog_btn"
+                                android:textOff="@string/sunday"
+                                android:textOn="@string/sunday">
+                            </ToggleButton>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View style="@style/divider_line_blank"/>
+
+                <LinearLayout style="@style/new_alarm_clcok_item_llyt">
+
+                    <LinearLayout style="@style/new_alarm_clcok_item">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="19dp"
+                            android:text="@string/tag"
+                            android:textColor="@color/black_text_normal_common"
+                            android:textSize="16sp"/>
+
+                        <EditText
+                            android:id="@+id/tag_edit_text"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="19dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:gravity="right"
+                            android:inputType="text"
+                            android:selectAllOnFocus="true"
+                            android:singleLine="true"
+                            android:text="@string/alarm_clock"
+                            android:textColor="@color/darkgray"
+                            android:textSize="16sp"/>
+                    </LinearLayout>
+
+                    <View style="@style/divider_line"/>
+
+                    <LinearLayout
+                        android:id="@+id/ring_llyt"
+                        style="@style/new_alarm_clcok_item"
+                        android:layout_marginLeft="13dp"
+                        android:layout_marginRight="13dp"
+                        android:background="@drawable/bg_record_operate_item">
+
+                        <TextView
+                            style="@style/new_alarm_clcok_item_type"
+                            android:layout_marginLeft="6dp"
+                            android:text="@string/ring"/>
+
+                        <TextView
+                            android:id="@+id/ring_describe"
+                            style="@style/new_alarm_clcok_item_describe"
+                            android:layout_marginRight="6dp"
+                            android:drawablePadding="5dp"
+                            android:drawableRight="@drawable/ic_more_arrow_dark"
+                            android:ellipsize="end"
+                            android:maxWidth="230dp"
+                            android:singleLine="true"
+                            android:text="@string/default_ring"/>
+                    </LinearLayout>
+
+                    <View style="@style/divider_line"/>
+
+                    <LinearLayout style="@style/new_alarm_clcok_item">
+
+                        <TextView
+                            style="@style/new_alarm_clcok_item_type"
+                            android:text="@string/volume"/>
+
+                        <SeekBar
+                            android:id="@+id/volumn_sk"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:max="15"
+                            android:maxHeight="12dp"
+                            android:minHeight="8dp"
+                            android:progressDrawable="@drawable/seekbar_define_color_style"
+                            android:thumb="@drawable/seekbar_thumb"/>
+                    </LinearLayout>
+
+                    <View style="@style/divider_line"/>
+
+                    <LinearLayout style="@style/new_alarm_clcok_item">
+
+                        <TextView
+                            style="@style/new_alarm_clcok_item_type"
+                            android:text="@string/vibrate"/>
+
+                        <ToggleButton
+                            android:id="@+id/vibrate_btn"
+                            style="@style/new_alarm_clcok_item_toggle_btn">
+                        </ToggleButton>
+                    </LinearLayout>
+
+                    <View style="@style/divider_line"/>
+
+                    <LinearLayout
+                        android:id="@+id/nap_llyt"
+                        style="@style/new_alarm_clcok_item"
+                        android:layout_marginLeft="13dp"
+                        android:layout_marginRight="13dp"
+                        android:background="@drawable/bg_record_operate_item">
+
+                        <TextView
+                            style="@style/new_alarm_clcok_item_type"
+                            android:layout_marginLeft="6dp"
+                            android:text="@string/nap"/>
+
+                        <ToggleButton
+                            android:id="@+id/nap_btn"
+                            style="@style/new_alarm_clcok_item_toggle_btn"
+                            android:layout_marginRight="5dp">
+                        </ToggleButton>
+                    </LinearLayout>
+
+                    <View style="@style/divider_line"/>
+
+                    <LinearLayout style="@style/new_alarm_clcok_item">
+
+                        <TextView
+                            style="@style/new_alarm_clcok_item_type"
+                            android:text="@string/wea_prompt"/>
+
+                        <ToggleButton
+                            android:id="@+id/wea_prompt_btn"
+                            style="@style/new_alarm_clcok_item_toggle_btn">
+                        </ToggleButton>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </FrameLayout>
+
+
+</LinearLayout>

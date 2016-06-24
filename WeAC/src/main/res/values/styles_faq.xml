@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="faq_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black_text_normal_common</item>
+        <item name="android:textSize">@dimen/medium</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
+    <style name="faq_detail">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:textSize">@dimen/big_small</item>
+        <item name="android:layout_marginTop">2dp</item>
+    </style>
+</resources>

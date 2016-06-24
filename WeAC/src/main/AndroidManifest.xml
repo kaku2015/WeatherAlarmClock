@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    package="com.kaku.weac"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- 以下为百度定位需要权限 -->
+    <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- 这个权限用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+    <!-- 操作SD卡 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <!-- 扫描二维码 -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <!-- 开启闪光灯 -->
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.autofocus"/>
+
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <application
+        android:name=".LeakCanaryApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name">
+        <activity
+            android:name=".activities.SplashActivity"
+            android:excludeFromRecents="false"
+            android:theme="@style/Transparent.Light">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.SET_ALARM"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.ThemeActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Transparent.Light"/>
+        <activity
+            android:name=".activities.AlarmClockNewActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Transparent.holo"/>
+        <activity
+            android:name=".activities.AlarmClockEditActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Transparent.holo"/>
+        <activity
+            android:name=".activities.RingSelectActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Transparent.Light"/>
+        <activity
+            android:name=".activities.AlarmClockOntimeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar"/>
+        <activity
+            android:name=".activities.AlarmClockNapNotificationActivity"
+            android:theme="@android:style/Theme.NoDisplay"/>
+        <activity
+            android:name=".activities.NapEditActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.MyDialog"/>
+        <activity
+            android:name=".activities.RecordOperateActivity"
+            android:theme="@style/Theme.MyDialog"/>
+        <activity
+            android:name=".activities.RecordDetailActivity"
+            android:theme="@style/Theme.MyDialog"/>
+        <activity
+            android:name=".activities.RecordRenameActivity"
+            android:theme="@style/Theme.MyDialog"/>
+        <activity
+            android:name=".activities.RecordDeleteActivity"
+            android:theme="@style/Theme.MyDialog"/>
+        <activity
+            android:name=".activities.MyDialogActivity"
+            android:theme="@style/Theme.MyDialog"/>
+        <activity
+            android:name=".activities.MyDialogActivitySingle"
+            android:theme="@style/Theme.MyDialog"/>
+        <activity
+            android:name=".activities.LifeIndexDetailActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.MyDialog"/>
+        <activity
+            android:name=".activities.WeatherAlarmActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.MyDialog"/>
+        <activity
+            android:name=".activities.TimerOnTimeActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity
+            android:name=".activities.ShakeExplainActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity
+            android:name=".activities.RecordDeleteBatchActivity"
+            android:theme="@style/Transparent.Light"/>
+        <activity
+            android:name=".activities.CityManageActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Transparent.Light"/>
+        <activity
+            android:name=".activities.AddCityActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Transparent.Light"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+        <activity
+            android:name=".activities.LocalAlbumActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Transparent.Light"/>
+        <activity
+            android:name=".activities.LocalAlbumDetailActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Transparent.Light"/>
+        <activity
+            android:name=".zxing.activity.CaptureActivity"
+            android:theme="@style/Transparent"/>
+        <activity
+            android:name=".activities.DisplayScanResultActivity"
+            android:theme="@style/Transparent.Light"/>
+        <activity
+            android:name=".activities.GenerateCodeActivity"
+            android:theme="@style/Transparent.Light"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+        <activity
+            android:name=".activities.FeedbackActivity"
+            android:theme="@style/Transparent.Light"/>
+        <activity
+            android:name=".activities.AboutActivity"
+            android:theme="@style/Transparent.Light"/>
+        <activity
+            android:name=".activities.FAQActivity"
+            android:theme="@style/Transparent.Light">
+        </activity>
+
+        <receiver
+            android:name=".broadcast.AlarmClockBroadcast"
+            android:process=":daemon">
+            <!--广播定义单独进程，在6.0上接受不到，不定义进程退到后台也接受不到。-->
+            <!--广播和后台运行的服务保持在一个线程，只要服务不死，这样就都可以接受到广播了-->
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.BOOT_COMPLETED"/>-->
+            <!--</intent-filter>-->
+        </receiver>
+
+        <receiver android:name=".broadcast.BootBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".broadcast.AlarmClockProcessReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.kaku.weac.AlarmClockOff"/>
+            </intent-filter>
+        </receiver>
+
+        <!--        <service
+                    android:name=".service.NotificationCenter"
+                    android:exported="false"
+                    android:process=":pushservice">
+                </service>-->
+
+
+        <receiver
+            android:name=".broadcast.WakeReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.kaku.weac.wake.gray"/>
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".service.DaemonService$DaemonInnerService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":daemon"/>
+        <service
+            android:name=".broadcast.WakeReceiver$WakeNotifyService"
+            android:enabled="true"
+            android:exported="false"/>
+
+        <service
+            android:name=".broadcast.WakeReceiver$WakeGrayInnerService"
+            android:enabled="true"
+            android:exported="false"/>
+
+
+        <service
+            android:name=".service.DaemonService"
+            android:exported="true"
+            android:process=":daemon">
+        </service>
+        <service
+            android:name=".service.CountDownService">
+        </service>
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":location">
+        </service>
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="ObExIXC7RqG2ZXf0Ys2q0ttv"/>
+        <meta-data
+            android:name="com.kaku.weac.util.GlideConfiguration"
+            android:value="GlideModule"/>
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="56c1ca2167e58ec5d600086f"/>
+        <!--        <meta-data
+                    android:name="UMENG_CHANNEL"
+                    android:value="bugly"/>-->
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="${UMENG_CHANNEL_VALUE}"/>
+
+        <!--
+        <activity
+        android:name="com.umeng.fb.ConversationActivity"
+        android:theme="@style/Transparent.Light"/>
+        -->
+
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService">
+        </service>
+
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+
+    </application>
+
+</manifest>

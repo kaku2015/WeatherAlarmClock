@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout style="@style/action_llyt">
+
+        <ImageView
+            android:id="@+id/action_back"
+            style="@style/action_icon"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/ic_action_previous_item"/>
+
+        <TextView
+            style="@style/action_title"
+            android:text="@string/theme"/>
+
+        <TextView
+            android:id="@+id/custom_define_btn"
+            style="@style/action_tv"
+            android:layout_alignParentRight="true"
+            android:text="@string/custom_define"/>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <GridView
+            android:id="@+id/gv_change_theme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white_trans20"
+            android:horizontalSpacing="10dp"
+            android:numColumns="2"
+            android:padding="10dp"
+            android:scrollbars="none"
+            android:verticalSpacing="10dp"/>
+    </FrameLayout>
+</LinearLayout>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    style="@style/dialog_llyt"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        style="@style/dialog_title"
+        android:text="@string/detail"/>
+
+    <View style="@style/line_blue"/>
+
+    <LinearLayout style="@style/record_detail_item_llyt">
+
+        <TextView
+            style="@style/record_detail_title"
+            android:text="@string/file_name"/>
+
+        <TextView
+            android:id="@+id/fime_name"
+            style="@style/record_detail_content"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/record_detail_item_llyt">
+
+        <TextView
+            style="@style/record_detail_title"
+            android:text="@string/file_format"/>
+
+        <TextView
+            android:id="@+id/fime_format"
+            style="@style/record_detail_content"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/record_detail_item_llyt">
+
+        <TextView
+            style="@style/record_detail_title"
+            android:text="@string/file_size"/>
+
+        <TextView
+            android:id="@+id/fime_size"
+            style="@style/record_detail_content"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/record_detail_item_llyt">
+
+        <TextView
+            style="@style/record_detail_title"
+            android:text="@string/alter_time"/>
+
+        <TextView
+            android:id="@+id/modify_time"
+            style="@style/record_detail_content"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/record_detail_item_llyt">
+
+        <TextView
+            style="@style/record_detail_title"
+            android:text="@string/play_duration"/>
+
+        <TextView
+            android:id="@+id/play_duration"
+            style="@style/record_detail_content"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/record_detail_item_llyt">
+
+        <TextView
+            style="@style/record_detail_title"
+            android:text="@string/save_path"/>
+
+        <TextView
+            android:id="@+id/save_path"
+            style="@style/record_detail_content"
+            android:textIsSelectable="true"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/roger_btn"
+        style="@style/single_btn"
+        android:layout_height="40dp"/>
+
+</LinearLayout>

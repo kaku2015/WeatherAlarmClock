@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/select_logo"
+        android:title="@string/select_logo"/>
+
+    <item
+        android:id="@+id/save_qr_code"
+        android:title="@string/save_qr_code"/>
+    <item
+        android:id="@+id/fore_color"
+        android:title="@string/qrcode_fore_color"/>
+    <item
+        android:id="@+id/back_color"
+        android:title="@string/qrcode_back_color"/>
+    <item
+        android:id="@+id/restore"
+        android:title="@string/restore"/>
+
+</menu>

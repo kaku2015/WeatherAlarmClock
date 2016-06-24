@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="more_item_group">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingLeft">19dp</item>
+        <item name="android:paddingRight">19dp</item>
+    </style>
+
+    <style name="more_item_area">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/black_trans20</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="more_item_title_tv">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/white_trans90</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:drawablePadding">15dp</item>
+        <item name="android:drawableRight">@drawable/ic_more_arrow</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="more_item_divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:background">@color/white_trans10</item>
+        <item name="android:layout_marginLeft">19dp</item>
+    </style>
+
+    <style name="more_item_area_divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">10dp</item>
+        <item name="android:background">@color/white_trans10</item>
+    </style>
+
+    <style name="more_item_area_ripple">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+</resources>

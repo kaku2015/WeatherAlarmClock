@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.kaku.weac.activities.FAQActivity">
+
+    <RelativeLayout style="@style/action_llyt">
+
+        <ImageView
+            android:id="@+id/action_back"
+            style="@style/action_icon"
+            android:layout_alignParentLeft="true"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_action_previous_item"/>
+
+        <TextView
+            android:id="@+id/action_title"
+            style="@style/action_title"
+            android:text="@string/faq"/>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_background_color">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="@dimen/border_margin"
+            android:paddingRight="@dimen/border_margin">
+
+            <TextView
+                style="@style/faq_title"
+                android:text="@string/no_alarm"/>
+
+            <TextView
+                style="@style/faq_detail"
+                android:text="@string/no_alarm_detail1"/>
+
+            <TextView
+                style="@style/faq_detail"
+                android:text="@string/no_alarm_detail2"/>
+
+            <TextView
+                style="@style/faq_detail"
+                android:text="@string/no_alarm_detail3"/>
+
+            <TextView
+                style="@style/faq_title"
+                android:text="@string/weather_prompt_wrong"/>
+
+            <TextView
+                style="@style/faq_detail"
+                android:text="@string/weather_prompt_wrong_detail"/>
+
+            <TextView
+                style="@style/faq_title"
+                android:text="@string/weather_can_not_update"/>
+
+            <TextView
+                style="@style/faq_detail"
+                android:text="@string/weather_can_not_update_detail"/>
+
+            <TextView
+                style="@style/faq_title"
+                android:text="@string/can_not_location"/>
+
+            <TextView
+                style="@style/faq_detail"
+                android:text="@string/can_not_location_detail"/>
+
+            <TextView
+                style="@style/faq_title"
+                android:text="@string/ac_delete_miss"/>
+
+            <TextView
+                style="@style/faq_detail"
+                android:text="@string/shake_retrieve_recently_deleted_ac"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

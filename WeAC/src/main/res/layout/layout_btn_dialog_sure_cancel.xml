@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cancel_btn"
+            style="@style/sure_cancel_btn"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/bg_btn_cancel"
+            android:text="@string/cancel" />
+
+        <Button
+            android:id="@+id/sure_btn"
+            style="@style/sure_cancel_btn"
+            android:background="@drawable/bg_btn_sure"
+            android:text="@string/sure" />
+
+    </LinearLayout>
+</merge>

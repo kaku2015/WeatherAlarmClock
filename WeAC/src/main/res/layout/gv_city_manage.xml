@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:id="@+id/background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_gv_city_manage">
+
+        <LinearLayout
+            android:id="@+id/city_weather"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/city_name"
+                style="@style/wea_forecast_title"
+                android:drawablePadding="2dp"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:paddingTop="8dp"
+                android:singleLine="true"
+                android:text="@string/dash"
+                android:textSize="15sp"/>
+
+            <LinearLayout
+                style="@style/wea_forecast_content_llyt"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp">
+
+                <ImageView
+                    android:id="@+id/weather_type_iv"
+                    style="@style/wea_forecast_content_iv"/>
+
+                <RelativeLayout style="@style/wea_forecast_content_degree_rlyt">
+
+                    <TextView
+                        android:id="@+id/temp_high"
+                        style="@style/wea_forecast_content_degree_rlyt_tv"
+                        android:layout_alignParentTop="true"/>
+
+                    <TextView
+                        android:id="@+id/temp_low"
+                        style="@style/wea_forecast_content_degree_rlyt_tv"
+                        android:layout_alignParentBottom="true"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/weather_type_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="8dp"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:singleLine="true"
+                android:text="@string/no"
+                android:textColor="@color/white_trans90"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/set_default"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@drawable/bg_gv_city_manage_set_default"
+                android:gravity="center"
+                android:text="@string/set_default"
+                android:textColor="@color/white_trans90"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/add_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_action_new"
+            android:visibility="gone"/>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="@style/progress_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateDuration="1000"
+            android:visibility="gone"/>
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/city_delete_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:paddingRight="20dp"
+        android:src="@drawable/ic_delete_btn"
+        android:visibility="gone"/>
+
+</FrameLayout>

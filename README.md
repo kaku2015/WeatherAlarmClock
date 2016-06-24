@@ -1,6 +1,6 @@
 # WeatherAlarmClock 天气闹钟
 
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/screenshots/logo.png)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/logo.png)
 
 简介
 -----------------
@@ -10,31 +10,31 @@
 
 ### 扫码下载:
 
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/screenshots/qrcode.png)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/qrcode.png)
 
 [下载链接](http://zhushou.360.cn/detail/index/soft_id/3242718)
 
 截图
 --------------
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/screenshots/1.jpeg)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/screenshots/2.jpeg)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/screenshots/3.jpeg)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/screenshots/4.jpeg)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/screenshots/5.jpeg)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/screenshots/6.jpeg)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/screenshots/7.jpeg)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/screenshots/8.jpeg)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/screenshots/9.jpeg)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/screenshots/10.jpeg)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/screenshots/11.jpeg)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/screenshots/12.jpeg)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/screenshots/13.jpeg)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/screenshots/14.jpeg)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/screenshots/15.jpeg)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/screenshots/16.jpeg)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/screenshots/17.jpeg)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/screenshots/18.jpeg)
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/screenshots/19.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/1.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/2.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/3.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/4.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/5.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/6.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/7.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/8.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/9.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/10.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/11.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/12.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/13.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/14.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/15.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/16.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/17.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/18.jpeg)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/19.jpeg)
 
 参考项目
 --------------
@@ -49,7 +49,7 @@
 ---------------
 * [WeatherChartView](https://github.com/kaku2015/WeatherChartView) 
 
-![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/workspace/screenshots/wcv.png)
+![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/wcv.png)
 
 用到的开源库
 -------------
@@ -88,7 +88,6 @@
 
 CSDN: http://blog.csdn.net/kaku2013
 
-sina：http://blog.sina.com.cn/kaku2013
 
 后续
 ---------------

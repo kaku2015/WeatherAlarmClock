@@ -85,13 +85,19 @@ public class DisplayScanResultActivity extends BaseActivity implements View.OnCl
                 ToastUtil.showShortToast(this, getString(R.string.text_already_copied));
                 break;
             case R.id.search_btn:
+                // TODO: 自定义浏览器webview
                 Intent intent = new Intent();
                 intent.setAction("android.intent.action.VIEW");
-                Uri uri = Uri.parse("http://www.baidu.com/s?wd=" + mScanResult);
-                intent.setData(uri);
-                startActivity(intent);
-                finish();
-                overridePendingTransition(0, 0);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    Uri uri = Uri.parse("http://www.baidu.com/s?wd=" + mScanResult);
+                    intent.setData(uri);
+                    startActivity(intent);
+                    finish();
+                    overridePendingTransition(0, 0);
+                } else {
+                    ToastUtil.showLongToast(this, getString(R.string.no_browser));
+                }
+
                 break;
         }
     }

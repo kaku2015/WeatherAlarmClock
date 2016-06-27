@@ -46,16 +46,18 @@ public class AlarmClockBroadcast extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         AlarmClock alarmClock = intent
                 .getParcelableExtra(WeacConstants.ALARM_CLOCK);
-        // 单次响铃
-        if (alarmClock.getWeeks() == null) {
-            AlarmClockOperate.getInstance().updateAlarmClock(false,
-                    alarmClock.getId());
+        if (alarmClock != null) {
+            // 单次响铃
+            if (alarmClock.getWeeks() == null) {
+                AlarmClockOperate.getInstance().updateAlarmClock(false,
+                        alarmClock.getId());
 
-            Intent i = new Intent("com.kaku.weac.AlarmClockOff");
-            context.sendBroadcast(i);
-        } else {
-            // 重复周期闹钟
-            MyUtil.startAlarmClock(context, alarmClock);
+                Intent i = new Intent("com.kaku.weac.AlarmClockOff");
+                context.sendBroadcast(i);
+            } else {
+                // 重复周期闹钟
+                MyUtil.startAlarmClock(context, alarmClock);
+            }
         }
 
         // 小睡已执行次数
@@ -73,7 +75,7 @@ public class AlarmClockBroadcast extends BroadcastReceiver {
                     + (now - WeacStatus.sLastStartTime));
             LogUtil.d(LOG_TAG, "WeacStatus.strikerLevel："
                     + WeacStatus.sStrikerLevel);
-            LogUtil.d(LOG_TAG, "闹钟名：" + alarmClock.getTag());
+//            LogUtil.d(LOG_TAG, "闹钟名：" + alarmClock.getTag());
 
             // 当是新闹钟任务并且上一次响起也为新闹钟任务时，开启了时间相同的多次闹钟，只保留一个其他关闭
             if ((napTimesRan == 0) & (WeacStatus.sStrikerLevel == 1)) {

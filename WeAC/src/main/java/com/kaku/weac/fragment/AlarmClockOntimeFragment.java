@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
@@ -190,11 +191,13 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
                         | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         mAlarmClock = getActivity().getIntent()
-        .getParcelableExtra(WeacConstants.ALARM_CLOCK);
-        // 取得小睡间隔
-        mNapInterval = mAlarmClock.getNapInterval();
-        // 取得小睡次数
-        mNapTimes = mAlarmClock.getNapTimes();
+                .getParcelableExtra(WeacConstants.ALARM_CLOCK);
+        if (mAlarmClock != null) {
+            // 取得小睡间隔
+            mNapInterval = mAlarmClock.getNapInterval();
+            // 取得小睡次数
+            mNapTimes = mAlarmClock.getNapTimes();
+        }
         // XXX:修正小睡数
         // mNapTimes = 1000;
         // 小睡已执行次数
@@ -204,8 +207,10 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
         playRing();
 
         mNotificationManager = NotificationManagerCompat.from(getActivity());
-        // 取消下拉列表通知消息
-        mNotificationManager.cancel(mAlarmClock.getId());
+        if (mAlarmClock != null) {
+            // 取消下拉列表通知消息
+            mNotificationManager.cancel(mAlarmClock.getId());
+        }
 
         mShowTimeHandler = new ShowTimeHandler(this);
     }
@@ -227,12 +232,18 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
 
         // 标签
         TextView tagTv = (TextView) view.findViewById(R.id.ontime_tag);
-        tagTv.setText(mAlarmClock.getTag());
+        if (mAlarmClock != null) {
+            tagTv.setText(mAlarmClock.getTag());
+        } else {
+            tagTv.setText(getString(R.string.alarm_error));
+            tagTv.setTextColor(Color.RED);
+        }
 
         // 小睡按钮
         TextView napTv = (TextView) view.findViewById(R.id.ontime_nap);
+
         // 小睡开启状态
-        if (mAlarmClock.isNap()) {
+        if (mAlarmClock != null && mAlarmClock.isNap()) {
             // 当执行X次小睡后隐藏小睡按钮
             if (mNapTimesRan != mNapTimes) {
                 // 设置小睡
@@ -269,7 +280,7 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
         });
 
         // 天气提示
-        if (mAlarmClock.isWeaPrompt()) {
+        if (mAlarmClock != null && mAlarmClock.isWeaPrompt()) {
             mWeatherInfoGroup = (ViewGroup) view.findViewById(R.id.weather_info_group);
             mWeatherPbar = (ProgressBar) view.findViewById(R.id.progress_bar);
             mWeatherTypeTv = (TextView) view.findViewById(R.id.weather_type_tv);
@@ -534,7 +545,7 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
     @TargetApi(19)
     private void nap() {
         // 当小睡执行了X次
-        if (mNapTimesRan == mNapTimes) {
+        if (mNapTimesRan == mNapTimes || mAlarmClock == null) {
             return;
         }
         // 小睡次数加1
@@ -614,44 +625,48 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
     private void playRing() {
         mAudioManager = (AudioManager) getActivity().getSystemService(
                 Context.AUDIO_SERVICE);
-
         mCurrentVolume = mAudioManager
                 .getStreamVolume(AudioManager.STREAM_MUSIC);
-        // 设置铃声音量
-        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
-                mAlarmClock.getVolume(), AudioManager.ADJUST_SAME);
+        if (mAlarmClock != null) {
+            // 设置铃声音量
+            mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
+                    mAlarmClock.getVolume(), AudioManager.ADJUST_SAME);
 
-        // 默认铃声
-        if (mAlarmClock.getRingUrl().equals(WeacConstants.DEFAULT_RING_URL)
-                || TextUtils.isEmpty(mAlarmClock.getRingUrl())) {
-            // 振动模式
-            if (mAlarmClock.isVibrate()) {
-                // 播放
-                AudioPlayer.getInstance(getActivity()).playRaw(
-                        R.raw.ring_weac_alarm_clock_default, true, true);
-            } else {
-                AudioPlayer.getInstance(getActivity()).playRaw(
-                        R.raw.ring_weac_alarm_clock_default, true, false);
-            }
+            // 默认铃声
+            if (mAlarmClock.getRingUrl().equals(WeacConstants.DEFAULT_RING_URL)
+                    || TextUtils.isEmpty(mAlarmClock.getRingUrl())) {
+                // 振动模式
+                if (mAlarmClock.isVibrate()) {
+                    // 播放
+                    AudioPlayer.getInstance(getActivity()).playRaw(
+                            R.raw.ring_weac_alarm_clock_default, true, true);
+                } else {
+                    AudioPlayer.getInstance(getActivity()).playRaw(
+                            R.raw.ring_weac_alarm_clock_default, true, false);
+                }
 
-            // 无铃声
-        } else if (mAlarmClock.getRingUrl().equals(WeacConstants.NO_RING_URL)) {
-            // 振动模式
-            if (mAlarmClock.isVibrate()) {
-                AudioPlayer.getInstance(getActivity()).stop();
-                AudioPlayer.getInstance(getActivity()).vibrate();
+                // 无铃声
+            } else if (mAlarmClock.getRingUrl().equals(WeacConstants.NO_RING_URL)) {
+                // 振动模式
+                if (mAlarmClock.isVibrate()) {
+                    AudioPlayer.getInstance(getActivity()).stop();
+                    AudioPlayer.getInstance(getActivity()).vibrate();
+                } else {
+                    AudioPlayer.getInstance(getActivity()).stop();
+                }
             } else {
-                AudioPlayer.getInstance(getActivity()).stop();
+                // 振动模式
+                if (mAlarmClock.isVibrate()) {
+                    AudioPlayer.getInstance(getActivity()).play(
+                            mAlarmClock.getRingUrl(), true, true);
+                } else {
+                    AudioPlayer.getInstance(getActivity()).play(
+                            mAlarmClock.getRingUrl(), true, false);
+                }
             }
         } else {
-            // 振动模式
-            if (mAlarmClock.isVibrate()) {
-                AudioPlayer.getInstance(getActivity()).play(
-                        mAlarmClock.getRingUrl(), true, true);
-            } else {
-                AudioPlayer.getInstance(getActivity()).play(
-                        mAlarmClock.getRingUrl(), true, false);
-            }
+            AudioPlayer.getInstance(getActivity()).playRaw(
+                    R.raw.ring_weac_alarm_clock_default, true, true);
         }
     }
 
@@ -679,7 +694,7 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
                     // 响铃XX分钟并且当前Activity没有被销毁进入小睡
                     if (startedTime == TIME) {
                         // 小睡开启状态
-                        if (mAlarmClock.isNap()) {
+                        if (mAlarmClock != null && mAlarmClock.isNap()) {
                             if (!getActivity().isFinishing()) {
                                 onClickNapButton();
                                 return;

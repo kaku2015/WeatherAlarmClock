@@ -292,65 +292,72 @@ public class AlarmClockOntimeFragment extends BaseFragment implements
     }
 
     private void initWeather() {
-        // 判断网络是否可用
-        if (!MyUtil.isNetworkAvailable(getActivity())) {
-            return;
-        }
+        try {
+            // 判断网络是否可用
+            if (!MyUtil.isNetworkAvailable(getActivity())) {
+                return;
+            }
 
-        SharedPreferences share = getActivity().getSharedPreferences(
-                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
-        // 没有默认城市自动定位
-        String weatherCode = share.getString(WeacConstants.DEFAULT_WEATHER_CODE,
-                getString(R.string.auto_location));
+            SharedPreferences share = getActivity().getSharedPreferences(
+                    WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+            // 没有默认城市自动定位
+            String weatherCode = share.getString(WeacConstants.DEFAULT_WEATHER_CODE,
+                    getString(R.string.auto_location));
 
-        String cityName;
-        String address;
-        // 自动定位
-        if (weatherCode.equals(getString(R.string.auto_location))) {
-            cityName = share.getString(WeacConstants.DEFAULT_CITY_NAME, null);
-            address = null;
-        } else {
-            cityName = null;
-            address = getString(R.string.address_weather, weatherCode);
-        }
-        mWeatherPbar.setVisibility(View.VISIBLE);
-        HttpUtil.sendHttpRequest(address, cityName,
-                new HttpCallbackListener() {
-                    @Override
-                    public void onFinish(String response) {
-                        try {
-                            if (!response.contains("error")) {
-                                WeatherInfo weatherInfo = WeatherUtil.handleWeatherResponse(
-                                        new ByteArrayInputStream(response.getBytes()));
-                                getActivity().runOnUiThread(new SetWeatherInfoRunnable(weatherInfo));
-                                // 无法解析当前位置
-                            } else {
+            String cityName;
+            String address;
+            // 自动定位
+            if (weatherCode.equals(getString(R.string.auto_location))) {
+                cityName = share.getString(WeacConstants.DEFAULT_CITY_NAME, null);
+                address = null;
+            } else {
+                cityName = null;
+                address = getString(R.string.address_weather, weatherCode);
+            }
+            mWeatherPbar.setVisibility(View.VISIBLE);
+            HttpUtil.sendHttpRequest(address, cityName,
+                    new HttpCallbackListener() {
+                        @Override
+                        public void onFinish(String response) {
+                            try {
+                                if (!response.contains("error")) {
+                                    WeatherInfo weatherInfo = WeatherUtil.handleWeatherResponse(
+                                            new ByteArrayInputStream(response.getBytes()));
+                                    getActivity().runOnUiThread(new SetWeatherInfoRunnable(weatherInfo));
+                                    // 无法解析当前位置
+                                } else {
+                                    getActivity().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            mWeatherPbar.setVisibility(View.GONE);
+                                        }
+                                    });
+                                }
+                            } catch (Exception e) {
+                                LogUtil.e(LOG_TAG, "initWeather(): " + e.toString());
+                            }
+                        }
+
+                        @Override
+                        public void onError(final Exception e) {
+                            try {
                                 getActivity().runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
                                         mWeatherPbar.setVisibility(View.GONE);
                                     }
                                 });
+                            } catch (Exception e1) {
+                                LogUtil.e(LOG_TAG, e1.toString());
                             }
-                        } catch (Exception e) {
-                            LogUtil.e(LOG_TAG, "initWeather(): " + e.toString());
                         }
-                    }
-
-                    @Override
-                    public void onError(final Exception e) {
-                        try {
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    mWeatherPbar.setVisibility(View.GONE);
-                                }
-                            });
-                        } catch (Exception e1) {
-                            LogUtil.e(LOG_TAG, e1.toString());
-                        }
-                    }
-                });
+                    });
+        } catch (Exception e) {
+            LogUtil.e(LOG_TAG, "initWeather()" + e.toString());
+            if (mWeatherPbar != null) {
+                mWeatherPbar.setVisibility(View.GONE);
+            }
+        }
     }
 
 

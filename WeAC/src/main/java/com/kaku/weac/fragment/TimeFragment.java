@@ -302,13 +302,17 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
 
     @Override
     public void OnUpdateTime() {
-        if (mTimer != null) {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mTimer.updateDisplayTime();
-                }
-            });
+        try {
+            if (mTimer != null && !getActivity().isFinishing()) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mTimer.updateDisplayTime();
+                    }
+                });
+            }
+        } catch (Exception e) {
+            LogUtil.e(LOG_TAG, "OnUpdateTime(): e.toString()");
         }
     }
 

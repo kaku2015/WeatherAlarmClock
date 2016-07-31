@@ -14,8 +14,10 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import com.kaku.weac.R;
+import com.kaku.weac.bean.Event.TimerOnTimeEvent;
 import com.kaku.weac.common.WeacConstants;
 import com.kaku.weac.util.AudioPlayer;
+import com.kaku.weac.util.OttoAppConfig;
 
 /**
  * 计时时间到activity
@@ -43,6 +45,8 @@ public class TimerOnTimeActivity extends BaseActivitySimple implements View.OnCl
                         | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         playRing();
         initViews();
+
+        OttoAppConfig.getInstance().post(new TimerOnTimeEvent());
     }
 
     private void playRing() {

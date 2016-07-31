@@ -16,13 +16,13 @@
  */
 package com.kaku.weac.activities;
 
+import android.animation.FloatEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.kaku.weac.R;
@@ -80,27 +80,28 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void startAnimation() {
-        View splashIv = findViewById(R.id.splash_iv);
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.splash);
-        splashIv.startAnimation(animation);
-        animation.setAnimationListener(new Animation.AnimationListener() {
+        final View splashIv = findViewById(R.id.splash_iv);
+        ValueAnimator animator = ValueAnimator.ofObject(new FloatEvaluator(), 1.0f, 1.2f);
+        animator.setDuration(3000);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
-            public void onAnimationStart(Animation animation) {
-
+            public void onAnimationUpdate(ValueAnimator animation) {
+                Float value = (Float) animation.getAnimatedValue();
+                if (value != 1.2f) {
+                    splashIv.setScaleX(value);
+                    splashIv.setScaleY(value);
+                } else {
+                    goToActivity();
+                }
             }
 
-            @Override
-            public void onAnimationEnd(Animation animation) {
+            private void goToActivity() {
                 MyUtil.startActivity(SplashActivity.this, MainActivity.class);
                 overridePendingTransition(0, android.R.anim.fade_out);
                 finish();
             }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
         });
+        animator.start();
     }
 
     private void setSlogan() {

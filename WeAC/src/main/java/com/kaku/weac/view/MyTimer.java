@@ -608,6 +608,8 @@ public class MyTimer extends View {
 //    private Handler mTimeHandler;
 
     public void updateDisplayTime() {
+//        LogUtil.d("MyTimer", "剩余时间：" + MyUtil.formatTime(mTimeRemain.get(Calendar.MINUTE),
+//                mTimeRemain.get(Calendar.SECOND)));
         // 时间不为0，继续倒计时
         if (!isTimeEmpty()) {
             mTimeRemain.add(Calendar.MILLISECOND, -1000);
@@ -758,10 +760,14 @@ public class MyTimer extends View {
      */
     private boolean mIsReset;
 
+    public void setShowAnimation(boolean isShowedAnimation) {
+        mIsShowedAnimation = isShowedAnimation;
+    }
+
     /**
      * 是否已经演示过动画
      */
-    private boolean mIsShow;
+    private boolean mIsShowedAnimation;
 
     /**
      * 重置
@@ -883,7 +889,7 @@ public class MyTimer extends View {
 
     private void startAnimation() {
         // 没有演示过动画
-        if (!mIsShow) {
+        if (!mIsShowedAnimation) {
             SharedPreferences preferences = getContext().getSharedPreferences(
                     WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
             boolean isStop = preferences.getBoolean(WeacConstants.IS_STOP, false);
@@ -908,7 +914,13 @@ public class MyTimer extends View {
                 });
                 animator.start();
             }
-            mIsShow = true;
+            mIsShowedAnimation = true;
+        }
+    }
+
+    public void clearRemainTime() {
+        if (mTimeRemain != null && !isTimeEmpty()) {
+            mTimeRemain.clear();
         }
     }
 }

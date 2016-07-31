@@ -40,6 +40,7 @@ import com.kaku.weac.Listener.OnVisibleListener;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.RingSelectActivity;
 import com.kaku.weac.activities.TimerOnTimeActivity;
+import com.kaku.weac.bean.Event.TimerOnTimeEvent;
 import com.kaku.weac.bean.Event.TimerStartEvent;
 import com.kaku.weac.bean.model.TimeModel;
 import com.kaku.weac.common.WeacConstants;
@@ -300,6 +301,14 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
         startCountDownService();
     }
 
+
+    @Subscribe
+    public void onTimerOnTime(TimerOnTimeEvent event) {
+        if (mTimer != null) {
+            mTimer.clearRemainTime();
+        }
+    }
+
     @Override
     public void OnUpdateTime() {
         try {
@@ -508,6 +517,23 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
                 setStartBtnClickable();
             }
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogUtil.d(LOG_TAG, "onResume");
+        if (mTimer != null) {
+            setTimer();
+            mTimer.setShowAnimation(true);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        LogUtil.d(LOG_TAG, "onStop");
+        stopCountDown();
     }
 
     @Override

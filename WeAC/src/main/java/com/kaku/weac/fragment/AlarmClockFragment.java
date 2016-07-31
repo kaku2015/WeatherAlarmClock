@@ -18,6 +18,7 @@ package com.kaku.weac.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
@@ -35,6 +36,7 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.afollestad.materialdialogs.AlertDialogWrapper;
 import com.kaku.weac.Listener.OnItemClickListener;
 import com.kaku.weac.R;
 import com.kaku.weac.activities.AlarmClockEditActivity;
@@ -293,6 +295,8 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
 //                TabAlarmClockOperate.getInstance(getActivity()).insert(ac);
                 AlarmClockOperate.getInstance().saveAlarmClock(ac);
                 addList(ac);
+
+                showAlarmExplain();
                 break;
             // 修改闹钟
             case REQUEST_ALARM_CLOCK_EDIT:
@@ -303,6 +307,37 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
                 break;
 
         }
+    }
+
+    private void showAlarmExplain() {
+        if (isShow()) {
+            new AlertDialogWrapper.Builder(getActivity())
+                    .setTitle(getActivity().getString(R.string.warm_tips_title))
+                    .setMessage(getActivity().getString(R.string.warm_tips_detail))
+                    .setPositiveButton(R.string.roger, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .setNegativeButton(R.string.no_tip, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            SharedPreferences share = getActivity().getSharedPreferences(
+                                    WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = share.edit();
+                            editor.putBoolean(WeacConstants.ALARM_CLOCK_EXPLAIN, false);
+                            editor.apply();
+                        }
+                    })
+                    .show();
+        }
+    }
+
+    private boolean isShow() {
+        SharedPreferences share = getActivity().getSharedPreferences(
+                WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
+        return share.getBoolean(WeacConstants.ALARM_CLOCK_EXPLAIN, true);
     }
 
     @Subscribe

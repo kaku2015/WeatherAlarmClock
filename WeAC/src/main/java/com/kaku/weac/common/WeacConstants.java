@@ -260,4 +260,9 @@ public class WeacConstants {
      */
     public static final String SHAKE_RETRIEVE_AC = "shake_retrieve_ac";
 
+    /**
+     * 闹钟不响可能原因提示
+     */
+    public static final String ALARM_CLOCK_EXPLAIN = "alarm_clock_explain";
+
 }

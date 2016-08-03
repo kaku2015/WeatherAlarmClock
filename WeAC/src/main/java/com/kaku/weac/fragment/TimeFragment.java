@@ -306,6 +306,9 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
     public void onTimerOnTime(TimerOnTimeEvent event) {
         if (mTimer != null) {
             mTimer.clearRemainTime();
+            mTimer.setIsStarted(false);
+            mTimer.saveRemainTime(0,false);
+            setStratLlytVisible();
         }
     }
 
@@ -523,7 +526,8 @@ public class TimeFragment extends LazyLoadFragment implements View.OnClickListen
     public void onResume() {
         super.onResume();
         LogUtil.d(LOG_TAG, "onResume");
-        if (mTimer != null) {
+        if (mTimer != null && mTimer.isStarted() ) {
+            mTimer.setReset(false);
             setTimer();
             mTimer.setShowAnimation(true);
         }

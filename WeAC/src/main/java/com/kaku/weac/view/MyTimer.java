@@ -605,7 +605,14 @@ public class MyTimer extends View {
         mIsStarted = isStarted;
     }
 
-//    private Handler mTimeHandler;
+    public void setReset(boolean reset) {
+        mIsReset = reset;
+    }
+
+    public boolean isStarted() {
+        return mIsStarted;
+    }
+    //    private Handler mTimeHandler;
 
     public void updateDisplayTime() {
 //        LogUtil.d("MyTimer", "剩余时间：" + MyUtil.formatTime(mTimeRemain.get(Calendar.MINUTE),
@@ -716,7 +723,7 @@ public class MyTimer extends View {
      * @param countdownTime 计时时间
      * @param isStop        是否为暂停状态
      */
-    private void saveRemainTime(long countdownTime, boolean isStop) {
+    public void saveRemainTime(long countdownTime, boolean isStop) {
         SharedPreferences preferences = getContext().getSharedPreferences(
                 WeacConstants.EXTRA_WEAC_SHARE, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -919,8 +926,9 @@ public class MyTimer extends View {
     }
 
     public void clearRemainTime() {
-        if (mTimeRemain != null && !isTimeEmpty()) {
+        if (mTimeRemain != null) {
             mTimeRemain.clear();
+            invalidate();
         }
     }
 }

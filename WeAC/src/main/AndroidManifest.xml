@@ -116,6 +116,7 @@
             android:theme="@style/Theme.MyDialog"/>
         <activity
             android:name=".activities.TimerOnTimeActivity"
+            android:launchMode="singleTask"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <activity
             android:name=".activities.ShakeExplainActivity"

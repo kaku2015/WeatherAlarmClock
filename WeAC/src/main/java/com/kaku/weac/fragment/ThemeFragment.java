@@ -44,8 +44,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
-
 /**
  * 主题fragment
  *
@@ -134,7 +132,7 @@ public class ThemeFragment extends BaseFragment implements View.OnClickListener 
 
         });
 
-        OverScrollDecoratorHelper.setUpOverScroll(gridView);
+//        OverScrollDecoratorHelper.setUpOverScroll(gridView); // 点击主题图片有时不响应bug
         return view;
     }
 

@@ -155,7 +155,7 @@ public class AlarmClockNewFragment extends BaseFragment implements OnClickListen
                 container, false);
         // 设置界面背景
         setBackground(view);
-        setBounce(view);
+//        setBounce(view);
         // 初始化操作栏
         initActionBar(view);
         // 初始化时间选择

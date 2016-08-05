@@ -59,7 +59,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.wasabeef.recyclerview.animators.ScaleInLeftAnimator;
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 /**
  * 闹钟fragment
@@ -141,7 +140,7 @@ public class AlarmClockFragment extends BaseFragment implements OnClickListener 
         mRecyclerView.getItemAnimator().setChangeDuration(300);
         mRecyclerView.setAdapter(mAdapter);
 
-        OverScrollDecoratorHelper.setUpOverScroll(mRecyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
+//        OverScrollDecoratorHelper.setUpOverScroll(mRecyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
 
         // 监听闹铃item点击事件Listener
         OnItemClickListener onItemClickListener = new OnItemClickListenerImpl();

@@ -146,7 +146,7 @@ public class MoreFragment extends LazyLoadFragment {
 
     private void assignViews(View view) {
         ScrollView scrollView = (ScrollView) view.findViewById(R.id.scroll_view);
-        OverScrollDecoratorHelper.setUpOverScroll(scrollView);
+//        OverScrollDecoratorHelper.setUpOverScroll(scrollView);
 
         mUsedMemoryTv = (TextView) view.findViewById(R.id.used_memory_tv);
         mCleanUpCP = (CircleProgress) view.findViewById(R.id.circle_progress);

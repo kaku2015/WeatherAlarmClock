@@ -46,8 +46,6 @@ import com.squareup.otto.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
-
 
 /**
  * 本地相册Activity
@@ -165,7 +163,7 @@ public class LocalAlbumActivity extends BaseActivity implements View.OnClickList
             }
         });
 
-        OverScrollDecoratorHelper.setUpOverScroll(mLocalAlbumListView);
+//        OverScrollDecoratorHelper.setUpOverScroll(mLocalAlbumListView);
     }
 
     private Uri mImageUri;

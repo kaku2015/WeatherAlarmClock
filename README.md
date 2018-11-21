@@ -82,6 +82,7 @@ The code was written as an introduction to Android a few years ago, so it was wr
 Contact me
 ---------------
 Email: kaku201313@163.com
+
 Email: FishingNetTech@yeah.net
 
 License

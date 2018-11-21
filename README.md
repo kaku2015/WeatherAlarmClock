@@ -1,4 +1,4 @@
-# WeatherAlarmClock  [中文](https://github.com/kaku2015/WeatherAlarmClock/README_zh.md)
+# WeatherAlarmClock  [中文](https://github.com/kaku2015/WeatherAlarmClock/blob/master/README_zh.md)
 
 ![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/logo.png)
 
@@ -8,7 +8,7 @@ The WeatherAlarmClock is an alarm clock with a weather reminder. It is inspired 
 
 Main functions: alarm clock, weather forecast, timer, recording, city management, city search, automatic positioning, theme switching, scanning QR code, creating QR code, clearing cache, one-click cleaning, etc.
 
-### Scan code download:
+### Scan code download
 
 ![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/qrcode.png)
 
@@ -36,7 +36,7 @@ Screenshots
 ![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/18.jpeg)
 ![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/19.jpeg)
 
-Thanks for the following library.
+Thanks for the following library
 --------------
 
 * [ZXingLib](https://github.com/xuyisheng/ZXingLib) 
@@ -51,7 +51,7 @@ Library created for WeatherAlarmClock
 
 ![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/wcv.png)
 
-Open source library:
+Open source library
 -------------
 * [PagerSlidingTabStrip](https://github.com/astuetz/PagerSlidingTabStrip) 
 * [leakcanary](https://github.com/square/leakcanary) 
@@ -79,10 +79,15 @@ The code was written as an introduction to Android a few years ago, so it was wr
 
 ### Prohibited for commercial use!!
 
+Contact me
+---------------
+Email: kaku201313@163.com
+Email: FishingNetTech@yeah.net
+
 License
 ---------------
   ```
-   Copyright (c) 2016-2019 FishingNet <kaku201313@163.com> 
+   Copyright (c) 2016-2019 FishingNet(咖枯) <kaku201313@163.com> 
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

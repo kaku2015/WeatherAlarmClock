@@ -1,20 +1,20 @@
-# WeatherAlarmClock  [中文](https://github.com/kaku2015/WeatherAlarmClock/README_zh.md)
+# WeatherAlarmClock 天气闹钟
 
 ![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/logo.png)
 
-Introduction
+简介
 -----------------
-The WeatherAlarmClock is an alarm clock with a weather reminder. It is inspired by the embarrassing situation of forgetting to watch the weather forecast without an umbrella before going out.
+天气闹钟是一款具有天气提醒功能的闹钟，灵感来自于出门前经常忘记看天气预报没有带伞而淋雨的尴尬情况。
 
-Main functions: alarm clock, weather forecast, timer, recording, city management, city search, automatic positioning, theme switching, scanning QR code, creating QR code, clearing cache, one-click cleaning, etc.
+主要功能：闹钟、天气预报、计时器、录音、城市管理、城市搜索、自动定位、主题切换、扫描二维码，创造二维码、清除缓存、一键清理等。
 
-### Scan code download:
+### 扫码下载:
 
 ![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/qrcode.png)
 
-[Download link](https://fir.im/weac)
+[下载链接](http://zhushou.360.cn/detail/index/soft_id/3242718)
 
-Screenshots
+截图
 --------------
 ![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/1.jpeg)
 ![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/2.jpeg)
@@ -36,22 +36,22 @@ Screenshots
 ![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/18.jpeg)
 ![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/19.jpeg)
 
-Thanks for the following library.
+参考项目
 --------------
 
-* [ZXingLib](https://github.com/xuyisheng/ZXingLib) 
-* [SimplifyReader](https://github.com/SkillCollege/SimplifyReader)  
-* [superCleanMaster](https://github.com/joyoyao/superCleanMaster) 
-* [TimerView](https://github.com/pheynix/TimerView) 
-* [AndroidDaemonService](https://github.com/D-clock/AndroidDaemonService) 
+* [ZXingLib](https://github.com/xuyisheng/ZXingLib) 参考二维码扫描
+* [SimplifyReader](https://github.com/SkillCollege/SimplifyReader)   参考浏览本地图片
+* [superCleanMaster](https://github.com/joyoyao/superCleanMaster)  参考内存清理
+* [TimerView](https://github.com/pheynix/TimerView)  参考自定义计时器绘制
+* [AndroidDaemonService](https://github.com/D-clock/AndroidDaemonService)  参考灰色保活
 
-Library created for WeatherAlarmClock
+为天气闹钟而诞生的库
 ---------------
 * [WeatherChartView](https://github.com/kaku2015/WeatherChartView) 
 
 ![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/wcv.png)
 
-Open source library:
+用到的开源库
 -------------
 * [PagerSlidingTabStrip](https://github.com/astuetz/PagerSlidingTabStrip) 
 * [leakcanary](https://github.com/square/leakcanary) 
@@ -73,16 +73,21 @@ Open source library:
 * [umeng](http://www.umeng.com/)
 * [locSDK](http://lbsyun.baidu.com/)
 
-About
----------------
-The code was written as an introduction to Android a few years ago, so it was written badly for reference only.
 
-### Prohibited for commercial use!!
+关于天气闹钟
+---------------
+由于这个项目是几年前入门Android时写的，所以代码很烂，仅供参考。
+
+### 严禁用于商业用途！！
+
+
+邮箱: kaku201313@163.com
+
 
 License
 ---------------
   ```
-   Copyright (c) 2016-2019 FishingNet <kaku201313@163.com> 
+   Copyright (c) 2016-2019 FishingNet(咖枯) <kaku201313@163.com> 
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

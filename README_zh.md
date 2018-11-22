@@ -78,6 +78,9 @@
 ---------------
 由于这个项目是几年前入门 Android 时写的，所以代码很烂，仅供参考。
 
+本项目已停止维护！
+dasbiswajit 将继续维护：https://github.com/dasbiswajit/WeatherAlarmClock
+
 ### 严禁用于商业用途！！
 
 

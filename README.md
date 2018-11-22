@@ -77,6 +77,9 @@ About
 ---------------
 The code was written as an introduction to Android a few years ago, so it was written badly for reference only.
 
+This project has stopped maintenance!
+Dasbiswajit will continue to maintain: https://github.com/dasbiswajit/WeatherAlarmClock
+
 ### Prohibited for commercial use!!
 
 Contact me

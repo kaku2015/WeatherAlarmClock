@@ -8,11 +8,18 @@
 
 主要功能：闹钟、天气预报、计时器、录音、城市管理、城市搜索、自动定位、主题切换、扫描二维码，创造二维码、清除缓存、一键清理等。
 
+**本项目已停止维护！**
+
+[dasbiswajit](https://github.com/dasbiswajit/) 将继续维护：https://github.com/dasbiswajit/WeatherAlarmClock
+
 ### 扫码下载:
 
 ![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/qrcode.png)
 
 [下载链接](http://zhushou.360.cn/detail/index/soft_id/3242718)
+
+<a href='https://play.google.com/store/apps/details?id=com.bisw.weac&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
+
 
 截图
 --------------
@@ -78,8 +85,7 @@
 ---------------
 由于这个项目是几年前入门 Android 时写的，所以代码很烂，仅供参考。
 
-本项目已停止维护！
-dasbiswajit 将继续维护：https://github.com/dasbiswajit/WeatherAlarmClock
+
 
 ### 严禁用于商业用途！！
 

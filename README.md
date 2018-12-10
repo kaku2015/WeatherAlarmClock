@@ -2,6 +2,10 @@
 
 ![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/logo.png)
 
+**This project has stopped maintenance!**
+
+[Dasbiswajit](https://github.com/dasbiswajit/) will continue to maintain. New Repo: https://github.com/dasbiswajit/WeatherAlarmClock
+
 Introduction
 -----------------
 The WeatherAlarmClock is an alarm clock with a weather reminder. It is inspired by the embarrassing situation of forgetting to watch the weather forecast without an umbrella before going out.
@@ -13,6 +17,8 @@ Main functions: alarm clock, weather forecast, timer, recording, city management
 ![image](https://github.com/kaku2015/WeatherAlarmClock/blob/master/screenshots/qrcode.png)
 
 [Download link](https://fir.im/weac)
+
+<a href='https://play.google.com/store/apps/details?id=com.bisw.weac&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
 
 Screenshots
 --------------
@@ -77,8 +83,7 @@ About
 ---------------
 The code was written as an introduction to Android a few years ago, so it was written badly for reference only.
 
-This project has stopped maintenance!
-Dasbiswajit will continue to maintain: https://github.com/dasbiswajit/WeatherAlarmClock
+
 
 ### Prohibited for commercial use!!
 
